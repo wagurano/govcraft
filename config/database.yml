@@ -12,8 +12,8 @@ default: &default
 
 development:
   <<: *default
-  database:  curry_development_<%= branch %>
+  database:  govcraft_development_<%= branch %>
 
 test:
   <<: *default
-  database:  curry_test_<%= branch %>
+  database:  govcraft_test_<%= branch %>
