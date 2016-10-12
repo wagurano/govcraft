@@ -27,7 +27,6 @@ production:
 ```
 $ rbenv install 2.3.1
 $ bundle install
-$ bundle exec rake db:migrate
 ```
 
 ### 소스관리 설정
@@ -83,4 +82,6 @@ export TWITTER_APP_SECRET="xx"
 
 #### 스키마
 
-db:create와 db:migrate로 생성합니다.
+```
+$ bin/rails db:setup
+```

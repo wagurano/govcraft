@@ -1,0 +1,6 @@
+= form_for @following_issue do |f|
+  .form-group
+    = f.label :issue_title
+    = f.text_field :issue_title, class: 'form-control'
+  .form-group
+    = f.submit data: { disable_with: "진행 중..." }

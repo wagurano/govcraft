@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   end
 
   root 'pages#home'
+  resources :following_issues
 end

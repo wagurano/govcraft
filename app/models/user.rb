@@ -3,6 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :registerable, :rememberable, :trackable, :omniauthable,
          :omniauth_providers => [:facebook, :twitter]
+
+  # assiciations
+  has_many :following_issues, dependent: :destroy
+
   # validations
   VALID_NICKNAME_REGEX = /\A[ㄱ-ㅎ가-힣a-z0-9_]+\z/i
 
@@ -20,6 +24,9 @@ class User < ApplicationRecord
 
   # mount
   mount_uploader :image, UserImageUploader
+
+  # scope
+  scope :not_someone, ->(someone) { where.not(id: someone.id) }
 
   # methods for devises/auth
   def self.parse_omniauth(data)
@@ -45,6 +52,10 @@ class User < ApplicationRecord
 
   def admin?
     %w(account@parti.xyz).include? email
+  end
+
+  def following?(issue)
+    following_issues.exists?(issue: issue)
   end
 
   private
