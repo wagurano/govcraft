@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :campaigns do
     shallow do
       resources :petitions
+      resources :memorials
     end
   end
 end
