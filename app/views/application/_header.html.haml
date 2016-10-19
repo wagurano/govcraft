@@ -1,6 +1,6 @@
 #site-header
   %nav.navbar.navbar-inverse.navbar-fixed-top
-    .container-fluid
+    .container
       .navbar-header
         %button.navbar-toggle.collapsed{"data-target": "#collapsable", "data-toggle": "collapse", type: "button"}
           %span.icon-bar
@@ -11,8 +11,8 @@
 
       .collapse.navbar-collapse
         %ul.nav.navbar-nav
-          %li
-            %a(href='#') 메뉴
+          %li= link_to '이슈', following_issues_path
+          %li= link_to '캠페인', campaigns_path
 
         %ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
