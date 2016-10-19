@@ -9,5 +9,9 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   resources :following_issues
-  resources :campaigns
+  resources :campaigns do
+    shallow do
+      resources :petitions
+    end
+  end
 end
