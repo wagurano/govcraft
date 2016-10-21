@@ -1,0 +1,7 @@
+.panel.panel-default[issue]
+  .panel-body
+    %h4.text-center
+      = issue.title
+      %small
+        %i.fa.fa-user
+        = issue.following_issues.count
