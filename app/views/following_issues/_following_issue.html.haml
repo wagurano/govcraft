@@ -1,7 +1,6 @@
-.row[following_issue]
-  .col-xs-3
+%span.badge.badge-default[following_issue]
+  %h5
     = following_issue.issue.title
-    - if can? :destroy, following_issue
-      = link_to '삭제', following_issue, method: :delete, data: { confirm: 'Are you sure?'}
-  .col-xs-9
-    = render partial: 'users/thumbnail', collection: following_issue.issue.followers.not_someone(current_user), as: :user
+    %small
+      - if can? :destroy, following_issue
+        = link_to '삭제', following_issue, method: :delete, data: { confirm: 'Are you sure?'}, class: 'text-danger'

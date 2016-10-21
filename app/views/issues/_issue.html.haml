@@ -5,3 +5,5 @@
       %small
         %i.fa.fa-user
         = issue.following_issues.count
+    %div
+      = render partial: 'users/thumbnail', collection: issue.followers.not_someone(current_user), as: :user
