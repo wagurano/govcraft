@@ -1,9 +1,9 @@
 .panel.panel-default[issue]
   .panel-body
-    %h4.text-center
+    %h3.text-center{ style: 'margin-top: 0; border-bottom: 1px solid #dedede; padding-bottom: 7px; margin-bottom: 14px;' }
       = issue.title
       %small
         %i.fa.fa-user
         = issue.following_issues.count
     %div
-      = render partial: 'users/thumbnail', collection: issue.followers.not_someone(current_user), as: :user
+      = render partial: 'users/thumbnail', collection: issue.followers
