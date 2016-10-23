@@ -7,12 +7,17 @@
           %span.icon-bar
           %span.icon-bar
         %a.navbar-brand{ href: root_path }
-          가브크래프트 0.01
+          가브크래프트
 
       .collapse.navbar-collapse
         %ul.nav.navbar-nav
           %li= link_to '이슈', issues_path
           %li= link_to '캠페인', campaigns_path
+          %li= link_to '토론', '#'
+          %li= link_to '청원', '#'
+          %li= link_to '투표', '#'
+          %li= link_to '아카이브', '#'
+          %li= link_to '추모', '#'
 
         %ul.nav.navbar-nav.navbar-right
           - if user_signed_in?

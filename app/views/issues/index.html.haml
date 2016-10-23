@@ -1,5 +1,10 @@
 .container
-  .row.masonry-container
-    - @issues.each do |issue|
-      .col-sm-3
-        = render issue
+  %section
+    .page-header
+      %h2 이슈
+
+  %section
+    .row.masonry-container
+      - @issues.each do |issue|
+        .col-sm-3
+          = render issue
