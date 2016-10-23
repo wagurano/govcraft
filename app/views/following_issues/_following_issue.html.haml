@@ -1,6 +1,6 @@
-%span.badge.badge-default[following_issue]
+%span.badge.badge-primary[following_issue]
   %h5
     = following_issue.issue.title
     %small
       - if can? :destroy, following_issue
-        = link_to '삭제', following_issue, method: :delete, data: { confirm: 'Are you sure?'}, class: 'text-danger'
+        = link_to '삭제', following_issue, method: :delete, data: { confirm: 'Are you sure?'}

@@ -1,11 +1,14 @@
 %section#page-home
   %section#issues
     .container
-      .page-header
-        %h2 관심 이슈
+      %section
+        .page-header
+          %h2 나의 관심 이슈
+
       - if user_signed_in?
-        = render 'following_issues/form'
-        .following-issues
-          - current_user.following_issues.each do |following_issues|
-            = render following_issues
+        %section
+          .following-issues{ style: 'margin-bottom: 14px;' }
+            - current_user.following_issues.each do |following_issues|
+              = render following_issues
+          = render 'following_issues/form'
 
