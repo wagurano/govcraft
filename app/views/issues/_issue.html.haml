@@ -4,4 +4,4 @@
       = issue.title
 
     %div
-      = render partial: 'users/thumbnail', collection: issue.followers
+      = render partial: 'users/thumbnail', collection: issue.followers, as: :user
