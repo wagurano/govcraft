@@ -1,2 +1,18 @@
-%div[campaign]
-  %h4= link_to campaign.title, campaign
+.panel.panel-floating[campaign]
+  .panel-body
+    %h3.text-center{ style: 'word-break: keep-all;' }= link_to campaign.title, campaign
+    %hr
+
+    .row
+      .col-xs-4
+        .text-center
+          논의
+          %h4= 0
+      .col-xs-4
+        .text-center
+          청원
+          %h4= campaign.petitions.count
+      .col-xs-4
+        .text-center
+          투표
+          %h4= campaign.petitions.count
