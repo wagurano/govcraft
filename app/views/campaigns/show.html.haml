@@ -1,20 +1,28 @@
 %section
   .container
-    %h2= @campaign.title
+    .page-header
+      %h2
+        %strong= @campaign.title
+        캠페인
 
-    %div
+    %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
       = simple_format @campaign.body
 
-    %section
-      = link_to '수정', edit_campaign_path(@campaign), class: 'btn btn-primary'
-      = link_to '삭제', @campaign, method: :delete, data: { confirm: '삭제하시겠습니까?' }, class: 'btn btn-primary'
+      %div
+        = link_to '수정', edit_campaign_path(@campaign)
+        = link_to '삭제', @campaign, method: :delete, data: { confirm: '삭제하시겠습니까?' }
 
-    %section
-      %h3 청원
-      = link_to '청원 만들기', new_campaign_petition_path(@campaign), class: 'btn btn-primary'
+    %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
+      %h4 논의
+      = link_to '논의 만들기', new_campaign_discussion_path(@campaign)
+      = render @campaign.discussions
+
+    %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
+      %h4 청원
+      = link_to '청원 만들기', new_campaign_petition_path(@campaign)
       = render @campaign.petitions
 
-    %section
-      %h3 추모관
-      = link_to '추모 만들기', new_campaign_memorial_path(@campaign), class: 'btn btn-primary'
+    %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
+      %h4 추모관
+      = link_to '추모 만들기', new_campaign_memorial_path(@campaign)
       = render @campaign.memorials

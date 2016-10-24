@@ -1,0 +1,11 @@
+= form_for (@discussion.new_record? ? [@campaign, @discussion] : @discussion) do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+
+  .form-group
+    = f.label :body
+    = f.text_area :body, class: 'form-control'
+
+  .form-group
+    = f.submit '저장', class: 'btn btn-primary'
