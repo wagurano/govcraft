@@ -1,7 +1,7 @@
 .panel.panel-floating[issue]
   .panel-body
     %h4.text-center{ style: 'margin-top: 0; border-bottom: 1px solid #dedede; padding-bottom: 7px; margin-bottom: 14px;' }
-      = issue.title
+      = link_to "##{issue.title}", issue
 
     %div
       = render partial: 'users/thumbnail', collection: issue.followers, as: :user

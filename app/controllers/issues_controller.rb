@@ -5,4 +5,7 @@ class IssuesController < ApplicationController
   def index
     @issue = Issue.order('title asc')
   end
+
+  def show
+  end
 end

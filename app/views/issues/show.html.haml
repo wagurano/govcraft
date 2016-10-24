@@ -1,0 +1,15 @@
+.container
+  %section
+    .page-header
+      %h2= "##{@issue.title}"
+
+  %section
+    = render partial: 'users/thumbnail', collection: @issue.followers, as: :user
+
+  %section{ style: 'margin: 28px 0;'}
+    %ul.nav.nav-tabs{:role => "tablist"}
+      %li.active{:role => "presentation"}
+        %a{"aria-controls" => "discussions", "data-toggle" => "tab", :href => "#discussions", :role => "tab"} 토론
+
+    .tab-content
+      #discussions.tab-pane.active{:role => "tabpanel"}
