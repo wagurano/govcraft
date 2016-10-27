@@ -1,7 +1,7 @@
 - if ['issues', 'campaigns', 'discussions', 'petitions', 'polls', 'memorials'].include? params[:controller]
   %section
     .container
-      %ol.breadcrumb
+      %ol.breadcrumb{ style: 'font-size: 12px;' }
         - if params[:controller] == 'issues'
           %li= link_to '토픽 목록', issues_path
 

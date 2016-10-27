@@ -12,39 +12,42 @@
             = link_to '삭제', @campaign, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
       %p= simple_format @campaign.body
 
-%section.page-block
-  .container
-    %h4
-      = link_to campaign_discussions_path(@campaign) do
-        = Discussion.model_name.human
-        %small= @campaign.discussions.count
+    .row
+      .col-sm-4{ style: 'margin-bottom: 28px;'}
+        %h4
+          = link_to campaign_discussions_path(@campaign) do
+            = Discussion.model_name.human
 
-    %ul.list-unstyled
-      - @campaign.discussions.each do |discussion|
-        %li
-          %h5= link_to discussion.title, discussion
+        %ul.list-unstyled
+          - @campaign.discussions.each do |discussion|
+            %li
+              %h5
+                = link_to discussion.title, discussion
+                %small.text-muted
+                  = discussion.comments.count
 
-%section.page-block
-  .container
-    %h4
-      = link_to campaign_petitions_path(@campaign) do
-        = Petition.model_name.human
-        %small= @campaign.petitions.count
+      .col-sm-4{ style: 'margin-bottom: 28px;'}
+        %h4
+          = link_to campaign_petitions_path(@campaign) do
+            = Petition.model_name.human
 
-    %ul.list-unstyled
-      - @campaign.petitions.each do |petition|
-        %li
-          %h5= link_to petition.title, petition
+        %ul.list-unstyled
+          - @campaign.petitions.each do |petition|
+            %li
+              %h5
+                = link_to petition.title, petition
+                %small.text-muted
+                  = petition.comments.count
 
-%section.page-block
-  .container
-    %h4
-      = link_to campaign_polls_path(@campaign) do
-        = Poll.model_name.human
-        %small= @campaign.polls.count
+      .col-sm-4{ style: 'margin-bottom: 28px;'}
+        %h4
+          = link_to campaign_polls_path(@campaign) do
+            = Poll.model_name.human
 
-    %ul.list-unstyled
-      - @campaign.polls.each do |poll|
-        %li
-          %h5= link_to poll.title, poll
-
+        %ul.list-unstyled
+          - @campaign.polls.each do |poll|
+            %li
+              %h5
+                = link_to poll.title, poll
+                %small.text-muted
+                  = poll.comments.count
