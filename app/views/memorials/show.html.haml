@@ -1,13 +1,31 @@
 .container
+  .row
+    .col-sm-3
+      = link_to '추모관 열기', new_memorial_path, class: 'btn btn-default btn-sm'
+    .col-sm-9.text-right
+      = link_to '목록', memorials_path, class: 'btn btn-default btn-sm'
 
-  %ol.breadcrumb
-    %li= link_to @campaign.title, @campaign
+  %section{ style: 'margin: 7px 0;'}
+    .panel.panel-default
+      .panel-heading
+        %h3{ style: 'margin-top: 7px;'}= @memorial.title
 
-  %h2= @memorial.title
+        .discussion__info
+          %span.discussion__user
+            = link_to @memorial.user.nickname
+          %span.discussion__date
+            = date_f @memorial.created_at
+          - if can? :edit, @memorial
+            = link_to '수정', edit_discussion_path(@memorial)
+          - if can? :destroy, @memorial
+            = link_to '삭제', @memorial, method: :delete, data: { confirm: '삭제하시겠습니까?' }
 
-  %div
-    = simple_format @memorial.body
+      .panel-body
+        = simple_format @memorial.body
 
-  %div
-    = link_to '수정', edit_memorial_path(@memorial), class: 'btn btn-primary'
-    = link_to '삭제', @memorial, method: :delete, data: { confirm: '삭제하시겠습니까?' }, class: 'btn btn-primary'
+        .like
+          = link_to '좋아요', likes_path(like: { likable_id: @memorial.id, likable_type: 'memorial'}), method: :post
+          = @memorial.likes.count
+
+      .panel-footer
+        = render 'comments/list', commentable: @memorial

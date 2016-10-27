@@ -9,10 +9,14 @@ ko:
     models:
       campaign: 캠페인
       discussion: 토론
+      memorial: 시민추모관
     attributes:
       campaign:
         title: 제목
         body: 내용
       discussion:
+        title: 제목
+        body: 내용
+      memorial:
         title: 제목
         body: 내용

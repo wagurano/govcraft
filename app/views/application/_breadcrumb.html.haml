@@ -1,4 +1,4 @@
-- if ['issues', 'campaigns', 'discussions'].include? params[:controller]
+- if ['issues', 'campaigns', 'discussions', 'memorials'].include? params[:controller]
   %section
     .container
       %ol.breadcrumb
@@ -9,3 +9,7 @@
           %li= link_to '캠페인 목록', campaigns_path
           %li= link_to @campaign.title, @campaign
           %li= link_to '토론 목록', campaign_discussions_path(@campaign)
+
+        - if params[:controller] == 'memorials'
+          %li= link_to '추모관 목록', memorials_path
+

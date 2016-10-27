@@ -10,13 +10,16 @@ Rails.application.routes.draw do
 
   resources :comments
   resources :likes
+
   resources :issues
   resources :following_issues
+
   resources :campaigns do
     shallow do
       resources :discussions
       resources :petitions
-      resources :memorials
     end
   end
+
+  resources :memorials
 end

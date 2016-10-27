@@ -1,0 +1,17 @@
+.container
+  %section
+    .row
+      - @memorials.each do |memorial|
+        .col-sm-12
+          .panel.panel-default.panel-floating
+            .panel-body
+              %h4= link_to memorial.title, memorial
+              .memorial-meta.text-muted
+                = date_f memorial.created_at
+                부터
+                추모글
+                %strong= memorial.comments.count
+                개가 모였습니다.
+
+  %section{ style: 'margin-top: 28px; padding-top: 14px; border-top: 1px solid #dedede' }
+    = link_to '추모관 열기', new_memorial_path, class: 'btn btn-default'

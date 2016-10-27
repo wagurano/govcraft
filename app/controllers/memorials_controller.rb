@@ -1,27 +1,18 @@
 class MemorialsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource :campaign, parent: true
-  load_and_authorize_resource through: :campaign, shallow: true
+  load_and_authorize_resource
 
-  def show
-    @campaign = @memorial.campaign
-  end
-
-  def new
+  def index
+    @memorials = Memorial.all
   end
 
   def create
-    @memorial.campaign = @campaign
     @memorial.user = current_user
     if @memorial.save
-      redirect_to @memorial || @campaign
+      redirect_to @memorial
     else
       render 'new'
     end
-  end
-
-  def edit
-    @campaign = @memorial.campaign
   end
 
   def update
@@ -34,7 +25,7 @@ class MemorialsController < ApplicationController
 
   def destroy
     @memorial.destroy
-    redirect_to campaign_path(@memorial.campaign)
+    redirect_to memorials_path
   end
 
   private

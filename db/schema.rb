@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027040921) do
+ActiveRecord::Schema.define(version: 20161027045845) do
 
   create_table "campaigns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.string   "title"
@@ -75,11 +75,10 @@ ActiveRecord::Schema.define(version: 20161027040921) do
   create_table "memorials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.string   "title"
     t.text     "body",        limit: 65535
-    t.integer  "campaign_id"
     t.integer  "user_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.index ["campaign_id"], name: "index_memorials_on_campaign_id", using: :btree
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "likes_count",               default: 0
     t.index ["user_id"], name: "index_memorials_on_user_id", using: :btree
   end
 
