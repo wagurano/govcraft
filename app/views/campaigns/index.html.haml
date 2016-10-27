@@ -1,9 +1,10 @@
-.container
-  %section
-    .row.masonry-container
-      - @campaigns.each do |campaign|
-        .col-sm-4
-          = render campaign
+%section.page-block
+  .container
+    %section
+      .row.masonry-container
+        - @campaigns.each do |campaign|
+          .col-sm-4
+            = render campaign
 
-  %section{ style: 'margin-top: 28px; padding-top: 14px; border-top: 1px solid #dedede' }
-    = link_to '캠페인 열기', new_campaign_path, class: 'btn btn-primary'
+    %section{ style: 'margin-top: 28px; padding-top: 14px; border-top: 1px solid #dedede' }
+      = link_to '캠페인 열기', new_campaign_path, class: 'btn btn-primary'

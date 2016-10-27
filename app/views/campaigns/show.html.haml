@@ -1,36 +1,50 @@
-%section
+%section#campaign-header-block
   .container
-    .page-header
-      %h2= @campaign.title
+    .jumbotron
+      %h2
+        %small.badge 캠페인
+        %br
+        = @campaign.title
+        %small
+          - if can? :edit, @campaign
+            = link_to '수정', edit_campaign_path(@campaign)
+          - if can? :destroy, @campaign
+            = link_to '삭제', @campaign, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
+      %p= simple_format @campaign.body
 
-    %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
-      = simple_format @campaign.body
+%section.page-block
+  .container
+    %h4
+      = link_to campaign_discussions_path(@campaign) do
+        = Discussion.model_name.human
+        %small= @campaign.discussions.count
 
-      .text-muted
-        = link_to '수정', edit_campaign_path(@campaign)
-        = link_to '삭제', @campaign, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+    %ul.list-unstyled
+      - @campaign.discussions.each do |discussion|
+        %li
+          %h5= link_to discussion.title, discussion
 
-    %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
-      %h4
-        = link_to Discussion.model_name.human, campaign_discussions_path(@campaign)
-      %ul.list-unstyled
-        - @campaign.discussions.each do |discussion|
-          %li
-            %h5= link_to discussion.title, discussion
+%section.page-block
+  .container
+    %h4
+      = link_to campaign_petitions_path(@campaign) do
+        = Petition.model_name.human
+        %small= @campaign.petitions.count
 
-    %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
-      %h4
-        = link_to Petition.model_name.human, campaign_petitions_path(@campaign)
-      %ul.list-unstyled
-        - @campaign.petitions.each do |petition|
-          %li
-            %h5= link_to petition.title, petition
+    %ul.list-unstyled
+      - @campaign.petitions.each do |petition|
+        %li
+          %h5= link_to petition.title, petition
 
-    %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
-      %h4
-        = link_to Poll.model_name.human, campaign_polls_path(@campaign)
-      %ul.list-unstyled
-        - @campaign.polls.each do |poll|
-          %li
-            %h5= link_to poll.title, poll
+%section.page-block
+  .container
+    %h4
+      = link_to campaign_polls_path(@campaign) do
+        = Poll.model_name.human
+        %small= @campaign.polls.count
+
+    %ul.list-unstyled
+      - @campaign.polls.each do |poll|
+        %li
+          %h5= link_to poll.title, poll
 

@@ -3,7 +3,6 @@
 }
 
 html {
-  min-height: 100%;
   position: relative;
 }
 
@@ -27,8 +26,8 @@ body {
 }
 
 .page-block {
-  padding-top: $font-size-base * 3;
-  padding-bottom: $font-size-base * 1.5;
+  padding-top: $font-size-base;
+  padding-bottom: $font-size-base;
 
   .page-header {
     margin-top: 0;
