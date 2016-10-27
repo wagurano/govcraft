@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024071434) do
+ActiveRecord::Schema.define(version: 20161027030050) do
 
   create_table "campaigns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.string   "title"
@@ -70,6 +70,17 @@ ActiveRecord::Schema.define(version: 20161024071434) do
     t.datetime "updated_at",                null: false
     t.index ["campaign_id"], name: "index_petitions_on_campaign_id", using: :btree
     t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
+  end
+
+  create_table "polls", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+    t.string   "title"
+    t.text     "body",        limit: 65535
+    t.integer  "user_id"
+    t.integer  "campaign_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["campaign_id"], name: "index_polls_on_campaign_id", using: :btree
+    t.index ["user_id"], name: "index_polls_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
