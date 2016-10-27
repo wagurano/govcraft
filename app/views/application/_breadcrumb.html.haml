@@ -1,7 +1,13 @@
-- if ['campaigns', 'issues'].include? params[:controller]
+- if ['issues', 'campaigns', 'discussions'].include? params[:controller]
   %section
     .container
       %ol.breadcrumb
         - if params[:controller] == 'campaigns'
           %li= link_to '캠페인', campaigns_path
 
+        - if params[:controller] == 'discussions'
+          %li= link_to '캠페인', campaigns_path
+          %li= link_to @campaign.title, @campaign
+
+          - if params[:action] == 'show'
+            %li= link_to '토론', campaign_discussions_path(@campaign)

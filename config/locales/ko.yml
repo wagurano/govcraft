@@ -1,0 +1,14 @@
+ko:
+  date:
+    formats:
+      default: '%Y.%m.%d'
+  time:
+    formats:
+      default: "%Y.%m.%d %H:%M"
+  activerecord:
+    models:
+      discussion: 토론
+    attributes:
+      discussion:
+        title: 제목
+        body: 내용

@@ -54,6 +54,7 @@ gem 'meta-tags', '~> 2.1.0'
 gem 'unobtrusive_flash', '~> 3.1'
 gem 'ruby_dig', '~> 0.0.2'
 gem 'identicon', '~> 0.0.5'
+gem 'rails-timeago', '~> 2.15'
 
 # image
 gem 'imgkit', '~> 1.6', '>= 1.6.1'

@@ -11,8 +11,8 @@
         = link_to '삭제', @campaign, method: :delete, data: { confirm: '삭제하시겠습니까?' }
 
     %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
-      %h4 논의
-      = link_to '논의 만들기', new_campaign_discussion_path(@campaign)
+      %h4 토론
+      = link_to '토론 글쓰기', new_campaign_discussion_path(@campaign)
       = render @campaign.discussions
 
     %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}

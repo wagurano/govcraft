@@ -3,6 +3,10 @@ class DiscussionsController < ApplicationController
   load_and_authorize_resource :campaign, parent: true
   load_and_authorize_resource through: :campaign, shallow: true
 
+  def index
+    @discussions = @campaign.discussions
+  end
+
   def show
     @campaign = @discussion.campaign
   end
