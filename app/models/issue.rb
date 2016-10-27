@@ -1,4 +1,9 @@
 class Issue < ApplicationRecord
+
+  # commentable
+  has_many :comments, as: :commentable
+
+
   has_many :following_issues
   has_many :followers, -> { order 'following_issues.created_at' }, through: :following_issues, source: :user
   validates :title, uniqueness: true, presence: true

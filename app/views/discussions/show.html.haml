@@ -24,4 +24,4 @@
         = simple_format @discussion.body
 
       .panel-footer
-        comments
+        = render 'comments/list', commentable: @discussion

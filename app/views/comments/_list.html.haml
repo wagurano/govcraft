@@ -1,0 +1,15 @@
+.comments-form
+  = form_for Comment.new do |f|
+    = f.hidden_field :commentable_type, value: commentable.class.name
+    = f.hidden_field :commentable_id, value: commentable.id
+    .form-group
+      ~ f.text_area :body, placeholder: '의견 주세요.'
+    = f.submit
+.comments
+  - commentable.comments.recent.each do |comment|
+    .comment[comment]
+      .comment-meta
+        = comment.user.nickname
+        = comment.created_at
+      .comment-body
+      = comment.body
