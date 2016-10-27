@@ -1,9 +1,7 @@
 %section
   .container
     .page-header
-      %h2
-        %strong= @campaign.title
-        캠페인
+      %h2= @campaign.title
 
     %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
       = simple_format @campaign.body
