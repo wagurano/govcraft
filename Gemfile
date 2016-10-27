@@ -43,6 +43,7 @@ gem 'twitter', '~> 5.16'
 gem 'google-api-client', '~> 0.9.2'
 
 # util
+gem 'rails-i18n'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'envyable', '~> 0.2.0'
 gem 'seed-fu', '~> 2.3', '>= 2.3.5'
