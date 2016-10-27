@@ -1,32 +1,31 @@
 %section.page-block
   .container
     .row
-      .col-sm-3
+      .col-xs-6
         = link_to '토론 글쓰기', new_campaign_discussion_path(@campaign), class: 'btn btn-default btn-sm'
-      .col-sm-9.text-right
+      .col-xs-6.text-right
         = link_to '목록', campaign_discussions_path(@campaign), class: 'btn btn-default btn-sm'
 
-    %section{ style: 'margin: 7px 0;'}
-      .panel.panel-default
-        .panel-heading
-          %h3{ style: 'margin-top: 7px;'}= @discussion.title
+%section#discussion-block.page-block.post-block
+  .container
+    .post-block__title
+      %h3= @discussion.title
 
-          .discussion__info
-            %span.discussion__user
-              = link_to @discussion.user.nickname
-            %span.discussion__date
-              = date_f @discussion.created_at
-            - if can? :edit, @discussion
-              = link_to '수정', edit_discussion_path(@discussion)
-            - if can? :destroy, @discussion
-              = link_to '삭제', @discussion, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+    .post-block__info
+      %span.post-block__user
+        = link_to @discussion.user.nickname
+      %span.post-block__date
+        = date_f @discussion.created_at
+      - if can? :edit, @discussion
+        = link_to '수정', edit_discussion_path(@discussion)
+      - if can? :destroy, @discussion
+        = link_to '삭제', @discussion, method: :delete, data: { confirm: '삭제하시겠습니까?' }
 
-        .panel-body
-          = simple_format @discussion.body
+    .post-block__body
+      = simple_format @discussion.body
 
-          .like
-            = link_to '좋아요', likes_path(like: { likable_id: @discussion.id, likable_type: 'Discussion'}), method: :post
-            = @discussion.likes.count
+    .post-block__like
+      = render 'likes/button', likable: @discussion
 
-        .panel-footer
-          = render 'comments/list', commentable: @discussion
+    .post-block__comments
+      = render 'comments/list', commentable: @discussion

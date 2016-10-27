@@ -4,7 +4,7 @@
     = f.hidden_field :commentable_id, value: commentable.id
     .form-group
       ~ f.text_area :body, placeholder: '댓글 쓰기...', class: 'form-control'
-    = f.submit '작성', class: 'btn btn-default'
+    = f.submit '작성', class: 'btn btn-default btn-sm'
 
 .comments
   - commentable.comments.recent.each do |comment|

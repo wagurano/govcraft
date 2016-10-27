@@ -3,26 +3,26 @@
     .container
       %ol.breadcrumb{ style: 'font-size: 12px;' }
         - if params[:controller] == 'issues'
-          %li= link_to '토픽 목록', issues_path
+          %li= link_to Issue.model_name.human, issues_path
 
         - if params[:controller] == 'campaigns'
-          %li= link_to '캠페인 목록', campaigns_path
+          %li= link_to Campaign.model_name.human, campaigns_path
 
         - if params[:controller] == 'discussions'
-          %li= link_to '캠페인 목록', campaigns_path
+          %li= link_to Campaign.model_name.human, campaigns_path
           %li= link_to @campaign.title, @campaign
-          %li= link_to '토론 목록', campaign_discussions_path(@campaign)
+          %li= link_to Discussion.model_name.human, campaign_discussions_path(@campaign)
 
         - if params[:controller] == 'petitions'
-          %li= link_to '캠페인 목록', campaigns_path
+          %li= link_to Campaign.model_name.human, campaigns_path
           %li= link_to @campaign.title, @campaign
-          %li= link_to '서명 목록', campaign_petitions_path(@campaign)
+          %li= link_to Petition.model_name.human, campaign_petitions_path(@campaign)
 
         - if params[:controller] == 'polls'
-          %li= link_to '캠페인 목록', campaigns_path
+          %li= link_to Campaign.model_name.human, campaigns_path
           %li= link_to @campaign.title, @campaign
-          %li= link_to '투표 목록', campaign_polls_path(@campaign)
+          %li= link_to Poll.model_name.human, campaign_polls_path(@campaign)
 
         - if params[:controller] == 'memorials'
-          %li= link_to '추모관 목록', memorials_path
+          %li= link_to Memorial.model_name.human, memorials_path
 
