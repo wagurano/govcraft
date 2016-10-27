@@ -22,12 +22,18 @@
 
 #campaign-header-block {
   .jumbotron {
-    background-color: transparent;
-    border: 1px solid $gray-lighter;
+    background-color: $gray-dark;
+    background-image: url(https://source.unsplash.com/random);
+    background-size: cover;
+    border: none;
+    color: $gray-lightest;
+    text-shadow: 0 0 6px rgba(0,0,0,.5);
   }
   .badge {
-    background-color: $gray-dark;
+    background-color: $gray-light;
+    color: $gray-dark;
     font-weight: normal;
     padding-top: 5px;
+    text-shadow: none;
   }
 }
