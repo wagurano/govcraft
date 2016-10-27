@@ -7,8 +7,12 @@ ko:
       default: "%Y.%m.%d %H:%M"
   activerecord:
     models:
+      campaign: 캠페인
       discussion: 토론
     attributes:
+      campaign:
+        title: 제목
+        body: 내용
       discussion:
         title: 제목
         body: 내용

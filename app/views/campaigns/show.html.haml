@@ -12,15 +12,15 @@
 
     %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
       %h4 토론
-      = link_to '토론 글쓰기', new_campaign_discussion_path(@campaign)
-      = render @campaign.discussions
+      %ul.list-unstyled
+        - @campaign.discussions.each do |discussion|
+          %li
+            %h5= link_to discussion.title, discussion
 
     %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
       %h4 청원
-      = link_to '청원 만들기', new_campaign_petition_path(@campaign)
       = render @campaign.petitions
 
     %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
       %h4 추모관
-      = link_to '추모 만들기', new_campaign_memorial_path(@campaign)
       = render @campaign.memorials
