@@ -12,7 +12,7 @@
 
     %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
       %h4
-        = link_to '토론', campaign_discussions_path(@campaign)
+        = link_to Discussion.model_name.human, campaign_discussions_path(@campaign)
       %ul.list-unstyled
         - @campaign.discussions.each do |discussion|
           %li
@@ -20,7 +20,7 @@
 
     %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
       %h4
-        = link_to '청원', campaign_petitions_path(@campaign)
+        = link_to Petition.model_name.human, campaign_petitions_path(@campaign)
       %ul.list-unstyled
         - @campaign.petitions.each do |petition|
           %li
@@ -28,7 +28,7 @@
 
     %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
       %h4
-        = link_to '투표', campaign_polls_path(@campaign)
+        = link_to Poll.model_name.human, campaign_polls_path(@campaign)
       %ul.list-unstyled
         - @campaign.polls.each do |poll|
           %li

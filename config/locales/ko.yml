@@ -9,6 +9,7 @@ ko:
     models:
       campaign: 캠페인
       discussion: 토론
+      petition: 서명
       poll: 투표
       memorial: 시민추모관
     attributes:
@@ -21,7 +22,7 @@ ko:
       petition:
         title: 제목
         body: 내용
-        comments_goal_count: 청원 목표수
+        comments_goal_count: 서명 목표인수
       poll:
         title: 제목
         body: 내용

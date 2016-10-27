@@ -13,7 +13,7 @@
         - if params[:controller] == 'petitions'
           %li= link_to '캠페인 목록', campaigns_path
           %li= link_to @campaign.title, @campaign
-          %li= link_to '청원 목록', campaign_petitions_path(@campaign)
+          %li= link_to '서명 목록', campaign_petitions_path(@campaign)
 
         - if params[:controller] == 'polls'
           %li= link_to '캠페인 목록', campaigns_path

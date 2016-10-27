@@ -1,7 +1,7 @@
 .container
   .row
     .col-sm-3
-      = link_to '청원 쓰기', new_campaign_petition_path(@campaign), class: 'btn btn-default btn-sm'
+      = link_to "#{Petition.model_name.human} 쓰기", new_campaign_petition_path(@campaign), class: 'btn btn-default btn-sm'
     .col-sm-9.text-right
       = link_to '목록', campaign_petitions_path(@campaign), class: 'btn btn-default btn-sm'
 

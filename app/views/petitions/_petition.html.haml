@@ -1,2 +1,15 @@
-%div[petition]
-  %h4= link_to petition.title, petition
+%tr[petition]
+  %td.text-muted.text-center
+    = petition.id
+  %td.petition__title
+    %strong= link_to petition.title, petition
+  %td.petition__nickname
+    = petition.user.nickname
+  %td.petition__comments_count.text-right
+    = rand(petition.comments_goal_count)
+    \/
+    = petition.comments_goal_count
+  %td.petition__read_count.text-right
+    = rand(100)
+  %td.petition__created_at.text-center
+    = date_f petition.created_at

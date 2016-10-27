@@ -6,13 +6,13 @@
     .row
       .col-xs-4
         .text-center
-          토론
+          = Discussion.model_name.human
           %h4= campaign.discussions.count
       .col-xs-4
         .text-center
-          청원
+          = Petition.model_name.human
           %h4= campaign.petitions.count
       .col-xs-4
         .text-center
-          투표
+          = Poll.model_name.human
           %h4= campaign.polls.count
