@@ -2,6 +2,9 @@
   %section
     .container
       %ol.breadcrumb
+        - if params[:controller] == 'issues'
+          %li= link_to '토픽 목록', issues_path
+
         - if params[:controller] == 'campaigns'
           %li= link_to '캠페인 목록', campaigns_path
 

@@ -25,3 +25,12 @@ body {
     transform: translate(0, -2px);
   }
 }
+
+.page-block {
+  padding-top: $font-size-base * 3;
+  padding-bottom: $font-size-base * 1.5;
+
+  .page-header {
+    margin-top: 0;
+  }
+}

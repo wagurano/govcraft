@@ -1,8 +1,8 @@
 %span[following_issue]
-  = following_issue.issue.title
+  = link_to following_issue.issue.title, following_issue.issue
   %small
     - if can? :destroy, following_issue
-      = link_to '삭제', following_issue, method: :delete, data: { confirm: 'Are you sure?'}
+      = link_to '삭제', following_issue, method: :delete, data: { confirm: '정말 삭제하시겠습니까?'}
 
 :css
   .following_issue {

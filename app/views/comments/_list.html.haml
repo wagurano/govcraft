@@ -3,13 +3,14 @@
     = f.hidden_field :commentable_type, value: commentable.class.name
     = f.hidden_field :commentable_id, value: commentable.id
     .form-group
-      ~ f.text_area :body, placeholder: '의견 주세요.'
-    = f.submit
+      ~ f.text_area :body, placeholder: '댓글 쓰기...', class: 'form-control'
+    = f.submit '작성', class: 'btn btn-default'
+
 .comments
   - commentable.comments.recent.each do |comment|
-    .comment[comment]
-      .comment-meta
+    .comment[comment]{ style: 'margin: 14px 0;'}
+      %small.comment-meta.text-muted
         = comment.user.nickname
-        = comment.created_at
+        = date_f comment.created_at
       .comment-body
-      = comment.body
+        = comment.body

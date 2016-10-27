@@ -1,9 +1,5 @@
-.container
-  %section
-    .page-header
-      %h2 토픽
-
-  %section
+%section.page-block
+  .container
     .row.masonry-container
       - @issues.each do |issue|
         .col-sm-3
