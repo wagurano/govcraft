@@ -1,5 +1,4 @@
 class PollsController < ApplicationController
-  before_action :authenticate_user!
   load_and_authorize_resource :campaign, parent: true
   load_and_authorize_resource through: :campaign, shallow: true
 
