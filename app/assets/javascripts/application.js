@@ -9,8 +9,11 @@
 UnobtrusiveFlash.flashOptions['timeout'] = 300000;
 
 $(document).imagesLoaded( { }, function() {
+
+  if ( $(window).width() > 739 ) {
     //masonry
     var options = {}
-    $('.masonry-container').masonry();
+      $('.masonry-container').masonry();
+    }
   }
 );
