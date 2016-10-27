@@ -8,6 +8,4 @@
         - if params[:controller] == 'discussions'
           %li= link_to '캠페인', campaigns_path
           %li= link_to @campaign.title, @campaign
-
-          - if params[:action] == 'show'
-            %li= link_to '토론', campaign_discussions_path(@campaign)
+          %li= link_to '토론', campaign_discussions_path(@campaign)

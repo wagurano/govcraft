@@ -1,9 +1,27 @@
 .container
-  %h2= @discussion.title
+  .row
+    .col-sm-3
+      = link_to '토론 글쓰기', new_campaign_discussion_path(@campaign), class: 'btn btn-default btn-sm'
+    .col-sm-9.text-right
+      = link_to '목록', campaign_discussions_path(@campaign), class: 'btn btn-default btn-sm'
 
-  %div
-    = simple_format @discussion.body
+  %section{ style: 'margin: 7px 0;'}
+    .panel.panel-default
+      .panel-heading
+        %h3{ style: 'margin-top: 7px;'}= @discussion.title
 
-  %div
-    = link_to '수정', edit_discussion_path(@discussion), class: 'btn btn-primary'
-    = link_to '삭제', @discussion, method: :delete, data: { confirm: '삭제하시겠습니까?' }, class: 'btn btn-primary'
+        .discussion__info
+          %span.discussion__user
+            = link_to @discussion.user.nickname
+          %span.discussion__date
+            = date_f @discussion.created_at
+          - if can? :edit, @discussion
+            = link_to '수정', edit_discussion_path(@discussion)
+          - if can? :destroy, @discussion
+            = link_to '삭제', @discussion, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+
+      .panel-body
+        = simple_format @discussion.body
+
+      .panel-footer
+        comments
