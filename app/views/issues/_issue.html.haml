@@ -5,3 +5,7 @@
 
     %div
       = render partial: 'users/thumbnail', collection: issue.followers, as: :user
+      - if issue.comments.count > 0
+        %small.text-muted{ style: 'line-height: 20px'}
+          \+
+          = issue.comments.count
