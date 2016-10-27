@@ -3,7 +3,7 @@
   %head
     %meta{:charset => "utf-8"}
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
-    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no", :name => "viewport"}
 
     = favicon_link_tag 'favicon.ico'
 
@@ -22,10 +22,13 @@
     %section(style='position: fixed; z-index: 1000; width: 100%')
       .container
         .unobtrusive-flash-container
+
     - if content_for?(:header)
       = yield :header
     - else
       = render 'application/header'
+
     = yield
+
     = javascript_include_tag 'application'
     = yield :script if content_for?(:script)
