@@ -29,7 +29,7 @@ class DiscussionsController < ApplicationController
   end
 
   def update
-    if @discussion.update(petition_params)
+    if @discussion.update(discussion_params)
       redirect_to @discussion
     else
       render 'edit'
