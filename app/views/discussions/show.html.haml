@@ -23,5 +23,9 @@
       .panel-body
         = simple_format @discussion.body
 
+        .like
+          = link_to '좋아요', likes_path(like: { likable_id: @discussion.id, likable_type: 'Discussion'}), method: :post
+          = @discussion.likes.count
+
       .panel-footer
         = render 'comments/list', commentable: @discussion

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   resources :comments
+  resources :likes
   resources :issues
   resources :following_issues
   resources :campaigns do

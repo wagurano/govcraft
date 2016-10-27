@@ -5,7 +5,7 @@ class Ability
     can :read, :all
 
     if user
-      can :create, [FollowingIssue, Campaign, Discussion, Petition, Memorial, Comment]
+      can :create, [FollowingIssue, Campaign, Discussion, Petition, Memorial, Comment, Like]
       can [:update, :destroy], [FollowingIssue, Campaign, Discussion, Petition, Memorial], :user_id => user.id
     end
   end
