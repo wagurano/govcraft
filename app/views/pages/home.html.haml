@@ -1,14 +1,31 @@
-%section#page-home
-  %section#issues
-    .container
+%section#issues{ style: 'background-color: #fff; padding-bottom: 42px;' }
+  .container
+    %section
+      .page-header
+        %h2 나의 관심 토픽
+
+    - if user_signed_in?
       %section
-        .page-header
-          %h2 나의 관심 토픽
+        .following-issues{ style: 'margin-bottom: 14px;' }
+          - current_user.following_issues.each do |following_issues|
+            = render following_issues
+        = render 'following_issues/form'
 
-      - if user_signed_in?
-        %section
-          .following-issues{ style: 'margin-bottom: 14px;' }
-            - current_user.following_issues.each do |following_issues|
-              = render following_issues
-          = render 'following_issues/form'
-
+%section{ style: 'background-color: #f5f5f5; padding: 42px 0 28px;' }
+  .container
+    .row
+      .col-sm-4
+        .panel.panel-floating
+          .panel-body
+            .text-center
+              %h3{ style: 'margin-top:14px;'}= link_to '시민아카이브', '#'
+      .col-sm-4
+        .panel.panel-floating
+          .panel-body
+            .text-center
+              %h3{ style: 'margin-top:14px;'}= link_to '시민추모관', memorials_path
+      .col-sm-4
+        .panel.panel-floating
+          .panel-body
+            .text-center
+              %h3{ style: 'margin-top:14px;'}= link_to '시민씽크탱크', '#'
