@@ -1,0 +1,31 @@
+.container
+  .row
+    .col-sm-3
+      = link_to '투표 쓰기', new_campaign_poll_path(@campaign), class: 'btn btn-default btn-sm'
+    .col-sm-9.text-right
+      = link_to '목록', campaign_polls_path(@campaign), class: 'btn btn-default btn-sm'
+
+  %section{ style: 'margin: 7px 0;'}
+    .panel.panel-default
+      .panel-heading
+        %h3{ style: 'margin-top: 7px;'}= @poll.title
+
+        .poll__info
+          %span.poll__user
+            = link_to @poll.user.nickname
+          %span.poll__date
+            = date_f @poll.created_at
+          - if can? :edit, @poll
+            = link_to '수정', edit_poll_path(@poll)
+          - if can? :destroy, @poll
+            = link_to '삭제', @poll, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+
+      .panel-body
+        = simple_format @poll.body
+
+        .like
+          = link_to '좋아요', likes_path(like: { likable_id: @poll.id, likable_type: 'Poll'}), method: :post
+          = @poll.likes.count
+
+      .panel-footer
+        = render 'comments/list', commentable: @poll

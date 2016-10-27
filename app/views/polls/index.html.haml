@@ -1,0 +1,21 @@
+%section#polls-section
+  .container
+    .row
+      .col-sm-12
+        = link_to '투표 열기', new_campaign_poll_path(@campaign), class: 'btn btn-default btn-sm'
+
+    %table.table{ style: 'margin: 28px 0;'}
+      %thead
+        %tr
+          %th.text-center 번호
+          %th 제목
+          %th 글쓴이
+          %th.text-right 조회수
+          %th.text-center 시간
+      %tbody
+        = render @polls
+
+    .row
+      .col-sm-2
+        = link_to '투표 열기', new_campaign_poll_path(@campaign), class: 'btn btn-default btn-sm'
+

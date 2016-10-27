@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     shallow do
       resources :discussions
       resources :petitions
+      resources :polls
     end
   end
 

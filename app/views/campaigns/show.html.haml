@@ -26,3 +26,11 @@
           %li
             %h5= link_to petition.title, petition
 
+    %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
+      %h4
+        = link_to '투표', campaign_polls_path(@campaign)
+      %ul.list-unstyled
+        - @campaign.polls.each do |poll|
+          %li
+            %h5= link_to poll.title, poll
+

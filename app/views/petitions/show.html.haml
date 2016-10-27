@@ -24,7 +24,7 @@
         = simple_format @petition.body
 
         .like
-          = link_to '좋아요', likes_path(like: { likable_id: @petition.id, likable_type: 'petition'}), method: :post
+          = link_to '좋아요', likes_path(like: { likable_id: @petition.id, likable_type: 'Petition'}), method: :post
           = @petition.likes.count
 
       .panel-footer
