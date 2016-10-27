@@ -1,31 +1,32 @@
-.container
-  .row
-    .col-sm-3
-      = link_to '토론 글쓰기', new_campaign_discussion_path(@campaign), class: 'btn btn-default btn-sm'
-    .col-sm-9.text-right
-      = link_to '목록', campaign_discussions_path(@campaign), class: 'btn btn-default btn-sm'
+%section.page-block
+  .container
+    .row
+      .col-sm-3
+        = link_to '토론 글쓰기', new_campaign_discussion_path(@campaign), class: 'btn btn-default btn-sm'
+      .col-sm-9.text-right
+        = link_to '목록', campaign_discussions_path(@campaign), class: 'btn btn-default btn-sm'
 
-  %section{ style: 'margin: 7px 0;'}
-    .panel.panel-default
-      .panel-heading
-        %h3{ style: 'margin-top: 7px;'}= @discussion.title
+    %section{ style: 'margin: 7px 0;'}
+      .panel.panel-default
+        .panel-heading
+          %h3{ style: 'margin-top: 7px;'}= @discussion.title
 
-        .discussion__info
-          %span.discussion__user
-            = link_to @discussion.user.nickname
-          %span.discussion__date
-            = date_f @discussion.created_at
-          - if can? :edit, @discussion
-            = link_to '수정', edit_discussion_path(@discussion)
-          - if can? :destroy, @discussion
-            = link_to '삭제', @discussion, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+          .discussion__info
+            %span.discussion__user
+              = link_to @discussion.user.nickname
+            %span.discussion__date
+              = date_f @discussion.created_at
+            - if can? :edit, @discussion
+              = link_to '수정', edit_discussion_path(@discussion)
+            - if can? :destroy, @discussion
+              = link_to '삭제', @discussion, method: :delete, data: { confirm: '삭제하시겠습니까?' }
 
-      .panel-body
-        = simple_format @discussion.body
+        .panel-body
+          = simple_format @discussion.body
 
-        .like
-          = link_to '좋아요', likes_path(like: { likable_id: @discussion.id, likable_type: 'Discussion'}), method: :post
-          = @discussion.likes.count
+          .like
+            = link_to '좋아요', likes_path(like: { likable_id: @discussion.id, likable_type: 'Discussion'}), method: :post
+            = @discussion.likes.count
 
-      .panel-footer
-        = render 'comments/list', commentable: @discussion
+        .panel-footer
+          = render 'comments/list', commentable: @discussion
