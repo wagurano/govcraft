@@ -1,9 +1,10 @@
 %section
-  .container-fluid
+  .container
     .page-header
       %h2
         = render 'users/thumbnail'
         = current_user.nickname
+
     = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
       = devise_error_messages!
       .form-group
