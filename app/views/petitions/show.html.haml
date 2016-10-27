@@ -1,13 +1,31 @@
 .container
+  .row
+    .col-sm-3
+      = link_to '청원 쓰기', new_campaign_petition_path(@campaign), class: 'btn btn-default btn-sm'
+    .col-sm-9.text-right
+      = link_to '목록', campaign_petitions_path(@campaign), class: 'btn btn-default btn-sm'
 
-  %ol.breadcrumb
-    %li= link_to @campaign.title, @campaign
+  %section{ style: 'margin: 7px 0;'}
+    .panel.panel-default
+      .panel-heading
+        %h3{ style: 'margin-top: 7px;'}= @petition.title
 
-  %h2= @petition.title
+        .petition__info
+          %span.petition__user
+            = link_to @petition.user.nickname
+          %span.petition__date
+            = date_f @petition.created_at
+          - if can? :edit, @petition
+            = link_to '수정', edit_petition_path(@petition)
+          - if can? :destroy, @petition
+            = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
 
-  %div
-    = simple_format @petition.body
+      .panel-body
+        = simple_format @petition.body
 
-  %div
-    = link_to '수정', edit_petition_path(@petition), class: 'btn btn-primary'
-    = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }, class: 'btn btn-primary'
+        .like
+          = link_to '좋아요', likes_path(like: { likable_id: @petition.id, likable_type: 'petition'}), method: :post
+          = @petition.likes.count
+
+      .panel-footer
+        = render 'comments/list', commentable: @petition

@@ -17,6 +17,10 @@ ko:
       discussion:
         title: 제목
         body: 내용
+      petition:
+        title: 제목
+        body: 내용
+        comments_goal_count: 청원 목표수
       memorial:
         title: 제목
         body: 내용

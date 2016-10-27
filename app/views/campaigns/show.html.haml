@@ -6,7 +6,7 @@
     %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
       = simple_format @campaign.body
 
-      %div
+      .text-muted
         = link_to '수정', edit_campaign_path(@campaign)
         = link_to '삭제', @campaign, method: :delete, data: { confirm: '삭제하시겠습니까?' }
 
@@ -19,9 +19,10 @@
             %h5= link_to discussion.title, discussion
 
     %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
-      %h4 청원
-      = render @campaign.petitions
+      %h4
+        = link_to '청원', campaign_petitions_path(@campaign)
+      %ul.list-unstyled
+        - @campaign.petitions.each do |petition|
+          %li
+            %h5= link_to petition.title, petition
 
-    %section{ style: 'padding: 14px 0; margin-bottom: 14px; border-bottom: 1px solid #c0c0c2'}
-      %h4 추모관
-      = render @campaign.memorials

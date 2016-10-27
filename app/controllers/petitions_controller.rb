@@ -3,6 +3,10 @@ class PetitionsController < ApplicationController
   load_and_authorize_resource :campaign, parent: true
   load_and_authorize_resource through: :campaign, shallow: true
 
+  def index
+    @petitions = @campaign.petitions
+  end
+
   def show
     @campaign = @petition.campaign
   end
@@ -40,6 +44,6 @@ class PetitionsController < ApplicationController
   private
 
   def petition_params
-    params.require(:petition).permit(:title, :body)
+    params.require(:petition).permit(:title, :body, :comments_goal_count)
   end
 end
