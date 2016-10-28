@@ -24,5 +24,6 @@ Rails.application.routes.draw do
 
   resources :agendas
   resources :archives
+  resources :archive_documents
   resources :memorials
 end

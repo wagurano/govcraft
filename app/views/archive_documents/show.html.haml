@@ -1,0 +1,26 @@
+%section#archive_document-block.page-block.post-block
+  .container
+    .post-block__title
+      %h3
+        = @archive_document.date
+        = @archive_document.time
+        = @archive_document.title
+
+    .post-block__info
+      %span.post-block__user
+        = link_to @archive_document.user.nickname
+      %span.post-block__date
+        = date_f @archive_document.created_at
+      - if can? :edit, @archive_document
+        = link_to '수정', edit_archive_document_path(@archive_document)
+      - if can? :destroy, @archive_document
+        = link_to '삭제', @archive_document, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+
+    .post-block__body
+      = simple_format @archive_document.body
+
+    .post-block__like
+      = render 'likes/button', likable: @archive_document
+
+    .post-block__comments
+      = render 'comments/list', commentable: @archive_document

@@ -1,0 +1,21 @@
+= form_for @archive_document do |f|
+  = f.hidden_field :archive_id
+
+  .form-group
+    = f.label :date
+    = f.date_field :date, class: 'form-control'
+
+  .form-group
+    = f.label :time
+    = f.text_field :time, placeholder: 'hh:mm:ss', class: 'form-control'
+
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+
+  .form-group
+    = f.label :body
+    = f.text_area :body, class: 'form-control'
+
+  .form-group
+    = f.submit '저장', class: 'btn btn-primary'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028024334) do
+ActiveRecord::Schema.define(version: 20161028040036) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer  "user_id"
@@ -24,6 +24,21 @@ ActiveRecord::Schema.define(version: 20161028024334) do
     t.datetime "updated_at",                               null: false
     t.string   "outline"
     t.index ["user_id"], name: "index_agendas_on_user_id", using: :btree
+  end
+
+  create_table "archive_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+    t.string   "title"
+    t.text     "body",           limit: 65535
+    t.date     "date"
+    t.string   "time"
+    t.integer  "user_id",                                  null: false
+    t.integer  "archive_id",                               null: false
+    t.integer  "comments_count",               default: 0
+    t.integer  "likes_count",                  default: 0
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.index ["archive_id"], name: "index_archive_documents_on_archive_id", using: :btree
+    t.index ["user_id"], name: "index_archive_documents_on_user_id", using: :btree
   end
 
   create_table "archives", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|

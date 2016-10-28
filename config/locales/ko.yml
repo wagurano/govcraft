@@ -40,3 +40,8 @@ ko:
         title: 제목
         body: 내용
         image: 대표이미지
+      archive_document:
+        title: 제목
+        body: 내용
+        date: 날짜
+        time: 시간

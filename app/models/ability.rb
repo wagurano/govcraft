@@ -7,12 +7,12 @@ class Ability
     if user
       can :create, [
           FollowingIssue, Campaign, Discussion, Petition, Poll,
-          Memorial, Agenda, Archive,
+          Memorial, Agenda, Archive, ArchiveDocument,
           Comment, Like
         ]
       can [:update, :destroy], [
           FollowingIssue, Campaign, Discussion, Petition, Poll,
-          Memorial, Agenda, Archive,
+          Memorial, Agenda, Archive, ArchiveDocument,
           Comment, Like
         ], :user_id => user.id
     end

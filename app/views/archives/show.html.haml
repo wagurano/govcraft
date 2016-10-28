@@ -1,11 +1,3 @@
-%section.page-block
-  .container
-    .row
-      .col-xs-6
-        = link_to "#{Archive.model_name.human} 시작하기", new_archive_path, class: 'btn btn-default btn-sm'
-      .col-xs-6.text-right
-        = link_to '목록', archives_path, class: 'btn btn-default btn-sm'
-
 %section#archive-header-block
   .container
     .jumbotron{ style: "background-image: url(#{@archive.image_url(:lg)})" }
@@ -20,7 +12,18 @@
             = link_to '삭제', @archive, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
       %p= simple_format @archive.body
 
-%section.page-block.post-block
+%section.page-block
   .container
-    .post-block__comments
-      = render 'comments/list', commentable: @archive
+    %h4 자료
+
+    .row
+      .col-xs-6
+        = link_to '자료 추가하기', new_archive_document_path(archive_id: @archive.id), class: 'btn btn-default btn-sm'
+
+    %ul.list-unstyled
+      - @archive.documents.each do |document|
+        %li[document]
+          .text-muted
+            = document.date
+            = document.time
+          %h5= link_to document.title, document

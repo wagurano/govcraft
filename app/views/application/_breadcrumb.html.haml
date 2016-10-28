@@ -1,4 +1,4 @@
-- if ['issues', 'campaigns', 'discussions', 'petitions', 'polls', 'memorials'].include? params[:controller]
+- if ['issues', 'campaigns', 'discussions', 'petitions', 'polls', 'memorials', 'archive_documents'].include? params[:controller]
   %section
     .container
       %ol.breadcrumb{ style: 'font-size: 12px;' }
@@ -25,4 +25,8 @@
 
         - if params[:controller] == 'memorials'
           %li= link_to Memorial.model_name.human, memorials_path
+
+        - if params[:controller] == 'archive_documents' && params[:action] == 'show'
+          %li= link_to Archive.model_name.human, archives_path
+          %li= link_to @archive.title, @archive
 
