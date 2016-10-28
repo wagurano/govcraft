@@ -1,0 +1,21 @@
+%div
+  목표
+  = petition.signs_goal_count
+%div
+  현재
+  = petition.signs_count
+
+- if user_signed_in?
+  - if petition.signed?(current_user)
+    서명 완료
+  - else
+    = form_for Sign.new(petition: petition) do |f|
+      = f.hidden_field :petition_id
+      .form-group
+        = f.label :body
+        = f.text_area :body
+      .form-group
+        = f.submit
+
+%div
+  = render petition.signs

@@ -1,0 +1,8 @@
+%div[sign]
+  = render partial: 'users/thumbnail', user: sign.user
+  %span.body= sign.body
+  %span.button
+    - if can? :update, sign
+      = link_to '수정', [:edit, sign]
+    - if can? :destroy, sign
+      = link_to '취소', sign, method: :delete, data: { confirm: '정말 취소하시겠습니까?' }

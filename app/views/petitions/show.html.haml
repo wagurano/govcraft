@@ -24,6 +24,9 @@
     .post-block__body
       = simple_format @petition.body
 
+    .post-block__signs
+      = render 'signs/list', petition: @petition
+
     .post-block__like
       = render 'likes/button', likable: @petition
 

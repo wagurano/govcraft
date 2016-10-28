@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :comments
   resources :likes
+  resources :signs
 
   resources :issues
   resources :following_issues
