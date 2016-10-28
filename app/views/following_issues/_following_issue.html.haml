@@ -1,5 +1,9 @@
+- issue = following_issue.issue
 %span[following_issue]
-  = link_to following_issue.issue.title, following_issue.issue
+  = link_to issue.title, issue
+  %small.text-muted
+    %i.fa.fa-user-o
+    = issue.followers.count
   %small
     - if can? :destroy, following_issue
       = link_to '삭제', following_issue, method: :delete, data: { confirm: '정말 삭제하시겠습니까?'}

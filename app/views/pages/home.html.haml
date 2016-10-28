@@ -9,7 +9,7 @@
 - if user_signed_in?
   %section#issues.page-block
     .container
-      %h3 나의 관심 토픽
+      %h4 나의 관심 토픽
 
       .following-issues{ style: 'margin-bottom: 14px;' }
         - current_user.following_issues.each do |following_issues|
@@ -23,7 +23,7 @@
         .panel.panel-floating
           .panel-body
             .text-center
-              %h4{ style: 'margin-top:14px;'}= link_to '시민아카이브', '#'
+              %h4{ style: 'margin-top:14px;'}= link_to '시민아카이브', archives_path
       .col-sm-4
         .panel.panel-floating
           .panel-body
