@@ -89,3 +89,24 @@
     border-radius: $btn-border-radius-large;
   }
 }
+
+/* components */
+.following_issue {
+  border: 1px solid #c0c0c2;
+  border-radius: 36px;
+  display: inline-block;
+  font-size: 18px;
+  padding: 14px;
+  margin-right: 7px;
+  margin-bottom: 7px;
+  .buttons {
+    display: none;
+  }
+}
+.following_issue:hover {
+  border-color: #4a5dd0;
+  cursor: pointer;
+  .buttons {
+    display: inline;
+  }
+}
