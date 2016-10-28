@@ -1,32 +1,34 @@
-- if ['issues', 'campaigns', 'discussions', 'petitions', 'polls', 'memorials', 'archive_documents'].include? params[:controller]
-  %section
-    .container
+%section
+  .container
+    - if params[:controller] == 'issues'
       %ol.breadcrumb{ style: 'font-size: 12px;' }
-        - if params[:controller] == 'issues'
-          %li= link_to Issue.model_name.human, issues_path
+        %li= link_to Issue.model_name.human, issues_path
 
-        - if params[:controller] == 'campaigns'
-          %li= link_to Campaign.model_name.human, campaigns_path
+    - if params[:controller] == 'campaigns'
+      %ol.breadcrumb{ style: 'font-size: 12px;' }
+        %li= link_to Campaign.model_name.human, campaigns_path
 
-        - if params[:controller] == 'discussions'
-          %li= link_to Campaign.model_name.human, campaigns_path
-          %li= link_to @campaign.title, @campaign
-          %li= link_to Discussion.model_name.human, campaign_discussions_path(@campaign)
+    - if params[:controller] == 'discussions'
+      %ol.breadcrumb{ style: 'font-size: 12px;' }
+        %li= link_to Campaign.model_name.human, campaigns_path
+        %li= link_to @campaign.title, @campaign
 
-        - if params[:controller] == 'petitions'
-          %li= link_to Campaign.model_name.human, campaigns_path
-          %li= link_to @campaign.title, @campaign
-          %li= link_to Petition.model_name.human, campaign_petitions_path(@campaign)
+    - if params[:controller] == 'petitions'
+      %ol.breadcrumb{ style: 'font-size: 12px;' }
+        %li= link_to Campaign.model_name.human, campaigns_path
+        %li= link_to @campaign.title, @campaign
 
-        - if params[:controller] == 'polls'
-          %li= link_to Campaign.model_name.human, campaigns_path
-          %li= link_to @campaign.title, @campaign
-          %li= link_to Poll.model_name.human, campaign_polls_path(@campaign)
+    - if params[:controller] == 'polls'
+      %ol.breadcrumb{ style: 'font-size: 12px;' }
+        %li= link_to Campaign.model_name.human, campaigns_path
+        %li= link_to @campaign.title, @campaign
 
-        - if params[:controller] == 'memorials'
-          %li= link_to Memorial.model_name.human, memorials_path
+    - if params[:controller] == 'memorials'
+      %ol.breadcrumb{ style: 'font-size: 12px;' }
+        %li= link_to Memorial.model_name.human, memorials_path
 
-        - if params[:controller] == 'archive_documents' && params[:action] == 'show'
-          %li= link_to Archive.model_name.human, archives_path
-          %li= link_to @archive.title, @archive
+    - if params[:controller] == 'archive_documents' && params[:action] == 'show'
+      %ol.breadcrumb{ style: 'font-size: 12px;' }
+        %li= link_to Archive.model_name.human, archives_path
+        %li= link_to @archive.title, @archive
 
