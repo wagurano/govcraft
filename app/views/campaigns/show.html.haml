@@ -24,7 +24,11 @@
               %h5
                 = link_to discussion.title, discussion
                 %small.text-muted
+                  %i.fa.fa-comment-o
                   = discussion.comments.count
+                %small.text-muted
+                  %i.fa.fa-heart-o
+                  = discussion.likes_count
 
       .col-sm-4{ style: 'margin-bottom: 28px;'}
         %h4
@@ -37,7 +41,11 @@
               %h5
                 = link_to petition.title, petition
                 %small.text-muted
+                  %i.fa.fa-comment-o
                   = petition.comments.count
+                %small.text-muted
+                  %i.fa.fa-heart-o
+                  = petition.likes_count
 
       .col-sm-4{ style: 'margin-bottom: 28px;'}
         %h4
@@ -50,4 +58,8 @@
               %h5
                 = link_to poll.title, poll
                 %small.text-muted
+                  %i.fa.fa-comment-o
                   = poll.comments.count
+                %small.text-muted
+                  %i.fa.fa-heart-o
+                  = poll.likes_count
