@@ -3,7 +3,7 @@ class DiscussionsController < ApplicationController
   load_and_authorize_resource through: :campaign, shallow: true
 
   def index
-    @discussions = @campaign.discussions
+    @discussions = @campaign.discussions.order("id DESC")
   end
 
   def show
