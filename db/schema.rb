@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028012925) do
+ActiveRecord::Schema.define(version: 20161028021424) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer  "user_id"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20161028012925) do
     t.integer  "likes_count",                  default: 0
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.string   "outline"
     t.index ["user_id"], name: "index_agendas_on_user_id", using: :btree
   end
 

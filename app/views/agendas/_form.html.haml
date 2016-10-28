@@ -1,15 +1,19 @@
 = form_for @agenda do |f|
   .form-group
+    = f.label :outline
+    = f.text_area :outline, class: 'form-control input-lg'
+
+  .form-group
     = f.label :problem
-    = f.text_area :problem, class: 'form-control'
+    = f.text_area :problem, rows: 8, class: 'form-control'
 
   .form-group
     = f.label :solution
-    = f.text_area :solution, class: 'form-control'
+    = f.text_area :solution, rows: 8, class: 'form-control'
 
   .form-group
     = f.label :memo
-    = f.text_area :memo, class: 'form-control'
+    = f.text_area :memo, rows: 8, class: 'form-control'
 
   .form-group
     = f.submit '저장', class: 'btn btn-primary'

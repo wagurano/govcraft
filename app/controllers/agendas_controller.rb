@@ -30,6 +30,6 @@ class AgendasController < ApplicationController
   private
 
   def agenda_params
-    params.require(:agenda).permit(:problem, :solution, :memo)
+    params.require(:agenda).permit(:outline, :problem, :solution, :memo)
   end
 end

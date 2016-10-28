@@ -31,6 +31,7 @@ ko:
         title: 제목
         body: 내용
       agenda:
+        outline: 요점
         problem: 한국사회의 문제(진단)
         solution: 대안(처방)
         memo: 참고

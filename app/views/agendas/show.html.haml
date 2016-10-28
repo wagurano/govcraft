@@ -8,6 +8,9 @@
 
 %section#agenda-block.page-block.post-block
   .container
+    .post-block__title
+      %h3= @agenda.outline
+
     .post-block__info
       %span.post-block__user
         = link_to @agenda.user.nickname
