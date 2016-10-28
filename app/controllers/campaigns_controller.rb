@@ -2,7 +2,7 @@ class CampaignsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @campaigns = Campaign.all
+    @campaigns = Campaign.order('id DESC')
   end
 
   def show
