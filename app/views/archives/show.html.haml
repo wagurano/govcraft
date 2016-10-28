@@ -1,0 +1,26 @@
+%section.page-block
+  .container
+    .row
+      .col-xs-6
+        = link_to "#{Archive.model_name.human} 시작하기", new_archive_path, class: 'btn btn-default btn-sm'
+      .col-xs-6.text-right
+        = link_to '목록', archives_path, class: 'btn btn-default btn-sm'
+
+%section#archive-header-block
+  .container
+    .jumbotron{ style: "background-image: url(#{@archive.image_url(:lg)})" }
+      %h2
+        %small.badge 아카이브
+        %br
+        = @archive.title
+        %small
+          - if can? :edit, @archive
+            = link_to '수정', edit_campaign_path(@archive)
+          - if can? :destroy, @archive
+            = link_to '삭제', @archive, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
+      %p= simple_format @archive.body
+
+%section.page-block.post-block
+  .container
+    .post-block__comments
+      = render 'comments/list', commentable: @archive

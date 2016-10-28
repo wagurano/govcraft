@@ -28,13 +28,41 @@
     border: none;
     color: $gray-lightest;
     text-shadow: 0 0 6px rgba(0,0,0,.5);
+    .badge, a {
+      text-shadow: none;
+    }
   }
   .badge {
     background-color: $gray-light;
     color: $gray-dark;
     font-weight: normal;
     padding-top: 5px;
-    text-shadow: none;
+  }
+}
+
+#archive-header-block {
+  .jumbotron {
+    background-color: $gray-dark;
+    background-size: cover;
+    border: none;
+    color: $gray-lightest;
+    text-shadow: 0 0 6px rgba(0,0,0,.5);
+
+    .badge, a {
+      text-shadow: none;
+    }
+    .badge {
+      background-color: $gray-light;
+      color: $gray-dark;
+      font-weight: normal;
+      padding-top: 5px;
+    }
+    a {
+      color: $gray-lightest;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 

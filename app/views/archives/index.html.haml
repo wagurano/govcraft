@@ -1,0 +1,18 @@
+%section.page-block
+  .container
+    %section
+      .row
+        - @archives.each do |archive|
+          .col-sm-12
+            .panel.panel-default.panel-floating
+              .panel-body
+                %h4= link_to archive.title, archive
+                .archive-meta.text-muted
+                  = date_f archive.created_at
+                  부터
+                  데이터가
+                  %strong= archive.comments.count
+                  개가 모였습니다.
+
+    %section{ style: 'margin-top: 28px; padding-top: 14px; border-top: 1px solid #dedede' }
+      = link_to "#{Archive.model_name.human} 시작하기", new_archive_path, class: 'btn btn-default'

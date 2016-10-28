@@ -54,10 +54,6 @@ class ImageUploader < CarrierWave::Uploader::Base
     "#{secure_token(10)}.#{file.extension}" if original_filename.present?
   end
 
-  def url
-    (ImageUploader::env_storage == :fog or self.file.try(:exists?)) ? super : "https://canoe-file.s3.amazonaws.com#{super}"
-  end
-
   protected
 
   def secure_token(length=16)
