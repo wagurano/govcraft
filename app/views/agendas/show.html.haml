@@ -1,0 +1,39 @@
+%section.page-block
+  .container
+    .row
+      .col-xs-6
+        = link_to "#{Agenda.model_name.human} 쓰기", new_agenda_path, class: 'btn btn-default btn-sm'
+      .col-xs-6.text-right
+        = link_to '목록', agendas_path, class: 'btn btn-default btn-sm'
+
+%section#agenda-block.page-block.post-block
+  .container
+    .post-block__info
+      %span.post-block__user
+        = link_to @agenda.user.nickname
+      %span.post-block__date
+        = date_f @agenda.created_at
+      - if can? :edit, @agenda
+        = link_to '수정', edit_agenda_path(@agenda)
+      - if can? :destroy, @agenda
+        = link_to '삭제', @agenda, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+
+    .post-block__body
+      %h4= Agenda.human_attribute_name('problem')
+      %div
+        = simple_format @agenda.problem
+
+    .post-block__body
+      %h4= Agenda.human_attribute_name('solution')
+      .lead= @agenda.solution
+
+    .post-block__body
+      %h4= Agenda.human_attribute_name('memo')
+      %div
+        = simple_format @agenda.memo
+
+    .post-block__like
+      = render 'likes/button', likable: @agenda
+
+    .post-block__comments
+      = render 'comments/list', commentable: @agenda

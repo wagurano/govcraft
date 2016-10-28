@@ -12,6 +12,7 @@ ko:
       petition: 서명
       poll: 투표
       memorial: 시민추모관
+      agenda: 의제
     attributes:
       campaign:
         title: 제목
@@ -29,3 +30,7 @@ ko:
       memorial:
         title: 제목
         body: 내용
+      agenda:
+        problem: 한국사회의 문제(진단)
+        solution: 대안(처방)
+        memo: 참고

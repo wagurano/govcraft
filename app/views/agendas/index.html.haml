@@ -1,0 +1,14 @@
+%section.page-block
+  .container
+    %section
+      .row.masonry
+        - @agendas.each do |agenda|
+          .col-sm-4
+            .panel.panel-default.panel-floating
+              .panel-body
+                %h4= link_to agenda.solution, agenda
+                .agenda-meta.text-muted
+                  = date_f agenda.created_at
+
+    %section{ style: 'margin-top: 28px; padding-top: 14px; border-top: 1px solid #dedede' }
+      = link_to "#{Agenda.model_name.human} 쓰기", new_agenda_path, class: 'btn btn-default'
