@@ -1,7 +1,8 @@
 %section#discussions-section.page-block
   .container
     .row
-      .col-sm-12
+      .col-xs-6
+      .col-xs-6.text-right
         = link_to '토론 글쓰기', new_campaign_discussion_path(@campaign), class: 'btn btn-default btn-sm'
 
     %table.table{ style: 'margin: 28px 0;'}
@@ -28,8 +29,4 @@
               = rand(100)
             %td.discussion__created_at.text-center
               = date_f discussion.created_at
-
-    .row
-      .col-sm-2
-        = link_to '토론 글쓰기', new_campaign_discussion_path(@campaign), class: 'btn btn-default btn-sm'
 
