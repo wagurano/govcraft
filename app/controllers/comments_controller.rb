@@ -4,6 +4,9 @@ class CommentsController < ApplicationController
 
   def create
     @comment.user = current_user
+    if @comment.commentable.respond_to? :voted_by? and @comment.commentable.voted_by? current_user
+      @comment.choice = @comment.commentable.fetch_vote_of(current_user).choice
+    end
     errors_to_flash(@comment) unless @comment.save
     redirect_back(fallback_location: root_path)
   end
