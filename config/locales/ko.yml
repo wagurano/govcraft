@@ -24,7 +24,7 @@ ko:
       petition:
         title: 제목
         body: 내용
-        comments_goal_count: 서명 목표인수
+        signs_goal_count: 서명 목표인수
       poll:
         title: 제목
         body: 내용
