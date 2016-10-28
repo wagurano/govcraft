@@ -1,0 +1,7 @@
+%div
+  - { agree: '찬성', disagree: '반대' }.each do |choice, choice_label|
+    = link_to polymorphic_url([choice, :votes], poll_id: poll.id), method: :post do
+      #{choice_label}
+      = poll.send("#{choice}s_count")
+  - if poll.voted_by?(current_user)
+    = link_to '취소', cancel_votes_path(poll_id: poll.id), method: :post

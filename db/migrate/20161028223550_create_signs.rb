@@ -3,7 +3,7 @@ class CreateSigns < ActiveRecord::Migration[5.0]
     create_table :signs do |t|
       t.references :user, null: false, index: true
       t.references :petition, null: false, index: true
-      t.string :body
+      t.text :body
       t.timestamps null: false
     end
 

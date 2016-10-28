@@ -24,6 +24,9 @@
     .post-block__body
       = simple_format @poll.body
 
+    .post-block__vote
+      = render 'votes/panel', poll: @poll
+
     .post-block__like
       = render 'likes/button', likable: @poll
 

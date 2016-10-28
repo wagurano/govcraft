@@ -11,6 +11,13 @@ Rails.application.routes.draw do
   resources :comments
   resources :likes
   resources :signs
+  resources :votes do
+    collection do
+      post :agree
+      post :disagree
+      post :cancel
+    end
+  end
 
   resources :issues
   resources :following_issues
