@@ -1,6 +1,7 @@
 class PollsController < ApplicationController
   load_and_authorize_resource :campaign, parent: true
   load_and_authorize_resource through: :campaign, shallow: true
+  before_action :reset_meta_tags, only: :show
 
   def index
     @polls = @campaign.polls
@@ -45,5 +46,13 @@ class PollsController < ApplicationController
 
   def poll_params
     params.require(:poll).permit(:title, :body)
+  end
+
+  def reset_meta_tags
+    prepare_meta_tags({
+      title: "[투표] " + @poll.title,
+      description: @poll.body.html_safe,
+      url: request.original_url}
+    )
   end
 end

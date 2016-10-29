@@ -1,6 +1,7 @@
 class DiscussionsController < ApplicationController
   load_and_authorize_resource :campaign, parent: true
   load_and_authorize_resource through: :campaign, shallow: true
+  before_action :reset_meta_tags, only: :show
 
   def index
     @discussions = @campaign.discussions.order("id DESC")
@@ -45,5 +46,13 @@ class DiscussionsController < ApplicationController
 
   def discussion_params
     params.require(:discussion).permit(:title, :body)
+  end
+
+  def reset_meta_tags
+    prepare_meta_tags({
+      title: @discussion.title,
+      description: @discussion.body.html_safe,
+      url: request.original_url}
+    )
   end
 end

@@ -1,5 +1,6 @@
 class CampaignsController < ApplicationController
   load_and_authorize_resource
+  before_action :reset_meta_tags, only: :show
 
   def index
     @campaigns = Campaign.order('id DESC')
@@ -42,5 +43,14 @@ class CampaignsController < ApplicationController
 
   def campaign_params
     params.require(:campaign).permit(:title, :body)
+  end
+
+  def reset_meta_tags
+    prepare_meta_tags({
+      title: @campaign.title,
+      description: @campaign.body.html_safe,
+      image: @campaign.image.url,
+      url: request.original_url}
+    )
   end
 end

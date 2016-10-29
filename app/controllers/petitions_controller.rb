@@ -1,6 +1,7 @@
 class PetitionsController < ApplicationController
   load_and_authorize_resource :campaign, parent: true
   load_and_authorize_resource through: :campaign, shallow: true
+  before_action :reset_meta_tags, only: :show
 
   def index
     @petitions = @campaign.petitions.order('id DESC')
@@ -45,5 +46,13 @@ class PetitionsController < ApplicationController
 
   def petition_params
     params.require(:petition).permit(:title, :body, :signs_goal_count)
+  end
+
+  def reset_meta_tags
+    prepare_meta_tags({
+      title: "[서명] " + @petition.title,
+      description: @petition.body.html_safe,
+      url: request.original_url}
+    )
   end
 end

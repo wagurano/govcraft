@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :prepare_meta_tags, if: "request.get?"
   after_action :prepare_unobtrusive_flash
   after_action :store_location
 
@@ -41,6 +42,43 @@ class ApplicationController < ActionController::Base
 
   def errors_to_flash(model)
     flash[:notice] = model.errors.full_messages.join('<br>').html_safe
+  end
+
+  def prepare_meta_tags(options={})
+    set_meta_tags build_meta_options(options)
+  end
+
+  def build_meta_options(options)
+    site_name = "가브크래프트 Govcraft"
+    title = options[:title] || "시민이 주도하는 시민 참여 플랫폼"
+    image = options[:image] || view_context.image_url('seo.png')
+    url = options[:url] || root_url
+    description = options[:description] || "가브크래프트는 시민이 주도하는 시민 참여 플랫폼입니다"
+
+    {
+      title:       title,
+      reverse:     true,
+      image:       image,
+      description: description,
+      keywords:    "시민, 정치, 국회, 입법, 법안, 민주주의, 온라인정치, 정치참여, 빠띠, 빠흐띠",
+      canonical:   url,
+      twitter: {
+        site_name: site_name,
+        site: '@parti_xyz',
+        card: 'summary',
+        title: title,
+        description: description,
+        image: image
+      },
+      og: {
+        url: url,
+        site_name: site_name,
+        title: title,
+        image: image,
+        description: description,
+        type: 'website'
+      }
+    }
   end
 
   #bugfix redactor2-rails
