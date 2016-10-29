@@ -11,7 +11,22 @@
           %th.text-center 번호
           %th 제목
           %th 글쓴이
-          %th.text-right 조회수
-          %th.text-center 시간
+          %th.text-right 투표
+          %th.text-right 조회
+          %th.text-center 작성일
       %tbody
-        = render @polls
+        - @polls.each do |poll|
+          %tr[poll]
+            %td.text-muted.text-center
+              = poll.id
+            %td.discussion__title
+              %strong= link_to poll.title, poll
+            %td.discussion__nickname
+              = poll.user.nickname
+            %td.discussion__cnt.text-right
+              = poll.votes_count
+            %td.discussion__cnt.text-right
+              = poll.views_count
+            %td.discussion__created_at.text-center
+              = date_f poll.created_at
+
