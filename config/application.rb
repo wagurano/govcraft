@@ -15,5 +15,6 @@ module GovCraft
     config.time_zone = 'Asia/Seoul'
     config.i18n.available_locales = [:en, :ko]
     config.i18n.default_locale = :ko
+    config.autoload_paths << Rails.root.join('lib')
   end
 end
