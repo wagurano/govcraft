@@ -21,6 +21,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'
 gem 'haml-rails', '~> 0.9.0'
+gem 'redactor2_rails', '~> 0.1.3'
 
 # assets
 source 'https://rails-assets.org' do

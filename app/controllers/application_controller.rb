@@ -24,4 +24,9 @@ class ApplicationController < ActionController::Base
   def errors_to_flash(model)
     flash[:notice] = model.errors.full_messages.join('<br>').html_safe
   end
+
+  #bugfix redactor2-rails
+  def redactor_current_user
+    redactor2_current_user
+  end
 end

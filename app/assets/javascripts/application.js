@@ -5,6 +5,9 @@
 //= require unobtrusive_flash_bootstrap
 //= require imagesloaded.pkgd
 //= require masonry.pkgd
+//= require redactor2_rails/config
+//= require redactor
+//= require redactor2_rails/langs/ko
 
 UnobtrusiveFlash.flashOptions['timeout'] = 300000;
 
@@ -17,3 +20,16 @@ $(document).imagesLoaded( { }, function() {
     }
   }
 );
+
+$(function(){
+  // Initialize Redactor
+  $('.redactor').redactor({
+    buttons: ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'file', 'link', 'horizontalrule'],
+    callbacks: {
+      imageUploadError: function(json, xhr) {
+        UnobtrusiveFlash.showFlashMessage(json.error.data[0], {type: 'notice'})
+      }
+    }
+  });
+  $('.redactor .redactor-editor').prop('contenteditable', true);
+});
