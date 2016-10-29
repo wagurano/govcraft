@@ -2,7 +2,7 @@ class IssuesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @issue = Issue.order('title asc')
+    @issues = Issue.all
   end
 
   def show

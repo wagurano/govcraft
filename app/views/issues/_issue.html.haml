@@ -2,10 +2,10 @@
   .panel-body
     %h4.text-center{ style: 'margin-top: 0; border-bottom: 1px solid #dedede; padding-bottom: 7px; margin-bottom: 14px;' }
       = link_to "##{issue.title}", issue
+      - if issue.comments.count > 0
+        %small.text-muted{ style: 'line-height: 20px'}
+          (#{issue.comments.count})
+
 
     %div
       = render partial: 'users/thumbnail', collection: issue.followers, as: :user
-      - if issue.comments.count > 0
-        %small.text-muted{ style: 'line-height: 20px'}
-          \+
-          = issue.comments.count
