@@ -89,6 +89,8 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.20160615)
       unf (>= 0.0.5, < 1.0.0)
+    enumerize (2.0.0)
+      activesupport (>= 3.2)
     envyable (0.2.0)
     equalizer (0.0.10)
     erubis (2.7.0)
@@ -562,6 +564,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   counter_culture (~> 0.2.3)
   devise (~> 4.2)
+  enumerize (~> 2.0)
   envyable (~> 0.2.0)
   exception_notification (~> 4.1, >= 4.1.4)
   ey_config

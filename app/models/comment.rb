@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
+  include Choosable
+
   belongs_to :commentable, polymorphic: true
   belongs_to :user
   scope :recent, -> { order(created_at: :desc) }

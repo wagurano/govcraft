@@ -14,6 +14,6 @@
         = comment.user.nickname
         = date_f comment.created_at
       - if comment.choice.present?
-        .comment-choice= comment.choice
+        .comment-choice= comment.choice.text
       .comment-body
         = comment.body

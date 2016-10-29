@@ -1,4 +1,6 @@
 class Vote < ApplicationRecord
+  include Choosable
+
   belongs_to :user
   belongs_to :poll, counter_cache: true
 
