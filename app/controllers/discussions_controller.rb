@@ -8,6 +8,7 @@ class DiscussionsController < ApplicationController
 
   def show
     @campaign = @discussion.campaign
+    @discussion.increment!(:views_count)
   end
 
   def new

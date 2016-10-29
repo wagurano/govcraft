@@ -8,6 +8,7 @@ class PetitionsController < ApplicationController
 
   def show
     @campaign = @petition.campaign
+    @petition.increment!(:views_count)
   end
 
   def new

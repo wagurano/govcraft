@@ -6,10 +6,10 @@
   %td.petition__nickname
     = petition.user.nickname
   %td.petition__comments_count.text-right
-    = rand(petition.signs_goal_count)
+    = petition.signs_count
     \/
     = petition.signs_goal_count
   %td.petition__read_count.text-right
-    = rand(100)
+    = petition.views_count
   %td.petition__created_at.text-center
     = date_f petition.created_at

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028234708) do
+ActiveRecord::Schema.define(version: 20161029001415) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer  "user_id"
@@ -55,10 +55,11 @@ ActiveRecord::Schema.define(version: 20161028234708) do
 
   create_table "campaigns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.string   "title"
-    t.text     "body",       limit: 65535
+    t.text     "body",        limit: 65535
     t.integer  "user_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "views_count",               default: 0
     t.index ["user_id"], name: "index_campaigns_on_user_id", using: :btree
   end
 
@@ -82,6 +83,7 @@ ActiveRecord::Schema.define(version: 20161028234708) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.integer  "likes_count",               default: 0
+    t.integer  "views_count",               default: 0
     t.index ["campaign_id"], name: "index_discussions_on_campaign_id", using: :btree
     t.index ["user_id"], name: "index_discussions_on_user_id", using: :btree
   end
@@ -134,6 +136,7 @@ ActiveRecord::Schema.define(version: 20161028234708) do
     t.integer  "likes_count",                    default: 0
     t.integer  "signs_goal_count",               default: 1000
     t.integer  "signs_count"
+    t.integer  "views_count",                    default: 0
     t.index ["campaign_id"], name: "index_petitions_on_campaign_id", using: :btree
     t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
   end
@@ -149,6 +152,7 @@ ActiveRecord::Schema.define(version: 20161028234708) do
     t.integer  "votes_count",                   default: 0
     t.integer  "agrees_count",                  default: 0
     t.integer  "disagrees_count",               default: 0
+    t.integer  "views_count",                   default: 0
     t.index ["campaign_id"], name: "index_polls_on_campaign_id", using: :btree
     t.index ["user_id"], name: "index_polls_on_user_id", using: :btree
   end

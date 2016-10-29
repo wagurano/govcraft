@@ -6,6 +6,7 @@ class CampaignsController < ApplicationController
   end
 
   def show
+    @campaign.increment!(:views_count)
   end
 
   def new

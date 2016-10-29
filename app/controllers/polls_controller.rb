@@ -8,6 +8,7 @@ class PollsController < ApplicationController
 
   def show
     @campaign = @poll.campaign
+    @poll.increment!(:views_count)
   end
 
   def new
