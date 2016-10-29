@@ -3,7 +3,7 @@ class PetitionsController < ApplicationController
   load_and_authorize_resource through: :campaign, shallow: true
 
   def index
-    @petitions = @campaign.petitions
+    @petitions = @campaign.petitions.order('id DESC')
   end
 
   def show

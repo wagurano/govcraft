@@ -2,9 +2,9 @@
   .container
     .row
       .col-xs-6
-        = link_to "#{Petition.model_name.human} 글쓰기", new_campaign_petition_path(@campaign), class: 'btn btn-default btn-sm'
-      .col-xs-6.text-right
         = link_to '목록', campaign_petitions_path(@campaign), class: 'btn btn-default btn-sm'
+      .col-xs-6.text-right
+        = link_to "#{Petition.model_name.human} 제안하기", new_campaign_petition_path(@campaign), class: 'btn btn-default btn-sm'
 
 %section#petition-block.page-block.post-block
   .container

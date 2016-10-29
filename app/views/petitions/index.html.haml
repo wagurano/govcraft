@@ -1,8 +1,9 @@
 %section#petitions-section.page-block
   .container
     .row
-      .col-sm-12
-        = link_to "#{Petition.model_name.human} 글쓰기", new_campaign_petition_path(@campaign), class: 'btn btn-default btn-sm'
+      .col-xs-6
+      .col-xs-6.text-right
+        = link_to "#{Petition.model_name.human} 제안하기", new_campaign_petition_path(@campaign), class: 'btn btn-default btn-sm'
 
     %table.table{ style: 'margin: 28px 0;'}
       %thead
@@ -15,8 +16,4 @@
           %th.text-center 시간
       %tbody
         = render @petitions
-
-    .row
-      .col-sm-2
-        = link_to "#{Petition.model_name.human} 글쓰기", new_campaign_petition_path(@campaign), class: 'btn btn-default btn-sm'
 

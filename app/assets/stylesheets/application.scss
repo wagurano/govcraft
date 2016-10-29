@@ -4,34 +4,13 @@
 @import 'base';
 
 /* components */
-.following_issue {
-  border: 1px solid #c0c0c2;
-  border-radius: 36px;
-  display: inline-block;
-  font-size: 18px;
-  padding: 14px;
-  margin-right: 7px;
-  margin-bottom: 7px;
-  transition: all 0.2s ease-in-out;
+@import 'components';
 
-  .buttons {
-    display: none;
-  }
-}
-.following_issue:hover {
-  border-color: #4a5dd0;
-  cursor: pointer;
-  .buttons {
-    display: inline;
-  }
-}
-
-/* pages */
+/* blocks & panels */
 @import 'users';
 @import 'posts';
 @import 'petitions';
-
-/* blocks */
+@import 'polls';
 
 #site-header {
   .navbar-brand {

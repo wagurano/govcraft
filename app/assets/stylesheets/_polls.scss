@@ -1,0 +1,21 @@
+#poll-block {
+  .vote-panel {
+    background-color: $gray-lightest;
+    padding: $font-size-base*2;
+    border-radius: $btn-border-radius-large;
+
+    text-align: center;
+    .btn-choice {
+      .choice__label {
+        display: block;
+        font-size: $font-size-base;
+        font-weight: normal;
+      }
+      .choice__count {
+        display: block;
+        font-size: $font-size-large;
+        font-weight: bold;
+      }
+    }
+  }
+}
