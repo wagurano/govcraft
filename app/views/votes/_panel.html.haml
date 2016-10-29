@@ -14,7 +14,9 @@
               %span.choice__count= poll.agrees_count
         .vote__users
           - poll.votes.where(choice: 'agree').each do |v|
-            = render 'users/thumbnail', user: v.user if v.user.present?
+            - if v.user.present?
+              = link_to v.user do
+                = render 'users/thumbnail', user: v.user
 
     .col-xs-6
       .text-left
@@ -29,4 +31,6 @@
               %span.choice__count= poll.disagrees_count
         .vote__users
           - poll.votes.where(choice: 'disagree').each do |v|
-            = render 'users/thumbnail', user: v.user if v.user.present?
+            - if v.user.present?
+              = link_to v.user do
+                = render 'users/thumbnail', user: v.user

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
+  resources :users
   resources :comments
   resources :likes
   resources :signs

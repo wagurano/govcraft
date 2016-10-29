@@ -1,0 +1,11 @@
+%section.page-block
+  .container
+    .page-header
+      %h2
+        = render 'thumbnail', user: @user
+        = @user.nickname
+
+    %section
+      %dl
+        %dt 가입일
+        %dd= date_f @user.created_at
