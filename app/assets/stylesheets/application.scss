@@ -26,6 +26,12 @@
   }
 }
 
+#site-hero-block {
+  .jumbotron {
+    background-color: $brand-primary-lighter;
+  }
+}
+
 #campaign-header-block {
   .jumbotron {
     position: relative;
