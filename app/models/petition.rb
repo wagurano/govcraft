@@ -9,4 +9,8 @@ class Petition < ApplicationRecord
   def signed? someone
     signed_users.exists?(user: someone)
   end
+
+  def percentage
+    ( signs_count.to_f / signs_goal_count * 100 ).to_i
+  end
 end

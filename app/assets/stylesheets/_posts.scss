@@ -1,0 +1,24 @@
+.post-block {
+  &__title {
+    border-bottom: 1px solid $gray-lighter;
+    font-size: $font-size-small;
+    margin-bottom: $font-size-base * 0.5;
+  }
+  &__info {
+    color: $text-muted;
+    font-size: $font-size-small;
+  }
+  &__body {
+    margin: $font-size-base*2 0;
+  }
+  &__like {
+    text-align: center;
+    margin: $font-size-base*2 0;
+  }
+  &__comments {
+    background-color: $gray-lightest;
+    padding: $font-size-base*2;
+    border-radius: $btn-border-radius-large;
+  }
+}
+

@@ -1,21 +1,43 @@
-%div
-  목표
-  = petition.signs_goal_count
-%div
-  현재
-  = petition.signs_count
+.sign-panel
+  .sign-panel__status
+    .sign-panel__status__count
+      현재
+      = petition.signs_count
+      \/
+      목표
+      = petition.signs_goal_count
 
-- if user_signed_in?
-  - if petition.signed?(current_user)
-    서명 완료
-  - else
-    = form_for Sign.new(petition: petition) do |f|
-      = f.hidden_field :petition_id
-      .form-group
-        = f.label :body
-        = f.text_area :body
-      .form-group
-        = f.submit
+    .progress
+      .progress-bar.progress-bar-warning.progress-bar-striped.active{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{petition.percentage}", :role => "progressbar", :style => "width: #{petition.percentage}%;"}
+        #{petition.percentage}%
 
-%div
-  = render petition.signs
+  .sign-panel__form
+    - if user_signed_in?
+      - if petition.signed?(current_user)
+        .text-center
+          서명하였습니다
+      - else
+        = form_for Sign.new(petition: petition) do |f|
+          = f.hidden_field :petition_id
+          .form-group
+            = f.text_field :body, placeholder: '서명 한마디..', class: 'form-control'
+          .form-group
+            = f.submit "#{petition.signs_count+1}번째 서명자 되기", class: 'btn btn-primary btn-sm'
+    - else
+      .text-center
+        = link_to '서명을 하려면 로그인이 필요합니다', '#'
+
+
+  .sign-panel__list
+    - petition.signs.each do |sign|
+      %div[sign]
+        .media
+          .media-left
+            .img-user{style: "background-image: url(#{sign.user.image.sm.url});"}
+          .media-body
+            = sign.body
+            %small
+              - if can? :update, sign
+                = link_to '수정', [:edit, sign]
+              - if can? :destroy, sign
+                = link_to '취소', sign, method: :delete, data: { confirm: '정말 취소하시겠습니까?' }

@@ -1,0 +1,24 @@
+#petition-block {
+  .sign-panel {
+    background-color: $gray-lightest;
+    padding: $font-size-base*2;
+    border-radius: $btn-border-radius-large;
+
+    &__status__count {
+      text-align: right;
+      font-size: $font-size-small;
+      color: $text-muted;
+    }
+    &__form {
+      padding: $font-size-base;
+      background-color: white;
+    }
+    &__list {
+      margin: $font-size-base 0;
+      padding: $font-size-base 0;
+      .sign {
+        margin: $font-size-base 0;
+      }
+    }
+  }
+}

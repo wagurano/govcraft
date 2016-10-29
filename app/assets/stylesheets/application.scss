@@ -3,7 +3,33 @@
 @import 'bootstrap';
 @import 'base';
 
+/* components */
+.following_issue {
+  border: 1px solid #c0c0c2;
+  border-radius: 36px;
+  display: inline-block;
+  font-size: 18px;
+  padding: 14px;
+  margin-right: 7px;
+  margin-bottom: 7px;
+  transition: all 0.2s ease-in-out;
+
+  .buttons {
+    display: none;
+  }
+}
+.following_issue:hover {
+  border-color: #4a5dd0;
+  cursor: pointer;
+  .buttons {
+    display: inline;
+  }
+}
+
+/* pages */
 @import 'users';
+@import 'posts';
+@import 'petitions';
 
 /* blocks */
 
@@ -71,49 +97,3 @@
   }
 }
 
-.post-block {
-  &__title {
-    border-bottom: 1px solid $gray-lighter;
-    font-size: $font-size-small;
-    margin-bottom: $font-size-base * 0.5;
-  }
-  &__info {
-    color: $text-muted;
-    font-size: $font-size-small;
-  }
-  &__body {
-    margin: $font-size-base*2 0;
-  }
-  &__like {
-    text-align: center;
-    margin: $font-size-base*2 0;
-  }
-  &__comments {
-    background-color: $gray-lightest;
-    padding: $font-size-base*2;
-    border-radius: $btn-border-radius-large;
-  }
-}
-
-/* components */
-.following_issue {
-  border: 1px solid #c0c0c2;
-  border-radius: 36px;
-  display: inline-block;
-  font-size: 18px;
-  padding: 14px;
-  margin-right: 7px;
-  margin-bottom: 7px;
-  transition: all 0.2s ease-in-out;
-
-  .buttons {
-    display: none;
-  }
-}
-.following_issue:hover {
-  border-color: #4a5dd0;
-  cursor: pointer;
-  .buttons {
-    display: inline;
-  }
-}

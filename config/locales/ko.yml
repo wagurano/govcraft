@@ -7,6 +7,8 @@ ko:
       default: "%Y.%m.%d %H:%M"
   activerecord:
     models:
+      user: 회원
+      issue: 토픽
       campaign: 캠페인
       discussion: 토론
       petition: 서명

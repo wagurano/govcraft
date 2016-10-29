@@ -24,11 +24,8 @@
     .post-block__body
       = simple_format @petition.body
 
-    .post-block__signs
-      = render 'signs/list', petition: @petition
-
     .post-block__like
       = render 'likes/button', likable: @petition
 
-    .post-block__comments
-      = render 'comments/list', commentable: @petition
+    .post-block__signs
+      = render 'signs/list', petition: @petition

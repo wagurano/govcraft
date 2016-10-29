@@ -9,7 +9,7 @@
 
 .comments
   - commentable.comments.recent.each do |comment|
-    .comment[comment]{ style: 'margin: 14px 0;'}
+    %div[comment]{ style: 'margin: 14px 0;'}
       %small.comment-meta.text-muted
         = comment.user.nickname
         = date_f comment.created_at
