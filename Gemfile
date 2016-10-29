@@ -72,6 +72,7 @@ gem 'exception_notification', '~> 4.1', '>= 4.1.4'
 gem 'sidekiq', '~> 4.1'
 gem 'redis', '~> 3.2', '>= 3.2.2'
 gem 'redis-namespace', '~> 1.5', '>= 1.5.2'
+gem 'postmark-rails', '~> 0.12.0'
 
 # monitor
 gem 'newrelic_rpm'
