@@ -12,14 +12,18 @@
       %h3= @petition.title
 
     .post-block__info
-      %span.post-block__user
-        = link_to @petition.user.nickname
-      %span.post-block__date
-        = date_f @petition.created_at
-      - if can? :edit, @petition
-        = link_to '수정', edit_petition_path(@petition)
-      - if can? :destroy, @petition
-        = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+      .row
+        .col-xs-6
+          %span.post-block__user
+            = link_to @petition.user.nickname
+          %span.post-block__date
+            = date_f @petition.created_at
+          - if can? :edit, @petition
+            = link_to '수정', edit_petition_path(@petition)
+          - if can? :destroy, @petition
+            = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+        .col-xs-6.text-right
+          조회 #{@petition.views_count}
 
     .post-block__body
       = simple_format @petition.body

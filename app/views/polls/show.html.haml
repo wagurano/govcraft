@@ -12,14 +12,18 @@
       %h3= @poll.title
 
     .post-block__info
-      %span.post-block__user
-        = link_to @poll.user.nickname
-      %span.post-block__date
-        = date_f @poll.created_at
-      - if can? :edit, @poll
-        = link_to '수정', edit_poll_path(@poll)
-      - if can? :destroy, @poll
-        = link_to '삭제', @poll, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+      .row
+        .col-xs-6
+          %span.post-block__user
+            = link_to @poll.user.nickname
+          %span.post-block__date
+            = date_f @poll.created_at
+          - if can? :edit, @poll
+            = link_to '수정', edit_poll_path(@poll)
+          - if can? :destroy, @poll
+            = link_to '삭제', @poll, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+        .col-xs-6.text-right
+          조회 #{@poll.views_count}
 
     .post-block__body
       = simple_format @poll.body

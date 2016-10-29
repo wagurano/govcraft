@@ -12,14 +12,18 @@
       %h3= @discussion.title
 
     .post-block__info
-      %span.post-block__user
-        = link_to @discussion.user.nickname
-      %span.post-block__date
-        = date_f @discussion.created_at
-      - if can? :edit, @discussion
-        = link_to '수정', edit_discussion_path(@discussion)
-      - if can? :destroy, @discussion
-        = link_to '삭제', @discussion, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+      .row
+        .col-xs-6
+          %span.post-block__user
+            = link_to @discussion.user.nickname
+          %span.post-block__date
+            = date_f @discussion.created_at
+          - if can? :edit, @discussion
+            = link_to '수정', edit_discussion_path(@discussion)
+          - if can? :destroy, @discussion
+            = link_to '삭제', @discussion, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+        .col-xs-6.text-right
+          조회 #{@discussion.views_count}
 
     .post-block__body
       = simple_format @discussion.body
