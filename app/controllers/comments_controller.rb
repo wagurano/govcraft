@@ -11,6 +11,11 @@ class CommentsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def destroy
+    @comment.destroy
+    redirect_to :back
+  end
+
   private
 
   def comment_params

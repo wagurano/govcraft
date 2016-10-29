@@ -13,6 +13,8 @@
       %small.comment-meta.text-muted
         = comment.user.nickname
         = date_f comment.created_at
+        - if can? :destroy, comment
+          = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
       - if comment.choice.present?
         .comment-choice= comment.choice.text
       .comment-body
