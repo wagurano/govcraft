@@ -2,7 +2,7 @@
   .container
     .row
       .col-xs-6
-      .col-xs-6
+      .col-xs-6.text-right
         = link_to "#{Poll.model_name.human} 제안하기", new_campaign_poll_path(@campaign), class: 'btn btn-default btn-sm'
 
     %table.table{ style: 'margin: 28px 0;'}

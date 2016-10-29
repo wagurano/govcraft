@@ -22,3 +22,16 @@
   }
 }
 
+.post-group {
+  .list-group-item {
+    .post__status {
+      float: right;
+      color: $brand-warning;
+      font-weight: bold;
+    }
+    .post__meta {
+      color: $text-muted;
+      font-size: $font-size-small;
+    }
+  }
+}

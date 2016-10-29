@@ -3,14 +3,13 @@ class ApplicationController < ActionController::Base
   after_action :prepare_unobtrusive_flash
   after_action :store_location
 
-  def store_location
-    return unless request.get?
-    if (!request.fullpath.match("/users") && !request.xhr?)
-      store_location_for(:user, request.fullpath)
+  before_action do
+    if browser.device.mobile?
+      request.variant = :mobile
     end
   end
 
-  #if Rails.env.production? or Rails.env.staging?
+  if Rails.env.production? or Rails.env.staging?
     rescue_from ActiveRecord::RecordNotFound, ActionController::UnknownFormat do |exception|
       render_404
     end
@@ -26,7 +25,14 @@ class ApplicationController < ActionController::Base
       self.response_body = nil
       redirect_to root_url, :alert => I18n.t('errors.messages.invalid_auth_token')
     end
-  #end
+  end
+
+  def store_location
+    return unless request.get?
+    if (!request.fullpath.match("/users") && !request.xhr?)
+      store_location_for(:user, request.fullpath)
+    end
+  end
 
   def render_404
     self.response_body = nil
