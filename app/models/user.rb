@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :registerable, :rememberable, :trackable, :omniauthable,
+  devise :database_authenticatable, :registerable,
+         :rememberable, :trackable, :recoverable,
+         :omniauthable,
          :omniauth_providers => [:facebook, :twitter]
 
   # assiciations
@@ -17,10 +19,23 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: false },
     length: { maximum: 20 }
   validate :nickname_exclude_pattern
+  validates :email,
+    presence: true,
+    format: { with: Devise.email_regexp },
+    uniqueness: {scope: [:provider]}
+  validates :uid, uniqueness: {scope: [:provider]}
+  validates :password,
+    presence: true,
+    confirmation: true,
+    length: Devise.password_length,
+    if: :password_required?
+
+  validates_confirmation_of :password, if: :password_required?
 
   # filters
   before_save :downcase_nickname
   before_validation :strip_whitespace_nickname, only: :nickname
+  before_save :set_uid
 
   # mount
   mount_uploader :image, UserImageUploader
@@ -39,7 +54,11 @@ class User < ApplicationRecord
     if auth.present?
       auth["email"] = params['email'] if params['email'].present?
       resource.assign_attributes(auth)
+      resource.password = Devise.friendly_token[0,20]
+      resource.confirmed_at = DateTime.now
       resource.remote_image_url = auth['image']
+    else
+      resource.provider = 'email'
     end
     resource
   end
@@ -58,7 +77,32 @@ class User < ApplicationRecord
     following_issues.exists?(issue: issue)
   end
 
+  # email auth
+
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    email = conditions.delete(:email)
+    where(conditions.to_h).where(["provider = 'email' AND uid = :value", { :value => email.downcase }]).first
+  end
+
+  # for recovering the password for an account
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    unless conditions.has_key?(:confirmation_token)
+      conditions.merge! provider: 'email'
+    end
+    where(conditions.to_h).first
+  end
+
   private
+
+  def set_uid
+    self.uid = self.email if self.provider == 'email'
+  end
 
   def downcase_nickname
     self.nickname = nickname.downcase
@@ -72,5 +116,9 @@ class User < ApplicationRecord
 
   def strip_whitespace_nickname
     self.nickname = self.nickname.strip unless self.nickname.nil?
+  end
+
+  def password_required?
+    !persisted? || !password.nil? || !password_confirmation.nil?
   end
 end

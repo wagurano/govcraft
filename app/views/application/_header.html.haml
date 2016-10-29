@@ -25,10 +25,6 @@
                 로그아웃
           - else
             %li
-              = link_to user_facebook_omniauth_authorize_path(provider: :facebook) do
-                %i.fa.fa-facebook.fa-fw
-                페이스북으로 로그인
-            %li
-              = link_to user_twitter_omniauth_authorize_path(provider: :twitter) do
-                %i.fa.fa-twitter.fa-fw
-                트위터로 로그인
+              = link_to new_user_session_path do
+                %i.fa.fa-sign-in
+                로그인 &middot; 가입

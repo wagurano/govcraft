@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
       if user_signed_in?
         redirect_to root_url, :alert => exception.message
       else
-        redirect_to sign_in_user_url, alert: '먼저 로그인 해주세요.'
+        redirect_to new_user_session_url, alert: '먼저 로그인 해주세요.'
       end
     end
     rescue_from ActionController::InvalidCrossOriginRequest, ActionController::InvalidAuthenticityToken do |exception|

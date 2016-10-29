@@ -10,12 +10,20 @@
         = f.hidden_field :remember_me
         .form-group
           = f.label :nickname do
-            카누에서 사용할 아이디를 넣어 주세요.
+            사용할 아이디를 넣어 주세요.
           = f.text_field :nickname, autofocus: true, class: 'form-control'
           .text-primary
             * 한글, 알파벳, 숫자, _ 만 가능합니다.
 
-        - if resource.email.blank? or resource.errors.include?(:email)
+        - if 'email' == resource.try(:provider)
+          .form-group
+            = f.label :password
+            = f.password_field :password, autofocus: true, class: 'form-control'
+            .help-block 최소 #{Devise.password_length.min}자 이상 적어 주세요.
+          .form-group
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation, autofocus: true, class: 'form-control'
+        - if 'email' == resource.try(:provider) or resource.email.blank? or resource.errors.include?(:email)
           .form-group
             = f.label :email do
               이메일을 넣어 주세요.
