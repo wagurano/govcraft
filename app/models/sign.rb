@@ -12,7 +12,7 @@ class Sign < ApplicationRecord
   scope :earlier, -> { order(created_at: :asc) }
 
   def user_image_url
-    user.present? ? user.image.sm.url : UserImageUploader::DEFAULT_IMAGE_URL
+    user.present? ? user.image.sm.url : ActionController::Base.helpers.asset_path('default-user.png')
   end
 
   def user_name

@@ -1,8 +1,6 @@
 # encoding: utf-8
 
 class UserImageUploader < CarrierWave::Uploader::Base
-  DEFAULT_IMAGE_URL = ActionController::Base.helpers.asset_url('default-user.png')
-
   include CarrierWave::MiniMagick
 
   def self.env_storage
@@ -27,7 +25,7 @@ class UserImageUploader < CarrierWave::Uploader::Base
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url
-    UserImageUploader::DEFAULT_IMAGE_URL
+    ActionController::Base.helpers.asset_path('default-user.png')
   end
 
   # Process files as they are uploaded:
