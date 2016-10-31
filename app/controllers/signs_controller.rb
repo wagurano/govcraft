@@ -1,10 +1,14 @@
 class SignsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :create
   load_and_authorize_resource
 
   def create
-    @sign.user = current_user
-    errors_to_flash(@sign) unless @sign.save
+    @sign.user = current_user if user_signed_in?
+    if @sign.save
+      flash[:notice] = I18n.t('messages.signed')
+    else
+      errors_to_flash(@sign)
+    end
     redirect_back(fallback_location: @petition)
   end
 
@@ -21,6 +25,6 @@ class SignsController < ApplicationController
   private
 
   def sign_params
-    params.require(:sign).permit(:body, :petition_id)
+    params.require(:sign).permit(:body, :petition_id, :signer_name, :signer_email)
   end
 end

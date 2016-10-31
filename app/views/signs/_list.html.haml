@@ -12,29 +12,35 @@
         #{petition.percentage}%
 
   .sign-panel__form
-    - if user_signed_in?
-      - if petition.signed?(current_user)
-        .text-center
-          서명하였습니다
-      - else
-        = form_for Sign.new(petition: petition) do |f|
-          = f.hidden_field :petition_id
-          .form-group
-            = f.text_field :body, placeholder: '서명 한마디..', class: 'form-control'
-          .form-group
-            = f.submit "#{petition.signs_count+1}번째 서명자 되기", class: 'btn btn-primary btn-sm'
-    - else
+    - if user_signed_in? and petition.signed?(current_user)
       .text-center
-        = link_to '서명을 하려면 로그인이 필요합니다', new_user_session_path
-
+        서명하였습니다
+    - else
+      = form_for Sign.new(petition: petition) do |f|
+        = f.hidden_field :petition_id
+        .form-group
+          = f.text_field :body, placeholder: '서명 한마디..', class: 'form-control'
+        - unless user_signed_in?
+          .row
+            .col-xs-12.col-md-6
+              .form-group
+                = f.label :signer_name
+                = f.text_field :signer_name, class: 'form-control'
+            .col-xs-12.col-md-6
+              .form-group
+                = f.label :signer_email
+                = f.text_field :signer_email, class: 'form-control'
+        .form-group
+          = f.submit "#{petition.signs_count+1}번째 서명자 되기", class: 'btn btn-primary btn-sm', data: { disable_with: "진행 중..." }
 
   .sign-panel__list
-    - petition.signs.each do |sign|
+    - petition.signs.recent.each do |sign|
       %div[sign]
         .media
           .media-left
-            .img-user{style: "background-image: url(#{sign.user.image.sm.url});"}
+            .img-user{style: "background-image: url(#{sign.user_image_url});"}
           .media-body
+            .text-muted= sign.user_name
             = sign.body
             %small
               - if can? :update, sign

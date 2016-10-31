@@ -6,11 +6,13 @@ ko:
     formats:
       default: "%Y.%m.%d %H:%M"
   errors:
-    format: "%{message}"
+    format: "%{attribute}%{message}"
     messages:
-      blank: "%{attribute}을 입력해 주세요."
-      not_saved: "저장되지 않았습니다."
-      taken: "이미 사용 중입니다."
+      blank: "을(를) 입력해 주세요."
+      not_saved: "이 저장되지 않았습니다."
+      taken: "은(는) 이미 사용 중입니다."
+  messages:
+    signed: '서명하셨습니다!'
   activerecord:
     models:
       user: 당원
@@ -41,6 +43,9 @@ ko:
         title: 제목
         body: 내용
         signs_goal_count: 서명 목표인수
+      sign:
+        signer_name: 이름
+        signer_email: 이메일
       poll:
         title: 제목
         body: 내용
@@ -83,6 +88,9 @@ ko:
               invalid: "비밀번호가 틀립니다."
             reset_password_token:
               invalid: "링크가 바르지 않습니다."
+        sign:
+          signer:
+            blank: 과 이메일을 넣어주세요.
   enumerize:
     defaults:
       choice:

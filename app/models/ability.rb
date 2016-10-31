@@ -3,12 +3,13 @@ class Ability
 
   def initialize(user)
     can :read, :all
+    can :create, Sign
 
     if user
       can :create, [
           FollowingIssue, Campaign, Discussion, Petition, Poll,
           Memorial, Agenda, Archive, ArchiveDocument,
-          Comment, Like, Sign
+          Comment, Like
         ]
       can [:update, :destroy], [
           FollowingIssue, Campaign, Discussion, Petition, Poll,

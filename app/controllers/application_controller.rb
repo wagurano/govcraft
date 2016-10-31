@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def errors_to_flash(model)
-    flash[:notice] = model.errors.full_messages.join('<br>').html_safe
+    flash[:error] = model.errors.full_messages.join('<br>').html_safe
   end
 
   def prepare_meta_tags(options={})
