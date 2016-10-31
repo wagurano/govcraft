@@ -6,6 +6,7 @@
         %small.text-muted{ style: 'line-height: 20px'}
           (#{issue.comments.count})
 
-
     %div
-      = render partial: 'users/thumbnail', collection: issue.followers, as: :user
+      - issue.followers.each do |user|
+        = link_to user do
+          = render partial: 'users/thumbnail', user: user
