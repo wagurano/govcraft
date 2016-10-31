@@ -1,5 +1,6 @@
 class Comment < ApplicationRecord
   include Choosable
+  include Reportable
 
   belongs_to :commentable, polymorphic: true
   belongs_to :user

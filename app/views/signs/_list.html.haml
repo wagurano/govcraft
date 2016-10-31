@@ -40,8 +40,11 @@
           .media-left
             .img-user{style: "background-image: url(#{sign.user_image_url});"}
           .media-body
-            .text-muted= sign.user_name
-            = sign.body
+            .text-muted
+              = sign.user_name
+              - if current_user != sign.user
+                = render 'reports/button', reportable: sign
+            = raw screened(sign, :body)
             %small
               - if can? :update, sign
                 = link_to '수정', [:edit, sign]

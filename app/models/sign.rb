@@ -1,4 +1,6 @@
 class Sign < ApplicationRecord
+  include Reportable
+
   belongs_to :user, optional: true
   belongs_to :petition, counter_cache: true
 

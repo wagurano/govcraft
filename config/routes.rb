@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :comments
   resources :likes
   resources :signs
+  resources :reports
   resources :votes do
     collection do
       post :agree

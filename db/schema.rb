@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031104320) do
+ActiveRecord::Schema.define(version: 20161031112435) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer  "user_id"
@@ -66,14 +66,15 @@ ActiveRecord::Schema.define(version: 20161031104320) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer  "user_id"
-    t.string   "commentable_type",               null: false
-    t.integer  "commentable_id",                 null: false
+    t.string   "commentable_type",                           null: false
+    t.integer  "commentable_id",                             null: false
     t.text     "body",             limit: 65535
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.string   "choice"
     t.string   "commenter_name"
     t.string   "commenter_email"
+    t.integer  "reports_count",                  default: 0
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
@@ -176,14 +177,26 @@ ActiveRecord::Schema.define(version: 20161031104320) do
     t.index ["assetable_type", "type", "assetable_id"], name: "idx_redactor2_assetable_type", using: :btree
   end
 
+  create_table "reports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+    t.string   "reportable_type", null: false
+    t.integer  "reportable_id",   null: false
+    t.integer  "user_id",         null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["reportable_id", "reportable_type", "user_id"], name: "index_reports_on_reportable_id_and_reportable_type_and_user_id", unique: true, using: :btree
+    t.index ["reportable_type", "reportable_id"], name: "index_reports_on_reportable_type_and_reportable_id", using: :btree
+    t.index ["user_id"], name: "index_reports_on_user_id", using: :btree
+  end
+
   create_table "signs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer  "user_id"
-    t.integer  "petition_id",                null: false
-    t.text     "body",         limit: 65535
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "petition_id",                             null: false
+    t.text     "body",          limit: 65535
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "signer_name"
     t.string   "signer_email"
+    t.integer  "reports_count",               default: 0
     t.index ["petition_id", "signer_email"], name: "index_signs_on_petition_id_and_signer_email", unique: true, using: :btree
     t.index ["petition_id"], name: "index_signs_on_petition_id", using: :btree
     t.index ["user_id", "petition_id"], name: "index_signs_on_user_id_and_petition_id", unique: true, using: :btree
