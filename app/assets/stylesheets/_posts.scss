@@ -10,6 +10,9 @@
   }
   &__body {
     margin: $font-size-base*2 0;
+    img {
+      max-width: 100%;
+    }
   }
   &__like {
     text-align: center;
