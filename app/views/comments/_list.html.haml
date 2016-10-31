@@ -1,17 +1,26 @@
-- if user_signed_in?
-  .comments-form
-    = form_for Comment.new do |f|
-      = f.hidden_field :commentable_type, value: commentable.class.name
-      = f.hidden_field :commentable_id, value: commentable.id
-      .form-group
-        ~ f.text_area :body, placeholder: '댓글 쓰기...', class: 'form-control redactor'
-      = f.submit '작성', class: 'btn btn-default btn-sm'
+.comments-form
+  = form_for Comment.new do |f|
+    = f.hidden_field :commentable_type, value: commentable.class.name
+    = f.hidden_field :commentable_id, value: commentable.id
+    .form-group
+      ~ f.text_area :body, placeholder: '댓글 쓰기...', class: 'form-control redactor'
+    - unless user_signed_in?
+      .row
+        .col-xs-12.col-md-6
+          .form-group
+            = f.label :commenter_name
+            = f.text_field :commenter_name, class: 'form-control'
+        .col-xs-12.col-md-6
+          .form-group
+            = f.label :commenter_email
+            = f.text_field :commenter_email, class: 'form-control'
+    = f.submit '작성', class: 'btn btn-default btn-sm'
 
 .comments
   - commentable.comments.recent.each do |comment|
     %div[comment]{ style: 'margin: 14px 0;'}
       %small.comment-meta.text-muted
-        = comment.user.nickname
+        = comment.user_nickname
         = date_f comment.created_at
         - if can? :destroy, comment
           = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }

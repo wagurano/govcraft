@@ -3,7 +3,7 @@ class Sign < ApplicationRecord
   belongs_to :petition, counter_cache: true
 
   validates :user, uniqueness: { scope: :petition }, if: 'user.present?'
-  validate :uniq_signer
+  validate :signer_should_be_present_if_user_is_blank
   validates :signer_email, format: { with: Devise.email_regexp }, uniqueness: { scope: :petition }, if: 'signer_email.present?'
 
   scope :recent, -> { order(created_at: :desc) }
@@ -19,7 +19,7 @@ class Sign < ApplicationRecord
 
   private
 
-  def uniq_signer
+  def signer_should_be_present_if_user_is_blank
     if user.blank? and (signer_name.blank? or signer_email.blank?)
       errors.add(:signer_name, I18n.t('activerecord.errors.models.sign.signer.blank'))
     end

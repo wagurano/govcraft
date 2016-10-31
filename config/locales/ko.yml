@@ -13,6 +13,7 @@ ko:
       taken: "은(는) 이미 사용 중입니다."
   messages:
     signed: '서명하셨습니다!'
+    commented: '댓글을 게시했습니다!'
   activerecord:
     models:
       user: 당원
@@ -66,6 +67,9 @@ ko:
         body: 내용
         date: 날짜
         time: 시간
+      comment:
+        commenter_name: 이름
+        commenter_email: 이메일
     errors:
       models:
         user:
@@ -90,6 +94,9 @@ ko:
               invalid: "링크가 바르지 않습니다."
         sign:
           signer:
+            blank: 과 이메일을 넣어주세요.
+        comment:
+          commenter:
             blank: 과 이메일을 넣어주세요.
   enumerize:
     defaults:
