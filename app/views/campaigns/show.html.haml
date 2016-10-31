@@ -46,7 +46,7 @@
             %small.text-muted
               아직 토론이 없습니다. 이야기를 시작해 볼까요?
               %br
-              = link_to "#{Discussion.model_name.human} 쓰기"
+              = link_to "#{Discussion.model_name.human} 쓰기", new_campaign_discussion_path(@campaign)
 
       .col-sm-4{ style: 'margin-bottom: 28px;'}
         %h4
@@ -69,7 +69,7 @@
             %small.text-muted
               가장 먼저 서명을 제안해 보세요.
               %br
-              = link_to "#{Petition.model_name.human} 제안하기"
+              = link_to "#{Petition.model_name.human} 제안하기", new_campaign_petition_path(@campaign)
 
       .col-sm-4{ style: 'margin-bottom: 28px;'}
         %h4
@@ -92,4 +92,4 @@
             %small.text-muted
               가장 먼저 투표를 제안해 보세요.
               %br
-              = link_to "#{Poll.model_name.human} 제안하기"
+              = link_to "#{Poll.model_name.human} 제안하기", new_campaign_poll_path(@campaign)
