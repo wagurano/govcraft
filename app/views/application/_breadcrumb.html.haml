@@ -1,5 +1,9 @@
 %section
   .container
+    - if params[:controller] == 'users'
+      %ol.breadcrumb{ style: 'font-size: 12px;' }
+        %li= link_to User.model_name.human, issues_path
+
     - if params[:controller] == 'issues'
       %ol.breadcrumb{ style: 'font-size: 12px;' }
         %li= link_to Issue.model_name.human, issues_path

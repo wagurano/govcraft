@@ -1,0 +1,16 @@
+%section.page-block
+  .container
+    %section
+      .row.masonry
+        - @users.each do |user|
+          .col-sm-3
+            .panel.panel-default.panel-floating
+              .panel-body
+                = link_to user do
+                  = render 'thumbnail', user: user
+                  = user.nickname
+                .text-muted{ style: 'margin-top: 14px' }
+                  %small= user.description
+
+    %section{ style: 'margin-top: 28px; padding-top: 14px; border-top: 1px solid #dedede' }
+      = link_to "#{Agenda.model_name.human} 쓰기", new_agenda_path, class: 'btn btn-default'

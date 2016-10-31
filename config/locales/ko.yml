@@ -13,7 +13,7 @@ ko:
       taken: "이미 사용 중입니다."
   activerecord:
     models:
-      user: 회원
+      user: 당원
       issue: 토픽
       campaign: 캠페인
       discussion: 토론
@@ -25,6 +25,7 @@ ko:
     attributes:
       user:
         nickname: 아이디
+        description: 자기소개
         email: 이메일
         image: 프로필사진
         password: 비밀번호
