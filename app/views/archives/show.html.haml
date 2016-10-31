@@ -16,11 +16,11 @@
   .container
     %h4 자료
 
-    .row
+    .row.hidden
       .col-xs-6
         = link_to '자료 추가하기', new_archive_document_path(archive_id: @archive.id), class: 'btn btn-default btn-sm'
 
-    %ul.list-unstyled
+    %ul.list-unstyled.hidden
       - @archive.documents.each do |document|
         %li[document]
           .text-muted
