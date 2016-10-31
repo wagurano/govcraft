@@ -4,7 +4,7 @@
       = f.hidden_field :commentable_type, value: commentable.class.name
       = f.hidden_field :commentable_id, value: commentable.id
       .form-group
-        ~ f.text_area :body, placeholder: '댓글 쓰기...', class: 'form-control'
+        ~ f.text_area :body, placeholder: '댓글 쓰기...', class: 'form-control redactor'
       = f.submit '작성', class: 'btn btn-default btn-sm'
 
 .comments
@@ -18,4 +18,4 @@
       - if comment.choice.present?
         .comment-choice= comment.choice.text
       .comment-body
-        = comment.body
+        = raw comment.body
