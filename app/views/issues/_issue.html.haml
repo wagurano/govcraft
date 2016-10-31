@@ -9,4 +9,4 @@
     %div
       - issue.followers.each do |user|
         = link_to user do
-          = render partial: 'users/thumbnail', user: user
+          = render 'users/thumbnail', user: user
