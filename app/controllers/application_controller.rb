@@ -49,18 +49,18 @@ class ApplicationController < ActionController::Base
   end
 
   def build_meta_options(options)
-    site_name = "가브크래프트 Govcraft"
-    title = options[:title] || "시민이 주도하는 시민 참여 플랫폼"
+    site_name = "우리가 주인이당! Would You Party?"
+    title = options[:title] || "시민이 만드는 정치개혁 프로젝트 정당"
     image = options[:image] || view_context.image_url('seo.png')
     url = options[:url] || root_url
-    description = options[:description] || "가브크래프트는 시민이 주도하는 시민 참여 플랫폼입니다"
+    description = options[:description] || "시민이 만드는 프로젝트 정당 '우리가 주인이당'입니다"
 
     {
       title:       title,
       reverse:     true,
       image:       image,
       description: description,
-      keywords:    "시민, 정치, 국회, 입법, 법안, 민주주의, 온라인정치, 정치참여, 빠띠, 빠흐띠",
+      keywords:    "시민, 정치, 국회, 입법, 법안, 민주주의, 온라인정치, 정치참여, 우리가 주인이당, 정치개혁, Would You Party",
       canonical:   url,
       twitter: {
         site_name: site_name,
