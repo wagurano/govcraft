@@ -3,6 +3,7 @@ class IssuesController < ApplicationController
 
   def index
     @issues = Issue.all
+    @following_issue = FollowingIssue.new
   end
 
   def show
