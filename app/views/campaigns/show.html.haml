@@ -1,6 +1,6 @@
 %section#campaign-header-block
   .container
-    - style = @campaign.image.file.present? ? "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{@campaign.image_url(:lg)})" : ''
+    - style = @campaign.image.file.present? ? "" : ''
     .jumbotron{ style: style }
       %h2
         %small.badge 캠페인
@@ -26,70 +26,83 @@
 
     .row
       .col-sm-4{ style: 'margin-bottom: 28px;'}
-        %h4
-          = link_to campaign_discussions_path(@campaign) do
-            = Discussion.model_name.human
+        .panel.panel-default
+          .panel-body
+            %h4
+              = link_to campaign_discussions_path(@campaign) do
+                = Discussion.model_name.human
 
-        %ul.list-unstyled
-          - if @campaign.discussions.any?
-            - @campaign.discussions.recent.limit(5).each do |discussion|
-              %li
-                %h5
-                  = link_to discussion.title, discussion
-                  %small.text-muted
-                    %i.fa.fa-comment-o
-                    = discussion.comments.count
-                  %small.text-muted
-                    %i.fa.fa-heart-o
-                    = discussion.likes_count
-          - else
-            %small.text-muted
-              아직 토론이 없습니다. 이야기를 시작해 볼까요?
-              %br
-              = link_to "#{Discussion.model_name.human} 쓰기", new_campaign_discussion_path(@campaign)
-
-      .col-sm-4{ style: 'margin-bottom: 28px;'}
-        %h4
-          = link_to campaign_petitions_path(@campaign) do
-            = Petition.model_name.human
-
-        %ul.list-unstyled
-          - if @campaign.petitions.any?
-            - @campaign.petitions.each do |petition|
-              %li
-                %h5
-                  = link_to petition.title, petition
-                  %small.text-muted
-                    %i.fa.fa-user-o
-                    = petition.signs_count
-                  %small.text-muted
-                    %i.fa.fa-heart-o
-                    = petition.likes_count
-          - else
-            %small.text-muted
-              가장 먼저 서명을 제안해 보세요.
-              %br
-              = link_to "#{Petition.model_name.human} 제안하기", new_campaign_petition_path(@campaign)
+            %ul.list-unstyled
+              - if @campaign.discussions.any?
+                - @campaign.discussions.recent.limit(5).each do |discussion|
+                  %li
+                    %h5
+                      = link_to discussion.title, discussion
+                      %small.text-muted
+                        %i.fa.fa-comment-o
+                        = discussion.comments.count
+                      %small.text-muted
+                        %i.fa.fa-heart-o
+                        = discussion.likes_count
+              - else
+                %small.text-muted
+                  아직 토론이 없습니다. 이야기를 시작해 볼까요?
+                  %br
+                  = link_to "#{Discussion.model_name.human} 쓰기", new_campaign_discussion_path(@campaign)
 
       .col-sm-4{ style: 'margin-bottom: 28px;'}
-        %h4
-          = link_to campaign_polls_path(@campaign) do
-            = Poll.model_name.human
+        .panel.panel-default
+          .panel-body
+            %h4
+              = link_to campaign_petitions_path(@campaign) do
+                = Petition.model_name.human
 
-        %ul.list-unstyled
-          - if @campaign.polls.any?
-            - @campaign.polls.each do |poll|
-              %li
-                %h5
-                  = link_to poll.title, poll
-                  %small.text-muted
-                    %i.fa.fa-check-square-o
-                    = poll.votes_count
-                  %small.text-muted
-                    %i.fa.fa-heart-o
-                    = poll.likes_count
-          - else
-            %small.text-muted
-              가장 먼저 투표를 제안해 보세요.
-              %br
-              = link_to "#{Poll.model_name.human} 제안하기", new_campaign_poll_path(@campaign)
+            %ul.list-unstyled
+              - if @campaign.petitions.any?
+                - @campaign.petitions.each do |petition|
+                  %li
+                    %h5
+                      = link_to petition.title, petition
+                      %small.text-muted
+                        %i.fa.fa-user-o
+                        = petition.signs_count
+                      %small.text-muted
+                        %i.fa.fa-heart-o
+                        = petition.likes_count
+              - else
+                %small.text-muted
+                  가장 먼저 서명을 제안해 보세요.
+                  %br
+                  = link_to "#{Petition.model_name.human} 제안하기", new_campaign_petition_path(@campaign)
+
+      .col-sm-4{ style: 'margin-bottom: 28px;'}
+        .panel.panel-default
+          .panel-body
+            %h4
+              = link_to campaign_polls_path(@campaign) do
+                = Poll.model_name.human
+
+            %ul.list-unstyled
+              - if @campaign.polls.any?
+                - @campaign.polls.each do |poll|
+                  %li
+                    %h5
+                      = link_to poll.title, poll
+                      %small.text-muted
+                        %i.fa.fa-check-square-o
+                        = poll.votes_count
+                      %small.text-muted
+                        %i.fa.fa-heart-o
+                        = poll.likes_count
+              - else
+                %small.text-muted
+                  가장 먼저 투표를 제안해 보세요.
+                  %br
+                  = link_to "#{Poll.model_name.human} 제안하기", new_campaign_poll_path(@campaign)
+
+:css
+  body {
+    background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{@campaign.image_url(:lg)});
+    background-size: cover;
+    background-position: center center;
+  }
