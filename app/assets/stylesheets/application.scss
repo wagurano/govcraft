@@ -18,7 +18,13 @@
 
 #site-hero-block {
   .jumbotron {
-    background-color: $brand-primary-lighter;
+    background-color: $brand-primary;
+    background-image: image_url('seo.png');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-indent: -999px;
+    overflow: hidden;
   }
 }
 
