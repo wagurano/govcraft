@@ -67,7 +67,7 @@ ko:
         title: 제목
         body: 내용
         date: 날짜
-        time: 시간
+        time: 시간(선택사항)
       comment:
         commenter_name: 이름
         commenter_email: 이메일

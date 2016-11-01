@@ -14,5 +14,5 @@
                   %strong= archive.comments.count
                   개가 모였습니다.
 
-    %section.hidden{ style: 'margin-top: 28px; padding-top: 14px; border-top: 1px solid #dedede;' }
+    %section{ style: 'margin-top: 28px;'}
       = link_to "#{Archive.model_name.human} 시작하기", new_archive_path, class: 'btn btn-default'

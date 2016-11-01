@@ -13,7 +13,7 @@ class ArchiveDocumentsController < ApplicationController
   def create
     @archive_document.user = current_user
     if @archive_document.save
-      redirect_to @archive_document
+      redirect_to @archive
     else
       render 'new'
     end

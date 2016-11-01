@@ -14,16 +14,23 @@
 
 %section.page-block
   .container
-    %h4 자료
+    %h4
+      = link_to '자료 추가하기', new_archive_document_path(archive_id: @archive.id)
 
-    .row.hidden
-      .col-xs-6
-        = link_to '자료 추가하기', new_archive_document_path(archive_id: @archive.id), class: 'btn btn-default btn-sm'
-
-    %ul.list-unstyled.hidden
+    %ul.list-group.post-group
       - @archive.documents.each do |document|
-        %li[document]
-          .text-muted
-            = document.date
-            = document.time
-          %h5= link_to document.title, document
+        %li.list-group-item[document]
+          = link_to document do
+            %h4.list-group-item-heading
+              = document.title
+              .pull-right
+                %small.text-muted
+                  = document.date
+                  = document.time
+
+            .text-muted
+              = document.body.html_safe
+
+            .post__meta
+
+
