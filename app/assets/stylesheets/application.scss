@@ -25,6 +25,9 @@
     background-repeat: no-repeat;
     text-indent: -999px;
     overflow: hidden;
+    @media(min-width: 700px) {
+      height: 300px;
+    }
   }
 }
 
