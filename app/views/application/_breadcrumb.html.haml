@@ -8,23 +8,16 @@
       %ol.breadcrumb{ style: 'font-size: 12px;' }
         %li= link_to Issue.model_name.human, issues_path
 
-    - if params[:controller] == 'campaigns'
-      %ol.breadcrumb{ style: 'font-size: 12px;' }
-        %li= link_to Campaign.model_name.human, campaigns_path
-
     - if params[:controller] == 'discussions'
       %ol.breadcrumb{ style: 'font-size: 12px;' }
-        %li= link_to Campaign.model_name.human, campaigns_path
         %li= link_to @campaign.title, @campaign
 
     - if params[:controller] == 'petitions'
       %ol.breadcrumb{ style: 'font-size: 12px;' }
-        %li= link_to Campaign.model_name.human, campaigns_path
         %li= link_to @campaign.title, @campaign
 
     - if params[:controller] == 'polls'
       %ol.breadcrumb{ style: 'font-size: 12px;' }
-        %li= link_to Campaign.model_name.human, campaigns_path
         %li= link_to @campaign.title, @campaign
 
     - if params[:controller] == 'archives'
