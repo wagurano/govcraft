@@ -7,7 +7,7 @@
         = @archive.title
         %small
           - if can? :edit, @archive
-            = link_to '수정', edit_campaign_path(@archive)
+            = link_to '수정', edit_archive_path(@archive)
           - if can? :destroy, @archive
             = link_to '삭제', @archive, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
       %p= simple_format @archive.body

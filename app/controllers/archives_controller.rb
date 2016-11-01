@@ -14,6 +14,9 @@ class ArchivesController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
     if @archive.update(archive_params)
       redirect_to @archive
