@@ -25,7 +25,7 @@
           점
 
     .row
-      .col-sm-4{ style: 'margin-bottom: 28px;'}
+      .col-sm-6
         .panel.panel-default
           .panel-body
             %h4
@@ -50,32 +50,7 @@
                   %br
                   = link_to "#{Discussion.model_name.human} 쓰기", new_campaign_discussion_path(@campaign)
 
-      .col-sm-4{ style: 'margin-bottom: 28px;'}
-        .panel.panel-default
-          .panel-body
-            %h4
-              = link_to campaign_petitions_path(@campaign) do
-                = Petition.model_name.human
-
-            %ul.list-unstyled
-              - if @campaign.petitions.any?
-                - @campaign.petitions.each do |petition|
-                  %li
-                    %h5
-                      = link_to petition.title, petition
-                      %small.text-muted
-                        %i.fa.fa-user-o
-                        = petition.signs_count
-                      %small.text-muted
-                        %i.fa.fa-heart-o
-                        = petition.likes_count
-              - else
-                %small.text-muted
-                  가장 먼저 서명을 제안해 보세요.
-                  %br
-                  = link_to "#{Petition.model_name.human} 제안하기", new_campaign_petition_path(@campaign)
-
-      .col-sm-4{ style: 'margin-bottom: 28px;'}
+      .col-sm-6
         .panel.panel-default
           .panel-body
             %h4
@@ -99,6 +74,39 @@
                   가장 먼저 투표를 제안해 보세요.
                   %br
                   = link_to "#{Poll.model_name.human} 제안하기", new_campaign_poll_path(@campaign)
+
+    .row
+      .col-sm-6
+        .panel.panel-default
+          .panel-body
+            %h4
+              = link_to campaign_petitions_path(@campaign) do
+                = Petition.model_name.human
+
+            %ul.list-unstyled
+              - if @campaign.petitions.any?
+                - @campaign.petitions.each do |petition|
+                  %li
+                    %h5
+                      = link_to petition.title, petition
+                      %small.text-muted
+                        %i.fa.fa-user-o
+                        = petition.signs_count
+                      %small.text-muted
+                        %i.fa.fa-heart-o
+                        = petition.likes_count
+              - else
+                %small.text-muted
+                  가장 먼저 서명을 제안해 보세요.
+                  %br
+                  = link_to "#{Petition.model_name.human} 제안하기", new_campaign_petition_path(@campaign)
+      .col-sm-6
+        .panel.panel-default
+          .panel-body
+            %h4
+              = link_to '위키'
+            %p
+              준비 중입니다
 
 :css
   body {
