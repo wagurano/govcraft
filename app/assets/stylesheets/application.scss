@@ -43,6 +43,12 @@
       font-weight: normal;
       padding-top: 5px;
     }
+    .campaign__body {
+      a {
+        color: $gray-lightest;
+        text-decoration: underline;
+      }
+    }
     .campaign__meta {
       font-size: $font-size-small;
       span {

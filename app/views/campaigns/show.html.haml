@@ -11,7 +11,7 @@
             = link_to '수정', edit_campaign_path(@campaign)
           - if can? :destroy, @campaign
             = link_to '삭제', @campaign, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
-      %p= simple_format @campaign.body
+      .campaign__body= smart_format @campaign.body
       .campaign__meta
         %span
           제안자 :
