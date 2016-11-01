@@ -8,6 +8,7 @@
 /.bundle
 /.powenv
 .sass-cache
+.DS_Store
 
 # Ignore all logfiles and tempfiles.
 /log/*
