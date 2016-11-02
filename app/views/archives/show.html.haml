@@ -20,16 +20,19 @@
     %ul.list-group.post-group
       - @archive.documents.each do |document|
         %li.list-group-item[document]
-          = link_to document do
-            %small.text-muted
-              = document.date
-              = document.time
-            %h4.list-group-item-heading
-              = document.title
+          .media
+            .media-body
+              = link_to document do
+                %h5.text-muted
+                  = document.date
+                  = document.time
+                %h4.list-group-item-heading
+                  = document.title
+                  - if document.comments.count > 0
+                    %small
+                      (#{document.comments.count})
 
-            .text-muted
-              = document.body.html_safe
-
-            .post__meta
-
-
+                .text-muted
+                  = document.body.html_safe
+            .media-right{ style: 'vertical-align: middle;'}
+              = render 'likes/button', likable: document
