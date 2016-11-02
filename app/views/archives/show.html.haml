@@ -21,12 +21,11 @@
       - @archive.documents.each do |document|
         %li.list-group-item[document]
           = link_to document do
+            %small.text-muted
+              = document.date
+              = document.time
             %h4.list-group-item-heading
               = document.title
-              .pull-right
-                %small.text-muted
-                  = document.date
-                  = document.time
 
             .text-muted
               = document.body.html_safe

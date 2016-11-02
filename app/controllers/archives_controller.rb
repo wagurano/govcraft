@@ -2,7 +2,7 @@ class ArchivesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @archives = Archive.all
+    @archives = Archive.order('id DESC')
   end
 
   def create
