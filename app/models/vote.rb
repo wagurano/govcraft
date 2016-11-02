@@ -6,5 +6,5 @@ class Vote < ApplicationRecord
 
   counter_culture :poll, :column_name => proc {|model| "#{model.choice}s_count" }
 
-  validates :user, uniqueness: { scope: :poll }
+  validates :user, uniqueness: { scope: :poll }, if: "user.present?"
 end

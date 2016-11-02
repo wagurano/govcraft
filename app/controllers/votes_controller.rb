@@ -1,13 +1,17 @@
 class VotesController < ApplicationController
-  before_action :authenticate_user!
+  include VoteHelper
+
+  before_action :authenticate_user!, except: [:agree, :disagree]
 
   def agree
-    choice(:agree)
+    fetch_poll
+    choice(:agree) if votable?(@poll)
     redirect_back(fallback_location: @poll)
   end
 
   def disagree
-    choice(:disagree)
+    fetch_poll
+    choice(:disagree) if votable?(@poll)
     redirect_back(fallback_location: @poll)
   end
 
@@ -23,16 +27,24 @@ class VotesController < ApplicationController
 
   private
 
+  def votable?(poll)
+    user_signed_in? or !voted?(poll)
+  end
+
   def choice(choice)
-    @poll = Poll.find params[:poll_id]
-    @vote = @poll.fetch_vote_of(current_user)
+    @vote = @poll.fetch_vote_of(current_user) if user_signed_in?
 
     if @vote.blank?
       @vote = @poll.votes.build(choice: choice, user: current_user)
-      errors_to_flash(@poll) unless @poll.save
+      mark_voted_poll(@poll) unless user_signed_in?
+      errors_to_flash(@vote) unless @poll.save
     elsif @vote.choice != choice
       @vote.update_attributes(choice: choice)
       errors_to_flash(@vote) unless @vote.save
     end
+  end
+
+  def fetch_poll
+    @poll ||= Poll.find params[:poll_id]
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031112435) do
+ActiveRecord::Schema.define(version: 20161102001830) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer  "user_id"
@@ -229,7 +229,7 @@ ActiveRecord::Schema.define(version: 20161031112435) do
   end
 
   create_table "votes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
-    t.integer  "user_id",    null: false
+    t.integer  "user_id"
     t.integer  "poll_id",    null: false
     t.string   "choice"
     t.datetime "created_at", null: false

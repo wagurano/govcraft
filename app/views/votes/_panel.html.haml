@@ -1,5 +1,5 @@
 .vote-panel
-  - vote = poll.fetch_vote_of(current_user)
+  - vote = user_signed_in? ? poll.fetch_vote_of(current_user) : Vote.new
   .row
     .col-xs-6
       .text-right
