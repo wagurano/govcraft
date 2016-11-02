@@ -1,5 +1,6 @@
 class ArchivesController < ApplicationController
   load_and_authorize_resource
+  before_action :reset_meta_tags, only: :show
 
   def index
     @archives = Archive.order('id DESC')
@@ -34,5 +35,13 @@ class ArchivesController < ApplicationController
 
   def archive_params
     params.require(:archive).permit(:title, :body, :image)
+  end
+
+  def reset_meta_tags
+    prepare_meta_tags({
+      title: @archive.title,
+      description: @archive.body.html_safe,
+      url: request.original_url}
+    )
   end
 end
