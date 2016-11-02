@@ -2,17 +2,20 @@
   .container
     %section
       .row
-        - @memorials.each do |memorial|
-          .col-sm-12
-            .panel.panel-default.panel-floating
-              .panel-body
-                %h4= link_to memorial.title, memorial
-                .memorial-meta.text-muted
-                  = date_f memorial.created_at
-                  부터
-                  추모글
-                  %strong= memorial.comments.count
-                  개가 모였습니다.
+        .col-sm-12
+          .panel.panel-default.panel-floating
+            .panel-body
+              %h4= link_to '농민 백남기, 당신의 모습이 아직 가슴 속에 선명합니다', 'http://thelastletter.co/', target: '_blank'
+              .memorial-meta.text-muted
+                %strong= number_with_delimiter 774
+                개의 추모글이 모였습니다
 
-    %section{ style: 'margin-top: 28px; padding-top: 14px; border-top: 1px solid #dedede; display: none;' }
+          .panel.panel-default.panel-floating
+            .panel-body
+              %h4= link_to '세월호 희생자 사이버 추모관', 'http://www.sewol.or.kr/xe/', target: '_blank'
+              .memorial-meta.text-muted
+                %strong= number_with_delimiter 6221
+                개의 추모글이 모였습니다
+
+    %section.hidden{ style: 'margin-top: 28px; padding-top: 14px; border-top: 1px solid #dedede;' }
       = link_to '추모관 열기', new_memorial_path, class: 'btn btn-default'
