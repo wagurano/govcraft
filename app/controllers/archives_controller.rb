@@ -39,7 +39,7 @@ class ArchivesController < ApplicationController
 
   def reset_meta_tags
     prepare_meta_tags({
-      title: @archive.title,
+      title: '[아카이브] ' + @archive.title,
       description: @archive.body.html_safe,
       url: request.original_url}
     )
