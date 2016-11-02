@@ -11,8 +11,8 @@
 
       #site-header-collapsable.collapse.navbar-collapse
         %ul.nav.navbar-nav
-          %li= link_to '당원들', users_path
-          %li= link_to '캠페인', campaigns_path
+          %li= link_to "당원 #{User.count}명", users_path
+          %li= link_to "캠페인 #{Campaign.count}개", campaigns_path
           %li= link_to '아카이브', archives_path
           %li= link_to '토론방', campaign_discussions_path(Campaign.first) if Campaign.first
           %li= link_to '토픽', issues_path
