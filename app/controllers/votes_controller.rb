@@ -28,7 +28,7 @@ class VotesController < ApplicationController
   private
 
   def votable?(poll)
-    user_signed_in? or !voted?(poll)
+    user_signed_in? or !anonymous_voted?(poll)
   end
 
   def choice(choice)
@@ -36,7 +36,7 @@ class VotesController < ApplicationController
 
     if @vote.blank?
       @vote = @poll.votes.build(choice: choice, user: current_user)
-      mark_voted_poll(@poll) unless user_signed_in?
+      mark_anonymous_voted_poll(@poll, choice) unless user_signed_in?
       errors_to_flash(@vote) unless @poll.save
     elsif @vote.choice != choice
       @vote.update_attributes(choice: choice)
