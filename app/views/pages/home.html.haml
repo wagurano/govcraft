@@ -8,7 +8,7 @@
 %section.page-block
   .container
     %h4 진행중인 캠페인
-    .row
+    .row.masonry-container
       - @campaigns.each do |campaign|
         .col-sm-4
           = render campaign

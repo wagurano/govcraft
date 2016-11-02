@@ -5,7 +5,7 @@
         %h4
           캠페인
       .col-xs-6.text-right
-        = link_to '새로운 캠페인 시작하기', new_campaign_path, class: 'btn btn-default btn-sm'
+        = link_to '새로운 캠페인 시작하기', new_campaign_path, class: 'btn btn-default btn-sm' if can? :create, Campaign
 
     %section
       .row.masonry-container

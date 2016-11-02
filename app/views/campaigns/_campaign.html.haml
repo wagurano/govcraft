@@ -1,18 +1,20 @@
 .panel.panel-floating[campaign]
   .panel-body
+    - if campaign.image.file.present?
+      .thumbnail
+        = image_tag campaign.image_url(:sm)
     %h3.text-center{ style: 'word-break: keep-all;' }= link_to campaign.title, campaign
-    %hr
 
-    .row
+    .row{ style: 'margin-top: 7px;' }
       .col-xs-4
-        .text-center
+        %h5.text-right
           = Discussion.model_name.human
-          %h4= campaign.discussions.count
+          = campaign.discussions.count
       .col-xs-4
-        .text-center
+        %h5.text-center
           = Petition.model_name.human
-          %h4= campaign.petitions.count
+          = campaign.petitions.count
       .col-xs-4
-        .text-center
+        %h5
           = Poll.model_name.human
-          %h4= campaign.polls.count
+          = campaign.polls.count
