@@ -1,0 +1,35 @@
+%section.page-block
+  .container
+    .row
+      .col-xs-6
+        = link_to '목록', campaign_wikis_path(@campaign), class: 'btn btn-default btn-sm'
+      .col-xs-6.text-right
+        = link_to "#{Wiki.model_name.human} 추가", new_campaign_wiki_path(@campaign), class: 'btn btn-default btn-sm'
+
+%section#wiki-block.page-block.post-block
+  .container
+    .post-block__title
+      %h3= @wiki.title
+
+    .post-block__info
+      .row
+        .col-xs-6
+          %span.post-block__user
+            = link_to @wiki.user.nickname
+          %span.post-block__date
+            = date_f @wiki.created_at
+          - if can? :edit, @wiki
+            = link_to '수정', edit_wiki_path(@wiki)
+          - if can? :destroy, @wiki
+            = link_to '삭제', @wiki, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+        .col-xs-6.text-right
+          조회 #{@wiki.views_count}
+
+    .post-block__body
+      = simple_format @wiki.body
+
+    .post-block__like
+      = render 'likes/button', likable: @wiki
+
+    .post-block__comments
+      = render 'comments/list', commentable: @wiki

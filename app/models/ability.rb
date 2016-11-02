@@ -7,18 +7,22 @@ class Ability
 
     if user
       can :create, [
-          FollowingIssue, Campaign, Discussion, Petition, Poll,
+          FollowingIssue,
+          Campaign, Discussion, Petition, Poll, Wiki,
           Memorial, Agenda, Archive, ArchiveDocument,
           Like
         ]
       can [:update, :destroy], [
-          FollowingIssue, Campaign, Discussion, Petition, Poll,
-          Memorial, Agenda, Archive, ArchiveDocument,
+          FollowingIssue,
+          Campaign, Discussion, Petition, Poll, Wiki,          Memorial, Agenda, Archive, ArchiveDocument,
           Comment, Like, Sign
         ], :user_id => user.id
 
+      # 모든 당원은 위키를 수정할 수 있다
+      can :update, Wiki
+
       # 캠페이너는 캠페인에 속한 글과 댓글을 삭제할 수 있다
-      can :destroy, [Discussion, Petition, Poll] do |model|
+      can :destroy, [Discussion, Petition, Poll, Wiki] do |model|
         user == model.campaign.user
       end
       can :destroy, Comment do |comment|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102120635) do
+ActiveRecord::Schema.define(version: 20161102155229) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer  "user_id"
@@ -238,6 +238,20 @@ ActiveRecord::Schema.define(version: 20161102120635) do
     t.index ["poll_id"], name: "index_votes_on_poll_id", using: :btree
     t.index ["user_id", "poll_id"], name: "index_votes_on_user_id_and_poll_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_votes_on_user_id", using: :btree
+  end
+
+  create_table "wikis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+    t.string   "title"
+    t.text     "body",           limit: 65535
+    t.integer  "user_id",                                  null: false
+    t.integer  "campaign_id",                              null: false
+    t.integer  "views_count",                  default: 0
+    t.integer  "comments_count",               default: 0
+    t.integer  "likes_count",                  default: 0
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.index ["campaign_id"], name: "index_wikis_on_campaign_id", using: :btree
+    t.index ["user_id"], name: "index_wikis_on_user_id", using: :btree
   end
 
 end

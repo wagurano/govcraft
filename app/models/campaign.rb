@@ -3,6 +3,7 @@ class Campaign < ApplicationRecord
   has_many :discussions
   has_many :petitions
   has_many :polls
+  has_many :wikis
 
   mount_uploader :image, ImageUploader
 end

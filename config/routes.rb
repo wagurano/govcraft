@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       resources :discussions
       resources :petitions
       resources :polls
+      resources :wikis
     end
   end
 

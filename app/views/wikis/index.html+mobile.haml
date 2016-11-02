@@ -1,0 +1,30 @@
+%section#discussions-section.page-block
+  .container
+    .row
+      .col-xs-6
+      .col-xs-6.text-right
+        = link_to '토론 글쓰기', new_campaign_discussion_path(@campaign), class: 'btn btn-default btn-sm'
+
+    %ul.list-group.post-group{ style: 'margin: 28px 0;' }
+      - @discussions.each do |discussion|
+        %li.list-group-item[discussion]
+          = link_to discussion do
+            %h4.list-group-item-heading
+              = discussion.title
+            .post__meta
+              .row
+                .col-xs-6
+                  %span.nickname
+                    = discussion.user.nickname
+                  %span.created_at
+                    = date_f discussion.created_at
+                .col-xs-6.text-right
+                  %span
+                    %i.fa.fa-comment-o
+                    = discussion.comments.count
+                  %span
+                    %i.fa.fa-heart-o
+                    = discussion.likes_count
+                  %span
+                    %i.fa.fa-eye
+                    = discussion.views_count
