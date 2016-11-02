@@ -2,7 +2,8 @@
   .panel-body
     - if campaign.image.file.present?
       .thumbnail
-        = image_tag campaign.image_url(:sm)
+        = link_to campaign do
+          = image_tag campaign.image_url(:sm)
     %h3.text-center{ style: 'word-break: keep-all;' }= link_to campaign.title, campaign
 
     .row{ style: 'margin-top: 7px;' }
