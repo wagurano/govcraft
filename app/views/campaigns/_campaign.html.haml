@@ -10,12 +10,12 @@
       .col-xs-4
         %h5.text-right
           = Discussion.model_name.human
-          = campaign.discussions.count
+          %strong= campaign.discussions.count
       .col-xs-4
         %h5.text-center
           = Petition.model_name.human
-          = campaign.petitions.count
+          %strong= campaign.petitions.count
       .col-xs-4
         %h5
           = Poll.model_name.human
-          = campaign.polls.count
+          %strong= campaign.polls.count

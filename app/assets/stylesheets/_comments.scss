@@ -1,0 +1,18 @@
+.comment {
+  .comment__meta {
+    color: $text-muted;
+    font-size: $font-size-small;
+    margin-bottom: $font-size-small;
+  }
+  .comment__body {
+    h1, h2, h3, h4, h5 {
+      font-size: $font-size-base !important;
+      margin: 2px 0;
+    }
+    p {
+      margin-bottom: 2px;
+    }
+  }
+  border-top: 1px solid $gray-lighter;
+  padding-top: $font-size-base;
+}
