@@ -28,7 +28,7 @@
       .col-sm-6
         .panel.panel-default
           .panel-body
-            %h4
+            %h4.panel-title
               = link_to campaign_discussions_path(@campaign) do
                 = Discussion.model_name.human
 
@@ -39,11 +39,7 @@
                     %h5
                       = link_to discussion.title, discussion
                       %small.text-muted
-                        %i.fa.fa-comment-o
-                        = discussion.comments.count
-                      %small.text-muted
-                        %i.fa.fa-heart-o
-                        = discussion.likes_count
+                        (#{discussion.comments.count})
               - else
                 %small.text-muted
                   아직 토론이 없습니다. 이야기를 시작해 볼까요?
@@ -53,7 +49,7 @@
       .col-sm-6
         .panel.panel-default
           .panel-body
-            %h4
+            %h4.panel-title
               = link_to campaign_polls_path(@campaign) do
                 = Poll.model_name.human
 
@@ -66,9 +62,6 @@
                       %small.text-muted
                         %i.fa.fa-check-square-o
                         = poll.votes_count
-                      %small.text-muted
-                        %i.fa.fa-heart-o
-                        = poll.likes_count
               - else
                 %small.text-muted
                   가장 먼저 투표를 제안해 보세요.
@@ -79,7 +72,7 @@
       .col-sm-6
         .panel.panel-default
           .panel-body
-            %h4
+            %h4.panel-title
               = link_to campaign_petitions_path(@campaign) do
                 = Petition.model_name.human
 
@@ -92,9 +85,6 @@
                       %small.text-muted
                         %i.fa.fa-user-o
                         = petition.signs_count
-                      %small.text-muted
-                        %i.fa.fa-heart-o
-                        = petition.likes_count
               - else
                 %small.text-muted
                   가장 먼저 서명을 제안해 보세요.
@@ -103,7 +93,7 @@
       .col-sm-6
         .panel.panel-default
           .panel-body
-            %h4
+            %h4.panel-title
               = link_to '위키'
             %p
               준비 중입니다

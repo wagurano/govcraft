@@ -6,6 +6,8 @@ class Petition < ApplicationRecord
   has_many :signs, dependent: :destroy
   has_many :signed_users, through: :signs, source: :petition
 
+  scope :recent, -> { order('id DESC') }
+
   def signed? someone
     signed_users.exists?(user: someone)
   end

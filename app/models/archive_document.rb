@@ -5,4 +5,6 @@ class ArchiveDocument < ApplicationRecord
   has_many :likes, as: :likable
 
   default_scope { order('date DESC, time DESC') }
+
+  scope :recent, -> { order('id DESC') }
 end

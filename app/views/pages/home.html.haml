@@ -13,6 +13,59 @@
         .col-sm-4
           = render campaign
 
+%section.page-block
+  .container
+    %h4 새로 올라온 글
+
+    .row
+      .col-sm-6
+        .panel.panel-default
+          .panel-body
+            %h5.panel-title 토론
+            %ul.list-unstyled
+              - Discussion.recent.limit(5).each do |discussion|
+                %li
+                  %h5
+                    = link_to discussion.title, discussion
+                    %small.text-muted
+                      (#{discussion.comments.count})
+
+      .col-sm-6
+        .panel.panel-default
+          .panel-body
+            %h5.panel-title 투표
+            %ul.list-unstyled
+              - Poll.recent.limit(5).each do |poll|
+                %li
+                  %h5
+                    = link_to poll.title, poll
+                    %small.text-muted
+                      %i.fa.fa-check-square-o
+                      = poll.votes_count
+    .row
+      .col-sm-6
+        .panel.panel-default
+          .panel-body
+            %h5.panel-title 서명
+            %ul.list-unstyled
+              - Petition.recent.limit(5).each do |petition|
+                %li
+                  %h5
+                    = link_to petition.title, petition
+                    %small.text-muted
+                      %i.fa.fa-user-o
+                      = petition.signs_count
+
+      .col-sm-6
+        .panel.panel-default
+          .panel-body
+            %h5.panel-title 아카이브
+            %ul.list-unstyled
+              - ArchiveDocument.recent.limit(5).each do |document|
+                %li
+                  %h5
+                    = link_to document.title, document
+
 %section.page-block{ style: 'background-color: #f5f5f5; padding-top: 28px;' }
   .container
     .row
