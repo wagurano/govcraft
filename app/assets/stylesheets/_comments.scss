@@ -12,6 +12,9 @@
     p {
       margin-bottom: 2px;
     }
+    img {
+      max-width: 100%;
+    }
   }
   border-top: 1px solid $gray-lighter;
   padding-top: $font-size-base;
