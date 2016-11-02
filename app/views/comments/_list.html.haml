@@ -2,8 +2,6 @@
   = form_for Comment.new do |f|
     = f.hidden_field :commentable_type, value: commentable.class.name
     = f.hidden_field :commentable_id, value: commentable.id
-    .form-group
-      ~ f.text_area :body, placeholder: '댓글 쓰기...', class: 'form-control redactor'
     - unless user_signed_in?
       .row
         .col-xs-12.col-md-6
@@ -14,6 +12,8 @@
           .form-group
             = f.label :commenter_email
             = f.text_field :commenter_email, class: 'form-control'
+    .form-group
+      ~ f.text_area :body, placeholder: '댓글 쓰기...', class: 'form-control redactor'
     = f.submit '작성', class: 'btn btn-default btn-sm'
 
 .comments

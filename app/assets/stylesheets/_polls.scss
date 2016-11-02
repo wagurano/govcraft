@@ -2,8 +2,8 @@
   .vote-panel {
     background-color: $gray-lightest;
     padding: $font-size-base*2;
+    margin: $font-size-base 0;
     border-radius: $btn-border-radius-large;
-    border-bottom: 1px solid $gray-lighter;
 
     .btn-choice {
       .choice__label {

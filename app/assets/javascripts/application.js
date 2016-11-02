@@ -8,6 +8,7 @@
 //= require redactor2_rails/config
 //= require redactor
 //= require redactor2_rails/langs/ko
+//= require jssocials
 
 UnobtrusiveFlash.flashOptions['timeout'] = 300000;
 
@@ -32,4 +33,10 @@ $(function(){
     }
   });
   $('.redactor .redactor-editor').prop('contenteditable', true);
+
+  $('.share-box').jsSocials({
+    showCount: true,
+    showLabel: false,
+    shares: ["email", "twitter", "facebook"]
+  });
 });

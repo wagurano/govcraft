@@ -28,7 +28,10 @@
     .post-block__body
       = simple_format @petition.body
 
-    .post-block__like
+    .post-block__share.text-center
+      .share-box
+
+    .post-block__like.hidden
       = render 'likes/button', likable: @petition
 
     .post-block__signs
