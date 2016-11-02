@@ -3,4 +3,6 @@ class ArchiveDocument < ApplicationRecord
   belongs_to :archive
   has_many :comments, as: :commentable
   has_many :likes, as: :likable
+
+  default_scope { order('date DESC, time DESC') }
 end
