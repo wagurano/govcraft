@@ -11,7 +11,7 @@
           %th.text-center 번호
           %th 제목
           %th 글쓴이
-          %th.text-right 댓글
+          %th.text-right 편집
           %th.text-right 조회
           %th.text-center 작성일
       %tbody
@@ -24,7 +24,7 @@
             %td.wiki__nickname
               = wiki.user.nickname
             %td.wiki__cnt.text-right
-              = wiki.comments.count
+              = wiki.wiki_revisions.count
             %td.wiki__cnt.text-right
               = wiki.views_count
             %td.wiki__created_at.text-center

@@ -20,6 +20,14 @@
       %ol.breadcrumb{ style: 'font-size: 12px;' }
         %li= link_to @campaign.title, @campaign
 
+    - if params[:controller] == 'wikis'
+      %ol.breadcrumb{ style: 'font-size: 12px;' }
+        %li= link_to @campaign.title, @campaign
+
+    - if params[:controller] == 'wiki_revisions'
+      %ol.breadcrumb{ style: 'font-size: 12px;' }
+        %li= link_to @campaign.title, @campaign
+
     - if params[:controller] == 'archives'
       %ol.breadcrumb{ style: 'font-size: 12px;' }
         %li= link_to Archive.model_name.human, archives_path

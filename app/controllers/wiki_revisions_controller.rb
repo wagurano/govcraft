@@ -1,6 +1,10 @@
 class WikiRevisionsController < ApplicationController
   load_and_authorize_resource
 
+  def show
+    @campaign = @wiki_revision.wiki.campaign
+  end
+
   def revert
     @wiki = @wiki_revision.wiki
     @wiki.body = @wiki_revision.body

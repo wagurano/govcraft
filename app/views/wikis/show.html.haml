@@ -31,14 +31,13 @@
     .post-block__like
       = render 'likes/button', likable: @wiki
 
-    .post-block__comments
-      = render 'comments/list', commentable: @wiki
-
 %section
   .container
-    %ul
+    %h4 편집이력
+    %ul.list-unstyled
       - @wiki.wiki_revisions.recent.each do |wiki_revision|
         %li
           = link_to wiki_revision do
+            = date_f wiki_revision.created_at
             = wiki_revision.user.nickname
-            = wiki_revision.created_at
+

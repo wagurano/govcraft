@@ -3,14 +3,14 @@
   .container
     .row
       .col-xs-6
-        a
+        = link_to '페이지로 돌아가기', @wiki_revision.wiki, class: 'btn btn-default btn-sm'
       .col-xs-6.text-right
-        b
+
 %section#wiki-block.page-block.post-block
   .container
     .post-block__title
       %h3
-        = wiki.title
+        %strong= wiki.title
         이력
 
     .post-block__info
@@ -25,4 +25,5 @@
       = raw @wiki_revision.body
 
     .post-block__note
+      %h4 메모
       = simple_format @wiki_revision.note
