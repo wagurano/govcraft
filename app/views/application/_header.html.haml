@@ -14,7 +14,7 @@
           %li= link_to "당원 #{User.count}명", users_path
           %li= link_to "캠페인 #{Campaign.count}개", campaigns_path
           %li= link_to '아카이브', archives_path
-          %li= link_to '토론방', campaign_discussions_path(Campaign.first) if Campaign.first
+          %li= link_to '게시판', campaign_discussions_path(Campaign.first) if Campaign.first
           %li= link_to '토픽', issues_path
 
         %ul.nav.navbar-nav.navbar-right
