@@ -26,7 +26,7 @@
           조회 #{@wiki.views_count}
 
     .post-block__body
-      = simple_format @wiki.body
+      = raw @wiki.body
 
     .post-block__like
       = render 'likes/button', likable: @wiki
