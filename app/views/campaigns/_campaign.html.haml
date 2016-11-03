@@ -6,16 +6,13 @@
           = image_tag campaign.image_url(:sm)
     %h3.text-center{ style: 'word-break: keep-all;' }= link_to campaign.title, campaign
 
-    .row{ style: 'margin-top: 7px;' }
-      .col-xs-4
-        %h5.text-right
-          = Discussion.model_name.human
-          %strong= campaign.discussions.count
-      .col-xs-4
-        %h5.text-center
-          = Petition.model_name.human
-          %strong= campaign.petitions.count
-      .col-xs-4
-        %h5
-          = Poll.model_name.human
-          %strong= campaign.polls.count
+    .row{ style: 'margin-top: 21px;' }
+      .col-xs-4.text-center
+        %small= Discussion.model_name.human
+        %h4{ style: 'margin-top: 7px;' }= campaign.discussions.count
+      .col-xs-4.text-center
+        %small= Petition.model_name.human
+        %h4{ style: 'margin-top: 7px;' }= campaign.petitions.count
+      .col-xs-4.text-center
+        %small= Poll.model_name.human
+        %h4{ style: 'margin-top: 7px;' }= campaign.polls.count
