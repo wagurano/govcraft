@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102155229) do
+ActiveRecord::Schema.define(version: 20161103055822) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer  "user_id"
@@ -238,6 +238,17 @@ ActiveRecord::Schema.define(version: 20161102155229) do
     t.index ["poll_id"], name: "index_votes_on_poll_id", using: :btree
     t.index ["user_id", "poll_id"], name: "index_votes_on_user_id_and_poll_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_votes_on_user_id", using: :btree
+  end
+
+  create_table "wiki_revisions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+    t.integer  "wiki_id",                  null: false
+    t.integer  "user_id",                  null: false
+    t.text     "body",       limit: 65535
+    t.text     "note",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["user_id"], name: "index_wiki_revisions_on_user_id", using: :btree
+    t.index ["wiki_id"], name: "index_wiki_revisions_on_wiki_id", using: :btree
   end
 
   create_table "wikis", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|

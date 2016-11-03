@@ -1,0 +1,28 @@
+- wiki = @wiki_revision.wiki
+%section.page-block
+  .container
+    .row
+      .col-xs-6
+        a
+      .col-xs-6.text-right
+        b
+%section#wiki-block.page-block.post-block
+  .container
+    .post-block__title
+      %h3
+        = wiki.title
+        이력
+
+    .post-block__info
+      %span.post-block__user
+        = link_to @wiki_revision.user.nickname
+      %span.post-block__date
+        = date_f @wiki_revision.created_at
+      - if can? :edit, wiki
+        = link_to '되돌리기', revert_wiki_revision_path(@wiki_revision), method: :put
+
+    .post-block__body
+      = raw @wiki_revision.body
+
+    .post-block__note
+      = simple_format @wiki_revision.note

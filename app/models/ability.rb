@@ -18,8 +18,9 @@ class Ability
           Comment, Like, Sign
         ], :user_id => user.id
 
-      # 모든 당원은 위키를 수정할 수 있다
-      can :update, Wiki
+      # 모든 당원은 위키를 수정하고 원복할 수 있다
+      can [:update], Wiki
+      can [:revert], WikiRevision
 
       # 캠페이너는 캠페인에 속한 글과 댓글을 삭제할 수 있다
       can :destroy, [Discussion, Petition, Poll, Wiki] do |model|

@@ -8,4 +8,8 @@
     ~ f.text_area :body, rows: 10, class: 'form-control redactor'
 
   .form-group
+    = f.label :revision_note
+    ~ f.text_field :revision_note, rows: 2, class: 'form-control'
+
+  .form-group
     = f.submit '저장', class: 'btn btn-primary'

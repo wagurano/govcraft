@@ -18,6 +18,7 @@ class WikisController < ApplicationController
   def create
     @wiki.campaign = @campaign
     @wiki.user = current_user
+    @wiki.wiki_revisions.build(user: current_user, body: @wiki.body, note: @wiki.revision_note)
     if @wiki.save
       redirect_to @wiki || @campaign
     else
@@ -30,7 +31,9 @@ class WikisController < ApplicationController
   end
 
   def update
-    if @wiki.update(wiki_params)
+    @wiki.assign_attributes(wiki_params)
+    @wiki.wiki_revisions.build(user: current_user, body: @wiki.body, note: @wiki.revision_note)
+    if @wiki.save
       redirect_to @wiki
     else
       render 'edit'
@@ -45,7 +48,7 @@ class WikisController < ApplicationController
   private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :body)
+    params.require(:wiki).permit(:title, :body, :revision_note)
   end
 
   def reset_meta_tags

@@ -30,7 +30,11 @@ Rails.application.routes.draw do
       resources :discussions
       resources :petitions
       resources :polls
-      resources :wikis
+      resources :wikis do
+        resources :wiki_revisions do
+          put 'revert', on: :member
+        end
+      end
     end
   end
 

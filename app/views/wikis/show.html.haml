@@ -33,3 +33,12 @@
 
     .post-block__comments
       = render 'comments/list', commentable: @wiki
+
+%section
+  .container
+    %ul
+      - @wiki.wiki_revisions.recent.each do |wiki_revision|
+        %li
+          = link_to wiki_revision do
+            = wiki_revision.user.nickname
+            = wiki_revision.created_at
