@@ -55,7 +55,20 @@
                     %small.text-muted
                       %i.fa.fa-user-o
                       = petition.signs_count
+      .col-sm-6
+        .panel.panel-default
+          .panel-body
+            %h5.panel-title #{Wiki.model_name.human}
+            %ul.list-unstyled
+              - Wiki.recent.limit(5).each do |wiki|
+                %li
+                  %h5
+                    = link_to wiki.title, wiki
+                    %small.text-muted
+                      %i.fa.fa-edit
+                      = wiki.wiki_revisions.count
 
+    .row
       .col-sm-6
         .panel.panel-default
           .panel-body
