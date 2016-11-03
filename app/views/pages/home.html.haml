@@ -21,7 +21,7 @@
       .col-sm-6
         .panel.panel-default
           .panel-body
-            %h5.panel-title 토론
+            %h5.panel-title #{Discussion.model_name.human}
             %ul.list-unstyled
               - Discussion.recent.limit(5).each do |discussion|
                 %li
@@ -33,7 +33,7 @@
       .col-sm-6
         .panel.panel-default
           .panel-body
-            %h5.panel-title 투표
+            %h5.panel-title #{Poll.model_name.human}
             %ul.list-unstyled
               - Poll.recent.limit(5).each do |poll|
                 %li
@@ -46,7 +46,7 @@
       .col-sm-6
         .panel.panel-default
           .panel-body
-            %h5.panel-title 서명
+            %h5.panel-title #{Petition.model_name.human}
             %ul.list-unstyled
               - Petition.recent.limit(5).each do |petition|
                 %li
@@ -59,7 +59,7 @@
       .col-sm-6
         .panel.panel-default
           .panel-body
-            %h5.panel-title 아카이브
+            %h5.panel-title #{Archive.model_name.human}
             %ul.list-unstyled
               - ArchiveDocument.recent.limit(5).each do |document|
                 %li
