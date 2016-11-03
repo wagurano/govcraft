@@ -19,21 +19,21 @@ $(document).imagesLoaded( { }, function() {
     var options = {}
       $('.masonry-container').masonry();
     }
+
+    // Initialize Redactor
+    $('.redactor').redactor({
+      buttons: ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'file', 'link', 'horizontalrule'],
+      callbacks: {
+        imageUploadError: function(json, xhr) {
+          UnobtrusiveFlash.showFlashMessage(json.error.data[0], {type: 'notice'})
+        }
+      }
+    });
+    $('.redactor .redactor-editor').prop('contenteditable', true);
   }
 );
 
 $(function(){
-  // Initialize Redactor
-  $('.redactor').redactor({
-    buttons: ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'file', 'link', 'horizontalrule'],
-    callbacks: {
-      imageUploadError: function(json, xhr) {
-        UnobtrusiveFlash.showFlashMessage(json.error.data[0], {type: 'notice'})
-      }
-    }
-  });
-  $('.redactor .redactor-editor').prop('contenteditable', true);
-
   $('.share-box').jsSocials({
     showCount: true,
     showLabel: false,
