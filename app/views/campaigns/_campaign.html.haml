@@ -9,10 +9,13 @@
     .row{ style: 'margin-top: 21px;' }
       .col-xs-4.text-center
         %small= Discussion.model_name.human
-        %h4{ style: 'margin-top: 7px;' }= campaign.discussions.count
+        %h4{ style: 'margin-top: 7px;' }
+          = link_to campaign.discussions.count, campaign_discussions_path(campaign)
       .col-xs-4.text-center
         %small= Petition.model_name.human
-        %h4{ style: 'margin-top: 7px;' }= campaign.petitions.count
+        %h4{ style: 'margin-top: 7px;' }
+          = link_to campaign.petitions.count, campaign_petitions_path(campaign)
       .col-xs-4.text-center
         %small= Poll.model_name.human
-        %h4{ style: 'margin-top: 7px;' }= campaign.polls.count
+        %h4{ style: 'margin-top: 7px;' }
+          = link_to campaign.polls.count, campaign_polls_path(campaign)
