@@ -22,7 +22,7 @@ class Sign < ApplicationRecord
   private
 
   def signer_should_be_present_if_user_is_blank
-    if user.blank? and (signer_name.blank? or signer_email.blank?)
+    if user.blank? and signer_name.blank?
       errors.add(:signer_name, I18n.t('activerecord.errors.models.sign.signer.blank'))
     end
   end

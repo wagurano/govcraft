@@ -20,7 +20,7 @@ class Comment < ApplicationRecord
   private
 
   def commenter_should_be_present_if_user_is_blank
-    if user.blank? and (commenter_name.blank? or commenter_email.blank?)
+    if user.blank? and commenter_name.blank?
       errors.add(:commenter_name, I18n.t('activerecord.errors.models.comment.commenter.blank'))
     end
   end
