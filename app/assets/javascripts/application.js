@@ -67,25 +67,6 @@ $(function(){
 
             return $result;
         }
-    }, {
-        renderer: function() {
-            var $result = $("<div>");
-
-            var script = document.createElement("script");
-            script.src = "//assets.pinterest.com/js/pinit.js";
-            $result.append(script);
-
-            $("<a>").append($("<img>").attr("//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png"))
-                    .attr({
-                        href: "//www.pinterest.com/pin/create/button/?url=http%3A%2F%2Fjs-socials.com%2Fdemos%2F&media=%26quot%3Bhttp%3A%2F%2Fgdurl.com%2Fa653%26quot%3B&description=Next%20stop%3A%20Pinterest",
-                        "data-pin-do": "buttonPin",
-                        "data-pin-config": "beside",
-                        "data-pin-color":"red"
-                    })
-                    .appendTo($result);
-
-            return $result;
-        }
     }]
   });
 
