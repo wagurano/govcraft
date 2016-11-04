@@ -29,7 +29,9 @@ Rails.application.routes.draw do
     shallow do
       resources :discussions
       resources :petitions
-      resources :polls
+      resources :polls do
+        get 'social_card', on: :member
+      end
       resources :wikis do
         resources :wiki_revisions do
           put 'revert', on: :member

@@ -1,0 +1,11 @@
+!!!
+%html{:lang => I18n.locale}
+  %head
+    %meta{:charset => "utf-8"}
+    = stylesheet_link_tag asset_data_base64('application.css')
+    %link{href: "http://fonts.googleapis.com/earlyaccess/notosanskr.css", rel: "stylesheet"}
+  %body(style='padding: 0;')
+    %section.poll-social-card-section{ style: "background-image: url(#{asset_data_base64('social_card_poll.png')});" }
+      .card
+        .title{ class: (@poll.title.length < 31 ? (@poll.title.length < 17 ? 'short' : 'medium') : 'long') }
+          = truncate(@poll.title, length: 50)

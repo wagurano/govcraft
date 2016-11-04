@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :read, :all
+    can [:read, :social_card], :all
     can :create, [Sign, Comment]
 
     if user

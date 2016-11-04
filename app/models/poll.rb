@@ -5,6 +5,7 @@ class Poll < ApplicationRecord
   has_many :likes, as: :likable
   has_many :votes, dependent: :destroy
 
+  mount_uploader :social_card, ImageUploader
   scope :recent, -> { order('id DESC') }
 
   def fetch_vote_of someone
