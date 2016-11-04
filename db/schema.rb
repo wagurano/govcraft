@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103055822) do
+ActiveRecord::Schema.define(version: 20161104073121) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer  "user_id"
@@ -198,7 +198,6 @@ ActiveRecord::Schema.define(version: 20161103055822) do
     t.string   "signer_name"
     t.string   "signer_email"
     t.integer  "reports_count",               default: 0
-    t.index ["petition_id", "signer_email"], name: "index_signs_on_petition_id_and_signer_email", unique: true, using: :btree
     t.index ["petition_id"], name: "index_signs_on_petition_id", using: :btree
     t.index ["user_id", "petition_id"], name: "index_signs_on_user_id_and_petition_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_signs_on_user_id", using: :btree
