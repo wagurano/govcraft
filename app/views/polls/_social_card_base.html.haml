@@ -8,4 +8,6 @@
     %section.poll-social-card-section{ style: "background-image: url(#{asset_data_base64('social_card_poll.png')});" }
       .card
         .title{ class: (@poll.title.length < 31 ? (@poll.title.length < 17 ? 'short' : 'medium') : 'long') }
-          = truncate(@poll.title, length: 50)
+          - words = truncate(@poll.title, length: 50).split
+          - words.each do |word|
+            .title-word= word

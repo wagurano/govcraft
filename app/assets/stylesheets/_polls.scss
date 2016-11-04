@@ -52,6 +52,7 @@
     .title {
       letter-spacing: -1px;
       word-break: keep-all;
+      word-wrap: break-word;
       font-weight: 300;
       margin: 0 70px;
       &.short {
@@ -64,6 +65,11 @@
       }
       &.long {
         font-size: 55px;
+      }
+
+      .title-word {
+        display: inline-block;
+        white-space:nowrap;
       }
     }
   }

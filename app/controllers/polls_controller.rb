@@ -12,7 +12,7 @@ class PollsController < ApplicationController
     @poll.increment!(:views_count)
 
     prepare_meta_tags title: @poll.title,
-      description: @poll.body.truncate(100),
+      description: ApplicationController.helpers.strip_tags(@poll.body).strip.truncate(100),
       url: poll_url,
       image: social_card_poll_url(format: :png),
       twitter_card_type: 'summary_large_image'
