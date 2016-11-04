@@ -31,6 +31,9 @@
     .post-block__like
       = render 'likes/button', likable: @discussion
 
+    .post-block__share.text-center
+      .share-box
+
     .post-block__comments
       = render 'comments/list', commentable: @discussion
 
