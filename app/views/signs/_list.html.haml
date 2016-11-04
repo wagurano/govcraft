@@ -18,8 +18,6 @@
     - else
       = form_for Sign.new(petition: petition) do |f|
         = f.hidden_field :petition_id
-        .form-group
-          = f.text_field :body, placeholder: '서명 한마디..', class: 'form-control'
         - unless user_signed_in?
           .row
             .col-xs-12.col-md-6
@@ -30,6 +28,8 @@
               .form-group
                 = f.label :signer_email
                 = f.text_field :signer_email, class: 'form-control'
+        .form-group
+          = f.text_field :body, placeholder: '서명 한마디..', class: 'form-control'
         .form-group
           = f.submit "#{petition.signs_count+1}번째 서명자 되기", class: 'btn btn-primary btn-sm', data: { disable_with: "진행 중..." }
 

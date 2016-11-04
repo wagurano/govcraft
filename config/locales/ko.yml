@@ -49,7 +49,7 @@ ko:
         signs_goal_count: 서명 목표인수
       sign:
         signer_name: 이름
-        signer_email: 이메일
+        signer_email: 이메일(선택사항)
       poll:
         title: 제목
         body: 내용
@@ -76,7 +76,7 @@ ko:
         time: 시간(선택사항)
       comment:
         commenter_name: 이름
-        commenter_email: 이메일
+        commenter_email: 이메일(선택사항)
     errors:
       models:
         user:
