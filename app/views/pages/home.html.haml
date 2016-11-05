@@ -5,6 +5,25 @@
       %p
         시민이 만드는 정치개혁 프로젝트 정당. 지금 정당 하나 하실래요?
 
+    .well.well-mute{ style: 'border:none' }
+      .text-center
+        %p
+          우주당(우리가주인이당)은
+          %br
+          시민이 나서서 새로운 정치 대안을 만들어가는 프로젝트 정당입니다.
+          %br
+          (아직까지는 정당법의 정당과는 무관합니다)
+        %p
+          시민이면 누구나 당원이 되어 캠페인을 제안하고,
+          %br
+          공감하는 사람들과 함께 팀을 이뤄
+          %br
+          정치, 사회, 경제, 사회 각 분야의 여러 이슈들을 시민의 힘으로 해결합니다.
+        %p
+          지금 곧 팀이나 캠페인을 제안하거나 참여해 보세요.
+        %p
+          = link_to '팀이나 캠페인 제안하기', campaign_discussions_path(Campaign.first), class: 'btn btn-primary'
+
 %section.page-block
   .container
     %h4 진행중인 캠페인
