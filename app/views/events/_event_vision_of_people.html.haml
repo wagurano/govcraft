@@ -19,7 +19,7 @@
 
     %section
       .row.masonry-container
-        .col-sm-4
+        .col-sm-6
           .panel.panel-floating
             .panel-body
               = form_for Comment.new do |f|
@@ -40,11 +40,11 @@
 
         - comments = params[:tag].present? ? @event.comments.tagged_with(params[:tag]) : @event.comments
         - comments.order('id DESC').each do |comment|
-          .col-sm-4
+          .col-sm-6
             .panel.panel-floating
-              .panel-body.text-center
-                .comment__body{ style: 'font-size: 16px;' }
-                  %h4= smart_format comment.body
+              .panel-body
+                .comment__body
+                  %h4{ style: 'font-size: 16px; letter-spacing: -0.02em; line-height: 1.4;'}= smart_format comment.body
                 .comment__tags
                   - comment.tag_list.each do |tag|
                     = link_to "##{tag}", event_path(@event, {tag: tag})
