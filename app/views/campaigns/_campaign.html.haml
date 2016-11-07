@@ -1,11 +1,10 @@
 .panel.panel-floating[campaign]
   .panel-body
-    - if campaign.image.file.present?
-      = link_to campaign.title, campaign, style: "display: block; height: 150px; background-image: url(#{campaign.image_url(:md)}); background-size: cover; background-position: center center; text-indent: -999px; overflow: hidden;"
+    = link_to campaign.title, campaign, style: "display: block; height: 150px; background-image: url(#{campaign.image_url(:md)}); background-size: cover; background-position: center center; text-indent: -999px; overflow: hidden;"
 
-    %h5{ style: 'word-break: keep-all;' }= link_to campaign.title, campaign
+    %h5{ style: 'height: 45px; word-break: keep-all;' }= link_to campaign.title, campaign
 
-    .campaign__meta{ style: 'margin-top: 14px;' }
+    .campaign__meta{ style: 'height: 20px; margin-top: 7px;' }
       - if campaign.discussions.count > 0
         %small{ style: 'margin-right: 7px;' }
           = Discussion.model_name.human
