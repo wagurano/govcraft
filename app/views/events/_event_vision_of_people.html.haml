@@ -19,6 +19,13 @@
               = form_for Comment.new do |f|
                 = f.hidden_field :commentable_type, value: 'Event'
                 = f.hidden_field :commentable_id, value: @event.id
+                - unless user_signed_in?
+                  .form-group
+                    = f.label :commenter_name
+                    = f.text_field :commenter_name, class: 'form-control'
+                  .form-group
+                    = f.label :commenter_email
+                    = f.text_field :commenter_email, class: 'form-control'
                 .form-group
                   ~ f.text_area :body, placeholder: '새롭게 쓰는 대한민국, 당신이 가장 바라는 변화 한가지는 무엇인가요?', rows: 8, class: 'form-control input-lg'
                 .form-group
