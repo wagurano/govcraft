@@ -20,7 +20,7 @@
                 = f.hidden_field :commentable_type, value: 'Event'
                 = f.hidden_field :commentable_id, value: @event.id
                 .form-group
-                  ~ f.text_area :body, placeholder: '함께 만드는 대한민국, 가장 중요한 변화는 무엇을 바라시나요?', rows: 8, class: 'form-control input-lg'
+                  ~ f.text_area :body, placeholder: '새롭게 쓰는 대한민국, 당신이 가장 바라는 변화 한가지는 무엇인가요?', rows: 8, class: 'form-control input-lg'
                 .form-group
                   = f.text_field :tag_list, placeholder: '태그1, 태그2', class: 'form-control'
                 = f.submit '작성', class: 'btn btn-primary btn-sm btn-block'

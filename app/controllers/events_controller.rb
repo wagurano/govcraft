@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   load_and_authorize_resource
+  before_action :reset_meta_tags, only: :show
 
   def index
     @evnts = Event.all
