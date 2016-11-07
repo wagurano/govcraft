@@ -50,3 +50,10 @@
                     = render 'reports/button', reportable: comment
                 .comment__like{ style: 'margin-top: 14px;' }
                   = render 'likes/button', likable: comment
+
+%section.page-block
+  .container
+    %h4 지금 진행중인 다른 캠페인
+    %ul
+      %li= link_to '임시총리 누가 좋을까요? 인물을 추천하고 평가하는데 참여해 보세요', 'http://wouldyouparty.org/campaigns/10'
+      %li= link_to '박근혜, 최순실, 새누리당. 모두 책임져야 합니다.', 'http://wouldyouparty.org/campaigns/5'
