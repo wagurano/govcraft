@@ -8,4 +8,12 @@
     = f.text_area :body, class: 'form-control'
 
   .form-group
+    = f.label :url
+    = f.text_field :url, class: 'form-control'
+
+  .form-group
+    = f.label :image
+    = f.file_field :image, class: 'form-control'
+
+  .form-group
     = f.submit '저장', class: 'btn btn-primary'

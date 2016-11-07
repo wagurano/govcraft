@@ -81,6 +81,17 @@
                     \-
                     = link_to document.title, document
 
+      .col-sm-6
+        .panel.panel-default
+          .panel-body
+            %h5.panel-title #{Memorial.model_name.human}
+            %ul.list-unstyled
+              - Memorial.recent.limit(5).each do |memorial|
+                - url = memorial.url.present? ? memorial.url : memorial_path(memorial)
+                %li
+                  %h5
+                    = link_to memorial.title, url
+
 %section.page-block{ style: 'background-color: #f5f5f5; padding: 28px 0;' }
   .container
     %h4 당원

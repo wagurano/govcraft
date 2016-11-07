@@ -15,7 +15,7 @@ class MemorialsController < ApplicationController
   end
 
   def update
-    if @memorial.update(petition_params)
+    if @memorial.update(memorial_params)
       redirect_to @memorial
     else
       render 'edit'
@@ -30,6 +30,6 @@ class MemorialsController < ApplicationController
   private
 
   def memorial_params
-    params.require(:memorial).permit(:title, :body)
+    params.require(:memorial).permit(:title, :body, :url, :image)
   end
 end
