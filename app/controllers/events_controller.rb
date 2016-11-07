@@ -17,6 +17,9 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
     if @event.update(event_params)
       redirect_to @event
@@ -34,5 +37,13 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:slug, :title, :body)
+  end
+
+  def reset_meta_tags
+    prepare_meta_tags({
+      title: @event.title,
+      description: @event.body.html_safe,
+      url: request.original_url}
+    )
   end
 end
