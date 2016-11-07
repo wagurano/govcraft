@@ -6,10 +6,16 @@
 
     %section{ style: 'margin-bottom: 28px;' }
       - ActsAsTaggableOn::Tag.most_used(100).each do |tag|
-        %span{ style: 'display: inline-block; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px;' }
-          = link_to tag.name, event_path(@event, {tag: tag.name})
-          %small.text-muted
-            = tag.taggings_count
+        - if params[:tag] == tag.name
+          %span{ style: 'display: inline-block; background-color: #4a5dd0; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; color: #fff' }
+            = link_to tag.name, event_path(@event, {tag: tag.name}), style: 'color: #fff'
+            %small
+              = tag.taggings_count
+        - else
+          %span{ style: 'display: inline-block; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px;' }
+            = link_to tag.name, event_path(@event, {tag: tag.name})
+            %small.text-muted
+              = tag.taggings_count
 
     %section
       .row.masonry-container
@@ -32,7 +38,8 @@
                   = f.text_field :tag_list, placeholder: '태그1, 태그2', class: 'form-control'
                 = f.submit '작성', class: 'btn btn-primary btn-sm btn-block'
 
-        - @event.comments.order('id DESC').each do |comment|
+        - comments = params[:tag].present? ? @event.comments.tagged_with(params[:tag]) : @event.comments
+        - comments.order('id DESC').each do |comment|
           .col-sm-4
             .panel.panel-floating
               .panel-body.text-center
