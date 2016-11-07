@@ -12,6 +12,7 @@ gem 'kaminari', '~> 0.16.3'
 gem 'scoped_search', '~> 3.2', '>= 3.2.2'
 gem 'counter_culture', '~> 0.2.3'
 gem 'enumerize', '~> 2.0'
+gem 'acts-as-taggable-on', '~> 4.0'
 
 # ui
 gem 'sass-rails', '~> 5.0'

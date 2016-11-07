@@ -2,6 +2,8 @@ class Comment < ApplicationRecord
   include Choosable
   include Reportable
 
+  acts_as_taggable # Alias for acts_as_taggable_on :tags
+
   belongs_to :commentable, polymorphic: true
   belongs_to :user
   has_many :likes, as: :likable

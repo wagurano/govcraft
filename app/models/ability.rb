@@ -9,12 +9,13 @@ class Ability
       can :create, [
           FollowingIssue,
           Campaign, Discussion, Petition, Poll, Wiki,
-          Memorial, Agenda, Archive, ArchiveDocument,
+          Memorial, Agenda, Archive, ArchiveDocument, Event,
           Like
         ]
       can [:update, :destroy], [
           FollowingIssue,
-          Campaign, Discussion, Petition, Poll, Wiki,          Memorial, Agenda, Archive, ArchiveDocument,
+          Campaign, Discussion, Petition, Poll, Wiki,
+          Memorial, Agenda, Archive, ArchiveDocument, Event,
           Comment, Like, Sign
         ], :user_id => user.id
 

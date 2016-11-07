@@ -15,7 +15,8 @@
           %li= link_to "캠페인 #{Campaign.count}개", campaigns_path
           %li= link_to '아카이브', archives_path
           %li= link_to '게시판', campaign_discussions_path(Campaign.first) if Campaign.first
-          %li= link_to '뭣이중헌디?', issues_path
+          - if Event.first
+            %li= link_to '뭣이중헌디?', Event.first
 
         %ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
