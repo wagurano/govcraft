@@ -1,21 +1,27 @@
 .panel.panel-floating[campaign]
   .panel-body
     - if campaign.image.file.present?
-      .thumbnail
-        = link_to campaign do
-          = image_tag campaign.image_url(:sm)
-    %h4.text-center{ style: 'word-break: keep-all;' }= link_to campaign.title, campaign
+      = link_to campaign.title, campaign, style: "display: block; height: 150px; background-image: url(#{campaign.image_url(:md)}); background-size: cover; background-position: center center; text-indent: -999px; overflow: hidden;"
 
-    .row{ style: 'margin-top: 21px;' }
-      .col-xs-4.text-center
-        %small= Discussion.model_name.human
-        %h4{ style: 'margin-top: 7px;' }
+    %h5{ style: 'word-break: keep-all;' }= link_to campaign.title, campaign
+
+    .campaign__meta{ style: 'margin-top: 14px;' }
+      - if campaign.discussions.count > 0
+        %small{ style: 'margin-right: 7px;' }
+          = Discussion.model_name.human
           = link_to campaign.discussions.count, campaign_discussions_path(campaign)
-      .col-xs-4.text-center
-        %small= Petition.model_name.human
-        %h4{ style: 'margin-top: 7px;' }
+
+      - if campaign.petitions.count > 0
+        %small{ style: 'margin-right: 7px;' }
+          = Petition.model_name.human
           = link_to campaign.petitions.count, campaign_petitions_path(campaign)
-      .col-xs-4.text-center
-        %small= Poll.model_name.human
-        %h4{ style: 'margin-top: 7px;' }
+
+      - if campaign.polls.count > 0
+        %small{ style: 'margin-right: 7px;' }
+          = Poll.model_name.human
           = link_to campaign.polls.count, campaign_polls_path(campaign)
+
+      - if campaign.wikis.count > 0
+        %small{ style: 'margin-right: 7px;' }
+          = Wiki.model_name.human
+          = link_to campaign.wikis.count, campaign_wikis_path(campaign)
