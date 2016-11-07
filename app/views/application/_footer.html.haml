@@ -13,17 +13,17 @@
     .container
       %ul.nav.navbar-nav
         %li
+          = link_to about_path do
+            %i.fa.fa-info-circle
+            우주당 소개
+        %li
           = link_to 'https://www.facebook.com/groups/1820856674866416/', target: '_blank' do
             %i.fa.fa-facebook-official
             페이스북 그룹
         %li
           = link_to 'http://slack.wouldyouparty.org/', target: '_blank' do
             %i.fa.fa-slack
-            슬랙 초대장 받기
-        %li
-          = link_to 'http://telegram.me/govcraft', target: '_blank' do
-            %i.fa.fa-telegram
-            텔레그램
+            슬랙
 
       %ul.nav.navbar-nav.navbar-right
         %li

@@ -41,6 +41,7 @@ class User < ApplicationRecord
   mount_uploader :image, UserImageUploader
 
   # scope
+  default_scope { order('id DESC') }
   scope :not_someone, ->(someone) { where.not(id: someone.id) }
 
   # methods for devises/auth
