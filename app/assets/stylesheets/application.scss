@@ -22,14 +22,13 @@
 #site-hero-block {
   .jumbotron {
     background-color: $brand-primary;
-    background-image: image_url('seo.png');
-    background-size: contain;
+    background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), image_url('seo.png');
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    text-indent: -999px;
-    overflow: hidden;
-    @media(min-width: 700px) {
-      height: 300px;
+    color: #fff;
+    a {
+      color: #fff;
     }
   }
 }
