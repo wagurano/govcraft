@@ -1,5 +1,9 @@
 = form_for @event do |f|
   .form-group
+    = f.label :image
+    = f.file_field :image, class: 'form-control'
+
+  .form-group
     = f.label :slug
     = f.text_field :slug, class: 'form-control'
 

@@ -37,7 +37,7 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:slug, :title, :body)
+    params.require(:event).permit(:image, :slug, :title, :body)
   end
 
   def reset_meta_tags
