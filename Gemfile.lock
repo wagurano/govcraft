@@ -101,6 +101,7 @@ GEM
       activesupport (>= 4.0, < 6)
     excon (0.52.0)
     execjs (2.7.0)
+    exifr (1.2.5)
     ey_config (0.0.7)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
@@ -582,6 +583,7 @@ DEPENDENCIES
   enumerize (~> 2.0)
   envyable (~> 0.2.0)
   exception_notification (~> 4.1, >= 4.1.4)
+  exifr
   ey_config
   file_validators (~> 2.0, >= 2.0.2)
   fog

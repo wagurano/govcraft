@@ -5,7 +5,7 @@
 %section.page-block
   .container
     .row.masonry-container
-      .col-sm-6.hidden-xs
+      .col-sm-4.hidden-xs
         .panel.panel-floating
           .panel-body
             = form_for Comment.new do |f|
@@ -22,37 +22,67 @@
                 = f.label :image
                 = f.file_field :image, required: true, class: 'form-control'
               .form-group
-                ~ f.text_area :body, placeholder: '지금 나는...', required: true, rows: 3, class: 'form-control input-lg'
+                ~ f.text_area :body, placeholder: '지금 나는...', required: true, rows: 3, class: 'form-control'
               = f.submit '작성', class: 'btn btn-primary btn-block'
       - @event.comments.order('id DESC').each do |comment|
-        .col-sm-6
-          .panel.panel-floating
+        .col-sm-4
+          .panel.panel-floating[comment]{ style: 'padding:0' }
             .panel-body
               - if comment.image.present?
                 .comment__image
-                  = image_tag comment.image_url(:lg), style: 'width: 100%;'
+                  - if comment.latitude && comment.longitude
+                    %a{ "data-target" => "#comment-modal", "data-toggle" => "modal", "data-comment-id" => comment.id, :type => "button", style: 'cursor:pointer' }
+                      = image_tag comment.image_url(:lg), style: 'width: 100%;'
+                  - else
+                    = image_tag comment.image_url(:lg), style: 'width: 100%;'
               .comment__body
                 %h4{ style: 'font-size: 16px; letter-spacing: -0.02em; line-height: 1.4;'}= smart_format comment.body
-              .comment__tags
-                - comment.tag_list.each do |tag|
-                  = link_to "##{tag}", event_path(@event, {tag: tag})
               .comment__meta{ style: 'color: #5f5f5f;font-size: 12px' }
+                - if comment.latitude && comment.longitude
+                  %i.fa.fa-map-marker.text-danger
                 = comment.user_nickname
                 = date_f comment.created_at
                 - if can? :destroy, comment
                   = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
                 - if current_user != comment.user
                   = render 'reports/button', reportable: comment
+              .comment__map.hidden
+                - if comment.latitude && comment.longitude
+                  = image_tag "https://maps.googleapis.com/maps/api/staticmap?center=#{comment.latitude},#{comment.longitude}&size=400x300&zoom=18&markers=color:red%7C#{comment.latitude},#{comment.longitude}&key=AIzaSyBmxQGhxC-UzPzxIMlE9Sy09Dv9zUtiiW4", style: 'max-width: 100%;'
               .comment__like{ style: 'margin-top: 14px;' }
                 = render 'likes/button', likable: comment
 
+#comment-modal.modal.fade{:role => "dialog", :tabindex => "0"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &#215;
+        %h4.modal-title
+      .modal-body
+        .comment__map.text-center
+
+= content_for :script do
+  :javascript
+    $('#comment-modal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      var id = button.data('comment-id');
+      var $comment = $('#comment_'+id);
+      var map = $comment.find('.comment__map');
+      var body = $comment.find('.comment__body');
+
+      var modal = $(this);
+      modal.find('.modal-title').text(body.text());
+      modal.find('.modal-body .comment__map').html(map.html());
+    })
+
 %section.visible-xs
   %nav.navbar.navbar-default.navbar-fixed-bottom{ style: 'min-height: auto;'}
-    %button.btn.btn-primary.btn-lg.btn-block{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
+    %button.btn.btn-primary.btn-lg.btn-block{"data-target" => "#comment-form-modal", "data-toggle" => "modal", :type => "button"}
       %i.fa.fa-file-image-o
       사진 올리기
 
-#myModal.modal.fade{:role => "dialog", :tabindex => "-1"}
+#comment-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
     .modal-content
       .modal-header

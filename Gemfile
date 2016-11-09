@@ -63,6 +63,7 @@ gem 'identicon', '~> 0.0.5'
 gem 'rails-timeago', '~> 2.15'
 
 # image
+gem 'exifr'
 gem 'imgkit', '~> 1.6', '>= 1.6.1'
 group :development, :test do
   gem 'wkhtmltoimage-binary', '~> 0.12.2'

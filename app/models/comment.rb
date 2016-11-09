@@ -17,11 +17,23 @@ class Comment < ApplicationRecord
   validates :commenter_email, format: { with: Devise.email_regexp }, if: 'commenter_email.present?'
   validate :commenter_should_be_present_if_user_is_blank
 
+  before_save :save_gps
+
   def user_nickname
     user.present? ? user.nickname : commenter_name
   end
 
   private
+
+  def save_gps
+    if self.image.present?
+      gps = EXIFR::JPEG.new(self.image.file.path).gps
+      if gps.present?
+        self.latitude = gps.latitude
+        self.longitude = gps.longitude
+      end
+    end
+  end
 
   def commenter_should_be_present_if_user_is_blank
     if user.blank? and commenter_name.blank?
