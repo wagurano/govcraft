@@ -8,6 +8,8 @@ class Comment < ApplicationRecord
   belongs_to :user
   has_many :likes, as: :likable
 
+  mount_uploader :image, ImageUploader
+
   scope :recent, -> { order(created_at: :desc) }
   scope :earlier, -> { order(created_at: :asc) }
 

@@ -44,7 +44,8 @@ class EventsController < ApplicationController
     prepare_meta_tags({
       title: @event.title,
       description: @event.body.html_safe,
-      url: request.original_url}
-    )
+      url: request.original_url,
+      image: @event.image
+    })
   end
 end

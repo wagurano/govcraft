@@ -79,6 +79,7 @@ ko:
       comment:
         commenter_name: 이름
         commenter_email: 이메일(선택사항)
+        image: 사진
     errors:
       models:
         user:
