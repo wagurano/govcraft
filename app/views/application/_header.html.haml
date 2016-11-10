@@ -11,8 +11,14 @@
 
       #site-header-collapsable.collapse.navbar-collapse
         %ul.nav.navbar-nav
-          - if Event.first
-            %li= link_to '우리의 목소리를 들어라!', Event.first
+          - ['vision_of_people', 'hayago'].each do |e|
+            - event = Event.find_by(slug: e)
+            - if event
+              %li
+                = link_to event do
+                  %i.fa.fa-globe
+                  = event.title
+
           %li= link_to '캠페인', campaigns_path
           %li= link_to '아카이브', archives_path
           %li= link_to '추모관', memorials_path
