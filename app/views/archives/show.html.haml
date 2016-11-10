@@ -17,25 +17,22 @@
 
 %section.page-block
   .container
-    %h4
-      = link_to '자료 추가하기', new_archive_document_path(archive_id: @archive.id)
+    .row
+      .col-xs-6
+        %h4
+          자료
+      .col-xs-6.text-right
+        = link_to '자료 추가하기', new_archive_document_path(archive_id: @archive.id), class: 'btn btn-default btn-sm'
 
-    %ul.list-group.post-group
+    %table.table.table-bordered{ style:"table-layout:fixed" }
       - @archive.documents.each do |document|
-        %li.list-group-item[document]
-          .media
-            .media-body
-              %h5.text-muted
-                = document.date
-                = document.time
-              %h4.list-group-item-heading
-                = link_to document do
-                  = document.title
-                  - if document.comments.count > 0
-                    %small
-                      (#{document.comments.count})
-
-              .text-muted
-                = document.body.html_safe
-            .media-right{ style: 'vertical-align: middle;'}
-              = render 'likes/button', likable: document
+        %tr[document]
+          %td{ style: 'white-space: nowrap; font-size: 12px; width: 120px;' }
+            = document.date
+            = document.time
+          %td{ style: 'white-space: nowrap; text-overflow: ellipsis; overflow: hidden;' }
+            = link_to document do
+              = document.title
+              %small.text-muted
+                - 10.times do
+                  = strip_tags document.body
