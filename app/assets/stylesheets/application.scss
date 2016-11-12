@@ -20,15 +20,26 @@
 }
 
 #site-hero-block {
+  background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), image_url('seo.png');
+  margin-top: -30px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
   .jumbotron {
-    background-color: $brand-primary;
-    background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), image_url('seo.png');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
     color: #fff;
+    text-shadow: 0 1px 0 #999,
+               0 2px 0 #888,
+               0 3px 0 #777,
+               0 4px 0 #666,
+               0 5px 0 #606060;
     a {
       color: #fff;
+    }
+    .btn {
+      text-shadow: none;
     }
   }
 }

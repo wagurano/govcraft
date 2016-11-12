@@ -1,8 +1,8 @@
-%section#site-hero-block
-  .container
-    .jumbotron
-      - if Event.first.present?
-        - event = Event.first
+- event = Event.last
+- if event.present?
+  %section#site-hero-block{ style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{event.image});" }
+    .container
+      .jumbotron
         = link_to event do
           %h2= event.title
           = raw event.body
