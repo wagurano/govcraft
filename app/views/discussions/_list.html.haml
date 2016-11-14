@@ -1,0 +1,46 @@
+%section#discussions
+  .container
+    .panel.panel-primary
+      .panel-heading
+        .row
+          .col-xs-6
+            %h4.panel-title
+              = Discussion.model_name.human
+          .col-xs-6.text-right
+            = link_to "#{Discussion.model_name.human} 글쓰기", new_campaign_discussion_path(@campaign), style: 'color: #fff; text-decoration: underline;' if @campaign.present?
+
+      - if discussions.any?
+        %table.table
+          %thead
+            %tr
+              %th.text-center #
+              %th 제목
+              %th 글쓴이
+              %th.text-right 추천
+              %th.text-right 조회
+              %th.text-center.hidden-xs 작성일
+          %tbody
+            - discussions.each do |discussion|
+              %tr[discussion]
+                %td.text-muted.text-center
+                  = discussion.id
+                %td.discussion__title
+                  %strong
+                    = link_to discussion.title, discussion
+                  - if discussion.comments.count > 0
+                    %small
+                      (#{discussion.comments.count})
+                %td.discussion__nickname
+                  = discussion.user.nickname
+                %td.discussion__likes_count.text-right.text-danger
+                  %strong= discussion.likes_count
+                %td.discussion__views_count.text-right
+                  = discussion.views_count
+                %td.discussion__created_at.text-center.hidden-xs
+                  = date_f discussion.created_at
+
+      - else
+        %small.text-muted
+          아직 게시글이 없습니다. 이야기를 시작해 볼까요?
+          %br
+          = link_to "#{Discussion.model_name.human} 쓰기", new_campaign_discussion_path(@campaign)

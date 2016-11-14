@@ -2,7 +2,7 @@
   .container
     .row
       .col-xs-6
-        = link_to '목록', campaign_wikis_path(@campaign), class: 'btn btn-default btn-sm'
+        = link_to '목록', campaign_path(@campaign, anchor: 'wikis'), class: 'btn btn-default btn-sm'
       .col-xs-6.text-right
         = link_to "#{Wiki.model_name.human} 추가", new_campaign_wiki_path(@campaign), class: 'btn btn-default btn-sm'
 
@@ -40,7 +40,3 @@
           = link_to wiki_revision do
             = date_f wiki_revision.created_at
             = wiki_revision.user.nickname
-
-%section
-  .container
-    = render 'campaigns/recent_posts'

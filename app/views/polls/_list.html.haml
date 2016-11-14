@@ -1,0 +1,50 @@
+%section#polls
+  .container
+    .panel.panel-primary
+      .panel-heading
+        .row
+          .col-xs-6
+            %h4.panel-title
+              = Poll.model_name.human
+          .col-xs-6.text-right
+            = link_to "#{Poll.model_name.human} 추가", new_campaign_poll_path(@campaign), style: 'color: #fff; text-decoration: underline;' if @campaign.present?
+
+      - if polls.any?
+        %table.table
+          %thead
+            %tr
+              %th.text-center #
+              %th 제목
+              %th 글쓴이
+              %th.text-right 찬성
+              %th.text-right 반대
+              %th.text-right.hidden-xs 조회
+              %th.text-center.hidden-xs 작성일
+          %tbody
+            - polls.each do |poll|
+              %tr[poll]
+                %td.text-muted.text-center
+                  = poll.id
+                %td.discussion__title
+                  %strong
+                    = link_to poll.title, poll
+                  - if poll.comments.count > 0
+                    %small
+                      (#{poll.comments.count})
+                %td.discussion__nickname
+                  = poll.user.nickname
+                %td.discussion__cnt.text-right.text-primary
+                  %strong= poll.agrees_count
+                %td.discussion__cnt.text-right.text-danger
+                  %strong= poll.disagrees_count
+                %td.discussion__cnt.text-right.hidden-xs
+                  = poll.views_count
+                %td.discussion__created_at.text-center.hidden-xs
+                  = date_f poll.created_at
+
+      - else
+        .panel-body
+          %small.text-muted
+            가장 먼저 투표를 제안해 보세요.
+            %br
+            = link_to "#{Poll.model_name.human} 제안하기", new_campaign_poll_path(@campaign)

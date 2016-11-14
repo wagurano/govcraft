@@ -42,7 +42,10 @@ class CampaignsController < ApplicationController
   private
 
   def campaign_params
-    params.require(:campaign).permit(:title, :body, :image)
+    params.require(:campaign).permit(
+      :title, :body, :image,
+      :discussion_enabled, :poll_enabled, :petition_enabled, :wiki_enabled
+    )
   end
 
   def reset_meta_tags

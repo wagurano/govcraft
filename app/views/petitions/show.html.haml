@@ -2,7 +2,7 @@
   .container
     .row
       .col-xs-6
-        = link_to '목록', campaign_petitions_path(@campaign), class: 'btn btn-default btn-sm'
+        = link_to '목록', campaign_path(@campaign, anchor: 'petitions'), class: 'btn btn-default btn-sm'
       .col-xs-6.text-right
         = link_to "#{Petition.model_name.human} 제안하기", new_campaign_petition_path(@campaign), class: 'btn btn-default btn-sm'
 
@@ -36,7 +36,3 @@
 
     .post-block__signs
       = render 'signs/list', petition: @petition
-
-%section
-  .container
-    = render 'campaigns/recent_posts'

@@ -16,66 +16,19 @@
         .col-sm-4
           = render campaign
 
-%section.page-block
+= render 'discussions/list', discussions: Discussion.recent
+= render 'polls/list', polls: Poll.recent
+= render 'petitions/list', petitions: Petition.recent
+= render 'wikis/list', wikis: Wiki.recent
+
+%section
   .container
-    %h4 새로 올라온 글
-
     .row
       .col-sm-6
         .panel.panel-default
+          .panel-heading
+            %h4.panel-title #{Archive.model_name.human}
           .panel-body
-            %h5.panel-title #{Discussion.model_name.human}
-            %ul.list-unstyled
-              - Discussion.recent.limit(5).each do |discussion|
-                %li
-                  %h5
-                    = link_to discussion.title, discussion
-                    %small.text-muted
-                      (#{discussion.comments.count})
-
-      .col-sm-6
-        .panel.panel-default
-          .panel-body
-            %h5.panel-title #{Poll.model_name.human}
-            %ul.list-unstyled
-              - Poll.recent.limit(5).each do |poll|
-                %li
-                  %h5
-                    = link_to poll.title, poll
-                    %small.text-muted
-                      %i.fa.fa-check-square-o
-                      = poll.votes_count
-    .row
-      .col-sm-6
-        .panel.panel-default
-          .panel-body
-            %h5.panel-title #{Petition.model_name.human}
-            %ul.list-unstyled
-              - Petition.recent.limit(5).each do |petition|
-                %li
-                  %h5
-                    = link_to petition.title, petition
-                    %small.text-muted
-                      %i.fa.fa-user-o
-                      = petition.signs_count
-      .col-sm-6
-        .panel.panel-default
-          .panel-body
-            %h5.panel-title #{Wiki.model_name.human}
-            %ul.list-unstyled
-              - Wiki.recent.limit(5).each do |wiki|
-                %li
-                  %h5
-                    = link_to wiki.title, wiki
-                    %small.text-muted
-                      %i.fa.fa-edit
-                      = wiki.wiki_revisions.count
-
-    .row
-      .col-sm-6
-        .panel.panel-default
-          .panel-body
-            %h5.panel-title #{Archive.model_name.human}
             %ul.list-unstyled
               - ArchiveDocument.recent.limit(5).each do |document|
                 %li
@@ -86,8 +39,9 @@
 
       .col-sm-6
         .panel.panel-default
+          .panel-heading
+            %h4.panel-title #{Memorial.model_name.human}
           .panel-body
-            %h5.panel-title #{Memorial.model_name.human}
             %ul.list-unstyled
               - Memorial.recent.limit(5).each do |memorial|
                 - url = memorial.url.present? ? memorial.url : memorial_path(memorial)

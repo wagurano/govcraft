@@ -12,4 +12,20 @@
     = f.file_field :image, class: 'form-control'
 
   .form-group
+    = f.label :discussion_enabled
+    = f.check_box :discussion_enabled, class: 'form-control'
+
+  .form-group
+    = f.label :poll_enabled
+    = f.check_box :poll_enabled, class: 'form-control'
+
+  .form-group
+    = f.label :petition_enabled
+    = f.check_box :petition_enabled, class: 'form-control'
+
+  .form-group
+    = f.label :wiki_enabled
+    = f.check_box :wiki_enabled, class: 'form-control'
+
+  .form-group
     = f.submit '저장', class: 'btn btn-primary'

@@ -1,36 +1,5 @@
-%section#campaign-header-block
-  .container
-    - style = @campaign.image.file.present? ? "" : ''
-    .jumbotron{ style: style }
-      %h2
-        %small.badge 캠페인
-        %br
-        = @campaign.title
-        %small
-          - if can? :edit, @campaign
-            = link_to '수정', edit_campaign_path(@campaign)
-          - if can? :destroy, @campaign
-            = link_to '삭제', @campaign, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
-      .campaign__body= smart_format @campaign.body
-      .campaign__meta
-        %span
-          제안자 :
-          = @campaign.user.nickname
-        %span
-          시작일 :
-          = date_f @campaign.created_at
-        %span
-          활동지수 :
-          = rand(1000)
-          점
-      .campaign_share{ style: 'margin-top: 14px;' }
-        .share-box
-
-    = render 'recent_posts'
-
-:css
-  body {
-    background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{@campaign.image_url(:lg)});
-    background-size: cover;
-    background-position: center center;
-  }
+= render 'header'
+= render 'discussions/list', discussions: @campaign.discussions if @campaign.discussion_enabled?
+= render 'polls/list', polls: @campaign.polls if @campaign.poll_enabled?
+= render 'petitions/list', petitions: @campaign.petitions if @campaign.petition_enabled?
+= render 'wikis/list', wikis: @campaign.wikis if @campaign.wiki_enabled?
