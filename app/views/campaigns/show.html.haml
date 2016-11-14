@@ -1,5 +1,5 @@
 = render 'header'
-= render 'discussions/list', discussions: @campaign.discussions if @campaign.discussion_enabled?
-= render 'polls/list', polls: @campaign.polls if @campaign.poll_enabled?
-= render 'petitions/list', petitions: @campaign.petitions if @campaign.petition_enabled?
-= render 'wikis/list', wikis: @campaign.wikis if @campaign.wiki_enabled?
+= render 'discussions/list', discussions: @campaign.discussions.recent if @campaign.discussion_enabled?
+= render 'polls/list', polls: @campaign.polls.recent if @campaign.poll_enabled?
+= render 'petitions/list', petitions: @campaign.petitions.recent if @campaign.petition_enabled?
+= render 'wikis/list', wikis: @campaign.wikis.recent if @campaign.wiki_enabled?
