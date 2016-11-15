@@ -6,6 +6,10 @@ class ArchivesController < ApplicationController
     @archives = Archive.order('id DESC')
   end
 
+  def show
+    @documents = params[:tag].present? ? @archive.documents.tagged_with(params[:tag]) : @archive.documents
+  end
+
   def create
     @archive.user = current_user
     if @archive.save

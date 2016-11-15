@@ -18,6 +18,12 @@
         = f.text_field :time, placeholder: 'hh:mm:ss', class: 'form-control'
 
   .form-group
+    = f.label :tag_list
+    = f.text_field :tag_list, placeholder: '태그1, 태그2, 태그3', class: 'form-control'
+    %p.help-block
+      콤마로 태그를 구분해서 넣으세요.
+
+  .form-group
     = f.label :title
     = f.text_field :title, class: 'form-control'
 

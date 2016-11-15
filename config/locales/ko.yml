@@ -72,6 +72,7 @@ ko:
         body: 내용
         image: 대표이미지
       archive_document:
+        tag_list: 태그
         title: 제목
         body: 내용
         date: 날짜
