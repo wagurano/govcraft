@@ -36,6 +36,10 @@
       %ol.breadcrumb{ style: 'font-size: 12px;' }
         %li= link_to Archive.model_name.human, archives_path
 
+    - if params[:controller] == 'events'
+      %ol.breadcrumb{ style: 'font-size: 12px;' }
+        %li= link_to Event.model_name.human, events_path
+
     - if params[:controller] == 'memorials'
       %ol.breadcrumb{ style: 'font-size: 12px;' }
         %li= link_to Memorial.model_name.human, memorials_path
