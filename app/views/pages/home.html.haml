@@ -25,9 +25,9 @@
   .container
     .row
       .col-sm-6
-        .panel.panel-default
+        .panel.panel-primary
           .panel-heading
-            %h4.panel-title #{Archive.model_name.human}
+            %h4.panel-title= link_to Archive.model_name.human, archives_path
           .panel-body
             %ul.list-unstyled
               - ArchiveDocument.recent.limit(5).each do |document|
@@ -38,9 +38,9 @@
                     = link_to document.title, document
 
       .col-sm-6
-        .panel.panel-default
+        .panel.panel-primary
           .panel-heading
-            %h4.panel-title #{Memorial.model_name.human}
+            %h4.panel-title= link_to Memorial.model_name.human, memorials_path
           .panel-body
             %ul.list-unstyled
               - Memorial.recent.limit(5).each do |memorial|
