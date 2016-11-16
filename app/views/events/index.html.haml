@@ -3,7 +3,7 @@
     .row.masonry-container
       - @events.each do |event|
         .col-sm-6
-          .panel.panel-default[event]{ style: "background-image: url(#{event.image_url(:lg)}); background-size: cover; background-position: center center;" }
-            .panel-body
-              %h3= link_to event.title, event
-              %div= strip_tags event.body
+          %div[event]
+            .img{ style: "background-image: url(#{event.image_url(:lg)})" }
+            %h3= link_to event.title, event
+            %div= strip_tags event.body
