@@ -77,6 +77,8 @@ ko:
         body: 내용
         date: 날짜
         time: 시간(선택사항)
+        source_url: 출처
+        image: 대표이미지(선택사항)
       comment:
         commenter_name: 이름
         commenter_email: 이메일(선택사항)

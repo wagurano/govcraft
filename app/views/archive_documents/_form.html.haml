@@ -3,8 +3,8 @@
 
   .well
     %ul
-      %li 날짜는 반드시 넣어주시고, 시간은 넣지 않아도 됩니다
-      %li 자료 하단에 출처를 넣어주세요
+      %li 날짜는 반드시 넣으시고, 시간은 넣지 않아도 됩니다.
+      %li 출처는 반드시 입력해야 합니다.
 
   .row
     .col-sm-6
@@ -24,8 +24,16 @@
       콤마로 태그를 구분해서 넣으세요.
 
   .form-group
+    = f.label :source_url
+    = f.text_field :source_url, required: true, class: 'form-control'
+
+  .form-group
+    = f.label :image
+    = f.file_field :image, class: 'form-control'
+
+  .form-group
     = f.label :title
-    = f.text_field :title, class: 'form-control'
+    = f.text_field :title, required: true, class: 'form-control input-lg'
 
   .form-group
     = f.label :body

@@ -1,0 +1,29 @@
+%section.page-block
+  .container
+    .row
+      .col-xs-6
+        %h4
+          자료
+      .col-xs-6.text-right
+        = link_to '자료 추가하기', new_archive_document_path(archive_id: archive.id), class: 'btn btn-default btn-sm'
+
+    %table.table.table-bordered{ style:"table-layout:fixed" }
+      %thead
+        %tr
+          %th 일시
+          %th 내용
+          %th 태그
+      %tbody
+        - archive.documents.each do |document|
+          %tr[document]
+            %td{ style: 'white-space: nowrap; font-size: 12px; width: 120px;' }
+              = document.date
+              = document.time
+            %td{ style: 'white-space: nowrap; text-overflow: ellipsis; overflow: hidden;' }
+              = link_to document do
+                = document.title
+                %small.text-muted
+                  - 10.times do
+                    = strip_tags document.body
+            %td{ style: 'white-space: nowrap; font-size: 12px;' }
+              = document.tags.join(', ')

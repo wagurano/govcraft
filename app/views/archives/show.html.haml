@@ -1,19 +1,4 @@
-%section#archive-header-block
-  .container
-    .jumbotron{ style: "background-image: url(#{@archive.image_url(:lg)})" }
-      %h2
-        %small.badge 아카이브
-        %br
-        = @archive.title
-        %small
-          - if can? :edit, @archive
-            = link_to '수정', edit_archive_path(@archive)
-          - if can? :destroy, @archive
-            = link_to '삭제', @archive, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
-      %p= simple_format @archive.body
-
-      .archive__share{ style: 'margin-top: 14px;' }
-        .share-box
+= render 'header'
 
 %section.page-block
   .container
@@ -29,32 +14,4 @@
           %small.text-muted
             = tag.taggings_count
 
-%section.page-block
-  .container
-    .row
-      .col-xs-6
-        %h4
-          자료
-      .col-xs-6.text-right
-        = link_to '자료 추가하기', new_archive_document_path(archive_id: @archive.id), class: 'btn btn-default btn-sm'
-
-    %table.table.table-bordered{ style:"table-layout:fixed" }
-      %thead
-        %tr
-          %th 일시
-          %th 내용
-          %th 태그
-      %tbody
-        - @documents.each do |document|
-          %tr[document]
-            %td{ style: 'white-space: nowrap; font-size: 12px; width: 120px;' }
-              = document.date
-              = document.time
-            %td{ style: 'white-space: nowrap; text-overflow: ellipsis; overflow: hidden;' }
-              = link_to document do
-                = document.title
-                %small.text-muted
-                  - 10.times do
-                    = strip_tags document.body
-            %td{ style: 'white-space: nowrap; font-size: 12px;' }
-              = document.tags.join(', ')
+= render 'archive_documents/list', archive: @archive

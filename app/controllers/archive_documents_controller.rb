@@ -39,7 +39,7 @@ class ArchiveDocumentsController < ApplicationController
 
   def archive_document_params
     params.require(:archive_document).permit(
-      :archive_id, :date, :time,
+      :archive_id, :date, :time, :image, :source_url,
       :title, :body, :tag_list
     )
   end
