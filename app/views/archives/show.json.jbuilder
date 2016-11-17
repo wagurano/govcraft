@@ -5,20 +5,21 @@ json.title do
 end
 
 json.events @archive.documents do |document|
-  if document.image.file.present?
-    json.media do
-      json.url request.protocol + request.host_with_port + document.image_url(:lg)
-    end
-  end
   if document.date.present?
+    if document.image.file.present?
+      json.media do
+        json.url request.protocol + request.host_with_port + document.image_url(:lg)
+      end
+    end
+
     json.start_date do
       json.month document.date.strftime('%m')
       json.day document.date.strftime('%d')
       json.year document.date.strftime('%Y')
     end
-  end
-  json.text do
-    json.headline document.title
-    json.text document.body + "<p>출처: #{document.source_url}</p>"
+    json.text do
+      json.headline document.title
+      json.text document.body + "<p>출처: #{document.source_url}</p>"
+    end
   end
 end
