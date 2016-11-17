@@ -11,11 +11,11 @@
 
       #site-header-collapsable.collapse.navbar-collapse
         %ul.nav.navbar-nav
-          %li= link_to '캠페인', campaigns_path
-          %li= link_to '아카이브', archives_path
-          %li= link_to '이벤트', events_path
-          %li= link_to '투표', polls_path
-          %li= link_to '청원', petitions_path
+          %li= link_to Campaign.model_name.human, campaigns_path
+          %li= link_to Archive.model_name.human, archives_path
+          %li= link_to Event.model_name.human, events_path
+          %li= link_to Poll.model_name.human, polls_path
+          %li= link_to Petition.model_name.human, petitions_path
 
         %ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
