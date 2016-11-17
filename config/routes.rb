@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   get 'about', to: 'pages#about', as: :about
+  get 'petitions', to: 'pages#petitions', as: :petitions
+  get 'polls', to: 'pages#polls', as: :polls
 
   resources :users
   resources :comments

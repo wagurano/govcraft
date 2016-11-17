@@ -5,4 +5,12 @@ class PagesController < ApplicationController
 
   def about
   end
+
+  def polls
+    @polls = Poll.recent
+  end
+
+  def petitions
+    @petitions = Petition.recent
+  end
 end
