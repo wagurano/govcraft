@@ -18,14 +18,8 @@
         = f.text_field :time, placeholder: 'hh:mm:ss', class: 'form-control'
 
   .form-group
-    = f.label :tag_list
-    = f.text_field :tag_list, placeholder: '태그1, 태그2, 태그3', class: 'form-control'
-    %p.help-block
-      콤마로 태그를 구분해서 넣으세요.
-
-  .form-group
     = f.label :source_url
-    = f.text_field :source_url, required: true, class: 'form-control'
+    = f.text_field :source_url, class: 'form-control'
 
   .form-group
     = f.label :image
@@ -38,6 +32,12 @@
   .form-group
     = f.label :body
     = f.text_area :body, class: 'form-control redactor'
+
+  .form-group
+    = f.label :tag_list
+    = f.text_field :tag_list, placeholder: '태그1, 태그2, 태그3', class: 'form-control'
+    %p.help-block
+      콤마로 태그를 구분해서 넣으세요.
 
   .form-group
     = f.submit '저장', class: 'btn btn-primary'
