@@ -10,11 +10,12 @@ json.events @archive.documents do |document|
       json.url request.protocol + request.host_with_port + document.image_url(:lg)
     end
   end
-  json.start_date do
-    json.month document.date.strftime('%m')
-    json.day document.date.strftime('%d')
-    json.year document.date.strftime('%Y')
-  end
+  - if document.date.present?
+    json.start_date do
+      json.month document.date.strftime('%m')
+      json.day document.date.strftime('%d')
+      json.year document.date.strftime('%Y')
+    end
   json.text do
     json.headline document.title
     json.text document.body + "<p>출처: #{document.source_url}</p>"
