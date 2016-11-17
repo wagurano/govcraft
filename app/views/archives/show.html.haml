@@ -15,3 +15,14 @@
             = tag.taggings_count
 
 = render 'archive_documents/list', archive: @archive
+
+%section.page-block
+  .container
+    %h4 타임라인
+    #timeline-embed{ style: 'width:100%; height: 400px' }
+
+= content_for :script do
+  :javascript
+    $.getJSON("#{archive_path(@archive, format: :json)}", function(data) {
+      window.timeline = new TL.Timeline('timeline-embed', data);
+    });
