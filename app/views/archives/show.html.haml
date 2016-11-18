@@ -1,4 +1,4 @@
-= render 'header'
+= render 'header', archive: @archive
 
 %section.page-block
   .container
@@ -14,15 +14,24 @@
           %small.text-muted
             = tag.taggings_count
 
-= render 'archive_documents/list', archive: @archive
-
 %section.page-block
   .container
-    %h4 타임라인
-  #timeline-embed{ style: 'width:100%; height: 600px' }
+    %ul.nav.nav-tabs{:role => "tablist"}
+      %li{ class: (params[:tab].nil? ? 'active' : '') }
+        = link_to '타임라인', archive_path(@archive), role: "tab"
+      %li{ class: (params[:tab] == 'list' ? 'active' : '') }
+        = link_to '자료목록', archive_path(@archive, tab: 'list'), role: "tab"
+      %li
+        = link_to '자료추가', new_archive_document_path(archive_id: @archive.id), role: "tab"
 
-= content_for :script do
-  :javascript
-    $.getJSON("#{archive_path(@archive, format: :json)}", function(data) {
-      window.timeline = new TL.Timeline('timeline-embed', data);
-    });
+- if params[:tab] == 'list'
+  = render 'archive_documents/list', archive: @archive
+- else
+  %section
+    #timeline-embed{ style: 'width:100%; height: 500px' }
+
+  = content_for :script do
+    :javascript
+      $.getJSON("#{archive_path(@archive, format: :json)}", function(data) {
+        window.timeline = new TL.Timeline('timeline-embed', data);
+      });

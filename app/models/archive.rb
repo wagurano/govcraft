@@ -5,4 +5,8 @@ class Archive < ApplicationRecord
   has_many :likes, as: :likable
 
   mount_uploader :image, ImageUploader
+
+  def contributors
+    documents.collect{|d| d.user}.uniq
+  end
 end
