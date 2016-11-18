@@ -3,7 +3,7 @@
 %section#archive_document-block.page-block.post-block
   .container
     .post-block__title
-      %h3
+      %h4
         = @archive_document.date
         = @archive_document.time
         = @archive_document.title
@@ -24,9 +24,17 @@
 
     .post-block__body
       = raw @archive_document.body
-      %p
-        출처:
-        = link_to @archive_document.source_url, @archive_document.source_url, target: '_blank'
+
+    .well.well-mute
+      - if @archive_document.source_url.present?
+        %div
+          출처:
+          = link_to @archive_document.source_url, @archive_document.source_url, target: '_blank'
+      - if @archive_document.media_url.present?
+        %div
+          미디어:
+          = link_to @archive_document.media_url, @archive_document.media_url, target: '_blank'
+          = @archive_document.media_credit
 
     .post-block__like
       = render 'likes/button', likable: @archive_document

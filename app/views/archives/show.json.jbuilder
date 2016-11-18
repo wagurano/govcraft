@@ -6,7 +6,12 @@ end
 
 json.events @archive.documents do |document|
   if document.date.present?
-    if document.image.file.present?
+    if document.media_url.present?
+      json.media do
+        json.url document.media_url
+        json.credit document.media_credit
+      end
+    elsif document.image.file.present?
       json.media do
         json.url request.protocol + request.host_with_port + document.image_url(:lg)
       end

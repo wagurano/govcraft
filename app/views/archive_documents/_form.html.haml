@@ -1,10 +1,25 @@
 = form_for @archive_document do |f|
   = f.hidden_field :archive_id
 
-  .well
-    %ul
-      %li 날짜는 반드시 넣으시고, 시간은 넣지 않아도 됩니다.
-      %li 출처는 반드시 입력해야 합니다.
+  .form-group
+    = f.label :tag_list
+    = f.text_field :tag_list, placeholder: '태그1, 태그2, 태그3', class: 'form-control'
+    %p.help-block
+      콤마로 태그를 구분해서 넣으세요.
+
+  .form-group
+    = f.label :image
+    = f.file_field :image, class: 'form-control'
+
+  .form-group
+    = f.label :title
+    = f.text_field :title, required: true, class: 'form-control input-lg'
+
+  .form-group
+    = f.label :body
+    = f.text_area :body, class: 'form-control redactor'
+
+  %hr
 
   .row
     .col-sm-6
@@ -21,23 +36,17 @@
     = f.label :source_url
     = f.text_field :source_url, class: 'form-control'
 
-  .form-group
-    = f.label :image
-    = f.file_field :image, class: 'form-control'
+  %hr
 
   .form-group
-    = f.label :title
-    = f.text_field :title, required: true, class: 'form-control input-lg'
-
-  .form-group
-    = f.label :body
-    = f.text_area :body, class: 'form-control redactor'
-
-  .form-group
-    = f.label :tag_list
-    = f.text_field :tag_list, placeholder: '태그1, 태그2, 태그3', class: 'form-control'
+    = f.label :media_url
+    = f.text_field :media_url, class: 'form-control'
     %p.help-block
-      콤마로 태그를 구분해서 넣으세요.
+      관련 이미지나 동영상의 URL을 넣어주세요 ( https://timeline.knightlab.com/docs/media-types.html )
+
+  .form-group
+    = f.label :media_credit
+    = f.text_field :media_credit, class: 'form-control'
 
   .form-group
     = f.submit '저장', class: 'btn btn-primary'

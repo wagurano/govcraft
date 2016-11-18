@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116050920) do
+ActiveRecord::Schema.define(version: 20161118013918) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer  "user_id"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20161116050920) do
     t.datetime "updated_at",                               null: false
     t.string   "image"
     t.string   "source_url"
+    t.string   "media_url"
+    t.string   "media_credit"
     t.index ["archive_id"], name: "index_archive_documents_on_archive_id", using: :btree
     t.index ["user_id"], name: "index_archive_documents_on_user_id", using: :btree
   end

@@ -75,14 +75,16 @@ ko:
       archive_document:
         tag_list: 태그
         title: 제목
-        body: 내용
-        date: 날짜
-        time: 시간(선택사항)
-        source_url: 출처
-        image: 대표이미지(선택사항)
+        body: 내용(선택)
+        date: 날짜(선택)
+        time: 시간(선택)
+        source_url: 출처(선택)
+        image: 대표이미지(선택)
+        media_url: 미디어 URL(선택)
+        media_credit: 미디어 출처(선택)
       comment:
         commenter_name: 이름
-        commenter_email: 이메일(선택사항)
+        commenter_email: 이메일(선택)
         image: 사진
     errors:
       models:
