@@ -1,3 +1,5 @@
+= render 'campaigns/header', campaign: @campaign
+
 %section.page-block
   .container
     .row
@@ -36,3 +38,6 @@
 
     .post-block__signs
       = render 'signs/list', petition: @petition
+
+    .post-block__comments
+      = render 'comments/list', commentable: @petition

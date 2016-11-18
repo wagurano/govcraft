@@ -8,26 +8,6 @@
       %ol.breadcrumb{ style: 'font-size: 12px;' }
         %li= link_to Issue.model_name.human, issues_path
 
-    - if params[:controller] == 'discussions'
-      %ol.breadcrumb{ style: 'font-size: 12px;' }
-        %li= link_to @campaign.title, @campaign
-
-    - if params[:controller] == 'petitions'
-      %ol.breadcrumb{ style: 'font-size: 12px;' }
-        %li= link_to @campaign.title, @campaign
-
-    - if params[:controller] == 'polls'
-      %ol.breadcrumb{ style: 'font-size: 12px;' }
-        %li= link_to @campaign.title, @campaign
-
-    - if params[:controller] == 'wikis'
-      %ol.breadcrumb{ style: 'font-size: 12px;' }
-        %li= link_to @campaign.title, @campaign
-
-    - if params[:controller] == 'wiki_revisions'
-      %ol.breadcrumb{ style: 'font-size: 12px;' }
-        %li= link_to @campaign.title, @campaign
-
     - if params[:controller] == 'events'
       %ol.breadcrumb{ style: 'font-size: 12px;' }
         %li= link_to Event.model_name.human, events_path

@@ -40,7 +40,7 @@
           .media-left
             .img-user{style: "background-image: url(#{sign.user_image_url});"}
           .media-body
-            .text-muted
+            %span.text-muted
               = sign.user_name
               - if current_user != sign.user
                 = render 'reports/button', reportable: sign

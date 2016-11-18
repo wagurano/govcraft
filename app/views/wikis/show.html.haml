@@ -1,3 +1,5 @@
+= render 'campaigns/header', campaign: @campaign
+
 %section.page-block
   .container
     .row
@@ -30,6 +32,10 @@
 
     .post-block__like
       = render 'likes/button', likable: @wiki
+
+    .post-block__comments
+      = render 'comments/list', commentable: @wiki
+
 
 %section
   .container

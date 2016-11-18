@@ -48,7 +48,8 @@
 #campaign-header-block {
   .jumbotron {
     position: relative;
-    background-color: rgba(0,0,0,.4);
+    background-position: center center;
+    background-size: cover;
     border: none;
     color: $gray-lightest;
     .badge {
@@ -57,11 +58,11 @@
       font-weight: normal;
       padding-top: 5px;
     }
-    .campaign__body {
-      a {
-        color: $gray-lightest;
-        text-decoration: underline;
-      }
+    a {
+      color: #fff;
+    }
+    small a {
+      color: $gray-lighter;
     }
     .campaign__meta {
       font-size: $font-size-small;
