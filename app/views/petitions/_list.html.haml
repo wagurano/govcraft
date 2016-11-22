@@ -6,33 +6,32 @@
         = link_to "제안하기", new_campaign_petition_path(@campaign) if @campaign.present?
     .panel.panel-default
       - if petitions.any?
-        %table.table
-          %thead
-            %tr
-              %th.text-center #
-              %th 제목
-              %th 글쓴이
-              %th.text-right 서명
-              %th.text-right 조회
-              %th.text-center.hidden-xs 작성일
-          %tbody
-            - petitions.each do |petition|
-              %tr[petition]
-                %td.text-muted.text-center
-                  = petition.id
-                %td.petition__title
-                  %strong= link_to petition.title, petition
-                %td.petition__nickname
-                  = petition.user.nickname
-                %td.petition__comments_count.text-right.text-danger
-                  %strong
-                    = petition.signs_count
-                    \/
-                    = petition.signs_goal_count
-                %td.petition__read_count.text-right
-                  = petition.views_count
-                %td.petition__created_at.text-center.hidden-xs
-                  = date_f petition.created_at
+        %ul.list-group.post-group
+          - petitions.each do |petition|
+            %li.list-group-item[petition]
+              = link_to petition do
+                .post__campaign= petition.campaign.title
+                %h5.list-group-item-heading
+                  = petition.title
+
+                .post__meta
+                  .row
+                    .col-xs-6
+                      %span.nickname
+                        = petition.user.nickname
+                      %span.created_at
+                        = date_f petition.created_at
+                    .col-xs-6.text-right
+                      %span.text-danger
+                        %strong
+                          #{petition.percentage}% 달성
+                      %span
+                        %i.fa.fa-user-o
+                        = petition.signs_count
+                      %span
+                        %i.fa.fa-eye
+                        = petition.views_count
+
 
       - else
         - if @campaign.present?

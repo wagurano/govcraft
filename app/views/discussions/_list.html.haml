@@ -6,34 +6,31 @@
         = link_to "글쓰기", new_campaign_discussion_path(@campaign) if @campaign.present?
     .panel.panel-default
       - if discussions.any?
-        %table.table
-          %thead
-            %tr
-              %th.text-center #
-              %th 제목
-              %th 글쓴이
-              %th.text-right 추천
-              %th.text-right 조회
-              %th.text-center.hidden-xs 작성일
-          %tbody
-            - discussions.each do |discussion|
-              %tr[discussion]
-                %td.text-muted.text-center
-                  = discussion.id
-                %td.discussion__title
-                  %strong
-                    = link_to discussion.title, discussion
+        %ul.list-group.post-group
+          - discussions.each do |discussion|
+            %li.list-group-item[discussion]
+              = link_to discussion do
+                .post__campaign= discussion.campaign.title
+                %h5.list-group-item-heading
+                  = discussion.title
                   - if discussion.comments.count > 0
                     %small
                       (#{discussion.comments.count})
-                %td.discussion__nickname
-                  = discussion.user.nickname
-                %td.discussion__likes_count.text-right.text-danger
-                  %strong= discussion.likes_count
-                %td.discussion__views_count.text-right
-                  = discussion.views_count
-                %td.discussion__created_at.text-center.hidden-xs
-                  = date_f discussion.created_at
+                .post__meta
+                  .row
+                    .col-xs-6
+                      %span.nickname
+                        = discussion.user.nickname
+                      %span.created_at
+                        = date_f discussion.created_at
+                    .col-xs-6.text-right
+                      %span.text-success
+                        %strong
+                          %i.fa.fa-heart-o
+                          = discussion.likes_count
+                      %span
+                        %i.fa.fa-eye
+                        = discussion.views_count
 
       - else
         - if @campaign.present?

@@ -7,37 +7,36 @@
 
     .panel.panel-default
       - if polls.any?
-        %table.table
-          %thead
-            %tr
-              %th.text-center #
-              %th 제목
-              %th 글쓴이
-              %th.text-right 찬성
-              %th.text-right 반대
-              %th.text-right.hidden-xs 조회
-              %th.text-center.hidden-xs 작성일
-          %tbody
-            - polls.each do |poll|
-              %tr[poll]
-                %td.text-muted.text-center
-                  = poll.id
-                %td.discussion__title
-                  %strong
-                    = link_to poll.title, poll
+        %ul.list-group.post-group
+          - polls.each do |poll|
+            %li.list-group-item[poll]
+              = link_to poll do
+                .post__campaign= poll.campaign.title
+                %h5.list-group-item-heading
+                  = poll.title
                   - if poll.comments.count > 0
                     %small
                       (#{poll.comments.count})
-                %td.discussion__nickname
-                  = poll.user.nickname
-                %td.discussion__cnt.text-right.text-primary
-                  %strong= poll.agrees_count
-                %td.discussion__cnt.text-right.text-danger
-                  %strong= poll.disagrees_count
-                %td.discussion__cnt.text-right.hidden-xs
-                  = poll.views_count
-                %td.discussion__created_at.text-center.hidden-xs
-                  = date_f poll.created_at
+                .post__meta
+                  .row
+                    .col-xs-6
+                      %span.nickname
+                        = poll.user.nickname
+                      %span.created_at
+                        = date_f poll.created_at
+                    .col-xs-6.text-right
+                      %span.text-primary
+                        %strong
+                          %i.fa.fa-thumbs-o-up
+                          = poll.agrees_count
+                      %span.text-danger
+                        %strong
+                          %i.fa.fa-thumbs-o-down
+                          = poll.disagrees_count
+                      %span
+                        %i.fa.fa-eye
+                        = poll.views_count
+
 
       - else
         - if @campaign.present?

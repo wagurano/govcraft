@@ -40,6 +40,11 @@
       color: $brand-warning;
       font-weight: bold;
     }
+    .post__campaign {
+      float: right;
+      font-size: $font-size-small;
+      color: $gray;
+    }
     .post__meta {
       color: $text-muted;
       font-size: $font-size-small;
