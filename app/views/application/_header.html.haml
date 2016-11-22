@@ -7,14 +7,17 @@
           %span.icon-bar
           %span.icon-bar
         %a.navbar-brand{ href: root_path }
-          우리가주인이당!
+          우리가주인이당, 우주당!
 
       #site-header-collapsable.collapse.navbar-collapse
         %ul.nav.navbar-nav
           - Event.recent.each do |event|
-            %li= link_to event.title, event
-            %li= link_to Archive.model_name.human, archives_path
-            %li= link_to Memorial.model_name.human, memorials_path
+            %li
+              = link_to event do
+                %i.fa.fa-tree
+                = event.title
+          %li= link_to Archive.model_name.human, archives_path
+          %li= link_to Memorial.model_name.human, memorials_path
 
         %ul.nav.navbar-nav.navbar-right
           - if user_signed_in?

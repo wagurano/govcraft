@@ -51,6 +51,8 @@
 
 .bottom-nav {
   display: flex;
+  margin-left: -15px;
+  margin-right: -15px;
 
   & > div {
     width: 20%;
@@ -58,7 +60,7 @@
     text-align: center;
   }
   a {
-    font-size: $font-size-base;
+    font-size: $font-size-small;
     color: #ddd;
     line-height: 1.8;
     text-decoration: none;
@@ -68,5 +70,6 @@
   }
   i {
     display: block;
+    font-size: $font-size-large;
   }
 }
