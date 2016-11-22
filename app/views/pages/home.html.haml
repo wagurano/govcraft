@@ -10,7 +10,7 @@
 
 %section.page-block
   .container
-    %h4 진행중인 캠페인
+    %h4= Campaign.model_name.human
     .row.masonry-container
       - @campaigns.each do |campaign|
         .col-sm-4

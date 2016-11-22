@@ -37,13 +37,12 @@
   .list-group-item {
     .post__status {
       float: right;
-      color: $brand-warning;
       font-weight: bold;
     }
     .post__campaign {
-      float: right;
-      font-size: $font-size-small;
+      font-size: $font-size-small * 0.9;
       color: $gray;
+      margin-bottom: 4px;
     }
     .post__meta {
       color: $text-muted;

@@ -11,12 +11,22 @@
           - polls.each do |poll|
             %li.list-group-item[poll]
               = link_to poll do
+                .post__status
+                  %span.text-primary
+                    %i.fa.fa-thumbs-up
+                    = poll.agrees_count
+                  %span.text-danger
+                    %i.fa.fa-thumbs-down
+                    = poll.disagrees_count
+
                 .post__campaign= poll.campaign.title
+
                 %h5.list-group-item-heading
                   = poll.title
                   - if poll.comments.count > 0
                     %small
                       (#{poll.comments.count})
+
                 .post__meta
                   .row
                     .col-xs-6
@@ -25,18 +35,9 @@
                       %span.created_at
                         = date_f poll.created_at
                     .col-xs-6.text-right
-                      %span.text-primary
-                        %strong
-                          %i.fa.fa-thumbs-o-up
-                          = poll.agrees_count
-                      %span.text-danger
-                        %strong
-                          %i.fa.fa-thumbs-o-down
-                          = poll.disagrees_count
                       %span
                         %i.fa.fa-eye
                         = poll.views_count
-
 
       - else
         - if @campaign.present?

@@ -10,7 +10,12 @@
           - petitions.each do |petition|
             %li.list-group-item[petition]
               = link_to petition do
+                .post__status
+                  %span.text-danger
+                    #{petition.percentage}% 달성
+
                 .post__campaign= petition.campaign.title
+
                 %h5.list-group-item-heading
                   = petition.title
 
@@ -22,9 +27,6 @@
                       %span.created_at
                         = date_f petition.created_at
                     .col-xs-6.text-right
-                      %span.text-danger
-                        %strong
-                          #{petition.percentage}% 달성
                       %span
                         %i.fa.fa-user-o
                         = petition.signs_count

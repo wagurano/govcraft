@@ -10,7 +10,13 @@
           - discussions.each do |discussion|
             %li.list-group-item[discussion]
               = link_to discussion do
+                .post__status
+                  %span.text-danger
+                    %i.fa.fa-heart
+                    = discussion.likes_count
+
                 .post__campaign= discussion.campaign.title
+
                 %h5.list-group-item-heading
                   = discussion.title
                   - if discussion.comments.count > 0
@@ -24,10 +30,6 @@
                       %span.created_at
                         = date_f discussion.created_at
                     .col-xs-6.text-right
-                      %span.text-success
-                        %strong
-                          %i.fa.fa-heart-o
-                          = discussion.likes_count
                       %span
                         %i.fa.fa-eye
                         = discussion.views_count
