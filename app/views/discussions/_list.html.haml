@@ -1,14 +1,10 @@
-%section#discussions
+%section#discussions.page-block
   .container
-    .panel.panel-primary
-      .panel-heading
-        .row
-          .col-xs-6
-            %h4.panel-title
-              = Discussion.model_name.human
-          .col-xs-6.text-right
-            = link_to "#{Discussion.model_name.human} 글쓰기", new_campaign_discussion_path(@campaign), style: 'color: #fff; text-decoration: underline;' if @campaign.present?
-
+    %h4
+      = Discussion.model_name.human
+      %small
+        = link_to "글쓰기", new_campaign_discussion_path(@campaign) if @campaign.present?
+    .panel.panel-default
       - if discussions.any?
         %table.table
           %thead
@@ -40,7 +36,9 @@
                   = date_f discussion.created_at
 
       - else
-        %small.text-muted
-          아직 게시글이 없습니다. 이야기를 시작해 볼까요?
-          %br
-          = link_to "#{Discussion.model_name.human} 쓰기", new_campaign_discussion_path(@campaign)
+        - if @campaign.present?
+          .panel-body
+            %small.text-muted
+              아직 게시글이 없습니다. 이야기를 시작해 볼까요?
+              %br
+              = link_to "#{Discussion.model_name.human} 쓰기", new_campaign_discussion_path(@campaign)

@@ -1,5 +1,9 @@
 %section.page-block
   .container
+    %h4
+      = Archive.model_name.human
+      %small= link_to "#{Archive.model_name.human} 시작하기", new_archive_path
+
     %section
       .row
         - @archives.each do |archive|
@@ -12,6 +16,3 @@
                   부터
                   %strong= archive.documents.count
                   개의 자료가 모였습니다.
-
-    %section{ style: 'margin-top: 28px;'}
-      = link_to "#{Archive.model_name.human} 시작하기", new_archive_path, class: 'btn btn-default'

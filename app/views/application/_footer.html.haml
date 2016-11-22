@@ -9,24 +9,8 @@
   }(document, 'script', 'facebook-jssdk'));
 
 %section#site-footer
-  %nav.navbar.navbar-inverse{ style: 'margin: 0;' }
+  %nav.navbar.navbar-inverse.navbar-fixed-bottom{ style: 'margin: 0;' }
     .container
-      %ul.nav.navbar-nav
-        %li
-          = link_to about_path do
-            %i.fa.fa-info-circle
-            우주당 소개
-        %li
-          = link_to 'https://www.facebook.com/groups/1820856674866416/', target: '_blank' do
-            %i.fa.fa-facebook-official
-            페이스북 그룹
-        %li
-          = link_to 'http://slack.wouldyouparty.org/', target: '_blank' do
-            %i.fa.fa-slack
-            슬랙
-
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          = link_to 'http://parti.xyz', target: '_blank' do
-            Presented by
-            %strong 빠흐띠
+      .row
+        .col-xs-2
+          = link_to Campaign.model_name.human, campaigns_path

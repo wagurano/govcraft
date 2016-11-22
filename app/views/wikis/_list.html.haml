@@ -1,14 +1,10 @@
-%section#wikis
+%section#wikis.page-block
   .container
-    .panel.panel-primary
-      .panel-heading
-        .row
-          .col-xs-6
-            %h4.panel-title
-              = Wiki.model_name.human
-          .col-xs-6.text-right
-            = link_to "#{Wiki.model_name.human} 추가", new_campaign_wiki_path(@campaign), style: 'color: #fff; text-decoration: underline;' if @campaign.present?
-
+    %h4
+      = Wiki.model_name.human
+      %small
+        = link_to "#{Wiki.model_name.human} 추가", new_campaign_wiki_path(@campaign) if @campaign.present?
+    .panel.panel-default
       - if wikis.any?
         %table.table
           %thead
@@ -35,8 +31,9 @@
                 %td.wiki__created_at.text-center.hidden-xs
                   = date_f wiki.created_at
       - else
-        .panel-body
-          %small.text-muted
-            첫 위키 페이지를 작성해 보세요.
-            %br
-            = link_to "#{Wiki.model_name.human} 추가하기", new_campaign_wiki_path(@campaign)
+        - if @campaign.present?
+          .panel-body
+            %small.text-muted
+              첫 위키 페이지를 작성해 보세요.
+              %br
+              = link_to "#{Wiki.model_name.human} 추가하기", new_campaign_wiki_path(@campaign)

@@ -21,34 +21,6 @@
 = render 'petitions/list', petitions: Petition.recent
 = render 'wikis/list', wikis: Wiki.recent
 
-%section
-  .container
-    .row
-      .col-sm-6
-        .panel.panel-primary
-          .panel-heading
-            %h4.panel-title= link_to Archive.model_name.human, archives_path
-          .panel-body
-            %ul.list-unstyled
-              - ArchiveDocument.recent.limit(5).each do |document|
-                %li
-                  %h5
-                    #{link_to document.archive.title, document.archive}
-                    \-
-                    = link_to document.title, document
-
-      .col-sm-6
-        .panel.panel-primary
-          .panel-heading
-            %h4.panel-title= link_to Memorial.model_name.human, memorials_path
-          .panel-body
-            %ul.list-unstyled
-              - Memorial.recent.limit(5).each do |memorial|
-                - url = memorial.url.present? ? memorial.url : memorial_path(memorial)
-                %li
-                  %h5
-                    = link_to memorial.title, url
-
 %section.page-block{ style: 'background-color: #f5f5f5; padding: 28px 0;' }
   .container
     %h4

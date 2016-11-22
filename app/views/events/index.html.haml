@@ -1,5 +1,7 @@
 %section.page-block
   .container
+    %h4= Event.model_name.human
+
     .row.masonry-container
       - @events.each do |event|
         .col-sm-6

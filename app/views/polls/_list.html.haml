@@ -1,14 +1,11 @@
-%section#polls
+%section#polls.page-block
   .container
-    .panel.panel-primary
-      .panel-heading
-        .row
-          .col-xs-6
-            %h4.panel-title
-              = Poll.model_name.human
-          .col-xs-6.text-right
-            = link_to "#{Poll.model_name.human} 추가", new_campaign_poll_path(@campaign), style: 'color: #fff; text-decoration: underline;' if @campaign.present?
+    %h4
+      = Poll.model_name.human
+      %small
+        = link_to "제안하기", new_campaign_poll_path(@campaign) if @campaign.present?
 
+    .panel.panel-default
       - if polls.any?
         %table.table
           %thead
@@ -43,8 +40,9 @@
                   = date_f poll.created_at
 
       - else
-        .panel-body
-          %small.text-muted
-            가장 먼저 투표를 제안해 보세요.
-            %br
-            = link_to "#{Poll.model_name.human} 제안하기", new_campaign_poll_path(@campaign)
+        - if @campaign.present?
+          .panel-body
+            %small.text-muted
+              가장 먼저 투표를 제안해 보세요.
+              %br
+              = link_to "#{Poll.model_name.human} 제안하기", new_campaign_poll_path(@campaign)
