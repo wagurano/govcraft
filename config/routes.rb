@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about', as: :about
   get 'petitions', to: 'pages#petitions', as: :petitions
   get 'polls', to: 'pages#polls', as: :polls
+  get 'discussions', to: 'pages#discussions', as: :discussions
 
   resources :users
   resources :comments

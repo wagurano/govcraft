@@ -48,3 +48,25 @@
 .well-mute {
   border: none;
 }
+
+.bottom-nav {
+  display: flex;
+
+  & > div {
+    width: 20%;
+    padding: 15px 10px;
+    text-align: center;
+  }
+  a {
+    font-size: $font-size-base;
+    color: #ddd;
+    line-height: 1.8;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #fff;
+  }
+  i {
+    display: block;
+  }
+}

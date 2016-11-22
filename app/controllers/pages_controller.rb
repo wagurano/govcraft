@@ -13,4 +13,8 @@ class PagesController < ApplicationController
   def petitions
     @petitions = Petition.recent
   end
+
+  def discussions
+    @discussions = Discussion.recent
+  end
 end

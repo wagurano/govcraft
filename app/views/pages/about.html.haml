@@ -3,33 +3,19 @@
     .jumbotron
       %h2 우리가 주인이당! Would You Party?
       %p
-        시민이 만드는 정치개혁 프로젝트 정당. 지금 정당 하나 해보실래요?
+        디지털 직접 민주주의 플랫폼, "우주당"은
+        자발적인 재능 낭비로 만드는 시민들의 직접 민주주의 플랫폼입니다
 
-%section
+%section.page-block
   .container
-    .row
-      .col-sm-6
-        .well.well-mute
-          %h4 우주당 - 우리가 주인이당! - 은
-          %p
-            시민이 모여 대안을 만드는 시민 주도의 정치 개혁 프로젝트입니다.
-            (정당법의 정당과는 무관합니다)
-          %p
-            또한 시민이 정치를 주제로 노는 놀이터입니다.
-            누구나 자신이 중요하다고 여기는 캠페인을 제안하고 공감하는 이들과 함께 시도해 보는 실험실이기도 합니다.
-            지금 어떤 캠페인이 진행 중인가 둘러 보세요.
-          %p
-            = link_to "#{Campaign.count}개의 캠페인 목록 보기", campaigns_path, class: 'btn btn-primary'
-
-      .col-sm-6
-        .well.well-mute
-          %p
-            %h4 우주당 그룹 / 채팅방
-            %p
-              = link_to 'https://www.facebook.com/groups/1820856674866416/', target: '_blank' do
-                %i.fa.fa-facebook-official
-                페이스북 그룹
-            %p
-              = link_to 'http://slack.wouldyouparty.org/', target: '_blank' do
-                %i.fa.fa-slack
-                슬랙
+    .well.well-mute
+      %p
+        %h4 우주당 그룹 / 채팅방
+        %p
+          = link_to 'https://www.facebook.com/groups/1820856674866416/', target: '_blank' do
+            %i.fa.fa-facebook-official
+            페이스북 그룹
+        %p
+          = link_to 'http://slack.wouldyouparty.org/', target: '_blank' do
+            %i.fa.fa-slack
+            슬랙
