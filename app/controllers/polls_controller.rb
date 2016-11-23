@@ -78,7 +78,7 @@ class PollsController < ApplicationController
   private
 
   def poll_params
-    params.require(:poll).permit(:title, :body)
+    params.require(:poll).permit(:title, :body, :cover_image)
   end
 
   def reset_meta_tags

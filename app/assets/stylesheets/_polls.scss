@@ -1,29 +1,3 @@
-#poll-block {
-  .vote-panel {
-    background-color: $gray-lightest;
-    padding: $font-size-base*2;
-    margin: $font-size-base 0;
-    border-radius: $btn-border-radius-large;
-
-    .btn-choice {
-      .choice__label {
-        display: block;
-        font-size: $font-size-base;
-        font-weight: normal;
-      }
-      .choice__count {
-        display: block;
-        font-size: $font-size-large;
-        font-weight: bold;
-      }
-    }
-
-    .vote__users {
-      margin-top: $font-size-small;
-    }
-  }
-}
-
 .poll-social-card-section {
   background-size: cover;
   width: 1200px;

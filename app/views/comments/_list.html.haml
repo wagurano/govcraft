@@ -13,7 +13,7 @@
             = f.label :commenter_email
             = f.text_field :commenter_email, class: 'form-control'
     .form-group
-      ~ f.text_area :body, placeholder: '댓글 쓰기...', class: 'form-control redactor'
+      ~ f.text_area :body, placeholder: '댓글 쓰기...', class: 'form-control ' + ( is_redactorable? ? 'redactor' : '')
     = f.submit '작성', class: 'btn btn-default btn-sm'
 
 .comments

@@ -8,4 +8,8 @@
     = f.text_area :body, class: 'form-control redactor'
 
   .form-group
+    = f.label :cover_image
+    = f.file_field :cover_image, class: 'form-control'
+
+  .form-group
     = f.submit '저장', class: 'btn btn-primary'

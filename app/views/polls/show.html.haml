@@ -1,43 +1,44 @@
-= render 'campaigns/header', campaign: @campaign
-
-%section.page-block
+- cover_image = @poll.has_cover_image? ? @poll.cover_image_url(:lg) : @poll.campaign.image_url(:lg)
+%section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .15)), url(#{cover_image})" }
   .container
-    .row
-      .col-xs-6
-        = link_to '목록', campaign_path(@campaign, anchor: 'polls'), class: 'btn btn-default btn-sm'
-      .col-xs-6.text-right
-        = link_to "#{Poll.model_name.human} 제안하기", new_campaign_poll_path(@campaign), class: 'btn btn-default btn-sm'
+    .cover-section__campaign
+      = link_to @poll.campaign.title, @poll.campaign
+
+    %h1.cover-section__title= @poll.title
+
+    %h4.cover-section__users-count
+      %span
+        %i.fa.fa-user-o
+        = @poll.votes_count
+        명 투표
+
+    .cover-section__votes
+      = render 'votes/panel', poll: @poll
 
 %section#poll-block.page-block.post-block
   .container
-    .post-block__title
-      %h3= @poll.title
-
     .post-block__info
       .row
-        .col-xs-6
+        .col-xs-8
           %span.post-block__user
-            = link_to @poll.user.nickname
+            = link_to @poll.user do
+              = image_tag @poll.user.image_url, class: 'img-user'
+              = @poll.user.nickname
           %span.post-block__date
             = date_f @poll.created_at
           - if can? :edit, @poll
             = link_to '수정', edit_poll_path(@poll)
           - if can? :destroy, @poll
             = link_to '삭제', @poll, method: :delete, data: { confirm: '삭제하시겠습니까?' }
-        .col-xs-6.text-right
+        .col-xs-4.text-right
           조회 #{@poll.views_count}
 
     .post-block__body
       = raw @poll.body
 
-    .post-block__share.text-center
+    .post-block__share
+      %h5 이 이슈를 친구들에게 알려 주세요
       .share-box
-
-    .post-block__like.hidden
-      = render 'likes/button', likable: @poll
-
-    .post-block__vote
-      = render 'votes/panel', poll: @poll
 
     .post-block__comments
       = render 'comments/list', commentable: @poll

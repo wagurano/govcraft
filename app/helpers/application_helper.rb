@@ -34,4 +34,8 @@ module ApplicationHelper
       return content, content_type
     end
   end
+
+  def is_redactorable?
+    !browser.device.mobile? and !browser.device.tablet?
+  end
 end

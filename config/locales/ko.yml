@@ -54,6 +54,7 @@ ko:
       poll:
         title: 제목
         body: 내용
+        cover_image: 커버이미지(선택)
       wiki:
         title: 제목
         body: 내용
