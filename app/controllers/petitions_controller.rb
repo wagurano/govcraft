@@ -45,7 +45,7 @@ class PetitionsController < ApplicationController
   private
 
   def petition_params
-    params.require(:petition).permit(:title, :body, :signs_goal_count)
+    params.require(:petition).permit(:title, :body, :signs_goal_count, :cover_image)
   end
 
   def reset_meta_tags

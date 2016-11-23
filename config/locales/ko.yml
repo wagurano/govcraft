@@ -48,6 +48,7 @@ ko:
         title: 제목
         body: 내용
         signs_goal_count: 서명 목표인수
+        cover_image: 커버이미지(선택)
       sign:
         signer_name: 이름
         signer_email: 이메일(선택사항)
