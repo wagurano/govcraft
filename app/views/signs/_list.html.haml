@@ -20,16 +20,22 @@
         = f.hidden_field :petition_id
         - unless user_signed_in?
           .row
-            .col-xs-12.col-md-6
+            .col-sm-6
+              = link_to user_facebook_omniauth_authorize_path(provider: :facebook), class: 'btn btn-join btn-join-facebook btn-block' do
+                %i.fa.fa-facebook.fa-fw
+                페이스북으로 로그인해서 참여
+              = link_to user_twitter_omniauth_authorize_path(provider: :twitter), class: 'btn btn-join btn-join-twitter btn-block' do
+                %i.fa.fa-twitter.fa-fw
+                트위터로 로그인해서 참여
+            .col-sm-1
+              혹은
+            .col-sm-5
               .form-group
-                = f.label :signer_name
-                = f.text_field :signer_name, class: 'form-control'
-            .col-xs-12.col-md-6
+                = f.text_field :signer_name, placeholder: '이름', class: 'form-control'
               .form-group
-                = f.label :signer_email
-                = f.text_field :signer_email, class: 'form-control'
+                = f.text_field :signer_email, placeholder: '이메일', class: 'form-control'
         .form-group
-          = f.text_field :body, placeholder: '서명 한마디..', class: 'form-control'
+          = f.text_field :body, placeholder: '한마디..', class: 'form-control'
         .form-group
           = f.submit "#{petition.signs_count+1}번째 서명자 되기", class: 'btn btn-primary btn-sm', data: { disable_with: "진행 중..." }
 
