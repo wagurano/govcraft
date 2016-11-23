@@ -43,6 +43,9 @@
       font-size: $font-size-small * 0.9;
       color: $gray;
       margin-bottom: 4px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
     .post__meta {
       color: $text-muted;
