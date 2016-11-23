@@ -30,7 +30,9 @@ class ApplicationController < ActionController::Base
 
   def store_location
     return unless request.get?
-    if (!request.fullpath.match("/users") && !request.xhr?)
+    if params[:redirect_to].present?
+      store_location_for(:user, params[:redirect_to])
+    elsif (!request.fullpath.match("/users") && !request.xhr?)
       store_location_for(:user, request.fullpath)
     end
   end

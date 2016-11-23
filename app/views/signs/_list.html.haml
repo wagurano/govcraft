@@ -21,10 +21,10 @@
         - unless user_signed_in?
           .row
             .col-sm-6
-              = link_to user_facebook_omniauth_authorize_path(provider: :facebook), class: 'btn btn-join btn-join-facebook btn-block' do
+              = link_to user_facebook_omniauth_authorize_path(provider: :facebook, redirect_to: petition_path(@petition)), class: 'btn btn-join btn-join-facebook btn-block' do
                 %i.fa.fa-facebook.fa-fw
                 페이스북으로 로그인해서 참여
-              = link_to user_twitter_omniauth_authorize_path(provider: :twitter), class: 'btn btn-join btn-join-twitter btn-block' do
+              = link_to user_twitter_omniauth_authorize_path(provider: :twitter, redirect_to: petition_path(@petition)), class: 'btn btn-join btn-join-twitter btn-block' do
                 %i.fa.fa-twitter.fa-fw
                 트위터로 로그인해서 참여
             .col-sm-1
