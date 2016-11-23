@@ -1,13 +1,3 @@
-- event = Event.last
-- if event.present?
-  %section#site-hero-block{ style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{event.image});" }
-    .container
-      .jumbotron
-        = link_to event do
-          %h2= event.title
-          = raw event.body
-        %p= link_to '지금 참여하기', event, class: 'btn btn-primary btn-lg'
-
 %section.page-block
   .container
     %h4= Campaign.model_name.human
