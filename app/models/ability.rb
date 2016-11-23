@@ -30,6 +30,10 @@ class Ability
       can :destroy, Comment do |comment|
         comment.commentable.try(:campaign) && user == comment.commentable.campaign.user
       end
+
+      if user.has_role? :admin
+        can :manage, :all
+      end
     end
   end
 end
