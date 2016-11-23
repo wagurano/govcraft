@@ -16,6 +16,7 @@
     font-size: $font-size-base * 3;
     text-shadow: 1px 1px 3px rgba(0,0,0,.5);
     margin-bottom: $font-size-base * 1.5;
+    word-break: keep-all;
   }
   &__users-count span {
     border: 1px solid #fff;
