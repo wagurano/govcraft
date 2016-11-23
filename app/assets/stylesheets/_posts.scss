@@ -3,7 +3,6 @@
   color: #fff;
   text-align: center;
   padding-top: $font-size-base * 8;
-  padding-bottom: $font-size-base * 4;
   margin-top: -20px;
   &__campaign a {
     color: $gray-lighter;
@@ -24,8 +23,40 @@
     padding: $font-size-base*0.5 $font-size-base;
     text-shadow: 1px 1px 3px rgba(0,0,0,.5);
   }
+  &__signs {
+    background-color: rgba(0,0,0,.3);
+    border-radius: $border-radius-base;
+    margin: $font-size-base * 4 auto 0;
+    padding: $font-size-base * 2;
+    .sign-panel {
+      &__status__count {
+        text-align: right;
+        font-size: $font-size-small;
+      }
+      &__form {
+        padding: $font-size-base*0.5;
+      }
+      &__list {
+        margin: $font-size-base/2 0;
+        padding: $font-size-base/2 0;
+        .sign {
+          display: inline-block;
+          color: $gray-lightest;
+          margin: 2px;
+          a {
+            color: $gray-lighter;
+          }
+          .img-user {
+            width: $font-size-base * 2;
+            height: $font-size-base * 2;
+          }
+        }
+      }
+    }
+  }
+
   &__votes {
-    background-color: rgba(0,0,0,.15);
+    background-color: rgba(0,0,0,.3);
     border-radius: $border-radius-base;
     margin: $font-size-base * 4 auto 0;
     padding: $font-size-base * 2;
