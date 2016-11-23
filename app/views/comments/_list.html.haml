@@ -1,3 +1,5 @@
+%h4 의견
+
 .comments-form
   = form_for Comment.new do |f|
     = f.hidden_field :commentable_type, value: commentable.class.name
@@ -13,7 +15,7 @@
             = f.label :commenter_email
             = f.text_field :commenter_email, class: 'form-control'
     .form-group
-      ~ f.text_area :body, placeholder: '댓글 쓰기...', class: 'form-control ' + ( is_redactorable? ? 'redactor' : '')
+      ~ f.text_area :body, placeholder: '제 생각에는...', class: 'form-control ' + ( is_redactorable? ? 'redactor' : '')
     = f.submit '작성', class: 'btn btn-default btn-sm'
 
 .comments

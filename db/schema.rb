@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123035740) do
+ActiveRecord::Schema.define(version: 20161123054142) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer  "user_id"
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(version: 20161123035740) do
     t.integer  "signs_goal_count",               default: 1000
     t.integer  "signs_count",                    default: 0
     t.integer  "views_count",                    default: 0
+    t.string   "cover_image"
     t.index ["campaign_id"], name: "index_petitions_on_campaign_id", using: :btree
     t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
   end

@@ -1,18 +1,22 @@
-= render 'campaigns/header', campaign: @campaign
-
-%section.page-block
+- cover_image = @petition.has_cover_image? ? @petition.cover_image_url(:lg) : @petition.campaign.image_url(:lg)
+%section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .15)), url(#{cover_image})" }
   .container
-    .row
-      .col-xs-6
-        = link_to '목록', campaign_path(@campaign, anchor: 'petitions'), class: 'btn btn-default btn-sm'
-      .col-xs-6.text-right
-        = link_to "#{Petition.model_name.human} 제안하기", new_campaign_petition_path(@campaign), class: 'btn btn-default btn-sm'
+    .cover-section__campaign
+      = link_to @petition.campaign.title, @petition.campaign
+
+    %h1.cover-section__title= @petition.title
+
+    %h4.cover-section__users-count
+      %span
+        %i.fa.fa-user-o
+        = @petition.signs_count
+        명 서명
+
+    .cover-section__signs
+      = render 'signs/list', petition: @petition
 
 %section#petition-block.page-block.post-block
   .container
-    .post-block__title
-      %h3= @petition.title
-
     .post-block__info
       .row
         .col-xs-6
@@ -30,14 +34,9 @@
     .post-block__body
       = raw @petition.body
 
-    .post-block__share.text-center
+    .post-block__share
+      %h4 이 이슈를 친구들에게 알려 주세요
       .share-box
-
-    .post-block__like.hidden
-      = render 'likes/button', likable: @petition
-
-    .post-block__signs
-      = render 'signs/list', petition: @petition
 
     .post-block__comments
       = render 'comments/list', commentable: @petition
