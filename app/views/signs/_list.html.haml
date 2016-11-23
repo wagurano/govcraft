@@ -14,7 +14,7 @@
   .sign-panel__form
     - if user_signed_in? and petition.signed?(current_user)
       .text-center
-        서명하였습니다
+        참여하였습니다
     - else
       = form_for Sign.new(petition: petition) do |f|
         = f.hidden_field :petition_id
@@ -37,7 +37,7 @@
         .form-group
           = f.text_field :body, placeholder: '한마디..', class: 'form-control'
         .form-group
-          = f.submit "#{petition.signs_count+1}번째 서명자 되기", class: 'btn btn-primary btn-sm', data: { disable_with: "진행 중..." }
+          = f.submit "#{petition.signs_count+1}번째 참가자 되기", class: 'btn btn-primary btn-sm', data: { disable_with: "진행 중..." }
 
   .sign-panel__list
     - petition.signs.recent.each do |sign|
