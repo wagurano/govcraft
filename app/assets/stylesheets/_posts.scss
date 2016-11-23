@@ -40,12 +40,15 @@
       &__list {
         margin: $font-size-base/2 0;
         padding: $font-size-base/2 0;
-        text-align: left;
         .sign {
           color: $gray-lightest;
           margin: $font-size-base 0;
           a {
             color: $gray-lighter;
+          }
+          .img-user {
+            width: $font-size-base * 2;
+            height: $font-size-base * 2;
           }
         }
       }
@@ -112,7 +115,7 @@
   &__share {
     border-top: 1px solid $gray-lighter;
     padding-top: $font-size-base;
-    h5 {
+    h4 {
       color: $gray;
     }
   }

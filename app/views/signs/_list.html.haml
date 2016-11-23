@@ -36,14 +36,5 @@
   .sign-panel__list
     - petition.signs.recent.each do |sign|
       %div[sign]
-        %span
-          .img-user{style: "background-image: url(#{sign.user_image_url});"}
-          = sign.user_name
-        = raw screened(sign, :body)
-        %small
-          - if current_user != sign.user
-            = render 'reports/button', reportable: sign
-          - if can? :update, sign
-            = link_to '수정', [:edit, sign]
-          - if can? :destroy, sign
-            = link_to '취소', sign, method: :delete, data: { confirm: '정말 취소하시겠습니까?' }
+        = link_to sign.user, data: { toggle: 'tooltip' }, title: "#{sign.user.nickname} - #{raw(screened(sign, :body))}" do
+          .img-user{style: "background-image: url(#{sign.user_image_url}); width: 30px; height: 30px;"}

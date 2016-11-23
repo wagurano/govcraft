@@ -19,7 +19,7 @@
   .container
     .post-block__info
       .row
-        .col-xs-6
+        .col-xs-9
           %span.post-block__user
             = link_to @petition.user.nickname
           %span.post-block__date
@@ -28,7 +28,7 @@
             = link_to '수정', edit_petition_path(@petition)
           - if can? :destroy, @petition
             = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
-        .col-xs-6.text-right
+        .col-xs-3.text-right
           조회 #{@petition.views_count}
 
     .post-block__body

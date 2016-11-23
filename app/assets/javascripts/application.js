@@ -69,4 +69,5 @@ $(function(){
 
   $('.post-block__body iframe').addClass('embed-responsive-item');
   $('.post-block__body iframe').parent().addClass('embed-responsive embed-responsive-16by9');
+  $('[data-toggle="tooltip"]').tooltip()
 });
