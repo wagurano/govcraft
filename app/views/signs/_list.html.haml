@@ -34,8 +34,13 @@
           = f.submit "#{petition.signs_count+1}번째 서명자 되기", class: 'btn btn-primary btn-sm', data: { disable_with: "진행 중..." }
 
   .sign-panel__list
-    - petition.signs.recent.each do |sign|
-      - if sign.user
-        %div[sign]
-          = link_to sign.user, data: { toggle: 'tooltip' }, title: "#{sign.user.nickname} - #{raw(screened(sign, :body))}" do
-            .img-user{style: "background-image: url(#{sign.user_image_url}); width: 30px; height: 30px;"}
+    - 200.times do
+      - petition.signs.recent.each do |sign|
+        - if sign.user
+          %div[sign]
+            = link_to sign.user, data: { toggle: 'tooltip' }, title: "#{sign.user_name} - #{raw(screened(sign, :body))}" do
+              .img-user{style: "background-image: url(#{sign.user_image_url}); width: 30px; height: 30px;"}
+        - else
+          %div[sign]
+            = link_to '#', data: { toggle: 'tooltip' }, title: "#{sign.user_name} - #{raw(screened(sign, :body))}" do
+              .img-user{style: "background-image: url(#{sign.user_image_url}); width: 30px; height: 30px;"}

@@ -12,8 +12,9 @@
         = @petition.signs_count
         명 서명
 
-    .cover-section__signs
-      = render 'signs/list', petition: @petition
+%section.section__signs
+  .container
+    = render 'signs/list', petition: @petition
 
 %section#petition-block.page-block.post-block
   .container
