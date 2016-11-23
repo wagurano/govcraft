@@ -31,7 +31,7 @@
             = render 'reports/button', reportable: comment
 
         - if comment.choice.present?
-          .comment__choice= comment.choice.text
+          .comment__choice{ class: comment.choice }= comment.choice.text
         .comment__body
           = raw screened(comment, :body)
       .media-right{ style: 'vertical-align: middle;' }

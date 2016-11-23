@@ -1,4 +1,7 @@
 .comment {
+  border-top: 1px solid $gray-lighter;
+  padding-top: $font-size-base;
+
   .comment__meta {
     color: $text-muted;
     font-size: $font-size-small;
@@ -16,6 +19,20 @@
       max-width: 100%;
     }
   }
-  border-top: 1px solid $gray-lighter;
-  padding-top: $font-size-base;
+
+  .comment__choice {
+    display: inline-block;
+    border: 1px solid $gray;
+    border-radius: $font-size-small;
+    font-size: $font-size-small;
+    padding: 2px 4px;
+    &.agree {
+      color: $brand-success;
+      border-color: $brand-success;
+    }
+    &.disagree {
+      color: $brand-danger;
+      border-color: $brand-danger;
+    }
+  }
 }
