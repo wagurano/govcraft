@@ -13,24 +13,22 @@
           #{petition.percentage}%
 
   .sign-panel__users
-    - 100.times do
-      - petition.signs.recent.each do |sign|
-        %span
-          = sign.user_name
+    - petition.signs.recent.each do |sign|
+      %span
+        = sign.user_name
 
   .sign-panel__list
-    - 100.times do
-      - petition.signs.recent.each do |sign|
-        %div
-          %span.text-primary= sign.user_name
-          = raw(screened(sign, :body))
-          %small
-            - if current_user != sign.user
-              = render 'reports/button', reportable: sign
-            - if can? :update, sign
-              = link_to '수정', [:edit, sign]
-            - if can? :destroy, sign
-              = link_to '취소', sign, method: :delete, data: { confirm: '정말 취소하시겠습니까?' }
+    - petition.signs.recent.each do |sign|
+      %div
+        %span.text-primary= sign.user_name
+        = raw(screened(sign, :body))
+        %small
+          - if current_user != sign.user
+            = render 'reports/button', reportable: sign
+          - if can? :update, sign
+            = link_to '수정', [:edit, sign]
+          - if can? :destroy, sign
+            = link_to '취소', sign, method: :delete, data: { confirm: '정말 취소하시겠습니까?' }
 
   - if user_signed_in? and petition.signed?(current_user)
     .text-center.hidden
