@@ -45,12 +45,12 @@
                 .form-control-static
                   = current_user.nickname
           - else
-          .form-group
-            = f.label :signer_name
-            = f.text_field :signer_name, placeholder: '홍길동(사회혁신가) 혹은 홍길동(1986)', class: 'form-control'
-          .form-group
-            = f.label :signer_email
-            = f.text_field :signer_email, placeholder: '이메일', class: 'form-control'
+            .form-group
+              = f.label :signer_name
+              = f.text_field :signer_name, placeholder: '홍길동(사회혁신가) 혹은 홍길동(1986)', class: 'form-control'
+            .form-group
+              = f.label :signer_email
+              = f.text_field :signer_email, placeholder: '이메일', class: 'form-control'
           .form-group
             = f.label :body
             = f.text_field :body, placeholder: '나는 약속합니다', class: 'form-control'
