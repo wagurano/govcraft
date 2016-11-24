@@ -13,9 +13,7 @@
           #{petition.percentage}%
 
   .sign-panel__users
-    - petition.signs.recent.each do |sign|
-      %span
-        = sign.user_name
+    = petition.signs.map{|s| s.user_name}.join(', ')
 
   .sign-panel__list
     - petition.signs.recent.each do |sign|

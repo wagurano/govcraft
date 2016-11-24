@@ -101,7 +101,7 @@
   background-color: rgba(0,0,0,.05);
   border-radius: $border-radius-base;
   margin: $font-size-base * 4 auto 0;
-  padding: $font-size-base * 2;
+  padding: $font-size-base;
 
   .sign-panel {
     &__status__count {
@@ -109,8 +109,7 @@
       font-size: $font-size-small;
     }
     &__users {
-      margin: $font-size-base/2 0;
-      padding: $font-size-base/2 0;
+      padding: $font-size-base 0;
       word-break: keep-all;
       .sign {
         display: inline-block;
@@ -127,13 +126,11 @@
     }
     &__list {
       border-top: 1px solid $gray-lighter;
-      padding: $font-size-base*0.5;
-      padding-top: $font-size-base*2;
+      padding: $font-size-base 0;
     }
     &__form {
       border-top: 1px solid $gray-lighter;
-      padding: $font-size-base*0.5;
-      padding-top: $font-size-base*2;
+      padding: $font-size-base 0;
     }
   }
 }
