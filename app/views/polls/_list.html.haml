@@ -3,7 +3,7 @@
     %h4
       = Poll.model_name.human
       %small
-        = link_to "제안하기", new_campaign_poll_path(@campaign) if @campaign.present?
+        = link_to "제안하기", new_poll_path(campaign_id: @campaign)
 
     .panel.panel-default
       - if polls.any?
@@ -19,9 +19,10 @@
                     %i.fa.fa-thumbs-down
                     = poll.disagrees_count
 
-                .post__campaign= poll.campaign.title
+                - if poll.campaign
+                  .post__campaign= poll.campaign.title
 
-                %h5.list-group-item-heading
+                %h4.list-group-item-heading
                   = poll.title
                   - if poll.comments.count > 0
                     %small

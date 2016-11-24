@@ -1,10 +1,9 @@
 class PetitionsController < ApplicationController
-  load_and_authorize_resource :campaign, parent: true
-  load_and_authorize_resource through: :campaign, shallow: true
+  load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
 
   def index
-    @petitions = @campaign.petitions.order('id DESC')
+    @petitions = Petition.recent
   end
 
   def show
@@ -13,10 +12,10 @@ class PetitionsController < ApplicationController
   end
 
   def new
+    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id].present?
   end
 
   def create
-    @petition.campaign = @campaign
     @petition.user = current_user
     if @petition.save
       redirect_to @petition || @campaign
@@ -39,13 +38,13 @@ class PetitionsController < ApplicationController
 
   def destroy
     @petition.destroy
-    redirect_to campaign_path(@petition.campaign)
+    redirect_to @petition.campaign ? campaign_path(@petition.campaign) : petitions_path
   end
 
   private
 
   def petition_params
-    params.require(:petition).permit(:title, :body, :signs_goal_count, :cover_image)
+    params.require(:petition).permit(:title, :body, :campaign_id, :signs_goal_count, :cover_image)
   end
 
   def reset_meta_tags

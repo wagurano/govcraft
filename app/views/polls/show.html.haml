@@ -1,8 +1,9 @@
-- cover_image = @poll.has_cover_image? ? @poll.cover_image_url(:lg) : @poll.campaign.image_url(:lg)
+- cover_image = @poll.cover_image_url(:lg)
 %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .15)), url(#{cover_image})" }
   .container
-    .cover-section__campaign
-      = link_to @poll.campaign.title, @poll.campaign
+    - if @campaign
+      .cover-section__campaign
+        = link_to @poll.campaign.title, @poll.campaign
 
     %h1.cover-section__title= @poll.title
 

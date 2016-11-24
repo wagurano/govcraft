@@ -1,10 +1,9 @@
 class WikisController < ApplicationController
-  load_and_authorize_resource :campaign, parent: true
-  load_and_authorize_resource through: :campaign, shallow: true
+  load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
 
   def index
-    @wikis = @campaign.wikis
+    @wikis = Wiki.recent
   end
 
   def show
@@ -13,10 +12,10 @@ class WikisController < ApplicationController
   end
 
   def new
+    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
   end
 
   def create
-    @wiki.campaign = @campaign
     @wiki.user = current_user
     @wiki.wiki_revisions.build(user: current_user, body: @wiki.body, note: @wiki.revision_note)
     if @wiki.save
@@ -48,7 +47,7 @@ class WikisController < ApplicationController
   private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :revision_note)
+    params.require(:wiki).permit(:title, :body, :campaign_id, :revision_note)
   end
 
   def reset_meta_tags

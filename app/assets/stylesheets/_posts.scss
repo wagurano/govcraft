@@ -42,13 +42,14 @@
         }
         .choice__count {
           display: block;
-          font-size: $font-size-large;
+          font-size: $font-size-h2;
           font-weight: bold;
         }
       }
 
       .vote__users {
         margin-top: $font-size-small;
+        text-align: center;
       }
     }
 

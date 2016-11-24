@@ -10,9 +10,6 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   get 'about', to: 'pages#about', as: :about
-  get 'petitions', to: 'pages#petitions', as: :petitions
-  get 'polls', to: 'pages#polls', as: :polls
-  get 'discussions', to: 'pages#discussions', as: :discussions
 
   resources :users
   resources :comments
@@ -30,17 +27,16 @@ Rails.application.routes.draw do
   resources :issues
   resources :following_issues
 
-  resources :campaigns do
+  resources :campaigns
+  resources :discussions
+  resources :petitions
+  resources :polls do
+    get 'social_card', on: :member
+  end
+  resources :wikis do
     shallow do
-      resources :discussions
-      resources :petitions
-      resources :polls do
-        get 'social_card', on: :member
-      end
-      resources :wikis do
-        resources :wiki_revisions do
-          put 'revert', on: :member
-        end
+      resources :wiki_revisions do
+        put 'revert', on: :member
       end
     end
   end

@@ -1,10 +1,9 @@
 class DiscussionsController < ApplicationController
-  load_and_authorize_resource :campaign, parent: true
-  load_and_authorize_resource through: :campaign, shallow: true
+  load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
 
   def index
-    @discussions = @campaign.discussions.order("id DESC")
+    @discussions = Discussion.recent
   end
 
   def show
@@ -13,10 +12,10 @@ class DiscussionsController < ApplicationController
   end
 
   def new
+    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
   end
 
   def create
-    @discussion.campaign = @campaign
     @discussion.user = current_user
     if @discussion.save
       redirect_to @discussion || @campaign
@@ -45,7 +44,7 @@ class DiscussionsController < ApplicationController
   private
 
   def discussion_params
-    params.require(:discussion).permit(:title, :body)
+    params.require(:discussion).permit(:title, :body, :campaign_id)
   end
 
   def reset_meta_tags

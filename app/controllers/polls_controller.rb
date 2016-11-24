@@ -1,10 +1,9 @@
 class PollsController < ApplicationController
-  load_and_authorize_resource :campaign, parent: true
-  load_and_authorize_resource through: :campaign, shallow: true
+  load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
 
   def index
-    @polls = @campaign.polls
+    @polls = Poll.recent
   end
 
   def show
@@ -19,10 +18,10 @@ class PollsController < ApplicationController
   end
 
   def new
+    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
   end
 
   def create
-    @poll.campaign = @campaign
     @poll.user = current_user
     if @poll.save
       redirect_to @poll || @campaign
@@ -45,7 +44,7 @@ class PollsController < ApplicationController
 
   def destroy
     @poll.destroy
-    redirect_to campaign_path(@poll.campaign)
+    redirect_to @poll.campaign ? campaign_path(@poll.campaign) : polls_path
   end
 
   def social_card
@@ -78,7 +77,7 @@ class PollsController < ApplicationController
   private
 
   def poll_params
-    params.require(:poll).permit(:title, :body, :cover_image)
+    params.require(:poll).permit(:title, :body, :campaign_id, :cover_image)
   end
 
   def reset_meta_tags

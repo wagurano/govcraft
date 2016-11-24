@@ -1,12 +1,5 @@
-= render 'campaigns/header', campaign: @campaign
-
-%section.page-block
-  .container
-    .row
-      .col-xs-6
-        = link_to '목록', campaign_path(@campaign, anchor: 'wikis'), class: 'btn btn-default btn-sm'
-      .col-xs-6.text-right
-        = link_to "#{Wiki.model_name.human} 추가", new_campaign_wiki_path(@campaign), class: 'btn btn-default btn-sm'
+- if @campaign
+  = render 'campaigns/header', campaign: @campaign
 
 %section#wiki-block.page-block.post-block
   .container

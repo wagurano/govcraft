@@ -3,7 +3,7 @@
     %h4
       = Discussion.model_name.human
       %small
-        = link_to "글쓰기", new_campaign_discussion_path(@campaign) if @campaign.present?
+        = link_to "글쓰기", new_discussion_path(campaign_id: @campaign)
     .panel.panel-default
       - if discussions.any?
         %ul.list-group.post-group
@@ -15,9 +15,10 @@
                     %i.fa.fa-heart
                     = discussion.likes_count
 
-                .post__campaign= discussion.campaign.title
+                - if discussion.campaign
+                  .post__campaign= discussion.campaign.title
 
-                %h5.list-group-item-heading
+                %h4.list-group-item-heading
                   = discussion.title
                   - if discussion.comments.count > 0
                     %small

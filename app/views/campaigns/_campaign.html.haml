@@ -8,19 +8,19 @@
       - if campaign.discussions.count > 0
         %small{ style: 'margin-right: 7px;' }
           = Discussion.model_name.human
-          = link_to campaign.discussions.count, campaign_discussions_path(campaign)
+          = link_to campaign.discussions.count, campaign
 
       - if campaign.petitions.count > 0
         %small{ style: 'margin-right: 7px;' }
           = Petition.model_name.human
-          = link_to campaign.petitions.count, campaign_petitions_path(campaign)
+          = link_to campaign.petitions.count, campaign
 
       - if campaign.polls.count > 0
         %small{ style: 'margin-right: 7px;' }
           = Poll.model_name.human
-          = link_to campaign.polls.count, campaign_polls_path(campaign)
+          = link_to campaign.polls.count, campaign
 
       - if campaign.wikis.count > 0
         %small{ style: 'margin-right: 7px;' }
           = Wiki.model_name.human
-          = link_to campaign.wikis.count, campaign_wikis_path(campaign)
+          = link_to campaign.wikis.count, campaign

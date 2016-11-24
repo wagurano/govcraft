@@ -3,7 +3,7 @@
     %h4
       = Petition.model_name.human
       %small
-        = link_to "제안하기", new_campaign_petition_path(@campaign) if @campaign.present?
+        = link_to "제안하기", new_petition_path(campaign_id: @campaign)
     .panel.panel-default
       - if petitions.any?
         %ul.list-group.post-group
@@ -14,9 +14,10 @@
                   %span.text-danger
                     #{petition.percentage}% 달성
 
-                .post__campaign= petition.campaign.title
+                - if petition.campaign
+                  .post__campaign= petition.campaign.title
 
-                %h5.list-group-item-heading
+                %h4.list-group-item-heading
                   = petition.title
 
                 .post__meta

@@ -3,14 +3,16 @@
     %h4
       = Wiki.model_name.human
       %small
-        = link_to "#{Wiki.model_name.human} 추가", new_campaign_wiki_path(@campaign) if @campaign.present?
+        = link_to "#{Wiki.model_name.human} 추가", new_wiki_path(campaign_id: @campaign)
     .panel.panel-default
       - if wikis.any?
         %ul.list-group.post-group
           - wikis.each do |wiki|
             %li.list-group-item[wiki]
               = link_to wiki do
-                .post__campaign= wiki.campaign.title
+                - if wiki.campaign
+                  .post__campaign= wiki.campaign.title
+
                 %h5.list-group-item-heading
                   = wiki.title
                   - if wiki.comments.count > 0

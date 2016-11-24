@@ -12,13 +12,6 @@
             = link_to polymorphic_url(['agree', :votes], poll_id: poll.id), method: :post, class: 'btn btn-default btn-choice btn-lg' do
               %span.choice__label 찬성
               %span.choice__count= poll.agrees_count
-        .vote__users
-          - poll.votes.where(choice: 'agree').recent.limit(99).each do |v|
-            - if v.user.present?
-              = image_tag v.user.image.sm.url, width: 20, height: 20, class: 'img-circle'
-            - else
-              = image_tag 'icon-candle.png', width: 20, height: 20, class: 'img-circle'
-
     .col-xs-6
       .text-left
         %div
@@ -30,9 +23,13 @@
             = link_to polymorphic_url(['disagree', :votes], poll_id: poll.id), method: :post, class: 'btn btn-default btn-choice btn-lg' do
               %span.choice__label 반대
               %span.choice__count= poll.disagrees_count
-        .vote__users
-          - poll.votes.where(choice: 'disagree').recent.limit(99).each do |v|
-            - if v.user.present?
-              = image_tag v.user.image.sm.url, width: 20, height: 20, class: 'img-circle'
-            - else
-              = image_tag 'icon-candle.png', width: 20, height: 20, class: 'img-circle'
+
+  .row
+    .col-xs-12
+      .vote__users
+        - poll.votes.each do |v|
+          - if v.user.present?
+            = image_tag v.user.image.sm.url, width: 20, height: 20, class: 'img-circle'
+          - else
+            = image_tag 'icon-candle.png', width: 20, height: 20, class: 'img-circle'
+

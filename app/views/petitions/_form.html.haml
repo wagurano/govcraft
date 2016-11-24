@@ -1,4 +1,7 @@
-= form_for (@petition.new_record? ? [@campaign, @petition] : @petition) do |f|
+= form_for @petition do |f|
+  - if @campaign.present?
+    = f.hidden_field :campaign_id, value: @campaign.id
+
   .form-group
     = f.label :title
     = f.text_field :title, class: 'form-control'
