@@ -14,9 +14,11 @@
               %span.choice__count= poll.agrees_count
         .vote__users
           - poll.votes.where(choice: 'agree').each do |v|
-            - if v.user.present?
+            - if false && v.user.present?
               = link_to v.user do
                 = render 'users/thumbnail', user: v.user
+            - else
+              = image_tag 'icon-candle.png', width: 20, height: 20
 
     .col-xs-6
       .text-left
@@ -34,3 +36,5 @@
             - if v.user.present?
               = link_to v.user do
                 = render 'users/thumbnail', user: v.user
+            - else
+              = image_tag 'icon-candle.png', width: 20, height: 20
