@@ -85,9 +85,6 @@
   &__share {
     border-top: 1px solid $gray-lighter;
     padding-top: $font-size-base;
-    h4 {
-      color: $gray;
-    }
   }
   &__comments {
     border-top: 1px solid $gray-lighter;
@@ -98,10 +95,7 @@
 }
 
 .post-block__signs {
-  background-color: rgba(0,0,0,.05);
-  border-radius: $border-radius-base;
   margin: $font-size-base * 4 auto 0;
-  padding: $font-size-base;
 
   .sign-panel {
     &__status__count {

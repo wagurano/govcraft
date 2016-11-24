@@ -14,7 +14,7 @@
 
   - if petition.signs_count > 0
     .sign-panel__users
-      = petition.signs.map{|s| s.user_name}.join(', ')
+      = petition.signs.map{|s| s.user_name}.sort.join(', ')
 
     .sign-panel__list
       - petition.signs.recent.each do |sign|
