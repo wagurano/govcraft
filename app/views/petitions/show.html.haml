@@ -1,5 +1,5 @@
 - cover_image = @petition.has_cover_image? ? @petition.cover_image_url(:lg) : @petition.campaign.image_url(:lg)
-%section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .15)), url(#{cover_image})" }
+%section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .15)), url(#{cover_image}); padding-bottom: 56px; background-size: cover; background-position: center center;" }
   .container
     .cover-section__campaign
       = link_to @petition.campaign.title, @petition.campaign
@@ -11,9 +11,6 @@
         %i.fa.fa-user-o
         = @petition.signs_count
         명 서명
-
-    .cover-section__signs
-      = render 'signs/list', petition: @petition
 
 %section#petition-block.page-block.post-block
   .container
@@ -33,6 +30,9 @@
 
     .post-block__body
       = raw @petition.body
+
+    .post-block__signs
+      = render 'signs/list', petition: @petition
 
     .post-block__share
       %h4 이 이슈를 친구들에게 알려 주세요

@@ -15,7 +15,7 @@ class Petition < ApplicationRecord
   end
 
   def percentage
-    ( signs_count.to_f / signs_goal_count * 100 ).to_i
+    signs_goal_count > 0 ? ( signs_count.to_f / signs_goal_count * 100 ).to_i : 0
   end
 
   def has_cover_image?
