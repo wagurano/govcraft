@@ -51,7 +51,7 @@ ko:
         cover_image: 커버이미지(선택)
       sign:
         signer_name: 이름(소속 혹은 학번)
-        signer_email: 이메일(선택사항)
+        signer_email: 이메일
         body: 나의 약속
       poll:
         title: 제목
