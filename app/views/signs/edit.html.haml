@@ -1,6 +1,14 @@
-= form_for @sign do |f|
-  .form-group
-    = f.label :body
-    = f.text_area :body
-  .form-group
-    = f.submit
+%section
+  .container
+    = form_for @sign do |f|
+      .form-group
+        = f.label :signer_name
+        = f.text_field :signer_name, class: 'form-control'
+      .form-group
+        = f.label :signer_email
+        = f.text_field :signer_email, class: 'form-control'
+      .form-group
+        = f.label :body
+        = f.text_area :body, class: 'form-control'
+      .form-group
+        = f.submit class: 'btn btn-primary'
