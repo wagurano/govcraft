@@ -14,7 +14,8 @@
 
   - if petition.signs_count > 0
     .sign-panel__users
-      = petition.signs.map{|s| s.user_name}.sort.join(', ')
+      %h4 참여자
+      %div= petition.signs.map{|s| s.user_name}.sort.join(', ')
 
     .sign-panel__list
       - petition.signs.recent.each do |sign|
