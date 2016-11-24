@@ -46,4 +46,4 @@
             %small.text-muted
               가장 먼저 투표를 제안해 보세요.
               %br
-              = link_to "#{Poll.model_name.human} 제안하기", new_campaign_poll_path(@campaign)
+              = link_to "#{Poll.model_name.human} 제안하기", new_poll_path(campaign_id: @campaign)

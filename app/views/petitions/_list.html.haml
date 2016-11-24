@@ -42,4 +42,4 @@
             %small.text-muted
               가장 먼저 서명을 제안해 보세요.
               %br
-              = link_to "#{Petition.model_name.human} 제안하기", new_campaign_petition_path(@campaign)
+              = link_to "#{Petition.model_name.human} 제안하기", new_petition_path(campaign_id: @campaign)
