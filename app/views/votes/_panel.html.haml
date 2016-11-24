@@ -13,10 +13,9 @@
               %span.choice__label 찬성
               %span.choice__count= poll.agrees_count
         .vote__users
-          - poll.votes.where(choice: 'agree').each do |v|
+          - poll.votes.where(choice: 'agree').recent.limit(99).each do |v|
             - if v.user.present?
-              = link_to v.user do
-                = render 'users/thumbnail', user: v.user
+              = render 'users/thumbnail', user: v.user
             - else
               = image_tag 'icon-candle.png', width: 20, height: 20
 
@@ -32,9 +31,8 @@
               %span.choice__label 반대
               %span.choice__count= poll.disagrees_count
         .vote__users
-          - poll.votes.where(choice: 'disagree').each do |v|
+          - poll.votes.where(choice: 'disagree').recent.limit(99).each do |v|
             - if v.user.present?
-              = link_to v.user do
-                = render 'users/thumbnail', user: v.user
+              = render 'users/thumbnail', user: v.user
             - else
               = image_tag 'icon-candle.png', width: 20, height: 20
