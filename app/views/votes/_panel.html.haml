@@ -15,9 +15,9 @@
         .vote__users
           - poll.votes.where(choice: 'agree').recent.limit(99).each do |v|
             - if v.user.present?
-              = render 'users/thumbnail', user: v.user
+              = image_tag v.user.image.sm.url, width: 20, height: 20, class: 'img-circle'
             - else
-              = image_tag 'icon-candle.png', width: 20, height: 20
+              = image_tag 'icon-candle.png', width: 20, height: 20, class: 'img-circle'
 
     .col-xs-6
       .text-left
@@ -33,6 +33,6 @@
         .vote__users
           - poll.votes.where(choice: 'disagree').recent.limit(99).each do |v|
             - if v.user.present?
-              = render 'users/thumbnail', user: v.user
+              = image_tag v.user.image.sm.url, width: 20, height: 20, class: 'img-circle'
             - else
-              = image_tag 'icon-candle.png', width: 20, height: 20
+              = image_tag 'icon-candle.png', width: 20, height: 20, class: 'img-circle'
