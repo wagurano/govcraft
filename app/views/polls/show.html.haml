@@ -36,6 +36,9 @@
     .post-block__body
       = raw @poll.body
 
+    .cover-section__votes
+      = render 'votes/panel', poll: @poll
+
     .post-block__share
       %h4 이 이슈를 친구들에게 알려 주세요
       .share-box
