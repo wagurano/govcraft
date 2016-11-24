@@ -109,6 +109,7 @@
       font-size: $font-size-small;
     }
     &__users {
+      border-bottom: 1px solid $gray-lighter;
       padding: $font-size-base 0;
       word-break: keep-all;
       .sign {
@@ -125,11 +126,10 @@
       }
     }
     &__list {
-      border-top: 1px solid $gray-lighter;
+      border-bottom: 1px solid $gray-lighter;
       padding: $font-size-base 0;
     }
     &__form {
-      border-top: 1px solid $gray-lighter;
       padding: $font-size-base 0;
     }
   }

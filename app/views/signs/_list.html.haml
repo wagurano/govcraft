@@ -12,32 +12,39 @@
         .progress-bar.progress-bar-warning.progress-bar-striped.active{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{petition.percentage}", :role => "progressbar", :style => "width: #{petition.percentage}%;"}
           #{petition.percentage}%
 
-  .sign-panel__users
-    = petition.signs.map{|s| s.user_name}.join(', ')
+  - if petition.signs_count > 0
+    .sign-panel__users
+      = petition.signs.map{|s| s.user_name}.join(', ')
 
-  .sign-panel__list
-    - petition.signs.recent.each do |sign|
-      %div
-        %span.text-primary= sign.user_name
-        = raw(screened(sign, :body))
-        %small
-          - if current_user != sign.user
-            = render 'reports/button', reportable: sign
-          - if can? :update, sign
-            = link_to '수정', [:edit, sign]
-          - if can? :destroy, sign
-            = link_to '취소', sign, method: :delete, data: { confirm: '정말 취소하시겠습니까?' }
+    .sign-panel__list
+      - petition.signs.recent.each do |sign|
+        %div
+          %span.text-primary= sign.user_name
+          = raw(screened(sign, :body))
+          %small
+            - if current_user != sign.user
+              = render 'reports/button', reportable: sign
+            - if can? :update, sign
+              = link_to '수정', [:edit, sign]
+            - if can? :destroy, sign
+              = link_to '취소', sign, method: :delete, data: { confirm: '정말 취소하시겠습니까?' }
 
   - if user_signed_in? and petition.signed?(current_user)
-    .text-center.hidden
-      참여하였습니다
+    .sign-panel__form
+      .text-center
+        참여하였습니다
   - else
     .sign-panel__form
       - if user_signed_in? and petition.signed?(current_user)
       - else
         = form_for Sign.new(petition: petition) do |f|
           = f.hidden_field :petition_id
-          - unless user_signed_in?
+          - if user_signed_in?
+            .row
+              .col-xs-12
+                .form-control-static
+                  = current_user.nickname
+          - else
             .row
               .col-sm-6
                 = link_to user_facebook_omniauth_authorize_path(provider: :facebook, redirect_to: petition_path(@petition)), class: 'btn btn-join btn-join-facebook btn-block' do
@@ -56,5 +63,5 @@
           .form-group
             = f.text_field :body, placeholder: '나도 한마디..', class: 'form-control'
           .form-group
-            = f.submit "#{petition.signs_count+1}번째로 참가하기", class: 'btn btn-primary btn-sm', data: { disable_with: "진행 중..." }
+            = f.submit "#{petition.signs_count+1}번째로 참가하기", class: 'btn btn-primary btn-sm btn-block', data: { disable_with: "진행 중..." }
 
