@@ -9,11 +9,13 @@
 @import 'components';
 
 /* blocks & panels */
+@import 'campaigns';
 @import 'users';
 @import 'posts';
 @import 'petitions';
 @import 'polls';
 @import 'wikis';
+@import 'archives';
 @import 'events';
 @import 'comments';
 
@@ -43,58 +45,3 @@
     }
   }
 }
-
-#campaign-header-block {
-  .jumbotron {
-    position: relative;
-    background-position: center center;
-    background-size: cover;
-    border: none;
-    color: $gray-lightest;
-    .badge {
-      background-color: $gray-light;
-      color: $gray-dark;
-      font-weight: normal;
-      padding-top: 5px;
-    }
-    a {
-      color: #fff;
-    }
-    small a {
-      color: $gray-lighter;
-    }
-    .campaign__meta {
-      font-size: $font-size-small;
-      span {
-        margin-right: $font-size-base;
-      }
-    }
-  }
-}
-
-#archive-header-block {
-  .jumbotron {
-    background-color: $gray-dark;
-    background-size: cover;
-    border: none;
-    color: $gray-lightest;
-    text-shadow: 0 0 6px rgba(0,0,0,.5);
-
-    .badge, a {
-      text-shadow: none;
-    }
-    .badge {
-      background-color: $gray-light;
-      color: $gray-dark;
-      font-weight: normal;
-      padding-top: 5px;
-    }
-    a {
-      color: $gray-lightest;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-}
-

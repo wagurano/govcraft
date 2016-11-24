@@ -7,7 +7,7 @@
           %span.icon-bar
           %span.icon-bar
         %a.navbar-brand{ href: root_path }
-          우주당!
+          직접 민주주의 플랫폼, 우주당!
 
       #site-header-collapsable.collapse.navbar-collapse
         %ul.nav.navbar-nav
@@ -16,6 +16,11 @@
               = link_to event do
                 %i.fa.fa-tree
                 = event.title
+          - Campaign.recent.each do |campaign|
+            %li
+              = link_to campaign do
+                %i.fa.fa-rocket
+                = campaign.title
           %li= link_to Archive.model_name.human, archives_path
           %li= link_to Memorial.model_name.human, memorials_path
 

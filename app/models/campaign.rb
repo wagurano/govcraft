@@ -6,4 +6,6 @@ class Campaign < ApplicationRecord
   has_many :wikis, dependent: :destroy
 
   mount_uploader :image, ImageUploader
+
+  scope :recent, -> { order('id DESC') }
 end

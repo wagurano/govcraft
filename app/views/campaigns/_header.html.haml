@@ -3,13 +3,13 @@
     .jumbotron{ style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{campaign.image});" }
       %h2
         %small.badge 캠페인
-        %br
-        = link_to campaign.title, campaign
-        %small
-          - if can? :edit, campaign
-            = link_to '수정', edit_campaign_path(campaign)
-          - if can? :destroy, campaign
-            = link_to '삭제', campaign, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
+        .campaign__title
+          = link_to campaign.title, campaign
+          %small
+            - if can? :edit, campaign
+              = link_to '수정', edit_campaign_path(campaign)
+            - if can? :destroy, campaign
+              = link_to '삭제', campaign, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
       - if params[:controller] == 'campaigns'
         .campaign__body= smart_format campaign.body
       .campaign__meta
