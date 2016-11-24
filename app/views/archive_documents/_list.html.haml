@@ -1,5 +1,19 @@
 %section.page-block
   .container
+    - archive.documents.tag_counts_on(:tags).each do |tag|
+      - if params[:tag] == tag.name
+        %span{ style: 'display: inline-block; background-color: #4a5dd0; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; color: #fff; margin-bottom: 7px;' }
+          = link_to tag.name, archive_path(archive), style: 'color: #fff'
+          %small
+            = tag.taggings_count
+      - else
+        %span{ style: 'display: inline-block; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; margin-bottom: 7px;' }
+          = link_to tag.name, archive_path(archive, {tag: tag.name})
+          %small.text-muted
+            = tag.taggings_count
+
+%section.page-block
+  .container
     %ul.list-group.post-group{ style: 'margin: 28px 0;' }
       - archive.documents.each do |document|
         %li.list-group-item[document]
