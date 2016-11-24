@@ -14,7 +14,7 @@
               %span.choice__count= poll.agrees_count
         .vote__users
           - poll.votes.where(choice: 'agree').each do |v|
-            - if false && v.user.present?
+            - if v.user.present?
               = link_to v.user do
                 = render 'users/thumbnail', user: v.user
             - else
