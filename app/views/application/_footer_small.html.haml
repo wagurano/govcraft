@@ -1,0 +1,12 @@
+:css
+  #site-header, #site-footer { display: none; }
+  body { padding: 0; }
+
+%section.page-block
+  .container
+    .text-muted.text-right
+      powered by
+      %strong
+        = link_to root_path do
+          = image_tag 'favicons/favicon-32x32.png', width: 18
+          우주당
