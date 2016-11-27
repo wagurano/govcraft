@@ -1,11 +1,1 @@
-%section.page-block
-  .container
-    %h4= Event.model_name.human
-
-    .row.masonry-container
-      - @events.each do |event|
-        .col-sm-6
-          %div[event]
-            .img{ style: "background-image: url(#{event.image_url(:lg)})" }
-            %h3= link_to event.title, event
-            %div= strip_tags event.body
+= render 'list', events: @events
