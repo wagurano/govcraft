@@ -41,7 +41,7 @@
 %section
   .container-fluid
     .row.masonry-container
-      .col-sm-4
+      .col-sm-6.col-md-4.col-lg-3
         .panel.panel-default.panel-floating
           .panel-body
             = form_for Comment.new do |f|
@@ -62,7 +62,7 @@
 
       - comments = params[:tag].present? ? event.comments.tagged_with(params[:tag]) : event.comments
       - comments.order('id DESC').each do |comment|
-        .col-sm-4
+        .col-sm-6.col-md-4.col-lg-3
           .panel.panel-default.panel-floating[comment]
             .panel-body
               .comment__body
