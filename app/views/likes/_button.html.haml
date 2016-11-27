@@ -1,4 +1,5 @@
-- btn_class = 'btn btn-like btn-default'
+- btn_class = 'btn btn-like '
+- btn_class = Like.liked?(likable, current_user) ? btn_class + 'btn-primary' : btn_class + 'btn-default'
 = link_to likes_path(like: { likable_id: likable.id, likable_type: likable.class.name}), method: :post, remote: true, class: btn_class do
   %i.fa.fa-heart
   %span.likes__count= likable.likes_count

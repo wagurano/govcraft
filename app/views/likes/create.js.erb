@@ -1,1 +1,3 @@
-$('.likes__count').text(<%= @like.likable.likes_count %>);
+var likable = $('#<%= @like.likable.class.name.underscore %>_<%= @like.likable.id %>');
+likable.find('.likes__count').text(<%= @like.likable.likes_count %>);
+likable.find('.btn-like').addClass('btn-primary').removeClass('btn-default');

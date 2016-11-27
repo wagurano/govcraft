@@ -56,7 +56,7 @@
       - comments = params[:tag].present? ? event.comments.tagged_with(params[:tag]) : event.comments
       - comments.order('id DESC').each do |comment|
         .col-sm-4
-          .panel.panel-floating
+          .panel.panel-floating[comment]
             .panel-body
               .comment__body
                 %h4{ style: 'font-size: 16px; letter-spacing: -0.02em; line-height: 1.4;'}= smart_format comment.body
