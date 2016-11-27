@@ -24,7 +24,7 @@ class Ability
       can [:revert], WikiRevision
 
       # 캠페이너는 캠페인에 속한 글과 댓글을 삭제할 수 있다
-      can :destroy, [Discussion, Petition, Poll, Wiki] do |model|
+      can :destroy, [Discussion, Petition, Poll, Wiki, Event] do |model|
         model.campaign && user == model.campaign.user
       end
       can :destroy, Comment do |comment|

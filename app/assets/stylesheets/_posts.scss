@@ -18,6 +18,9 @@
     margin-bottom: $font-size-base * 1.5;
     word-break: keep-all;
   }
+  &__buttons a {
+    color: $gray-lighter;
+  }
   &__users-count span {
     border: 1px solid #fff;
     border-radius: 20px;

@@ -61,6 +61,11 @@ ko:
         title: 제목
         body: 내용
         revision_note: 메모
+      event:
+        title: 제목
+        body: 설명
+        template: 이벤트형식
+        image: 커버이미지
       memorial:
         title: 제목
         body: 내용

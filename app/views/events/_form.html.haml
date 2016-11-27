@@ -4,8 +4,8 @@
     = f.file_field :image, class: 'form-control'
 
   .form-group
-    = f.label :slug
-    = f.text_field :slug, class: 'form-control'
+    = f.label :template
+    = f.select :template, Event::TEMPLATES, {}, class: 'form-control'
 
   .form-group
     = f.label :title

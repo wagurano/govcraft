@@ -6,6 +6,10 @@ class EventsController < ApplicationController
     @evnts = Event.recent
   end
 
+  def show
+    @campaign = @event.campaign
+  end
+
   def new
   end
 
@@ -37,7 +41,7 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:image, :slug, :title, :body)
+    params.require(:event).permit(:image, :slug, :title, :body, :template)
   end
 
   def reset_meta_tags
