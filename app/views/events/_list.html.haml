@@ -1,12 +1,13 @@
-%section.page-block
-  .container
-    %h4= Event.model_name.human
+- if events.any?
+  %section.page-block
+    .container
+      %h4= Event.model_name.human
 
-    .row.masonry-container
-      - events.each do |event|
-        .col-sm-6
-          %div[event]{ style: 'margin-bottom: 28px;' }
-            = link_to event do
-              .img{ style: "background-image: url(#{event.image_url(:lg)})" }
-              %h3= event.title
-              %div= strip_tags event.body
+      .row.masonry-container
+        - events.each do |event|
+          .col-sm-4
+            %div[event]{ style: 'margin-bottom: 28px;' }
+              = link_to event do
+                .img{ style: "background-image: url(#{event.image_url(:lg)})" }
+                %h3= event.title
+                %div= strip_tags event.body
