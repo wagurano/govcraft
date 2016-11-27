@@ -1,4 +1,4 @@
 %section#campaign-events
-  - @campaign.events.each do |event|
+  - @campaign.events.recent.each do |event|
     %section.event_block
       = render "events/template_#{event.template}", event: event

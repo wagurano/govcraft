@@ -1,6 +1,6 @@
 class CampaignsController < ApplicationController
   load_and_authorize_resource
-  before_action :reset_meta_tags, only: :show
+  before_action :reset_meta_tags, only: [:show, :events]
 
   def index
     @campaigns = Campaign.order('id DESC')
