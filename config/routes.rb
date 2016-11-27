@@ -27,7 +27,11 @@ Rails.application.routes.draw do
   resources :issues
   resources :following_issues
 
-  resources :campaigns
+  resources :campaigns do
+    member do
+      get 'events'
+    end
+  end
   resources :discussions
   resources :petitions
   resources :polls do

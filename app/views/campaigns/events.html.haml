@@ -1,0 +1,15 @@
+- @campaign.events.each do |event|
+  %section.event_block
+    = render "events/template_#{event.template}", event: event
+
+:css
+  .event_block {
+    position: absolute;
+    left: 10%;
+    top: 0;
+    width: 80%;
+    padding: 20px;
+  }
+  .event_block + .event_block {
+    left: 90%;
+  }

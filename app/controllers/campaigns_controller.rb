@@ -10,6 +10,10 @@ class CampaignsController < ApplicationController
     @campaign.increment!(:views_count)
   end
 
+  def events
+    @campaign.increment!(:views_count)
+  end
+
   def new
   end
 

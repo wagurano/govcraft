@@ -35,7 +35,7 @@
           .panel-body
             = form_for Comment.new do |f|
               = f.hidden_field :commentable_type, value: 'Event'
-              = f.hidden_field :commentable_id, value: @event.id
+              = f.hidden_field :commentable_id, value: event.id
               - unless user_signed_in?
                 .form-group
                   = f.label :commenter_name
@@ -49,7 +49,7 @@
               .form-group
                 ~ f.text_area :body, placeholder: '지금 나는...', required: true, rows: 3, class: 'form-control'
               = f.submit '작성', class: 'btn btn-primary btn-block'
-      - @event.comments.order('id DESC').each do |comment|
+      - event.comments.order('id DESC').each do |comment|
         .col-sm-4
           .panel.panel-floating[comment]{ style: 'padding:0' }
             .panel-body
@@ -102,7 +102,7 @@
     })
 
 
-    var locations = #{@event.comments.select{|c| c.latitude.present? }.pluck(:body, :latitude, :longitude)}
+    var locations = #{event.comments.select{|c| c.latitude.present? }.pluck(:body, :latitude, :longitude)}
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
@@ -149,7 +149,7 @@
       .modal-body
         = form_for Comment.new do |f|
           = f.hidden_field :commentable_type, value: 'Event'
-          = f.hidden_field :commentable_id, value: @event.id
+          = f.hidden_field :commentable_id, value: event.id
           - unless user_signed_in?
             .form-group
               = f.label :commenter_name
