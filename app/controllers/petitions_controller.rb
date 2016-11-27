@@ -11,6 +11,9 @@ class PetitionsController < ApplicationController
     @petition.increment!(:views_count)
   end
 
+  def data
+  end
+
   def new
     @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id].present?
   end

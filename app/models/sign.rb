@@ -19,6 +19,10 @@ class Sign < ApplicationRecord
     user.present? ? user.nickname : signer_name
   end
 
+  def user_email
+    user.present? ? user.email : signer_email
+  end
+
   private
 
   def signer_should_be_present_if_user_is_blank

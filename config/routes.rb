@@ -28,12 +28,12 @@ Rails.application.routes.draw do
   resources :following_issues
 
   resources :campaigns do
-    member do
-      get 'events'
-    end
+    get 'events', on: :member
   end
   resources :discussions
-  resources :petitions
+  resources :petitions do
+    get 'data', on: :member
+  end
   resources :polls do
     get 'social_card', on: :member
   end
