@@ -5,7 +5,7 @@
       %small
         = link_to "제안하기", new_poll_path(campaign_id: @campaign)
 
-    .panel.panel-default
+    .panel.panel-default.panel-floating
       - if polls.any?
         %ul.list-group.post-group
           - polls.each do |poll|

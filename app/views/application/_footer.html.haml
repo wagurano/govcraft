@@ -8,27 +8,43 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-%section#site-footer
-  %nav.navbar.navbar-inverse.navbar-fixed-bottom{ style: 'margin: 0;' }
+- if hide_gnb_and_footer?
+  :css
+    #site-header, #site-footer { display: none; }
+    body { padding: 0; }
+
+  %section.page-block
     .container
-      .bottom-nav
-        %div
-          = link_to campaigns_path do
-            %i.fa.fa-rocket
-            = Campaign.model_name.human
-        %div
-          = link_to discussions_path do
-            %i.fa.fa-comments
-            = Discussion.model_name.human
-        %div
-          = link_to polls_path do
-            %i.fa.fa-thumbs-up
-            = Poll.model_name.human
-        %div
-          = link_to petitions_path do
-            %i.fa.fa-check
-            = Petition.model_name.human
-        %div
-          = link_to about_path do
-            %i.fa.fa-globe
+      .text-muted.text-right
+        powered by
+        직접 민주주의 플랫폼
+        %strong
+          = link_to root_path do
+            = image_tag 'favicons/favicon-32x32.png', width: 18
             우주당
+
+- else
+  %section#site-footer
+    %nav.navbar.navbar-inverse.navbar-fixed-bottom{ style: 'margin: 0;' }
+      .container
+        .bottom-nav
+          %div
+            = link_to campaigns_path do
+              %i.fa.fa-rocket
+              = Campaign.model_name.human
+          %div
+            = link_to discussions_path do
+              %i.fa.fa-comments
+              = Discussion.model_name.human
+          %div
+            = link_to polls_path do
+              %i.fa.fa-thumbs-up
+              = Poll.model_name.human
+          %div
+            = link_to petitions_path do
+              %i.fa.fa-check
+              = Petition.model_name.human
+          %div
+            = link_to about_path do
+              %i.fa.fa-globe
+              우주당

@@ -38,4 +38,13 @@ module ApplicationHelper
   def is_redactorable?
     !browser.device.mobile? and !browser.device.tablet?
   end
+
+  def hide_gnb_and_footer?
+    ( params[:controller] == 'campaigns' && params[:action] == 'show' ) ||
+    ( params[:controller] == 'polls' && params[:action] == 'show' ) ||
+    ( params[:controller] == 'petitions' && params[:action] == 'show' ) ||
+    ( params[:controller] == 'wikis' && params[:action] == 'show' ) ||
+    ( params[:controller] == 'discussions' && params[:action] == 'show' ) ||
+    ( params[:controller] == 'events' && params[:action] == 'show' )
+  end
 end

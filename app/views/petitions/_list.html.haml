@@ -4,7 +4,7 @@
       = Petition.model_name.human
       %small
         = link_to "제안하기", new_petition_path(campaign_id: @campaign)
-    .panel.panel-default
+    .panel.panel-default.panel-floating
       - if petitions.any?
         %ul.list-group.post-group
           - petitions.each do |petition|

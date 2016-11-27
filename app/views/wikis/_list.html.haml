@@ -4,7 +4,7 @@
       = Wiki.model_name.human
       %small
         = link_to "#{Wiki.model_name.human} 추가", new_wiki_path(campaign_id: @campaign)
-    .panel.panel-default
+    .panel.panel-default.panel-floating
       - if wikis.any?
         %ul.list-group.post-group
           - wikis.each do |wiki|

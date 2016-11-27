@@ -29,16 +29,7 @@
               = link_to new_user_session_path do
                 %i.fa.fa-sign-in
                 로그인 &middot; 가입
-          - Event.recent.each do |event|
-            %li
-              = link_to event do
-                %i.fa.fa-tree
-                = event.title
-          - Campaign.recent.each do |campaign|
-            %li
-              = link_to campaign do
-                %i.fa.fa-rocket
-                = campaign.title
+
           %li= link_to Archive.model_name.human, archives_path
           %li= link_to Memorial.model_name.human, memorials_path
-
+          %li= link_to Event.model_name.human, events_path

@@ -4,7 +4,7 @@
       = Discussion.model_name.human
       %small
         = link_to "글쓰기", new_discussion_path(campaign_id: @campaign)
-    .panel.panel-default
+    .panel.panel-default.panel-floating
       - if discussions.any?
         %ul.list-group.post-group
           - discussions.each do |discussion|

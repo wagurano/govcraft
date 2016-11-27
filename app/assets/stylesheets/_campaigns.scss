@@ -1,35 +1,31 @@
 #campaign-header-block {
-  .jumbotron {
-    position: relative;
-    background-position: top center;
-    background-size: cover;
-    border: none;
-    color: $gray-lightest;
-    .badge {
-      background-color: $gray-light;
-      color: $gray-dark;
-      font-weight: normal;
-      padding-top: 5px;
-    }
-    a {
-      color: #fff;
-    }
-    small a {
-      color: $gray-lighter;
-    }
-    .campaign__title {
-      text-shadow: 1px 1px 3px rgba(0,0,0,.5);
-    }
-    .campaign__meta {
-      font-size: $font-size-small;
-      text-shadow: 1px 1px 3px rgba(0,0,0,.5);
-      span {
-        margin-right: $font-size-base;
-      }
-    }
-    .campaign__body {
-      text-shadow: 1px 1px 3px rgba(0,0,0,.5);
+  background-position: top center;
+  background-size: cover;
+  color: $gray-lightest;
+  padding: $font-size-base*4 0;
+  .badge {
+    background-color: $gray-light;
+    color: $gray-dark;
+    font-weight: normal;
+    padding-top: 5px;
+  }
+  a {
+    color: #fff;
+  }
+  small a {
+    color: $gray-lighter;
+  }
+  .campaign__title {
+    text-shadow: 1px 1px 3px rgba(0,0,0,.5);
+  }
+  .campaign__meta {
+    font-size: $font-size-small;
+    text-shadow: 1px 1px 3px rgba(0,0,0,.5);
+    span {
+      margin-right: $font-size-base;
     }
   }
+  .campaign__body {
+    text-shadow: 1px 1px 3px rgba(0,0,0,.5);
+  }
 }
-

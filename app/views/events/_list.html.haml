@@ -6,8 +6,9 @@
       .row.masonry-container
         - events.each do |event|
           .col-sm-4
-            %div[event]{ style: 'margin-bottom: 28px;' }
-              = link_to event do
-                .img{ style: "background-image: url(#{event.image_url(:lg)})" }
-                %h3= event.title
-                %div= strip_tags event.body
+            .panel.panel-default.panel-floating[event]{ style: 'margin-bottom: 28px;' }
+              .panel-body
+                = link_to event do
+                  .img{ style: "background-image: url(#{event.image_url(:lg)})" }
+                  %h4= event.title
+                  %div= strip_tags event.body
