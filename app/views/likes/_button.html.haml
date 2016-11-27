@@ -1,4 +1,4 @@
-- btn_class = 'btn btn-danger'
-= link_to likes_path(like: { likable_id: likable.id, likable_type: likable.class.name}), method: :post, class: btn_class do
+- btn_class = 'btn btn-like btn-default'
+= link_to likes_path(like: { likable_id: likable.id, likable_type: likable.class.name}), method: :post, remote: true, class: btn_class do
   %i.fa.fa-heart
-  = likable.likes_count
+  %span.likes__count= likable.likes_count

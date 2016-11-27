@@ -3,6 +3,7 @@ class Ability
 
   def initialize(user)
     can [:read, :social_card], :all
+    can [:events], Campaign
     can :create, [Sign, Comment]
 
     if user

@@ -6,3 +6,30 @@
     height: 150px;
   }
 }
+
+#campaign-events {
+  .event_block {
+    background-color: $gray-lightest;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 90%;
+  }
+  .event_block + .event_block {
+    left: 91%;
+  }
+  .event_block + .event_block + .event_block {
+    left: 182%;
+  }
+  @media (max-width: 768px) {
+    .event_block {
+      width: 95%;
+    }
+    .event_block + .event_block {
+      left: 96%;
+    }
+    .event_block + .event_block + .event_block {
+      left: 192%;
+    }
+  }
+}

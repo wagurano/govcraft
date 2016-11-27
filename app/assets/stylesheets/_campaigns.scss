@@ -29,32 +29,3 @@
     text-shadow: 1px 1px 3px rgba(0,0,0,.5);
   }
 }
-
-#campaign-events {
-  .event_block {
-    position: absolute;
-    left: 10%;
-    top: 0;
-    width: 80%;
-    padding: $font-size-base;
-  }
-  .event_block + .event_block {
-    left: 90%;
-  }
-  .event_block + .event_block + .event_block {
-    left: 170%;
-  }
-  @media (max-width: 768px) {
-    .event_block {
-      left: 4%;
-      width: 92%;
-      padding: 10px 1px;
-    }
-    .event_block + .event_block {
-      left: 96%;
-    }
-    .event_block + .event_block + .event_block {
-      left: 188%;
-    }
-  }
-}
