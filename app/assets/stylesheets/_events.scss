@@ -12,5 +12,13 @@
     background-color: $gray-lightest;
     width: 80%;
     border-right: 1px solid #fff;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+  .event_block:hover {
+    opacity: 1;
+  }
+  .slick-active {
+    opacity: 1;
   }
 }
