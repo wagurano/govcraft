@@ -94,3 +94,15 @@
 .tl-timemarker .tl-timemarker-content-container  {
   width: 180px;
 }
+
+.user-thumb {
+  width: $font-size-base*1.5;
+  height: $font-size-base*1.5;
+  border-radius: 50%;
+}
+.user-thumb-sm {
+  width: $font-size-base;
+  height: $font-size-base;
+  border-radius: 50%;
+  vertical-align: middle;
+}

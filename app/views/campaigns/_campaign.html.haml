@@ -5,3 +5,7 @@
     %h5{ style: 'height: 45px; word-break: keep-all;' }= link_to campaign.title, campaign
 
     .campaign__meta{ style: 'height: 20px; margin-top: 7px;' }
+      %small.text-muted
+        제안자 :
+        = image_tag campaign.user.image.sm, class: 'user-thumb-sm'
+        = campaign.user.nickname
