@@ -78,7 +78,7 @@ $(function(){
     responsive: [{
       breakpoint: 768,
       settings: {
-        centerPadding: '20px'
+        centerPadding: '15px'
       }
     }]
   });
