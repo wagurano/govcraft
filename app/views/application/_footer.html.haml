@@ -10,18 +10,19 @@
 
 - if hide_gnb_and_footer?
   :css
-    #site-header, #site-footer { display: none; }
-    body { padding: 0; }
+    body { padding-top: 0; }
 
   %section#site-footer
-    .container
-      .text-muted.text-right
-        powered by
-        직접 민주주의 플랫폼
-        %strong
-          = link_to root_path do
-            = image_tag 'favicons/favicon-32x32.png', width: 18
-            우주당
+    %nav.navbar.navbar-default{ style: 'margin: 0;' }
+      .container
+        %ul.nav.navbar-nav.navbar-right
+          %li.text-right
+            = link_to root_path do
+              powered by
+              직접 민주주의 플랫폼
+              = image_tag 'favicons/favicon-32x32.png', width: 18
+              %strong
+                우주당
 
 - else
   %section#site-footer
