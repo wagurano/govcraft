@@ -74,7 +74,8 @@ $(function(){
     slidesToShow: 1,
     arrows: false,
     centerMode: true,
-    centerPadding: '40px',
+    focusOnSelect: true,
+    centerPadding: '5%',
     responsive: [{
       breakpoint: 768,
       settings: {
