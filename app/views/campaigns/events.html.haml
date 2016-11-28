@@ -1,4 +1,5 @@
-%section#campaign-events
+%section#campaign-events{ data: { "events-slider": true } }
   - @campaign.events.recent.each do |event|
-    %section.event_block
+    .event_block
       = render "events/template_#{event.template}", event: event
+

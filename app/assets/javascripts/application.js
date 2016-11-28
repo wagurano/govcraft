@@ -70,4 +70,16 @@ $(function(){
   $('.post-block__body iframe').addClass('embed-responsive-item');
   $('.post-block__body iframe').parent().addClass('embed-responsive embed-responsive-16by9');
   $('[data-toggle="tooltip"]').tooltip()
+  $('[data-events-slider]').slick({
+    slidesToShow: 1,
+    arrows: false,
+    centerMode: true,
+    centerPadding: '40px',
+    responsive: [{
+      breakpoint: 768,
+      settings: {
+        centerPadding: '20px'
+      }
+    }]
+  });
 });

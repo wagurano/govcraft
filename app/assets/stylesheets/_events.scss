@@ -8,12 +8,9 @@
 }
 
 #campaign-events {
-  display: flex;
-  width: 90% * 3;
-
   .event_block {
     background-color: $gray-lightest;
-    width: 33.333%;
+    width: 80%;
     border-right: 1px solid #fff;
   }
 }
