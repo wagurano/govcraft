@@ -16,7 +16,7 @@
       으로 더 많은 사람들의 힘을 모아보세요.
 
     %section
-      .row.masonry-container
+      .row
         - @campaigns.each do |campaign|
-          .col-sm-4
+          .col-sm-12
             = render campaign

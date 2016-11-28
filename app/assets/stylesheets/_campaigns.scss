@@ -29,3 +29,22 @@
     text-shadow: 1px 1px 3px rgba(0,0,0,.5);
   }
 }
+
+.campaign-card {
+  .panel-body {
+    height: 120px;
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
+    .campaign__title a {
+      color: #fff;
+      text-shadow: 1px 1px 1px #000;
+    }
+    .campaign__meta {
+      color: #fff;
+      margin-top: 7px;
+      font-size: $font-size-small;
+      text-shadow: 1px 1px 1px #000;
+    }
+  }
+}

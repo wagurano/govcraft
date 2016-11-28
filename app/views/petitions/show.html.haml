@@ -41,3 +41,8 @@
 
     .post-block__comments
       = render 'comments/list', commentable: @petition
+
+    - if @petition.campaign
+      .post-block__campaign
+        %h4 캠페인
+        = render @petition.campaign

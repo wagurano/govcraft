@@ -1,9 +1,9 @@
 %section.page-block
   .container
     %h4= Campaign.model_name.human
-    .row.masonry-container
+    .row
       - @campaigns.each do |campaign|
-        .col-sm-4
+        .col-sm-12
           = render campaign
 
 %section.page-block{ style: 'background-color: #f5f5f5; padding: 28px 0;' }
