@@ -1,5 +1,8 @@
 %section#campaign-events{ data: { "events-slider": true } }
+  // TODO : 하드코딩된 컨텐츠 제거
+  .event_block{:style => "background-color: #F1882F"}
+    %img{:src => path_to_image('event_information.gif'),
+         :style => "width: 768px; max-width: 100%; margin: 0 auto;"}
   - @campaign.events.recent.each do |event|
     .event_block
       = render "events/template_#{event.template}", event: event
-
