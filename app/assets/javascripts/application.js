@@ -72,13 +72,13 @@ $(function(){
   $('[data-toggle="tooltip"]').tooltip()
   $('[data-events-slider]').slick({
     slidesToShow: 1,
-    arrows: false,
     centerMode: true,
     focusOnSelect: true,
     centerPadding: '5%',
     responsive: [{
       breakpoint: 768,
       settings: {
+        arrows: false,
         centerPadding: '15px'
       }
     }]
