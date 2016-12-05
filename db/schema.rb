@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20161205064341) do
     t.index ["user_id"], name: "index_candidates_on_user_id", using: :btree
   end
 
-  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.string   "commentable_type",                              null: false
     t.integer  "commentable_id",                                null: false
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 20161205064341) do
     t.index ["user_id"], name: "index_elections_on_user_id", using: :btree
   end
 
-  create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "slug"
     t.string   "title"
     t.text     "body",           limit: 65535

@@ -9,7 +9,7 @@
 
   :javascript
     $.getJSON("#{archive_path(@archive, format: :json)}", function(data) {
-      window.timeline = new TL.Timeline('timeline-embed', data);
+      window.timeline = new TL.Timeline('timeline-embed', data, { start_at_end: true });
     });
     $(window).load(function(){
       $("a").click(function(){
@@ -48,5 +48,5 @@
     = content_for :script do
       :javascript
         $.getJSON("#{archive_path(@archive, format: :json)}", function(data) {
-          window.timeline = new TL.Timeline('timeline-embed', data);
+          window.timeline = new TL.Timeline('timeline-embed', data, { start_at_end: true });
         });
