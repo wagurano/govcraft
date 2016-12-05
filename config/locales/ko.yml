@@ -80,6 +80,8 @@ ko:
         title: 제목
         body: 내용
         image: 대표이미지
+        banner_image: 배너이미지
+        banner_url: 배너URL
       archive_document:
         tag_list: 태그
         title: 제목

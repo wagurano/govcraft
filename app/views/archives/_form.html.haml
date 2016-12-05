@@ -12,4 +12,12 @@
     = f.text_area :body, rows: 10, class: 'form-control'
 
   .form-group
+    = f.label :banner_image
+    = f.file_field :banner_image, class: 'form-control'
+
+  .form-group
+    = f.label :banner_url
+    = f.text_field :banner_url, class: 'form-control'
+
+  .form-group
     = f.submit '저장', class: 'btn btn-primary'
