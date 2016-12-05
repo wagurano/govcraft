@@ -1,10 +1,22 @@
 %section.page-block
   .container
-    %h4= Campaign.model_name.human
+    .jumbotron
+      %h2 우리가 주인이당! Would You Party?
+      %p 우주당은 시민들이 자발적으로 만드는 직접 민주주의 플랫폼입니다. 함께 만들 분들을 계속해서 모으고 있습니다.
+      %p
+        = link_to '우주당 슬랙 접속하기', 'http://slack.wouldyouparty.org', target: '_blank', class: 'btn btn-primary btn-lg'
+        = link_to '우주당 이해하기', about_path, class: 'btn btn-danger btn-lg'
+
+%section.page-block
+  .container
     .row
-      - @campaigns.each do |campaign|
-        .col-sm-12
-          = render campaign
+      .col-sm-6
+        %h4= Campaign.model_name.human
+        = render @campaigns
+      .col-sm-6
+        %h4= Archive.model_name.human
+        = render @archives
+
 
 %section.page-block{ style: 'background-color: #f5f5f5; padding: 28px 0;' }
   .container

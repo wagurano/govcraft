@@ -20,7 +20,7 @@ ko:
     models:
       user: 당원
       issue: 토픽
-      campaign: 캠페인
+      campaign: 시민 캠페인
       discussion: 게시판
       petition: 서명
       poll: 투표
@@ -66,6 +66,12 @@ ko:
         body: 설명
         template: 이벤트형식
         image: 커버이미지
+      election:
+        title: 선거명
+      candidate:
+        name: 후보자
+        body: 추천사유 혹은 출마사유
+        image: 사진
       memorial:
         title: 제목
         body: 내용

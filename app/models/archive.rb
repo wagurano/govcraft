@@ -7,6 +7,8 @@ class Archive < ApplicationRecord
   mount_uploader :image, ImageUploader
   mount_uploader :banner_image, ImageUploader
 
+  scope :recent, -> { order('id DESC') }
+
   def contributors
     documents.collect{|d| d.user}.uniq
   end

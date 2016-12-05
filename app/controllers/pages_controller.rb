@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   def home
-    @campaigns = Campaign.order('id DESC').limit(9)
+    @campaigns = Campaign.recent
+    @archives = Archive.recent
   end
 
   def about
