@@ -44,6 +44,11 @@ Rails.application.routes.draw do
       end
     end
   end
+  resources :elections do
+    shallow do
+      resources :candidates
+    end
+  end
 
   resources :events
   resources :agendas

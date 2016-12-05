@@ -11,13 +11,13 @@ class Ability
           FollowingIssue,
           Campaign, Discussion, Petition, Poll, Wiki,
           Memorial, Agenda, Archive, ArchiveDocument, Event,
-          Like
+          Like, Election, Candidate
         ]
       can [:update, :destroy], [
           FollowingIssue,
           Campaign, Discussion, Petition, Poll, Wiki,
           Memorial, Agenda, Archive, ArchiveDocument, Event,
-          Comment, Like, Sign
+          Comment, Like, Sign, Election, Candidate
         ], :user_id => user.id
 
       can :data, [Petition], user_id: user.id

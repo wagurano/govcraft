@@ -1,0 +1,52 @@
+- if @campaign
+  = render 'campaigns/header', campaign: @campaign
+
+%section#discussion-block.page-block.post-block
+  .container
+    .post-block__title
+      %h3= @election.title
+
+    .post-block__info
+      .row
+        .col-xs-6
+          %span.post-block__user
+            = link_to @election.user.nickname
+          %span.post-block__date
+            = date_f @election.created_at
+          - if can? :edit, @election
+            = link_to '수정', edit_election_path(@election)
+          - if can? :destroy, @election
+            = link_to '삭제', @election, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+
+    .post-block__body
+      = raw @election.body
+
+
+    .post-block__body
+      = form_for [@election, @candidate] do |f|
+
+        .form-group
+          = f.label :name
+          = f.text_field :name, class: 'form-control'
+
+        .form-group
+          = f.label :body
+          ~ f.text_area :body, rows: 10, class: 'form-control redactor'
+
+        .form-group
+          = f.label :image
+          = f.file_field :image, class: 'form-control'
+
+        .form-group
+          = f.submit '저장', class: 'btn btn-primary'
+
+      .post-block__body
+        %h3 후보 리스트
+        = render @election.candidates
+
+
+    .post-block__share.text-center
+      .share-box
+
+    .post-block__comments
+      = render 'comments/list', commentable: @election
