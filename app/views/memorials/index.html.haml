@@ -7,16 +7,7 @@
       .row.masonry-container
         - @memorials.each do |memorial|
           .col-sm-6
-            - url = memorial.url.present? ? memorial.url : memorial_path(memorial)
-            .panel.panel-default.panel-floating
-              .panel-body
-                %h4= link_to memorial.title, url
-                .memorial-meta.text-muted
-                  - if memorial.url.present?
-                    = link_to memorial.url, memorial.url, target: '_blank'
-                  - else
-                    %strong= number_with_delimiter memorial.comments_count
-                    개의 추모글이 모였습니다
+            = render memorial
 
     %section.hidden{ style: 'margin-top: 28px; padding-top: 14px; border-top: 1px solid #dedede;' }
       = link_to '추모관 열기', new_memorial_path, class: 'btn btn-default'

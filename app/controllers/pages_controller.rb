@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   def home
     @campaigns = Campaign.recent
     @archives = Archive.recent
+    @memorials = Memorial.recent
   end
 
   def about

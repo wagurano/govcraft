@@ -1,2 +1,12 @@
 %div[memorial]
-  %h4= link_to memorial.title, memorial
+  - url = memorial.url.present? ? memorial.url : memorial_path(memorial)
+  .panel.panel-default.panel-floating.memorial-card
+    .panel-body
+      = link_to memorial do
+        %h4.memorial__title= memorial.title
+        .memorial__meta
+          - if memorial.url.present?
+            = link_to memorial.url, memorial.url, target: '_blank'
+          - else
+            %strong= number_with_delimiter memorial.comments_count
+            개의 추모글이 모였습니다
