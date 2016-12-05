@@ -4,20 +4,20 @@ class Ability
   def initialize(user)
     can [:read, :social_card], :all
     can [:events], Campaign
-    can :create, [Sign, Comment]
+    can :create, [Sign, Comment, Like]
 
     if user
       can :create, [
           FollowingIssue,
           Campaign, Discussion, Petition, Poll, Wiki,
           Memorial, Agenda, Archive, ArchiveDocument, Event,
-          Like, Election, Candidate
+          Election, Candidate
         ]
       can [:update, :destroy], [
           FollowingIssue,
           Campaign, Discussion, Petition, Poll, Wiki,
           Memorial, Agenda, Archive, ArchiveDocument, Event,
-          Comment, Like, Sign, Election, Candidate
+          Comment, Sign, Election, Candidate
         ], :user_id => user.id
 
       can :data, [Petition], user_id: user.id

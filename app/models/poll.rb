@@ -1,8 +1,9 @@
 class Poll < ApplicationRecord
+  include Likable
+
   belongs_to :user
   belongs_to :campaign
   has_many :comments, as: :commentable, dependent: :destroy
-  has_many :likes, as: :likable, dependent: :destroy
   has_many :votes, dependent: :destroy
 
   mount_uploader :cover_image, ImageUploader

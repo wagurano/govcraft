@@ -1,8 +1,9 @@
 class Petition < ApplicationRecord
+  include Likable
+
   belongs_to :user
   belongs_to :campaign
   has_many :comments, as: :commentable, dependent: :destroy
-  has_many :likes, as: :likable, dependent: :destroy
   has_many :signs, dependent: :destroy
   has_many :signed_users, through: :signs, source: :petition, dependent: :destroy
 

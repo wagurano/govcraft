@@ -13,7 +13,7 @@
                 .post__status
                   %span.text-danger
                     %i.fa.fa-heart
-                    = discussion.likes_count
+                    = discussion.merged_likes_count
 
                 - if discussion.campaign
                   .post__campaign= discussion.campaign.title
