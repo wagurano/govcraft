@@ -14,6 +14,9 @@ gem 'counter_culture', '~> 0.2.3'
 gem 'enumerize', '~> 2.0'
 gem 'acts-as-taggable-on', '~> 4.0'
 
+# geo
+gem 'geocoder'
+
 # ui
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'

@@ -17,6 +17,7 @@ production:
   S3_SECRET_KEY: xx
   S3_REGION: xx
   S3_BUCKET: xx
+  GOOGLE_API_KEY: xx
 ```
 
 
@@ -71,13 +72,21 @@ development:
 
 ### 로그인 준비
 
-페이스북, 트위터를 연결합니다. 각 키는 프로젝트 최상위 폴더에 .powenv에 등록합니다. 트위터는 사용자 email을 얻어오기 위해 twitter에 따로 요청해야합니다.
+페이스북, 트위터를 연결합니다. 각 키는 프로젝트 최상위 폴더에 .powenv에 등록합니다.
 
 ```
 export FACEBOOK_APP_ID="xx"
 export FACEBOOK_APP_SECRET="xx"
 export TWITTER_APP_ID="xx"
 export TWITTER_APP_SECRET="xx"
+```
+
+### 구글API연결
+
+.powenv에 등록합니다.
+
+```
+export GOOGLE_API_KEY="xx"
 ```
 
 #### 스키마

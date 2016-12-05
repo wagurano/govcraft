@@ -44,6 +44,9 @@
                   = f.label :commenter_email
                   = f.text_field :commenter_email, class: 'form-control'
               .form-group
+                = f.label :full_street_address, '주소(선택사항)'
+                = f.text_field :full_street_address, class: 'form-control'
+              .form-group
                 = f.label :image
                 = f.file_field :image, required: true, class: 'form-control'
               .form-group

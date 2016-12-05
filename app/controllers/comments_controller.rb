@@ -26,6 +26,7 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(
       :body, :commentable_id, :commentable_type,
       :commenter_name, :commenter_email,
+      :full_street_address,
       :tag_list, :image
     )
   end
