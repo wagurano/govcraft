@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205142629) do
+ActiveRecord::Schema.define(version: 20161205235931) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20161205142629) do
     t.string   "banner_image"
     t.string   "banner_url"
     t.integer  "anonymous_likes_count",               default: 0
+    t.integer  "timeline_initial_zoom"
     t.index ["user_id"], name: "index_archives_on_user_id", using: :btree
   end
 

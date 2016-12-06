@@ -1,3 +1,4 @@
+- initial_zoom = (@archive.timeline_initial_zoom.present? ? @archive.timeline_initial_zoom : "null")
 - if params[:mode] == 'timeline'
   %section
     #timeline-embed
@@ -6,10 +7,9 @@
   = javascript_include_tag 'application'
   %script{:src => "https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"}
   %script{:src => "//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js", :type => "text/javascript"}
-
   :javascript
     $.getJSON("#{archive_path(@archive, format: :json)}", function(data) {
-      window.timeline = new TL.Timeline('timeline-embed', data, { start_at_end: true, language: 'ko' });
+      window.timeline = new TL.Timeline('timeline-embed', data, { start_at_end: true, language: 'ko', initial_zoom: #{initial_zoom} });
     });
     $(window).load(function(){
       $("a").click(function(){
@@ -48,5 +48,5 @@
     = content_for :script do
       :javascript
         $.getJSON("#{archive_path(@archive, format: :json)}", function(data) {
-          window.timeline = new TL.Timeline('timeline-embed', data, { start_at_end: true, language: 'ko' });
+          window.timeline = new TL.Timeline('timeline-embed', data, { start_at_end: true, language: 'ko', initial_zoom: #{initial_zoom} });
         });

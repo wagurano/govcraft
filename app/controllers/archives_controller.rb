@@ -42,7 +42,7 @@ class ArchivesController < ApplicationController
   private
 
   def archive_params
-    params.require(:archive).permit(:title, :body, :image, :banner_image, :banner_url)
+    params.require(:archive).permit(:title, :body, :image, :banner_image, :banner_url, :timeline_initial_zoom)
   end
 
   def reset_meta_tags

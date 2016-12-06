@@ -20,4 +20,8 @@
     = f.text_field :banner_url, class: 'form-control'
 
   .form-group
+    = f.label :timeline_initial_zoom
+    = f.number_field :timeline_initial_zoom, class: 'form-control'
+
+  .form-group
     = f.submit '저장', class: 'btn btn-primary'
