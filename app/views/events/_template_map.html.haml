@@ -4,34 +4,15 @@
   %script{:src => "https://maps.googleapis.com/maps/api/js?key=#{google_map_apikey}"}
 
 %section.page-block
-  .container
+  .container-fluid
     .well.well-mute
-      %p
-        11월 12일,
-        세계 어느 곳이든,
-        그리고 미처 참석할 수 없지만 함께하고 싶은 분들,
-        혹은 광장에 나와 함께할 사람을 찾고 싶은 분들,
-        아래에 해당한다면 우주당(우리가 주인이당)에서 함께 해 볼까요?
-      %ol
-        %li 집회에 참석하는건 이번이 처음이에요.
-        %li 혼자 가보는데, 어디에 서 있어야할지 모르겠어요.
-        %li 해외인데 같이 동참하고 싶어요.
-        %li 내가 이곳에 있었다고 남기고 싶어요,
-        %li 서울이 아닌 지역의 외침도 보였으면 해요.
-        %li 서로 만날 수 있는 방법은 없을까요?
-      %p
-        %strong
-          %u
-            인증샷을 올리고 본인의 위치를 공유하면서 함께 이야기할 사람들을 초대해 보세요.
-      .text-muted
-        참여연대에서 박근혜OUT지도를 만들었는데, 시국선언을 하실 분들은 여기도 가보세요.
-        = link_to '박근혜OUT지도', 'http://www.peoplepower21.org/ghout/1460229', target: '_blank'
+      = raw @event.body
 
       .share-box
 
     .row.masonry-container
-      .col-sm-4.hidden-xs
-        .panel.panel-floating
+      .col-md-3.col-sm-4.hidden-xs
+        .panel.panel-default.panel-floating
           .panel-body
             = form_for Comment.new do |f|
               = f.hidden_field :commentable_type, value: 'Event'
@@ -48,13 +29,13 @@
                 = f.text_field :full_street_address, class: 'form-control'
               .form-group
                 = f.label :image
-                = f.file_field :image, required: true, class: 'form-control'
+                = f.file_field :image, class: 'form-control'
               .form-group
                 ~ f.text_area :body, placeholder: '지금 나는...', required: true, rows: 3, class: 'form-control'
               = f.submit '작성', class: 'btn btn-primary btn-block'
       - event.comments.order('id DESC').each do |comment|
         .col-sm-4
-          .panel.panel-floating[comment]{ style: 'padding:0' }
+          .panel.panel-default.panel-floating[comment]{ style: 'padding:0' }
             .panel-body
               - if comment.image.present?
                 .comment__image
