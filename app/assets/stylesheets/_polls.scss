@@ -48,3 +48,16 @@
     }
   }
 }
+
+.poll-card {
+  text-align: center;
+  padding: $font-size-base * 1.5 0;
+  .post__title {
+    margin-bottom: $font-size-base * 2;
+  }
+  .vote-panel {
+    .col-xs-6 {
+      padding: 0 5px;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.col-sm-6
+  %div[poll]
+    .panel.panel-default.panel-floating.poll-card
+      .panel-body
+        - if poll.campaign
+          .post__campaign
+            = link_to poll.campaign.title, poll.campaign
+
+        %h4.post__title
+          = link_to poll.title, poll
+          - if poll.comments.count > 0
+            %small
+              (#{poll.comments.count})
+
+        = render 'votes/panel', poll: poll, show_voters: false
