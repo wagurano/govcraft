@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   # assiciations
   has_many :following_issues, dependent: :destroy
+  has_many :articles, dependent: :destroy
 
   # validations
   VALID_NICKNAME_REGEX = /\A[ㄱ-ㅎ가-힣a-z0-9_]+\z/i

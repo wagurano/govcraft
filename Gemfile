@@ -59,7 +59,6 @@ gem 'envyable', '~> 0.2.0'
 gem 'seed-fu', '~> 2.3', '>= 2.3.5'
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 gem "recaptcha", require: "recaptcha/rails"
-gem 'video_info', '~> 2.6', '>= 2.6.1'
 gem 'browser', '~> 2.0', '>= 2.0.2'
 gem 'meta-tags', '~> 2.1.0'
 gem 'unobtrusive_flash', '~> 3.1'
@@ -77,10 +76,18 @@ end
 # notification
 gem 'slack-notifier', '~> 1.4'
 gem 'exception_notification', '~> 4.1', '>= 4.1.4'
+gem 'postmark-rails', '~> 0.12.0'
+
+# scheduler
 gem 'sidekiq', '~> 4.1'
+gem 'sidekiq-unique-jobs', '~> 4.0', '>= 4.0.16'
 gem 'redis', '~> 3.2', '>= 3.2.2'
 gem 'redis-namespace', '~> 1.5', '>= 1.5.2'
-gem 'postmark-rails', '~> 0.12.0'
+
+# crawling
+gem 'mechanize', '~> 2.7', '>= 2.7.5'
+gem 'video_info', '~> 2.6'
+gem 'fastimage', '~> 1.9'
 
 # monitor
 gem 'newrelic_rpm'

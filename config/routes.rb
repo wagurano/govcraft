@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   end
 
   resources :events
+  resources :articles
   resources :agendas
   resources :archives
   resources :archive_documents

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205235931) do
+ActiveRecord::Schema.define(version: 20161206074502) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -63,6 +63,28 @@ ActiveRecord::Schema.define(version: 20161205235931) do
     t.index ["user_id"], name: "index_archives_on_user_id", using: :btree
   end
 
+  create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.text     "url",                   limit: 65535,             null: false
+    t.text     "body",                  limit: 65535
+    t.string   "title"
+    t.text     "desc",                  limit: 65535
+    t.text     "metadata",              limit: 65535
+    t.string   "image"
+    t.string   "page_type"
+    t.string   "crawling_status",                                 null: false
+    t.datetime "crawled_at"
+    t.string   "site_name"
+    t.integer  "image_height",                        default: 0
+    t.integer  "image_width",                         default: 0
+    t.integer  "user_id",                                         null: false
+    t.integer  "likes_count",                         default: 0
+    t.integer  "comments_count",                      default: 0
+    t.integer  "anonymous_likes_count",               default: 0
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
+  end
+
   create_table "campaigns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
     t.text     "body",               limit: 65535
@@ -78,7 +100,7 @@ ActiveRecord::Schema.define(version: 20161205235931) do
     t.index ["user_id"], name: "index_campaigns_on_user_id", using: :btree
   end
 
-  create_table "candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "name",                      null: false
     t.text     "body",        limit: 65535
     t.string   "image"
@@ -125,7 +147,7 @@ ActiveRecord::Schema.define(version: 20161205235931) do
     t.index ["user_id"], name: "index_discussions_on_user_id", using: :btree
   end
 
-  create_table "elections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "elections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "title"
     t.text     "body",            limit: 65535
     t.string   "image"

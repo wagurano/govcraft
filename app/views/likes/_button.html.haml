@@ -1,5 +1,5 @@
 - btn_class = 'btn btn-like '
 - btn_class = !likable?(likable) ? btn_class + 'btn-primary' : btn_class + 'btn-default'
-= link_to likes_path(like: { likable_id: likable.id, likable_type: likable.class.name}), method: :post, remote: true, class: btn_class, id: "#{likable.class.name.underscore}_#{likable.id}" do
+= link_to likes_path(like: { likable_id: likable.id, likable_type: likable.class.name}), method: :post, remote: true, class: btn_class, id: "#{likable.class.name.underscore}_#{likable.id}_btn" do
   %i.fa.fa-heart
   %span.likes__count= likable.merged_likes_count
