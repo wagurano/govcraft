@@ -11,13 +11,31 @@
   .header {
     background-size: cover;
     background-position: center center;
-    h1 {
-       color: #fff;
-       text-shadow: 1px 1px 2px #000;
-       text-align: center;
-       margin: 0;
-       padding: 130px 0 0 0;
-       word-break: keep-all;
+    h2 {
+      color: #fff;
+      text-shadow: 1px 1px 2px #000;
+      text-align: center;
+      margin: 0;
+      padding: 110px 0 0 0;
+      font-weight: bold;
+      line-height: 1.2;
+      word-break: keep-all;
+    }
+    h3 {
+      color: #fff;
+      text-shadow: 1px 1px 2px #000;
+      text-align: center;
+      font-weight: normal;
+      padding: 1rem 0 0 0;
+      word-break: keep-all;
+    }
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 2rem;
+      }
+      h3 {
+        font-size: 1.5rem;
+      }
     }
   }
   .intro {
@@ -31,6 +49,8 @@
     line-height: 1.7;
     h4 {
       line-height: 1.7;
+      font-weight: bold;
+      text-align: center;
     }
   }
   background-color: #fff;

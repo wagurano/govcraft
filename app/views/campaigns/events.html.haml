@@ -1,13 +1,14 @@
 %section#campaign-events{:data => {:spy => "scroll", :target => "navbar"}}
   // TODO : 하드코딩된 컨텐츠 제거
   .header{:style => "height: 310px; background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{@campaign.image});" }
-    %h1
-      새로운 사회를 함께 만들기 위한 시작 선언
+    %h2
+      우리가 꿈꾸는 OO는
+      %br
+      우리가 말하고 우리가 만든다
+    %h3
+      우리가 꿈꾸는 OO을 채워주세요!
   .intro{:data => {:aos => "fade-up"}}
     .container
-      %h4
-        "우리가 꿈꾸는 OO는 우리가 말하고 우리가 만든다"
-      %br
       %p
         11월 말, N명의 사회혁신가는
         %a{:href => "http://wouldyouparty.org/petitions/23", :target => "_blank"}
@@ -41,18 +42,17 @@
   .intro{:data => {:aos => "fade-up"}}
     .container
       %h4
-        가장 해결이 시급하다고 판단된 문제에 어떤 대안과 해결책이 필요할지
-        %br
-        함께 상상할 수 있는 장을 1월 중에 마련하겠습니다.
+        일상의 실천과제를 제시하고 정책적 제언을 만들겠습니다.
       %br
       %p
-        일상의 실천과제를 제시하고 정책적 제언을 만들겠습니다.
+        가장 해결이 시급하다고 판단된 문제에 어떤 대안과 해결책이 필요할지 함께 상상할 수 있는 장을 1월 중에 마련하겠습니다.
+        %br
+        그 결과를 정리해 사회혁신가가 이미 잘하고 있는 작업들과 연결하고, 새롭게 고민해야 할 일들을 제안하며, 정책적 제안까지 나아가려고 합니다.
   .intro{:class => "bg-gray", :data => {:aos => "fade-up"}}
     .container
       %h4
-        "우리가 꿈꾸는 OO는 우리가 말하고 우리가 만든다."
-      %br
+        가장 해결이 시급한 문제가 무엇인지 여러분의 생각을 들려주세요. :)
       %p
-        OO을 채우는 일에 함께 해주세요.
+
   .event_block{:id => "question_one", :data => {:aos => "fade-up"}}
     = render "events/template_default", event: @campaign.events.recent.first
