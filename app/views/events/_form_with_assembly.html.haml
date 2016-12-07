@@ -6,11 +6,11 @@
     .form-group
       = f.label :commenter_name
       = f.text_field :commenter_name, class: 'form-control'
-    .form-group
+    .form-group.hidden
       = f.label :commenter_email
       = f.text_field :commenter_email, class: 'form-control'
   .form-group
-    = f.label :full_street_address, '주소(선택사항)'
+    = f.label :full_street_address, '주소(필수)'
     = f.select :full_street_address, options_for_select( Event::CONGRESSMEN.collect{|c| [ "#{c[0]} (#{c[1]} #{c[2]})", c[3]]} ), {}, class: 'form-control'
   .form-group
     = f.label :image
