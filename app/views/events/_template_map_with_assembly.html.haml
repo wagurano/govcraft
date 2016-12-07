@@ -100,7 +100,7 @@
     })
 
 
-    var locations = #{comments.select{|c| c.latitude.present? }.collect{ |c| [c.tag_list.join(',') + '<br>' + c.body, c.latitude, c.longitude] }}
+    var locations = #{comments.select{|c| c.latitude.present? }.collect{ |c| ['<div><b>' + c.tag_list.join(',') + '</b></div>' + (c.image.present? ? '<div style="max-height: 150px; overflow: hidden;">' + image_tag(c.image_url(:sm), style: 'width: 100%;') + '</div>' : '') + '<div>' + c.body + '</div><div><span style="color: #5f5f5f; font-size: 12px">' + c.user.nickname + ' ' + date_f(c.created_at) + '</span></div>', c.latitude, c.longitude] }}
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 7,
@@ -114,6 +114,9 @@
     var infowindow = new google.maps.InfoWindow();
 
     var marker, i;
+    var markers = [];
+
+    var infowindowInterval;
 
     for (i = 0; i < locations.length; i++) {
       marker = new google.maps.Marker({
@@ -125,15 +128,29 @@
 
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
+          if(infowindowInterval) {
+            clearInterval(infowindowInterval);
+            infowindowInterval = null;
+          }
           infowindow.setContent(locations[i][0]);
           infowindow.open(map, marker);
         }
       })(marker, i));
+
+      markers.push(marker);
     }
 
     if(locations.length) {
       map.fitBounds(bounds);
     }
+
+    var showRandomInfowindow = function () {
+      var index = Math.floor(Math.random() * locations.length);
+      infowindow.setContent(locations[index][0]);
+      infowindow.open(map, markers[index]);
+    }
+    showRandomInfowindow();
+    infowindowInterval = setInterval(showRandomInfowindow, 10000);
 
 %section.visible-xs
   .container
