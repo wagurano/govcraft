@@ -1,19 +1,26 @@
+- cover_image = event.image_url(:lg)
 - comments = params[:tag] ? event.comments.tagged_with(params[:tag]) : event.comments
 - google_map_apikey = 'AIzaSyBmxQGhxC-UzPzxIMlE9Sy09Dv9zUtiiW4'
 
-%section.page-block
-  #map{ style: 'height: 300px; margin-top: -30px;' }
-  %script{:src => "https://maps.googleapis.com/maps/api/js?key=#{google_map_apikey}"}
+%section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image})" }
+  .container
+    - if @campaign
+      .cover-section__campaign
+        = link_to @campaign.title, @campaign
+
+    %h1.cover-section__title= event.title
+
+    .cover-section__body= raw @event.body
+
+    .share-box
 
 %section.page-block
-  .container-fluid
-    .well.well-mute
-      = raw @event.body
-
-      .share-box
+  .container
+    #map{ style: 'height: 500px;' }
+    %script{:src => "https://maps.googleapis.com/maps/api/js?key=#{google_map_apikey}"}
 
 %section.page-block
-  .container-fluid
+  .container
     - event.comments.tag_counts_on(:tags).each do |tag|
       - if params[:tag] == tag.name
         %span{ style: 'display: inline-block; background-color: #4a5dd0; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; color: #fff; margin-bottom: 7px;' }
@@ -27,14 +34,14 @@
             = tag.taggings_count
 
 %section.page-block
-  .container-fluid
+  .container
     .row.masonry-container
-      .col-md-3.col-sm-4.hidden-xs
+      .col-sm-4.hidden-xs
         .panel.panel-default.panel-floating
           .panel-body
             = render 'form_with_assembly', event: event
       - comments.order('id DESC').each do |comment|
-        .col-md-3.col-sm-4
+        .col-sm-4
           .panel.panel-default.panel-floating[comment]{ style: 'padding:0' }
             .panel-body
               %h4= comment.tag_list
@@ -119,7 +126,7 @@
     map.fitBounds(bounds);
 
 %section.visible-xs
-  .container-fluid
+  .container
     %nav.navbar.navbar-default.navbar-fixed-bottom{ style: 'min-height: auto;'}
       %button.btn.btn-primary.btn-lg.btn-block{"data-target" => "#comment-form-modal", "data-toggle" => "modal", :type => "button"}
         %i.fa.fa-file-image-o
