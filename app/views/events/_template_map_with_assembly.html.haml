@@ -72,7 +72,7 @@
               .comment__map.hidden
                 - if comment.latitude && comment.longitude
                   = image_tag "https://maps.googleapis.com/maps/api/staticmap?center=#{comment.latitude},#{comment.longitude}&size=400x300&zoom=18&markers=color:red%7C#{comment.latitude},#{comment.longitude}&key=#{google_map_apikey}", style: 'max-width: 100%;'
-              .comment__like{ style: 'margin-top: 14px;' }
+              .hidden.comment__like{ style: 'margin-top: 14px;' }
                 = render 'likes/button', likable: comment
 
 #comment-modal.modal.fade{:role => "dialog", :tabindex => "0"}
