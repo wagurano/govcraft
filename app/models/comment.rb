@@ -30,7 +30,7 @@ class Comment < ApplicationRecord
 
   def save_gps
     begin
-      if self.image.present?
+      if self.image.present? and self.full_street_address.blank?
         gps = EXIFR::JPEG.new(self.image.file.path).gps
         if gps.present?
           self.latitude = gps.latitude
