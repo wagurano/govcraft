@@ -41,12 +41,12 @@
     .sign-panel__users
       %h4 참여자
       %div
-        - petition.signs.each do |sign|
+        - petition.signs.limit(30).each do |sign|
           = image_tag 'icon-candle.png', width: 20, height: 20, class: 'img-circle'
           = sign.user_name
 
     .sign-panel__list
-      - petition.signs.recent.each do |sign|
+      - petition.signs.limit(30).recent.each do |sign|
         %div
           %span.text-primary= sign.user_name
           = raw(screened(sign, :body))
