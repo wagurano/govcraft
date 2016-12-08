@@ -2,6 +2,11 @@ class SignsController < ApplicationController
   before_action :authenticate_user!, except: :create
   load_and_authorize_resource
 
+  def index
+    @petition = Petition.find params[:petition_id]
+    @signs = @petition.signs.page params[:page]
+  end
+
   def create
     @sign.user = current_user if user_signed_in?
     if @sign.save

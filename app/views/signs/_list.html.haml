@@ -1,3 +1,4 @@
+- first_signs_count = 5
 .sign-panel
   - if user_signed_in? and petition.signed?(current_user)
     .sign-panel__form
@@ -41,12 +42,14 @@
     .sign-panel__users
       %h4 참여자
       %div
-        - petition.signs.limit(30).each do |sign|
+        - petition.signs.limit(first_signs_count).each do |sign|
           = image_tag 'icon-candle.png', width: 20, height: 20, class: 'img-circle'
           = sign.user_name
+        - if petition.signs.count > first_signs_count
+          = link_to "... #{petition.signs.count - first_signs_count}명 더보기", petition_signs_path(petition)
 
     .sign-panel__list
-      - petition.signs.limit(30).recent.each do |sign|
+      - @signs.recent.each do |sign|
         %div
           %span.text-primary= sign.user_name
           = raw(screened(sign, :body))
@@ -57,4 +60,5 @@
               = link_to '수정', [:edit, sign]
             - if can? :destroy, sign
               = link_to '취소', sign, method: :delete, data: { confirm: '정말 취소하시겠습니까?' }
+      = paginate @signs, params: { controller: :petitions, action: :show }
 

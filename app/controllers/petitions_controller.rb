@@ -9,6 +9,7 @@ class PetitionsController < ApplicationController
   def show
     @campaign = @petition.campaign
     @petition.increment!(:views_count)
+    @signs = @petition.signs.page params[:page]
   end
 
   def data

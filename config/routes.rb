@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   end
   resources :discussions
   resources :petitions do
+    resources :signs
     get 'data', on: :member
   end
   resources :polls do
