@@ -23,29 +23,3 @@
               = image_tag 'favicons/favicon-32x32.png', width: 18
               %strong
                 우주당
-
-- else
-  %section#site-footer
-    %nav.navbar.navbar-inverse{ style: 'margin: 0;' }
-      .container
-        .bottom-nav
-          %div
-            = link_to campaigns_path do
-              %i.fa.fa-rocket
-              = Campaign.model_name.human
-          %div
-            = link_to discussions_path do
-              %i.fa.fa-comments
-              = Discussion.model_name.human
-          %div
-            = link_to polls_path do
-              %i.fa.fa-thumbs-up
-              = Poll.model_name.human
-          %div
-            = link_to petitions_path do
-              %i.fa.fa-check
-              = Petition.model_name.human
-          %div
-            = link_to about_path do
-              %i.fa.fa-globe
-              우주당
