@@ -29,6 +29,7 @@ ko:
       agenda: 의제
       archive: 시민 아카이브
       event: 이벤트
+      article: 뉴스
     attributes:
       user:
         nickname: 아이디

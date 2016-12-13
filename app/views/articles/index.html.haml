@@ -2,73 +2,18 @@
   .container
     %h4
       = Article.model_name.human
+      %small
+        = link_to "글쓰기", new_article_path
 
-    .articles
-      .panel.panel-default.panel-flaoting
-        .panel-body
-          = form_for @new_article do |f|
-            .form-group
-              = f.label :url
-              = f.text_field :url, class: 'form-control'
+    - if @articles.any?
+      .panel.panel-default.panel-floating
+        %ul.list-group.post-group
+          = render @articles
 
-            .form-group
-              = f.label :body
-              ~ f.text_area :body, rows: 10, class: 'form-control redactor'
+    - unless @articles.any?
+      .text-muted
+        아직 뉴스가 없습니다. 같이 볼 뉴스 하나 올려주세요.
 
-            .form-group
-              = f.submit '저장', class: 'btn btn-primary'
+    .text-center
+      = paginate @articles
 
-      - @articles.each do |article|
-        .panel.panel-default.panel-flaoting[article]
-          .panel-body
-            = link_to article.url, target: '_blank' do
-              .article
-                .panel.panel-default
-                  .panel-body
-                    .media
-                      .media-body
-                        %h4.media-heading
-                          = article.title
-                        = article.desc
-                      - if article.image_present?
-                        .media-right
-                          = image_tag article.image.sm.url
-
-                .article__meta
-                  .row
-                    .col-sm-10.col-xs-12
-                      != article.body
-                      %span.article__user
-                        = image_tag article.user.image.sm, class: 'user-thumb-sm'
-                        = article.user.nickname
-                      %span.article__date
-                        = date_f article.created_at
-                      %span.article__manage
-                        - if can? :destroy, article
-                          = link_to '삭제', article, method: :delete, data: { confirm: '삭제하시겠습니까?' }
-                    .col-sm-2.col-xs-12
-                      .article__reactions.text-right
-                        = render 'likes/button', likable: article
-
-                %hr
-                .article__comments
-                  = render 'comments/list', commentable: article
-
-                / .article__status
-                /   %span.text-danger
-                /     %i.fa.fa-heart
-                /     = article.merged_likes_count
-                / %h4.list-group-item-heading
-                /   = article.url
-                /   - if article.comments.count > 0
-                /     %small
-                /       (#{article.comments.count})
-                / .post__meta
-                /   %span.nickname
-                /     = article.user.nickname
-                /   %span.created_at
-                /     = date_f article.created_at
-
-      - unless @articles.any?
-        %small.text-muted
-          아직 뉴스가 없습니다. 시작해 볼까요?

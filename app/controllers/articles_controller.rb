@@ -2,8 +2,11 @@ class ArticlesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @new_article = Article.new
-    @articles = Article.recent
+    @articles = Article.recent.page params[:page]
+  end
+
+  def new
+    @article = Article.new
   end
 
   def create
@@ -13,8 +16,20 @@ class ArticlesController < ApplicationController
       redirect_to articles_path
     else
       errors_to_flash(@article)
-      index
-      render :index
+      render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @article.update_attributes(article_params)
+      CrawlingJob.perform_async(@article.id)
+      redirect_to articles_path
+    else
+      errors_to_flash(@article)
+      render :new
     end
   end
 

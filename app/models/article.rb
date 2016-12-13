@@ -1,6 +1,8 @@
 class Article < ApplicationRecord
   include Likable
 
+  paginates_per 20
+
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
 
@@ -30,5 +32,9 @@ class Article < ApplicationRecord
 
   def image_present?
     self[:image].present?
+  end
+
+  def latest_comment_users
+    comments.where.not(user: self.user).where.not(user: nil).recent.limit(20).map(&:user).uniq[0..7]
   end
 end

@@ -71,4 +71,13 @@ $(function(){
   $('.post-block__body iframe').parent().addClass('embed-responsive embed-responsive-16by9');
   $('[data-toggle="tooltip"]').tooltip();
   AOS.init();
+
+  $('.gov-action-link').on('click', function(e) {
+    var href = $(e.target).closest('a').attr('href');
+    if (href && href != "#") {
+      return true;
+    }
+    var url = $(e.currentTarget).data('url');
+    window.open(url, '_blank');
+  });
 });

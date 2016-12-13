@@ -1,0 +1,12 @@
+.article {
+  &__title,
+  &__body {
+    cursor: pointer;
+  }
+  &__meta {
+    margin-top: 12px;
+  }
+  &__date {
+    color: $gray-light;
+  }
+}

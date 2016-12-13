@@ -1,0 +1,40 @@
+%li.list-group-item.gov-action-link[article]{ 'data-url': article.url }
+  .row
+    .col-sm-1.col-xs-2
+      .article__reactions.text-left
+        = render 'likes/button', likable: article
+    .col-sm-11.col-xs-10
+      .media
+        - if article.image_present?
+          .media-left
+            = image_tag article.image.xs.url
+        .media-body
+          %h4.media-heading
+            .article__title
+              = article.title
+          .article__body= excerpt(article.desc, length: 110)
+          .article__meta
+            .pull-left
+              = link_to article.user do
+                %span.article__user
+                  = image_tag article.user.image.sm, class: 'user-thumb-sm'
+                  = article.user.nickname
+              %span.article__date
+                = date_f article.created_at
+              %span.article__manage
+                - if can? :update, article
+                  = link_to [:edit, article] do
+                    %i.fa.fa-edit
+                - if can? :destroy, article
+                  = link_to article, method: :delete, data: { confirm: '삭제하시겠습니까?' } do
+                    %i.fa.fa-trash
+            .pull-right
+              - if article.latest_comment_users.any?
+                %span.article__comment_users
+                  - article.latest_comment_users.each do |user|
+                    = link_to user do
+                      = image_tag user.image.sm, class: 'user-thumb-sm'
+              = link_to article do
+                %span.article__comments
+                  %i.fa.fa-comment-o
+                  #{article.comments.count}

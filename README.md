@@ -2,7 +2,7 @@
 
 ## 실환경 구축 방법
 
-페이스북, 트위터를 연결합니다. 각 키는 /data/canoe_web_2/shared/config/env.yml에 등록합니다. 트위터는 사용자 email을 얻어오기 위해 twitter에 따로 요청해야합니다.
+페이스북, 트위터를 연결합니다. 각 키는 shared/config/env.yml에 등록합니다.
 
 S3_로 시작하는 것은 아마존 s3 관련된 정보입니다.
 

@@ -1,0 +1,14 @@
+.articles
+  .panel.panel-default.panel-flaoting
+    .panel-body
+      = form_for @article do |f|
+        .form-group
+          = f.label :url
+          = f.text_field :url, class: 'form-control'
+
+        .form-group
+          = f.label :body
+          ~ f.text_area :body, rows: 10, class: 'form-control redactor'
+
+        .form-group
+          = f.submit '저장', class: 'btn btn-primary'

@@ -1,0 +1,12 @@
+%section#article.page-block
+  .container
+    %h4
+      = link_to Article.model_name.human, articles_path
+
+    .panel.panel-default.panel-floating
+      %ul.list-group.post-group
+        = render @article
+
+    %hr
+    .article__comments
+      = render 'comments/list', commentable: @article
