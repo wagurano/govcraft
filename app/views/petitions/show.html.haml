@@ -46,3 +46,23 @@
       .post-block__campaign
         %h4 캠페인
         = render @petition.campaign
+
+- if flash[:sign_notice].present?
+  #sign-success-modal.modal.fade{:role => "dialog", :tabindex => "0"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &#215;
+          %h4.modal-title
+            = flash[:sign_notice]
+        .modal-body
+          %p 이 이슈를 친구들에게 알려 주세요
+          .share-box
+
+  = content_for :script do
+    :javascript
+      $(function(){
+        $('#sign-success-modal').modal('show');
+      });
+  - flash.delete(:sign_notice)

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :prepare_meta_tags, if: "request.get?"
-  after_action :prepare_unobtrusive_flash
+  after_action :prepare_flash
   after_action :store_location
 
   before_action do
@@ -86,5 +86,16 @@ class ApplicationController < ActionController::Base
   #bugfix redactor2-rails
   def redactor_current_user
     redactor2_current_user
+  end
+
+  private
+
+  def prepare_flash
+    obtrusive_flash = flash.select { |key, value| !unobtrusive_flash_keys.include?(key.to_sym) } if flash.any?
+    obtrusive_flash = [] if obtrusive_flash.blank?
+    prepare_unobtrusive_flash
+    obtrusive_flash.each do |key, value|
+      flash[key] = value
+    end
   end
 end

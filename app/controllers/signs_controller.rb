@@ -10,7 +10,7 @@ class SignsController < ApplicationController
   def create
     @sign.user = current_user if user_signed_in?
     if @sign.save
-      flash[:notice] = I18n.t('messages.signed')
+      flash[:sign_notice] = I18n.t('messages.signed')
     else
       errors_to_flash(@sign)
     end
