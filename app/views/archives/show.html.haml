@@ -11,12 +11,20 @@
     $.getJSON("#{archive_path(@archive, format: :json)}", function(data) {
       window.timeline = new TL.Timeline('timeline-embed', data, { start_at_end: true, language: 'ko', initial_zoom: #{initial_zoom} });
     });
-    $(window).load(function(){
-      $("a").click(function(){
-        top.window.location.href=$(this).attr("href");
-        return true;
-      })
-    })
+    $(window).click(function(e) {
+      if(e.target.tagName != 'A') {
+        return false;
+      }
+
+      e.preventDefault();
+      var url = $(e.target).attr("href");
+      if($(e.target).hasClass('tl-makelink')) {
+        top.window.open(url, '_blank');
+      } else {
+        top.window.location.href = url;
+      }
+      return false;
+    });
   :css
     body { padding: 0; margin: 0; }
 
@@ -49,4 +57,18 @@
       :javascript
         $.getJSON("#{archive_path(@archive, format: :json)}", function(data) {
           window.timeline = new TL.Timeline('timeline-embed', data, { start_at_end: true, language: 'ko', initial_zoom: #{initial_zoom} });
+        });
+        $(window).click(function(e) {
+          if(e.target.tagName != 'A') {
+            return false;
+          }
+
+          e.preventDefault();
+          var url = $(e.target).attr("href");
+          if($(e.target).hasClass('tl-makelink')) {
+            top.window.open(url, '_blank');
+          } else {
+            window.location.href = url;
+          }
+          return false;
         });
