@@ -3,6 +3,7 @@ class ArchiveDocumentsController < ApplicationController
 
   def show
     @archive = @archive_document.archive
+    @documents = params[:tag].present? ? @archive.documents.tagged_with(params[:tag]) : @archive.documents
   end
 
   def new

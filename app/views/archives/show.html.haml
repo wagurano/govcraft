@@ -13,7 +13,7 @@
     });
     $(window).click(function(e) {
       if(e.target.tagName != 'A') {
-        return false;
+        return true;
       }
 
       e.preventDefault();
@@ -28,6 +28,28 @@
   :css
     body { padding: 0; margin: 0; }
 
+- elsif params[:mode] == 'list'
+  = stylesheet_link_tag 'application', media: 'all'
+  :css
+    body { padding: 0; margin: 0; }
+
+  = render 'archive_documents/list', archive: @archive
+
+  %script{:src => "https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"}
+  = javascript_include_tag 'application'
+  :javascript
+    $(window).click(function(e) {
+      var $a_tag = $(e.target).closest('a');
+      if(!$a_tag.length || $a_tag.closest('#data-tag-cloud').length) {
+        console.log($a_tag);
+        return true;
+      }
+
+      e.preventDefault();
+      var url = $a_tag.attr("href");
+      top.window.open(url, '_blank');
+      return false;
+    });
 - else
   = render 'header', archive: @archive
 
@@ -60,7 +82,7 @@
         });
         $(window).click(function(e) {
           if(e.target.tagName != 'A') {
-            return false;
+            return true;
           }
 
           e.preventDefault();

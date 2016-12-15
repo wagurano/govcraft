@@ -9,7 +9,7 @@ class ArchivesController < ApplicationController
   def show
     @documents = params[:tag].present? ? @archive.documents.tagged_with(params[:tag]) : @archive.documents
 
-    if params[:mode] == 'timeline'
+    if %w(timeline list).include? params[:mode]
       render layout: false
     end
   end
