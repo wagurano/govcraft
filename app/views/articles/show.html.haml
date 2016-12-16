@@ -7,6 +7,8 @@
       %ul.list-group.post-group
         = render @article
 
+    .article__comments
+      != @article.body
     %hr
     .article__comments
       = render 'comments/list', commentable: @article

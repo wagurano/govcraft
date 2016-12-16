@@ -1,6 +1,7 @@
 .article {
   &__title,
-  &__body {
+  &__body,
+  &__image {
     cursor: pointer;
   }
   &__meta {

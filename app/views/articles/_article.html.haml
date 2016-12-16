@@ -1,4 +1,4 @@
-%li.list-group-item.gov-action-link[article]{ 'data-url': article.url }
+%li.list-group-item[article]
   .row
     .col-sm-1.col-xs-2
       .article__reactions.text-left
@@ -6,13 +6,18 @@
     .col-sm-11.col-xs-10
       .media
         - if article.image_present?
-          .media-left
+          .media-left.article__image.gov-action-link{ 'data-url': article.url }
             = image_tag article.image.xs.url
         .media-body
-          %h4.media-heading
+          %h4.media-heading.gov-action-link{ 'data-url': article.url }
             .article__title
               = article.title
-          .article__body= excerpt(article.desc, length: 110)
+          .article__body.gov-action-link{ 'data-url': article.url }
+            = excerpt(article.desc, length: 110)
+            %br
+            %span.artcle__site-name
+              %i.fa.fa-globe
+              출처: #{article.site_name}
           .article__meta
             .pull-left
               = link_to article.user do
