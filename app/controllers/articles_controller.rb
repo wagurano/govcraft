@@ -51,7 +51,7 @@ class ArticlesController < ApplicationController
 
   def hastag
     return if @article.body.blank?
-    strip_body = view_context.strip_tags(@article.body.gsub("&nbsp;", " "))
+    strip_body = Nokogiri::HTML(@article.body).xpath('//text()').map(&:text).join(' ').gsub("&nbsp;", " ")
     @article.tag_list = strip_body.scan(HASHTAG_REGEX).map { |match| match[1] }.join(', ')
   end
 end
