@@ -28,6 +28,10 @@ gem 'haml-rails', '~> 0.9.0'
 gem 'redactor2_rails', '~> 0.1.3'
 gem 'rails_autolink', '~> 1.1', '>= 1.1.6'
 
+# tool
+gem 'axlsx_rails', '~> 0.5.0'
+gem 'htmlentities', '~> 4.3', '>= 4.3.4'
+
 # assets
 source 'https://rails-assets.org' do
   gem 'rails-assets-trianglify'

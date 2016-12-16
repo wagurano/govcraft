@@ -1,0 +1,21 @@
+row_definition = [
+  [:tag_list, '태그'],
+  [:title, '제목'],
+  [:body, '내용'],
+  [:date, '날짜'],
+  [:time, '시간'],
+  [:source_url, '출처'],
+  [:image, '대표이미지'],
+  [:media_url, '미디어 URL'],
+  [:media_credit, '미디어 출처']
+]
+row_titles = row_definition.map { |c| c[1] }
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "생성일 #{l(Date.today)}") do |sheet|
+  sheet.add_row row_titles
+  @archive.documents.each do |document|
+    sheet.add_row row_definition.map { |c|
+      c[0] == :body ? HTMLEntities.new.decode(strip_tags(document[c[0]])) : document[c[0]]
+    }
+  end
+end

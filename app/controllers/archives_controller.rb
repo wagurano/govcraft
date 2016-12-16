@@ -14,6 +14,13 @@ class ArchivesController < ApplicationController
     end
   end
 
+  def download
+    @archive = Archive.find(params[:id])
+    respond_to do |format|
+      format.xlsx
+    end
+  end
+
   def create
     @archive.user = current_user
     if @archive.save

@@ -54,7 +54,9 @@ Rails.application.routes.draw do
   resources :events
   resources :articles
   resources :agendas
-  resources :archives
+  resources :archives do
+    get 'download', on: :member
+  end
   resources :archive_documents
   resources :memorials
 

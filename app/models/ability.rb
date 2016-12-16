@@ -5,8 +5,10 @@ class Ability
     can [:read, :social_card], :all
     can [:events], Campaign
     can :create, [Sign, Comment, Like]
+    can :download, Archive
 
     if user
+
       can :create, [
           FollowingIssue,
           Campaign, Discussion, Petition, Poll, Wiki,
