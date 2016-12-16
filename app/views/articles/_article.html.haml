@@ -18,6 +18,12 @@
             %span.artcle__site-name
               %i.fa.fa-globe
               출처: #{article.site_name}
+            %span.artcle__tags
+              - article.tags.each do |tag|
+                = link_to articles_path(tag: tag.name) do
+                  %span.label.label-default
+                    \##{tag.name}
+                &nbsp;
           .article__meta
             .pull-left
               = link_to article.user do

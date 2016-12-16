@@ -1,11 +1,39 @@
 %section#article.page-block
   .container
     %h4
-      = Article.model_name.human
+      = link_to Article.model_name.human, articles_path
+      - if params[:tag].present?
+        &gt;
+        \##{params[:tag]}
       %small
         = link_to "글쓰기", new_article_path
 
+- tag_counts = Article.tag_counts_on(:tags)
+- if tag_counts.any?
+  %section.page-block
+    .container#data-tag-cloud
+      - tag_counts.each do |tag|
+        - if params[:tag] == tag.name
+          %span{ style: 'display: inline-block; background-color: #4a5dd0; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; color: #fff; margin-bottom: 7px;' }
+            = link_to tag.name, articles_path(), style: 'color: #fff'
+            %small
+              = tag.taggings_count
+        - else
+          %span{ style: 'display: inline-block; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; margin-bottom: 7px;' }
+            = link_to tag.name, articles_path(tag: tag.name)
+            %small.text-muted
+              = tag.taggings_count
+
+%section.page-block
+  .container
     - if @articles.any?
+
+      .article__sort-panel.text-right
+        = link_to articles_path(sort: :hot, tag: params[:tag]), class: ('active' if params[:sort] == 'hot' or params[:sort].blank?) do
+          인기순
+        \|
+        = link_to articles_path(sort: :recent, tag: params[:tag]), class: ('active' if params[:sort] == 'recent') do
+          최신순
       .panel.panel-default.panel-floating
         %ul.list-group.post-group
           = render @articles

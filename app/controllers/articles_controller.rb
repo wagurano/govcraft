@@ -1,8 +1,10 @@
 class ArticlesController < ApplicationController
   load_and_authorize_resource
+  HASHTAG_REGEX = /(?:\s|^)(#(?!(?:\d+|[ㄱ-ㅎ가-힣a-z0-9_]+?_|_[ㄱ-ㅎ가-힣a-z0-9_]+?)(?:\s|$))([ㄱ-ㅎ가-힣a-z0-9\-_]+))/i
 
   def index
-    @articles = Article.recent.page params[:page]
+    sort = params[:sort] || 'hot'
+    @articles = Article.send(sort).recent.page params[:page]
   end
 
   def new
@@ -11,9 +13,10 @@ class ArticlesController < ApplicationController
 
   def create
     @article.user = current_user
+    hastag
     if @article.save
       CrawlingJob.perform_async(@article.id)
-      redirect_to articles_path
+      redirect_to articles_path(sort: :recent)
     else
       errors_to_flash(@article)
       render :new
@@ -24,9 +27,11 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    if @article.update_attributes(article_params)
+    @article.assign_attributes(article_params)
+    hastag
+    if @article.save
       CrawlingJob.perform_async(@article.id)
-      redirect_to articles_path
+      redirect_to article_path(@article)
     else
       errors_to_flash(@article)
       render :new
@@ -42,5 +47,11 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:url, :body)
+  end
+
+  def hastag
+    return if @article.body.blank?
+    strip_body = view_context.strip_tags(@article.body.gsub("&nbsp;", " "))
+    @article.tag_list = strip_body.scan(HASHTAG_REGEX).map { |match| match[1] }.join(', ')
   end
 end

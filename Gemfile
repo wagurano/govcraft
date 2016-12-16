@@ -13,6 +13,7 @@ gem 'scoped_search', '~> 3.2', '>= 3.2.2'
 gem 'counter_culture', '~> 0.2.3'
 gem 'enumerize', '~> 2.0'
 gem 'acts-as-taggable-on', '~> 4.0'
+gem 'by_star', '~> 2.2', '>= 2.2.1'
 
 # geo
 gem 'geocoder'
@@ -84,6 +85,7 @@ gem 'postmark-rails', '~> 0.12.0'
 
 # scheduler
 gem 'sidekiq', '~> 4.1'
+gem 'sidekiq-cron', '~> 0.4.5'
 gem 'sidekiq-unique-jobs', '~> 4.0', '>= 4.0.16'
 gem 'redis', '~> 3.2', '>= 3.2.2'
 gem 'redis-namespace', '~> 1.5', '>= 1.5.2'
