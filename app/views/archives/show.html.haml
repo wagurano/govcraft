@@ -69,7 +69,7 @@
         %li
           = link_to '자료추가', new_archive_document_path(archive_id: @archive.id), role: "tab"
         %li
-          = link_to download_archive_path(archive_id: @archive.id, format: :xlsx), role: "tab" do
+          = link_to download_archive_path(@archive, format: :xlsx), role: "tab" do
             %i.fa.fa-download
             다운로드
 
