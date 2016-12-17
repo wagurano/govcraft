@@ -7,12 +7,12 @@
         %span{ style: 'display: inline-block; background-color: #4a5dd0; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; color: #fff; margin-bottom: 7px;' }
           = link_to tag.name, archive_path(archive, passing_params.except(:tag)), style: 'color: #fff'
           %small
-            = tag.taggings_count
+            = tag.count
       - else
         %span{ style: 'display: inline-block; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; margin-bottom: 7px;' }
           = link_to tag.name, archive_path(archive, passing_params.merge(tag: tag.name))
           %small.text-muted
-            = tag.taggings_count
+            = tag.count
 
 %section.page-block
   .container
