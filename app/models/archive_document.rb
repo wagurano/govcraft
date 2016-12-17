@@ -9,7 +9,7 @@ class ArchiveDocument < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  default_scope { order('date DESC, time DESC') }
+  default_scope { order('date DESC, time DESC, id DESC') }
 
   scope :recent, -> { order('id DESC') }
 end
