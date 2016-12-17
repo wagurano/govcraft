@@ -7,7 +7,7 @@ ExceptionNotification.configure do |config|
 
   config.add_notifier :slack, {
     username: "GovCraft #{Rails.env}",
-    webhook_url: ENV["SLACK_WEBHOOK_URL"],
+    webhook_url: ENV["SLACK_EXCEPTION_WEBHOOK_URL"],
     additional_parameters: {
       mrkdwn: true
     }

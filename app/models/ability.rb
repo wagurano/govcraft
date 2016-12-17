@@ -5,6 +5,7 @@ class Ability
     can [:read, :social_card], :all
     can [:events], Campaign
     can :create, [Sign, Comment, Like]
+    can :create_by_slack, Article
     can :download, Archive
 
     if user

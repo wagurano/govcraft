@@ -18,6 +18,8 @@ production:
   S3_REGION: xx
   S3_BUCKET: xx
   GOOGLE_API_KEY: xx
+  SLACK_EXCEPTION_WEBHOOK_URL: xx
+  SLACK_ARTICLE_WEBHOOK_KEY: xx
 ```
 
 

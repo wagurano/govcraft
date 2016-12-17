@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161216060447) do
+ActiveRecord::Schema.define(version: 20161217044248) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20161216060447) do
     t.string   "site_name"
     t.integer  "image_height",                        default: 0
     t.integer  "image_width",                         default: 0
-    t.integer  "user_id",                                         null: false
+    t.integer  "user_id"
     t.integer  "likes_count",                         default: 0
     t.integer  "comments_count",                      default: 0
     t.integer  "anonymous_likes_count",               default: 0

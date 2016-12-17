@@ -4,7 +4,7 @@ class Article < ApplicationRecord
   acts_as_taggable
   paginates_per 20
 
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many :comments, as: :commentable, dependent: :destroy
 
   scope :recent, -> { order('id DESC') }

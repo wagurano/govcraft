@@ -52,7 +52,9 @@ Rails.application.routes.draw do
   end
 
   resources :events
-  resources :articles
+  resources :articles do
+    post :create_by_slack, on: :collection
+  end
   resources :agendas
   resources :archives do
     get 'download', on: :member

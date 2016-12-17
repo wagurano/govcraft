@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :create_by_slack
   load_and_authorize_resource
   HASHTAG_REGEX = /(?:\s|^)(#(?!(?:\d+|[ㄱ-ㅎ가-힣a-z0-9_]+?_|_[ㄱ-ㅎ가-힣a-z0-9_]+?)(?:\s|$))([ㄱ-ㅎ가-힣a-z0-9\-_]+))/i
 
@@ -21,6 +22,20 @@ class ArticlesController < ApplicationController
       errors_to_flash(@article)
       render :new
     end
+  end
+
+  def create_by_slack
+    slack_text = params[:text]
+    slack_token = params[:token]
+    return if slack_text.blank? or slack_token != ENV['SLACK_ARTICLE_WEBHOOK_KEY']
+
+    parsed_url = slack_text.scan(/https?:\/\/[\S]+/).first
+    return if parsed_url.blank?
+
+    @article = Article.new(url: parsed_url, body: slack_text)
+    hastag
+    @article.save!
+    CrawlingJob.perform_async(@article.id)
   end
 
   def edit
