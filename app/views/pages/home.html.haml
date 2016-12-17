@@ -20,6 +20,14 @@
         %h4= Memorial.model_name.human
         = render @memorials
 
+%section.page-block
+  .container
+    %h4
+      = Article.model_name.human
+      %small.text-right= link_to '더보기 >', articles_path
+    .panel.panel-default.panel-floating
+      %ul.list-group.post-group
+        = render @articles
 
 %section.page-block{ style: 'background-color: #f5f5f5; padding: 28px 0;' }
   .container

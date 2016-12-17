@@ -19,10 +19,10 @@
               %i.fa.fa-globe
               출처: #{article.site_name}
             %span.artcle__tags
+              %i.fa.fa-tag
               - article.tags.each do |tag|
                 = link_to articles_path(tag: tag.name) do
-                  %span.label.label-default
-                    \##{tag.name}
+                  %span ##{tag.name}
                 &nbsp;
           .article__meta
             .pull-left

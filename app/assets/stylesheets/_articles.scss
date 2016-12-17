@@ -10,12 +10,11 @@
   &__date {
     color: $gray-light;
   }
-
-  &__sort-panel a {
-    color: $gray;
-    &.active {
-      font-weight: bold;
-      color: $brand-primary;
-    }
+}
+.articles-sort-panel a {
+  color: $gray;
+  &.active {
+    font-weight: bold;
+    color: $brand-primary;
   }
 }

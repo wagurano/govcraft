@@ -27,8 +27,7 @@
 %section.page-block
   .container
     - if @articles.any?
-
-      .article__sort-panel.text-right
+      .articles-sort-panel.text-right
         = link_to articles_path(sort: :hot, tag: params[:tag]), class: ('active' if params[:sort] == 'hot' or params[:sort].blank?) do
           인기순
         \|

@@ -29,7 +29,7 @@ ko:
       agenda: 의제
       archive: 시민 아카이브
       event: 이벤트
-      article: 뉴스
+      article: 시민 뉴스
     attributes:
       user:
         nickname: 아이디
@@ -103,6 +103,9 @@ ko:
         commenter_name: 이름
         commenter_email: 이메일(선택)
         image: 사진
+      article:
+        url: URL
+        body: 내용
     errors:
       models:
         user:

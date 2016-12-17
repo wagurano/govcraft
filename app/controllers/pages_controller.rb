@@ -3,6 +3,7 @@ class PagesController < ApplicationController
     @campaigns = Campaign.recent
     @archives = Archive.recent
     @memorials = Memorial.recent
+    @articles = Article.hot.limit(10)
   end
 
   def about
