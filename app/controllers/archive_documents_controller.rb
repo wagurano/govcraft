@@ -14,7 +14,7 @@ class ArchiveDocumentsController < ApplicationController
   def create
     @archive_document.user = current_user
     if @archive_document.save
-      redirect_to @archive_document.archive
+      redirect_to archive_path(@archive_document.archive, tab: :list)
     else
       render 'new'
     end
