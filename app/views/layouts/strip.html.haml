@@ -1,0 +1,18 @@
+- content_for :header do
+  %div
+- content_for :footer do
+  %section
+    %nav.navbar.navbar-default{ style: 'margin: 0;' }
+      .container
+        %ul.nav.navbar-nav.navbar-right
+          %li.text-right
+            = link_to root_url, target: '_blank' do
+              powered by
+              직접 민주주의 플랫폼
+              = image_tag 'favicons/favicon-32x32.png', width: 18
+              %strong
+                우주당
+
+:css
+  body { padding-top: 0 !important; }
+= render file: 'layouts/application'

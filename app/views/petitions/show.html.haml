@@ -1,68 +1,74 @@
-- cover_image = @petition.cover_image_url(:lg)
-%section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image}); padding-bottom: 56px; background-size: cover; background-position: center center;" }
-  .container
-    - if @petition.campaign
-      .cover-section__campaign
-        = link_to @petition.campaign.title, @petition.campaign
+- if params[:mode] == 'widget'
+  = render 'widget'
+- else
+  - cover_image = @petition.cover_image_url(:lg)
+  %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image}); padding-bottom: 56px; background-size: cover; background-position: center center;" }
+    .container
+      - if @petition.campaign
+        .cover-section__campaign
+          = link_to @petition.campaign.title, @petition.campaign
 
-    %h1.cover-section__title= @petition.title
+      %h1.cover-section__title= @petition.title
 
-    %h4.cover-section__users-count
-      %span
-        %i.fa.fa-user-o
-        = @petition.signs_count
-        명 참여
+      %h4.cover-section__users-count
+        %span
+          %i.fa.fa-user-o
+          = @petition.signs_count
+          명 참여
 
-%section#petition-block.page-block.post-block
-  .container
-    .post-block__info
-      .row
-        .col-xs-9
-          %span.post-block__user
-            = link_to @petition.user.nickname
-          %span.post-block__date
-            = date_f @petition.created_at
-          - if can? :edit, @petition
-            = link_to '수정', edit_petition_path(@petition)
-          - if can? :destroy, @petition
-            = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
-        .col-xs-3.text-right
-          조회 #{@petition.views_count}
+  %section#petition-block.page-block.post-block
+    .container
+      .post-block__info
+        .row
+          .col-xs-9
+            %span.post-block__user
+              = link_to @petition.user.nickname
+            %span.post-block__date
+              = date_f @petition.created_at
+            - if can? :edit, @petition
+              = link_to '수정', edit_petition_path(@petition)
+            - if can? :destroy, @petition
+              = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+          .col-xs-3.text-right
+            조회 #{@petition.views_count}
 
-    .post-block__body
-      = raw @petition.body
+      .post-block__body
+        = raw @petition.body
 
-    .post-block__signs
-      = render 'signs/list', petition: @petition
+      .post-block__signs
+        = render 'signs/list', petition: @petition
 
-    .post-block__share
-      %h4 이 이슈를 친구들에게 알려 주세요
-      .share-box
+      .post-block__share
+        %h4 이 이슈를 친구들에게 알려 주세요
+        .share-box
 
-    .post-block__comments
-      = render 'comments/list', commentable: @petition
+      .post-block__widget
+        %h4 이 서명을 퍼가주세요.
+        %input{value: "<iframe width='100%' height='800' src='#{petition_url(@petition, mode: :widget)}' frameborder='0'></iframe>", style: 'width: 100%;'}
+      .post-block__comments
+        = render 'comments/list', commentable: @petition
 
-    - if @petition.campaign
-      .post-block__campaign
-        %h4 캠페인
-        = render @petition.campaign
+      - if @petition.campaign
+        .post-block__campaign
+          %h4 캠페인
+          = render @petition.campaign
 
-- if flash[:sign_notice].present?
-  #sign-success-modal.modal.fade{:role => "dialog", :tabindex => "0"}
-    .modal-dialog{:role => "document"}
-      .modal-content
-        .modal-header
-          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"} &#215;
-          %h4.modal-title
-            = flash[:sign_notice]
-        .modal-body
-          %p 이 이슈를 친구들에게 알려 주세요
-          .share-box
+  - if flash[:sign_notice].present?
+    #sign-success-modal.modal.fade{:role => "dialog", :tabindex => "0"}
+      .modal-dialog{:role => "document"}
+        .modal-content
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} &#215;
+            %h4.modal-title
+              = flash[:sign_notice]
+          .modal-body
+            %p 이 이슈를 친구들에게 알려 주세요
+            .share-box
 
-  = content_for :script do
-    :javascript
-      $(function(){
-        $('#sign-success-modal').modal('show');
-      });
-  - flash.delete(:sign_notice)
+    = content_for :script do
+      :javascript
+        $(function(){
+          $('#sign-success-modal').modal('show');
+        });
+    - flash.delete(:sign_notice)

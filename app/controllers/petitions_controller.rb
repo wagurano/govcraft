@@ -10,6 +10,10 @@ class PetitionsController < ApplicationController
     @campaign = @petition.campaign
     @petition.increment!(:views_count)
     @signs = @petition.signs.page params[:page]
+
+    if params[:mode] == 'widget'
+      render layout: 'strip'
+    end
   end
 
   def data
