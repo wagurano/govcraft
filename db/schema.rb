@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161217044248) do
+ActiveRecord::Schema.define(version: 20161220030538) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -99,6 +99,10 @@ ActiveRecord::Schema.define(version: 20161217044248) do
     t.boolean  "petition_enabled",                 default: true
     t.boolean  "poll_enabled",                     default: true
     t.boolean  "wiki_enabled",                     default: true
+    t.string   "discussion_title"
+    t.string   "poll_title"
+    t.string   "petition_title"
+    t.string   "wiki_title"
     t.index ["user_id"], name: "index_campaigns_on_user_id", using: :btree
   end
 

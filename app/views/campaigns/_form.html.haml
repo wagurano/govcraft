@@ -16,16 +16,32 @@
     = f.check_box :discussion_enabled, class: 'form-control'
 
   .form-group
+    = f.label :discussion_title
+    = f.text_field :discussion_title, class: 'form-control'
+
+  .form-group
     = f.label :poll_enabled
     = f.check_box :poll_enabled, class: 'form-control'
+
+  .form-group
+    = f.label :poll_title
+    = f.text_field :poll_title, class: 'form-control'
 
   .form-group
     = f.label :petition_enabled
     = f.check_box :petition_enabled, class: 'form-control'
 
   .form-group
+    = f.label :petition_title
+    = f.text_field :petition_title, class: 'form-control'
+
+  .form-group
     = f.label :wiki_enabled
     = f.check_box :wiki_enabled, class: 'form-control'
+
+  .form-group
+    = f.label :wiki_title
+    = f.text_field :wiki_title, class: 'form-control'
 
   .form-group
     = f.submit '저장', class: 'btn btn-primary'

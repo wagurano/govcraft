@@ -48,7 +48,8 @@ class CampaignsController < ApplicationController
   def campaign_params
     params.require(:campaign).permit(
       :title, :body, :image,
-      :discussion_enabled, :poll_enabled, :petition_enabled, :wiki_enabled
+      :discussion_enabled, :poll_enabled, :petition_enabled, :wiki_enabled,
+      :discussion_title, :poll_title, :petition_title, :wiki_title
     )
   end
 

@@ -1,7 +1,7 @@
 %section#petitions.page-block
   .container
     %h4
-      = Petition.model_name.human
+      = @campaign.petition_title
       %small
         = link_to "제안하기", new_petition_path(campaign_id: @campaign)
     .panel.panel-default.panel-floating
