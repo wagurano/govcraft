@@ -35,12 +35,16 @@ $(document).imagesLoaded( { }, function() {
 
 $(function(){
   $('.share-box').jsSocials({
+    // 윈도우 resize 할때 다시 로딩을 방지합니다.
+    showLabel: false,
+    showCount: false,
+
     shares: [{
         renderer: function() {
           var $result = $("<div>");
 
           var script = document.createElement("script");
-          script.text = "(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = \"//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.3\"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));";
+          script.text = "(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = \"//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.3\"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));";
           $result.append(script);
 
           $("<div>").addClass("fb-share-button")
