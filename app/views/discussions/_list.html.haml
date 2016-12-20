@@ -1,7 +1,7 @@
 %section#discussions.page-block
   .container
     %h4
-      = @campaign.discussion_title
+      = @campaign.try(:component_title, 'discussion')
       %small
         = link_to "글쓰기", new_discussion_path(campaign_id: @campaign)
     .panel.panel-default.panel-floating

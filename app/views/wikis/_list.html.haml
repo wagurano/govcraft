@@ -1,7 +1,7 @@
 %section#wikis.page-block
   .container
     %h4
-      = @campaign.wiki_title
+      = @campaign.try(:component_title, 'wiki')
       %small
         = link_to "#{Wiki.model_name.human} 추가", new_wiki_path(campaign_id: @campaign)
     .panel.panel-default.panel-floating

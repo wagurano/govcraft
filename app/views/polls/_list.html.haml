@@ -1,7 +1,7 @@
 %section#polls.page-block
   .container
     %h4
-      = @campaign.poll_title
+      = @campaign.try(:component_title, 'poll')
       %small
         = link_to "제안하기", new_poll_path(campaign_id: @campaign)
 
