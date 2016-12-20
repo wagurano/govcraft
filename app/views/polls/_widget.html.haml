@@ -1,0 +1,22 @@
+- cover_image = @poll.cover_image_url(:lg)
+%section.poll-widget.cover-section{ style: "padding-top: 0;" }
+  %section{ style: "padding-top: 20px; padding-bottom: 56px; background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image}); background-size: cover; background-position: center top; background-repeat: no-repeat;" }
+    .container
+      - if @poll.campaign
+        .cover-section__campaign
+          = link_to @poll.campaign.title, @poll.campaign, target: '_blank'
+
+      = link_to @poll, target: '_blank', style: 'color: #fff;' do
+        %h1.cover-section__title= @poll.title
+
+        %h4.cover-section__users-count
+          %span
+            %i.fa.fa-user-o
+            = @poll.votes_count
+            명 참여
+  %section{ style: 'background: #fff;' }
+    .container{ style: 'position: relative; top: -56px;' }
+      .cover-section__votes{ style: "margin-top: 0; background-color: #eee;" }
+        = render 'votes/panel', poll: @poll, show_voters: false
+        = link_to '자세히 보기 >', poll_url(@poll), target: '_blank'
+

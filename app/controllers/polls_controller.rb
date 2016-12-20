@@ -10,6 +10,10 @@ class PollsController < ApplicationController
     @campaign = @poll.campaign
     @poll.increment!(:views_count)
 
+    if params[:mode] == 'widget'
+      render layout: 'strip'
+    end
+
     prepare_meta_tags title: @poll.title,
       description: ApplicationController.helpers.strip_tags(@poll.body).strip.truncate(100),
       url: poll_url,
