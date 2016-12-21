@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
   resources :users
   resources :comments
-  resources :likes
+  resources :likes do
+    delete '/', on: :collection, to: 'likes#cancel'
+  end
   resources :signs
   resources :reports
   resources :votes do

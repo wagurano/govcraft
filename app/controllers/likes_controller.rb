@@ -19,6 +19,17 @@ class LikesController < ApplicationController
     end
   end
 
+  def cancel
+    if !user_signed_in?
+      flash[:notice] = '로그인해서 공감한 경우만 취소됩니다.'
+      return
+    end
+
+    @like = Like.find_by!(likable: Like.new(like_params).likable, user: current_user)
+    @likable = @like.likable
+    @like.try(:destroy)
+  end
+
   private
 
   def like_params
