@@ -85,3 +85,13 @@ $(function(){
     window.open(url, '_blank');
   });
 });
+
+$(document).ajaxError(function (e, xhr, settings) {
+  if(xhr.status == 500) {
+    UnobtrusiveFlash.showFlashMessage('뭔가 잘못되었습니다. 곧 고치겠습니다.', {type: 'error'})
+  } else if(xhr.status == 404) {
+    UnobtrusiveFlash.showFlashMessage('어머나! 누가 지웠네요. 페이지를 새로 고쳐보세요.', {type: 'notice'})
+  } else if(xhr.status == 401) {
+    UnobtrusiveFlash.showFlashMessage('먼저 로그인해 주세요.', {type: 'notice'})
+  }
+});
