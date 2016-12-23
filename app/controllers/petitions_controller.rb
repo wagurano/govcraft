@@ -52,7 +52,7 @@ class PetitionsController < ApplicationController
   private
 
   def petition_params
-    params.require(:petition).permit(:title, :body, :campaign_id, :signs_goal_count, :cover_image)
+    params.require(:petition).permit(:title, :body, :campaign_id, :signs_goal_count, :cover_image, :thanks_mention)
   end
 
   def reset_meta_tags

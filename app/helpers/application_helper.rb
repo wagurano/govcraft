@@ -53,4 +53,9 @@ module ApplicationHelper
     options[:length] = 130 unless options.has_key?(:length)
     truncate((strip_tags(text).try(:html_safe)), options)
   end
+
+  def fill_in(template, data)
+    return if template.blank?
+    template.gsub(/\{\{(\w+)\}\}/) { data[$1.to_sym] }
+  end
 end

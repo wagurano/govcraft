@@ -19,4 +19,11 @@
     = f.file_field :cover_image, class: 'form-control'
 
   .form-group
+    = f.label :thanks_mention
+    ~ f.text_area :thanks_mention, class: 'form-control'
+  %p.help-block
+    비워두시면, 서명 이후에 '#{t('messages.signed')}'라는 문구로 표시됩니다.
+    %br
+    {{number}}라고 쓰시면 그자리에 서명 순번이 표시됩니다.
+  .form-group
     = f.submit '저장', class: 'btn btn-primary'

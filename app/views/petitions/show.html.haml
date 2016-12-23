@@ -61,9 +61,9 @@
             %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
               %span{"aria-hidden" => "true"} &#215;
             %h4.modal-title
-              = flash[:sign_notice]
+              서명 성공
           .modal-body
-            %p 이 이슈를 친구들에게 알려 주세요
+            %p= flash[:sign_notice]
             .share-box
 
     = content_for :script do
