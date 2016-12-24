@@ -23,6 +23,12 @@
               .form-group.hidden
                 = f.label :signer_email
                 = f.text_field :signer_email, placeholder: '이메일', class: 'form-control'
+
+            - if petition.id == 29
+              .form-group
+                = f.label :extra_29_confirm_join
+                = f.check_box :extra_29_confirm_join, class: 'form-control'
+
             .form-group
               = f.label :body, petition.sign_title || Sign.human_attribute_name(:body)
               = f.text_field :body, placeholder: '나는...', class: 'form-control input-lg'
@@ -60,6 +66,8 @@
         %div
           %span.text-primary= sign.user_name
           = raw(screened(sign, :body))
+          - if sign.extra_29_confirm_join
+            %strong (광고에 참여)
           - if !local_assigns[:widget]
             %small
               - if current_user != sign.user

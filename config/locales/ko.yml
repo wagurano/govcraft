@@ -61,6 +61,7 @@ ko:
         signer_name: 이름
         signer_email: 이메일
         body: 나의 한마디
+        extra_29_confirm_join: 신문광고에 참여합니다
       poll:
         title: 제목
         body: 내용

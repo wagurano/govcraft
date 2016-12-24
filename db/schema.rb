@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161224044534) do
+ActiveRecord::Schema.define(version: 20161224060926) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -338,13 +338,14 @@ ActiveRecord::Schema.define(version: 20161224044534) do
 
   create_table "signs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
-    t.integer  "petition_id",                             null: false
-    t.text     "body",          limit: 65535
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.integer  "petition_id",                                         null: false
+    t.text     "body",                  limit: 65535
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.string   "signer_name"
     t.string   "signer_email"
-    t.integer  "reports_count",               default: 0
+    t.integer  "reports_count",                       default: 0
+    t.boolean  "extra_29_confirm_join",               default: false
     t.index ["petition_id"], name: "index_signs_on_petition_id", using: :btree
     t.index ["user_id", "petition_id"], name: "index_signs_on_user_id_and_petition_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_signs_on_user_id", using: :btree
