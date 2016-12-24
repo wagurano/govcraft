@@ -20,7 +20,7 @@
 
   .form-group
     = f.label :thanks_mention
-    ~ f.text_area :thanks_mention, class: 'form-control'
+    ~ f.text_area :thanks_mention, class: 'form-control redactor'
   %p.help-block
     비워두시면, 서명 이후에 '#{t('messages.signed')}'라는 문구로 표시됩니다.
     %br

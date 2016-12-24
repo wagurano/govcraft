@@ -63,7 +63,7 @@
             %h4.modal-title
               서명 성공
           .modal-body
-            %p= flash[:sign_notice]
+            != flash[:sign_notice]
             .share-box
 
     = content_for :script do
