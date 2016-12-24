@@ -25,5 +25,14 @@
     비워두시면, 서명 이후에 '#{t('messages.signed')}'라는 문구로 표시됩니다.
     %br
     {{number}}라고 쓰시면 그자리에 서명 순번이 표시됩니다.
+
+  .form-group
+    = f.label :comment_enabled
+    = f.check_box :comment_enabled, class: 'form-control'
+
+  .form-group
+    = f.label :sign_title
+    = f.text_field :sign_title, class: 'form-control'
+
   .form-group
     = f.submit '저장', class: 'btn btn-primary'

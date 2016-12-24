@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161223093911) do
+ActiveRecord::Schema.define(version: 20161224044534) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -250,6 +250,8 @@ ActiveRecord::Schema.define(version: 20161223093911) do
     t.string   "cover_image"
     t.integer  "anonymous_likes_count",               default: 0
     t.text     "thanks_mention",        limit: 65535
+    t.boolean  "comment_enabled",                     default: true
+    t.string   "sign_title"
     t.index ["campaign_id"], name: "index_petitions_on_campaign_id", using: :btree
     t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
   end
