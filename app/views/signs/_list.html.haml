@@ -80,7 +80,8 @@
               - if can? :destroy, sign
                 = link_to '취소', sign, method: :delete, data: { confirm: '정말 취소하시겠습니까?' }
       - if !local_assigns[:widget]
-        = paginate @signs, params: { controller: :petitions, action: :show }
+        .sign-panel__pagination.text-center
+          = paginate @signs, params: { controller: :petitions, activeon: :show }, theme: 'twitter-bootstrap-3'
       - else
         .text-center{ style: 'margin-top: 12px' }
           = link_to '더보기 >', petition_url(@petition), target: '_blank'

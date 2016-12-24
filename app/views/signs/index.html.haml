@@ -10,6 +10,6 @@
             %div
               = image_tag 'icon-candle.png', width: 20, height: 20, class: 'img-circle'
               = sign.user_name
-
-    = paginate @signs, params: { petition_id: @petition.id }
+    .text-center
+      = paginate @signs, params: { petition_id: @petition.id }, theme: 'twitter-bootstrap-3'
 
