@@ -1,0 +1,32 @@
+%section#race-block.page-block.post-block
+  .container
+    .post-block__title
+      %h4
+        = link_to Race.model_name.human, people_path
+        &gt;
+        = @race.title
+    .post-block__info
+      %span.post-block__user
+        = link_to @race.user.nickname
+      %span.post-block__date
+        = date_f @race.created_at
+      - if can? :edit, @race
+        = link_to '수정', edit_race_path(@race)
+      - if can? :destroy, @race
+        = link_to '삭제', @race, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+    .post-block__body
+      = raw @race.body
+
+    .post-block__chart
+      - if @race.thumb_stats.past_month.any?
+        - up_data = @race.players.map { |player| {name: "#{player.person.name} \n좋아요", data: player.up_graph_data } }
+        - down_data = @race.players.map { |player| {name: "#{player.person.name} \n싫어요", data: player.down_graph_data } }
+        = line_chart up_data + down_data, defer: true
+
+    .post-block__people
+      - if can? :create, Player
+        .add-btn{ style: 'margin-bottom: 24px'}
+          = link_to '인물추가', new_player_path(race_id: @race.id), class: 'btn btn-default'
+      - if @race.players.any?
+        .row
+          = render @race.players

@@ -1,0 +1,20 @@
+- is_thumbable_up = user_signed_in? && !thumbable.thumbed_up?(current_user)
+- is_thumbable_down = user_signed_in? && !thumbable.thumbed_down?(current_user)
+- is_thumbable_middle = user_signed_in? && !thumbable.thumbed_middle?(current_user)
+.text-center{ id: thumb_btns_panel_dom_id(thumbable) }
+  = link_to thumbs_path(thumb: {thumbable_type: thumbable.model_name, thumbable_id: thumbable.id, direction: :up}), method: :post, remote: true, class: "btn #{is_thumbable_up ? 'btn-success--inactive' : 'btn-success'}", disabled: !is_thumbable_up do
+    %i.fa.fa-thumbs-up
+    좋아요
+    %br
+    = thumbable.thumbs_up_count
+  = link_to thumbs_path(thumb: {thumbable_type: thumbable.model_name, thumbable_id: thumbable.id, direction: :down}), method: :post, remote: true, class: "btn #{is_thumbable_down ? 'btn-danger--inactive' : 'btn-danger'}", disabled: !is_thumbable_down do
+    %i.fa.fa-thumbs-down
+    싫어요
+    %br
+    = thumbable.thumbs_down_count
+  = link_to thumbs_path(thumb: {thumbable_type: thumbable.model_name, thumbable_id: thumbable.id, direction: :middle}), method: :post, remote: true, class: "btn #{is_thumbable_middle ? 'btn-default' : 'btn-default--active'}", disabled: !is_thumbable_middle do
+    %i.fa.fa-thumbs-up.fa-rotate-270
+    몰라요
+    %br
+    = thumbable.thumbs_middle_count
+

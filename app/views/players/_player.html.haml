@@ -1,0 +1,9 @@
+- person = player.person
+.col-sm-6
+  .person.clearfix
+    - if can? :destroy, player
+      = link_to player, method: :delete, class: 'pull-right', style: 'font-size: 1.3em; color: #777; padding: 10px', data: { confirm: '삭제하시겠습니까?' } do
+        %i.fa.fa-trash
+    = render person
+  = render 'thumbs/btns_panels', thumbable: player
+

@@ -52,6 +52,12 @@ Rails.application.routes.draw do
       resources :candidates
     end
   end
+  resources :people do
+    get :search, on: :collection
+  end
+  resources :races
+  resources :players
+  resources :thumbs
 
   resources :events
   resources :articles do

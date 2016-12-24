@@ -41,8 +41,10 @@
     - else
       = render 'footer'
 
-
+    %script{:src => "https://www.gstatic.com/charts/loader.js"}
     = javascript_include_tag 'application'
+    :javascript
+      Chartkick.configure({language: "ko"});
     %script{:src => "https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"}
     %script{:src => "https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"}
     = yield :script if content_for?(:script)

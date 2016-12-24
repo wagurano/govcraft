@@ -31,6 +31,9 @@ ko:
       archive: 시민 아카이브
       event: 이벤트
       article: 시민 뉴스
+      person: 인물
+      race: 인물투표
+      player: 후보
     attributes:
       user:
         nickname: 아이디
@@ -108,6 +111,15 @@ ko:
       article:
         url: URL
         body: 내용
+      person:
+        name: 이름
+        body: 설명
+        image: 대표이미지
+      race:
+        title: 제목
+        body: 설명
+      player:
+        person_id: 인물
     errors:
       models:
         user:

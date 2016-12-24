@@ -9,6 +9,8 @@
 //= require redactor
 //= require redactor2_rails/langs/ko
 //= require jssocials
+//= require chartkick
+//= require select2
 
 UnobtrusiveFlash.flashOptions['timeout'] = 300000;
 
@@ -83,6 +85,33 @@ $(function(){
     }
     var url = $(e.currentTarget).data('url');
     window.open(url, '_blank');
+  });
+
+  $('.gov-action-people-select').select2({
+    ajax: {
+      url: "/people/search.json",
+      dataType: 'json',
+      delay: 250,
+      data: function (params) {
+        return {
+          q: params.term
+        };
+      },
+      processResults: function (data, params) {
+        return { results: data };
+      },
+      cache: true
+    },
+    escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+    minimumInputLength: 1,
+    templateResult: function (person) {
+      if (person.loading) return person.text;
+      return "<img src='" + person.image_url + "' style='max-height: 2em'/>" + person.text;
+    },
+    templateSelection: function (person) {
+      if (person.loading) return person.text;
+      return "<img src='" + person.image_url + "' style='max-height: 2em'/>" + person.text;
+    },
   });
 });
 

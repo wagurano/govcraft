@@ -14,6 +14,8 @@ gem 'counter_culture', '~> 0.2.3'
 gem 'enumerize', '~> 2.0'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'by_star', '~> 2.2', '>= 2.2.1'
+gem 'groupdate', '~> 3.1', '>= 3.1.1'
+gem 'chartkick', '~> 2.2', '>= 2.2.1'
 
 # geo
 gem 'geocoder'

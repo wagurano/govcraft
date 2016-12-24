@@ -1,0 +1,10 @@
+= form_for @player do |f|
+  = f.hidden_field :race_id
+
+  .form-group
+    = f.label :person_id
+    = f.select :person_id, [], {}, { class: 'form-control gov-action-people-select', style: 'height: 2em', autocomplete: 'off' }
+
+  .form-group
+    = f.submit '저장', class: 'btn btn-primary', data: { disable_with: "저장 중..." }
+

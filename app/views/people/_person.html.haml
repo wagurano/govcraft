@@ -1,0 +1,18 @@
+%div[person]
+  .panel.panel-default.panel-floating.person-card
+    .panel-body
+      .media
+        .media-body
+          %h4.post__title
+            = person.name
+          %p.post__body
+            != person.body
+          - if local_assigns[:show_control_btns]
+            .post__btns
+              - if can? :edit, person
+                = link_to '수정', edit_person_path(person)
+              - if can? :destroy, person
+                = link_to '삭제', person, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+        - if person.image_present?
+          .media-right
+            = image_tag person.image.xs.url

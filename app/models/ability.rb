@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can [:read, :social_card], :all
+    can [:read, :search, :social_card], :all
     can [:events], Campaign
     can :create, [Sign, Comment, Like]
     can :cancel, Like
@@ -10,18 +10,19 @@ class Ability
     can :download, Archive
 
     if user
-
       can :create, [
           FollowingIssue,
           Campaign, Discussion, Petition, Poll, Wiki,
           Memorial, Agenda, Archive, ArchiveDocument, Event,
-          Election, Candidate, Article
+          Election, Candidate, Article, Person, Race, Player,
+          Thumb
         ]
       can [:update, :destroy], [
           FollowingIssue,
           Campaign, Discussion, Petition, Poll, Wiki,
           Memorial, Agenda, Archive, ArchiveDocument, Event,
-          Comment, Sign, Election, Candidate, Article
+          Comment, Sign, Election, Candidate, Article, Person,
+          Race, Player
         ], :user_id => user.id
 
       can :data, [Petition], user_id: user.id
