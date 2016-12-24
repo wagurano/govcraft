@@ -10,5 +10,11 @@
       .form-group
         = f.label :body
         = f.text_area :body, class: 'form-control'
+
+      - if @sign.petition.id == 29
+        .form-group
+          = f.label :extra_29_confirm_join
+          = f.check_box :extra_29_confirm_join, class: 'form-control'
+
       .form-group
         = f.submit class: 'btn btn-primary'

@@ -12,6 +12,7 @@ ko:
       not_saved: "이 저장되지 않았습니다."
       taken: "은(는) 이미 사용 중입니다."
   messages:
+    saved: '저장되었습니다'
     signed: '이 이슈를 친구들에게 알려 주세요'
     already_signed: '이미 서명하셨습니다.'
     commented: '댓글을 게시했습니다!'

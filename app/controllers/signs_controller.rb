@@ -23,7 +23,11 @@ class SignsController < ApplicationController
   end
 
   def update
-    errors_to_flash(@sign) unless @sign.update_attributes(sign_params)
+    if @sign.update_attributes(sign_params)
+      flash[:success] = t('messages.saved')
+    else
+      errors_to_flash(@sign)
+    end
     redirect_to(@sign.petition)
   end
 
