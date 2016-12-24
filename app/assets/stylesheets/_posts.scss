@@ -65,7 +65,18 @@
         text-align: center;
       }
     }
-
+  }
+  &__signs {
+    .sign-panel {
+      &__users {
+        border-bottom: 1px solid #dedede;
+        padding: 14px 0;
+        word-break: keep-all;
+      }
+      &__list {
+        padding: 14px 0;
+      }
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 - first_signs_count = 300
 - if local_assigns[:widget]
   - local_assigns[:limit_signs_count] = 10
-  - local_assigns[:hide_users] = true
+  - local_assigns[:hide_users] = params[:hide_users].present? ? (params[:hide_users] == 'true') : true
 
 .sign-panel
   - if user_signed_in? and petition.signed?(current_user)
@@ -57,7 +57,10 @@
             = image_tag 'icon-candle.png', width: 20, height: 20, class: 'img-circle'
             = sign.user_name
           - if petition.signs.count > first_signs_count
-            = link_to "... #{petition.signs.count - first_signs_count}명 더보기", petition_signs_path(petition)
+            - if local_assigns[:widget]
+              = link_to "... #{petition.signs.count - first_signs_count}명 더보기", petition_url(@petition), target: '_blank'
+            - else
+              = link_to "... #{petition.signs.count - first_signs_count}명 더보기", petition_signs_path(petition)
 
     .sign-panel__list
       - signs = @signs.recent
@@ -79,5 +82,6 @@
       - if !local_assigns[:widget]
         = paginate @signs, params: { controller: :petitions, action: :show }
       - else
-        = link_to '더보기 >', petition_url(@petition), target: '_blank'
+        .text-center{ style: 'margin-top: 12px' }
+          = link_to '더보기 >', petition_url(@petition), target: '_blank'
 
