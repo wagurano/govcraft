@@ -29,7 +29,8 @@ $(document).imagesLoaded( { }, function() {
         imageUploadError: function(json, xhr) {
           UnobtrusiveFlash.showFlashMessage(json.error.data[0], {type: 'notice'})
         }
-      }
+      },
+      toolbarFixed: false,
     });
     $('.redactor .redactor-editor').prop('contenteditable', true);
   }
