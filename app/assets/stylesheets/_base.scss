@@ -109,3 +109,28 @@ body {
     background-color: #fff;
   }
 }
+
+.kakao-share-button {
+  font-size: 12px;
+  font-weight: bold;
+  color: #3c1e1e;
+  background-color: #ffeb00;
+  height: 20px;
+  line-height: 22px;
+  width: 100px;
+  width: 65px;
+  border-radius: 3px;
+  &:before {
+    background-image: asset_url('icon_katalk.png');
+    background-size: 14px 13px;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    content:"";
+    width: 20px;
+    height: 20px;
+  }
+  &--label {
+    position: absolute;
+  }
+}
