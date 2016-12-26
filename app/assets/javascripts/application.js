@@ -85,11 +85,10 @@ $(function(){
             if(!md.mobile()) {
               return;
             }
-            var $result = $("<div class='kakao-share-button'><span class='kakao-share-button--label'>카카오톡</span></div>");
             if(!this.image_url) {
-              return $result;
+              return;
             }
-            console.log(this);
+            var $result = $("<div class='kakao-share-button'><span class='kakao-share-button--label'>카카오톡</span></div>");
 
             var url = this.url;
             var text = this.text;
@@ -106,7 +105,7 @@ $(function(){
                 height: image_height
               },
               webLink: {
-                text: '빠띠에서 보기',
+                text: '우주당에서 보기',
                 url: url
               }
             });

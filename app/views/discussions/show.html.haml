@@ -27,7 +27,7 @@
       = render 'likes/button', likable: @discussion
 
     .post-block__share.text-center
-      .share-box
+      .share-box{ 'data-share-image': image_url('seo.png') }
 
     .post-block__comments
       = render 'comments/list', commentable: @discussion
