@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   resources :issues
   resources :following_issues
 
+  get 'campaigns/:id', to: redirect { |params, req| "/c/#{Campaign.find_by(id: params[:id]).slug}"}, constraints: lambda { |request, params|
+    Campaign.exists?(id: params[:id])
+  }
   resources :campaigns, path: :c do
     get 'events', on: :member
   end
