@@ -1,6 +1,6 @@
 class CreateFriendlyIdSlugs < ActiveRecord::Migration
   def change
-    create_table :friendly_id_slugs do |t|
+    create_table :friendly_id_slugs, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC"  do |t|
       t.string   :slug,           :null => false
       t.integer  :sluggable_id,   :null => false
       t.string   :sluggable_type, :limit => 50
