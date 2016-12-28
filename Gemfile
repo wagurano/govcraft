@@ -17,6 +17,7 @@ gem 'acts-as-taggable-on', '~> 4.0'
 gem 'by_star', '~> 2.2', '>= 2.2.1'
 gem 'groupdate', '~> 3.1', '>= 3.1.1'
 gem 'chartkick', '~> 2.2', '>= 2.2.1'
+gem 'friendly_id', '~> 5.2.0'
 
 # geo
 gem 'geocoder'

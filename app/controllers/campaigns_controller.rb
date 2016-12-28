@@ -1,5 +1,5 @@
 class CampaignsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
   before_action :reset_meta_tags, only: [:show, :events]
 
   def index
@@ -23,6 +23,7 @@ class CampaignsController < ApplicationController
     if @campaign.save
       redirect_to @campaign
     else
+      errors_to_flash(@campaign)
       render 'new'
     end
   end
@@ -47,7 +48,7 @@ class CampaignsController < ApplicationController
 
   def campaign_params
     params.require(:campaign).permit(
-      :title, :body, :image,
+      :title, :body, :image, :slug,
       :discussion_enabled, :poll_enabled, :petition_enabled, :wiki_enabled,
       :discussion_title, :poll_title, :petition_title, :wiki_title
     )

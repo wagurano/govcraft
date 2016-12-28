@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   resources :issues
   resources :following_issues
 
-  resources :campaigns do
+  resources :campaigns, path: :c do
     get 'events', on: :member
   end
   resources :discussions
