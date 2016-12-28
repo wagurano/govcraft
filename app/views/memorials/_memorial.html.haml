@@ -1,8 +1,8 @@
 %div[memorial]
   - url = memorial.url.present? ? memorial.url : memorial_path(memorial)
   .panel.panel-default.panel-floating.memorial-card
-    .panel-body
-      = link_to memorial do
+    = link_to url, target: '_blank' do
+      .panel-body
         %h4.memorial__title= memorial.title
         .memorial__meta
           - if memorial.url.present?
