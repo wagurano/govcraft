@@ -5,7 +5,7 @@ require 'uri'
 require 'securerandom'
 
 class OpenGraph
-  attr_accessor :src, :url, :type, :title, :site_name, :description, :images, :image_io, :image_width, :image_height, :image_original_filename, :metadata, :response, :original_images
+  attr_accessor :doc, :src, :url, :type, :title, :site_name, :description, :images, :image_io, :image_width, :image_height, :image_original_filename, :metadata, :response, :original_images
 
   def initialize(src)
     @agent = Mechanize.new
