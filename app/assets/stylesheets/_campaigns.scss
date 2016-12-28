@@ -15,6 +15,15 @@
   small a {
     color: $gray-lighter;
   }
+  .current-user-status {
+    margin-top: -30px;
+    text-shadow: 1px 1px 3px #000;
+    .dropdown-menu {
+      background: none;
+      border: none;
+      min-width: inherit;
+    }
+  }
   .campaign__title {
     @include text-stroke();
   }

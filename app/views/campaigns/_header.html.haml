@@ -1,5 +1,23 @@
 %section#campaign-header-block{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{campaign.image});" }
   .container
+    .current-user-status.badge.pull-right
+      - if user_signed_in?
+        .dropdown
+          %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+            = render 'users/thumbnail'
+            = current_user.nickname
+            %span.caret
+          %ul.dropdown-menu
+            %li
+              = link_to edit_user_registration_path do
+                프로필 수정
+            %li
+              = link_to sign_out_path, method: :delete do
+                로그아웃
+      - else
+        = link_to new_user_session_path do
+          %i.fa.fa-sign-in
+          로그인 &middot; 가입
     %h2
       %small.badge 캠페인
       .campaign__title
