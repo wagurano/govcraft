@@ -22,12 +22,15 @@
           .col-sm-3
             .speech
               = link_to speech.video_url, class: 'popup-youtube' do
-                .embed-responsive.embed-responsive-4by3.video-image
+                .embed-responsive.embed-responsive-16by9.video-image
                   = image_tag video.thumbnail_medium
                   %i.fa.fa-play-circle.play-circle.play-circle--medium
-              %h4.mg-md= excerpt(speech.title, length: 25)
-              .text-center
+              %h5.title.mg-md= excerpt(speech.title, length: 30)
+              .text-left
                 = render 'likes/button', likable: speech
+                .view-count
+                  %i.fa.fa-eye
+                  = number_with_delimiter speech.view_count
       .text-center
         = paginate @speeches, theme: 'twitter-bootstrap-3'
   / bloc-1 END

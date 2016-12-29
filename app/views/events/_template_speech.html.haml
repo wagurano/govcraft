@@ -12,16 +12,18 @@
       .container
         .row.row-no-gutters
           .col-sm-12.col-md-8.col-md-offset-2
-            %h1.mg-lg.text-center.hero-bloc-text.tc-outer-space
-              %strong 광장의 발언을 이어갑니다
-            - speech = @speeches.first
-            - video = VideoInfo.new(speech.video_url)
-            .video-image
-              = link_to speech.video_url, class: 'popup-youtube' do
-                = image_tag video.thumbnail_large, class: 'img-responsive mg-lg'
-                %i.fa.fa-play-circle.play-circle.play-circle--large
-            .text-center
-              = render 'likes/button', likable: speech
+            .speech
+              %h1.mg-lg.text-center.hero-bloc-text.tc-outer-space
+                %strong 광장의 발언을 이어갑니다
+              - speech = @speeches.first
+              - video = VideoInfo.new(speech.video_url)
+              .video-image
+                = link_to speech.video_url, class: 'popup-youtube' do
+                  = image_tag video.thumbnail_large, class: 'img-responsive mg-lg'
+                  %i.fa.fa-play-circle.play-circle.play-circle--large
+              .text-center
+                = render 'likes/button', likable: speech
+
       .container.fill-bloc-bottom-edge
         .row
           .col-sm-12
@@ -43,20 +45,23 @@
             .col-sm-3
               .speech.clearfix
                 = link_to speech.video_url, class: 'popup-youtube' do
-                  .embed-responsive.embed-responsive-4by3.video-image
+                  .embed-responsive.embed-responsive-16by9.video-image
                     = image_tag video.thumbnail_medium
                     %i.fa.fa-play-circle.play-circle.play-circle--medium
-                %h4.mg-md= excerpt(speech.title, length: 25)
-                .text-center
+                %h5.mg-md.title= excerpt(speech.title, length: 30)
+                .text-left
                   = render 'likes/button', likable: speech
+                  .view-count
+                    %i.fa.fa-eye
+                    = number_with_delimiter speech.view_count
   / bloc-1 END
   / bloc-2
   #bloc-2.bloc.bgc-outer-space.d-bloc
     .container.bloc-sm
       .row
-        .col-sm-6.text-right
+        .col-xs-6.text-right
           = link_to '영상발언 올리기', new_speech_path(event_id: event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'
-        .col-sm-6.text-left
+        .col-xs-6.text-left
           = link_to '영상발언 더보기', speeches_path(event_id: event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'
   / bloc-2 END
   / bloc-3

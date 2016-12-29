@@ -94,15 +94,45 @@
 
   .speech-list .speech {
     padding-top: 12px;
+    .title {
+      margin-bottom: 0;
+      height: 30px;
+    }
+    .view-count {
+      vertical-align: top;
+      display: inline-block;
+      line-height: 34px;
+    }
+    .btn-like {
+      height: 36px;
+      border: none;
+      background-color: transparent;
+      color: $gray-light;
+      padding: 0;
+      @media (max-width: 768px) {
+        padding-left: 10px;
+      }
+      margin-top: 6px;
+      &.btn-primary {
+        i {
+          color: lighten(#ea672c, 5%);
+        }
+      }
+    }
+
   }
 
   .video-image {
     position: relative;
 
+    img {
+      width: 100%;
+    }
+
     .play-circle {
       position: absolute;
       top: 50%;
-      color: #fff;
+      color: $gray-lighter;
 
       top: 50%;
       left: 50%;
