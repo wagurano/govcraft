@@ -22,16 +22,19 @@ class Citizen2017Job
       video = VideoInfo.new(video_url)
       if video.available?
         video_url = (video.provider == 'YouTube' ? "http://www.youtube.com/watch?v=#{video.video_id}" : video_url)
-        Citizen2017Speech.create!(title: item.doc.title.gsub("국민토크::송박영신, 소원 3개를 말해봐 - ", ""), citizen2017_id: last_scrapped_citizen2017_id, video_url: video_url)
+
+        ActiveRecord::Base.transaction do
+          citizen_speech = Citizen2017Speech.create!(title: item.doc.title.gsub("국민토크::송박영신, 소원 3개를 말해봐 - ", ""), citizen2017_id: last_scrapped_citizen2017_id, video_url: video_url)
+
+          speech = Speech.create!(event_id: 6, title: citizen_speech.title, video_url: citizen_speech.video_url)
+          citizen_speech.update_attributes!(speech_id: speech.id)
+        end
+
         puts "save video : #{video_url}"
       else
         puts "not video : #{video_url}"
       end
       sleep(1.0/2.0)
     end
-    # 10.times do
-    #   break if crawl!(source)
-    #   sleep(1.0/2.0)
-    # end
   end
 end

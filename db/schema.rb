@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229015552) do
+ActiveRecord::Schema.define(version: 20161229023131) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -123,6 +123,8 @@ ActiveRecord::Schema.define(version: 20161229015552) do
     t.string  "title"
     t.integer "citizen2017_id"
     t.string  "video_url"
+    t.integer "speech_id"
+    t.index ["speech_id"], name: "index_citizen2017_speeches_on_speech_id", using: :btree
   end
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
