@@ -25,7 +25,7 @@
                 .embed-responsive.embed-responsive-4by3.video-image
                   = image_tag video.thumbnail_medium
                   %i.fa.fa-play-circle.play-circle.play-circle--medium
-              %h4.mg-md= excerpt(speech.title, length: 28)
+              %h4.mg-md= excerpt(speech.title, length: 25)
               .text-center
                 = render 'likes/button', likable: speech
       .text-center
