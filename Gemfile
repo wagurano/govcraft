@@ -32,6 +32,7 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'
 gem 'haml-rails', '~> 0.9.0'
 gem 'redactor2_rails', '~> 0.1.3'
 gem 'rails_autolink', '~> 1.1', '>= 1.1.6'
+gem 'magnific-popup-rails', '~> 1.1'
 
 # tool
 gem 'axlsx_rails', '~> 0.5.0'

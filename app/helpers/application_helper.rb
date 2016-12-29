@@ -46,7 +46,8 @@ module ApplicationHelper
     ( params[:controller] == 'petitions' && params[:action] == 'show' ) ||
     ( params[:controller] == 'wikis' && params[:action] == 'show' ) ||
     ( params[:controller] == 'discussions' && params[:action] == 'show' ) ||
-    ( params[:controller] == 'events' && params[:action] == 'show' )
+    ( params[:controller] == 'events' && params[:action] == 'show' ) ||
+    ( params[:controller] == 'speeches' && params[:action] == 'index' )
   end
 
   def excerpt(text, options = {})

@@ -13,6 +13,7 @@
 //= require select2
 //= require kakao
 //= require mobile-detect
+//= require magnific-popup
 
 UnobtrusiveFlash.flashOptions['timeout'] = 300000;
 
@@ -156,6 +157,16 @@ $(function(){
       if (person.loading) return person.text;
       return "<img src='" + person.image_url + "' style='max-height: 2em'/>" + person.text;
     },
+  });
+
+  $('.popup-youtube').magnificPopup({
+    disableOn: 700,
+    type: 'iframe',
+    mainClass: 'mfp-fade',
+    removalDelay: 160,
+    preloader: false,
+
+    fixedContentPos: false
   });
 });
 

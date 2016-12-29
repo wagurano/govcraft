@@ -1,58 +1,204 @@
-- cover_image = event.image_url(:lg)
-%section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image})" }
-  .container-fluid
-    - if @campaign
-      .cover-section__campaign
-        = link_to @campaign.title, @campaign
+/ Main container
+.page-container.page-container--event-speeches
+  / bloc-0
+  #bloc-0.bloc.bloc-fill-screen.bgc-white.l-bloc{style: "height: 800px; background-image: url(#{image_url('events/speeches/cover.png')});"}
+    .container.fill-bloc-top-edge
+      %nav.navbar.row
+        .navbar-header
+          %a.navbar-brand{:href => "index.html"}
+            = image_tag 'events/speeches/logo.png', alt: "logo", width: "300"
 
-    %h2.cover-section__title
-      = event.title
+    - if @speeches.any?
+      .container
+        .row.row-no-gutters
+          .col-sm-12.col-md-8.col-md-offset-2
+            %h1.mg-lg.text-center.hero-bloc-text.tc-outer-space
+              %strong 광장의 발언을 이어갑니다
+            - speech = @speeches.first
+            - video = VideoInfo.new(speech.video_url)
+            .video-image
+              = link_to speech.video_url, class: 'popup-youtube' do
+                = image_tag video.thumbnail_large, class: 'img-responsive mg-lg'
+                %i.fa.fa-play-circle.play-circle.play-circle--large
+            .text-center
+              = render 'likes/button', likable: speech
+      .container.fill-bloc-bottom-edge
+        .row
+          .col-sm-12
+            %a#scroll-hero.blocs-hero-btn-dwn{:href => "#speech-list"}
+              %span.fa.fa-chevron-down
+  / bloc-0 END
+  / bloc-1
+  #bloc-1.bloc.bgc-outer-space.d-bloc
+    .container.bloc-md
+      %a{id: "speech-list"}
+      .row
+        .col-sm-12
+          %h3.text-center.mg-md.tc-deep-carrot-orange
+            %strong 자유발언 영상
+      .row.voffset.speech-list
+        - @speeches[1..-1].each do |speech|
+          - video = VideoInfo.new(speech.video_url)
+          .col-sm-3
+            .speech.clearfix
+              = link_to speech.video_url, class: 'popup-youtube' do
+                .embed-responsive.embed-responsive-4by3.video-image
+                  = image_tag video.thumbnail_medium
+                  %i.fa.fa-play-circle.play-circle.play-circle--medium
+              %h4.mg-md= excerpt(speech.title, length: 28)
+              .text-center
+                = render 'likes/button', likable: speech
+  / bloc-1 END
+  / bloc-2
+  #bloc-2.bloc.bgc-outer-space.d-bloc
+    .container.bloc-sm
+      .row
+        .col-sm-6.text-right
+          = link_to '영상발언 올리기', new_speech_path(event_id: event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'
+        .col-sm-6.text-left
+          = link_to '영상발언 더보기', speeches_path(event_id: event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'
+  / bloc-2 END
+  / bloc-3
+  / #bloc-3.bloc.bgc-outer-space.d-bloc
+  /   .container.bloc-sm
+  /     .row.bgc-outer-space
+  /       .col-xs-12.col-md-8.col-md-offset-2
+  /         %h3.statement-bloc-text.tc-deep-carrot-orange
+  /           %span
+  /             %strong 온라인 시민 발언 통계
+  / bloc-3 END
+  / bloc-4
+  / #bloc-4.bloc.bgc-outer-space.tc-white
+  /   .container.bloc-sm
+  /     .row
+  /       .col-sm-12
+  /         .text-center
+  /           %span.feather-icon.icon-flag.icon-round.icon-white.icon-sm
+  /         %h3.text-center.mg-sm 참여지역
+  /         %p.text-center
+  /           서울특별시 100, 부산광역시 , 대구광역시 , 인천광역시 , 광주광역시 ,대전광역시 ,울산광역시 , 세종특별자치시 , 경기도 , 경기남부 ,
+  /           = succeed "\u{acbd}\u{ae30}\u{bd81}\u{bd80}" do
+  /             %br/
+  / bloc-4 END
+  / bloc-5
+  / #bloc-5.bloc.l-bloc.bgc-outer-space
+  /   .container.bloc-sm
+  /     .row
+  /       .col-sm-12
+  /         .text-center
+  /           %span.feather-icon.icon-head.icon-round.icon-white.icon-sm
+  /         %h3.text-center.mg-md.tc-white
+  /           참여자수
+  /           %strong 1,000
+  /           명
+  / bloc-5 END
+  / bloc-6
+  #bloc-6.bloc.bgc-outer-space.d-bloc
+    .container.bloc-sm
+      .row
+        .col-xs-12.col-md-8.col-md-offset-2
+          %h3.statement-bloc-text.tc-deep-carrot-orange
+            %span
+              %strong 관련 사이트
+          %p.text-center
+            = link_to 'http://citizen2017.net/c/5/9', target: '_blank' do
+              국민토크 http://citizen2017.net/c/5/9
+            %br
+            = link_to 'wouldyouparty.org/petitions/29', target: '_blank' do
+              탄핵심판촉구
+  / bloc-6 END
+  / ScrollToTop Button
+  / %a.bloc-button.btn.btn-d.scrollToTop{:onclick => "scrollToTarget('1')"}
+  /   %span.fa.fa-chevron-up
+  / ScrollToTop Button END
+  / Footer - bloc-7
+  #bloc-7.bloc.bgc-outer-space.d-bloc
+    .container.bloc-md
+      .post-block__share.text-center
+        .share-box{ 'data-share-image': image_url('seo.png') }
+  /     .row.bgc-outer-space
+  /       .col-sm-12.col-md-6.col-md-offset-3
+  /         .col-xs-3
+  /           .text-center
+  /             %a.social{:href => "index.html"}
+  /               %span.fa.fa-twitter.icon-md
+  /         .col-xs-3
+  /           .text-center
+  /             %a.social{:href => "index.html"}
+  /               %span.fa.fa-facebook.icon-md
+  /         .col-xs-3
+  /           .text-center
+  /             %a.social{:href => "index.html"}
+  /               %span.fa.fa-dribbble.icon-md
+  /         .col-xs-3
+  /           .text-center
+  /             %a.social{:href => "index.html"}
+  /               %span.fa.fa-instagram.icon-md
+  / Footer - bloc-7 END
+  / Footer - bloc-8
+  / #bloc-8.bloc.hidden-lg.hidden-md.bgc-white.l-bloc
+  /   .container.bloc-lg
+  /     .row
+  /       .col-sm-12
+  / Footer - bloc-8 END
+  / Main container END
+/ - cover_image = event.image_url(:lg)
+/ %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image})" }
+/   .container-fluid
+/     - if @campaign
+/       .cover-section__campaign
+/         = link_to @campaign.title, @campaign
 
-    - if can?(:edit, event) || can?(:destroy, event)
-      .cover-section__buttons
-        - if can? :edit, event
-          = link_to '수정', edit_event_path(event)
-        - if can? :destroy, event
-          = link_to '삭제', event, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+/     %h2.cover-section__title
+/       = event.title
 
-    .cover-section__body= raw event.body
+/     - if can?(:edit, event) || can?(:destroy, event)
+/       .cover-section__buttons
+/         - if can? :edit, event
+/           = link_to '수정', edit_event_path(event)
+/         - if can? :destroy, event
+/           = link_to '삭제', event, method: :delete, data: { confirm: '삭제하시겠습니까?' }
 
-    %h4.cover-section__users-count
-      %span
-        %i.fa.fa-comment-o
-        = event.comments.count
+/     .cover-section__body= raw event.body
 
-    .share-box{ 'data-share-image': image_url('seo.png') }
+/     %h4.cover-section__users-count
+/       %span
+/         %i.fa.fa-comment-o
+/         = event.comments.count
 
-%section
-  .container-fluid
-    - @speeches.each do |speech|
-      .player-wrapper
-        - video = VideoInfo.new(speech.video_url)
-        %a{class: 'anchor', id: 'anchor-video'}
-        .player
-          %iframe(src="#{video.embed_url}?enablejsapi=1" frameborder="0" allowfullscreen="allowfullscreen")
+/     .share-box{ 'data-share-image': image_url('seo.png') }
 
-%section
-  .container-fluid
-    = link_to '동영상 발언대 만들기', new_speech_path(event_id: event.id)
+/ %section
+/   .container-fluid
+/     - @speeches.each do |speech|
+/       .player-wrapper
+/         - video = VideoInfo.new(speech.video_url)
+/         %a{class: 'anchor', id: 'anchor-video'}
+/         .player
+/           %iframe(src="#{video.embed_url}?enablejsapi=1" frameborder="0" allowfullscreen="allowfullscreen")
 
-%section{ style: 'margin: 28px 0;' }
-  .container-fluid
-    - event.comments.tag_counts_on(:tags).each do |tag|
-      - if params[:tag] == tag.name
-        %span{ style: 'display: inline-block; background-color: #4a5dd0; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; color: #fff; margin-bottom: 7px;' }
-          = link_to tag.name, event_path(event, {tag: tag.name}), style: 'color: #fff'
-          %small
-            = tag.count
-      - else
-        %span{ style: 'display: inline-block; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; margin-bottom: 7px;' }
-          = link_to tag.name, event_path(event, {tag: tag.name})
-          %small.text-muted
-            = tag.taggings_count
+/ %section
+/   .container-fluid
+/     = link_to '동영상 발언대 만들기', new_speech_path(event_id: event.id)
 
-%section
-  .container-fluid
+/ %section{ style: 'margin: 28px 0;' }
+/   .container-fluid
+/     - event.comments.tag_counts_on(:tags).each do |tag|
+/       - if params[:tag] == tag.name
+/         %span{ style: 'display: inline-block; background-color: #4a5dd0; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; color: #fff; margin-bottom: 7px;' }
+/           = link_to tag.name, event_path(event, {tag: tag.name}), style: 'color: #fff'
+/           %small
+/             = tag.count
+/       - else
+/         %span{ style: 'display: inline-block; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; margin-bottom: 7px;' }
+/           = link_to tag.name, event_path(event, {tag: tag.name})
+/           %small.text-muted
+/             = tag.taggings_count
+
+%section.comments{ style: 'margin: 24px 0' }
+  .container
+    %h4 게시글로 발언하세요
+
     .comments-form
       = form_for Comment.new do |f|
         = f.hidden_field :commentable_type, value: 'Event'
