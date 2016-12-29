@@ -29,25 +29,26 @@
               %span.fa.fa-chevron-down
   / bloc-0 END
   / bloc-1
-  #bloc-1.bloc.bgc-outer-space.d-bloc
-    .container.bloc-md
-      %a{id: "speech-list"}
-      .row
-        .col-sm-12
-          %h3.text-center.mg-md.tc-deep-carrot-orange
-            %strong 자유발언 영상
-      .row.voffset.speech-list
-        - @speeches[1..-1].each do |speech|
-          - video = VideoInfo.new(speech.video_url)
-          .col-sm-3
-            .speech.clearfix
-              = link_to speech.video_url, class: 'popup-youtube' do
-                .embed-responsive.embed-responsive-4by3.video-image
-                  = image_tag video.thumbnail_medium
-                  %i.fa.fa-play-circle.play-circle.play-circle--medium
-              %h4.mg-md= excerpt(speech.title, length: 28)
-              .text-center
-                = render 'likes/button', likable: speech
+  - if @speeches.any?
+    #bloc-1.bloc.bgc-outer-space.d-bloc
+      .container.bloc-md
+        %a{id: "speech-list"}
+        .row
+          .col-sm-12
+            %h3.text-center.mg-md.tc-deep-carrot-orange
+              %strong 자유발언 영상
+        .row.voffset.speech-list
+          - @speeches[1..-1].each do |speech|
+            - video = VideoInfo.new(speech.video_url)
+            .col-sm-3
+              .speech.clearfix
+                = link_to speech.video_url, class: 'popup-youtube' do
+                  .embed-responsive.embed-responsive-4by3.video-image
+                    = image_tag video.thumbnail_medium
+                    %i.fa.fa-play-circle.play-circle.play-circle--medium
+                %h4.mg-md= excerpt(speech.title, length: 28)
+                .text-center
+                  = render 'likes/button', likable: speech
   / bloc-1 END
   / bloc-2
   #bloc-2.bloc.bgc-outer-space.d-bloc
