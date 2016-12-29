@@ -10,6 +10,8 @@ class Event < ApplicationRecord
 
   scope :recent, -> { order('id DESC') }
 
+  SLUG_CANDLE_SPEECH = 'candle-speech'
+
   CONGRESSMEN = [
   ['강길부', '울산', '울주군', '울산광역시 울주군 범서읍 굴화리 32-2번지 인재빌딩3층'],
   ['강석진', '경남', '산청군함양군거창군합천군',  '경상남도 거창군 거창읍 시장2길 9 애지안 2층'],

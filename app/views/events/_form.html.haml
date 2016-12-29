@@ -16,4 +16,8 @@
     = f.text_area :body, class: 'form-control redactor'
 
   .form-group
+    = f.label :slug
+    = f.text_field :slug, class: 'form-control'
+
+  .form-group
     = f.submit '저장', class: 'btn btn-primary'
