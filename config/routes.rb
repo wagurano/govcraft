@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :campaigns, path: :c do
     get 'events', on: :member
   end
+  resources :speeches
   resources :discussions
   resources :petitions do
     resources :signs

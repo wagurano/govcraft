@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :players, dependent: :destroy
   has_many :races, dependent: :destroy
   has_many :thumbs, dependent: :destroy
+  has_many :speeches, dependent: :destroy
 
   # validations
   VALID_NICKNAME_REGEX = /\A[ㄱ-ㅎ가-힣a-z0-9_]+\z/i
@@ -75,10 +76,6 @@ class User < ApplicationRecord
   end
 
   # the other methods
-
-  def admin?
-    %w(account@parti.xyz).include? email
-  end
 
   def following?(issue)
     following_issues.exists?(issue: issue)

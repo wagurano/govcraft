@@ -58,7 +58,7 @@ class PollsController < ApplicationController
           png = IMGKit.new(render_to_string(layout: nil), width: 1200, height: 630, quality: 10).to_png
           send_data(png, :type => "image/png", :disposition => 'inline')
         else
-          if !@poll.social_card.file.try(:exists?) or (params[:update] and current_user.try(:admin?))
+          if !@poll.social_card.file.try(:exists?) or (params[:update] and current_user.try(:has_role?, :admin)
             file = Tempfile.new(["social_card_#{@poll.id.to_s}", '.png'], 'tmp', :encoding => 'ascii-8bit')
             file.write IMGKit.new(render_to_string(layout: nil), width: 1200, height: 630, quality: 10).to_png
             file.flush

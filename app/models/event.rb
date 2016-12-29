@@ -1,9 +1,10 @@
 class Event < ApplicationRecord
-  TEMPLATES = %w( default map map_with_assembly )
+  TEMPLATES = %w( default map map_with_assembly speech )
 
   belongs_to :user
   belongs_to :campaign
   has_many :comments, as: :commentable
+  has_many :speeches, dependent: :destroy
 
   mount_uploader :image, ImageUploader
 

@@ -1,0 +1,96 @@
+- cover_image = event.image_url(:lg)
+%section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image})" }
+  .container-fluid
+    - if @campaign
+      .cover-section__campaign
+        = link_to @campaign.title, @campaign
+
+    %h2.cover-section__title
+      = event.title
+
+    - if can?(:edit, event) || can?(:destroy, event)
+      .cover-section__buttons
+        - if can? :edit, event
+          = link_to '수정', edit_event_path(event)
+        - if can? :destroy, event
+          = link_to '삭제', event, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+
+    .cover-section__body= raw event.body
+
+    %h4.cover-section__users-count
+      %span
+        %i.fa.fa-comment-o
+        = event.comments.count
+
+    .share-box{ 'data-share-image': image_url('seo.png') }
+
+%section
+  .container-fluid
+    - @speeches.each do |speech|
+      .player-wrapper
+        - video = VideoInfo.new(speech.video_url)
+        %a{class: 'anchor', id: 'anchor-video'}
+        .player
+          %iframe(src="#{video.embed_url}?enablejsapi=1" frameborder="0" allowfullscreen="allowfullscreen")
+
+%section
+  .container-fluid
+    = link_to '동영상 발언대 만들기', new_speech_path(event_id: event.id)
+
+%section{ style: 'margin: 28px 0;' }
+  .container-fluid
+    - event.comments.tag_counts_on(:tags).each do |tag|
+      - if params[:tag] == tag.name
+        %span{ style: 'display: inline-block; background-color: #4a5dd0; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; color: #fff; margin-bottom: 7px;' }
+          = link_to tag.name, event_path(event, {tag: tag.name}), style: 'color: #fff'
+          %small
+            = tag.count
+      - else
+        %span{ style: 'display: inline-block; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; margin-bottom: 7px;' }
+          = link_to tag.name, event_path(event, {tag: tag.name})
+          %small.text-muted
+            = tag.taggings_count
+
+%section
+  .container-fluid
+    .comments-form
+      = form_for Comment.new do |f|
+        = f.hidden_field :commentable_type, value: 'Event'
+        = f.hidden_field :commentable_id, value: event.id
+        - unless user_signed_in?
+          .row
+            .col-xs-12.col-md-6
+              .form-group
+                = f.label :commenter_name
+                = f.text_field :commenter_name, class: 'form-control'
+            .col-xs-12.col-md-6
+              .form-group
+                = f.label :commenter_email
+                = f.text_field :commenter_email, class: 'form-control'
+        .form-group
+          ~ f.text_area :body, placeholder: '제 생각에는...', class: 'form-control ' + ( is_redactorable? ? 'redactor' : '')
+        = f.submit '작성', class: 'btn btn-default btn-sm'
+
+    - comments = params[:tag].present? ? event.comments.tagged_with(params[:tag]) : event.comments
+    .comments
+      - comments.recent.each do |comment|
+        .media[comment]{ style: 'margin: 14px 0;'}
+          .media-body
+            .comment__meta
+              = comment.user_nickname
+              = date_f comment.created_at
+              - if can? :destroy, comment
+                = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
+              - if current_user != comment.user
+                = render 'reports/button', reportable: comment
+
+            - if comment.choice.present?
+              .comment__choice{ class: comment.choice }= comment.choice.text
+            .comment__body
+              = raw screened(comment, :body)
+            .comment__tags
+              - comment.tag_list.each do |tag|
+                = link_to "##{tag}", event_path(event, {tag: tag})
+          .media-right{ style: 'vertical-align: middle;' }
+            = render 'likes/button', likable: comment
+

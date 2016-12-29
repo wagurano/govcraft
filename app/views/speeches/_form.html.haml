@@ -1,0 +1,13 @@
+= form_for @speech do |f|
+  = f.hidden_field :event_id, value: @event.id
+
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+
+  .form-group
+    = f.label :video_url
+    = f.text_field :video_url, class: 'form-control'
+
+  .form-group
+    = f.submit '저장', class: 'btn btn-primary'
