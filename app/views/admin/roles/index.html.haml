@@ -1,0 +1,22 @@
+%section.page-block
+  .container
+    %h3
+      우주관리 > 역할
+    %section
+      %h4
+        관리자 목록
+
+      .role-form{ style: 'border: 1px solid #eee; padding: 24px;' }
+        = form_tag add_admin_roles_path, method: :post do |f|
+          .form-group
+            = text_field_tag :user_nickname, '', class: 'form-control'
+          = submit_tag '새로운 관리자 추가하기'
+
+
+      .row{ style: 'margin-top: 24px;' }
+        - User.with_role(:admin).each do |user|
+          .col-sm-3
+            = image_tag user.image.sm, class: 'user-thumb-sm'
+            = user.nickname
+            = link_to remove_admin_roles_path(user_nickname: user.nickname), method: :delete, class: 'btn btn-xs btn-default' do
+              %i.fa.fa-trash

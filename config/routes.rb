@@ -74,6 +74,15 @@ Rails.application.routes.draw do
   resources :archive_documents
   resources :memorials
 
+  namespace :admin do
+    resources :roles do
+      collection do
+        post :add
+        delete :remove
+      end
+    end
+  end
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/dev/emails"
   end
