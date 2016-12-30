@@ -24,7 +24,7 @@
       .row
         .col-sm-12
           %h3.text-center.mg-md.tc-deep-carrot-orange
-            %strong 시민발언 영상
+            %strong 촛불발언 영상
       .voffset.speech-list
         - @speeches.each_slice(4) do |speech_slice|
           .row
@@ -50,4 +50,4 @@
     .container.bloc-sm
       .row
         .col-sm-12.text-center
-          = link_to '시민발언 영상 올리기', new_speech_path(event_id: @event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'
+          = link_to '촛불발언 영상 올리기', new_speech_path(event_id: @event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'

@@ -90,6 +90,14 @@
 //   background: #FFFFFF url("img/pageload-spinner.gif") no-repeat center center;
 // }
 
+.comments.comments--event-speeches {
+  .comments-form {
+    border: 1px solid $gray-lighter;
+    background-color: $gray-lightest;
+    padding: 24px;
+  }
+}
+
 .page-container--event-speeches {
   .candle-logo {
     width: 500px;

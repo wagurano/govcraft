@@ -13,7 +13,9 @@
         .col-sm-12.col-md-10.col-md-offset-1
           .speech
             %h3.mg-lg.text-center.tc-outer-space.cover-text
-              != strip_tags(event.body)
+              != event.body
+            .text-center
+              .share-box{ 'data-share-image': image_url('seo.png') }
             - if @speeches.any?
               - speech = @speeches.first
               - video = VideoInfo.new(speech.video_url)
@@ -24,7 +26,7 @@
       .row
         .col-sm-12.text-center
           = link_to '#anchor-comments-list', class: 'btn btn-sq btn-dark-jungle-green btn-lg' do
-            지금 시민발언에 참여합니다
+            지금 촛불발언에 참여합니다
             &nbsp;
             %i.fa.fa-chevron-down
   / bloc-0 END
@@ -35,7 +37,7 @@
         .row
           .col-sm-12
             %h3.text-center.mg-md.tc-deep-carrot-orange
-              %strong 시민발언 영상
+              %strong 촛불발언 영상
         .speech-list.voffset
           - @speeches[1..-1].each_slice(4) do |speech_slice|
             .row
@@ -73,7 +75,7 @@
         .col-xs-12.col-md-8.col-md-offset-2
           %h3.statement-bloc-text.tc-deep-carrot-orange
             %span
-              %strong 온라인 시민 발언 통계
+              %strong 온라인 촛불발언 통계
   / bloc-3 END
   / bloc-4
   - area_stat = capture do
@@ -121,7 +123,7 @@
   / Footer - bloc-7
   #bloc-7.bloc.bgc-outer-space.d-bloc
     .container.bloc-md
-      .post-block__share.text-center
+      .text-center
         .share-box{ 'data-share-image': image_url('seo.png') }
   /     .row.bgc-outer-space
   /       .col-sm-12.col-md-6.col-md-offset-3
@@ -203,9 +205,9 @@
 /             = tag.taggings_count
 
 %a{id: "anchor-comments-list"}
-%section.comments{ style: 'margin: 24px 0' }
+%section.comments.comments--event-speeches{ style: 'margin: 24px 0' }
   .container
-    %h4 온라인 시민발언
+    %h4 온라인 촛불발언
 
     .comments-form
       = form_for Comment.new do |f|

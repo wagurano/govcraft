@@ -35,7 +35,7 @@ ko:
       person: 인물
       race: 인물투표
       player: 후보
-      speech: 시민발언 영상
+      speech: 촛불발언 영상
     attributes:
       user:
         nickname: 아이디
