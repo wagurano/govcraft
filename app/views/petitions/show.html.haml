@@ -4,6 +4,7 @@
   - cover_image = @petition.cover_image_url(:lg)
   %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image}); padding-bottom: 56px; background-size: cover; background-position: center center;" }
     .container
+      = render 'header'
       - if @petition.campaign
         .cover-section__campaign
           = link_to @petition.campaign.title, @petition.campaign
