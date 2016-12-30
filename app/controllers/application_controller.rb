@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     rescue_from ActiveRecord::RecordNotFound, ActionController::UnknownFormat do |exception|
       render_404
     end
-    rescue_from CanCan::AccessDenied do |exceptigson|
+    rescue_from CanCan::AccessDenied do |exception|
       self.response_body = nil
       if user_signed_in?
         redirect_to root_url, :alert => exception.message
