@@ -98,18 +98,30 @@
     }
   }
   .bloc.bloc-fill-screen.bgc-white.l-bloc.cover {
-    height: 1000px;
-    @media (max-width: 768px) and (orientation: portrait)  {
-      height: 650px;
-    }
     background-image: asset_url('events/speeches/cover.png');
     background-size: cover;
+    .cover-body {
+      padding-top: 200px;
+      padding-bottom: 50px;
+      position: initial;
+      transform: none;
+      -webkit-transform: none;
+      top: 0;
+    }
+    .cover-text {
+      font-size: $font-size-h3;
+      font-weight: normal;
+      line-height: 30px;
+      @media (max-width: 768px)  {
+        font-size: $font-size-base-xs;
+        line-height: 20px;
+      }
+    }
   }
   .speech-list .speech {
     padding-top: 12px;
     .title {
       margin-bottom: 0;
-      height: 30px;
     }
     .view-count {
       vertical-align: top;

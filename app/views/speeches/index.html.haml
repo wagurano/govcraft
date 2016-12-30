@@ -1,11 +1,21 @@
 / Main container
+/ Main container
 .page-container.page-container--event-speeches
   / bloc-0
-  #bloc-0.bloc.bloc-fill-screen.bgc-white.l-bloc{style: "height: 120px; background-image: url(#{image_url('events/speeches/cover.png')}); background-size: cover;"}
-    .container
-      .text-center
-        = link_to @event, class: 'navbar-brand' do
-          = image_tag 'events/speeches/logo.png', alt: "logo", width: "250"
+  #bloc-0.bloc.bloc-fill-screen.bgc-white.l-bloc.cover
+    .container.fill-bloc-top-edge
+      %nav
+        .text-center
+          = link_to @event do
+            = image_tag 'events/speeches/logo.png', alt: "logo", class: 'candle-logo'
+
+    .container.cover-body
+      .row.row-no-gutters
+        .col-sm-12.col-md-10.col-md-offset-1
+          .speech
+            %h3.mg-lg.text-center.tc-outer-space.cover-text
+              != strip_tags(@event.body)
+
   / bloc-0 END
   / bloc-1
   #bloc-1.bloc.bgc-outer-space.d-bloc
@@ -14,22 +24,24 @@
       .row
         .col-sm-12
           %h3.text-center.mg-md.tc-deep-carrot-orange
-            %strong 자유발언 영상
-      .row.voffset.speech-list
-        - @speeches.each do |speech|
-          - video = VideoInfo.new(speech.video_url)
-          .col-sm-3
-            .speech
-              = link_to speech.video_url, class: 'popup-youtube' do
-                .embed-responsive.embed-responsive-16by9.video-image
-                  = image_tag video.thumbnail_medium
-                  %i.fa.fa-play-circle.play-circle.play-circle--medium
-              %h5.title.mg-md= excerpt(speech.title, length: 30)
-              .text-left
-                = render 'likes/button', likable: speech
-                .view-count
-                  %i.fa.fa-eye
-                  = number_with_delimiter speech.view_count_cacheable
+            %strong 시민발언 영상
+      .voffset.speech-list
+        - @speeches.each_slice(4) do |speech_slice|
+          .row
+            - speech_slice.each do |speech|
+              - video = VideoInfo.new(speech.video_url)
+              .col-sm-3
+                .speech
+                  = link_to speech.video_url, class: 'popup-youtube' do
+                    .embed-responsive.embed-responsive-16by9.video-image
+                      = image_tag video.thumbnail_medium
+                      %i.fa.fa-play-circle.play-circle.play-circle--medium
+                  %h5.title.mg-md= speech.title
+                  .text-left
+                    = render 'likes/button', likable: speech
+                    .view-count
+                      %i.fa.fa-eye
+                      = number_with_delimiter speech.view_count_cacheable
       .text-center
         = paginate @speeches, theme: 'twitter-bootstrap-3'
   / bloc-1 END
@@ -38,4 +50,4 @@
     .container.bloc-sm
       .row
         .col-sm-12.text-center
-          = link_to '영상발언 올리기', new_speech_path(event_id: @event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'
+          = link_to '시민발언 영상 올리기', new_speech_path(event_id: @event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'

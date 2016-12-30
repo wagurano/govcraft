@@ -35,6 +35,7 @@ ko:
       person: 인물
       race: 인물투표
       player: 후보
+      speech: 시민발언 영상
     attributes:
       user:
         nickname: 아이디
@@ -124,6 +125,9 @@ ko:
         body: 설명
       player:
         person_id: 인물
+      speech:
+        title: 제목
+        video_url: 동영상주소 URL(필수)
     errors:
       models:
         user:

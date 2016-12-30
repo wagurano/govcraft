@@ -138,3 +138,11 @@ body {
     vertical-align: top;
   }
 }
+
+.pagination  {
+  .prev, .next_page {
+    @media (max-width: 768px) and (orientation: portrait) {
+      display: none;
+    }
+  }
+}

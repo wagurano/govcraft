@@ -8,59 +8,63 @@
           = link_to event do
             = image_tag 'events/speeches/logo.png', alt: "logo", class: 'candle-logo'
 
-    - if @speeches.any?
-      .container
-        .row.row-no-gutters
-          .col-sm-12.col-md-10.col-md-offset-1
-            .speech
-              %h1.mg-lg.text-center.hero-bloc-text.tc-outer-space
-                %strong!= event.body
+    .container.cover-body
+      .row.row-no-gutters
+        .col-sm-12.col-md-10.col-md-offset-1
+          .speech
+            %h3.mg-lg.text-center.tc-outer-space.cover-text
+              != strip_tags(event.body)
+            - if @speeches.any?
               - speech = @speeches.first
               - video = VideoInfo.new(speech.video_url)
               .video-image
                 = link_to speech.video_url, class: 'popup-youtube' do
                   = image_tag video.thumbnail_large, class: 'img-responsive mg-lg'
                   %i.fa.fa-play-circle.play-circle.play-circle--large
-
-      .container.fill-bloc-bottom-edge
-        .row
-          .col-sm-12
-            %a#scroll-hero.blocs-hero-btn-dwn{:href => "#speech-list"}
-              %span.fa.fa-chevron-down
+      .row
+        .col-sm-12.text-center
+          = link_to '#anchor-comments-list', class: 'btn btn-sq btn-dark-jungle-green btn-lg' do
+            지금 시민발언에 참여합니다
+            &nbsp;
+            %i.fa.fa-chevron-down
   / bloc-0 END
   / bloc-1
   - if @speeches.any?
     #bloc-1.bloc.bgc-outer-space.d-bloc
       .container.bloc-md
-        %a{id: "speech-list"}
         .row
           .col-sm-12
             %h3.text-center.mg-md.tc-deep-carrot-orange
-              %strong 자유발언 영상
-        .row.voffset.speech-list
-          - @speeches[1..-1].each do |speech|
-            - video = VideoInfo.new(speech.video_url)
-            .col-sm-3
-              .speech.clearfix
-                = link_to speech.video_url, class: 'popup-youtube' do
-                  .embed-responsive.embed-responsive-16by9.video-image
-                    = image_tag video.thumbnail_medium
-                    %i.fa.fa-play-circle.play-circle.play-circle--medium
-                %h5.mg-md.title= excerpt(speech.title, length: 30)
-                .text-left
-                  = render 'likes/button', likable: speech
-                  .view-count
-                    %i.fa.fa-eye
-                    = number_with_delimiter speech.view_count_cacheable
+              %strong 시민발언 영상
+        .speech-list.voffset
+          - @speeches[1..-1].each_slice(4) do |speech_slice|
+            .row
+              - speech_slice.each do |speech|
+                - video = VideoInfo.new(speech.video_url)
+                .col-sm-3
+                  .speech.clearfix
+                    = link_to speech.video_url, class: 'popup-youtube' do
+                      .embed-responsive.embed-responsive-16by9.video-image
+                        = image_tag video.thumbnail_medium
+                        %i.fa.fa-play-circle.play-circle.play-circle--medium
+                    %h5.mg-md.title= speech.title
+                    .text-left
+                      = render 'likes/button', likable: speech
+                      .view-count
+                        %i.fa.fa-eye
+                        = number_with_delimiter speech.view_count_cacheable
   / bloc-1 END
   / bloc-2
   #bloc-2.bloc.bgc-outer-space.d-bloc
     .container.bloc-sm
       .row
-        .col-xs-6.text-right
-          = link_to '영상발언 올리기', new_speech_path(event_id: event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'
-        .col-xs-6.text-left
-          = link_to '영상발언 더보기', speeches_path(event_id: event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'
+        / .col-xs-6.text-right
+        /   = link_to '영상발언 올리기', new_speech_path(event_id: event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'
+        .col-xs-12.text-center
+          = link_to speeches_path(event_id: event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg' do
+            영상발언 더보기
+            %small (#{Speech.where(event: event).count})
+
   / bloc-2 END
   / bloc-3
   #bloc-3.bloc.bgc-outer-space.d-bloc
@@ -198,6 +202,7 @@
 /           %small.text-muted
 /             = tag.taggings_count
 
+%a{id: "anchor-comments-list"}
 %section.comments{ style: 'margin: 24px 0' }
   .container
     %h4 온라인 시민발언

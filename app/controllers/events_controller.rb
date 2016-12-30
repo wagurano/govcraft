@@ -8,7 +8,7 @@ class EventsController < ApplicationController
 
   def show
     @campaign = @event.campaign
-    @speeches = @event.speeches.recent.limit(9) if @event.template == 'speech'
+    @speeches = @event.speeches.recent.limit(browser.device.mobile? ? 5 : 9) if @event.template == 'speech'
   end
 
   def new
