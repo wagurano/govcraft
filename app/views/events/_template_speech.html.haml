@@ -3,15 +3,15 @@
   / bloc-0
   #bloc-0.bloc.bloc-fill-screen.bgc-white.l-bloc.cover
     .container.fill-bloc-top-edge
-      %nav.navbar.row
-        .navbar-header
-          = link_to event, class: 'navbar-brand' do
-            = image_tag 'events/speeches/logo.png', alt: "logo", width: "300"
+      %nav
+        .text-center
+          = link_to event do
+            = image_tag 'events/speeches/logo.png', alt: "logo", class: 'candle-logo'
 
     - if @speeches.any?
       .container
         .row.row-no-gutters
-          .col-sm-12.col-md-8.col-md-offset-2
+          .col-sm-12.col-md-10.col-md-offset-1
             .speech
               %h1.mg-lg.text-center.hero-bloc-text.tc-outer-space
                 %strong 광장의 발언을 이어갑니다
@@ -21,8 +21,6 @@
                 = link_to speech.video_url, class: 'popup-youtube' do
                   = image_tag video.thumbnail_large, class: 'img-responsive mg-lg'
                   %i.fa.fa-play-circle.play-circle.play-circle--large
-              .text-center
-                = render 'likes/button', likable: speech
 
       .container.fill-bloc-bottom-edge
         .row
@@ -53,7 +51,7 @@
                   = render 'likes/button', likable: speech
                   .view-count
                     %i.fa.fa-eye
-                    = number_with_delimiter speech.view_count
+                    = number_with_delimiter speech.view_count_cacheable
   / bloc-1 END
   / bloc-2
   #bloc-2.bloc.bgc-outer-space.d-bloc
@@ -65,38 +63,37 @@
           = link_to '영상발언 더보기', speeches_path(event_id: event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'
   / bloc-2 END
   / bloc-3
-  / #bloc-3.bloc.bgc-outer-space.d-bloc
-  /   .container.bloc-sm
-  /     .row.bgc-outer-space
-  /       .col-xs-12.col-md-8.col-md-offset-2
-  /         %h3.statement-bloc-text.tc-deep-carrot-orange
-  /           %span
-  /             %strong 온라인 시민 발언 통계
+  #bloc-3.bloc.bgc-outer-space.d-bloc
+    .container.bloc-sm
+      .row.bgc-outer-space
+        .col-xs-12.col-md-8.col-md-offset-2
+          %h3.statement-bloc-text.tc-deep-carrot-orange
+            %span
+              %strong 온라인 시민 발언 통계
   / bloc-3 END
   / bloc-4
-  / #bloc-4.bloc.bgc-outer-space.tc-white
-  /   .container.bloc-sm
-  /     .row
-  /       .col-sm-12
-  /         .text-center
-  /           %span.feather-icon.icon-flag.icon-round.icon-white.icon-sm
-  /         %h3.text-center.mg-sm 참여지역
-  /         %p.text-center
-  /           서울특별시 100, 부산광역시 , 대구광역시 , 인천광역시 , 광주광역시 ,대전광역시 ,울산광역시 , 세종특별자치시 , 경기도 , 경기남부 ,
-  /           = succeed "\u{acbd}\u{ae30}\u{bd81}\u{bd80}" do
-  /             %br/
+  - area_stat = capture do
+    - area_count_map = event.comments.group(:full_street_address).count
+    - area_stat_map = Hash[Event::LARGE_AREA.map { |area| area_count_map[area].present? ? [area, area_count_map[area]] : nil }]
+    = area_stat_map.map { |k,v| "#{k} #{v}"}.join(', ')
+  - unless area_stat.strip.blank?
+    #bloc-4.bloc.bgc-outer-space.tc-white
+      .container.bloc-sm
+        .row
+          .col-sm-12
+            %h3.text-center.mg-sm 참여지역
+            %p.text-center
+              = area_stat
   / bloc-4 END
   / bloc-5
-  / #bloc-5.bloc.l-bloc.bgc-outer-space
-  /   .container.bloc-sm
-  /     .row
-  /       .col-sm-12
-  /         .text-center
-  /           %span.feather-icon.icon-head.icon-round.icon-white.icon-sm
-  /         %h3.text-center.mg-md.tc-white
-  /           참여자수
-  /           %strong 1,000
-  /           명
+  #bloc-5.bloc.l-bloc.bgc-outer-space
+    .container.bloc-sm
+      .row
+        .col-sm-12
+          %h3.text-center.mg-md.tc-white
+            참여자수
+            %strong #{event.comments.count}
+            명
   / bloc-5 END
   / bloc-6
   #bloc-6.bloc.bgc-outer-space.d-bloc
@@ -203,7 +200,7 @@
 
 %section.comments{ style: 'margin: 24px 0' }
   .container
-    %h4 게시글로 발언하세요
+    %h4 온라인 시민발언
 
     .comments-form
       = form_for Comment.new do |f|
@@ -221,6 +218,9 @@
                 = f.text_field :commenter_email, class: 'form-control'
         .form-group
           ~ f.text_area :body, placeholder: '제 생각에는...', class: 'form-control ' + ( is_redactorable? ? 'redactor' : '')
+        .form-group
+          = f.label :full_street_address, '주소(필수)'
+          = f.select :full_street_address, options_for_select(Event::LARGE_AREA), {}, class: 'form-control'
         = f.submit '작성', class: 'btn btn-default btn-sm'
 
     - comments = params[:tag].present? ? event.comments.tagged_with(params[:tag]) : event.comments
@@ -230,6 +230,8 @@
           .media-body
             .comment__meta
               = comment.user_nickname
+              - if comment.full_street_address.present?
+                (#{comment.full_street_address})
               = date_f comment.created_at
               - if can? :destroy, comment
                 = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }

@@ -2,11 +2,10 @@
 .page-container.page-container--event-speeches
   / bloc-0
   #bloc-0.bloc.bloc-fill-screen.bgc-white.l-bloc{style: "height: 120px; background-image: url(#{image_url('events/speeches/cover.png')}); background-size: cover;"}
-    .container.fill-bloc-top-edge
-      %nav.navbar.row
-        .navbar-header
-          = link_to @event, class: 'navbar-brand' do
-            = image_tag 'events/speeches/logo.png', alt: "logo", width: "300"
+    .container
+      .text-center
+        = link_to @event, class: 'navbar-brand' do
+          = image_tag 'events/speeches/logo.png', alt: "logo", width: "250"
   / bloc-0 END
   / bloc-1
   #bloc-1.bloc.bgc-outer-space.d-bloc
@@ -30,7 +29,7 @@
                 = render 'likes/button', likable: speech
                 .view-count
                   %i.fa.fa-eye
-                  = number_with_delimiter speech.view_count
+                  = number_with_delimiter speech.view_count_cacheable
       .text-center
         = paginate @speeches, theme: 'twitter-bootstrap-3'
   / bloc-1 END

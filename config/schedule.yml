@@ -6,4 +6,8 @@ sitizen_job:
   cron: "30 * * * * Asia/Seoul"
   class: "Citizen2017Job"
   queue: default
+speeches_view_count_job:
+  cron: "15 * * * * Asia/Seoul"
+  class: "SpeechesViewCountJob"
+  queue: default
 
