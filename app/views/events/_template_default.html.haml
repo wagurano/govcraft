@@ -1,6 +1,7 @@
 - cover_image = event.image_url(:lg)
 %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image})" }
-  .container-fluid
+  .container.container-fluid
+    = render 'header'
     - if @campaign
       .cover-section__campaign
         = link_to @campaign.title, @campaign
