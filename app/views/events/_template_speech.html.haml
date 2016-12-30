@@ -14,7 +14,7 @@
           .col-sm-12.col-md-10.col-md-offset-1
             .speech
               %h1.mg-lg.text-center.hero-bloc-text.tc-outer-space
-                %strong 광장의 발언을 이어갑니다
+                %strong!= event.body
               - speech = @speeches.first
               - video = VideoInfo.new(speech.video_url)
               .video-image
