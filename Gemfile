@@ -37,6 +37,7 @@ gem 'magnific-popup-rails', '~> 1.1'
 # tool
 gem 'axlsx_rails', '~> 0.5.0'
 gem 'htmlentities', '~> 4.3', '>= 4.3.4'
+gem "recaptcha", require: "recaptcha/rails"
 
 # assets
 source 'https://rails-assets.org' do

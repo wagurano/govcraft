@@ -48,3 +48,17 @@
     %script{:src => "https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"}
     %script{:src => "https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"}
     = yield :script if content_for?(:script)
+
+    :javascript
+      //recaptcha
+      var onloadRecaptchaCallback = function() {
+        $('.gov-action-recaptcha').each(function(index, elm){
+          var widget_id = grecaptcha.render(elm, {
+            'sitekey' : "#{Recaptcha.configuration.site_key}",
+            'size' : '100px'
+          });
+          $(elm).closest('form').find('input[name="hiddenRecaptcha"]').data('recaptcha-id', widget_id);
+          $('.masonry-container').masonry();
+        });
+      };
+    %script(src="https://www.google.com/recaptcha/api.js?onload=onloadRecaptchaCallback&render=explicit&hl=ko" async defer)

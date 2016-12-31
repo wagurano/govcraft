@@ -14,6 +14,8 @@
 //= require kakao
 //= require mobile-detect
 //= require magnific-popup
+//= require jquery.validate
+//= require jquery.validate.messages_ko
 
 UnobtrusiveFlash.flashOptions['timeout'] = 300000;
 
@@ -167,6 +169,42 @@ $(function(){
     preloader: false,
 
     fixedContentPos: false
+  });
+
+  // 폼 검증
+  $.validator.addMethod("recaptcha", function(value, element) {
+    if(typeof grecaptcha != 'undefined') {
+      var recaptcha_id = $(element).data('recaptcha-id');
+      return grecaptcha.getResponse(recaptcha_id).length > 0;
+    }
+
+    return true;
+  }, '');
+
+  $('.gov-action-form-validation').each(function(i, elm) {
+    var $form = $(elm);
+
+    $form.validate({
+      ignore: ':hidden:not(.validate)',
+      rules: {
+        "hiddenRecaptcha": {
+          recaptcha: true
+        }
+      },
+      messages: {
+        "hiddenRecaptcha": {
+          recaptcha: "로봇이 아닌지 확인해 주세요."
+        }
+      },
+      errorPlacement: function(error, $element) {
+        if($element.attr('name') == 'hiddenRecaptcha') {
+          error.insertAfter($element.closest('form').find('.gov-action-recaptcha'));
+        } else {
+          error.insertAfter($element);
+        }
+        $('.masonry-container').masonry();
+      }
+    });
   });
 });
 

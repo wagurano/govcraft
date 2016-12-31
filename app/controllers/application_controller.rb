@@ -97,4 +97,9 @@ class ApplicationController < ActionController::Base
       flash[key] = value
     end
   end
+
+  def redirect_back_for_robot
+    flash[:error] = '로봇이세요? 로봇 여부를 확인해 주세요'
+    redirect_back(fallback_location: root_path)
+  end
 end

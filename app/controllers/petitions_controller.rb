@@ -9,7 +9,8 @@ class PetitionsController < ApplicationController
   def show
     @campaign = @petition.campaign
     @petition.increment!(:views_count)
-    @signs = @petition.signs.page params[:page]
+    @signs = Sign.recent.where.not(body: [nil, ''])
+    @signs = params[:mode] == 'widget' ? @signs.limit(10) : @signs.page(params[:page])
 
     if params[:mode] == 'widget'
       render layout: 'strip'

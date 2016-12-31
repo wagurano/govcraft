@@ -42,11 +42,12 @@
 
 %section.page-block
   .container
-    .row.masonry-container
-      .col-sm-4.hidden-xs
+    .row
+      .col-sm-12.hidden-xs
         .panel.panel-default.panel-floating
           .panel-body
             = render 'form_with_assembly', event: event
+    .row.masonry-container
       - comments.order('id DESC').each do |comment|
         .col-sm-4
           .panel.panel-default.panel-floating[comment]{ style: 'padding:0' }

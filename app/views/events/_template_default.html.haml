@@ -45,20 +45,25 @@
       .col-sm-6.col-md-4.col-lg-3
         .panel.panel-default.panel-floating
           .panel-body
-            = form_for Comment.new do |f|
+            = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
               = f.hidden_field :commentable_type, value: 'Event'
               = f.hidden_field :commentable_id, value: event.id
               - unless user_signed_in?
                 .form-group
                   = f.label :commenter_name
-                  = f.text_field :commenter_name, class: 'form-control'
+                  = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
                 .form-group
                   = f.label :commenter_email
                   = f.text_field :commenter_email, class: 'form-control'
               .form-group
-                ~ f.text_area :body, placeholder: '나의 의견은 ...', rows: 8, class: 'form-control input-lg'
+                ~ f.text_area :body, placeholder: '나의 의견은 ...', rows: 8, class: 'form-control input-lg', data: { 'rule-required': true }
               .form-group
                 = f.text_field :tag_list, placeholder: '태그1, 태그2', class: 'form-control'
+              - unless user_signed_in?
+                .form-group.recaptcha
+                  .help-block 스팸 방지를 위해 사람인지 확인합니다. 아래 체크 박스를 클릭해 주세요.
+                  = hidden_field_tag :hiddenRecaptcha, nil, class: 'validate'
+                  .gov-action-recaptcha
               = f.submit '작성', class: 'btn btn-primary btn-sm btn-block'
 
       - comments = params[:tag].present? ? event.comments.tagged_with(params[:tag]) : event.comments
