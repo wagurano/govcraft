@@ -75,12 +75,14 @@ Rails.application.routes.draw do
   resources :memorials
 
   namespace :admin do
+    root 'base#home', as: :home
     resources :roles do
       collection do
         post :add
         delete :remove
       end
     end
+    resources :comments
   end
 
   if Rails.env.development?
