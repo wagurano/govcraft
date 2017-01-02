@@ -6,6 +6,19 @@ class PagesController < ApplicationController
     @articles = Article.hot.limit(10)
   end
 
+  def hot
+    @new_campaigns = Campaign.past_week
+    @new_archives = Archive.past_week
+    @new_memorials = Memorial.past_week
+    @new_articles = Article.past_week
+
+    @new_discussions = Discussion.past_week
+    @new_petitions = Petition.past_week
+    @new_polls = Poll.past_week
+    @new_wikis = Wiki.past_week
+    @new_events = Event.past_week
+  end
+
   def about
   end
 

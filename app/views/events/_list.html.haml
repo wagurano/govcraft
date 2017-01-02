@@ -1,7 +1,7 @@
 - if events.any?
   %section.page-block
     .container
-      %h4= Event.model_name.human
+      %h4= local_assigns[:title_label] || Event.model_name.human
 
       .row.masonry-container
         - events.each do |event|
