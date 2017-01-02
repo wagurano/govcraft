@@ -107,6 +107,7 @@ gem 'ey_config'
 
 group :development do
   gem 'web-console', '~> 2.0'
+  gem 'puma'
 end
 
 group :development, :test do
