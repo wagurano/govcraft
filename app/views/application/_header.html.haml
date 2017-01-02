@@ -8,10 +8,28 @@
             %span.icon-bar
             %span.icon-bar
           %a.navbar-brand{ href: root_path }
-            직접 민주주의 플랫폼, 우주당!
+            우주당
 
         #site-header-collapsable.collapse.navbar-collapse
           %ul.nav.navbar-nav
+            %li
+              = link_to Campaign.model_name.human, campaigns_path
+            %li
+              = link_to Discussion.model_name.human,discussions_path
+            %li
+              = link_to Poll.model_name.human, polls_path
+            %li
+              = link_to Petition.model_name.human, petitions_path
+            %li
+              = link_to Archive.model_name.human, archives_path
+            %li
+              = link_to Memorial.model_name.human, memorials_path
+            %li
+              = link_to Event.model_name.human, events_path
+            %li
+              = link_to Article.model_name.human, articles_path
+
+          %ul.nav.navbar-nav.navbar-right
             - if user_signed_in?
               %li.dropdown
                 %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -30,28 +48,3 @@
                 = link_to new_user_session_path do
                   %i.fa.fa-sign-in
                   로그인 &middot; 가입
-
-            %li
-              = link_to campaigns_path do
-                %i.fa.fa-rocket
-                = Campaign.model_name.human
-            %li
-              = link_to discussions_path do
-                %i.fa.fa-comments
-                = Discussion.model_name.human
-            %li
-              = link_to polls_path do
-                %i.fa.fa-thumbs-up
-                = Poll.model_name.human
-            %li
-              = link_to petitions_path do
-                %i.fa.fa-check
-                = Petition.model_name.human
-            %li
-              = link_to Archive.model_name.human, archives_path
-            %li
-              = link_to Memorial.model_name.human, memorials_path
-            %li
-              = link_to Event.model_name.human, events_path
-            %li
-              = link_to Article.model_name.human, articles_path
