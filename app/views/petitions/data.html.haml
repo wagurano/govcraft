@@ -13,7 +13,7 @@
       %tbody
         - @petition.signs.recent.each do |sign|
           %tr
-            %td= sign.created_at
+            %td= l sign.created_at
             %td= sign.user_name
             %td= sign.user_email
             %td= sign.body

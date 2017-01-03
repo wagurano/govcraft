@@ -1,11 +1,41 @@
+%section#site-hero-block.page-block
+  #home-carousel.carousel.slide{"data-ride" => "carousel"}
+    / Indicators
+    %ol.carousel-indicators
+      %li.active{"data-slide-to" => "0", "data-target" => "#home-carousel"}
+      %li{"data-slide-to" => "1", "data-target" => "#home-carousel"}
+
+    / Wrapper for slides
+    .carousel-inner{:role => "listbox"}
+      .item.active{ style: "background-image: url(https://source.unsplash.com/category/nature); min-height: 400px;" }
+        .container
+          .jumbotron
+            %h2 우리가 주인이당! Would You Party?
+            %p
+              우주당은 시민들이 자발적으로 만드는 시민들의 정치 놀이터입니다.
+              %br
+              직접 민주주의 방식에 기반하여 시민이 주도하는 새로운 정치 문화를 함께 만들어 갑니다.
+
+      .item{ style: "background-image: url(https://source.unsplash.com/category/technology); min-height: 400px;" }
+        .container
+          .jumbotron
+            %h2 우리가 주인이당! 함께 개발해요.
+            %p
+              1. http://slack.wouldyouparty.org 에서 슬랙에 가입합니다.
+              %br
+              2. https://goo.gl/QxczPt 링크에 들어가서 우주당 트렐로에 가입합니다.
+              %br
+              3. 슬랙으로 #general 채널에서 트렐로 멤버 승인을 요청합니다 (멤버로 승인되기 전에는 댓글 쓰기만 가능합니다)
+              %br
+              4. 멤버가 된 후, 슬랙과 트렐로에서 자유롭게 참여합니다. (ex. 아이디어리스트에 새로운 아이디어 추가하기, 작업리스트에 있는 작업 하기 등 )
+
 %section.page-block
   .container
-    .jumbotron
-      %h2 우리가 주인이당! Would You Party?
-      %p 우주당은 시민들이 자발적으로 만드는 직접 민주주의 플랫폼입니다. 함께 만들 분들을 계속해서 모으고 있습니다.
-      %p
-        = link_to '우주당 슬랙 접속하기', 'http://slack.wouldyouparty.org', target: '_blank', class: 'btn btn-primary btn-lg'
-        = link_to '우주당 이해하기', about_path, class: 'btn btn-danger btn-lg'
+    .alert.alert-danger
+      지금 슬랙에서 우주당 당원들이 이야기를 나누고 있습니다. 함께 하시겠습니까?
+      = link_to 'http://slack.wouldyouparty.org', target: '_blank', class: 'alert-link' do
+        %i.fa.fa-slack
+        우주당 슬랙 초대장 받기
 
 %section.page-block
   .container
