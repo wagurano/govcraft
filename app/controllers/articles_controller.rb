@@ -32,7 +32,7 @@ class ArticlesController < ApplicationController
     parsed_url = slack_text.scan(/https?:\/\/[\S]+/).first
     return if parsed_url.blank?
     parsed_url = parsed_url[0...-1] if parsed_url.last == '>'
-
+    parsed_url = CGI.unescapeHTML parsed_url
     @article = Article.new(url: parsed_url, body: slack_text)
     hastag
     @article.save!
