@@ -44,6 +44,7 @@ ko:
         image: 프로필사진
         password: 비밀번호
         password_confirmation: 비밀번호 확인
+        enable_mailing: 메일수신 여부
       campaign:
         title: 제목
         body: 내용

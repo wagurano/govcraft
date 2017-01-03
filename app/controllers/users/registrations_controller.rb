@@ -13,7 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:remember_me, :nickname, :description, :image, :email)
+    params.require(:user).permit(:remember_me, :nickname, :description, :image, :email, :enable_mailing)
   end
 
   def after_inactive_sign_up_path_for(resource)
