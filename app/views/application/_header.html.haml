@@ -30,6 +30,8 @@
               = link_to Article.model_name.human, articles_path
 
           %ul.nav.navbar-nav.navbar-right
+            %li
+              = link_to '새소식', weekly_path
             - if user_signed_in?
               %li.dropdown
                 %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}

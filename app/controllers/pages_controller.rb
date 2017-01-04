@@ -6,7 +6,7 @@ class PagesController < ApplicationController
     @articles = Article.hot.limit(10)
   end
 
-  def hot
+  def weekly
     @new_campaigns = Campaign.past_week
     @new_archives = Archive.past_week
     @new_memorials = Memorial.past_week
