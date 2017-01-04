@@ -1,4 +1,4 @@
-class SummaryJob
+class SummaryMailingJob
   include Sidekiq::Worker
   sidekiq_options unique: :while_executing
 
@@ -12,7 +12,7 @@ class SummaryJob
     return if [new_campaigns,
       new_petitions, new_polls, new_events].select { |news| news.any? }.blank?
 
-    User.where(enable_mailing: true).each do |user|
+    User.with_role(:admin).where(enable_mailing: true).each do |user|
       ApplicationMailer.summary(user, new_campaigns, new_petitions, new_polls, new_events).deliver_now
     end
   end

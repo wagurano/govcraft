@@ -85,6 +85,7 @@ group :development, :test do
 end
 
 # notification
+gem 'postmark-rails', '~> 0.12.0'
 gem 'slack-notifier', '~> 1.4'
 gem 'exception_notification', '~> 4.1', '>= 4.1.4'
 gem 'postmark-rails', '~> 0.12.0'
