@@ -10,17 +10,16 @@
 
     .container.cover-body
       .row.row-no-gutters
-        .col-sm-12.col-md-10.col-md-offset-1
+        .col-sm-12.col-md-8.col-md-offset-2
           .speech
             %h3.mg-lg.text-center.tc-outer-space.cover-text
               != event.body
             .text-center
               .share-box{ 'data-share-image': image_url('seo.png') }
-            - if @speeches.any?
-              - speech = @speeches.first
-              - video = VideoInfo.new(speech.video_url)
+            - if @hero_speech.present?
+              - video = VideoInfo.new(@hero_speech.video_url)
               .video-image
-                = link_to speech.video_url, class: 'popup-youtube' do
+                = link_to @hero_speech.video_url, class: 'popup-youtube' do
                   = image_tag video.thumbnail_large, class: 'img-responsive mg-lg'
                   %i.fa.fa-play-circle.play-circle.play-circle--large
       .row
@@ -29,44 +28,6 @@
             지금 촛불발언에 참여합니다
             &nbsp;
             %i.fa.fa-chevron-down
-  / bloc-0 END
-  / bloc-1
-  - if @speeches.any?
-    #bloc-1.bloc.bgc-outer-space.d-bloc
-      .container.bloc-md
-        .row
-          .col-sm-12
-            %h3.text-center.mg-md.tc-deep-carrot-orange
-              %strong 촛불발언 영상
-        .speech-list.voffset
-          - @speeches[1..-1].each_slice(4) do |speech_slice|
-            .row
-              - speech_slice.each do |speech|
-                - video = VideoInfo.new(speech.video_url)
-                .col-sm-3
-                  .speech.clearfix
-                    = link_to speech.video_url, class: 'popup-youtube' do
-                      .embed-responsive.embed-responsive-16by9.video-image
-                        = image_tag video.thumbnail_medium
-                        %i.fa.fa-play-circle.play-circle.play-circle--medium
-                    %h5.mg-md.title= speech.title
-                    .text-left
-                      = render 'likes/button', likable: speech
-                      .view-count
-                        %i.fa.fa-eye
-                        = number_with_delimiter speech.view_count_cacheable
-  / bloc-1 END
-  / bloc-2
-  #bloc-2.bloc.bgc-outer-space.d-bloc
-    .container.bloc-sm
-      .row
-        / .col-xs-6.text-right
-        /   = link_to '영상발언 올리기', new_speech_path(event_id: event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'
-        .col-xs-12.text-center
-          = link_to speeches_path(event_id: event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg' do
-            영상발언 더보기
-            %small (#{Speech.where(event: event).count})
-
   / bloc-2 END
   / bloc-3
   #bloc-3.bloc.bgc-outer-space.d-bloc
@@ -100,22 +61,102 @@
             참여자수
             %strong #{event.comments.count}
             명
-  / bloc-5 END
-  / bloc-6
-  #bloc-6.bloc.bgc-outer-space.d-bloc
+  / bloc-6 END
+
+
+  %a{id: "anchor-comments-list"}
+  %section.comments.comments--event-speeches{ style: 'margin: 24px 0' }
+    .container
+      .row
+        .col-sm-12.col-md-8.col-md-offset-2
+          .comments-form
+            = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
+              = f.hidden_field :commentable_type, value: 'Event'
+              = f.hidden_field :commentable_id, value: event.id
+              - unless user_signed_in?
+                .row
+                  .col-xs-12.col-md-6
+                    .form-group
+                      = f.label :commenter_name
+                      = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
+                  .col-xs-12.col-md-6
+                    .form-group
+                      = f.label :commenter_email
+                      = f.text_field :commenter_email, class: 'form-control'
+              .form-group
+                ~ f.text_area :body, placeholder: '제 생각에는...', class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
+              .form-group
+                = f.label :full_street_address, '주소(필수)'
+                = f.select :full_street_address, options_for_select(Event::LARGE_AREA), {}, class: 'form-control'
+              - unless user_signed_in?
+                .form-group.recaptcha
+                  .help-block 스팸 방지를 위해 사람인지 확인합니다. 아래 체크 박스를 클릭해 주세요.
+                  = hidden_field_tag :hiddenRecaptcha, nil, class: 'validate'
+                  .gov-action-recaptcha
+              = f.submit '작성', class: 'btn btn-default btn-sm'
+
+          - comments = params[:tag].present? ? event.comments.tagged_with(params[:tag]) : event.comments
+          .comments
+            - comments.recent.each do |comment|
+              .media[comment]{ style: 'margin: 14px 0;'}
+                .media-body
+                  .comment__meta
+                    = comment.user_nickname
+                    - if comment.full_street_address.present?
+                      (#{comment.full_street_address})
+                    = date_f comment.created_at
+                    - if can? :destroy, comment
+                      = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
+                    - if current_user != comment.user
+                      = render 'reports/button', reportable: comment
+
+                  - if comment.choice.present?
+                    .comment__choice{ class: comment.choice }= comment.choice.text
+                  .comment__body
+                    = raw screened(comment, :body)
+                  .comment__tags
+                    - comment.tag_list.each do |tag|
+                      = link_to "##{tag}", event_path(event, {tag: tag})
+                .media-right{ style: 'vertical-align: middle;' }
+                  = render 'likes/button', likable: comment
+
+    / bloc-0 END
+    / bloc-1
+  - if @speeches.any?
+    #bloc-1.bloc.bgc-outer-space.d-bloc
+      .container.bloc-md
+        .row
+          .col-sm-12
+            %h3.text-center.mg-md.tc-deep-carrot-orange
+              %strong 촛불발언 동영상
+        .speech-list.voffset
+          - @speeches.each_slice(4) do |speech_slice|
+            .row
+              - speech_slice.each do |speech|
+                - video = VideoInfo.new(speech.video_url)
+                .col-sm-3
+                  .speech.clearfix
+                    = link_to speech.video_url, class: 'popup-youtube' do
+                      .embed-responsive.embed-responsive-16by9.video-image
+                        = image_tag video.thumbnail_medium
+                        %i.fa.fa-play-circle.play-circle.play-circle--medium
+                    %h5.mg-md.title= speech.title
+                    .text-left
+                      = render 'likes/button', likable: speech
+                      .view-count
+                        %i.fa.fa-eye
+                        = number_with_delimiter speech.view_count_cacheable
+  / bloc-1 END
+  / bloc-2
+  #bloc-2.bloc.bgc-outer-space.d-bloc
     .container.bloc-sm
       .row
-        .col-xs-12.col-md-8.col-md-offset-2
-          %h3.statement-bloc-text.tc-deep-carrot-orange
-            %span
-              %strong 관련 사이트
-          %p.text-center
-            = link_to 'http://citizen2017.net/c/5/9', target: '_blank' do
-              국민토크 http://citizen2017.net/c/5/9
-            %br
-            = link_to 'http://wouldyouparty.org/petitions/29', target: '_blank' do
-              탄핵심판촉구
-  / bloc-6 END
+        / .col-xs-6.text-right
+        /   = link_to '영상발언 올리기', new_speech_path(event_id: event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'
+        .col-xs-12.text-center
+          = link_to speeches_path(event_id: event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg' do
+            촛불발언 동영상 더보기
+            %small (#{Speech.where(event: event).count})
   / ScrollToTop Button
   / %a.bloc-button.btn.btn-d.scrollToTop{:onclick => "scrollToTarget('1')"}
   /   %span.fa.fa-chevron-up
@@ -125,138 +166,3 @@
     .container.bloc-md
       .text-center
         .share-box{ 'data-share-image': image_url('seo.png') }
-  /     .row.bgc-outer-space
-  /       .col-sm-12.col-md-6.col-md-offset-3
-  /         .col-xs-3
-  /           .text-center
-  /             %a.social{:href => "index.html"}
-  /               %span.fa.fa-twitter.icon-md
-  /         .col-xs-3
-  /           .text-center
-  /             %a.social{:href => "index.html"}
-  /               %span.fa.fa-facebook.icon-md
-  /         .col-xs-3
-  /           .text-center
-  /             %a.social{:href => "index.html"}
-  /               %span.fa.fa-dribbble.icon-md
-  /         .col-xs-3
-  /           .text-center
-  /             %a.social{:href => "index.html"}
-  /               %span.fa.fa-instagram.icon-md
-  / Footer - bloc-7 END
-  / Footer - bloc-8
-  / #bloc-8.bloc.hidden-lg.hidden-md.bgc-white.l-bloc
-  /   .container.bloc-lg
-  /     .row
-  /       .col-sm-12
-  / Footer - bloc-8 END
-  / Main container END
-/ - cover_image = event.image_url(:lg)
-/ %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image})" }
-/   .container-fluid
-/     - if @campaign
-/       .cover-section__campaign
-/         = link_to @campaign.title, @campaign
-
-/     %h2.cover-section__title
-/       = event.title
-
-/     - if can?(:edit, event) || can?(:destroy, event)
-/       .cover-section__buttons
-/         - if can? :edit, event
-/           = link_to '수정', edit_event_path(event)
-/         - if can? :destroy, event
-/           = link_to '삭제', event, method: :delete, data: { confirm: '삭제하시겠습니까?' }
-
-/     .cover-section__body= raw event.body
-
-/     %h4.cover-section__users-count
-/       %span
-/         %i.fa.fa-comment-o
-/         = event.comments.count
-
-/     .share-box{ 'data-share-image': image_url('seo.png') }
-
-/ %section
-/   .container-fluid
-/     - @speeches.each do |speech|
-/       .player-wrapper
-/         - video = VideoInfo.new(speech.video_url)
-/         %a{class: 'anchor', id: 'anchor-video'}
-/         .player
-/           %iframe(src="#{video.embed_url}?enablejsapi=1" frameborder="0" allowfullscreen="allowfullscreen")
-
-/ %section
-/   .container-fluid
-/     = link_to '동영상 발언대 만들기', new_speech_path(event_id: event.id)
-
-/ %section{ style: 'margin: 28px 0;' }
-/   .container-fluid
-/     - event.comments.tag_counts_on(:tags).each do |tag|
-/       - if params[:tag] == tag.name
-/         %span{ style: 'display: inline-block; background-color: #4a5dd0; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; color: #fff; margin-bottom: 7px;' }
-/           = link_to tag.name, event_path(event, {tag: tag.name}), style: 'color: #fff'
-/           %small
-/             = tag.count
-/       - else
-/         %span{ style: 'display: inline-block; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; margin-bottom: 7px;' }
-/           = link_to tag.name, event_path(event, {tag: tag.name})
-/           %small.text-muted
-/             = tag.taggings_count
-
-%a{id: "anchor-comments-list"}
-%section.comments.comments--event-speeches{ style: 'margin: 24px 0' }
-  .container
-    %h4 온라인 촛불발언
-
-    .comments-form
-      = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
-        = f.hidden_field :commentable_type, value: 'Event'
-        = f.hidden_field :commentable_id, value: event.id
-        - unless user_signed_in?
-          .row
-            .col-xs-12.col-md-6
-              .form-group
-                = f.label :commenter_name
-                = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
-            .col-xs-12.col-md-6
-              .form-group
-                = f.label :commenter_email
-                = f.text_field :commenter_email, class: 'form-control'
-        .form-group
-          ~ f.text_area :body, placeholder: '제 생각에는...', class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
-        .form-group
-          = f.label :full_street_address, '주소(필수)'
-          = f.select :full_street_address, options_for_select(Event::LARGE_AREA), {}, class: 'form-control'
-        - unless user_signed_in?
-          .form-group.recaptcha
-            .help-block 스팸 방지를 위해 사람인지 확인합니다. 아래 체크 박스를 클릭해 주세요.
-            = hidden_field_tag :hiddenRecaptcha, nil, class: 'validate'
-            .gov-action-recaptcha
-        = f.submit '작성', class: 'btn btn-default btn-sm'
-
-    - comments = params[:tag].present? ? event.comments.tagged_with(params[:tag]) : event.comments
-    .comments
-      - comments.recent.each do |comment|
-        .media[comment]{ style: 'margin: 14px 0;'}
-          .media-body
-            .comment__meta
-              = comment.user_nickname
-              - if comment.full_street_address.present?
-                (#{comment.full_street_address})
-              = date_f comment.created_at
-              - if can? :destroy, comment
-                = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
-              - if current_user != comment.user
-                = render 'reports/button', reportable: comment
-
-            - if comment.choice.present?
-              .comment__choice{ class: comment.choice }= comment.choice.text
-            .comment__body
-              = raw screened(comment, :body)
-            .comment__tags
-              - comment.tag_list.each do |tag|
-                = link_to "##{tag}", event_path(event, {tag: tag})
-          .media-right{ style: 'vertical-align: middle;' }
-            = render 'likes/button', likable: comment
-
