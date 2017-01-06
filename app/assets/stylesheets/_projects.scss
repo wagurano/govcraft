@@ -9,13 +9,13 @@
     font-weight: normal;
     padding-top: 5px;
   }
-  a {
+  a:not(.btn) {
     color: #fff;
   }
-  small a {
+  small a:not(.btn) {
     color: $gray-lighter;
   }
-  .project__title {
+  .project__title > *:not(small) {
     @include text-stroke();
   }
   .project__meta {
@@ -45,6 +45,9 @@
       margin-top: 7px;
       font-size: $font-size-small;
       text-shadow: 0px 1px 1px #000;
+      > span + span {
+        margin-left: 6px;
+      }
     }
   }
 }

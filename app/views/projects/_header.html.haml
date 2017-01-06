@@ -24,15 +24,42 @@
         = link_to project.title, project
         %small
           - if can? :edit, project
-            = link_to '수정', edit_project_path(project)
+            = link_to '수정', edit_project_path(project), class: 'btn btn-xs btn-default'
           - if can? :destroy, project
-            = link_to '삭제', project, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
+            = link_to '삭제', project, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-default'
+          - if user_signed_in?
+            - if project.participated? current_user
+              %span.btn.btn-xs.btn-default.gov-action-popover{ data: { placement: 'bottom', url: "##{dom_id(project)}--cancel-participation" } }
+                참여 중
+                %i.fa.fa-caret-down
+              .hidden
+                .cancel-participation{id: "#{dom_id(project)}--cancel-participation", style: 'white-space: nowrap;'}
+                  = link_to cancel_participations_path(project_id: project.id), method: :delete, data: { confirm: '정말 나가시겠습니까?' } do
+                    프로젝트 나가기
+            - else
+              = link_to '참여', participations_path(project_id: project.id), method: :post, class: 'btn btn-xs btn-default'
+          - else
+            = link_to new_user_session_path, class: 'btn btn-xs btn-default' do
+              참여
+
     - if params[:controller] == 'projects'
       .project__body= smart_format project.body
     .project__meta
       %span
         제안자 :
         = project.user.nickname
+      - if project.participations.any?
+        %span
+          참여자 :
+          - preview_count = 3
+          - remain_count = project.participations.count - preview_count
+          - remain_count = 0 if remain_count < 0
+
+          - project.participations.recent.limit(preview_count).each do |participation|
+            = participation.user.nickname
+          - if remain_count > 0
+            + #{remain_count}
+      %br.hidden-sm.visible-xs-block
       %span
         시작일 :
         = date_f project.created_at

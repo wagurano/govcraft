@@ -8,6 +8,17 @@
             제안자 :
             = image_tag project.user.image.sm, class: 'user-thumb-sm'
             = project.user.nickname
+          - if project.participations.any?
+            %span
+              참여자 :
+              - preview_count = 3
+              - remain_count = project.participations.count - preview_count
+              - remain_count = 0 if remain_count < 0
+
+              - project.participations.recent.limit(preview_count).each do |participation|
+                = participation.user.nickname
+              - if remain_count > 0
+                + #{remain_count}
           %span
             시작일 :
             = date_f project.created_at
