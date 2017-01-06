@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @campaign = @event.campaign
+    @project = @event.project
     @speeches = @event.speeches.recent.limit(browser.device.mobile? ? 4 : 8) if @event.template == 'speech'
     @hero_speech = @event.speeches.sample
   end

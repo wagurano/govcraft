@@ -71,15 +71,15 @@
         %a.link-btn{:href => "http://wouldyouparty.org/", :style => "background-color:#4A5DD0", :target => "_blank"} 홈페이지
         %a.link-btn{:href => "http://wouldyouparty.slack.com", :style => "background-color:#e32072", :target => "_blank"} 슬랙
         %a.link-btn{:href => "https://trello.com/b/8yNqiEKP/-", :style => "background-color:#026AA7", :target => "_blank"} 트렐로
-      - if @new_campaigns.any?
+      - if @new_projects.any?
         .content
           .content-title
-            캠페인
+            프로젝트
           .sub-content
-            - @new_campaigns.each do |campaign|
-              = link_to polymorphic_url(campaign) do
+            - @new_projects.each do |project|
+              = link_to polymorphic_url(project) do
                 .sub-title
-                  = campaign.title
+                  = project.title
       - if @new_petitions.any?
         .content
           .content-title

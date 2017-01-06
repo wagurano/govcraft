@@ -1,6 +1,6 @@
-%section#campaign-events{:data => {:spy => "scroll", :target => "navbar"}}
+%section#project-events{:data => {:spy => "scroll", :target => "navbar"}}
   // TODO : 하드코딩된 컨텐츠 제거
-  .header{:style => "height: 310px; background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{@campaign.image});" }
+  .header{:style => "height: 310px; background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{@project.image});" }
     %h2
       우리가 꿈꾸는 OO는
       %br
@@ -55,4 +55,4 @@
       %p
 
   .event_block{:id => "question_one", :data => {:aos => "fade-up"}}
-    = render "events/template_default", event: @campaign.events.recent.first
+    = render "events/template_default", event: @project.events.recent.first

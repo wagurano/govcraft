@@ -5,9 +5,9 @@
 %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image})" }
   .container
     = render 'header'
-    - if @campaign
-      .cover-section__campaign
-        = link_to @campaign.title, @campaign
+    - if @project
+      .cover-section__project
+        = link_to @project.title, @project
 
     %h1.cover-section__title= event.title
 

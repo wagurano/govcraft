@@ -2,13 +2,13 @@ class ApplicationMailer < ActionMailer::Base
   default from: "info@wouldyouparty.org"
   layout 'mailer'
 
-  def summary(user, new_campaigns, new_petitions, new_polls, new_events)
-    @new_campaigns = new_campaigns
+  def summary(user, new_projects, new_petitions, new_polls, new_events)
+    @new_projects = new_projects
     @new_petitions = new_petitions
     @new_polls = new_polls
     @new_events = new_events
 
-    return if [@new_campaigns, @new_petitions, @new_polls, @new_events].select { |news| news.any? }.blank?
+    return if [@new_projects, @new_petitions, @new_polls, @new_events].select { |news| news.any? }.blank?
 
     @user = user
     subject = ['[우주당] 이번 주엔 어떤 소식이 올라왔을까요?',

@@ -7,25 +7,25 @@ class DiscussionsController < ApplicationController
   end
 
   def show
-    @campaign = @discussion.campaign
+    @project = @discussion.project
     @discussion.increment!(:views_count)
   end
 
   def new
-    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
+    @project = Project.find(params[:project_id]) if params[:project_id]
   end
 
   def create
     @discussion.user = current_user
     if @discussion.save
-      redirect_to @discussion || @campaign
+      redirect_to @discussion || @project
     else
       render 'new'
     end
   end
 
   def edit
-    @campaign = @discussion.campaign
+    @project = @discussion.project
   end
 
   def update
@@ -38,13 +38,13 @@ class DiscussionsController < ApplicationController
 
   def destroy
     @discussion.destroy
-    redirect_to campaign_path(@discussion.campaign)
+    redirect_to project_path(@discussion.project)
   end
 
   private
 
   def discussion_params
-    params.require(:discussion).permit(:title, :body, :campaign_id)
+    params.require(:discussion).permit(:title, :body, :project_id)
   end
 
   def reset_meta_tags

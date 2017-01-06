@@ -1,9 +1,9 @@
 %section#discussions.page-block
   .container
     %h4
-      = local_assigns[:title_label] || @campaign.try(:component_title, 'discussion')
+      = local_assigns[:title_label] || @project.try(:component_title, 'discussion')
       %small
-        = link_to "글쓰기", new_discussion_path(campaign_id: @campaign)
+        = link_to "글쓰기", new_discussion_path(project_id: @project)
     .panel.panel-default.panel-floating
       - if discussions.any?
         %ul.list-group.post-group
@@ -15,8 +15,8 @@
                     %i.fa.fa-heart
                     = discussion.merged_likes_count
 
-                - if discussion.campaign
-                  .post__campaign= discussion.campaign.title
+                - if discussion.project
+                  .post__project= discussion.project.title
 
                 %h4.list-group-item-heading
                   = discussion.title
@@ -36,9 +36,9 @@
                         = discussion.views_count
 
       - else
-        - if @campaign.present?
+        - if @project.present?
           .panel-body
             %small.text-muted
               아직 게시글이 없습니다. 이야기를 시작해 볼까요?
               %br
-              = link_to "#{Discussion.model_name.human} 쓰기", new_discussion_path(campaign_id: @campaign)
+              = link_to "#{Discussion.model_name.human} 쓰기", new_discussion_path(project_id: @project)

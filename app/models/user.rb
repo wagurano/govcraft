@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   validates :nickname,
     presence: true,
-    exclusion: { in: %w(app new edit index session login logout users admin all crew issue group campaign) },
+    exclusion: { in: %w(app new edit index session login logout users admin all crew issue group project) },
     format: { with: VALID_NICKNAME_REGEX },
     uniqueness: { case_sensitive: false },
     length: { maximum: 20 }

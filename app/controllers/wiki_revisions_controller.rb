@@ -2,7 +2,7 @@ class WikiRevisionsController < ApplicationController
   load_and_authorize_resource
 
   def show
-    @campaign = @wiki_revision.wiki.campaign
+    @project = @wiki_revision.wiki.project
   end
 
   def revert

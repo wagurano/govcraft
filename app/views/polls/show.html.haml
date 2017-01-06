@@ -5,9 +5,9 @@
   %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image})" }
     .container
       = render 'header'
-      - if @campaign
-        .cover-section__campaign
-          = link_to @poll.campaign.title, @poll.campaign
+      - if @project
+        .cover-section__project
+          = link_to @poll.project.title, @poll.project
 
       %h1.cover-section__title= @poll.title
 
@@ -55,7 +55,7 @@
       .post-block__comments
         = render 'comments/list', commentable: @poll
 
-      - if @poll.campaign
-        .post-block__campaign
-          %h4 캠페인
-          = render @poll.campaign
+      - if @poll.project
+        .post-block__project
+          %h4 프로젝트
+          = render @poll.project

@@ -1,0 +1,6 @@
+= render 'header', project: @project
+= render 'events/list', project: @project, events: @project.events.recent
+= render 'polls/list', polls: @project.polls.recent if @project.poll_enabled?
+= render 'petitions/list', petitions: @project.petitions.recent if @project.petition_enabled?
+= render 'wikis/list', wikis: @project.wikis.recent if @project.wiki_enabled?
+= render 'discussions/list', discussions: @project.discussions.recent if @project.discussion_enabled?

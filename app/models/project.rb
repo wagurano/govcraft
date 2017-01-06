@@ -1,4 +1,4 @@
-class Campaign < ApplicationRecord
+class Project < ApplicationRecord
   extend FriendlyId
   friendly_id :slug, use: [:slugged, :finders]
 

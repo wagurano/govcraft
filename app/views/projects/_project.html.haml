@@ -1,0 +1,18 @@
+%div[project]
+  .panel.panel-default.panel-floating.project-card
+    .panel-body{ style: "background-image: url(#{project.image_url(:md)})" }
+      = link_to project do
+        %h4.project__title= project.title
+        .project__meta
+          %span
+            제안자 :
+            = image_tag project.user.image.sm, class: 'user-thumb-sm'
+            = project.user.nickname
+          %span
+            시작일 :
+            = date_f project.created_at
+          %span
+            활동지수 :
+            = rand(1000)
+            점
+

@@ -1,4 +1,4 @@
-= form_for (@memorial.new_record? ? [@campaign, @memorial] : @memorial) do |f|
+= form_for (@memorial.new_record? ? [@project, @memorial] : @memorial) do |f|
   .form-group
     = f.label :title
     = f.text_field :title, class: 'form-control'

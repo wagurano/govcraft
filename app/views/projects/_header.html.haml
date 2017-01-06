@@ -1,4 +1,4 @@
-%section#campaign-header-block{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{campaign.image});" }
+%section#project-header-block{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{project.image});" }
   .container
     .current-user-status.badge.pull-right
       - if user_signed_in?
@@ -19,27 +19,27 @@
           %i.fa.fa-sign-in
           로그인 &middot; 가입
     %h2
-      %small.badge 캠페인
-      .campaign__title
-        = link_to campaign.title, campaign
+      %small.badge 프로젝트
+      .project__title
+        = link_to project.title, project
         %small
-          - if can? :edit, campaign
-            = link_to '수정', edit_campaign_path(campaign)
-          - if can? :destroy, campaign
-            = link_to '삭제', campaign, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
-    - if params[:controller] == 'campaigns'
-      .campaign__body= smart_format campaign.body
-    .campaign__meta
+          - if can? :edit, project
+            = link_to '수정', edit_project_path(project)
+          - if can? :destroy, project
+            = link_to '삭제', project, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
+    - if params[:controller] == 'projects'
+      .project__body= smart_format project.body
+    .project__meta
       %span
         제안자 :
-        = campaign.user.nickname
+        = project.user.nickname
       %span
         시작일 :
-        = date_f campaign.created_at
+        = date_f project.created_at
       %span
         활동지수 :
         = rand(1000)
         점
-    - if params[:controller] == 'campaigns'
-      .campaign_share{ style: 'margin-top: 14px;' }
-        .share-box{ 'data-share-image': image_url(campaign.image) }
+    - if params[:controller] == 'projects'
+      .project_share{ style: 'margin-top: 14px;' }
+        .share-box{ 'data-share-image': image_url(project.image) }

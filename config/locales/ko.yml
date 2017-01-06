@@ -22,7 +22,7 @@ ko:
     models:
       user: 당원
       issue: 토픽
-      campaign: 캠페인
+      project: 프로젝트
       discussion: 게시판
       petition: 서명
       poll: 투표
@@ -45,7 +45,7 @@ ko:
         password: 비밀번호
         password_confirmation: 비밀번호 확인
         enable_mailing: 메일수신 여부
-      campaign:
+      project:
         title: 제목
         body: 내용
         image: 대표이미지
