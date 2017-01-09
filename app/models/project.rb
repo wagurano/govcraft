@@ -1,4 +1,4 @@
-class Campaign < ApplicationRecord
+class Project < ApplicationRecord
   extend FriendlyId
   friendly_id :slug, use: [:slugged, :finders]
 
@@ -8,6 +8,7 @@ class Campaign < ApplicationRecord
   has_many :polls, dependent: :destroy
   has_many :wikis, dependent: :destroy
   has_many :events, dependent: :destroy
+  has_many :participations, dependent: :destroy
 
   mount_uploader :image, ImageUploader
 
@@ -21,6 +22,10 @@ class Campaign < ApplicationRecord
     model = modle_name.classify.safe_constantize
     return if model.blank?
     send(:"#{modle_name}_title").blank? ? model.model_name.human : send(:"#{modle_name}_title")
+  end
+
+  def participated? someone
+    participations.exists? user: someone
   end
 
   private

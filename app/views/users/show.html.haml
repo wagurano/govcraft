@@ -9,3 +9,9 @@
       %dl
         %dt 가입일
         %dd= date_f @user.created_at
+
+    %section.page-block
+    .row
+      .col-sm-6
+        %h4 참여 중인 #{Project.model_name.human}
+        = render @user.participated_projects

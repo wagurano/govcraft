@@ -3,15 +3,15 @@
     .jumbotron
       %h2 우리가 주인이당! Would You Party?
 
-- if @new_campaigns.any?
+- if @new_projects.any?
   %section.page-block
     .container
-      - if @new_campaigns.any?
-        %h4 새 #{Campaign.model_name.human}
+      - if @new_projects.any?
+        %h4 새 #{Project.model_name.human}
         .row
-          - @new_campaigns.each do |campaign|
+          - @new_projects.each do |project|
             .col-sm-6
-              = render campaign
+              = render project
 
 
 = render 'events/list', events: @new_events, title_label: "새 #{Event.model_name.human}" if @new_events.any?

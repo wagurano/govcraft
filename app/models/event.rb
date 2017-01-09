@@ -2,7 +2,7 @@ class Event < ApplicationRecord
   TEMPLATES = %w( default map map_with_assembly speech )
 
   belongs_to :user
-  belongs_to :campaign
+  belongs_to :project
   has_many :comments, as: :commentable
   has_many :speeches, dependent: :destroy
 

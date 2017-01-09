@@ -1,0 +1,19 @@
+= render 'header', project: @project
+= render 'events/list', project: @project, events: @project.events.recent
+= render 'polls/list', polls: @project.polls.recent if @project.poll_enabled?
+= render 'petitions/list', petitions: @project.petitions.recent if @project.petition_enabled?
+= render 'wikis/list', wikis: @project.wikis.recent if @project.wiki_enabled?
+= render 'discussions/list', discussions: @project.discussions.recent if @project.discussion_enabled?
+
+- if @project.participations.any?
+  %section.page-block{ style: 'background-color: #f5f5f5; padding: 28px 0;' }
+    .container
+      %h4
+        참여자
+        %small
+          %i.fa.fa-user-o
+          = @project.participations.count
+      - @project.participations.recent.each do |participation|
+        - user = participation.user
+        = link_to user, data: { toggle: "tooltip", title: user.nickname} do
+          .img-user{style: "background-image: url(#{user.image.sm.url});"}

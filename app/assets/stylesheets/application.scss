@@ -4,6 +4,8 @@
 @import 'select2';
 @import 'select2-bootstrap';
 @import 'magnific-popup';
+@import 'jquery.webui-popover';
+
 @import 'base';
 
 /* components */
@@ -12,7 +14,7 @@
 @import 'components';
 
 /* blocks & panels */
-@import 'campaigns';
+@import 'projects';
 @import 'users';
 @import 'posts';
 @import 'petitions';

@@ -1,29 +1,29 @@
-class CampaignsController < ApplicationController
+class ProjectsController < ApplicationController
   load_and_authorize_resource find_by: :slug
   before_action :reset_meta_tags, only: [:show, :events]
 
   def index
-    @campaigns = Campaign.order('id DESC')
+    @projects = Project.order('id DESC')
   end
 
   def show
-    @campaign.increment!(:views_count)
+    @project.increment!(:views_count)
   end
 
   def events
-    @campaign.increment!(:views_count)
+    @project.increment!(:views_count)
   end
 
   def new
   end
 
   def create
-    @campaign = Campaign.new(campaign_params)
-    @campaign.user = current_user
-    if @campaign.save
-      redirect_to @campaign
+    @project = Project.new(project_params)
+    @project.user = current_user
+    if @project.save
+      redirect_to @project
     else
-      errors_to_flash(@campaign)
+      errors_to_flash(@project)
       render 'new'
     end
   end
@@ -32,22 +32,22 @@ class CampaignsController < ApplicationController
   end
 
   def update
-    if @campaign.update(campaign_params)
-      redirect_to @campaign
+    if @project.update(project_params)
+      redirect_to @project
     else
       render 'edit'
     end
   end
 
   def destroy
-    @campaign.destroy
-    redirect_to campaigns_path
+    @project.destroy
+    redirect_to projects_path
   end
 
   private
 
-  def campaign_params
-    params.require(:campaign).permit(
+  def project_params
+    params.require(:project).permit(
       :title, :body, :image, :slug,
       :discussion_enabled, :poll_enabled, :petition_enabled, :wiki_enabled,
       :discussion_title, :poll_title, :petition_title, :wiki_title
@@ -56,9 +56,9 @@ class CampaignsController < ApplicationController
 
   def reset_meta_tags
     prepare_meta_tags({
-      title: @campaign.title,
-      description: @campaign.body.html_safe,
-      image: @campaign.image.url,
+      title: @project.title,
+      description: @project.body.html_safe,
+      image: @project.image.url,
       url: request.original_url}
     )
   end

@@ -1,4 +1,4 @@
-#campaign-header-block {
+#project-header-block {
   background-position: top center;
   background-size: cover;
   color: $gray-lightest;
@@ -9,42 +9,45 @@
     font-weight: normal;
     padding-top: 5px;
   }
-  a {
+  a:not(.btn) {
     color: #fff;
   }
-  small a {
+  small a:not(.btn) {
     color: $gray-lighter;
   }
-  .campaign__title {
+  .project__title > *:not(small) {
     @include text-stroke();
   }
-  .campaign__meta {
+  .project__meta {
     font-size: $font-size-small;
     text-shadow: 1px 1px 3px #000;
     span {
       margin-right: $font-size-base;
     }
   }
-  .campaign__body {
+  .project__body {
     text-shadow: 1px 1px 3px #000;
   }
 }
 
-.campaign-card {
+.project-card {
   .panel-body {
     min-height: 100px;
     background-size: cover;
     background-position: center center;
     overflow: hidden;
-    .campaign__title {
+    .project__title {
       color: #fff;
       text-shadow: 0px 1px 1px #000;
     }
-    .campaign__meta {
+    .project__meta {
       color: #fff;
       margin-top: 7px;
       font-size: $font-size-small;
       text-shadow: 0px 1px 1px #000;
+      > span + span {
+        margin-left: 6px;
+      }
     }
   }
 }

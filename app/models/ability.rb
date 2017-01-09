@@ -3,7 +3,7 @@ class Ability
 
   def initialize(user)
     can [:read, :search, :social_card], :all
-    can [:events], Campaign
+    can [:events], Project
     can :create, [Sign, Comment, Like]
     can :cancel, Like
     can :create_by_slack, Article
@@ -12,14 +12,14 @@ class Ability
     if user
       can :create, [
           FollowingIssue,
-          Campaign, Discussion, Petition, Poll, Wiki,
+          Project, Discussion, Petition, Poll, Wiki,
           Memorial, Agenda, Archive, ArchiveDocument, Event,
           Election, Candidate, Article, Person, Race, Player,
           Thumb
         ]
       can [:update, :destroy], [
           FollowingIssue,
-          Campaign, Discussion, Petition, Poll, Wiki,
+          Project, Discussion, Petition, Poll, Wiki,
           Memorial, Agenda, Archive, ArchiveDocument, Event,
           Comment, Sign, Election, Candidate, Article, Person,
           Race, Player
@@ -31,12 +31,12 @@ class Ability
       can [:update], Wiki
       can [:revert], WikiRevision
 
-      # 캠페이너는 캠페인에 속한 글과 댓글을 삭제할 수 있다
+      # 프로젝트 개설자는 프로젝트에 속한 글과 댓글을 삭제할 수 있다
       can :destroy, [Discussion, Petition, Poll, Wiki, Event] do |model|
-        model.campaign && user == model.campaign.user
+        model.project && user == model.project.user
       end
       can :destroy, Comment do |comment|
-        comment.commentable.try(:campaign) && user == comment.commentable.campaign.user
+        comment.commentable.try(:project) && user == comment.commentable.project.user
       end
 
       if user.has_role? :admin

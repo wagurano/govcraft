@@ -5,9 +5,9 @@
   %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image}); padding-bottom: 56px; background-size: cover; background-position: center center;" }
     .container
       = render 'header'
-      - if @petition.campaign
-        .cover-section__campaign
-          = link_to @petition.campaign.title, @petition.campaign
+      - if @petition.project
+        .cover-section__project
+          = link_to @petition.project.title, @petition.project
 
       %h1.cover-section__title= @petition.title
 
@@ -51,10 +51,10 @@
         .post-block__comments
           = render 'comments/list', commentable: @petition
 
-      - if @petition.campaign
-        .post-block__campaign
-          %h4 캠페인
-          = render @petition.campaign
+      - if @petition.project
+        .post-block__project
+          %h4 프로젝트
+          = render @petition.project
 
   - if flash[:sign_notice].present?
     #sign-success-modal.modal.fade{:role => "dialog", :tabindex => "0"}

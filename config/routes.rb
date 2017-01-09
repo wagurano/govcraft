@@ -30,11 +30,17 @@ Rails.application.routes.draw do
   resources :issues
   resources :following_issues
 
-  get 'campaigns/:id', to: redirect { |params, req| "/c/#{Campaign.find_by(id: params[:id]).slug}"}, constraints: lambda { |request, params|
-    Campaign.exists?(id: params[:id])
+  get 'campaigns/:id', to: redirect { |params, req| "/p/#{Project.find_by(id: params[:id]).slug}"}, constraints: lambda { |request, params|
+    Project.exists?(id: params[:id])
   }
-  resources :campaigns, path: :c do
+  get 'c/:id', to: redirect { |params, req| "/p/#{Project.find_by(id: params[:id]).slug}"}, constraints: lambda { |request, params|
+    Project.exists?(id: params[:id])
+  }
+  resources :projects, path: :p do
     get 'events', on: :member
+  end
+  resources :participations do
+    delete :cancel, on: :collection
   end
   resources :speeches
   resources :discussions

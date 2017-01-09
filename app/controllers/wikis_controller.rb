@@ -7,26 +7,26 @@ class WikisController < ApplicationController
   end
 
   def show
-    @campaign = @wiki.campaign
+    @project = @wiki.project
     @wiki.increment!(:views_count)
   end
 
   def new
-    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
+    @project = Project.find(params[:project_id]) if params[:project_id]
   end
 
   def create
     @wiki.user = current_user
     @wiki.wiki_revisions.build(user: current_user, body: @wiki.body, note: @wiki.revision_note)
     if @wiki.save
-      redirect_to @wiki || @campaign
+      redirect_to @wiki || @project
     else
       render 'new'
     end
   end
 
   def edit
-    @campaign = @wiki.campaign
+    @project = @wiki.project
   end
 
   def update
@@ -41,13 +41,13 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki.destroy
-    redirect_to campaign_path(@wiki.campaign)
+    redirect_to project_path(@wiki.project)
   end
 
   private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :campaign_id, :revision_note)
+    params.require(:wiki).permit(:title, :body, :project_id, :revision_note)
   end
 
   def reset_meta_tags

@@ -2,9 +2,9 @@
   %div[poll]
     .panel.panel-default.panel-floating.poll-card
       .panel-body
-        - if poll.campaign
-          .post__campaign
-            = link_to poll.campaign.title, poll.campaign
+        - if poll.project
+          .post__project
+            = link_to poll.project.title, poll.project
 
         %h4.post__title
           = link_to poll.title, poll

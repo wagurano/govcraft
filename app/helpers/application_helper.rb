@@ -40,8 +40,8 @@ module ApplicationHelper
   end
 
   def hide_gnb_and_footer?
-    ( params[:controller] == 'campaigns' && params[:action] == 'show' ) ||
-    ( params[:controller] == 'campaigns' && params[:action] == 'events' ) ||
+    ( params[:controller] == 'projects' && params[:action] == 'show' ) ||
+    ( params[:controller] == 'projects' && params[:action] == 'events' ) ||
     ( params[:controller] == 'polls' && params[:action] == 'show' ) ||
     ( params[:controller] == 'petitions' && params[:action] == 'show' ) ||
     ( params[:controller] == 'wikis' && params[:action] == 'show' ) ||

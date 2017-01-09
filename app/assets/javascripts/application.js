@@ -16,6 +16,7 @@
 //= require magnific-popup
 //= require jquery.validate
 //= require jquery.validate.messages_ko
+//= require jquery.webui-popover
 
 UnobtrusiveFlash.flashOptions['timeout'] = 300000;
 
@@ -205,6 +206,18 @@ $(function(){
         $('.masonry-container').masonry();
       }
     });
+  });
+
+  $('.gov-action-popover').each(function(i, elm) {
+    var $elm = $(elm);
+
+    var options = {}
+    var style = $elm.data('style');
+    if(style) {
+      options['style'] = style;
+    }
+
+    $elm.webuiPopover(options);
   });
 });
 
