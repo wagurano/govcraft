@@ -38,6 +38,7 @@ gem 'magnific-popup-rails', '~> 1.1'
 gem 'axlsx_rails', '~> 0.5.0'
 gem 'htmlentities', '~> 4.3', '>= 4.3.4'
 gem "recaptcha", require: "recaptcha/rails"
+gem 'nokogiri', '~> 1.7', '>= 1.7.0.1'
 
 # assets
 source 'https://rails-assets.org' do
@@ -69,7 +70,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'envyable', '~> 0.2.0'
 gem 'seed-fu', '~> 2.3', '>= 2.3.5'
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
-gem "recaptcha", require: "recaptcha/rails"
 gem 'browser', '~> 2.0', '>= 2.0.2'
 gem 'meta-tags', '~> 2.1.0'
 gem 'unobtrusive_flash', '~> 3.1'
@@ -88,7 +88,7 @@ end
 gem 'postmark-rails', '~> 0.12.0'
 gem 'slack-notifier', '~> 1.4'
 gem 'exception_notification', '~> 4.1', '>= 4.1.4'
-gem 'postmark-rails', '~> 0.12.0'
+gem 'premailer-rails', '~> 1.9', '>= 1.9.2'
 
 # scheduler
 gem 'sidekiq', '~> 4.1'

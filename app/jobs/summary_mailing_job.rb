@@ -3,11 +3,11 @@ class SummaryMailingJob
   sidekiq_options unique: :while_executing
 
   def perform
-    new_projects = Project.past_week
+    new_projects = Project.past_month
 
-    new_petitions = Petition.past_week
-    new_polls = Poll.past_week
-    new_events = Event.past_week
+    new_petitions = Petition.past_month
+    new_polls = Poll.past_month
+    new_events = Event.past_month
 
     return if [new_projects,
       new_petitions, new_polls, new_events].select { |news| news.any? }.blank?
