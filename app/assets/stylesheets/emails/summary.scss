@@ -1,15 +1,20 @@
 *{
     font-family:AppleSDGothic,"apple sd gothic neo","noto sans korean","noto sans korean regular","noto sans cjk kr","noto sans cjk","nanum gothic","malgun gothic",dotum,sans-serif;
 }
+body{
+    background-color:#eee;
+}
 .container{
-    width:620px;
+    width:720px;
     margin:0 auto;
+    padding:24px;
+    background-color:#fff;
 }
 .header{
     text-align:left;
 }
 .header > p{
-    font-size:13px;
+    font-size:14px;
 }
 .content h3{
     color:#445AB3;
@@ -18,14 +23,18 @@
     text-decoration: none;
 }
 .sub-title{
+    line-height: 24px;
     background-color:#eee;
     color: #777;
-    padding:15px;
-    margin:8px 0px;
+    padding:12px;
+    margin:12px 0px;
     box-shadow:1px 1px 0px 2px #ddd;
+    .campaign-title {
+        color: #bbb;
+    }
 }
 .content-title{
-    margin-top:30px;
+    margin-top:36px;
     border-top: 2px solid #eee;
     padding:10px;
     color:#989898;
@@ -47,10 +56,13 @@
     margin-bottom:20px;
     line-height:20px;
 }
-.footer > h3{
+.footer > h3 {
     margin-bottom:3px;
 }
 .footer > h3 a {
     color:#4A5DD0;
     text-decoration:none;
 }
+.header > p {
+    margin-bottom:18px;
+ }
