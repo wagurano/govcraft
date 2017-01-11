@@ -152,7 +152,23 @@
         }
       }
     }
+  }
 
+  .post-block .comment {
+    &:first-child {
+      border-top: none;
+    }
+    .comment__likes {
+      margin-top: 12px;
+    }
+    .btn-like {
+      font-size: 12px;
+      height: auto;
+      border: 1px solid $gray-light;
+      &.btn-default {
+        color: $gray;
+      }
+    }
   }
 
   .video-image {

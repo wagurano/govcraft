@@ -96,10 +96,10 @@
               = f.submit '작성', class: 'btn btn-default btn-sm'
 
           - comments = params[:tag].present? ? event.comments.tagged_with(params[:tag]) : event.comments
-          .comments
-            - comments.recent.each do |comment|
-              .media[comment]{ style: 'margin: 14px 0;'}
-                .media-body
+          .post-block
+            .comments
+              - comments.recent.each do |comment|
+                .comment[comment]{ style: 'margin: 14px 0;'}
                   .comment__meta
                     = comment.user_nickname
                     - if comment.full_street_address.present?
@@ -117,8 +117,8 @@
                   .comment__tags
                     - comment.tag_list.each do |tag|
                       = link_to "##{tag}", event_path(event, {tag: tag})
-                .media-right{ style: 'vertical-align: middle;' }
-                  = render 'likes/button', likable: comment
+                  .comment__likes
+                    = render 'likes/button', likable: comment
 
     / bloc-0 END
     / bloc-1
