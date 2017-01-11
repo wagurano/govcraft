@@ -21,13 +21,13 @@
   #bloc-1.bloc.bgc-outer-space.d-bloc
     .container.bloc-md
       %a{id: "speech-list"}
-      .row
+      .row.row-no-gutters
         .col-sm-12
           %h3.text-center.mg-md.tc-deep-carrot-orange
             %strong 촛불발언 동영상
       .voffset.speech-list
         - @speeches.each_slice(4) do |speech_slice|
-          .row
+          .row{ style: 'margin-right: 0; margin-left: 0' }
             - speech_slice.each do |speech|
               - video = VideoInfo.new(speech.video_url)
               .col-sm-3
@@ -36,7 +36,7 @@
                     .embed-responsive.embed-responsive-16by9.video-image
                       = image_tag video.thumbnail_medium
                       %i.fa.fa-play-circle.play-circle.play-circle--medium
-                  %h5.title.mg-md= speech.title
+                  .title.mg-md= speech.title
                   .text-left
                     = render 'likes/button', likable: speech
                     .view-count
@@ -48,6 +48,6 @@
   / bloc-2
   #bloc-2.bloc.bgc-outer-space.d-bloc
     .container.bloc-sm
-      .row
+      .row.row-no-gutters
         .col-sm-12.text-center
           = link_to '촛불발언 동영상 올리기', new_speech_path(event_id: @event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'
