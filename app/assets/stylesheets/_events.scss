@@ -105,6 +105,11 @@
       width: 300px;
     }
   }
+  @media (max-width: 767px) {
+    .current-user-status--simple {
+      margin-right: 10px;
+    }
+  }
   .bloc.bloc-fill-screen.bgc-white.l-bloc.cover {
     background-image: asset_url('events/speeches/cover.png');
     background-size: cover;

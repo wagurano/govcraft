@@ -123,4 +123,14 @@
       color: #fff;
     }
   }
+  &--simple {
+    text-shadow: none;
+    .dropdown-menu {
+      background-color: #fff;
+      border: initial;
+      a {
+        color: initial;
+      }
+    }
+  }
 }
