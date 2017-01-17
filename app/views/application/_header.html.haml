@@ -1,4 +1,4 @@
-- unless hide_gnb_and_footer?
+- if @force_gnb_and_footer || !hide_gnb_and_footer?
   %section#site-header
     %nav.navbar.navbar-inverse.navbar-fixed-top
       .container

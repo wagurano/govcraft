@@ -9,6 +9,7 @@ class DiscussionsController < ApplicationController
   def show
     @project = @discussion.project
     @discussion.increment!(:views_count)
+    @force_gnb_and_footer = true if @discussion.project.blank?
   end
 
   def new
