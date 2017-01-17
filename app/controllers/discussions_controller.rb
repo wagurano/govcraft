@@ -38,7 +38,7 @@ class DiscussionsController < ApplicationController
 
   def destroy
     @discussion.destroy
-    redirect_to project_path(@discussion.project)
+    redirect_to @discussion.project || discussions_path
   end
 
   private
