@@ -98,9 +98,13 @@
                   .gov-action-recaptcha
               = f.submit '작성', class: 'btn btn-default btn-sm'
 
+          %a{id: "anchor-comments-page"}
           - comments = params[:tag].present? ? event.comments.tagged_with(params[:tag]) : event.comments
+          - comments = comments.page(params[:page])
           .post-block
             .comments
+              .comment
+                %strong.text-muted 현재 #{comments.current_page}페이지 / 전체 #{comments.total_count}건
               - comments.recent.each do |comment|
                 .comment[comment]{ style: 'margin: 14px 0;'}
                   .comment__meta
@@ -122,7 +126,8 @@
                       = link_to "##{tag}", event_path(event, {tag: tag})
                   .comment__likes
                     = render 'likes/button', likable: comment
-
+            .text-center
+              = paginate comments, theme: 'twitter-bootstrap-3', params: { anchor: 'anchor-comments-page' }
     / bloc-0 END
     / bloc-1
   - if @speeches.any?
