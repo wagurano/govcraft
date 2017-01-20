@@ -17,6 +17,6 @@
   %section{ style: 'background: #fff;' }
     .container{ style: 'position: relative; top: -56px;' }
       .cover-section__options{ style: "margin-top: 0; background-color: #eee;" }
-        = render 'options/panel', survey: @survey, show_feedbackrs: false
+        = render 'options/panel', survey: @survey
         = link_to '자세히 보기 >', survey_url(@survey), target: '_blank'
 

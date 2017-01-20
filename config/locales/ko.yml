@@ -135,6 +135,7 @@ ko:
         body: 설명
         duration: 기간(일)
         cover_image: 대표이미지
+        options: 옵션
     errors:
       models:
         user:
