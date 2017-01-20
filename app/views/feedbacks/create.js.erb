@@ -1,0 +1,1 @@
+$('#<%= options_panel_dom_id(@survey) %>').replaceWith('<%= j(render('options/panel', survey: @survey, show_feedbackrs: params[:show_feedbackrs] == 'true')) %>');

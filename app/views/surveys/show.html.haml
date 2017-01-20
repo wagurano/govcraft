@@ -1,0 +1,57 @@
+- if params[:mode] == 'widget'
+  = render 'widget'
+- else
+  - cover_image = @survey.cover_image_url(:lg)
+  %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image})" }
+    .container
+      = render 'header'
+      - if @project
+        .cover-section__project
+          = link_to @survey.project.title, @survey.project
+
+      %h1.cover-section__title= @survey.title
+
+      %h4.cover-section__users-count
+        %span
+          %i.fa.fa-user-o
+          #{@survey.feedbacks_count}명 응답
+
+  %section#survey-block.page-block.post-block
+    .container
+      .post-block__info
+        .row
+          .col-xs-8
+            %span.post-block__user
+              = link_to @survey.user do
+                = image_tag @survey.user.image_url, class: 'img-user'
+                = @survey.user.nickname
+            %span.post-block__date
+              = date_f @survey.created_at
+            - if can? :edit, @survey
+              = link_to '수정', edit_survey_path(@survey)
+            - if can? :destroy, @survey
+              = link_to '삭제', @survey, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+          .col-xs-4.text-right
+            조회 #{@survey.views_count}
+
+      .post-block__body
+        = raw @survey.body
+
+      .cover-section__options
+        = render 'options/panel', survey: @survey, show_feedbackers: true
+
+      .post-block__share
+        %h4 이 이슈를 친구들에게 알려 주세요
+        .share-box
+
+      .post-block__widget
+        %h4 이 이슈를 퍼가주세요.
+        %input{value: "<iframe width='100%' height='495' src='#{survey_url(@survey, mode: :widget)}' frameborder='0'></iframe>", style: 'width: 100%;'}
+
+      .post-block__comments
+        = render 'comments/list', commentable: @survey
+
+      - if @survey.project
+        .post-block__project
+          %h4 프로젝트
+          = render @survey.project

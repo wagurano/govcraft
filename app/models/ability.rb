@@ -12,14 +12,14 @@ class Ability
     if user
       can :create, [
           FollowingIssue,
-          Project, Discussion, Petition, Poll, Wiki,
+          Project, Discussion, Petition, Poll, Feedback, Survey, Wiki,
           Memorial, Agenda, Archive, ArchiveDocument, Event,
           Election, Candidate, Article, Person, Race, Player,
           Thumb
         ]
       can [:update, :destroy], [
           FollowingIssue,
-          Project, Discussion, Petition, Poll, Wiki,
+          Project, Discussion, Petition, Poll, Survey, Wiki,
           Memorial, Agenda, Archive, ArchiveDocument, Event,
           Comment, Sign, Election, Candidate, Article, Person,
           Race, Player
@@ -32,7 +32,7 @@ class Ability
       can [:revert], WikiRevision
 
       # 프로젝트 개설자는 프로젝트에 속한 글과 댓글을 삭제할 수 있다
-      can :destroy, [Discussion, Petition, Poll, Wiki, Event] do |model|
+      can :destroy, [Discussion, Petition, Poll, Survey, Wiki, Event] do |model|
         model.project && user == model.project.user
       end
       can :destroy, Comment do |comment|

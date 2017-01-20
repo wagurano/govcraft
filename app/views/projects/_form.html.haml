@@ -36,6 +36,14 @@
     = f.text_field :poll_title, class: 'form-control'
 
   .form-group
+    = f.label :survey_enabled
+    = f.check_box :wiki_enabled, class: 'form-control'
+
+  .form-group
+    = f.label :survey_title
+    = f.text_field :wiki_title, class: 'form-control'
+
+  .form-group
     = f.label :petition_enabled
     = f.check_box :petition_enabled, class: 'form-control'
 

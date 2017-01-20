@@ -51,6 +51,10 @@ Rails.application.routes.draw do
   resources :polls do
     get 'social_card', on: :member
   end
+  resources :surveys do
+    get 'social_card', on: :member
+  end
+  post 'feedbacks', to: 'feedbacks#create'
   resources :wikis do
     shallow do
       resources :wiki_revisions do

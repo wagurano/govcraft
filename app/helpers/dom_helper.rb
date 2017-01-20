@@ -10,4 +10,12 @@ module DomHelper
   def thumb_btns_panel_dom_id(thumbable)
     "#{dom_id(thumbable)}--thumb-btns-panel"
   end
+
+  def options_panel_dom_id(survey)
+    "#{dom_id(survey)}--options"
+  end
+
+  def option_dom_id(option)
+    dom_id(option)
+  end
 end

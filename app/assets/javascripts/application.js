@@ -17,6 +17,7 @@
 //= require jquery.validate
 //= require jquery.validate.messages_ko
 //= require jquery.webui-popover
+//= require cocoon
 
 UnobtrusiveFlash.flashOptions['timeout'] = 300000;
 

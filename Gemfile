@@ -33,6 +33,7 @@ gem 'haml-rails', '~> 0.9.0'
 gem 'redactor2_rails', '~> 0.1.3'
 gem 'rails_autolink', '~> 1.1', '>= 1.1.6'
 gem 'magnific-popup-rails', '~> 1.1'
+gem 'cocoon'
 
 # tool
 gem 'axlsx_rails', '~> 0.5.0'

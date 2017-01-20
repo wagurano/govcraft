@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170106071427) do
+ActiveRecord::Schema.define(version: 20170120104327) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -173,6 +173,18 @@ ActiveRecord::Schema.define(version: 20170106071427) do
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
 
+  create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "survey_id",  null: false
+    t.integer  "option_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_id"], name: "index_feedbacks_on_option_id", using: :btree
+    t.index ["survey_id"], name: "index_feedbacks_on_survey_id", using: :btree
+    t.index ["user_id", "survey_id"], name: "index_feedbacks_on_user_id_and_survey_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_feedbacks_on_user_id", using: :btree
+  end
+
   create_table "following_issues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "issue_id",   null: false
     t.integer  "user_id",    null: false
@@ -227,7 +239,16 @@ ActiveRecord::Schema.define(version: 20170106071427) do
     t.index ["user_id"], name: "index_memorials_on_user_id", using: :btree
   end
 
-  create_table "participations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "survey_id",                                 null: false
+    t.text     "body",            limit: 65535
+    t.integer  "feedbacks_count",               default: 0, null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.index ["survey_id"], name: "index_options_on_survey_id", using: :btree
+  end
+
+  create_table "participations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "user_id",    null: false
     t.integer  "project_id", null: false
     t.datetime "created_at", null: false
@@ -318,6 +339,8 @@ ActiveRecord::Schema.define(version: 20170106071427) do
     t.string   "petition_title"
     t.string   "wiki_title"
     t.string   "slug",                                            null: false
+    t.boolean  "survey_enabled",                   default: true
+    t.string   "survey_title"
     t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
   end
 
@@ -396,6 +419,24 @@ ActiveRecord::Schema.define(version: 20170106071427) do
     t.boolean  "is_expired_view_count", default: false
     t.index ["event_id"], name: "index_speeches_on_event_id", using: :btree
     t.index ["user_id"], name: "index_speeches_on_user_id", using: :btree
+  end
+
+  create_table "surveys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "title"
+    t.text     "body",                  limit: 65535
+    t.integer  "user_id",                                         null: false
+    t.integer  "project_id"
+    t.integer  "likes_count",                         default: 0
+    t.integer  "anonymous_likes_count",               default: 0
+    t.integer  "feedbacks_count",                     default: 0, null: false
+    t.integer  "views_count",                         default: 0, null: false
+    t.integer  "duration",                            default: 0, null: false
+    t.string   "cover_image"
+    t.string   "social_card"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.index ["project_id"], name: "index_surveys_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_surveys_on_user_id", using: :btree
   end
 
   create_table "taggings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

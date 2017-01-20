@@ -1,0 +1,35 @@
+= form_for @survey do |f|
+  - if @project.present?
+    = f.hidden_field :project_id, value: @project.id
+
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+
+  .form-group
+    = f.label :body
+    = f.text_area :body, class: 'form-control redactor'
+
+  .form-group
+    = f.label :options
+    = f.fields_for :options do |ff|
+      = render 'options/option_fields', f: ff, input_data: { placeholder: '* 필수입력: ex. 선택옵션' }
+    .links
+      = link_to_add_association '+ 선택항목 추가', f, :options, partial: 'options/option_fields', render_options: { locals: { input_data: { placeholder: 'ex. 선택옵션' } } }
+
+  .form-group
+    .form-inline
+      = f.label :duration
+      = f.select :duration, options_for_select((1...10).map { |i| [ "#{i}일", i] }, f.object.duration), {}, class: 'form-control'
+
+  .form-group
+    = f.label :cover_image
+    = f.file_field :cover_image, class: 'form-control'
+
+  %hr
+
+  .form-group
+    = f.submit '저장', class: 'btn btn-primary'
+
+
+

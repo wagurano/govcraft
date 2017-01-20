@@ -1,0 +1,42 @@
+.options-panel{ id: options_panel_dom_id(survey) }
+  - feedback = survey.fetch_feedback_of(current_user)
+  %table
+    - survey.options.each do |option|
+      %tr
+        - if !user_signed_in?
+          %td.checkbox-btn
+            = link_to '#', data: { toggle: 'parti-login-overlay' } do
+              %i.fa.fa-square-o
+        - else
+          %td.checkbox-btn
+            - if survey.open?
+              = link_to feedbacks_path(option_id: option.id), remote: true, method: :post do
+                - if option.selected?(current_user)
+                  %i.fa.fa-check-square-o
+                - else
+                  %i.fa.fa-square-o
+            - else
+              %span.closed
+                - if option.selected?(current_user)
+                  %i.fa.fa-check-square-o
+                - else
+                  %i.fa.fa-square-o
+        %td.body
+          - if survey.feedbacked?(current_user)
+            .chart{ class: ('active' if option.selected?(current_user)) }
+              .chart__bar{ style: "width: #{survey.percentage(option)}%"}
+                %span.chart__label= option.body
+          - else
+            .no-chart__label
+              = option.body
+        %td.feedbacks-count
+          - if survey.feedbacked?(current_user) and option.feedbacks_count > 0
+            #{option.feedbacks_count}명
+  .footer
+    - if survey.open?
+      마감까지 #{survey_remain_time(survey)}
+    - else
+      마감
+    - if survey.feedbacks_count > 0
+      &middot;
+      총투표 #{survey.feedbacks_count}명
