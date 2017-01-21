@@ -106,3 +106,31 @@
   border-radius: 50%;
   vertical-align: middle;
 }
+
+.current-user-status {
+  margin-top: -30px;
+  text-shadow: 1px 1px 3px #000;
+  font-weight: normal;
+  padding-top: 5px;
+  a {
+    color: #fff;
+  }
+  .dropdown-menu {
+    background: none;
+    border: none;
+    min-width: inherit;
+    a {
+      color: #fff;
+    }
+  }
+  &--simple {
+    text-shadow: none;
+    .dropdown-menu {
+      background-color: #fff;
+      border: initial;
+      a {
+        color: initial;
+      }
+    }
+  }
+}

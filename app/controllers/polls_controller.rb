@@ -7,7 +7,7 @@ class PollsController < ApplicationController
   end
 
   def show
-    @campaign = @poll.campaign
+    @project = @poll.project
     @poll.increment!(:views_count)
 
     if params[:mode] == 'widget'
@@ -22,20 +22,20 @@ class PollsController < ApplicationController
   end
 
   def new
-    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
+    @project = Project.find(params[:project_id]) if params[:project_id]
   end
 
   def create
     @poll.user = current_user
     if @poll.save
-      redirect_to @poll || @campaign
+      redirect_to @poll || @project
     else
       render 'new'
     end
   end
 
   def edit
-    @campaign = @poll.campaign
+    @project = @poll.project
   end
 
   def update
@@ -48,7 +48,7 @@ class PollsController < ApplicationController
 
   def destroy
     @poll.destroy
-    redirect_to @poll.campaign ? campaign_path(@poll.campaign) : polls_path
+    redirect_to @poll.project ? project_path(@poll.project) : polls_path
   end
 
   def social_card
@@ -81,7 +81,7 @@ class PollsController < ApplicationController
   private
 
   def poll_params
-    params.require(:poll).permit(:title, :body, :campaign_id, :cover_image)
+    params.require(:poll).permit(:title, :body, :project_id, :cover_image)
   end
 
   def reset_meta_tags

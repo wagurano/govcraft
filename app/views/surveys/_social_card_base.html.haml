@@ -1,0 +1,13 @@
+!!!
+%html{:lang => I18n.locale}
+  %head
+    %meta{:charset => "utf-8"}
+    = stylesheet_link_tag asset_data_base64('application.css')
+    %link{href: "http://fonts.googleapis.com/earlyaccess/notosanskr.css", rel: "stylesheet"}
+  %body(style='padding: 0;')
+    %section.survey-social-card-section{ style: "background-image: url(#{asset_data_base64('social_card_survey.png')});" }
+      .card
+        .title{ class: (@survey.title.length < 31 ? (@survey.title.length < 17 ? 'short' : 'medium') : 'long') }
+          - words = truncate(@survey.title, length: 50).split
+          - words.each do |word|
+            .title-word= word

@@ -7,7 +7,7 @@
   }
 }
 
-#campaign-events {
+#project-events {
   .header {
     background-size: cover;
     background-position: center center;
@@ -90,21 +90,51 @@
 //   background: #FFFFFF url("img/pageload-spinner.gif") no-repeat center center;
 // }
 
-.page-container--event-speeches {
+.comments.comments--event-speeches {
+  .comments-form {
+    border: 1px solid $gray-lighter;
+    background-color: $gray-lightest;
+    padding: 24px;
+  }
+}
 
-  .bloc.bloc-fill-screen.bgc-white.l-bloc.cover {
-    height: 850px;
+.page-container--event-speeches {
+  .candle-logo {
+    width: 500px;
     @media (max-width: 768px) and (orientation: portrait)  {
-      height: 650px;
+      width: 300px;
     }
+  }
+  @media (max-width: 767px) {
+    .current-user-status--simple {
+      margin-right: 10px;
+    }
+  }
+  .bloc.bloc-fill-screen.bgc-white.l-bloc.cover {
     background-image: asset_url('events/speeches/cover.png');
     background-size: cover;
+    .cover-body {
+      padding-top: 200px;
+      padding-bottom: 50px;
+      position: initial;
+      transform: none;
+      -webkit-transform: none;
+      top: 0;
+    }
+    .cover-text {
+      font-size: $font-size-h3;
+      font-weight: normal;
+      line-height: 30px;
+      @media (max-width: 768px)  {
+        font-size: $font-size-base-xs;
+        line-height: 20px;
+      }
+    }
   }
   .speech-list .speech {
     padding-top: 12px;
     .title {
       margin-bottom: 0;
-      height: 30px;
     }
     .view-count {
       vertical-align: top;
@@ -117,9 +147,6 @@
       background-color: transparent;
       color: $gray-light;
       padding: 0;
-      @media (max-width: 768px) {
-        padding-left: 10px;
-      }
       margin-top: 6px;
       &.btn-primary {
         i {
@@ -127,7 +154,23 @@
         }
       }
     }
+  }
 
+  .post-block .comment {
+    &:first-child {
+      border-top: none;
+    }
+    .comment__likes {
+      margin-top: 12px;
+    }
+    .btn-like {
+      font-size: 12px;
+      height: auto;
+      border: 1px solid $gray-light;
+      &.btn-default {
+        color: $gray;
+      }
+    }
   }
 
   .video-image {
@@ -191,7 +234,7 @@
     height: inherit;
     > .container {
       position: relative;
-      top: 50%;
+      top: 60%;
       transform: translateY(-50%);
       -webkit-transform: translateY(-50%);
     }
@@ -200,7 +243,7 @@
     }
     .fill-bloc-top-edge, .fill-bloc-bottom-edge {
       position: absolute;
-      margin: 20px auto;
+      margin: 60px auto;
       left: 0;
       right: 0;
       z-index: 1;
@@ -720,7 +763,6 @@
 
   .statement-bloc-text {
     line-height: 38px;
-    font-style: italic;
     font-size: 28px;
     text-align: center;
     font-weight: lighter;

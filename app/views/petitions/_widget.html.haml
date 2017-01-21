@@ -2,9 +2,9 @@
 %section.petition-widget.cover-section{ style: "padding-top: 0;" }
   %section{ style: "padding-top: 20px; padding-bottom: 56px; background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image}); background-size: cover; background-position: center top; background-repeat: no-repeat;" }
     .container
-      - if @petition.campaign
-        .cover-section__campaign
-          = link_to @petition.campaign.title, @petition.campaign, target: '_blank'
+      - if @petition.project
+        .cover-section__project
+          = link_to @petition.project.title, @petition.project, target: '_blank'
 
       = link_to petition_url(@petition), target: '_blank', style: 'color: #fff;' do
         %h1.cover-section__title= @petition.title

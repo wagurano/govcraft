@@ -1,9 +1,9 @@
 %section#polls.page-block
   .container
     %h4
-      = @campaign.try(:component_title, 'poll')
+      = local_assigns[:title_label] || @project.try(:component_title, 'poll')
       %small
-        = link_to "제안하기", new_poll_path(campaign_id: @campaign)
+        = link_to "제안하기", new_poll_path(project_id: @project)
 
     .section
       - if polls.any?
@@ -11,9 +11,9 @@
           = render polls
 
       - else
-        - if @campaign.present?
+        - if @project.present?
           .panel-body
             %small.text-muted
               가장 먼저 투표를 제안해 보세요.
               %br
-              = link_to "#{Poll.model_name.human} 제안하기", new_poll_path(campaign_id: @campaign)
+              = link_to "#{Poll.model_name.human} 제안하기", new_poll_path(project_id: @project)

@@ -50,6 +50,26 @@ class ImageUploader < CarrierWave::Uploader::Base
     ActionController::Base.helpers.asset_path('default-image.png')
   end
 
+  # def url(version = nil)
+  #   super_result = super(version)
+  #   if Rails.env.production?
+  #     super_result
+  #   elsif self.file.try(:exists?)
+  #     if ImageUploader::env_storage == :fog
+  #       super_result
+  #     else
+  #       super_result = "http://#{ENV["HOST"]}#{super_result}" if ENV["HOST"].present?
+  #       super_result
+  #     end
+  #   else
+  #     if ImageUploader::env_storage == :fog
+  #       "https://curry-file.s3.amazonaws.com#{self.path}"
+  #     else
+  #       "https://curry-file.s3.amazonaws.com#{super_result}"
+  #     end
+  #   end
+  # end
+
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename

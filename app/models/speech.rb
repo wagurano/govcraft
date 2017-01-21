@@ -8,10 +8,11 @@ class Speech < ApplicationRecord
 
   scope :recent, -> { order('id DESC') }
 
-  def view_count
-    Rails.cache.fetch("speech_#{id}/view_count", expires_in: [15, 30, 45, 60, 75, 90].sample.minutes) do
-      video = VideoInfo.new(video_url)
-      video.view_count
+  def view_count_cacheable
+    if (self.view_count_cached_at.blank? || self.view_count_cached_at < 12.hours.ago) and self.is_expired_view_count == false
+      update_columns(is_expired_view_count: true)
     end
+
+    self.cached_view_count
   end
 end

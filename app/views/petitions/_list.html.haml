@@ -1,9 +1,9 @@
 %section#petitions.page-block
   .container
     %h4
-      = @campaign.try(:component_title, 'petition')
+      = local_assigns[:title_label] || @project.try(:component_title, 'petition')
       %small
-        = link_to "제안하기", new_petition_path(campaign_id: @campaign)
+        = link_to "제안하기", new_petition_path(project_id: @project)
     .panel.panel-default.panel-floating
       - if petitions.any?
         %ul.list-group.post-group
@@ -14,8 +14,8 @@
                   %span.text-danger
                     #{petition.percentage}% 달성
 
-                - if petition.campaign
-                  .post__campaign= petition.campaign.title
+                - if petition.project
+                  .post__project= petition.project.title
 
                 %h4.list-group-item-heading
                   = petition.title
@@ -37,9 +37,9 @@
 
 
       - else
-        - if @campaign.present?
+        - if @project.present?
           .panel-body
             %small.text-muted
               가장 먼저 서명을 제안해 보세요.
               %br
-              = link_to "#{Petition.model_name.human} 제안하기", new_petition_path(campaign_id: @campaign)
+              = link_to "#{Petition.model_name.human} 제안하기", new_petition_path(project_id: @project)

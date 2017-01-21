@@ -7,9 +7,10 @@ class PetitionsController < ApplicationController
   end
 
   def show
-    @campaign = @petition.campaign
+    @project = @petition.project
     @petition.increment!(:views_count)
-    @signs = @petition.signs.page params[:page]
+    @signs = @petition.signs.recent.where.not(body: [nil, ''])
+    @signs = params[:mode] == 'widget' ? @signs.limit(10) : @signs.page(params[:page])
 
     if params[:mode] == 'widget'
       render layout: 'strip'
@@ -20,20 +21,20 @@ class PetitionsController < ApplicationController
   end
 
   def new
-    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id].present?
+    @project = Project.find(params[:project_id]) if params[:project_id].present?
   end
 
   def create
     @petition.user = current_user
     if @petition.save
-      redirect_to @petition || @campaign
+      redirect_to @petition || @project
     else
       render 'new'
     end
   end
 
   def edit
-    @campaign = @petition.campaign
+    @project = @petition.project
   end
 
   def update
@@ -46,13 +47,13 @@ class PetitionsController < ApplicationController
 
   def destroy
     @petition.destroy
-    redirect_to @petition.campaign ? campaign_path(@petition.campaign) : petitions_path
+    redirect_to @petition.project ? project_path(@petition.project) : petitions_path
   end
 
   private
 
   def petition_params
-    params.require(:petition).permit(:title, :body, :campaign_id, :signs_goal_count, :cover_image, :thanks_mention, :comment_enabled, :sign_title)
+    params.require(:petition).permit(:title, :body, :project_id, :signs_goal_count, :cover_image, :thanks_mention, :comment_enabled, :sign_title)
   end
 
   def reset_meta_tags

@@ -15,13 +15,15 @@ class User < ApplicationRecord
   has_many :races, dependent: :destroy
   has_many :thumbs, dependent: :destroy
   has_many :speeches, dependent: :destroy
+  has_many :participations, dependent: :destroy
+  has_many :participated_projects, through: :participations, source: :project
 
   # validations
   VALID_NICKNAME_REGEX = /\A[ㄱ-ㅎ가-힣a-z0-9_]+\z/i
 
   validates :nickname,
     presence: true,
-    exclusion: { in: %w(app new edit index session login logout users admin all crew issue group campaign) },
+    exclusion: { in: %w(app new edit index session login logout users admin all crew issue group project) },
     format: { with: VALID_NICKNAME_REGEX },
     uniqueness: { case_sensitive: false },
     length: { maximum: 20 }

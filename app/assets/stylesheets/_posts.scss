@@ -5,28 +5,32 @@
   text-align: center;
   padding-top: $font-size-base * 8;
 
-  &__campaign a {
+  .current-user-status {
+    margin-top: -86px;
+  }
+  &__project a {
     color: $gray-lighter;
-    text-shadow: 1px 1px 2px #000;
+    text-shadow: 1px 1px 0px #000;
     &:hover {
       text-decoration: underline;
     }
   }
   &__title {
-    font-size: $font-size-base * 3;
-    text-shadow: 1px 1px 2px #000;
+    font-weight: bold;
+    font-size: $font-size-base * 2.5;
+    @include text-stroke();
     margin-bottom: $font-size-base * 1.5;
     word-break: keep-all;
   }
   &__body {
     font-size: $font-size-large;
-    text-shadow: 1px 1px 2px #000;
+    text-shadow: 1px 1px 0px #000;
     min-height: $font-size-large * $line-height-base * 2;
     margin-bottom: $font-size-base*2;
   }
   &__buttons a {
     color: $gray-lighter;
-    text-shadow: 1px 1px 2px #000;
+    text-shadow: 1px 1px 0px #000;
   }
   &__users-count {
     margin-bottom: $font-size-base*2;
@@ -34,7 +38,7 @@
       border: 1px solid #fff;
       border-radius: 20px;
       padding: $font-size-base*0.5 $font-size-base;
-      text-shadow: 1px 1px 2px #000;
+      text-shadow: 1px 1px 0px #000;
     }
   }
 
@@ -116,7 +120,7 @@
     margin-top: $font-size-base*2;
     padding-top: $font-size-base;
   }
-  &__campaign {
+  &__project {
     border-top: 1px solid $gray-lighter;
     margin-top: $font-size-base*2;
     padding-top: $font-size-base;
@@ -166,7 +170,7 @@
       float: right;
       font-weight: bold;
     }
-    .post__campaign {
+    .post__project {
       font-size: $font-size-small * 0.9;
       color: $gray;
       margin-bottom: 4px;

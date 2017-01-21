@@ -3,6 +3,10 @@ class CommentsController < ApplicationController
   load_and_authorize_resource
 
   def create
+    if !verify_recaptcha(model: @comment) and !user_signed_in?
+      redirect_back_for_robot and return
+    end
+
     @comment.user = current_user if user_signed_in?
     if user_signed_in? and @comment.commentable.respond_to? :voted_by? and @comment.commentable.voted_by? current_user
       @comment.choice = @comment.commentable.fetch_vote_of(current_user).choice

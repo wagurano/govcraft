@@ -22,19 +22,21 @@ ko:
     models:
       user: 당원
       issue: 토픽
-      campaign: 시민 캠페인
+      project: 프로젝트
       discussion: 게시판
       petition: 서명
       poll: 투표
+      survey: 설문
       wiki: 위키
-      memorial: 시민 추모관
+      memorial: 추모관
       agenda: 의제
-      archive: 시민 아카이브
+      archive: 아카이브
       event: 이벤트
-      article: 시민 뉴스
+      article: 뉴스
       person: 인물
       race: 인물투표
       player: 후보
+      speech: 촛불발언 동영상
     attributes:
       user:
         nickname: 아이디
@@ -43,7 +45,8 @@ ko:
         image: 프로필사진
         password: 비밀번호
         password_confirmation: 비밀번호 확인
-      campaign:
+        enable_mailing: 메일수신 여부
+      project:
         title: 제목
         body: 내용
         image: 대표이미지
@@ -124,6 +127,15 @@ ko:
         body: 설명
       player:
         person_id: 인물
+      speech:
+        title: 제목
+        video_url: 동영상주소 URL(필수)
+      survey:
+        title: 제목
+        body: 설명
+        duration: 기간(일)
+        cover_image: 대표이미지
+        options: 옵션
     errors:
       models:
         user:

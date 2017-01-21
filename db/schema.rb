@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229062800) do
+ActiveRecord::Schema.define(version: 20170120104327) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -87,26 +87,6 @@ ActiveRecord::Schema.define(version: 20161229062800) do
     t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
   end
 
-  create_table "campaigns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string   "title"
-    t.text     "body",               limit: 65535
-    t.integer  "user_id"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.integer  "views_count",                      default: 0
-    t.string   "image"
-    t.boolean  "discussion_enabled",               default: true
-    t.boolean  "petition_enabled",                 default: true
-    t.boolean  "poll_enabled",                     default: true
-    t.boolean  "wiki_enabled",                     default: true
-    t.string   "discussion_title"
-    t.string   "poll_title"
-    t.string   "petition_title"
-    t.string   "wiki_title"
-    t.string   "slug",                                            null: false
-    t.index ["user_id"], name: "index_campaigns_on_user_id", using: :btree
-  end
-
   create_table "candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "name"
     t.text     "body",        limit: 65535
@@ -152,13 +132,13 @@ ActiveRecord::Schema.define(version: 20161229062800) do
     t.string   "title"
     t.text     "body",                  limit: 65535
     t.integer  "user_id"
-    t.integer  "campaign_id"
+    t.integer  "project_id"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.integer  "likes_count",                         default: 0
     t.integer  "views_count",                         default: 0
     t.integer  "anonymous_likes_count",               default: 0
-    t.index ["campaign_id"], name: "index_discussions_on_campaign_id", using: :btree
+    t.index ["project_id"], name: "index_discussions_on_project_id", using: :btree
     t.index ["user_id"], name: "index_discussions_on_user_id", using: :btree
   end
 
@@ -167,14 +147,14 @@ ActiveRecord::Schema.define(version: 20161229062800) do
     t.text     "body",            limit: 65535
     t.string   "image"
     t.integer  "user_id",                       null: false
-    t.integer  "campaign_id"
+    t.integer  "project_id"
     t.datetime "registered_from",               null: false
     t.datetime "registered_to",                 null: false
     t.datetime "voted_from",                    null: false
     t.datetime "voted_to",                      null: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.index ["campaign_id"], name: "index_elections_on_campaign_id", using: :btree
+    t.index ["project_id"], name: "index_elections_on_project_id", using: :btree
     t.index ["user_id"], name: "index_elections_on_user_id", using: :btree
   end
 
@@ -187,10 +167,22 @@ ActiveRecord::Schema.define(version: 20161229062800) do
     t.integer  "comments_count",               default: 0
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
-    t.integer  "campaign_id"
+    t.integer  "project_id"
     t.string   "template"
-    t.index ["campaign_id"], name: "index_events_on_campaign_id", using: :btree
+    t.index ["project_id"], name: "index_events_on_project_id", using: :btree
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
+  end
+
+  create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "survey_id",  null: false
+    t.integer  "option_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_id"], name: "index_feedbacks_on_option_id", using: :btree
+    t.index ["survey_id"], name: "index_feedbacks_on_survey_id", using: :btree
+    t.index ["user_id", "survey_id"], name: "index_feedbacks_on_user_id_and_survey_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_feedbacks_on_user_id", using: :btree
   end
 
   create_table "following_issues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC" do |t|
@@ -247,6 +239,25 @@ ActiveRecord::Schema.define(version: 20161229062800) do
     t.index ["user_id"], name: "index_memorials_on_user_id", using: :btree
   end
 
+  create_table "options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "survey_id",                                 null: false
+    t.text     "body",            limit: 65535
+    t.integer  "feedbacks_count",               default: 0, null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.index ["survey_id"], name: "index_options_on_survey_id", using: :btree
+  end
+
+  create_table "participations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_participations_on_project_id", using: :btree
+    t.index ["user_id", "project_id"], name: "index_participations_on_user_id_and_project_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_participations_on_user_id", using: :btree
+  end
+
   create_table "people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string   "name",                     null: false
     t.text     "body",       limit: 65535
@@ -260,7 +271,7 @@ ActiveRecord::Schema.define(version: 20161229062800) do
   create_table "petitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title"
     t.text     "body",                  limit: 65535
-    t.integer  "campaign_id"
+    t.integer  "project_id"
     t.integer  "user_id"
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
@@ -273,7 +284,7 @@ ActiveRecord::Schema.define(version: 20161229062800) do
     t.text     "thanks_mention",        limit: 65535
     t.boolean  "comment_enabled",                     default: true
     t.string   "sign_title"
-    t.index ["campaign_id"], name: "index_petitions_on_campaign_id", using: :btree
+    t.index ["project_id"], name: "index_petitions_on_project_id", using: :btree
     t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
   end
 
@@ -296,7 +307,7 @@ ActiveRecord::Schema.define(version: 20161229062800) do
     t.string   "title"
     t.text     "body",                  limit: 65535
     t.integer  "user_id"
-    t.integer  "campaign_id"
+    t.integer  "project_id"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.integer  "likes_count",                         default: 0
@@ -307,8 +318,30 @@ ActiveRecord::Schema.define(version: 20161229062800) do
     t.string   "social_card"
     t.string   "cover_image"
     t.integer  "anonymous_likes_count",               default: 0
-    t.index ["campaign_id"], name: "index_polls_on_campaign_id", using: :btree
+    t.index ["project_id"], name: "index_polls_on_project_id", using: :btree
     t.index ["user_id"], name: "index_polls_on_user_id", using: :btree
+  end
+
+  create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "title"
+    t.text     "body",               limit: 65535
+    t.integer  "user_id"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.integer  "views_count",                      default: 0
+    t.string   "image"
+    t.boolean  "discussion_enabled",               default: true
+    t.boolean  "petition_enabled",                 default: true
+    t.boolean  "poll_enabled",                     default: true
+    t.boolean  "wiki_enabled",                     default: true
+    t.string   "discussion_title"
+    t.string   "poll_title"
+    t.string   "petition_title"
+    t.string   "wiki_title"
+    t.string   "slug",                                            null: false
+    t.boolean  "survey_enabled",                   default: true
+    t.string   "survey_title"
+    t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
   end
 
   create_table "races", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
@@ -373,16 +406,37 @@ ActiveRecord::Schema.define(version: 20161229062800) do
   end
 
   create_table "speeches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string   "title",                             null: false
-    t.string   "video_url",                         null: false
-    t.integer  "event_id",                          null: false
+    t.string   "title",                                 null: false
+    t.string   "video_url",                             null: false
+    t.integer  "event_id",                              null: false
     t.integer  "user_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.integer  "likes_count",           default: 0
     t.integer  "anonymous_likes_count", default: 0
+    t.integer  "cached_view_count",     default: 0
+    t.datetime "view_count_cached_at"
+    t.boolean  "is_expired_view_count", default: false
     t.index ["event_id"], name: "index_speeches_on_event_id", using: :btree
     t.index ["user_id"], name: "index_speeches_on_user_id", using: :btree
+  end
+
+  create_table "surveys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "title"
+    t.text     "body",                  limit: 65535
+    t.integer  "user_id",                                         null: false
+    t.integer  "project_id"
+    t.integer  "likes_count",                         default: 0
+    t.integer  "anonymous_likes_count",               default: 0
+    t.integer  "feedbacks_count",                     default: 0, null: false
+    t.integer  "views_count",                         default: 0, null: false
+    t.integer  "duration",                            default: 0, null: false
+    t.string   "cover_image"
+    t.string   "social_card"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.index ["project_id"], name: "index_surveys_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_surveys_on_user_id", using: :btree
   end
 
   create_table "taggings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -437,7 +491,7 @@ ActiveRecord::Schema.define(version: 20161229062800) do
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "email"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                        default: 0, null: false
+    t.integer  "sign_in_count",                        default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -446,8 +500,8 @@ ActiveRecord::Schema.define(version: 20161229062800) do
     t.string   "uid"
     t.string   "nickname"
     t.string   "image"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.string   "encrypted_password"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -456,6 +510,7 @@ ActiveRecord::Schema.define(version: 20161229062800) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.text     "description",            limit: 65535
+    t.boolean  "enable_mailing",                       default: true
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
   end
 
@@ -491,14 +546,14 @@ ActiveRecord::Schema.define(version: 20161229062800) do
     t.string   "title"
     t.text     "body",                  limit: 65535
     t.integer  "user_id",                                         null: false
-    t.integer  "campaign_id",                                     null: false
+    t.integer  "project_id",                                      null: false
     t.integer  "views_count",                         default: 0
     t.integer  "comments_count",                      default: 0
     t.integer  "likes_count",                         default: 0
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.integer  "anonymous_likes_count",               default: 0
-    t.index ["campaign_id"], name: "index_wikis_on_campaign_id", using: :btree
+    t.index ["project_id"], name: "index_wikis_on_project_id", using: :btree
     t.index ["user_id"], name: "index_wikis_on_user_id", using: :btree
   end
 

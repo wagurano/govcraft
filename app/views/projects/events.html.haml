@@ -1,0 +1,58 @@
+%section#project-events{:data => {:spy => "scroll", :target => "navbar"}}
+  // TODO : 하드코딩된 컨텐츠 제거
+  .header{:style => "height: 310px; background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{@project.image});" }
+    %h2
+      우리가 꿈꾸는 OO는
+      %br
+      우리가 말하고 우리가 만든다
+    %h3
+      우리가 꿈꾸는 OO을 채워주세요!
+  .intro{:data => {:aos => "fade-up"}}
+    .container
+      %p
+        11월 말, N명의 사회혁신가는
+        %a{:href => "http://wouldyouparty.org/petitions/23", :target => "_blank"}
+          대통령 퇴진을 넘어 새로운 사회를 함께 만들겠다는 시국선언
+        을 발표했습니다.
+      %br
+      %blockquote
+        시민으로서, 주권자로서, 의견을 나누고 사회에 목소리를 낼 것이다.
+        %br
+        서로 믿고 존중하면서, 우리가 가장 잘 해왔던 방식으로,
+        %br
+        일상에서 대안과 해결책을 고민하고 제안하겠다.
+        %br
+        구체적인 그림과 방법을 연구하고 각자의 현장에서 이를 실천하려 한다.
+      %br
+      %p
+        그 내용엔 우리가 가장 잘 해왔던 방식으로, 대안과 해결책을 고민하고 제안하며,
+        %br
+        각자의 현장에서 실천하겠다는 다짐이 담겨 있었습니다.
+  .intro{:class => "bg-gray", :data => {:aos => "fade-up"}}
+    .container
+      %h4
+        대안과 해결책을 고민하기 위해 먼저 우리의 '문제'를 생각합니다.
+      %br
+      %p
+        새로운 사회를 만들기 위해서 어떤 문제에 집중하고 변화를 만들어야 할지 이야기를 모으고자 합니다.
+        %br
+        질문에 대한 답을 재료로 문제의 우선순위를 정할 예정입니다.
+        %br
+        더불어 데이터 분석을 통해 모여진 문제간의 연결망과 의미를 해석하려고 합니다.
+  .intro{:data => {:aos => "fade-up"}}
+    .container
+      %h4
+        일상의 실천과제를 제시하고 정책적 제언을 만들겠습니다.
+      %br
+      %p
+        가장 해결이 시급하다고 판단된 문제에 어떤 대안과 해결책이 필요할지 함께 상상할 수 있는 장을 1월 중에 마련하겠습니다.
+        %br
+        그 결과를 정리해 사회혁신가가 이미 잘하고 있는 작업들과 연결하고, 새롭게 고민해야 할 일들을 제안하며, 정책적 제안까지 나아가려고 합니다.
+  .intro{:class => "bg-gray", :data => {:aos => "fade-up"}}
+    .container
+      %h4
+        가장 해결이 시급한 문제가 무엇인지 여러분의 생각을 들려주세요. :)
+      %p
+
+  .event_block{:id => "question_one", :data => {:aos => "fade-up"}}
+    = render "events/template_default", event: @project.events.recent.first

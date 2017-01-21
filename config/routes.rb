@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   get 'about', to: 'pages#about', as: :about
+  get 'weekly', to: 'pages#weekly', as: :weekly
 
   resources :users
   resources :comments
@@ -29,11 +30,17 @@ Rails.application.routes.draw do
   resources :issues
   resources :following_issues
 
-  get 'campaigns/:id', to: redirect { |params, req| "/c/#{Campaign.find_by(id: params[:id]).slug}"}, constraints: lambda { |request, params|
-    Campaign.exists?(id: params[:id])
+  get 'campaigns/:id', to: redirect { |params, req| "/p/#{Project.find_by(id: params[:id]).slug}"}, constraints: lambda { |request, params|
+    Project.exists?(id: params[:id])
   }
-  resources :campaigns, path: :c do
+  get 'c/:id', to: redirect { |params, req| "/p/#{Project.find_by(id: params[:id]).slug}"}, constraints: lambda { |request, params|
+    Project.exists?(id: params[:id])
+  }
+  resources :projects, path: :p do
     get 'events', on: :member
+  end
+  resources :participations do
+    delete :cancel, on: :collection
   end
   resources :speeches
   resources :discussions
@@ -44,6 +51,10 @@ Rails.application.routes.draw do
   resources :polls do
     get 'social_card', on: :member
   end
+  resources :surveys do
+    get 'social_card', on: :member
+  end
+  post 'feedbacks', to: 'feedbacks#create'
   resources :wikis do
     shallow do
       resources :wiki_revisions do
@@ -73,6 +84,17 @@ Rails.application.routes.draw do
   end
   resources :archive_documents
   resources :memorials
+
+  namespace :admin do
+    root 'base#home', as: :home
+    resources :roles do
+      collection do
+        post :add
+        delete :remove
+      end
+    end
+    resources :comments
+  end
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/dev/emails"

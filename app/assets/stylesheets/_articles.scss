@@ -4,11 +4,31 @@
   &__image {
     cursor: pointer;
   }
+  &__image {
+    display: inline;
+    float: left;
+    margin-right: 12px;
+  }
+  &__desc {
+    display: initial;
+  }
   &__meta {
     margin-top: 12px;
   }
   &__date {
     color: $gray-light;
+  }
+  &__reactions {
+    @media (max-width: $screen-xs-max) {
+      margin-top: 12px;
+      text-align: center;
+    }
+    .btn-like {
+      width: 40%;
+      @media (min-width: $screen-sm-min) {
+        width: 100%;
+      }
+    }
   }
 }
 .articles-sort-panel a {

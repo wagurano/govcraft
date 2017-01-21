@@ -4,6 +4,8 @@
 @import 'select2';
 @import 'select2-bootstrap';
 @import 'magnific-popup';
+@import 'jquery.webui-popover';
+
 @import 'base';
 
 /* components */
@@ -12,11 +14,12 @@
 @import 'components';
 
 /* blocks & panels */
-@import 'campaigns';
+@import 'projects';
 @import 'users';
 @import 'posts';
 @import 'petitions';
 @import 'polls';
+@import 'surveys';
 @import 'wikis';
 @import 'archives';
 @import 'memorials';
@@ -31,15 +34,25 @@
 #site-hero-block {
   background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), image_url('seo.png');
   margin-top: -30px;
+  margin-bottom: $font-size-base*2;
+  padding: 0;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+
+  .carousel-inner .item {
+    background-size: cover;
+    background-position: center center;
+  }
 
   .jumbotron {
     background-color: transparent;
     border: none;
     color: #fff;
-    text-shadow: 1px 1px 3px rgba(0,0,0,.5);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    h2 {
+      font-weight: 600;
+    }
     a {
       color: #fff;
     }

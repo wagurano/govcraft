@@ -40,9 +40,10 @@ module ApplicationHelper
   end
 
   def hide_gnb_and_footer?
-    ( params[:controller] == 'campaigns' && params[:action] == 'show' ) ||
-    ( params[:controller] == 'campaigns' && params[:action] == 'events' ) ||
+    ( params[:controller] == 'projects' && params[:action] == 'show' ) ||
+    ( params[:controller] == 'projects' && params[:action] == 'events' ) ||
     ( params[:controller] == 'polls' && params[:action] == 'show' ) ||
+    ( params[:controller] == 'surveys' && params[:action] == 'show' ) ||
     ( params[:controller] == 'petitions' && params[:action] == 'show' ) ||
     ( params[:controller] == 'wikis' && params[:action] == 'show' ) ||
     ( params[:controller] == 'discussions' && params[:action] == 'show' ) ||
@@ -58,5 +59,10 @@ module ApplicationHelper
   def fill_in(template, data)
     return if template.blank?
     template.gsub(/\{\{(\w+)\}\}/) { data[$1.to_sym] }
+  end
+
+  def survey_remain_time(survey)
+    return '계속' if survey.duration <= 0
+    distance_of_time_in_words_to_now(survey.created_at + survey.duration.days)
   end
 end

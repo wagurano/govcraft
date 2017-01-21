@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     rescue_from ActiveRecord::RecordNotFound, ActionController::UnknownFormat do |exception|
       render_404
     end
-    rescue_from CanCan::AccessDenied do |exceptigson|
+    rescue_from CanCan::AccessDenied do |exception|
       self.response_body = nil
       if user_signed_in?
         redirect_to root_url, :alert => exception.message
@@ -96,5 +96,10 @@ class ApplicationController < ActionController::Base
     obtrusive_flash.each do |key, value|
       flash[key] = value
     end
+  end
+
+  def redirect_back_for_robot
+    flash[:error] = '로봇이세요? 로봇 여부를 확인해 주세요'
+    redirect_back(fallback_location: root_path)
   end
 end

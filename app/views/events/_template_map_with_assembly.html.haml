@@ -4,9 +4,10 @@
 
 %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image})" }
   .container
-    - if @campaign
-      .cover-section__campaign
-        = link_to @campaign.title, @campaign
+    = render 'header'
+    - if @project
+      .cover-section__project
+        = link_to @project.title, @project
 
     %h1.cover-section__title= event.title
 
@@ -41,11 +42,12 @@
 
 %section.page-block
   .container
-    .row.masonry-container
-      .col-sm-4.hidden-xs
+    .row
+      .col-sm-12.hidden-xs
         .panel.panel-default.panel-floating
           .panel-body
             = render 'form_with_assembly', event: event
+    .row.masonry-container
       - comments.order('id DESC').each do |comment|
         .col-sm-4
           .panel.panel-default.panel-floating[comment]{ style: 'padding:0' }
