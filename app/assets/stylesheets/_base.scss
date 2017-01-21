@@ -26,6 +26,17 @@ body {
     1px  1px 0 #000;
 }
 
+// 글 생략 (여러줄)
+@mixin multi-text-ellipsis($lines) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+
+}
+
 .btn-primary--inactive {
   @extend .btn-default;
   color: $brand-primary;

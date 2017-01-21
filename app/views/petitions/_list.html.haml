@@ -1,45 +1,26 @@
-%section#petitions.page-block
+#bloc-7.bloc.bgc-white.l-bloc
   .container
-    %h4
-      = local_assigns[:title_label] || @project.try(:component_title, 'petition')
-      %small
-        = link_to "제안하기", new_petition_path(project_id: @project)
-    .panel.panel-default.panel-floating
-      - if petitions.any?
-        %ul.list-group.post-group
-          - petitions.each do |petition|
-            %li.list-group-item[petition]
-              = link_to petition do
-                .post__status
-                  %span.text-danger
-                    #{petition.percentage}% 달성
-
-                - if petition.project
-                  .post__project= petition.project.title
-
-                %h4.list-group-item-heading
-                  = petition.title
-
-                .post__meta
-                  .row
-                    .col-xs-6
-                      %span.nickname
-                        = petition.user.nickname
-                      %span.created_at
-                        = date_f petition.created_at
-                    .col-xs-6.text-right
-                      %span
-                        %i.fa.fa-user-o
-                        = petition.signs_count
-                      %span
-                        %i.fa.fa-eye
-                        = petition.views_count
-
-
-      - else
-        - if @project.present?
-          .panel-body
-            %small.text-muted
-              가장 먼저 서명을 제안해 보세요.
-              %br
-              = link_to "#{Petition.model_name.human} 제안하기", new_petition_path(project_id: @project)
+    .row
+      .col-sm-12
+        %h3.mg-md.tc-outer-space
+          = local_assigns[:title_label] || @project.try(:component_title, 'petition')
+          %small
+            = link_to "제안하기", new_petition_path(project_id: @project)
+/ Footer - bloc-7 END
+/ Footer - bloc-8
+- if petitions.any?
+  - petitions.each do |petition|
+    = link_to petition do
+      #bloc-8.bloc.bg-sanfran.bloc-bg-texture.texture-darken.tc-white.bgc-white.petition
+        .container.bloc-md
+          .row
+            .col-sm-10
+              %h3.mg-md.blocs-mobile-signup-text.tc-white
+                = petition.title
+              .petition-body
+                = strip_tags petition.body
+            .col-sm-2
+              .text-center
+                .btn.btn-lg.btn-sq.btn-han-blue.petition-btn
+                  #{petition.percentage}% 달성
+/ Footer - bloc-8 END
