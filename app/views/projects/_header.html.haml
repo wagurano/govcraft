@@ -8,6 +8,24 @@
           %span.icon-bar
           %span.icon-bar
           %span.icon-bar
+      .current-user-status.badge.pull-right.visible-xs
+        - if user_signed_in?
+          .dropdown
+            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              = render 'users/thumbnail'
+              = current_user.nickname
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                = link_to edit_user_registration_path do
+                  프로필 수정
+              %li
+                = link_to sign_out_path, method: :delete do
+                  로그아웃
+        - else
+          = link_to new_user_session_path do
+            %i.fa.fa-sign-in
+            로그인 &middot; 가입
       .navbar-collapse.navbar-1.collapse.special-dropdown-nav
         %ul.site-navigation.nav.navbar-nav
           - if project.events.any?
@@ -33,11 +51,12 @@
             %li
               = link_to '#anchor-project-discussion' do
                 = local_assigns[:title_label] || project.try(:component_title, 'discussion')
+
 / bloc-0 END
 / bloc-1
 #bloc-1.bloc.project-header.bgc-blue-green.d-bloc
   .container.bloc-sm
-    .current-user-status.badge.pull-right
+    .current-user-status.badge.pull-right.hidden-xs
       - if user_signed_in?
         .dropdown
           %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
