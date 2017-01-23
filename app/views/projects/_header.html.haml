@@ -136,22 +136,22 @@
           - else
             = link_to new_user_session_path, class: 'btn btn-xs btn-default' do
               참여
-        %p
-          %strong= project.user.nickname
-          = date_f project.created_at
-          활동지수
-          = rand(1000)
+        - unless project.id == 7
+          %p
+            %strong= project.user.nickname
+            = date_f project.created_at
+            활동지수
+            = rand(1000)
 / Footer - bloc-3 END
 / Footer - bloc-5
 - if params[:controller] == 'projects'
   #bloc-5.bloc.bgc-white.l-bloc
     .container.bloc-sm
       - if project.id == 7
-        .row
+        .row.project-video
           .col-sm-12
             .embed-responsive.embed-responsive-16by9
               %iframe.embed-responsive-item{:allowfullscreen => "", :frameborder => "0", :mozallowfullscreen => "", :src => "https://www.youtube.com/embed/AgvL7fnPsCs", :webkitallowfullscreen => ""}
-        .row
           .col-sm-12.help-block
             Kevin MacLeod의 Griphop은(는) Creative Commons Attribution 라이선스(https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여됩니다.
             %br
