@@ -1,8 +1,3 @@
-/ bloc-0
-
-
-/ bloc-0 END
-/ bloc-1
 #bloc-1.bloc.project-header.bgc-blue-green.d-bloc{style: "background-image: url(#{asset_url(project.image_url(:lg))});"}
   .container.hidden-lg.hidden-md
     %nav.navbar.nav-invert.row
@@ -32,26 +27,27 @@
             로그인 &middot; 가입
       .navbar-collapse.navbar-1.collapse.special-dropdown-nav
         %ul.site-navigation.nav.navbar-nav
-          - if project.events.any?
+          - if project.events.any? && project.discussion_enabled
             %li
               = link_to '#anchor-project-envent' do
                 = local_assigns[:title_label] || Event.model_name.human
-          - if project.polls.any?
+          - if project.polls.any? && project.poll_enabled
             %li
               = link_to '#anchor-project-poll' do
                 = local_assigns[:title_label] || project.try(:component_title, 'poll')
-          - if project.surveys.any?
+          - if project.surveys.any? && project.survey_enabled
             %li
               = link_to '#anchor-project-survey' do
                 = local_assigns[:title_label] || project.try(:component_title, 'survey')
-          - if project.petitions.any?
+          - if project.petitions.any? && project.petition_enabled
             %li
               = link_to '#anchor-project-petition' do
                 = local_assigns[:title_label] || project.try(:component_title, 'petition')
-          %li
-            = link_to '#anchor-project-wiki' do
-              위키
-          - if project.discussions.any?
+          - if project.wiki_enabled
+            %li
+              = link_to '#anchor-project-wiki' do
+                위키
+          - if project.discussions.any? && project.discussion_enabled
             %li
               = link_to '#anchor-project-discussion' do
                 = local_assigns[:title_label] || project.try(:component_title, 'discussion')
@@ -88,26 +84,27 @@
           %span.icon-bar
       .navbar-collapse.navbar-1.collapse
         %ul.site-navigation.nav.navbar-nav
-          - if project.events.any?
+          - if project.events.any? && project.discussion_enabled
             %li
               = link_to '#anchor-project-envent' do
                 = local_assigns[:title_label] || Event.model_name.human
-          - if project.polls.any?
+          - if project.polls.any? && project.poll_enabled
             %li
               = link_to '#anchor-project-poll' do
                 = local_assigns[:title_label] || project.try(:component_title, 'poll')
-          - if project.surveys.any?
+          - if project.surveys.any? && project.survey_enabled
             %li
               = link_to '#anchor-project-survey' do
                 = local_assigns[:title_label] || project.try(:component_title, 'survey')
-          - if project.petitions.any?
+          - if project.petitions.any? && project.petition_enabled
             %li
               = link_to '#anchor-project-petition' do
                 = local_assigns[:title_label] || project.try(:component_title, 'petition')
-          %li
-            = link_to '#anchor-project-wiki' do
-              위키
-          - if project.discussions.any?
+          - if project.wiki_enabled
+            %li
+              = link_to '#anchor-project-wiki' do
+                위키
+          - if project.discussions.any? && project.discussion_enabled
             %li
               = link_to '#anchor-project-discussion' do
                 = local_assigns[:title_label] || project.try(:component_title, 'discussion')
