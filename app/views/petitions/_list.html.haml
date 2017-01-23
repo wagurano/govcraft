@@ -11,7 +11,7 @@
 - if petitions.any?
   - petitions.each do |petition|
     = link_to petition do
-      #bloc-8.bloc.bg-sanfran.bloc-bg-texture.texture-darken.tc-white.bgc-white.petition
+      .bloc-8.bloc.bg-sanfran.bloc-bg-texture.texture-darken.tc-white.bgc-white.petition{style: "background-image: url(#{asset_url(petition.cover_image_url(:lg))});"}
         .container.bloc-md
           .row
             .col-sm-10

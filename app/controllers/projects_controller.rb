@@ -48,7 +48,7 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(
-      :title, :body, :image, :slug,
+      :title, :subtitle, :body, :image, :slug,
       :discussion_enabled, :poll_enabled, :petition_enabled, :wiki_enabled,
       :discussion_title, :poll_title, :petition_title, :wiki_title
     )

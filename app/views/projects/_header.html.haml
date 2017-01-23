@@ -101,8 +101,9 @@
   .container.bloc-sm
     .row
       .col-sm-12
-        %h3.mg-md
-          = project.title
+        - if project.subtitle.present?
+          %h3.mg-md
+            = project.subtitle
         %p
           %strong= project.user.nickname
           = date_f project.created_at
@@ -118,6 +119,13 @@
           .col-sm-12
             .embed-responsive.embed-responsive-16by9
               %iframe.embed-responsive-item{:allowfullscreen => "", :frameborder => "0", :mozallowfullscreen => "", :src => "https://www.youtube.com/embed/AgvL7fnPsCs", :webkitallowfullscreen => ""}
+        .row
+          .col-sm-12.help-block
+            Kevin MacLeod의 Griphop은(는) Creative Commons Attribution 라이선스(https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여됩니다.
+            %br
+            출처: http://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100413
+            %br
+            아티스트: http://incompetech.com/
       .row
         .col-sm-12
           = smart_format project.body

@@ -48,6 +48,7 @@ ko:
         enable_mailing: 메일수신 여부
       project:
         title: 제목
+        subtitle: 부제목
         body: 내용
         image: 대표이미지
       discussion:
