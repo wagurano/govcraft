@@ -10,10 +10,7 @@
   = render 'events/list', project: @project, events: @project.events.recent
 
   %a{id: "anchor-project-poll"}
-  = render 'polls/list', polls: @project.polls.recent if @project.poll_enabled?
-
-  %a{id: "anchor-project-survey"}
-  = render 'surveys/list', surveys: @project.surveys.recent if @project.survey_enabled?
+  = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent if @project.poll_enabled?
 
   %a{id: "anchor-project-petition"}
   = render 'petitions/list', petitions: @project.petitions.recent if @project.petition_enabled?

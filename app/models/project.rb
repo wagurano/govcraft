@@ -21,12 +21,20 @@ class Project < ApplicationRecord
 
   def component_title(modle_name)
     model = modle_name.classify.safe_constantize
-    return if model.blank?
-    send(:"#{modle_name}_title").blank? ? model.model_name.human : send(:"#{modle_name}_title")
+    name_by_model = model.blank? ? I18n.t("activerecord.models.#{modle_name}") : model.model_name.human
+    send(:"#{modle_name}_title").blank? ? name_by_model : send(:"#{modle_name}_title")
+  end
+
+  def poll_and_survey_title
+    poll_title
   end
 
   def participated? someone
     participations.exists? user: someone
+  end
+
+  def polls_and_surveys_recent
+    [polls + surveys].flatten.sort_by(&:created_at).reverse
   end
 
   private

@@ -20,13 +20,14 @@ ko:
     reverted: '복원되었습니다!'
   activerecord:
     models:
+      poll_and_survey: 투표
       user: 당원
       issue: 토픽
       project: 프로젝트
       discussion: 게시판
       petition: 서명
-      poll: 투표
-      survey: 설문
+      poll: 찬반투표
+      survey: 다항투표
       wiki: 위키
       memorial: 추모관
       agenda: 의제

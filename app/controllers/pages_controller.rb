@@ -15,6 +15,7 @@ class PagesController < ApplicationController
     @new_discussions = Discussion.past_week
     @new_petitions = Petition.past_week
     @new_polls = Poll.past_week
+    @new_surveys = Survey.past_week
     @new_wikis = Wiki.past_week
     @new_events = Event.past_week
   end
