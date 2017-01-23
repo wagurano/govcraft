@@ -9,7 +9,7 @@
 
     - if polls.any?
       .row.masonry-container
-        = render polls
+        = render polls, hide_project_title: true
 
     - else
       - if @project.present?

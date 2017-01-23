@@ -1,8 +1,9 @@
+- hide_project_title ||= false
 .col-sm-6
   %div[poll]
     .panel.panel-default.panel-floating.poll-card
       .panel-body
-        - if poll.project
+        - if poll.project && !hide_project_title
           .post__project
             = link_to poll.project.title, poll.project
 
