@@ -1,6 +1,10 @@
 / bloc-0
-#bloc-0.bloc.hidden-lg.hidden-md.project-header-mobile.bgc-blue-green.d-bloc
-  .container
+
+
+/ bloc-0 END
+/ bloc-1
+#bloc-1.bloc.project-header.bgc-blue-green.d-bloc{style: "background-image: url(#{asset_url(project.image_url(:lg))});"}
+  .container.hidden-lg.hidden-md
     %nav.navbar.nav-invert.row
       .navbar-header
         %button#nav-toggle.ui-navbar-toggle.navbar-toggle{"data-target" => ".navbar-1", "data-toggle" => "collapse", :type => "button"}
@@ -51,10 +55,6 @@
             %li
               = link_to '#anchor-project-discussion' do
                 = local_assigns[:title_label] || project.try(:component_title, 'discussion')
-
-/ bloc-0 END
-/ bloc-1
-#bloc-1.bloc.project-header.bgc-blue-green.d-bloc
   .container.bloc-sm
     .current-user-status.badge.pull-right.hidden-xs
       - if user_signed_in?
@@ -78,10 +78,7 @@
       .col-sm-12
         %h1.mg-sm.project-title.mg-clear-xs
           = link_to project.title, project
-/ bloc-1 END
-/ bloc-2
-#bloc-2.bloc.hidden-xs.hidden-sm.bgc-blue-green.d-bloc
-  .container
+  .container.hidden-xs
     %nav.navbar.nav-invert.row
       .navbar-header
         %button#nav-toggle.ui-navbar-toggle.navbar-toggle{"data-target" => ".navbar-1", "data-toggle" => "collapse", :type => "button"}
@@ -123,6 +120,25 @@
         - if project.subtitle.present?
           %h3.mg-md
             = project.subtitle
+        %small
+          - if can? :edit, project
+            = link_to '수정', edit_project_path(project), class: 'btn btn-xs btn-default'
+          - if can? :destroy, project
+            = link_to '삭제', project, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-default'
+          - if user_signed_in?
+            - if project.participated? current_user
+              %span.btn.btn-xs.btn-default.gov-action-popover{ data: { placement: 'bottom', url: "##{dom_id(project)}--cancel-participation" } }
+                참여 중
+                %i.fa.fa-caret-down
+              .hidden
+                .cancel-participation{id: "#{dom_id(project)}--cancel-participation", style: 'white-space: nowrap;'}
+                  = link_to cancel_participations_path(project_id: project.id), method: :delete, data: { confirm: '정말 나가시겠습니까?' } do
+                    프로젝트 나가기
+            - else
+              = link_to '참여', participations_path(project_id: project.id), method: :post, class: 'btn btn-xs btn-default'
+          - else
+            = link_to new_user_session_path, class: 'btn btn-xs btn-default' do
+              참여
         %p
           %strong= project.user.nickname
           = date_f project.created_at
