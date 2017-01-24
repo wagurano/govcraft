@@ -1,15 +1,4 @@
 .col-sm-6
   %div[survey]
     .panel.panel-default.panel-floating.survey-card
-      .panel-body
-        - if survey.project
-          .post__project
-            = link_to survey.project.title, survey.project
-
-        %h4.post__title
-          = link_to survey.title, survey
-          - if survey.comments.count > 0
-            %small
-              (#{survey.comments.count})
-
-        = render 'options/panel', survey: survey
+      = render 'options/panel', local_assigns

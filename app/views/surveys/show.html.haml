@@ -38,7 +38,7 @@
         = raw @survey.body
 
       .cover-section__options
-        = render 'options/panel', survey: @survey
+        = render 'options/panel', survey: @survey, hide_project_title: true
 
       .post-block__share
         %h4 이 이슈를 친구들에게 알려 주세요
