@@ -50,6 +50,10 @@
 
     .vote-panel {
       border-radius: $btn-border-radius-large;
+      .vote-button {
+        display: inline-block;
+        margin: 0px 14px;
+      }
 
       .btn-choice {
         .choice__label {

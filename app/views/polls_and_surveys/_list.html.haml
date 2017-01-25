@@ -1,26 +1,25 @@
-#bloc-6.bloc.bgc-white.l-bloc
-  .container.bloc-md
-    .row
-      .col-sm-12
-        %h2.text-left.mg-clear.tc-outer-space
-          = local_assigns[:title_label] || @project.try(:component_title, 'poll_and_survey')
-          %small
-            = link_to "찬반투표 열기", new_poll_path(project_id: @project)
-            \|
-            = link_to "다항투표 열기", new_survey_path(project_id: @project)
+%section#polls.page-block
+  .container
+    %h4
+      = local_assigns[:title_label] || @project.try(:component_title, 'poll_and_survey')
+      %small
+        = link_to "찬반투표 열기", new_poll_path(project_id: @project)
+        \|
+        = link_to "다항투표 열기", new_survey_path(project_id: @project)
 
-    - models = [polls + surveys].flatten.sort_by(&:created_at).reverse
-    - if models.any?
-      .row.masonry-container
-        - models .each do |model|
-          = render model, hide_project_title: true
+    .section
+      - models = [polls + surveys].flatten.sort_by(&:created_at).reverse
+      - if models.any?
+        .row.masonry-container
+          - models .each do |model|
+            = render model, hide_project_title: true
 
-    - else
-      - if @project.present?
-        .panel-body
-          %small.text-muted
-            가장 먼저 투표를 제안해 보세요.
-            %br
-            = link_to "찬반투표 열기", new_poll_path(project_id: @project)
-            \|
-            = link_to "다항투표 열기", new_survey_path(project_id: @project)
+      - else
+        - if @project.present?
+          .panel-body
+            %small.text-muted
+              가장 먼저 투표를 제안해 보세요.
+              %br
+              = link_to "찬반투표 열기", new_poll_path(project_id: @project)
+              \|
+              = link_to "다항투표 열기", new_survey_path(project_id: @project)
