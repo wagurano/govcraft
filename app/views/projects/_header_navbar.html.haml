@@ -1,10 +1,12 @@
 %nav.navbar.nav-invert.row
-  .navbar-header.pull-left
-    %button#nav-toggle.ui-navbar-toggle.navbar-toggle{"data-target" => "#project-navbar", "data-toggle" => "collapse", :type => "button"}
+  .navbar-header
+    %button.pull-left#nav-toggle.ui-navbar-toggle.navbar-toggle{"data-target" => "#project-navbar", "data-toggle" => "collapse", :type => "button"}
       %span.sr-only Toggle navigation
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
+  .visible-xs
+    = render 'application/current_user_state_badge'
   .navbar-collapse.collapse#project-navbar
     %ul.site-navigation.nav.navbar-nav
       - if project.events.any? && project.discussion_enabled

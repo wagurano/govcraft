@@ -2,7 +2,8 @@
   .container
     .container.visible-xs
       = render 'projects/header_navbar', project: project
-    = render 'application/current_user_state_badge'
+    .hidden-xs
+      = render 'application/current_user_state_badge'
     %h2
       .project__title
         = link_to project.title, project

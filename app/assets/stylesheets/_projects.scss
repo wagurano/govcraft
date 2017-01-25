@@ -24,9 +24,15 @@
       .icon-bar {
         background-color: #fff;
       }
+      .navbar-toggle {
+        margin-bottom: 0;
+      }
     }
     #project-navbar {
       padding: 0;
+      @media (max-width: $screen-xs-max) {
+        margin-left: 10px;
+      }
       .site-navigation {
         li {
           a {
@@ -34,6 +40,9 @@
             color: rgba(255,255,255,0.7);
             font-size: $font-size-large;
             &:hover {
+              color: #fff;
+            }
+            @media (max-width: $screen-xs-max) {
               color: #fff;
             }
           }
@@ -53,6 +62,10 @@
     color: #FFFFFF;
     word-break: keep-all;
     text-shadow: 1px 1px 0px #000;
+    @media (max-width: $screen-xs-max) {
+      font-size: 34px;
+      text-align: center;
+    }
     small {
       text-shadow: none;
     }
@@ -60,8 +73,17 @@
   .project__meta {
     font-size: $font-size-small;
     text-shadow: 1px 1px 3px #000;
+    @media (max-width: $screen-xs-max) {
+      text-align: center;
+    }
     span {
       margin-right: $font-size-base;
+    }
+  }
+  .project_share {
+    @media (max-width: $screen-xs-max) {
+      text-align: center;
+      margin-bottom: 14px;
     }
   }
 }
