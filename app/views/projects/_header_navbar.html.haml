@@ -1,0 +1,33 @@
+%nav.navbar.nav-invert.row
+  .navbar-header
+    %button#nav-toggle.ui-navbar-toggle.navbar-toggle{"data-target" => "#project-navbar", "data-toggle" => "collapse", :type => "button"}
+      %span.sr-only Toggle navigation
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+  .navbar-collapse.collapse#project-navbar
+    %ul.site-navigation.nav.navbar-nav
+      - if project.events.any? && project.discussion_enabled
+        %li
+          = link_to '#anchor-project-envent' do
+            = local_assigns[:title_label] || Event.model_name.human
+      - if project.polls.any? && project.poll_enabled
+        %li
+          = link_to '#anchor-project-poll' do
+            = local_assigns[:title_label] || project.try(:component_title, 'poll')
+      - if project.surveys.any? && project.survey_enabled
+        %li
+          = link_to '#anchor-project-survey' do
+            = local_assigns[:title_label] || project.try(:component_title, 'survey')
+      - if project.petitions.any? && project.petition_enabled
+        %li
+          = link_to '#anchor-project-petition' do
+            = local_assigns[:title_label] || project.try(:component_title, 'petition')
+      - if project.wiki_enabled
+        %li
+          = link_to '#anchor-project-wiki' do
+            위키
+      - if project.discussions.any? && project.discussion_enabled
+        %li
+          = link_to '#anchor-project-discussion' do
+            = local_assigns[:title_label] || project.try(:component_title, 'discussion')

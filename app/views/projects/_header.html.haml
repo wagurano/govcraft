@@ -1,58 +1,8 @@
-#bloc-1.bloc.project-header.bgc-blue-green.d-bloc{style: "background-image: url(#{asset_url(project.image_url(:lg))});"}
-  .container.hidden-lg.hidden-md
-    %nav.navbar.nav-invert.row
-      .navbar-header
-        %button#nav-toggle.ui-navbar-toggle.navbar-toggle{"data-target" => ".navbar-1", "data-toggle" => "collapse", :type => "button"}
-          %span.sr-only Toggle navigation
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-      .current-user-status.badge.pull-right.visible-xs
-        - if user_signed_in?
-          .dropdown
-            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-              = render 'users/thumbnail'
-              = current_user.nickname
-              %span.caret
-            %ul.dropdown-menu
-              %li
-                = link_to edit_user_registration_path do
-                  프로필 수정
-              %li
-                = link_to sign_out_path, method: :delete do
-                  로그아웃
-        - else
-          = link_to new_user_session_path do
-            %i.fa.fa-sign-in
-            로그인 &middot; 가입
-      .navbar-collapse.navbar-1.collapse.special-dropdown-nav
-        %ul.site-navigation.nav.navbar-nav
-          - if project.events.any? && project.discussion_enabled
-            %li
-              = link_to '#anchor-project-envent' do
-                = local_assigns[:title_label] || Event.model_name.human
-          - if project.polls.any? && project.poll_enabled
-            %li
-              = link_to '#anchor-project-poll' do
-                = local_assigns[:title_label] || project.try(:component_title, 'poll')
-          - if project.surveys.any? && project.survey_enabled
-            %li
-              = link_to '#anchor-project-survey' do
-                = local_assigns[:title_label] || project.try(:component_title, 'survey')
-          - if project.petitions.any? && project.petition_enabled
-            %li
-              = link_to '#anchor-project-petition' do
-                = local_assigns[:title_label] || project.try(:component_title, 'petition')
-          - if project.wiki_enabled
-            %li
-              = link_to '#anchor-project-wiki' do
-                위키
-          - if project.discussions.any? && project.discussion_enabled
-            %li
-              = link_to '#anchor-project-discussion' do
-                = local_assigns[:title_label] || project.try(:component_title, 'discussion')
-  .container.bloc-sm
-    .current-user-status.badge.pull-right.hidden-xs
+%section#project-header-block{style: "background-image: url(#{asset_url(project.image_url(:lg))});"}
+  .container
+    .container.visible-xs
+      = render 'projects/header_navbar', project: project
+    .current-user-status.badge.pull-right
       - if user_signed_in?
         .dropdown
           %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -70,53 +20,9 @@
         = link_to new_user_session_path do
           %i.fa.fa-sign-in
           로그인 &middot; 가입
-    .row.voffset-clear-xs
-      .col-sm-12
-        %h1.mg-sm.project-title.mg-clear-xs
-          = link_to project.title, project
-  .container.hidden-xs
-    %nav.navbar.nav-invert.row
-      .navbar-header
-        %button#nav-toggle.ui-navbar-toggle.navbar-toggle{"data-target" => ".navbar-1", "data-toggle" => "collapse", :type => "button"}
-          %span.sr-only Toggle navigation
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-      .navbar-collapse.navbar-1.collapse
-        %ul.site-navigation.nav.navbar-nav
-          - if project.events.any? && project.discussion_enabled
-            %li
-              = link_to '#anchor-project-envent' do
-                = local_assigns[:title_label] || Event.model_name.human
-          - if project.polls.any? && project.poll_enabled
-            %li
-              = link_to '#anchor-project-poll' do
-                = local_assigns[:title_label] || project.try(:component_title, 'poll')
-          - if project.surveys.any? && project.survey_enabled
-            %li
-              = link_to '#anchor-project-survey' do
-                = local_assigns[:title_label] || project.try(:component_title, 'survey')
-          - if project.petitions.any? && project.petition_enabled
-            %li
-              = link_to '#anchor-project-petition' do
-                = local_assigns[:title_label] || project.try(:component_title, 'petition')
-          - if project.wiki_enabled
-            %li
-              = link_to '#anchor-project-wiki' do
-                위키
-          - if project.discussions.any? && project.discussion_enabled
-            %li
-              = link_to '#anchor-project-discussion' do
-                = local_assigns[:title_label] || project.try(:component_title, 'discussion')
-/ bloc-2 END
-/ Footer - bloc-3
-#bloc-3.bloc.bgc-white.l-bloc
-  .container.bloc-sm
-    .row
-      .col-sm-12
-        - if project.subtitle.present?
-          %h3.mg-md
-            = project.subtitle
+    %h2
+      .project__title
+        = link_to project.title, project
         %small
           - if can? :edit, project
             = link_to '수정', edit_project_path(project), class: 'btn btn-xs btn-default'
@@ -136,29 +42,34 @@
           - else
             = link_to new_user_session_path, class: 'btn btn-xs btn-default' do
               참여
-        - unless project.id == 7
-          %p
-            %strong= project.user.nickname
-            = date_f project.created_at
-            활동지수
-            = rand(1000)
-/ Footer - bloc-3 END
-/ Footer - bloc-5
-- if params[:controller] == 'projects'
-  #bloc-5.bloc.bgc-white.l-bloc
-    .container.bloc-sm
-      - if project.id == 7
-        .row.project-video
-          .col-sm-12
-            .embed-responsive.embed-responsive-16by9
-              %iframe.embed-responsive-item{:allowfullscreen => "", :frameborder => "0", :mozallowfullscreen => "", :src => "https://www.youtube.com/embed/AgvL7fnPsCs", :webkitallowfullscreen => ""}
-          .col-sm-12.help-block
-            Kevin MacLeod의 Griphop은(는) Creative Commons Attribution 라이선스(https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여됩니다.
-            %br
-            출처: http://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100413
-            %br
-            아티스트: http://incompetech.com/
-      .row
-        .col-sm-12
-          = smart_format project.body
-/ Footer - bloc-5 END
+
+    .project__meta
+      %span
+        제안자 :
+        = project.user.nickname
+      - if project.participations.any?
+        %span
+          참여자 :
+          - preview_count = 3
+          - remain_count = project.participations.count - preview_count
+          - remain_count = 0 if remain_count < 0
+
+          - project.participations.recent.limit(preview_count).each do |participation|
+            = participation.user.nickname
+          - if remain_count > 0
+            + #{remain_count}
+      %br.hidden-sm.visible-xs-block
+      %span
+        시작일 :
+        = date_f project.created_at
+      %span
+        활동지수 :
+        = rand(1000)
+        점
+    - if params[:controller] == 'projects'
+      .project_share{ style: 'margin-top: 14px;' }
+        .share-box{ 'data-share-image': image_url(project.image) }
+
+  .container.hidden-xs
+    = render 'projects/header_navbar', project: project
+

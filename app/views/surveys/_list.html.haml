@@ -1,18 +1,19 @@
-#bloc-7.bloc.bgc-white.l-bloc
-  .container.bloc-md
-    .row
-      .col-sm-12
-        %h3.mg-md.tc-outer-space
-          = local_assigns[:title_label] || @project.try(:component_title, 'survey')
-          %small
-            = link_to "제안하기", new_survey_path(project_id: @project)
-    - if surveys.any?
-      .row.masonry-container
-        = render surveys
-    - else
-      - if @project.present?
-        .panel-body
-          %small.text-muted
-            가장 먼저 투표 시작해 보세요.
-            %br
-            = link_to "#{Survey.model_name.human} 시작하기", new_survey_path(project_id: @project)
+%section#surveys.page-block
+  .container
+    %h4
+      = local_assigns[:title_label] || @project.try(:component_title, 'survey')
+      %small
+        = link_to "시작하기", new_survey_path(project_id: @project)
+
+    .section
+      - if surveys.any?
+        .row.masonry-container
+          = render surveys
+
+      - else
+        - if @project.present?
+          .panel-body
+            %small.text-muted
+              가장 먼저 설문을 시작해 보세요.
+              %br
+              = link_to "#{Survey.model_name.human} 시작하기", new_survey_path(project_id: @project)

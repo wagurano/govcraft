@@ -1,13 +1,42 @@
+.project-container{
+  .container {
+    max-width: 950px;
+  }
+}
+
 #project-header-block {
   background-position: top center;
   background-size: cover;
   color: $gray-lightest;
-  padding: $font-size-base*4 0;
+  padding: $font-size-base*4 0 0;
   .badge {
     background-color: $gray-light;
     color: $gray-dark;
     font-weight: normal;
     padding-top: 5px;
+  }
+  .navbar {
+    margin-bottom: 0;
+    .navbar-header {
+      .icon-bar {
+        background-color: #fff;
+      }
+    }
+    #project-navbar {
+      padding: 0;
+      .site-navigation {
+        li {
+          a {
+            background-color: transparent;
+            color: rgba(255,255,255,0.7);
+            font-size: $font-size-large;
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
   }
   a:not(.btn) {
     color: #fff;
@@ -15,8 +44,15 @@
   small a:not(.btn) {
     color: $gray-lighter;
   }
-  .project__title > *:not(small) {
-    @include text-stroke();
+  .project__title {
+    font-size: 50px;
+    font-weight: bold;
+    color: #FFFFFF;
+    word-break: keep-all;
+    text-shadow: 1px 1px 0px #000;
+    small {
+      text-shadow: none;
+    }
   }
   .project__meta {
     font-size: $font-size-small;
@@ -24,9 +60,6 @@
     span {
       margin-right: $font-size-base;
     }
-  }
-  .project__body {
-    text-shadow: 1px 1px 3px #000;
   }
 }
 
