@@ -1,7 +1,7 @@
 - cover_image = event.image_url(:lg)
 %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image})" }
   .container.container-fluid
-    = render 'header'
+    = render 'application/current_user_state_badge'
     - if @project
       .cover-section__project
         = link_to @project.title, @project

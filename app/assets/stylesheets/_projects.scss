@@ -9,6 +9,9 @@
   background-size: cover;
   color: $gray-lightest;
   padding: $font-size-base*4 0 0;
+  @media (max-width: $screen-xs-max) {
+    padding: 0;
+  }
   .badge {
     background-color: $gray-light;
     color: $gray-dark;
