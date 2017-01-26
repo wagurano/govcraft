@@ -1,11 +1,10 @@
-- hide_project_title ||= false
 .options-panel{ id: options_panel_dom_id(survey) }
   .header
     %h4
-      - if survey.project and !hide_project_title
+      - if survey.project
         %small.project
           = link_to survey.project.title, survey.project
-        %br
+          %br
       = link_to survey.title, survey
   - feedback = survey.fetch_feedback_of(current_user)
   .body
