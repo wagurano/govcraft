@@ -63,8 +63,24 @@ class UserImageUploader < CarrierWave::Uploader::Base
     "#{secure_token(10)}.#{file.extension}" if original_filename.present?
   end
 
-  def url
-    (UserImageUploader::env_storage == :fog or self.file.try(:exists?)) ? super : "https://canoe-file.s3.amazonaws.com#{super}"
+  def url(*args)
+    super_result = super(args)
+    if Rails.env.production? or self.file.nil?
+      super_result
+    elsif self.file.try(:exists?)
+      if UserImageUploader::env_storage == :fog
+        super_result
+      else
+        super_result = "https://#{ENV["HOST"]}#{super_result}" if ENV["HOST"].present?
+        super_result
+      end
+    else
+      if UserImageUploader::env_storage == :fog
+        "https://curry-file.s3.amazonaws.com#{self.path}"
+      else
+        "https://curry-file.s3.amazonaws.com#{super_result}"
+      end
+    end
   end
 
   protected
