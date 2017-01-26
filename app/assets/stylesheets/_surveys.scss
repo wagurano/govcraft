@@ -1,4 +1,5 @@
 .options-panel {
+  background-color: $gray-lightest;
   border: 1px solid $gray-lighter;
   body.app-projects-show & {
     border: none;
@@ -52,7 +53,6 @@
     }
   }
   > .header {
-    display: block;
     padding-bottom: 12px;
     border-bottom: 1px solid #eaeaeb;
     margin-bottom: 12px;
@@ -63,7 +63,7 @@
         font-size: $font-size-base;
         font-weight: bold;
       }
-      color: $text-color;
+      color: $gray;
     }
     .project {
       body.app-projects-show &,

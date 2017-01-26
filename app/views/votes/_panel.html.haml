@@ -1,5 +1,3 @@
-- show_comment_counts ||= false
-
 .vote-panel{id: vote_panel_dom_id(poll)}
   - vote = user_signed_in? ? poll.fetch_vote_of(current_user) : fetch_anonymous_vote(poll)
   .vote-button
@@ -20,12 +18,12 @@
       = link_to polymorphic_url(['disagree', :votes], poll_id: poll.id, show_voters: local_assigns[:show_voters]), method: :post, remote: true, class: 'btn btn-default btn-choice btn-lg' do
         %span.choice__label 반대
         %span.choice__count= poll.disagrees_count
-  - if poll.comments.count > 0 && show_comment_counts
+  - if poll.comments.count > 0
     %span.poll-comments-count
       %i.fa.fa-commenting
       #{poll.comments.count}
 
-  - unless show_voters == false
+  - if show_voters
     .row
       .col-xs-12
         .vote__users
@@ -34,8 +32,5 @@
               = image_tag v.user.image.sm.url, width: 20, height: 20, class: 'img-circle'
             - else
               = image_tag 'icon-candle.png', width: 20, height: 20, class: 'img-circle'
-    - if poll.comments.count > 0 && show_comment_counts
-      %i.fa.fa-commenting
-      %small
-        (#{poll.comments.count})
+
 

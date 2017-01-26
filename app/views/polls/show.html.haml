@@ -41,7 +41,7 @@
       .post-block__body
         = raw @poll.body
 
-      .cover-section__votes
+      .post-block__votes
         = render 'votes/panel', poll: @poll, show_voters: true
 
       .post-block__share
