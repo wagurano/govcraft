@@ -42,6 +42,7 @@ section#petitions-in-project {
       color: #fff;
       .petition-body {
         text-shadow: 1px 1px 0px #000;
+        @include multi-text-ellipsis(3);
       }
       .petition-title {
         a {

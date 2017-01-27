@@ -15,7 +15,7 @@
   = render 'wikis/list', wikis: @project.wikis.recent if @project.wiki_enabled?
 
   %a{id: "anchor-project-discussion"}
-  = render 'discussions/list', discussions: @project.discussions.recent if @project.discussion_enabled?
+  = render 'discussions/list_in_project', discussions: @project.discussions.recent if @project.discussion_enabled?
 
   - if @project.participations.any?
     %section.page-block{ style: 'background-color: #f5f5f5; padding: 28px 0;' }
