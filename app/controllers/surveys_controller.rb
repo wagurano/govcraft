@@ -1,5 +1,6 @@
 class SurveysController < ApplicationController
   load_and_authorize_resource
+  before_action :reset_meta_tags, only: :show
 
   def index
     @surveys = Survey.recent
@@ -51,5 +52,13 @@ class SurveysController < ApplicationController
 
   def survey_params
     params.require(:survey).permit(:title, :body, :project_id, :duration, :cover_image, options_attributes: [:id, :body])
+  end
+
+  def reset_meta_tags
+    prepare_meta_tags({
+      title: "[투표] " + @survey.title,
+      description: @survey.body.html_safe,
+      url: request.original_url}
+    )
   end
 end
