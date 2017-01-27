@@ -1,0 +1,21 @@
+%section#petitions-in-project.page-block
+  .container
+    %h4
+      = local_assigns[:title_label] || @project.try(:component_title, 'petition')
+      %small
+        = link_to "제안하기", new_petition_path(project_id: @project)
+  - if petitions.any?
+    - petitions.each do |petition|
+      = link_to petition do
+        .petition-container{class: ('petition--cover-image' if petition.cover_image.present?), style: ("background-image: url(#{asset_url(petition.cover_image)});" if petition.cover_image.present?)}
+          .container
+            .row
+              .col-sm-10
+                %h3.petition-title
+                  = petition.title
+                .petition-body
+                  = strip_tags petition.body
+              .col-sm-2
+                .text-center
+                  .btn.btn-lg.btn-petition
+                    #{petition.percentage}% 달성

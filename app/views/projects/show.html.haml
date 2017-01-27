@@ -9,7 +9,7 @@
   = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent if @project.poll_enabled?
 
   %a{id: "anchor-project-petition"}
-  = render 'petitions/list', petitions: @project.petitions.recent if @project.petition_enabled?
+  = render 'petitions/list_in_project', petitions: @project.petitions.recent if @project.petition_enabled?
 
   %a{id: "anchor-project-wiki"}
   = render 'wikis/list', wikis: @project.wikis.recent if @project.wiki_enabled?

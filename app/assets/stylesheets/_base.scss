@@ -12,6 +12,8 @@ body {
   padding-bottom: 60px;
   width: 100%;
   height: 100%;
+  word-break: keep-all;
+  word-wrap: break-word;
 }
 
 @mixin text-stroke {
