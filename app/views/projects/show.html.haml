@@ -12,7 +12,7 @@
   = render 'petitions/list_in_project', petitions: @project.petitions.recent if @project.petition_enabled?
 
   %a{id: "anchor-project-wiki"}
-  = render 'wikis/list', wikis: @project.wikis.recent if @project.wiki_enabled?
+  = render 'wikis/list_in_project', wikis: @project.wikis.recent if @project.wiki_enabled?
 
   %a{id: "anchor-project-discussion"}
   = render 'discussions/list_in_project', discussions: @project.discussions.recent if @project.discussion_enabled?

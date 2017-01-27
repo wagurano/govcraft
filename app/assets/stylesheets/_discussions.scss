@@ -12,6 +12,7 @@ section#discussions-in-project {
   }
   .panel {
     box-shadow: 0 0 2px $gray-lighter;
+    border: 1px solid $gray-lighter;
 
     .panel-heading {
       border-bottom: 1px solid $gray-lighter;

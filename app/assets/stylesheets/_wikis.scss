@@ -7,3 +7,51 @@
   .post-block__note {
   }
 }
+
+#wikis-in-project {
+  h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: $gray-dark;
+    small {
+      a {
+        font-size: 12px;
+        color: $gray;
+      }
+    }
+  }
+
+  .panel {
+    box-shadow: 0 0 2px $gray-lighter;
+    border: 1px solid $gray-lighter;
+
+    .panel-heading {
+      border-bottom: 1px solid $gray-lighter;
+
+      h4 {
+        margin: 0;
+      }
+    }
+
+    .panel-body {
+
+      .wiki-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: $text-color;
+      }
+      .wiki-content {
+        font-weight: 400;
+        color: $gray;
+        line-height: 24px;
+        @include multi-text-ellipsis(4);
+
+        &:first-child {
+          .wiki-title {
+            margin-top: 6px;
+          }
+        }
+      }
+    }
+  }
+}
