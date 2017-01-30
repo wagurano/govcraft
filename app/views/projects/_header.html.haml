@@ -55,8 +55,9 @@
       .project_share{ style: 'margin-top: 14px;' }
         .share-box{ 'data-share-image': image_url(project.image) }
 
-  .container.hidden-xs
-    = render 'projects/header_navbar', project: project
+  %section.header_navbar.hidden-xs
+    .container
+      = render 'projects/header_navbar', project: project
 
 .container
   .project-intro

@@ -9,6 +9,11 @@
   background-size: cover;
   color: $gray-lightest;
   padding: $font-size-base*4 0 0;
+  box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.3);
+  > section.header_navbar {
+    box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+
   @media (max-width: $screen-xs-max) {
     padding: 0;
   }
@@ -37,7 +42,7 @@
         li {
           a {
             background-color: transparent;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.8);
             font-size: $font-size-large;
             text-shadow: 1px 1px 0px #000;
             &:hover {
