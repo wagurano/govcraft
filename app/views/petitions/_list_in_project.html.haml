@@ -6,8 +6,8 @@
         = link_to "제안하기", new_petition_path(project_id: @project)
   - if petitions.any?
     - petitions.each do |petition|
-      = link_to petition do
-        .petition-container{class: ('petition--cover-image' if petition.cover_image.present?), style: ("background-image: url(#{asset_url(petition.cover_image)});" if petition.cover_image.present?)}
+      .petition-container{class: (petition.read_attribute(:cover_image).present? ? 'petition--cover-image' : 'petition--no-cover-image'), style: ("background-image: url(#{asset_url(petition.cover_image)});" if petition.read_attribute(:cover_image).present?)}
+        = link_to petition do
           .container
             .row
               .col-sm-10
