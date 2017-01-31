@@ -1,13 +1,9 @@
 %section.page-block
-  .container
-    %h4= Memorial.model_name.human
-    .well.well-mute
-      위로와 애도가 필요한 순간을 기억하기 위해 기록합니다
-    %section
-      .row.masonry-container
-        - @memorials.each do |memorial|
-          .col-sm-6
-            = render memorial
+  .ui.container.grid
+    .column
+      %h3
+        = Memorial.model_name.human
+        %small= link_to '추모관 열기', new_memorial_path
 
-    %section.hidden{ style: 'margin-top: 28px; padding-top: 14px; border-top: 1px solid #dedede;' }
-      = link_to '추모관 열기', new_memorial_path, class: 'btn btn-default'
+      .ui.four.column.grid.doubling.stackable
+        = render @memorials

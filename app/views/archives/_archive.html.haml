@@ -1,10 +1,12 @@
-%div[archive]
-  .panel.panel-default.panel-floating.archive-card
-    .panel-body{ style: "background-image: url(#{archive.image_url(:md)})" }
-      = link_to archive do
-        %h4.archive__title= archive.title
-        .archive__meta
-          = date_f archive.created_at
-          부터
-          %strong= archive.documents.count
-          개의 자료가 모였습니다.
+.column
+  .ui.card.fluid
+    .image{ style: "height: 140px; background-image: url(#{archive.image_url(:md)}); background-size: cover; background-position: center center;" }
+      %a.ui.brown.ribbon.label= Archive.model_name.human
+    .content
+      = link_to archive.title, archive, class: 'header'
+      .meta
+        %span
+          #{date_f(archive.created_at)}부터
+          #{archive.documents.count}개의 자료를 모았습니다.
+      .description
+      .extra

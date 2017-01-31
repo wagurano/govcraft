@@ -1,12 +1,15 @@
-%div[memorial]
-  - url = memorial.url.present? ? memorial.url : memorial_path(memorial)
-  .panel.panel-default.panel-floating.memorial-card
-    = link_to url, target: '_blank' do
-      .panel-body
-        %h4.memorial__title= memorial.title
-        .memorial__meta
+.column
+  .ui.card.fluid
+    .image{ style: "height: 140px; background-image: url(#{memorial.image_url(:md)}); background-size: cover; background-position: center center;" }
+      %a.ui.black.ribbon.label= Memorial.model_name.human
+    .content
+      = link_to memorial.title, memorial, class: 'header'
+      .meta
+        %span
           - if memorial.url.present?
             = link_to memorial.url, memorial.url, target: '_blank'
           - else
             %strong= number_with_delimiter memorial.comments_count
             개의 추모글이 모였습니다
+      .description
+      .extra

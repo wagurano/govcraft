@@ -16,24 +16,26 @@
           %h3.header 우주당 당원들이 지금 슬랙에서 이야기를 나누는 중입니다. 함께 하시겠습니까?
           %p= link_to '초대장 받기', 'http://slack.wouldyouparty.org', target: '_blank', class: 'ui green button'
 
-%section
+%section.page-block
   .ui.container.grid
     .column
       %h3= Project.model_name.human
-      .ui.items.divided
+      .ui.four.column.grid.doubling.stackable
         = render @projects
 
-%section
+%section.page-block
   .ui.container.grid
     .column
       %h3= Archive.model_name.human
-      = render @archives
+      .ui.four.column.grid.doubling.stackable
+        = render @archives
 
-%section
+%section.page-block
   .ui.container.grid
     .column
       %h3= Memorial.model_name.human
-      = render @memorials
+      .ui.four.column.grid.doubling.stackable
+        = render @memorials
 
 %section.page-block
   .container
