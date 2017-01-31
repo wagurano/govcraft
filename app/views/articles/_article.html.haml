@@ -1,56 +1,27 @@
-%li.list-group-item[article]
-  .row
-    .col-sm-2.hidden-xs
-      .article__reactions.text-left
-        = render 'likes/button', likable: article
-    .col-sm-10.col-xs-12
-      - if article.image_present?
-        .article__image.gov-action-link{ 'data-url': article.url }
-          = image_tag article.image.xs.url
-      .article__desc
-        %h4.media-heading.gov-action-link{ 'data-url': article.url }
-          .article__title
-            = article.title
-        .article__body.gov-action-link{ 'data-url': article.url }
-          = excerpt(article.desc, length: 90)
-          %br
-          %span.artcle__site-name
-            %i.fa.fa-globe
-            출처: #{article.site_name}
-          - if article.tags.any?
-            %span.artcle__tags
-              %i.fa.fa-tag
-              - article.tags.each do |tag|
-                = link_to articles_path(tag: tag.name) do
-                  %span ##{tag.name}
-                &nbsp;
-        .article__meta
-          .pull-left
-            - if article.user.present?
-              = link_to article.user do
-                %span.article__user
-                  = image_tag article.user.image.sm, class: 'user-thumb-sm'
-                  = article.user.nickname
-            %span.article__date
-              = date_f article.created_at
-            %span.article__manage
-              - if can? :update, article
-                = link_to [:edit, article] do
-                  %i.fa.fa-edit
-              - if can? :destroy, article
-                = link_to article, method: :delete, data: { confirm: '삭제하시겠습니까?' } do
-                  %i.fa.fa-trash
-          .pull-right
-            - if article.latest_comment_users.any?
-              %span.article__comment_users
-                - article.latest_comment_users.each do |user|
-                  = link_to user do
-                    = image_tag user.image.sm, class: 'user-thumb-sm'
-            = link_to article do
-              %span.article__comments
-                %i.fa.fa-comment-o
-                #{article.comments.count}
-  .row.visible-xs-block
-    .col-xs-12
-      .article__reactions.text-left
+.item
+  - if article.image_present?
+    .image{ style: "height: 110px; background-image: url(#{article.image.sm.url}); background-size: cover; background-position: top center;"}
+  .content
+    = link_to article.title, article.url, class: 'header'
+    .meta
+      %span= article.site_name
+      - if article.user.present?
+        = link_to article.user do
+          %span
+            = image_tag article.user.image.sm, class: 'user-thumb-sm'
+            = article.user.nickname
+      %span
+        - if can? :update, article
+          = link_to [:edit, article] do
+            %i.fa.fa-edit
+        - if can? :destroy, article
+          = link_to article, method: :delete, data: { confirm: '삭제하시겠습니까?' } do
+            %i.fa.fa-trash
+    .description
+      = excerpt(article.desc, length: 90)
+    .extra
+      - article.tags.each do |tag|
+        = link_to articles_path(tag: tag.name) do
+          .ui.label ##{tag.name}
+      %ui.right.floated.button
         = render 'likes/button', likable: article

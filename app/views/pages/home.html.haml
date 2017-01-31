@@ -38,12 +38,13 @@
         = render @memorials
 
 %section.page-block
-  .container
-    %h3
-      = Article.model_name.human
-      %small.text-right= link_to '더보기 >', articles_path
-    .panel.panel-default.panel-floating
-      %ul.list-group.post-group
+  .ui.container.grid
+    .column
+      %h3
+        = Article.model_name.human
+        %small.text-right= link_to '더보기 >', articles_path
+
+      .ui.divided.items
         = render @articles
 
 %section.page-block{ style: 'background-color: #f5f5f5; padding: 28px 0;' }
