@@ -82,3 +82,80 @@
     padding-right: 24px;
   }
 }
+
+.survey-social-card-section {
+  background-size: cover;
+  width: 1200px;
+  height: 630px;
+  padding: 0;
+  margin: 0;
+  display: table;
+  position: relative;
+  color: white;
+  font-family: 'Noto Sans KR';
+
+  .card {
+    display: table-cell;
+    vertical-align: middle;
+    width: 1060px;
+    padding-bottom: 50px;
+
+    .info {
+      font-size: 30px;
+      font-weight: 300;
+      position: absolute;
+      left: 70px;
+      top: 55px;
+    }
+
+    .title {
+      letter-spacing: -1px;
+      word-break: keep-all;
+      word-wrap: break-word;
+      font-weight: 300;
+      margin: 0 70px;
+      &.short {
+        text-align: center;
+        font-size: 80px;
+      }
+      &.medium {
+        text-align: center;
+        font-size: 65px;
+      }
+      &.long {
+        font-size: 55px;
+      }
+
+      .title-word {
+        display: inline-block;
+        white-space:nowrap;
+      }
+    }
+
+    .options {
+      padding: 0 180px;
+      font-size: 40px;
+      margin-top: 20px;
+
+      .option {
+        .checkbox-square {
+          display: inline-block;
+          background-color: transparent;
+          width: 1em;
+          height: 1em;
+          border: 2px solid #fff;
+          border-radius: 4px;
+          vertical-align: text-top;
+        }
+
+        .option-word {
+          display: inline-block;
+          white-space:nowrap;
+        }
+      }
+      .option + .option {
+        margin-top: 20px;
+      }
+    }
+  }
+}

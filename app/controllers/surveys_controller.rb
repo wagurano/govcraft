@@ -13,6 +13,12 @@ class SurveysController < ApplicationController
     if params[:mode] == 'widget'
       render layout: 'strip'
     end
+
+    prepare_meta_tags title: @survey.title,
+      description: ApplicationController.helpers.strip_tags(@survey.body).strip.truncate(100),
+      url: survey_url,
+      image: social_card_survey_url(format: :png),
+      twitter_card_type: 'summary_large_image'
   end
 
   def new
@@ -46,6 +52,33 @@ class SurveysController < ApplicationController
   def destroy
     @survey.destroy
     redirect_to @survey.project ? project_path(@survey.project) : surveys_path
+  end
+
+  def social_card
+    respond_to do |format|
+      format.png do
+        if params[:no_cached]
+          png = IMGKit.new(render_to_string(layout: nil), width: 1200, height: 630, quality: 10).to_png
+          send_data(png, :type => "image/png", :disposition => 'inline')
+        else
+          if !@survey.social_card.file.try(:exists?) or (params[:update] and current_user.try(:has_role?, :admin))
+            file = Tempfile.new(["social_card_#{@survey.id.to_s}", '.png'], 'tmp', :encoding => 'ascii-8bit')
+            file.write IMGKit.new(render_to_string(layout: nil), width: 1200, height: 630, quality: 10).to_png
+            file.flush
+            @survey.social_card = file
+            @survey.save!
+            file.unlink
+          end
+          if @survey.social_card.file.respond_to?(:url)
+            data = open @survey.social_card.url
+            send_data data.read, filename: "social_card.png", :type => "image/png", disposition: 'inline', stream: 'true', buffer_size: '4096'
+          else
+            send_file(@survey.social_card.path, :type => "image/png", :disposition => 'inline')
+          end
+        end
+      end
+      format.html { render(layout: nil) }
+    end
   end
 
   private

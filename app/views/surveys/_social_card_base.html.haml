@@ -11,3 +11,10 @@
           - words = truncate(@survey.title, length: 50).split
           - words.each do |word|
             .title-word= word
+        .options
+          - @survey.options.each do |option|
+            .option
+              %span.checkbox-square
+              - option_words = truncate(option.body, length: 50).split
+              - option_words.each do |word|
+                .option-word= word
