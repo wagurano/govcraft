@@ -33,6 +33,7 @@ class SurveysController < ApplicationController
     if @survey.save
       redirect_to @survey || @project
     else
+      errors_to_flash(@survey)
       render 'new'
     end
   end
@@ -45,6 +46,7 @@ class SurveysController < ApplicationController
     if @survey.update(survey_params)
       redirect_to @survey
     else
+      errors_to_flash(@survey)
       render 'edit'
     end
   end
