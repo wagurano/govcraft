@@ -3,6 +3,7 @@
 //= require bootstrap
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
+//= require semantic-ui
 //= require imagesloaded.pkgd
 //= require masonry.pkgd
 //= require redactor2_rails/config
