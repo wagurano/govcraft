@@ -1,29 +1,17 @@
-%div[project]
-  .panel.panel-default.panel-floating.project-card
-    .panel-body{ style: "background-image: url(#{project.image_url(:md)})" }
-      = link_to project do
-        %h4.project__title= project.title
-        .project__meta
-          %span
-            제안자 :
-            = image_tag project.user.image.sm, class: 'user-thumb-sm'
-            = project.user.nickname
-          - if project.participations.any?
-            %span
-              참여자 :
-              - preview_count = 3
-              - remain_count = project.participations.count - preview_count
-              - remain_count = 0 if remain_count < 0
-
-              - project.participations.recent.limit(preview_count).each do |participation|
-                = participation.user.nickname
-              - if remain_count > 0
-                + #{remain_count}
-          %span
-            시작일 :
-            = date_f project.created_at
-          %span
-            활동지수 :
-            = rand(1000)
-            점
+.item[project]
+  .image
+    = image_tag project.image_url(:md)
+  .content
+    = link_to project.title, project, class: 'header'
+    .meta
+      %span
+        = link_to project.user do
+          #{project.user.nickname}님의 제안
+      %span
+        = date_f project.created_at
+        부터
+    .description
+      = excerpt(project.body.html_safe)
+    .extra
+      = link_to '참여하기', project, class: 'ui floated button'
 
