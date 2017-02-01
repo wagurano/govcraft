@@ -1,14 +1,13 @@
 - if events.any?
   %section.page-block
-    .container
-      %h4= local_assigns[:title_label] || Event.model_name.human
+    .ui.container.grid
+      .column
+        %h3= local_assigns[:title_label] || Event.model_name.human
 
-      .row.masonry-container
-        - events.each do |event|
-          .col-sm-4
-            .panel.panel-default.panel-floating[event]{ style: 'margin-bottom: 28px;' }
-              .panel-body
-                = link_to event do
-                  .img{ style: "background-image: url(#{event.image_url(:lg)})" }
-                  %h4= event.title
-                  %div= strip_tags event.body
+        .ui.three.stackable.cards
+          - events.each do |event|
+            .ui.card
+              .image{ style: "height: 200px; background-image: url(#{event.image_url(:md)}); background-size: cover; background-position: top center;"}
+                %a.ui.purple.ribbon.label= Event.model_name.human
+              .content
+                = link_to event.title, event, class: 'header'
