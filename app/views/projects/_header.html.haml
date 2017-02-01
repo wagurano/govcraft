@@ -1,23 +1,23 @@
 %section#project-header-block{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(project.image_url(:lg))});"}
-  .ui.container.grid
-    .column
+  .ui.container
+    %h1.ui.center.aligned.huge.header.inverted
+      .ui.red.label= Project.model_name.human
+      %br
+      = project.title
 
-      %h1.ui.center.aligned.huge.header.inverted
-        = project.title
+    %h3.ui.inverted.center.aligned.header
+      = project.user.nickname
+      님의 제안
 
-      %h3.ui.inverted.center.aligned.header
-        = project.user.nickname
-        님의 제안
+    .project_buttons
+      - if can? :edit, project
+        = link_to '수정', edit_project_path(project), class: 'ui button'
+      - if can? :destroy, project
+        = link_to '삭제', project, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'ui button'
 
-      .project_buttons
-        - if can? :edit, project
-          = link_to '수정', edit_project_path(project), class: 'ui button'
-        - if can? :destroy, project
-          = link_to '삭제', project, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'ui button'
-
-      - if params[:controller] == 'projects'
-        .project_share{ style: 'margin-top: 14px;' }
-          .share-box{ 'data-share-image': image_url(project.image) }
+    - if params[:controller] == 'projects'
+      .project_share{ style: 'margin-top: 14px;' }
+        .share-box{ 'data-share-image': image_url(project.image) }
 
 %section.m-b
   = render 'projects/header_navbar', project: project

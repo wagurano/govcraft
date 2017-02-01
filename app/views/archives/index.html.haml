@@ -1,10 +1,9 @@
 %section.page-block
-  .ui.container.grid
-    .column
-      %h3
-        = Archive.model_name.human
-        %small= link_to "#{Archive.model_name.human} 시작하기", new_archive_path
+  .ui.container
+    %h3.header
+      = Archive.model_name.human
+      %small= link_to "#{Archive.model_name.human} 시작하기", new_archive_path
 
-      .ui.four.column.grid.doubling.stackable
-        = render @archives
+    .ui.four.column.grid.doubling.stackable
+      = render @archives
 

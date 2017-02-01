@@ -1,15 +1,8 @@
-- if !@force_gnb_and_footer && hide_gnb_and_footer?
-  :css
-    body { padding-top: 0; }
-
-  %section#site-footer
-    %nav.navbar.navbar-default{ style: 'margin: 0;' }
-      .container
-        %ul.nav.navbar-nav.navbar-right
-          %li.text-right
-            = link_to root_path do
-              powered by
-              직접 민주주의 플랫폼
-              = image_tag 'favicons/favicon-32x32.png', width: 18
-              %strong
-                우주당
+%section#site-footer
+  .ui.menu
+    .ui.container
+      = link_to root_path, class: 'right item' do
+        직접 민주주의 플랫폼
+        = image_tag 'favicons/favicon-32x32.png', width: 18
+        %strong
+          우주당
