@@ -19,13 +19,28 @@
 
   - if @project.participations.any?
     %section.page-block{ style: 'background-color: #f5f5f5; padding: 28px 0;' }
-      .container
-        %h4
-          참여자
-          %small
-            %i.fa.fa-user-o
-            = @project.participations.count
-        - @project.participations.recent.each do |participation|
-          - user = participation.user
-          = link_to user, data: { toggle: "tooltip", title: user.nickname} do
-            .img-user{style: "background-image: url(#{user.image.sm.url});"}
+      .ui.container.grid
+        .column
+          %h4
+            참여자
+            %small
+              %i.fa.fa-user-o
+              = @project.participations.count
+          - @project.participations.recent.each do |participation|
+            - user = participation.user
+            = link_to user, data: { toggle: "tooltip", title: user.nickname} do
+              .img-user{style: "background-image: url(#{user.image.sm.url});"}
+          - if user_signed_in?
+            - if @project.participated? current_user
+              %span.btn.btn-xs.btn-default.gov-action-popover{ data: { placement: 'bottom', url: "##{dom_id(project)}--cancel-participation" } }
+                참여 중
+                %i.fa.fa-caret-down
+              .hidden
+                .cancel-participation{id: "#{dom_id(project)}--cancel-participation", style: 'white-space: nowrap;'}
+                  = link_to cancel_participations_path(project_id: @project.id), method: :delete, data: { confirm: '정말 나가시겠습니까?' } do
+                    프로젝트 나가기
+            - else
+              = link_to '참여', participations_path(project_id: @project.id), method: :post, class: 'ui button'
+          - else
+            = link_to new_user_session_path, class: 'ui button' do
+              참여

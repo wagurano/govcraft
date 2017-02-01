@@ -1,7 +1,7 @@
 #site-hero-block {
   margin-bottom: 1em;
   .message {
-    background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), image_url('seo.png');
+    background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), image_url('seo.png');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -23,6 +23,10 @@
 .page-block {
   padding-top: 1.5em;
   padding-bottom: 1.5em;
+}
+
+.m-b {
+  margin-bottom: 1.5em;
 }
 
 .following_issue {

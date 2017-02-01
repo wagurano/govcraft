@@ -1,40 +1,41 @@
 %section#petitions.page-block
-  .container
-    %h4
-      = local_assigns[:title_label] || @project.try(:component_title, 'petition')
-      %small
-        = link_to "제안하기", new_petition_path(project_id: @project)
-    .panel.panel-default.panel-floating
-      - if petitions.any?
-        %ul.list-group.post-group
-          - petitions.each do |petition|
-            %li.list-group-item[petition]
-              = link_to petition do
-                .post__status
-                  %span.text-danger
-                    #{petition.percentage}% 달성
-                - if petition.project
-                  .post__project= petition.project.title
-                %h4.list-group-item-heading
-                  = petition.title
-                .post__meta
-                  .row
-                    .col-xs-6
-                      %span.nickname
-                        = petition.user.nickname
-                      %span.created_at
-                        = date_f petition.created_at
-                    .col-xs-6.text-right
-                      %span
-                        %i.fa.fa-user-o
-                        = petition.signs_count
-                      %span
-                        %i.fa.fa-eye
-                        = petition.views_count
-      - else
-        - if @project.present?
-          .panel-body
-            %small.text-muted
-              가장 먼저 서명을 제안해 보세요.
-              %br
-              = link_to "#{Petition.model_name.human} 제안하기", new_petition_path(project_id: @project)
+  .ui.container.grid
+    .column
+      %h3
+        = local_assigns[:title_label] || @project.try(:component_title, 'petition')
+        %small
+          = link_to "제안하기", new_petition_path(project_id: @project)
+      .panel.panel-default.panel-floating
+        - if petitions.any?
+          %ul.list-group.post-group
+            - petitions.each do |petition|
+              %li.list-group-item[petition]
+                = link_to petition do
+                  .post__status
+                    %span.text-danger
+                      #{petition.percentage}% 달성
+                  - if petition.project
+                    .post__project= petition.project.title
+                  %h4.list-group-item-heading
+                    = petition.title
+                  .post__meta
+                    .row
+                      .col-xs-6
+                        %span.nickname
+                          = petition.user.nickname
+                        %span.created_at
+                          = date_f petition.created_at
+                      .col-xs-6.text-right
+                        %span
+                          %i.fa.fa-user-o
+                          = petition.signs_count
+                        %span
+                          %i.fa.fa-eye
+                          = petition.views_count
+        - else
+          - if @project.present?
+            .panel-body
+              %small.text-muted
+                가장 먼저 서명을 제안해 보세요.
+                %br
+                = link_to "#{Petition.model_name.human} 제안하기", new_petition_path(project_id: @project)

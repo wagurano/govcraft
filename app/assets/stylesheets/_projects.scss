@@ -1,91 +1,17 @@
-.project-container{
-  .container {
-    max-width: 950px;
-  }
-}
-
 #project-header-block {
   background-position: top center;
   background-size: cover;
-  color: $gray-lightest;
-  padding: $font-size-base*4 0 0;
-  @media (max-width: $screen-xs-max) {
-    padding: 0;
+
+  h1.huge.header {
+    font-size: 48px;
+    margin-top: 120px;
   }
-  .badge {
-    background-color: $gray-light;
-    color: $gray-dark;
-    font-weight: normal;
-    padding-top: 5px;
-  }
-  .navbar {
-    margin-bottom: 0;
-    .navbar-header {
-      .icon-bar {
-        background-color: #fff;
-      }
-      .navbar-toggle {
-        margin-bottom: 0;
-      }
-    }
-    #project-navbar {
-      padding: 0;
-      @media (max-width: $screen-xs-max) {
-        margin-left: 10px;
-      }
-      .site-navigation {
-        li {
-          a {
-            background-color: transparent;
-            color: rgba(255,255,255,0.7);
-            font-size: $font-size-large;
-            text-shadow: 1px 1px 0px #000;
-            &:hover {
-              color: #fff;
-            }
-            @media (max-width: $screen-xs-max) {
-              color: #fff;
-            }
-          }
-        }
-      }
-    }
-  }
-  a:not(.btn) {
-    color: #fff;
-  }
-  small a:not(.btn) {
-    color: $gray-lighter;
-  }
-  .project__title {
-    font-size: 50px;
-    font-weight: bold;
-    color: #FFFFFF;
-    word-break: keep-all;
-    text-shadow: 1px 1px 0px #000;
-    @media (max-width: $screen-xs-max) {
-      font-size: 34px;
-      text-align: center;
-    }
-    small {
-      text-shadow: none;
-    }
-  }
-  .project__meta {
-    font-size: $font-size-small;
-    text-shadow: 1px 1px 3px #000;
-    @media (max-width: $screen-xs-max) {
-      text-align: center;
-    }
-    span {
-      margin-right: $font-size-base;
-    }
+  .project_buttons {
+    text-align: center;
   }
   .project_share {
-    @media (max-width: $screen-xs-max) {
-      text-align: center;
-      margin-bottom: 14px;
-    }
+    margin-bottom: 48px;
+    text-align: center;
   }
 }
 
