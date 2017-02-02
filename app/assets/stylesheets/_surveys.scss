@@ -89,6 +89,10 @@
   color: white;
   font-family: 'Noto Sans KR';
 
+  &.has-cover {
+    box-shadow: inset 2000px 0 0 0 rgba(0,0,0,0.5);
+  }
+
   .card {
     display: table-cell;
     vertical-align: middle;
@@ -109,6 +113,7 @@
       word-wrap: break-word;
       font-weight: 300;
       margin: 0 70px;
+      line-height: 1.2em;
       &.short {
         text-align: center;
         font-size: 80px;
