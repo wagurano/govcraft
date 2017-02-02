@@ -31,11 +31,11 @@
               .img-user{style: "background-image: url(#{user.image.sm.url});"}
           - if user_signed_in?
             - if @project.participated? current_user
-              %span.btn.btn-xs.btn-default.gov-action-popover{ data: { placement: 'bottom', url: "##{dom_id(project)}--cancel-participation" } }
+              %span.btn.btn-xs.btn-default.gov-action-popover{ data: { placement: 'bottom', url: "##{dom_id(@project)}--cancel-participation" } }
                 참여 중
                 %i.fa.fa-caret-down
               .hidden
-                .cancel-participation{id: "#{dom_id(project)}--cancel-participation", style: 'white-space: nowrap;'}
+                .cancel-participation{id: "#{dom_id(@project)}--cancel-participation", style: 'white-space: nowrap;'}
                   = link_to cancel_participations_path(project_id: @project.id), method: :delete, data: { confirm: '정말 나가시겠습니까?' } do
                     프로젝트 나가기
             - else
