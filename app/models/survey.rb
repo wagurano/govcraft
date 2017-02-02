@@ -12,6 +12,7 @@ class Survey < ApplicationRecord
   }
 
   validate :has_options
+  validates :duration, numericality: { greater_than: 0 }
 
   mount_uploader :cover_image, ImageUploader
   mount_uploader :social_card, ImageUploader

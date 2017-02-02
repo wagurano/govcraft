@@ -4,18 +4,17 @@
   %a{id: "anchor-project-event"}
   = render 'events/list', project: @project, events: @project.events.recent
 
-  %a{id: "anchor-project-poll"}
-  %a{id: "anchor-project-survey"}
+  %a{id: "anchor-project-poll-and-survey"}
   = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent if @project.poll_enabled?
 
   %a{id: "anchor-project-petition"}
-  = render 'petitions/list', petitions: @project.petitions.recent if @project.petition_enabled?
+  = render 'petitions/list_in_project', petitions: @project.petitions.recent if @project.petition_enabled?
 
   %a{id: "anchor-project-wiki"}
-  = render 'wikis/list', wikis: @project.wikis.recent if @project.wiki_enabled?
+  = render 'wikis/list_in_project', wikis: @project.wikis.recent if @project.wiki_enabled?
 
   %a{id: "anchor-project-discussion"}
-  = render 'discussions/list', discussions: @project.discussions.recent if @project.discussion_enabled?
+  = render 'discussions/list_in_project', discussions: @project.discussions.recent if @project.discussion_enabled?
 
   - if @project.participations.any?
     %section.page-block{ style: 'background-color: #f5f5f5; padding: 28px 0;' }

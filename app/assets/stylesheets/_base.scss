@@ -22,7 +22,21 @@
   -webkit-line-clamp: $lines;
   -webkit-box-orient: vertical;
   word-wrap: break-word;
+}
 
+// 백그라운드 위에 반투명 검은 바탕색을 깝니다.
+@mixin texture-darken {
+  position: relative;
+  &:before {
+    content: " ";
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-size: 2px 2px;
+    right: 0;
+  }
 }
 
 .btn-primary--inactive {
@@ -161,3 +175,4 @@ label.error {
     height: 100%;
   }
 }
+

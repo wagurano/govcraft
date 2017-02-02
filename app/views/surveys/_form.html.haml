@@ -20,7 +20,7 @@
   .form-group
     .form-inline
       = f.label :duration
-      = f.select :duration, options_for_select((1...10).map { |i| [ "#{i}일", i] }, f.object.duration), {}, class: 'form-control'
+      = f.number_field :duration, class: 'form-control'
 
   .form-group
     = f.label :cover_image

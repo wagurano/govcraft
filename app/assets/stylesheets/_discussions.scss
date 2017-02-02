@@ -1,14 +1,4 @@
-#wiki-block {
-  .post-block__body {
-    border: 1px solid $gray-lighter;
-    margin: $font-size-base * 2 0;
-    padding: $font-size-base;
-  }
-  .post-block__note {
-  }
-}
-
-#wikis-in-project {
+section#discussions-in-project {
   h4 {
     font-size: 18px;
     font-weight: 600;
@@ -20,7 +10,6 @@
       }
     }
   }
-
   .panel {
     box-shadow: 0 0 2px $gray-lighter;
     border: 1px solid $gray-lighter;
@@ -35,19 +24,19 @@
 
     .panel-body {
 
-      .wiki-title {
+      .discussion-title {
         font-size: 18px;
         font-weight: 600;
         color: $text-color;
       }
-      .wiki-content {
+      .discussion-content {
         font-weight: 400;
         color: $gray;
         line-height: 24px;
         @include multi-text-ellipsis(4);
 
         &:first-child {
-          .wiki-title {
+          .discussion-title {
             margin-top: 6px;
           }
         }

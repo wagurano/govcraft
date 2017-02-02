@@ -1,7 +1,7 @@
 - hide_project_title ||= false
 .col-sm-6
   %div[poll]
-    .panel.panel-default.panel-floating.poll-card{class: ('poll-card--cover-image' if poll.cover_image.present?), style: ("background: url(#{asset_url(poll.cover_image)});" if poll.cover_image.present?)}
+    .panel.panel-default.panel-floating.poll-card{class: ('poll-card--cover-image' if poll.cover_image.present?), style: ("background-image: url(#{asset_url(poll.cover_image)});" if poll.cover_image.present?)}
       .panel-body
         - if poll.project && !hide_project_title
           .post__project
