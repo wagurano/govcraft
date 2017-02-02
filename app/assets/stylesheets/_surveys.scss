@@ -10,14 +10,12 @@
   > .body > table {
     width: 100%;
 
-    td.checkbox-btn {
-      width: 24px;
+    td.body {
+      padding: 2px 0;
+
       span.closed {
         color: $gray-lighter;
       }
-    }
-    td.body {
-      padding: 2px 0;
     }
     td.feedbacks-count {
       width: 48px;
@@ -27,8 +25,9 @@
     .chart {
       border-radius: 4px;
       border: 1px solid $gray-lighter;
+      background-color: #fff;
       &.active {
-        border-color: $brand-primary;
+        border: 2px solid $brand-primary;
       }
 
       .chart__bar {
@@ -46,10 +45,6 @@
       &.active .chart__label {
         color: $gray-dark;
       }
-    }
-
-    .no-chart__label {
-      padding: 4px 6px;
     }
   }
   > .header {

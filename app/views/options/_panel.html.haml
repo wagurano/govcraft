@@ -12,33 +12,26 @@
       - survey.options.each do |option|
         %tr
           - if !user_signed_in?
-            %td.checkbox-btn
+            %td.body
               = link_to new_user_session_path do
-                %i.fa.fa-square-o
+                .chart{ class: ('active' if option.selected?(current_user)) }
+                  .chart__bar{ style: "width: #{survey.percentage(option)}%"}
+                    %span.chart__label= option.body
           - else
-            %td.checkbox-btn
-              - if survey.open?
+            - if survey.open?
+              %td.body
                 = link_to feedbacks_path(option_id: option.id), remote: true, method: :post do
-                  - if option.selected?(current_user)
-                    %i.fa.fa-check-square-o
-                  - else
-                    %i.fa.fa-square-o
-              - else
-                %span.closed
-                  - if option.selected?(current_user)
-                    %i.fa.fa-check-square-o
-                  - else
-                    %i.fa.fa-square-o
-          %td.body
-            - if survey.feedbacked?(current_user)
-              .chart{ class: ('active' if option.selected?(current_user)) }
-                .chart__bar{ style: "width: #{survey.percentage(option)}%"}
-                  %span.chart__label= option.body
+                  .chart{ class: ('active' if option.selected?(current_user)) }
+                    .chart__bar{ style: "width: #{survey.percentage(option)}%"}
+                      %span.chart__label= option.body
             - else
-              .no-chart__label
-                = option.body
+              %td.body
+                .chart{ class: ('active' if option.selected?(current_user)) }
+                  .chart__bar{ style: "width: #{survey.percentage(option)}%"}
+                    %span.closed.chart__label= option.body
+
           %td.feedbacks-count
-            - if survey.feedbacked?(current_user) and option.feedbacks_count > 0
+            - if option.feedbacks_count > 0
               #{option.feedbacks_count}명
   .footer
     - if survey.open?
