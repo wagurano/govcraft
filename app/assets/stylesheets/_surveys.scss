@@ -21,30 +21,37 @@
       width: 48px;
       text-align: right;
     }
+  }
+  .chart {
+    border-radius: 4px;
+    border: 1px solid $gray-lighter;
+    background-color: #fff;
+    height: 2em;
+    position: relative;
+    &.active {
+      border: 2px solid $brand-primary;
+    }
 
-    .chart {
-      border-radius: 4px;
-      border: 1px solid $gray-lighter;
-      background-color: #fff;
-      &.active {
-        border: 2px solid $brand-primary;
-      }
+    .chart__bar {
+      background-color: $brand-primary-light;
+      padding: 3px 0;
+      height: 100%;
+    }
 
-      .chart__bar {
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-        background-color: $brand-primary-light;
-        padding: 3px 0;
-      }
-
-      .chart__label {
-        color: $gray;
-        white-space: nowrap;
-        padding: 0 6px;
-      }
-      &.active .chart__label {
-        color: $gray-dark;
-      }
+    .chart__label {
+      color: $gray;
+      white-space: nowrap;
+      padding: 0 6px;
+      line-height: 2em;
+      top: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+      position: absolute;
+      font-size: 0.8em;
+    }
+    &.active .chart__label {
+      color: $gray-dark;
     }
   }
   > .header {
@@ -67,6 +74,7 @@
       }
     }
   }
+
   > .footer {
     padding-top: 12px;
     border-top: 1px solid #eaeaeb;
@@ -138,16 +146,6 @@
       margin-top: 20px;
 
       .option {
-        .checkbox-square {
-          display: inline-block;
-          background-color: transparent;
-          width: 1em;
-          height: 1em;
-          border: 2px solid #fff;
-          border-radius: 4px;
-          vertical-align: middle;
-        }
-
         .option-word {
           display: inline-block;
           white-space:nowrap;

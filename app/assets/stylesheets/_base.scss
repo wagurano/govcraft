@@ -39,6 +39,11 @@
   }
 }
 
+// linkable div : govcraft-ujs.js의 gov-action-rails-link 참조
+.gov-action-rails-link[data-url] {
+  cursor: pointer;
+}
+
 .btn-primary--inactive {
   @extend .btn-default;
   color: $brand-primary;

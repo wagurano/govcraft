@@ -1,4 +1,5 @@
 //= require jquery
+//= require govcraft_ujs
 //= require jquery_ujs
 //= require bootstrap
 //= require unobtrusive_flash
