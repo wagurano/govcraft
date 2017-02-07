@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123020912) do
+ActiveRecord::Schema.define(version: 20170207091547) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -173,7 +173,7 @@ ActiveRecord::Schema.define(version: 20170123020912) do
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
 
-  create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "user_id",    null: false
     t.integer  "survey_id",  null: false
     t.integer  "option_id",  null: false
@@ -284,6 +284,7 @@ ActiveRecord::Schema.define(version: 20170123020912) do
     t.text     "thanks_mention",        limit: 65535
     t.boolean  "comment_enabled",                     default: true
     t.string   "sign_title"
+    t.string   "social_image"
     t.index ["project_id"], name: "index_petitions_on_project_id", using: :btree
     t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
   end

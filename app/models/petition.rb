@@ -8,6 +8,7 @@ class Petition < ApplicationRecord
   has_many :signed_users, through: :signs, source: :petition
 
   mount_uploader :cover_image, ImageUploader
+  mount_uploader :social_image, ImageUploader
 
   scope :recent, -> { order('id DESC') }
 

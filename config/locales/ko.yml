@@ -60,6 +60,7 @@ ko:
         body: 내용
         signs_goal_count: 서명 목표인수
         cover_image: 커버이미지(선택)
+        social_image: 소셜공유이미지(선택)
         thanks_mention: 서명한 뒤에 표시되는 문구(선택)
         comment_enabled: 댓글 사용 여부
         sign_title: 서명폼 제목
