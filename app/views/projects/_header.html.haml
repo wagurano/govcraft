@@ -1,6 +1,6 @@
 %section#project-header-block{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(project.image_url(:lg))});"}
   .ui.container
-    %h1.ui.center.aligned.huge.header.inverted
+    %h1.ui.center.aligned.huge.header.inverted.text-keep-all
       .ui.red.label= Project.model_name.human
       %br
       = project.title

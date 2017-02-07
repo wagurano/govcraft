@@ -16,7 +16,6 @@
       = link_to Article.model_name.human, articles_path, class: 'item'
 
       .menu.right
-        = link_to '새소식', weekly_path, class: 'item'
         - if user_signed_in?
           .ui.simple.dropdown.item
             = render 'users/thumbnail'

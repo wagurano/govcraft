@@ -71,3 +71,21 @@ $widescreenMonitorBreakpoint : 1900px;
     display: none !important;
   }
 }
+
+@media only screen and (min-width: $computerBreakpoint) {
+  .ui.container {
+    width: 933px;
+  }
+
+  .ui.grid.container {
+    width: calc( 933px  +  2rem ) !important;
+  }
+
+  .ui.relaxed.grid.container {
+    width: calc( 933px  +  3rem ) !important;
+  }
+
+  .ui.very.relaxed.grid.container {
+    width: calc( 933px  +  5rem ) !important;
+  }
+}
