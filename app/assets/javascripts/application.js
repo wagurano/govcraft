@@ -211,6 +211,10 @@ $(function(){
     });
   });
 
+  $('.gov-action-sidbar').on('click', function(e) {
+    $('#site-sidebar').sidebar('toggle');
+  });
+
   $('.gov-action-popover').each(function(i, elm) {
     var $elm = $(elm);
 

@@ -27,11 +27,11 @@
       .container
         .unobtrusive-flash-container
 
-    = render 'application/header'
-
-    = render 'breadcrumb'
-
-    = yield
+    = render 'application/sidebar'
+    .pusher
+      = render 'application/header'
+      = render 'breadcrumb'
+      = yield
 
     = render 'footer'
 

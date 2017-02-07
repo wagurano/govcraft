@@ -1,0 +1,24 @@
+.ui#site-sidebar.mobile.tablet.only.sidebar.right.vertical.inverted.menu
+  = link_to Project.model_name.human, projects_path, class: 'item'
+  = link_to Discussion.model_name.human, discussions_path, class: 'item'
+  = link_to Poll.model_name.human, polls_path, class: 'item'
+  = link_to Petition.model_name.human, petitions_path, class: 'item'
+  = link_to Survey.model_name.human, surveys_path, class: 'item'
+  = link_to Archive.model_name.human, archives_path, class: 'item'
+  = link_to Memorial.model_name.human, memorials_path, class: 'item'
+  = link_to Event.model_name.human, events_path, class: 'item'
+  = link_to Article.model_name.human, articles_path, class: 'item'
+  = link_to '새소식', weekly_path, class: 'item'
+
+  - if user_signed_in?
+    .item
+      = render 'users/thumbnail'
+      = current_user.nickname
+      .menu
+        = link_to edit_user_registration_path, class: 'item active' do
+          프로필 수정
+        = link_to '로그아웃', sign_out_path, method: :delete, class: 'item active'
+
+  - else
+    = link_to new_user_session_path, class: 'item active' do
+      로그인 &middot; 가입
