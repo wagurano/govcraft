@@ -1,9 +1,20 @@
 .cover-section {
-  background-size: cover;
   background-position: top center;
+  background-size: cover;
   color: #fff;
+  padding-top: 120px;
   text-align: center;
-  padding-top: $font-size-base * 8;
+
+  h1.huge.header {
+    font-size: 48px;
+  }
+  .project_buttons {
+    text-align: center;
+  }
+  .project_share {
+    margin-bottom: 48px;
+    text-align: center;
+  }
 
   .current-user-status {
     margin-top: -86px;

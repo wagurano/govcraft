@@ -2,23 +2,22 @@
   = render 'widget'
 - else
   - cover_image = @petition.cover_image_url(:lg)
-  %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image}); padding-bottom: 56px; background-size: cover; background-position: center center;" }
-    .container
-      = render 'application/current_user_state_badge'
+  %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{cover_image}); padding-bottom: 56px; background-size: cover; background-position: center center;" }
+    .ui.container
       - if @petition.project
-        .cover-section__project
-          = link_to @petition.project.title, @petition.project
+        %h3.ui.center.aligned.header.inverted= link_to @petition.project.title, @petition.project, style: 'color: white'
 
-      %h1.cover-section__title= @petition.title
+      %h1.ui.center.aligned.huge.header.inverted
+        = @petition.title
 
-      %h4.cover-section__users-count
+      %h3.cover-section__users-count
         %span
           %i.fa.fa-user-o
           = @petition.signs_count
           명 참여
 
   %section#petition-block.page-block.post-block
-    .container
+    .ui.container
       .post-block__info
         .row
           .col-xs-9
