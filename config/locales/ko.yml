@@ -110,7 +110,7 @@ ko:
         body: 내용(선택)
         date: 날짜(선택)
         time: 시간(선택)
-        source_url: 출처(선택)
+        source_url: 출처(선택, 여러 출처를 입력할 때는 주소 사이에 공백을 입력해 주세요)
         image: 대표이미지(선택)
         media_url: 미디어 URL(선택)
         media_credit: 미디어 출처(선택)

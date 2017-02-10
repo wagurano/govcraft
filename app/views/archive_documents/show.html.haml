@@ -29,7 +29,8 @@
       - if @archive_document.source_url.present?
         %div
           출처:
-          = link_to @archive_document.source_url, @archive_document.source_url, target: '_blank'
+          - @archive_document.source_url_as_array.each do |url|
+            = link_to url, url, target: '_blank'
       - if @archive_document.media_url.present?
         %div
           미디어:

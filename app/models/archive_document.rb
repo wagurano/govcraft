@@ -12,4 +12,8 @@ class ArchiveDocument < ApplicationRecord
   default_scope { order('date DESC, time DESC, id DESC') }
 
   scope :recent, -> { order('id DESC') }
+
+  def source_url_as_array
+    source_url.split
+  end
 end
