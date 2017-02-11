@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207091547) do
+ActiveRecord::Schema.define(version: 20170211081747) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -25,42 +25,6 @@ ActiveRecord::Schema.define(version: 20170207091547) do
     t.string   "outline"
     t.integer  "anonymous_likes_count",               default: 0
     t.index ["user_id"], name: "index_agendas_on_user_id", using: :btree
-  end
-
-  create_table "archive_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string   "title"
-    t.text     "body",                  limit: 65535
-    t.date     "date"
-    t.string   "time"
-    t.integer  "user_id",                                         null: false
-    t.integer  "archive_id",                                      null: false
-    t.integer  "comments_count",                      default: 0
-    t.integer  "likes_count",                         default: 0
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.string   "image"
-    t.string   "source_url"
-    t.string   "media_url"
-    t.string   "media_credit"
-    t.integer  "anonymous_likes_count",               default: 0
-    t.index ["archive_id"], name: "index_archive_documents_on_archive_id", using: :btree
-    t.index ["user_id"], name: "index_archive_documents_on_user_id", using: :btree
-  end
-
-  create_table "archives", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string   "title"
-    t.text     "body",                  limit: 65535
-    t.string   "image"
-    t.integer  "user_id",                                         null: false
-    t.integer  "comments_count",                      default: 0
-    t.integer  "likes_count",                         default: 0
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.string   "banner_image"
-    t.string   "banner_url"
-    t.integer  "anonymous_likes_count",               default: 0
-    t.integer  "timeline_initial_zoom"
-    t.index ["user_id"], name: "index_archives_on_user_id", using: :btree
   end
 
   create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -488,6 +452,42 @@ ActiveRecord::Schema.define(version: 20170207091547) do
     t.index ["thumbable_type", "thumbable_id"], name: "index_thumbs_on_thumbable_type_and_thumbable_id", using: :btree
     t.index ["user_id", "thumbable_id", "thumbable_type"], name: "index_thumbs_on_user_id_and_thumbable_id_and_thumbable_type", unique: true, using: :btree
     t.index ["user_id"], name: "index_thumbs_on_user_id", using: :btree
+  end
+
+  create_table "timeline_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "title"
+    t.text     "body",                  limit: 65535
+    t.date     "date"
+    t.string   "time"
+    t.integer  "user_id",                                         null: false
+    t.integer  "timeline_id",                                     null: false
+    t.integer  "comments_count",                      default: 0
+    t.integer  "likes_count",                         default: 0
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "image"
+    t.string   "source_url"
+    t.string   "media_url"
+    t.string   "media_credit"
+    t.integer  "anonymous_likes_count",               default: 0
+    t.index ["timeline_id"], name: "index_timeline_documents_on_timeline_id", using: :btree
+    t.index ["user_id"], name: "index_timeline_documents_on_user_id", using: :btree
+  end
+
+  create_table "timelines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "title"
+    t.text     "body",                  limit: 65535
+    t.string   "image"
+    t.integer  "user_id",                                         null: false
+    t.integer  "comments_count",                      default: 0
+    t.integer  "likes_count",                         default: 0
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "banner_image"
+    t.string   "banner_url"
+    t.integer  "anonymous_likes_count",               default: 0
+    t.integer  "timeline_initial_zoom"
+    t.index ["user_id"], name: "index_timelines_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

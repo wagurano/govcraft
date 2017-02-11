@@ -1,8 +1,8 @@
-class Archive < ApplicationRecord
+class Timeline < ApplicationRecord
   include Likable
 
   belongs_to :user
-  has_many :documents, class_name: 'ArchiveDocument'
+  has_many :documents, class_name: 'TimelineDocument'
   has_many :comments, as: :commentable
 
   mount_uploader :image, ImageUploader

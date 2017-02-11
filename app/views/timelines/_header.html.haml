@@ -1,0 +1,21 @@
+%section#timeline-header-block
+  .container
+    .jumbotron{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{timeline.image});" }
+      %h2
+        %%small.badge 타임라인
+        .timeline__title
+          = link_to timeline.title, timeline
+          %small
+            - if can? :edit, timeline
+              = link_to '수정', edit_timeline_path(timeline)
+            - if can? :destroy, timeline
+              = link_to '삭제', timeline, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
+      .timeline__body= simple_format timeline.body
+
+      .timeline__share{ style: 'margin-top: 14px;' }
+        .share-box{ 'data-share-image': image_url('seo.png') }
+
+      .timeline__users
+        타임라인을 만든 사람들 :
+        - timeline.contributors.each do |user|
+          = render 'users/thumbnail', user: user

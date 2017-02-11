@@ -31,7 +31,7 @@ ko:
       wiki: 위키
       memorial: 추모관
       agenda: 의제
-      archive: 아카이브
+      timeline: 타임라인
       event: 이벤트
       article: 뉴스
       person: 인물
@@ -98,13 +98,13 @@ ko:
         problem: 한국사회의 문제(진단)
         solution: 대안(처방)
         memo: 참고
-      archive:
+      timeline:
         title: 제목
         body: 내용
         image: 대표이미지
         banner_image: 배너이미지
         banner_url: 배너URL
-      archive_document:
+      timeline_document:
         tag_list: 태그
         title: 제목
         body: 내용(선택)

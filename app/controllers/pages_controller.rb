@@ -1,14 +1,14 @@
 class PagesController < ApplicationController
   def home
     @projects = Project.recent
-    @archives = Archive.recent
+    @timelines = Timeline.recent
     @memorials = Memorial.recent
     @articles = Article.hot.limit(10)
   end
 
   def weekly
     @new_projects = Project.past_week
-    @new_archives = Archive.past_week
+    @new_timelines = Timeline.past_week
     @new_memorials = Memorial.past_week
     @new_articles = Article.past_week
 

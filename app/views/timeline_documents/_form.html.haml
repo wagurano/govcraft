@@ -1,9 +1,9 @@
-= form_for @archive_document do |f|
-  = f.hidden_field :archive_id
+= form_for @timeline_document do |f|
+  = f.hidden_field :timeline_id
 
   .form-group
     = f.label :tag_list
-    = f.text_field :tag_list, value: @archive_document.tag_list.try(:to_s), placeholder: '태그1, 태그2, 태그3', class: 'form-control'
+    = f.text_field :tag_list, value: @timeline_document.tag_list.try(:to_s), placeholder: '태그1, 태그2, 태그3', class: 'form-control'
     %p.help-block
       콤마로 태그를 구분해서 넣으세요.
 

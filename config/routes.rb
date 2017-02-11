@@ -79,10 +79,19 @@ Rails.application.routes.draw do
     post :create_by_slack, on: :collection
   end
   resources :agendas
-  resources :archives do
+
+  class AllTimelineConstraint
+    def matches?(request)
+      request.query_parameters["mode"] == "timeline"
+    end
+  end
+  get '/archives/:id',
+    to: redirect { |params, req| "/timelines/#{params[:id]}?mode=timeline" },
+    constraints: AllTimelineConstraint.new
+  resources :timelines do
     get 'download', on: :member
   end
-  resources :archive_documents
+  resources :timeline_documents
   resources :memorials
 
   namespace :admin do

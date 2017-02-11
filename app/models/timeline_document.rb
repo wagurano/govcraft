@@ -1,8 +1,8 @@
-class ArchiveDocument < ApplicationRecord
+class TimelineDocument < ApplicationRecord
   include Likable
 
   belongs_to :user
-  belongs_to :archive
+  belongs_to :timeline
   has_many :comments, as: :commentable
 
   acts_as_taggable # Alias for acts_as_taggable_on :tags

@@ -1,0 +1,9 @@
+%section.page-block
+  .ui.container
+    %h3.header
+      = Timeline.model_name.human
+      %small= link_to "#{Timeline.model_name.human} 시작하기", new_timeline_path
+
+    .ui.four.column.grid.doubling.stackable
+      = render @timelines
+
