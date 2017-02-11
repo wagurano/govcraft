@@ -1,4 +1,4 @@
-- initial_zoom = (@archive.timeline_initial_zoom.present? ? @archive.timeline_initial_zoom : "null")
+- initial_zoom = (@timeline.timeline_initial_zoom.present? ? @timeline.timeline_initial_zoom : "null")
 - if params[:mode] == 'timeline'
   %section
     #timeline-embed
@@ -8,7 +8,7 @@
   %script{:src => "https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"}
   %script{:src => "//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js", :type => "text/javascript"}
   :javascript
-    $.getJSON("#{archive_path(@archive, format: :json)}", function(data) {
+    $.getJSON("#{timeline_path(@timeline, format: :json)}", function(data) {
       window.timeline = new TL.Timeline('timeline-embed', data, { start_at_end: true, language: 'ko', initial_zoom: #{initial_zoom} });
     });
     $(window).click(function(e) {
@@ -33,7 +33,7 @@
   :css
     body { padding: 0; margin: 0; }
 
-  = render 'archive_documents/list', archive: @archive
+  = render 'timeline_documents/list', timeline: @timeline
 
   %script{:src => "https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"}
   = javascript_include_tag 'application'
@@ -51,37 +51,37 @@
       return false;
     });
 - else
-  = render 'header', archive: @archive
+  = render 'header', timeline: @timeline
 
-  - if @archive.banner_image.file.present?
+  - if @timeline.banner_image.file.present?
     %section.page-block
       .container
-        = link_to @archive.banner_url, target: '_blank' do
-          = image_tag @archive.banner_image, width: '100%'
+        = link_to @timeline.banner_url, target: '_blank' do
+          = image_tag @timeline.banner_image, width: '100%'
 
   %section.page-block
     .container
       %ul.nav.nav-tabs{:role => "tablist"}
         %li{ class: (params[:tab].nil? ? 'active' : '') }
-          = link_to '타임라인', archive_path(@archive), role: "tab"
+          = link_to '타임라인', timeline_path(@timeline), role: "tab"
         %li{ class: (params[:tab] == 'list' ? 'active' : '') }
-          = link_to '자료목록', archive_path(@archive, tab: 'list'), role: "tab"
+          = link_to '자료목록', timeline_path(@timeline, tab: 'list'), role: "tab"
         %li
-          = link_to '자료추가', new_archive_document_path(archive_id: @archive.id), role: "tab"
+          = link_to '자료추가', new_timeline_document_path(timeline_id: @timeline.id), role: "tab"
         %li
-          = link_to download_archive_path(@archive, format: :xlsx), role: "tab" do
+          = link_to download_timeline_path(@timeline, format: :xlsx), role: "tab" do
             %i.fa.fa-download
             다운로드
 
   - if params[:tab] == 'list'
-    = render 'archive_documents/list', archive: @archive
+    = render 'timeline_documents/list', timeline: @timeline
   - else
     %section
       #timeline-embed{ style: 'width:100%; height: 500px' }
 
     = content_for :script do
       :javascript
-        $.getJSON("#{archive_path(@archive, format: :json)}", function(data) {
+        $.getJSON("#{timeline_path(@timeline, format: :json)}", function(data) {
           window.timeline = new TL.Timeline('timeline-embed', data, { start_at_end: true, language: 'ko', initial_zoom: #{initial_zoom} });
         });
         $(window).click(function(e) {

@@ -1,4 +1,5 @@
 //= require jquery
+//= require govcraft_ujs
 //= require jquery_ujs
 //= require bootstrap
 //= require unobtrusive_flash
@@ -208,6 +209,10 @@ $(function(){
         $('.masonry-container').masonry();
       }
     });
+  });
+
+  $('.gov-action-sidbar').on('click', function(e) {
+    $('#site-sidebar').sidebar('toggle');
   });
 
   $('.gov-action-popover').each(function(i, elm) {

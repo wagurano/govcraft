@@ -1,10 +1,10 @@
 json.title do
   json.text do
-    json.headline @archive.title
+    json.headline @timeline.title
   end
 end
 
-json.events @archive.documents do |document|
+json.events @timeline.documents do |document|
   if document.date.present?
     if document.media_url.present?
       json.media do

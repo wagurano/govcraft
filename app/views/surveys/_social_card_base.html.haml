@@ -15,7 +15,7 @@
         .options
           - @survey.options.each do |option|
             .option
-              %span.checkbox-square
+              %img{src: asset_data_base64('social_card_checkmark.png'), style: 'with: 1em; height: 1em'}
               - option_words = truncate(option.body, length: 50).split
               - option_words.each do |word|
                 .option-word= word

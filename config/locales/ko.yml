@@ -31,7 +31,7 @@ ko:
       wiki: 위키
       memorial: 추모관
       agenda: 의제
-      archive: 아카이브
+      timeline: 타임라인
       event: 이벤트
       article: 뉴스
       person: 인물
@@ -60,6 +60,7 @@ ko:
         body: 내용
         signs_goal_count: 서명 목표인수
         cover_image: 커버이미지(선택)
+        social_image: 소셜공유이미지(선택)
         thanks_mention: 서명한 뒤에 표시되는 문구(선택)
         comment_enabled: 댓글 사용 여부
         sign_title: 서명폼 제목
@@ -97,19 +98,19 @@ ko:
         problem: 한국사회의 문제(진단)
         solution: 대안(처방)
         memo: 참고
-      archive:
+      timeline:
         title: 제목
         body: 내용
         image: 대표이미지
         banner_image: 배너이미지
         banner_url: 배너URL
-      archive_document:
+      timeline_document:
         tag_list: 태그
         title: 제목
         body: 내용(선택)
         date: 날짜(선택)
         time: 시간(선택)
-        source_url: 출처(선택)
+        source_url: 출처(선택, 여러 출처를 입력할 때는 주소 사이에 공백을 입력해 주세요)
         image: 대표이미지(선택)
         media_url: 미디어 URL(선택)
         media_credit: 미디어 출처(선택)

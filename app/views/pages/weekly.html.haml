@@ -21,15 +21,15 @@
 = render 'wikis/list', wikis: @new_wikis, title_label: "새 #{Wiki.model_name.human}" if @new_wikis.any?
 = render 'discussions/list', discussions: @new_discussions, title_label: "새 #{Discussion.model_name.human}" if @new_discussions.any?
 
-- if @new_archives.any? or @new_memorials.any?
+- if @new_timelines.any? or @new_memorials.any?
   %section.page-block
     .container
-      - if @new_archives.any?
-        %h4 새 #{Archive.model_name.human}
+      - if @new_timelines.any?
+        %h4 새 #{Timeline.model_name.human}
         .row
-          - @new_archives.each do |archive|
+          - @new_timelines.each do |timeline|
             .col-sm-6
-              = render archive
+              = render timeline
       - if @new_memorials.any?
         %h4 새 #{Memorial.model_name.human}
         .row

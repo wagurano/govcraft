@@ -7,20 +7,20 @@ class Ability
     can :create, [Sign, Comment, Like]
     can :cancel, Like
     can :create_by_slack, Article
-    can :download, Archive
+    can :download, Timeline
 
     if user
       can :create, [
           FollowingIssue,
           Project, Discussion, Petition, Poll, Feedback, Survey, Wiki,
-          Memorial, Agenda, Archive, ArchiveDocument, Event,
+          Memorial, Agenda, Timeline, TimelineDocument, Event,
           Election, Candidate, Article, Person, Race, Player,
           Thumb
         ]
       can [:update, :destroy], [
           FollowingIssue,
           Project, Discussion, Petition, Poll, Survey, Wiki,
-          Memorial, Agenda, Archive, ArchiveDocument, Event,
+          Memorial, Agenda, Timeline, TimelineDocument, Event,
           Comment, Sign, Election, Candidate, Article, Person,
           Race, Player
         ], :user_id => user.id

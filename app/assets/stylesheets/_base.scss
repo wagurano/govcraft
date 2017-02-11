@@ -14,6 +14,11 @@
     1px  1px 0 #000;
 }
 
+// keep-all
+.text-keep-all {
+  word-break: keep-all;
+}
+
 // 글 생략 (여러줄)
 @mixin multi-text-ellipsis($lines) {
   overflow: hidden;
@@ -37,6 +42,11 @@
     background-size: 2px 2px;
     right: 0;
   }
+}
+
+// linkable div : govcraft-ujs.js의 gov-action-rails-link 참조
+.gov-action-rails-link[data-url] {
+  cursor: pointer;
 }
 
 .btn-primary--inactive {

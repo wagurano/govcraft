@@ -53,14 +53,14 @@ class PetitionsController < ApplicationController
   private
 
   def petition_params
-    params.require(:petition).permit(:title, :body, :project_id, :signs_goal_count, :cover_image, :thanks_mention, :comment_enabled, :sign_title)
+    params.require(:petition).permit(:title, :body, :project_id, :signs_goal_count, :cover_image, :thanks_mention, :comment_enabled, :sign_title, :social_image)
   end
 
   def reset_meta_tags
     prepare_meta_tags({
       title: "[서명] " + @petition.title,
       description: @petition.body.html_safe,
-      image: view_context.image_url(@petition.cover_image_url),
+      image: view_context.image_url(@petition.social_image_url),
       url: request.original_url}
     )
   end

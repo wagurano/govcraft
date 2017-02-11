@@ -1,4 +1,4 @@
-%section#site-header
+%section#site-header.tablet.or.lower.responsive-hidden
   .ui.menu
     .ui.container
       = link_to root_path, class: 'header item' do
@@ -10,13 +10,12 @@
       = link_to Poll.model_name.human, polls_path, class: 'item'
       = link_to Petition.model_name.human, petitions_path, class: 'item'
       = link_to Survey.model_name.human, surveys_path, class: 'item'
-      = link_to Archive.model_name.human, archives_path, class: 'item'
+      = link_to Timeline.model_name.human, timelines_path, class: 'item'
       = link_to Memorial.model_name.human, memorials_path, class: 'item'
       = link_to Event.model_name.human, events_path, class: 'item'
       = link_to Article.model_name.human, articles_path, class: 'item'
 
       .menu.right
-        = link_to '새소식', weekly_path, class: 'item'
         - if user_signed_in?
           .ui.simple.dropdown.item
             = render 'users/thumbnail'
@@ -29,3 +28,14 @@
         - else
           = link_to new_user_session_path, class: 'item' do
             로그인 &middot; 가입
+
+%section#site-header--mobile.mobile.tablet.only
+  .ui.menu.segment.secondary.pointing
+    .ui.container
+      = link_to root_path, class: 'header item' do
+        = image_tag 'favicons/favicon-32x32.png', style: 'width: 16px; margin-right: 5px;'
+        우주당
+      .menu.right
+        %a.item.gov-action-sidbar
+          %i.sidebar.icon
+

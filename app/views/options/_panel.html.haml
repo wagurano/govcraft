@@ -8,31 +8,23 @@
       = link_to survey.title, survey
   - feedback = survey.fetch_feedback_of(current_user)
   .body
-    %table
+    .ui.list
       - survey.options.each do |option|
-        %tr
-          - if !user_signed_in?
-            %td.body
-              = link_to new_user_session_path do
-                .chart{ class: ('active' if option.selected?(current_user)) }
-                  .chart__bar{ style: "width: #{survey.percentage(option)}%"}
-                    %span.chart__label= option.body
+        - attrs = {}
+        - if survey.open?
+          - if user_signed_in?
+            - attrs = { 'data-url': feedbacks_path(option_id: option.id), 'data-remote': true, 'data-method': :post}
           - else
-            - if survey.open?
-              %td.body
-                = link_to feedbacks_path(option_id: option.id), remote: true, method: :post do
-                  .chart{ class: ('active' if option.selected?(current_user)) }
-                    .chart__bar{ style: "width: #{survey.percentage(option)}%"}
-                      %span.chart__label= option.body
-            - else
-              %td.body
-                .chart{ class: ('active' if option.selected?(current_user)) }
-                  .chart__bar{ style: "width: #{survey.percentage(option)}%"}
-                    %span.closed.chart__label= option.body
-
-          %td.feedbacks-count
-            - if option.feedbacks_count > 0
-              #{option.feedbacks_count}명
+            - attrs = { 'data-url': new_user_session_path, 'data-method': :get }
+        .item.gov-action-rails-link{ attrs.merge(style: 'margin-bottom: 12px') }
+          - if survey.open?
+            %i.check.circle.outline.icon{ style: "font-size: 2em; line-height: 1.5em; color: #{option.selected?(current_user) ? '#4a5dd0' : '#bbb'};"}
+          .content{ style: 'width: 100%' }
+            .header= option.body
+            .description{ style: 'margin-top: 3px;' }
+              .chart{ class: ('active' if option.selected?(current_user)) }
+                %span.chart__label #{option.feedbacks_count}명
+                .chart__bar{ style: "width: #{survey.percentage(option)}%"}
   .footer
     - if survey.open?
       마감까지 #{survey_remain_time(survey)}

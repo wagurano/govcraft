@@ -13,7 +13,7 @@ row_titles = row_definition.map { |c| c[1] }
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "생성일 #{l(Date.today)}") do |sheet|
   sheet.add_row row_titles
-  @archive.documents.each do |document|
+  @timeline.documents.each do |document|
     sheet.add_row row_definition.map { |c|
       c[0] == :body ? HTMLEntities.new.decode(strip_tags(document[c[0]])) : document[c[0]]
     }
