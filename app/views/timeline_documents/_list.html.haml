@@ -23,8 +23,7 @@
             %h4.list-group-item-heading{ style: 'white-space: nowrap; text-overflow: ellipsis; overflow: hidden;' }
               = document.title
               %small.text-muted
-                - 10.times do
-                  = strip_tags document.body
+                = strip_tags document.body
             .post__meta
               .row
                 .col-xs-6

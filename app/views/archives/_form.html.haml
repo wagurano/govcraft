@@ -1,0 +1,33 @@
+= form_for @archive do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+
+  .form-group
+    = f.label :body
+    = f.text_area :body, rows: 10, class: 'form-control'
+
+  .form-group
+    = f.label :cover_image
+    = f.file_field :cover_image, class: 'form-control'
+    = f.hidden_field :cover_image_cache, value: f.object.cover_image_cache
+    .help-block
+    - if @archive.read_attribute(:cover_image).present?
+      = image_tag @archive.cover_image.xs.url, class: 'img-thumbnail', style: 'max-width: 40px'
+      %label{ style: 'font-weight: normal;' }
+        = f.check_box :remove_cover_image
+        삭제하기
+
+  .form-group
+    = f.label :social_image
+    = f.file_field :social_image, class: 'form-control'
+    = f.hidden_field :social_image_cache, value: f.object.social_image_cache
+    .help-block
+    - if @archive.read_attribute(:social_image).present?
+      = image_tag @archive.social_image.xs.url, class: 'img-thumbnail', style: 'max-width: 40px'
+      %label{ style: 'font-weight: normal;' }
+        = f.check_box :remove_social_image
+        삭제하기
+
+  .form-group
+    = f.submit '저장', class: 'btn btn-primary'

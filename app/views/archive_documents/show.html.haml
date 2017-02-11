@@ -1,0 +1,51 @@
+= render 'archives/header', archive: @archive
+
+%section#archive_document-block.page-block.post-block
+  .container
+    .post-block__title
+      %h4
+        = @archive_document.title
+
+    .post-block__info
+      %span.post-block__user
+        = link_to @archive_document.user.nickname
+      %span.post-block__date
+        = date_f @archive_document.created_at
+      - if can? :edit, @archive_document
+        = link_to '수정', edit_archive_document_path(@archive_document)
+      - if can? :destroy, @archive_document
+        = link_to '삭제', @archive_document, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+
+    .post-block__content
+      .panel.panel-default
+        .panel-heading
+          .download
+            = link_to [:download, @archive_document] do
+              = file_type_icon(@archive_document.content_type)
+              #{@archive_document.content_name}
+              %i.fa.fa-download
+        - if @archive_document.image?
+          .panel-body
+            .image
+              = image_tag @archive_document.content.md.url
+
+    .post-block__body
+      = raw @archive_document.body
+
+    .well.well-mute
+      - if @archive_document.content_creator.present?
+        %div
+          생산자: #{@archive_document.content_creator}
+
+      - if @archive_document.content_created_date.present?
+        %div
+          생산일: #{@archive_document.content_created_date} #{@archive_document.content_created_time}
+
+      - if @archive_document.content_source.present?
+        %div
+          입수처: #{@archive_document.is_secret_content_source ? '비공개' : @archive_document.content_source}
+
+    .post-block__comments
+      = render 'comments/list', commentable: @archive_document
+
+= render 'archive_documents/list', archive: @archive

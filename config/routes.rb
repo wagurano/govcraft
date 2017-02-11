@@ -92,6 +92,10 @@ Rails.application.routes.draw do
     get 'download', on: :member
   end
   resources :timeline_documents
+  resources :archives
+  resources :archive_documents do
+    get :download, on: :member
+  end
   resources :memorials
 
   namespace :admin do

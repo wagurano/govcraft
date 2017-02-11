@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :speeches, dependent: :destroy
   has_many :participations, dependent: :destroy
   has_many :participated_projects, through: :participations, source: :project
+  has_many :archives, dependent: :restrict_with_exception
 
   # validations
   VALID_NICKNAME_REGEX = /\A[ㄱ-ㅎ가-힣a-z0-9_]+\z/i

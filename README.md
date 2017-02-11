@@ -96,3 +96,11 @@ export GOOGLE_API_KEY="xx"
 ```
 $ bin/rails db:setup
 ```
+
+### 로컬에서 한글 이름의 파일을 다운로드하면 파일 이름이 깨질 때
+
+.powenv에 아래를 추가합니다.
+
+```
+export FILENAME_ENCODING="ISO-8859-1"
+```

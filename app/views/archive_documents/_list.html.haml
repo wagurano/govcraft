@@ -1,0 +1,19 @@
+%section.page-block
+  .container
+    %ul.list-group.post-group{ style: 'margin: 28px 0;' }
+      - @documents.each do |document|
+        %li.list-group-item[document]
+          = link_to archive_document_path(document) do
+            %h4.list-group-item-heading{ style: 'white-space: nowrap; text-overflow: ellipsis; overflow: hidden;' }
+              = document.title
+              %small.text-muted
+                = strip_tags document.body
+            .post__meta
+              .row
+                .col-xs-6
+                  = document.content_created_date
+                  = document.content_created_time
+                  - if document.tags.any?
+                    %i.fa.fa-tag
+                    = document.tags.join(', ')
+                .col-xs-6.text-right
