@@ -46,7 +46,7 @@ class ArchivesController < ApplicationController
       redirect_to @archive
     else
       errors_to_flash(@archive)
-      render 'categories'
+      render 'edit_categories'
     end
   end
 
