@@ -1,0 +1,26 @@
+.ui.segment.nested-fields
+  %h4{ style: 'border-bottom: 1px solid #aaa; padding-bottom: 6px; '}
+    상위분류 ##{f.object.try(:slug) || '신규'}
+    %small
+      = link_to_remove_association f, { class: 'btn btn-default btn-xs' } do
+        &times; 삭제
+  .row
+    .form-group.col-xs-12.col-sm-5
+      = f.label :slug
+      = f.text_field :slug, { class: 'form-control' }
+    .form-group.col-xs-12.col-sm-5
+      = f.label :name
+      = f.text_field :name, { class: 'form-control' }
+
+  .hr
+
+  %h4{ style: 'border-bottom: 1px solid #aaa; padding-bottom: 6px; '} 하위분류들
+
+  .container
+    .row
+      .form-group
+        - f.object.children.each_with_index do |category, index|
+          = f.fields_for :children, category do |ff|
+            = render 'archive_categories/subcategory_fields', f: ff, archive: archive
+        .links
+          = link_to_add_association '+ 하위분류 추가', f, :children, partial: 'archive_categories/subcategory_fields', render_options: { locals: { archive: archive } }

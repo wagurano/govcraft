@@ -1,0 +1,13 @@
+%section.page-block
+  .container
+    - archive.categories.build if archive.categories.empty?
+    = form_for [:update_categories, archive] do |f|
+      .form-group
+        - f.object.categories.each_with_index do |category, index|
+          = f.fields_for :categories, category do |ff|
+            = render 'archive_categories/category_fields', f: ff, archive: archive
+        .links
+          = link_to_add_association '+ 대분류 추가', f, :categories, partial: 'archive_categories/category_fields', render_options: { locals: { archive: archive } }
+
+      .form-group
+        = f.submit class: 'btn btn-primary'

@@ -7,7 +7,9 @@ class ArchivesController < ApplicationController
   end
 
   def show
-    @documents = params[:tag].present? ? @archive.documents.tagged_with(params[:tag]) : @archive.documents
+    @documents = @archive.documents
+    @documents = @documents.tagged_with(params[:tag]) if params[:tag].present?
+    @documents = @documents.where(category_slug: params[:category_slug]) if params[:category_slug].present?
   end
 
   def download
@@ -22,6 +24,7 @@ class ArchivesController < ApplicationController
     if @archive.save
       redirect_to @archive
     else
+      errors_to_flash(@archive)
       render 'new'
     end
   end
@@ -33,7 +36,17 @@ class ArchivesController < ApplicationController
     if @archive.update(archive_params)
       redirect_to @archive
     else
+      errors_to_flash(@archive)
       render 'edit'
+    end
+  end
+
+  def update_categories
+    if @archive.update(archive_params)
+      redirect_to @archive
+    else
+      errors_to_flash(@archive)
+      render 'categories'
     end
   end
 
@@ -45,7 +58,9 @@ class ArchivesController < ApplicationController
   private
 
   def archive_params
-    params.require(:archive).permit(:title, :body, :cover_image, :cover_image_cache, :remove_cover_image, :social_image, :social_image_cache, :remove_social_image)
+    params.require(:archive).permit(:title, :body, :cover_image, :cover_image_cache,
+      :remove_cover_image, :social_image, :social_image_cache, :remove_social_image,
+      categories_attributes: [ :id, :slug, :name, :_destroy, children_attributes: [ :archive_id, :id, :slug, :name, :_destroy ] ] )
   end
 
   def reset_meta_tags

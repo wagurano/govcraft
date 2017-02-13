@@ -1,19 +1,43 @@
 %section.page-block
   .container
-    %ul.list-group.post-group{ style: 'margin: 28px 0;' }
-      - @documents.each do |document|
-        %li.list-group-item[document]
-          = link_to archive_document_path(document) do
-            %h4.list-group-item-heading{ style: 'white-space: nowrap; text-overflow: ellipsis; overflow: hidden;' }
-              = document.title
-              %small.text-muted
-                = strip_tags document.body
-            .post__meta
-              .row
-                .col-xs-6
-                  = document.content_created_date
-                  = document.content_created_time
+    .row
+      .hidden-xs.col-sm-3
+        .ui.vertical.menu
+          - @archive.categories.each do |category|
+            .item
+              .header= category.name
+              .menu
+                - category.children.each do |subcategory|
+                  .item= link_to subcategory.name, category_archive_path(@archive, category_slug: subcategory.slug)
+
+      .col-sm-9.col-xs-12
+        - if @documents.empty?
+          .ui.message
+            %p 해당 자료가 없습니다.
+        - else
+          .ui.divided.items
+            - @documents.each do |document|
+              .item
+                - if document.image?
+                  .image
+                    = image_tag document.content.sm.url
+                .content
+                  .header
+                    = file_type_icon(document.content_type)
+                    = link_to document.title, archive_document_path(document)
+                  .meta
+                    - if document.content_created_date.present?
+                      %span
+                        생성일:
+                        = document.content_created_date
+                        = document.content_created_time
+                  .description
+                    %p= strip_tags document.body
                   - if document.tags.any?
-                    %i.fa.fa-tag
-                    = document.tags.join(', ')
-                .col-xs-6.text-right
+                    .extra
+                      - document.tags.each do |tag|
+                        .ui.label= tag
+
+
+        - if can? :manage, @archive
+          = link_to '자료입력', new_archive_document_path(archive_id: @archive.id, category_slug: params[:category_slug]), class: 'ui primary button'

@@ -5,6 +5,7 @@ class ArchiveDocument < ApplicationRecord
 
   belongs_to :user
   belongs_to :archive
+  belongs_to :category, class_name: ArchiveCategory, optional: true, primary_key: :slug, foreign_key: :category_slug
   has_many :comments, as: :commentable
 
   mount_uploader :content, PrivateFileUploader
