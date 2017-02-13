@@ -11,6 +11,6 @@ class Archive < ApplicationRecord
   scope :recent, -> { order('id DESC') }
 
   def contributors
-    documents.collect{|d| d.user}.uniq
+    (documents.collect{|d| d.user} + [user]).uniq
   end
 end
