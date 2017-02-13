@@ -11,20 +11,21 @@ class PrivateFileUploader < CarrierWave::Uploader::Base
     end
   end
 
-  #storage env_storage
-  storage :fog
+  storage env_storage
 
   def initialize(*)
     super
 
-    self.fog_credentials = {
-      provider:              'AWS',
-      aws_access_key_id:     ENV["PRIVATE_S3_ACCESS_KEY"],
-      aws_secret_access_key: ENV["PRIVATE_S3_SECRET_KEY"],
-      region:                ENV["PRIVATE_S3_REGION"]
-    }
-    self.fog_directory = ENV["PRIVATE_S3_BUCKET"]
-    self.fog_public = false
+    if Rails.env.production?
+      self.fog_credentials = {
+        provider:              'AWS',
+        aws_access_key_id:     ENV["PRIVATE_S3_ACCESS_KEY"],
+        aws_secret_access_key: ENV["PRIVATE_S3_SECRET_KEY"],
+        region:                ENV["PRIVATE_S3_REGION"]
+      }
+      self.fog_directory = ENV["PRIVATE_S3_BUCKET"]
+      self.fog_public = false
+    end
   end
 
   # Override the directory where uploaded files will be stored.
