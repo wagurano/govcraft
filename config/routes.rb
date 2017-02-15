@@ -82,11 +82,11 @@ Rails.application.routes.draw do
 
   class AllTimelineConstraint
     def matches?(request)
-      request.query_parameters["mode"] == "timeline"
+      ["timeline", "list"].include? request.query_parameters["mode"]
     end
   end
   get '/archives/:id',
-    to: redirect { |params, req| "/timelines/#{params[:id]}?mode=timeline" },
+    to: redirect { |params, req| "/timelines/#{params[:id]}?mode=#{req.query_parameters["mode"]}" },
     constraints: AllTimelineConstraint.new
   resources :timelines do
     get 'download', on: :member
