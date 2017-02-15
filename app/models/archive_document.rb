@@ -1,6 +1,8 @@
 class ArchiveDocument < ApplicationRecord
   acts_as_taggable
 
+  XLXS_META = %i(id title body content_creator content_created_date content_created_time content_source is_secret_content_source remote_content_url category_slug)
+
   before_save :update_content_attributes
 
   belongs_to :user

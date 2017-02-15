@@ -93,6 +93,10 @@ Rails.application.routes.draw do
   end
   resources :timeline_documents
   resources :archives do
+    resources :bulk_tasks do
+      get :attachment, on: :member
+    end
+
     member do
       get '/categories/edit', to: 'archives#edit_categories'
       patch :update_categories

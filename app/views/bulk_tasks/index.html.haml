@@ -1,0 +1,69 @@
+= render 'archives/header', archive: @archive
+
+%section.page-block
+  .container
+    .ui.header
+      .content
+        대량데이터 처리
+        .sub.header
+          대량데이터 업로드를 요청하고 결과를 모니터합니다.
+
+    .ui.segment
+      = form_for [@archive, BulkTask.new], html: { class: 'ui form' } do |f|
+        .field
+          = f.label :desc
+          = f.text_field :desc
+        .field
+          = f.label :attachment
+          = f.file_field :attachment
+        %button.ui.button 업로드
+
+    .table-wrapper{ style: 'overflow-x: scroll' }
+      %table.ui.celled.padded.table
+        %thead
+          %tr.text-nowrap
+            %th.single.line #
+            %th 작업내역
+            %th 요청자
+            %th 상태
+            %th 처리 건수
+            %th 성공 건수
+            %th 생성 건수
+            %th 변경 건수
+            %th 실패 건수
+            %th 요청/결과 파일
+            %th 등록일
+            %th 변경일
+        %tbody
+          - @bulk_tasks.each do |bulk_task|
+            %tr.text-nowrap
+              %td.single.line= bulk_task.id
+              %td= bulk_task.desc
+              %td= bulk_task.try(:user).try(:nickname)
+              %td= bulk_task.status
+              %td= bulk_task.processing_count
+              %td= bulk_task.success_count
+              %td= bulk_task.inserted_count
+              %td= bulk_task.updated_count
+              %td= bulk_task.error_count
+              %td= link_to(bulk_task.attachment_name, [:attachment, @archive, bulk_task]) if bulk_task.attachment_name.present?
+              %td= bulk_task.created_at
+              %td= bulk_task.updated_at
+            - if bulk_task.error_detail.present?
+              %tr
+                %td(colspan=12)
+                  %strong 실패상세
+                  %div{ style: 'max-height: 100px; overflow-y: scroll;'}
+                    - if bulk_task.error_detail_as_hash.present?
+                      %table.table.table-bordered
+                        %thead.thead-default
+                          %tr.text-nowrap
+                            %th 엑셀열 번호
+                            %th 상세
+                        %tbody.tbody-default
+                          - bulk_task.error_detail_as_hash.each do |key, value|
+                            %tr
+                              %td= key
+                              %td= value
+                    - else
+                      = simple_format bulk_task.error_detail
