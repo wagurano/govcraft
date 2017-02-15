@@ -56,21 +56,17 @@
           = render @petition.project
 
   - if flash[:sign_notice].present?
-    #sign-success-modal.modal.fade{:role => "dialog", :tabindex => "0"}
-      .modal-dialog{:role => "document"}
-        .modal-content
-          .modal-header
-            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-              %span{"aria-hidden" => "true"} &#215;
-            %h4.modal-title
-              서명 성공
-          .modal-body
-            != flash[:sign_notice]
-            .share-box{ 'data-share-image': image_url(cover_image) }
+    #sign-success-modal.ui.small.modal.scrolling{:role => "dialog", :tabindex => "0", style: 'overflow: inherit;'}
+      %i.close.icon{ style: 'top: 1rem; right: 1em; color: #555;' }
+      .ui.icon.header
+        서명 성공
+      .content
+        != flash[:sign_notice]
+        .share-box{ 'data-share-image': image_url(cover_image) }
 
     = content_for :script do
       :javascript
         $(function(){
-          $('#sign-success-modal').modal('show');
+          $('#sign-success-modal').modal({observeChanges: true}).modal('show');
         });
     - flash.delete(:sign_notice)
