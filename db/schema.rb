@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170214133448) do
+ActiveRecord::Schema.define(version: 20170215110603) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -104,20 +104,22 @@ ActiveRecord::Schema.define(version: 20170214133448) do
 
   create_table "bulk_tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "job_id"
-    t.text     "desc",             limit: 65535
-    t.integer  "user_id",                                       null: false
-    t.integer  "archive_id",                                    null: false
+    t.text     "desc",                 limit: 65535
+    t.integer  "user_id",                                           null: false
+    t.integer  "archive_id",                                        null: false
     t.string   "attachment"
     t.string   "attachment_name"
-    t.string   "status",                         default: "등록", null: false
-    t.integer  "processing_count",               default: 0
-    t.integer  "success_count",                  default: 0
-    t.integer  "error_count",                    default: 0
-    t.integer  "inserted_count",                 default: 0
-    t.integer  "updated_count",                  default: 0
-    t.text     "error_detail",     limit: 65535
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.string   "status",                             default: "등록", null: false
+    t.integer  "processing_count",                   default: 0
+    t.integer  "success_count",                      default: 0
+    t.integer  "error_count",                        default: 0
+    t.integer  "inserted_count",                     default: 0
+    t.integer  "updated_count",                      default: 0
+    t.text     "error_detail",         limit: 65535
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.string   "google_access_token"
+    t.string   "google_refresh_token"
     t.index ["archive_id"], name: "index_bulk_tasks_on_archive_id", using: :btree
     t.index ["job_id"], name: "index_bulk_tasks_on_job_id", using: :btree
     t.index ["user_id"], name: "index_bulk_tasks_on_user_id", using: :btree

@@ -43,6 +43,7 @@ gem 'htmlentities', '~> 4.3', '>= 4.3.4'
 gem "recaptcha", require: "recaptcha/rails"
 gem 'nokogiri', '~> 1.7', '>= 1.7.0.1'
 gem 'roo', '~> 2.7', '>= 2.7.1'
+gem 'google_drive'
 
 # assets
 source 'https://rails-assets.org' do

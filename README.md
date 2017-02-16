@@ -20,6 +20,8 @@ production:
   GOOGLE_API_KEY: xx
   SLACK_EXCEPTION_WEBHOOK_URL: xx
   SLACK_ARTICLE_WEBHOOK_KEY: xx
+  GOOGLE_CLIENT_ID: xx
+  GOOGLE_CLIENT_SECRET: xx
 ```
 
 
@@ -81,6 +83,8 @@ export FACEBOOK_APP_ID="xx"
 export FACEBOOK_APP_SECRET="xx"
 export TWITTER_APP_ID="xx"
 export TWITTER_APP_SECRET="xx"
+export GOOGLE_CLIENT_ID="xx"
+export GOOGLE_CLIENT_SECRET="xx"
 ```
 
 ### 구글API연결

@@ -60,6 +60,7 @@ class ArchivesController < ApplicationController
   def archive_params
     params.require(:archive).permit(:title, :body, :cover_image, :cover_image_cache,
       :remove_cover_image, :social_image, :social_image_cache, :remove_social_image,
+      :google_drive_client_id, :google_drive_client_secret,
       categories_attributes: [ :id, :slug, :name, :_destroy, children_attributes: [ :archive_id, :id, :slug, :name, :_destroy ] ] )
   end
 

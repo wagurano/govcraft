@@ -5,7 +5,6 @@ class BulkTaskJob
 
   def perform(task_id)
     begin
-      # do something dodgy
       @bulk_task = BulkTask.find_by(id: task_id)
       return if @bulk_task.blank?
 
@@ -28,43 +27,55 @@ class BulkTaskJob
 
       xlsx = Roo::Spreadsheet.open @bulk_task.attachment.file.respond_to?(:url) ? @bulk_task.attachment.url : @bulk_task.attachment.file
       xlsx.sheet(0).each_row_streaming(offset: 1, pad_cells: true) do |row|
-        id = fetch_data(row, attributes, :id)
-        break if 'END' == id
+        temp_file = nil
+        begin
+          id = fetch_data(row, attributes, :id)
+          break if 'END' == id
+          id = id.try(:to_i)
 
-        id = id.try(:to_i)
+          current_index += 1
+          is_success = false
 
-        current_index += 1
-        is_success = false
+          row_data = fetch_data_all(row, attributes,
+            %i(title body content_creator content_created_date content_created_time content_source category_slug)).merge(
+            is_secret_content_source: (fetch_data(row, attributes, :is_secret_content_source) == '예'))
 
-        content_created_date = fetch_data(row, attributes, :content_created_date).try(:to_date)
+          fetch_data(row, attributes, :remote_content_url)
 
-        row_data = fetch_data_all(row, attributes,
-          %i(title body content_creator content_created_time content_source remote_content_url category_slug)).merge(
-          is_secret_content_source: (fetch_data(row, attributes, :is_secret_content_source) == '예'),
-          content_created_date: content_created_date)
-        if id == 0 or id.blank?
-          document = @bulk_task.archive.documents.create!(row_data.merge(user: @bulk_task.user))
-          if document.errors.empty?
-            is_success = true
-            inserted_count += 1
+          if id == 0 or id.blank?
+            document = @bulk_task.archive.documents.build(row_data.merge(user: @bulk_task.user))
+            temp_file = download_content(document, fetch_data(row, attributes, :remote_content_url))
+            if document.save
+              success_count += 1
+              inserted_count += 1
+            end
+          else
+            document = @bulk_task.archive.documents.find_by(id: id)
+            if document.blank?
+              errors[current_index] = '해당 자료 없음'
+              next
+            end
+
+            document.assign_attributes(row_data)
+            temp_file = download_content(document, fetch_data(row, attributes, :remote_content_url))
+            if document.save
+              success_count += 1
+              updated_count += 1 if document.previous_changes.any?
+            end
           end
-        else
-          document = @bulk_task.archive.documents.find_by(id: id)
-          if document.blank?
-            errors[current_index] = '해당 자료 없음'
-            next
-          end
 
-          is_success = document.update_attributes(row_data)
-          if document.previous_changes.any?
-            updated_count += 1
+          if document.errors.any?
+            errors[current_index] = document.errors.full_messages
           end
-        end
-
-        if is_success
-          success_count += 1
-        else
-          errors[current_index] = document.errors.full_messages
+        rescue => e # StandardError
+          errors[current_index] = e.message
+        rescue Exception => e
+          errors[current_index] = e.message
+        ensure
+          if temp_file.present?
+            temp_file.close
+            temp_file.unlink
+          end
         end
 
         if (current_index % 1000.0) == 0
@@ -113,5 +124,27 @@ class BulkTaskJob
     sec = splits[2].to_i if splits[2] !~ /\D/
 
     [hour, min || 0, sec || 0]
+  end
+
+  def init_google_session(bulk_task)
+    GoogleDrive::Session.from_access_token(bulk_task.google_access_token)
+  end
+
+  def download_content(document, url)
+    google_session = init_google_session(@bulk_task)
+    begin
+      google_file = google_session.file_by_url(url)
+    rescue GoogleDrive::Error
+      document.remote_content_url = url
+      return
+    end
+
+    temp_file = Tempfile.new(['archive', File.extname(google_file.title)])
+    google_file.download_to_file(temp_file.path)
+
+    document.content = temp_file.open
+    document.content_name = google_file.title
+
+    return temp_file
   end
 end

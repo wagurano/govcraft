@@ -96,13 +96,13 @@ Rails.application.routes.draw do
     resources :bulk_tasks do
       get :attachment, on: :member
     end
-
     member do
       get '/categories/edit', to: 'archives#edit_categories'
       patch :update_categories
       get '/categories/:category_slug', to: 'archives#show', as: :category
     end
   end
+  get '/bulk_tasks/start', to: 'bulk_tasks#start', as: :start_bulk_task
   resources :archive_documents do
     get :download, on: :member
   end

@@ -40,10 +40,10 @@ class ArchiveDocumentsController < ApplicationController
     if @archive_document.content.file.respond_to?(:url)
       # s3
       data = open @archive_document.content.url
-      send_data data.read, filename: encoded_file_name(@archive_document), type: @archive_document.content_type, disposition: 'attachment', stream: 'true', buffer_size: '4096'
+      send_data data.read, filename: encoded_file_name(@archive_document), disposition: 'attachment', stream: 'true', buffer_size: '4096'
     else
       # local storage
-      send_file @archive_document.content.path, filename: encoded_file_name(@archive_document), type: @archive_document.content_type, disposition: 'attachment'
+      send_file @archive_document.content.path, filename: encoded_file_name(@archive_document), disposition: 'attachment'
     end
   end
 
