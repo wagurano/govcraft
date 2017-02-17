@@ -18,6 +18,14 @@ ko:
     commented: '댓글을 게시했습니다!'
     reported: '신고되었습니다!'
     reverted: '복원되었습니다!'
+    xlsx_help:
+      archive_document:
+        id: 비워두면 신규생성, 숫자를 적으면 해당 데이터업이트, END면 종료합니다.
+        content_created_date: "예) 2016-02-08"
+        content_created_time: "예) 11:20:30"
+        is_secret_content_source: 비밀일 때만 '예'를 기입
+        remote_content_url: 자료 다운로드 주소할 주소를 적습니다.
+        category_slug: 분류코드는 동일 파일의 '분류코드' 시트를 참조합니다.
   activerecord:
     models:
       poll_and_survey: 투표
@@ -38,6 +46,8 @@ ko:
       race: 인물투표
       player: 후보
       speech: 촛불발언 동영상
+      archive: 아카이브
+      archive_document: 아카이브 자료
     attributes:
       user:
         nickname: 아이디
@@ -139,6 +149,17 @@ ko:
         duration: 기간(일)
         cover_image: 대표이미지
         options: 옵션
+      archive_document:
+        id: ID
+        title: 제목
+        body: 설명
+        content_creator: 생산자
+        content_created_date: 생산일
+        content_created_time: 생산시각
+        content_source:  생산처
+        is_secret_content_source: 생산처비밀 여부
+        remote_content_url: 자료 다운로드 주소
+        category_slug: 분류코드
     errors:
       models:
         user:

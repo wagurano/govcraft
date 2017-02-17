@@ -95,6 +95,7 @@ Rails.application.routes.draw do
   resources :archives do
     resources :bulk_tasks do
       get :attachment, on: :member
+      get :template, on: :collection
     end
     member do
       get :google_drive

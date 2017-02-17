@@ -8,9 +8,8 @@
         .sub.header
           대량데이터 업로드를 요청하고 결과를 모니터합니다.
 
-      .ui.right.floated.button
-        서식 다운로드(준비 중)
       = link_to '구글 드라이브 탐색', google_drive_archive_path(@archive), class: 'ui right floated button'
+      = link_to '서식 다운로드', template_archive_bulk_tasks_path(@archive, format: 'xlsx'), class: 'ui right floated button'
 
 
     .ui.segment

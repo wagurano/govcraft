@@ -27,6 +27,14 @@ class ArchiveDocument < ApplicationRecord
     self.content_name.gsub(/\\+/, "%20")
   end
 
+  def self.xlxs_human_attribute_names
+    XLXS_META.map { |a| human_attribute_name(a) }
+  end
+
+  def self.xlxs_human_attribute_helps
+    XLXS_META.map { |a| I18n.t("messages.xlsx_help.archive_document.#{a}", default: "") }
+  end
+
   private
 
   def update_content_attributes
