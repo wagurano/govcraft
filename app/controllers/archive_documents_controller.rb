@@ -64,8 +64,9 @@ class ArchiveDocumentsController < ApplicationController
       :archive_id,
       :title, :body, :tag_list,
       :content_creator, :content_created_date, :content_created_time,
-      :content_source, :is_secret_content_source,
-      :content, :content_cache, :remove_content, :category_slug
+      :content_source, :content_recipients,
+      :content, :content_cache, :remove_content,
+      :category_slug, :donor, :is_secret_donor
     )
   end
 end

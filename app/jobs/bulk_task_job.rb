@@ -36,9 +36,8 @@ class BulkTaskJob
           current_index += 1
           is_success = false
 
-          row_data = fetch_data_all(row, attributes,
-            %i(title body content_creator content_created_date content_created_time content_source category_slug)).merge(
-            is_secret_content_source: (fetch_data(row, attributes, :is_secret_content_source) == '예'))
+          row_data = fetch_data_all(row, attributes, ArchiveDocument::XLXS_META.reject { |a| %i(content is_secret_donor).include? a }).merge(
+            is_secret_donor: (fetch_data(row, attributes, :is_secret_donor) == '예'))
 
           fetch_data(row, attributes, :remote_content_url)
 
@@ -111,19 +110,10 @@ class BulkTaskJob
   end
 
   def fetch_data_all(row, attributes, names)
-    Hash[names.map { |name| [name, fetch_data(row, attributes, name)] }]
-  end
-
-  def parse_colon_time(value)
-    value = value.try(:strip)
-    return [nil, nil, nil] if value.blank?
-
-    splits = value.split(':')
-    hour = splits[0].to_i if splits[0] !~ /\D/
-    min = splits[1].to_i if splits[1] !~ /\D/
-    sec = splits[2].to_i if splits[2] !~ /\D/
-
-    [hour, min || 0, sec || 0]
+    Hash[names.map { |name|
+      value = fetch_data(row, attributes, name)
+      [name, (value.is_a?(Numeric) ? value.to_i.to_s : value)]
+    }]
   end
 
   def init_google_session(bulk_task)

@@ -45,6 +45,9 @@
         = f.check_box :remove_content
         삭제하기
 
+  .form-group
+    = f.label :media_type
+    = f.select :media_type, ArchiveDocument.media_type.options, {}, class: 'form-control'
 
   .form-group
     = f.label :content_creator
@@ -53,16 +56,26 @@
   .form-group
     = f.label :content_source
     = f.text_field :content_source, class: 'form-control'
+
+  .form-group
+    = f.label :content_recipients
+    = f.text_field :content_recipients, class: 'form-control'
+
+  .form-group
+    = f.label :donor
+    = f.text_field :donor, class: 'form-control'
     .help-block
       %label{ style: 'font-weight: normal;' }
-        = f.check_box :is_secret_content_source
+        = f.check_box :is_secret_donor
         숨깁니다
 
   .row
     .col-sm-6
       .form-group
         = f.label :content_created_date
-        = f.date_field :content_created_date, class: 'form-control'
+        = f.text_field :content_created_date, class: 'form-control'
+      .help-block
+        %p 기록물의 생산년도, 월, 일 을 구분기호없이 8자리 입력(예:20160330) 생산년도만 알고 월/일을 모르는 경우 '20160000'으로, 일자를 모르는 경우 '20160300'으로 처리함
 
     .col-sm-6
       .form-group

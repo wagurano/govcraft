@@ -20,12 +20,20 @@ ko:
     reverted: '복원되었습니다!'
     xlsx_help:
       archive_document:
-        id: 비워두면 신규생성, 숫자를 적으면 해당 데이터업이트, END면 종료합니다.
-        content_created_date: "예) 2016-02-08"
-        content_created_time: "예) 11:20:30"
-        is_secret_content_source: 비밀일 때만 '예'를 기입
-        remote_content_url: 자료 다운로드 주소할 주소를 적습니다.
-        category_slug: 분류코드는 동일 파일의 '분류코드' 시트를 참조합니다.
+        id: "비워두면 신규생성, 숫자를 적으면 해당 숫자를 ID로 가지는 자료를 업데이트합니다. 만일 END이면 해당 행의 위까지 처리하고 종료합니다."
+        title: "[필수] 기록물의 원제목을 그대로 입력하는 것을 기준으로 하되, 원제만으로는 어떤 기록인지 확인하기 어려울 경우에는 임의의 제목을 입력함. 외국어 제목의 경우 번역해서 제목에 입력함"
+        body: "[필수] 기록물의 본문에 대한 요약, 내용적 특성, 첨부물에 대해 설명함"
+        tag_list: "기록물건의 검색시 유용한 단어를 입력하며 단어는 콤마(,)로 구분함"
+        donor: "기록물을 제공한 곳(기록물을 입수한 곳)의 풀네임을 입력함"
+        is_secret_donor: "기증자를 부득이하게 비공개해야 할 경우 '예'를 입력. 그외엔 비워둡니다"
+        media_type: "[필수] 문서, 사진, 도면, 영상, 음성 중에 고릅니다"
+        content_source: "기록물에 나타난 생산 조직, 출처 명칭을 입력함. 기록물에 나타나 있지 않다 하더라도 명확하게 출처를 알 수 있다면 해당 생산기관명을 입력함. 입력할때는 생산당시 시점의 풀네임으로 입력함. 생산처를 알 수 없을 경우에는 비워둡니다."
+        content_creator: "기록물의 직접적인 생산자, 업무담당자를 입력함. 도서 간행물 등의 자료일 경우에는 저자, 발행인을 입력"
+        content_created_date: "기록물의 생산년도, 월, 일 을 구분기호없이 8자리 입력(예:20160330) 생산년도만 알고 월/일을 모르는 경우 '20160000'으로, 일자를 모르는 경우 '20160300'으로 처리함"
+        content_created_time: "구체적인 생산시간이 필요한 자료일 경우에는 생산시각을 입력함 (예:09:11:54)"
+        content_recipients: "기록물에 나타난 수신처의 명칭을 입력함 수신처가 여러개일 경우 콤마(,)로 구분함. (기록물에 입력되어있는 그대로 등록함. 주로 공문서 등을 등록할 때 필요함)"
+        remote_content_url: "[필수] 자료 다운로드 주소할 주소를 적습니다."
+        category_slug: "[필수] 분류코드는 동일 파일의 '분류코드' 시트를 참조합니다."
   activerecord:
     models:
       poll_and_survey: 투표
@@ -153,11 +161,15 @@ ko:
         id: ID
         title: 제목
         body: 설명
+        media_type: 유형
         content_creator: 생산자
+        content_source: 생산처
         content_created_date: 생산일
         content_created_time: 생산시각
-        content_source:  생산처
-        is_secret_content_source: 생산처비밀 여부
+        content_recipients: 수신인
+        donor: 기증자(제공자)
+        is_secret_donor: 기증자 공개여부
+        tag_list: 태그
         remote_content_url: 자료 다운로드 주소
         category_slug: 분류코드
     errors:

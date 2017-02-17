@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216232325) do
+ActiveRecord::Schema.define(version: 20170217023522) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -41,26 +41,27 @@ ActiveRecord::Schema.define(version: 20170216232325) do
   end
 
   create_table "archive_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string   "title",                                              null: false
-    t.text     "body",                     limit: 65535
-    t.integer  "user_id",                                            null: false
-    t.integer  "archive_id",                                         null: false
-    t.integer  "comments_count",                         default: 0
-    t.integer  "likes_count",                            default: 0
+    t.string   "title",                                          null: false
+    t.text     "body",                 limit: 65535
+    t.integer  "user_id",                                        null: false
+    t.integer  "archive_id",                                     null: false
+    t.integer  "comments_count",                     default: 0
+    t.integer  "likes_count",                        default: 0
     t.string   "content_creator"
-    t.date     "content_created_date"
     t.string   "content_created_time"
     t.string   "content_source"
-    t.boolean  "is_secret_content_source"
-    t.string   "content",                                            null: false
-    t.string   "content_name",                                       null: false
-    t.string   "content_type",                                       null: false
+    t.string   "content",                                        null: false
+    t.string   "content_name",                                   null: false
+    t.string   "content_type",                                   null: false
     t.integer  "content_size"
-    t.integer  "archive_category_id"
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.string   "category_slug"
-    t.index ["archive_category_id"], name: "index_archive_documents_on_archive_category_id", using: :btree
+    t.string   "media_type",                                     null: false
+    t.string   "content_created_date"
+    t.string   "content_recipients"
+    t.string   "donor"
+    t.boolean  "is_secret_donor"
     t.index ["archive_id"], name: "index_archive_documents_on_archive_id", using: :btree
     t.index ["user_id"], name: "index_archive_documents_on_user_id", using: :btree
   end

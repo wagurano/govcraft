@@ -3,7 +3,7 @@ wb.add_worksheet(name: "자료") do |sheet|
   sheet.add_row ArchiveDocument.xlxs_human_attribute_names
   sheet.add_row ['']
   sheet.add_row ['END']
-  sheet.add_row ArchiveDocument.xlxs_human_attribute_helps
+  sheet.add_row ArchiveDocument.xlxs_human_attribute_helps.map { |help| word_wrap(help, line_width: 15) }, widths: [25] * ArchiveDocument.xlxs_human_attribute_helps.count
 end
 wb.add_worksheet(name: "분류코드") do |sheet|
   sheet.add_row ['이름', '코드']
