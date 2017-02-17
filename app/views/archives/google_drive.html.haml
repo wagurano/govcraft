@@ -1,0 +1,38 @@
+= render 'header', archive: @archive
+%section.page-block
+  .container
+    .ui.header.clearing
+      .content
+        구글드라이브 탐색
+        .sub.header
+          구글드라이브에 있는 파일을 탐색합니다.
+
+      = link_to "구글드라이브 #{'재' if @drive_session.present?}연결", auth_google_api_path(redirect_uri: google_drive_archive_path(@archive)), class: 'ui right floated button'
+
+    - if @files.try(:any?)
+      .ui.list
+        - if @parent_collection.present?
+          .item
+            %i.reply.icon
+            .content
+              .header
+                = link_to '상위폴더로', google_drive_archive_path(@archive, file_id: @parent_collection.id)
+        - @files.select{ |f| f.resource_type == 'folder' }.each do |file|
+          .item
+            %i.folder.icon
+            .content
+              .header
+                = link_to file.title, google_drive_archive_path(@archive, file_id: file.id, parent_id: @collection.id)
+      %hr
+
+      .ui.list
+        - @files.select{ |f| f.resource_type != 'folder' }.each do |file|
+          .item
+            %i.file.outline.icon
+            .content
+              .header
+                = link_to file.human_url, target: '_blank' do
+                  = file.title
+                  %i.fa.fa-external-link
+              .description= file.human_url
+

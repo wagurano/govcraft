@@ -102,4 +102,14 @@ class ApplicationController < ActionController::Base
     flash[:error] = '로봇이세요? 로봇 여부를 확인해 주세요'
     redirect_back(fallback_location: root_path)
   end
+
+  def init_google_drive_credentials(options = {})
+    Google::Auth::UserRefreshCredentials.new({
+      client_id: ENV['GOOGLE_CLIENT_ID'],
+      client_secret: ENV['GOOGLE_CLIENT_SECRET'],
+      scope: [
+        "https://www.googleapis.com/auth/drive",
+        "https://spreadsheets.google.com/feeds/",
+      ]}.merge(options))
+  end
 end

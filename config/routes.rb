@@ -97,6 +97,7 @@ Rails.application.routes.draw do
       get :attachment, on: :member
     end
     member do
+      get :google_drive
       get '/categories/edit', to: 'archives#edit_categories'
       patch :update_categories
       get '/categories/:category_slug', to: 'archives#show', as: :category
@@ -107,6 +108,8 @@ Rails.application.routes.draw do
     get :download, on: :member
   end
   resources :memorials
+  get 'google_api/auth_callback', to: 'google_api#auth_callback', as: :auth_callback_google_api
+  get 'google_api/auth', to: 'google_api#auth', as: :auth_google_api
 
   namespace :admin do
     root 'base#home', as: :home

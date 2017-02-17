@@ -55,6 +55,22 @@ class ArchivesController < ApplicationController
     redirect_to archives_path
   end
 
+  def google_drive
+    begin
+      @drive_session = current_user.google_drive_session
+      if params[:file_id].present?
+        @collection = @drive_session.try(:file_by_id, params[:file_id])
+      else
+        @collection = @drive_session.try(:root_collection)
+      end
+      if params[:parent_id].present?
+        @parent_collection = @drive_session.try(:file_by_id, params[:parent_id])
+      end
+      @files = @collection.files
+    rescue Google::Apis::AuthorizationError => e
+    end
+  end
+
   private
 
   def archive_params

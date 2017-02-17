@@ -50,13 +50,7 @@ class BulkTasksController < ApplicationController
   private
 
   def init_credentials(bulk_task)
-    Google::Auth::UserRefreshCredentials.new(
-      client_id: ENV['GOOGLE_CLIENT_ID'],
-      client_secret: ENV['GOOGLE_CLIENT_SECRET'],
-      scope: [
-        "https://www.googleapis.com/auth/drive",
-        "https://spreadsheets.google.com/feeds/",
-      ],
+    init_google_drive_credentials(
       state: bulk_task.id,
       redirect_uri: start_bulk_task_url)
   end
