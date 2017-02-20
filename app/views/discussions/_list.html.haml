@@ -1,10 +1,11 @@
 %section#discussions.page-block
   .ui.container.grid
     .column
-      %h3
-        = local_assigns[:title_label] || @project.try(:component_title, 'discussion')
-        %small
-          = link_to "글쓰기", new_discussion_path(project_id: @project)
+      - if @project.present?
+        %h3
+          = local_assigns[:title_label] || @project.try(:component_title, 'discussion')
+          %small
+            = link_to "글쓰기", new_discussion_path(project_id: @project)
       .panel.panel-default.panel-floating
         - if discussions.any?
           %ul.list-group.post-group
