@@ -1,28 +1,46 @@
-%section#discussions-in-project.page-block
-  .container
-    .panel
-      .panel-heading
-        %h4
-          = local_assigns[:title_label] || @project.try(:component_title, 'discussion')
-          %small
-            = link_to "글쓰기", new_discussion_path(project_id: @project)
-      - if discussions.any?
-        .panel-body
-          - discussions.each do |discussion|
-            = link_to discussion do
-              .discussion-content
-                %h3.discussion-title
-                  %span
-                    = discussion.title
-                %p.discussion-content
-                  = discussion.user.nickname
+%section#discussions.page-block
+  .ui.container
+    - if @project.present?
+      %h3
+        = local_assigns[:title_label] || @project.try(:component_title, 'discussion')
+        %small
+          = link_to "글쓰기", new_discussion_path(project_id: @project)
+    - else
+      %h3
+        = Discussion.model_name.human
+
+    - if discussions.any?
+      .ui.divided.items
+        - discussions.each do |discussion|
+          .item
+            .content
+              .ui.right.floated.primary.button
+                %i.fa.fa-heart
+                = discussion.merged_likes_count
+              %h4.header
+                = link_to discussion do
+                  = discussion.title
+                  - if discussion.comments.count > 0
+                    %small
+                      (#{discussion.comments.count})
+
+              .meta
+                - if @project.nil? && discussion.project
+                  .ui.basic.small.label
+                    = link_to discussion.project.title, discussion.project
+                %span.nickname
+                  %i.user.icon
+                  = link_to discussion.user.nickname, discussion.user
+                %span.created_at
+                  %i.calendar.icon
                   = date_f discussion.created_at
-                  %br
-                  = strip_tags discussion.body
-      - else
-        - if @project.present?
-          .panel-body
-            %small.text-muted
+
+    - else
+      - if @project.present?
+        .ui.icon.message
+          %i.inbox.icon
+          .content
+            .header
               아직 게시글이 없습니다. 이야기를 시작해 볼까요?
-              %br
-              = link_to "#{Discussion.model_name.human} 쓰기", new_discussion_path(project_id: @project)
+            %p
+              = link_to "게시글 쓰기", new_discussion_path(project_id: @project)
