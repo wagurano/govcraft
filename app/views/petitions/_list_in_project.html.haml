@@ -1,21 +1,27 @@
 %section#petitions-in-project.page-block
-  .container
-    %h4
-      = local_assigns[:title_label] || @project.try(:component_title, 'petition')
-      %small
-        = link_to "제안하기", new_petition_path(project_id: @project)
-  - if petitions.any?
-    - petitions.each do |petition|
-      .petition-container{class: (petition.read_attribute(:cover_image).present? ? 'petition--cover-image' : 'petition--no-cover-image'), style: ("background-image: url(#{asset_url(petition.cover_image)});" if petition.read_attribute(:cover_image).present?)}
-        = link_to petition do
-          .container
-            .row
-              .col-sm-10
-                %h3.petition-title
-                  = petition.title
-                .petition-body
-                  = strip_tags petition.body
-              .col-sm-2
-                .text-center
-                  .btn.btn-lg.btn-petition
-                    #{petition.percentage}% 달성
+  .ui.container
+    - if @project.present?
+      %h4
+        = local_assigns[:title_label] || @project.try(:component_title, 'petition')
+        %small
+          = link_to "제안하기", new_petition_path(project_id: @project)
+
+  .ui.list
+    - if petitions.any?
+      - petitions.each do |petition|
+        .item
+          .petition-container{class: (petition.read_attribute(:cover_image).present? ? 'petition--cover-image' : 'petition--no-cover-image'), style: ("background-image: url(#{asset_url(petition.cover_image)});" if petition.read_attribute(:cover_image).present?)}
+            = link_to petition do
+              .ui.container
+                .right.floated.content
+                  .ui.primary.button
+                    - if petition.has_goal?
+                      #{petition.percentage}% 달성
+                    - else
+                      #{number_with_delimiter(petition.signs_count)}명 참여
+
+                .content
+                  %h3.ui.header.petition-title
+                    = petition.title
+                  .petition-body
+                    = strip_tags petition.body

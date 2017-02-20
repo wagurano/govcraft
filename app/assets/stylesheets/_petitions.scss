@@ -19,22 +19,17 @@ section#petitions-in-project {
     background-size: cover;
     background-repeat: no-repeat;
     background-color: #f5f5f5;
+    padding: 30px 0;
 
     &.petition--cover-image {
       @include texture-darken;
     }
 
-    .container {
-      padding: 50px 0;
-    }
-
-    .row {
-      margin: 0;
+    .content {
+      position: relative;
     }
 
     .petition-title {
-      font-weight: bold;
-      font-size: 32px;
       margin-top: 0;
       margin-bottom: 20px;
       @media (max-width: $screen-xs-max) {
@@ -44,10 +39,6 @@ section#petitions-in-project {
     .petition-body {
       max-height: 4em;
       @include multi-text-ellipsis(3);
-    }
-
-    &.petition--no-cover-image + .petition-container.petition--no-cover-image {
-      border-top: 1px solid $gray-lighter;
     }
 
     > a {
@@ -61,14 +52,6 @@ section#petitions-in-project {
       .petition-title {
         color: #fff;
         text-shadow: 1px 1px 0px #000;
-      }
-    }
-
-    .btn-petition {
-      background: #495CD0;
-      color: #fff;
-      @media (max-width: $screen-xs-max) {
-        margin-top: 14px;
       }
     }
   }

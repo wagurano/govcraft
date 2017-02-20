@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170217023522) do
     t.index ["user_id"], name: "index_agendas_on_user_id", using: :btree
   end
 
-  create_table "archive_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "archive_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "archive_id", null: false
     t.integer  "parent_id"
     t.string   "slug",       null: false
