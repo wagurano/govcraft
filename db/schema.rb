@@ -212,7 +212,7 @@ ActiveRecord::Schema.define(version: 20170217023522) do
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
 
-  create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "user_id",    null: false
     t.integer  "survey_id",  null: false
     t.integer  "option_id",  null: false
@@ -287,7 +287,7 @@ ActiveRecord::Schema.define(version: 20170217023522) do
     t.index ["survey_id"], name: "index_options_on_survey_id", using: :btree
   end
 
-  create_table "participations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "participations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "user_id",    null: false
     t.integer  "project_id", null: false
     t.datetime "created_at", null: false
