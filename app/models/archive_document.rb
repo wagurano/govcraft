@@ -1,7 +1,7 @@
 class ArchiveDocument < ApplicationRecord
   acts_as_taggable
 
-  XLXS_META = %i(id title body content_creator content_created_date
+  BULK_META = %i(id title body content_creator content_created_date
     content_created_time content_source donor is_secret_donor
     content_recipients media_type
     remote_content_url category_slug tag_list)
@@ -48,12 +48,16 @@ class ArchiveDocument < ApplicationRecord
     [year, (month if month != "00"), (day if day != "00")]
   end
 
-  def self.xlxs_human_attribute_names
-    XLXS_META.map { |a| human_attribute_name(a) }
+  def self.bulk_human_attribute_names
+    BULK_META.map { |a| human_attribute_name(a) }
   end
 
-  def self.xlxs_human_attribute_helps
-    XLXS_META.map { |a| I18n.t("messages.xlsx_help.archive_document.#{a}", default: "") }
+  def self.bulk_human_attribute_helps
+    BULK_META.map { |a| I18n.t("messages.xlsx_help.archive_document.#{a}", default: "") }
+  end
+
+  def self.bulk_attribute_index(attribute)
+    BULK_META.index(attribute.to_sym)
   end
 
   private

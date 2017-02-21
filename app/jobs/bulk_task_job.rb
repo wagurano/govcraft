@@ -16,7 +16,7 @@ class BulkTaskJob
       inserted_count = 0
       errors = {}
 
-      attributes = ArchiveDocument::XLXS_META
+      attributes = ArchiveDocument::BULK_META
 
       if @bulk_task.attachment.blank?
         @bulk_task.update_attributes(
@@ -36,7 +36,7 @@ class BulkTaskJob
           current_index += 1
           is_success = false
 
-          row_data = fetch_data_all(row, attributes, ArchiveDocument::XLXS_META.reject { |a| %i(content is_secret_donor).include? a }).merge(
+          row_data = fetch_data_all(row, attributes, ArchiveDocument::BULK_META.reject { |a| %i(content is_secret_donor).include? a }).merge(
             is_secret_donor: (fetch_data(row, attributes, :is_secret_donor) == '예'))
 
           fetch_data(row, attributes, :remote_content_url)

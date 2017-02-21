@@ -1,13 +1,28 @@
+archive ||= @archive
+google_drive_files ||= @google_drive_files
+default_category_slug ||= @default_category_slug
+
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "자료") do |sheet|
-  sheet.add_row ArchiveDocument.xlxs_human_attribute_names
-  sheet.add_row ['']
-  sheet.add_row ['END']
-  sheet.add_row ArchiveDocument.xlxs_human_attribute_helps.map { |help| word_wrap(help, line_width: 15) }, widths: [25] * ArchiveDocument.xlxs_human_attribute_helps.count
+  sheet.add_row ArchiveDocument.bulk_human_attribute_names
+  if google_drive_files.blank?
+    sheet.add_row [ nil ]
+  else
+    google_drive_files.each do |drive_file|
+      data_set = [ nil ] * ArchiveDocument::BULK_META.size
+      data_set[ ArchiveDocument.bulk_attribute_index(:title) ] = drive_file.title
+      data_set[ ArchiveDocument.bulk_attribute_index(:remote_content_url) ] = drive_file.human_url
+      data_set[ ArchiveDocument.bulk_attribute_index(:category_slug) ] = default_category_slug
+      sheet.add_row data_set
+    end
+  end
+  sheet.add_row [ nil ]
+  sheet.add_row [t('messages.xlsx_help.end_line')]
+  sheet.add_row ArchiveDocument.bulk_human_attribute_helps.map { |help| word_wrap(help, line_width: 15) }, widths: [25] * ArchiveDocument.bulk_human_attribute_helps.count
 end
 wb.add_worksheet(name: "분류코드") do |sheet|
   sheet.add_row ['이름', '코드']
-  @archive.categories.each do |category|
+  archive.categories.each do |category|
     sheet.add_row [category.name]
     category.children.each do |subcategory|
       sheet.add_row [subcategory.name, subcategory.slug]
