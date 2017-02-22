@@ -52,7 +52,9 @@ class BulkTasksController < ApplicationController
       begin
         @drive_session = current_user.google_drive_session
         @collection = @drive_session.try(:file_by_id, params[:file_id])
-        @google_drive_files = @collection.try(:files)
+        all_files = @collection.try(:files)
+        only_files = all_files.reject{ |f| f.resource_type == 'folder' }
+        @google_drive_files = only_files.sort_by! { |file| file.title }
         @default_category_slug = params[:default_category_slug]
       rescue Google::Apis::AuthorizationError => e
         redirect_to auth_google_api_path(redirect_uri: template_archive_bulk_tasks_path(params))

@@ -66,7 +66,7 @@ class ArchivesController < ApplicationController
       if params[:parent_id].present?
         @parent_collection = @drive_session.try(:file_by_id, params[:parent_id])
       end
-      @files = @collection.try(:files)
+      @files = @collection.try(:files).sort_by { |file| file.title }
     rescue Google::Apis::AuthorizationError => e
     end
   end
