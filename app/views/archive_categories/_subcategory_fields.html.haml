@@ -13,3 +13,8 @@
     .form-group.col-xs-12.col-sm-5
       = f.label :name
       = f.text_field :name, { class: 'form-control' }
+
+    .form-group.col-xs-12.col-sm-10
+      = f.label :desc
+      ~ f.text_area :desc, { class: 'form-control' }
+

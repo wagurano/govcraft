@@ -8,6 +8,7 @@ class ArchivesController < ApplicationController
 
   def show
     @documents = @archive.documents
+    @category = @archive.all_categories.find_by(slug: params[:category_slug])
     @documents = @documents.tagged_with(params[:tag]) if params[:tag].present?
     @documents = @documents.where(category_slug: params[:category_slug]) if params[:category_slug].present?
   end
@@ -77,7 +78,7 @@ class ArchivesController < ApplicationController
     params.require(:archive).permit(:title, :body, :cover_image, :cover_image_cache,
       :remove_cover_image, :social_image, :social_image_cache, :remove_social_image,
       :google_drive_client_id, :google_drive_client_secret,
-      categories_attributes: [ :id, :slug, :name, :_destroy, children_attributes: [ :archive_id, :id, :slug, :name, :_destroy ] ] )
+      categories_attributes: [ :id, :slug, :name, :desc, :_destroy, children_attributes: [ :archive_id, :id, :slug, :name, :_destroy ] ] )
   end
 
   def reset_meta_tags

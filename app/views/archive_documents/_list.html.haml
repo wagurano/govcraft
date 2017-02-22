@@ -4,13 +4,19 @@
       .hidden-xs.col-sm-3
         .ui.vertical.menu
           - @archive.categories.each do |category|
-            .item
+            .item{ class: ('active' if category == @category.try(:parent)) }
               .header= category.name
               .menu
                 - category.children.each do |subcategory|
-                  .item= link_to subcategory.name, category_archive_path(@archive, category_slug: subcategory.slug)
+                  .item{ class: ('active' if subcategory == @category) }
+                    = link_to subcategory.name, category_archive_path(@archive, category_slug: subcategory.slug)
 
       .col-sm-9.col-xs-12
+        - if @category.present?
+          %h2.ui.header
+            = @category.name
+            - if @category.desc.present?
+              .sub.header= @category.desc
         - if @documents.empty?
           .ui.message
             %p 해당 자료가 없습니다.

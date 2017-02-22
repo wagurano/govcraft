@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217023522) do
+ActiveRecord::Schema.define(version: 20170222143028) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -28,12 +28,13 @@ ActiveRecord::Schema.define(version: 20170217023522) do
   end
 
   create_table "archive_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.integer  "archive_id", null: false
+    t.integer  "archive_id",               null: false
     t.integer  "parent_id"
-    t.string   "slug",       null: false
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "slug",                     null: false
+    t.string   "name",                     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.text     "desc",       limit: 65535
     t.index ["archive_id", "slug"], name: "index_archive_categories_on_archive_id_and_slug", unique: true, using: :btree
     t.index ["archive_id"], name: "index_archive_categories_on_archive_id", using: :btree
     t.index ["parent_id"], name: "index_archive_categories_on_parent_id", using: :btree
