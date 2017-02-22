@@ -16,6 +16,8 @@ class ArchiveDocument < ApplicationRecord
   belongs_to :category, class_name: ArchiveCategory, optional: true, primary_key: :slug, foreign_key: :category_slug
   has_many :comments, as: :commentable
 
+  attr_accessor :google_access_token
+
   mount_uploader :content, PrivateFileUploader
 
   validates :title, presence: true
@@ -48,6 +50,12 @@ class ArchiveDocument < ApplicationRecord
     [year, (month if month != "00"), (day if day != "00")]
   end
 
+  # bulk
+
+  def self.bulk_attributes
+    BULK_META
+  end
+
   def self.bulk_human_attribute_names
     BULK_META.map { |a| human_attribute_name(a) }
   end
@@ -60,12 +68,48 @@ class ArchiveDocument < ApplicationRecord
     BULK_META.index(attribute.to_sym)
   end
 
+  def before_process_bulk(bulk_task)
+    self.archive = bulk_task.archive
+    self.google_access_token = bulk_task.google_access_token
+    self.user = bulk_task.user
+  end
+
+  def process_bulk_of_is_secret_donor(value)
+    if value == "예"
+      self.is_secret_donor = true
+    else
+      self.is_secret_donor = false
+    end
+  end
+
+  def process_bulk_of_remote_content_url(value)
+    return if value.blank?
+
+    download_content(value)
+  end
+
   private
 
   def update_content_attributes
     if content.present? && content_changed?
       self.content_type = content.file.content_type
       self.content_size = content.file.size
+    end
+  end
+
+  def download_content(url)
+    begin
+      google_file = google_drive_session.file_by_url(url)
+    rescue GoogleDrive::Error
+      self.remote_content_url = url
+      return
+    end
+
+    Tempfile.open(['archive', File.extname(google_file.title)]) do |temp_file|
+      google_file.download_to_file(temp_file.path)
+
+      self.content = temp_file.open
+      self.content_name = google_file.title
     end
   end
 end

@@ -17,7 +17,6 @@ wb.add_worksheet(name: "자료") do |sheet|
     end
   end
   sheet.add_row [ nil ]
-  sheet.add_row [t('messages.xlsx_help.end_line')]
   sheet.add_row ArchiveDocument.bulk_human_attribute_helps.map { |help| word_wrap(help, line_width: 15) }, widths: [25] * ArchiveDocument.bulk_human_attribute_helps.count
 end
 wb.add_worksheet(name: "분류코드") do |sheet|

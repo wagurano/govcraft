@@ -106,11 +106,6 @@ class User < ApplicationRecord
     where(conditions.to_h).first
   end
 
-  def google_drive_session
-    return if google_access_token.blank?
-    GoogleDrive::Session.from_access_token(google_access_token)
-  end
-
   private
 
   def set_uid
