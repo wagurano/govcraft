@@ -47,6 +47,19 @@ class BulkTasksController < ApplicationController
     redirect_to archive_bulk_tasks_path(@archive)
   end
 
+  def template
+    if params[:file_id].present?
+      begin
+        @drive_session = current_user.google_drive_session
+        @collection = @drive_session.try(:file_by_id, params[:file_id])
+        @google_drive_files = @collection.try(:files)
+        @default_category_slug = params[:default_category_slug]
+      rescue Google::Apis::AuthorizationError => e
+        redirect_to auth_google_api_path(redirect_uri: template_archive_bulk_tasks_path(params))
+      end
+    end
+  end
+
   private
 
   def init_credentials(bulk_task)
