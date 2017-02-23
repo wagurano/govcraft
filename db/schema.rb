@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222143028) do
+ActiveRecord::Schema.define(version: 20170223023839) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -145,6 +145,15 @@ ActiveRecord::Schema.define(version: 20170222143028) do
     t.string  "video_url"
     t.integer "speech_id"
     t.index ["speech_id"], name: "index_citizen2017_speeches_on_speech_id", using: :btree
+  end
+
+  create_table "clypits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "archive_document_id", null: false
+    t.string   "audio_file_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["archive_document_id"], name: "index_clypits_on_archive_document_id", using: :btree
+    t.index ["audio_file_id"], name: "index_clypits_on_audio_file_id", using: :btree
   end
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

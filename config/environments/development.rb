@@ -55,3 +55,4 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end
+Rails.application.routes.default_url_options[:host] = "http://govcraft.dev"

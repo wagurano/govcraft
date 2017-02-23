@@ -15,6 +15,7 @@ class ArchiveDocument < ApplicationRecord
   belongs_to :archive
   belongs_to :category, class_name: ArchiveCategory, optional: true, primary_key: :slug, foreign_key: :category_slug
   has_many :comments, as: :commentable
+  has_one :clypit, dependent: :destroy
 
   attr_accessor :google_access_token
 

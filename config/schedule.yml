@@ -14,4 +14,8 @@ summary_mailing_job:
   class: SummaryMailingJob
   cron: "15 5 * * 1 Asia/Seoul"
   queue: default
+clypit_job:
+  class: ClypitJob
+  cron: "*/5 * * * * Asia/Seoul"
+  queue: default
 
