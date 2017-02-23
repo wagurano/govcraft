@@ -89,10 +89,7 @@ class BulkTaskJob
   end
 
   def empty_row? row, model_class
-    Rails.logger.debug model_class.bulk_attributes.size
     row[0..model_class.bulk_attributes.size].all? do |cell|
-      Rails.logger.debug "XXX"
-      Rails.logger.debug cell.try(:formatted_value).try(:strip)
       cell.nil? or cell.formatted_value.try(:strip).blank?
     end
   end
