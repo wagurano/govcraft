@@ -45,6 +45,7 @@ gem 'nokogiri', '~> 1.7', '>= 1.7.0.1'
 gem 'roo', '~> 2.7', '>= 2.7.1'
 gem 'google_drive'
 gem 'rest-client', '~> 2.0'
+gem 'streamio-ffmpeg'
 
 # assets
 source 'https://rails-assets.org' do

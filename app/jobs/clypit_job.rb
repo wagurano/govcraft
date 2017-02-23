@@ -20,6 +20,13 @@ class ClypitJob
         open(temp_file, 'wb') do |f|
           f << open(document.content.url).read
         end
+
+        extname = File.extname(temp_file)
+        unless %w(.mp3 .ogg .m4a .wav .aiff .aif .3gpp).include? extname
+          new_temp_file = "#{dir}/#{File.basename(temp_file)}.wav"
+          FFMPEG::Movie.new(temp_file).transcode(new_temp_file)
+          temp_file = new_temp_file
+        end
         @data = open temp_file
       end
     else
@@ -54,6 +61,7 @@ class ClypitJob
     rescue RestClient::ExceptionWithResponse => e
       logger.info("Clypit Auth fail : ")
       logger.info e.inspect
+      logger.info e.response
     end
 
     begin
@@ -78,6 +86,7 @@ class ClypitJob
     rescue RestClient::ExceptionWithResponse => e
       logger.info("Clypit Upload fail : ")
       logger.info e.inspect
+      logger.info e.response
     end
 
     document.save!
