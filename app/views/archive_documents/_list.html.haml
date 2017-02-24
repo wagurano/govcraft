@@ -12,11 +12,13 @@
                     = link_to subcategory.name, category_archive_path(@archive, category_slug: subcategory.slug)
 
       .col-sm-9.col-xs-12
-        - if @category.present?
-          %h2.ui.header
-            = @category.name
-            - if @category.desc.present?
-              .sub.header= @category.desc
+        %h2.ui.header
+          - if @category.present?
+            #{@category.name} (#{@documents.total_count})
+          - else
+            전체 자료 (#{@documents.total_count})
+          - if @category.try(:desc).present?
+            .sub.header= @category.desc
         - if @documents.empty?
           .ui.message
             %p 해당 자료가 없습니다.
@@ -44,6 +46,8 @@
                       - document.tags.each do |tag|
                         .ui.label= tag
 
+        .text-center
+          = paginate @documents, theme: 'twitter-bootstrap-3'
 
         - if can? :manage, @archive
           = link_to '자료입력', new_archive_document_path(archive_id: @archive.id, category_slug: params[:category_slug]), class: 'ui primary button'
