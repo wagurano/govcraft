@@ -24,6 +24,10 @@
               = file_type_icon(@archive_document.content_type)
               #{@archive_document.content_name}
               %i.fa.fa-download
+          - if @archive_document.clypit.present?
+            .clypit
+              %iframe{ frameborder: "0", height: "160", src: "https://clyp.it/#{@archive_document.clypit.audio_file_id}/widget", width: "100%"}
+
         - if @archive_document.image?
           .panel-body
             .image
