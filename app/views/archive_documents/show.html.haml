@@ -56,7 +56,7 @@
 
       - if @archive_document.donor.present?
         %div
-          기증자(제공자): #{@archive_document.is_secret_donor ? '비공개' : @archive_document.donor}
+          출처(제공자): #{@archive_document.is_secret_donor ? '비공개' : @archive_document.donor}
 
 
       등록일: #{l @archive_document.created_at}
