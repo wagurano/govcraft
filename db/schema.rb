@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223023839) do
+ActiveRecord::Schema.define(version: 20170225055106) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -51,9 +51,9 @@ ActiveRecord::Schema.define(version: 20170223023839) do
     t.string   "content_creator"
     t.string   "content_created_time"
     t.string   "content_source"
-    t.string   "content",                                        null: false
-    t.string   "content_name",                                   null: false
-    t.string   "content_type",                                   null: false
+    t.string   "content"
+    t.string   "content_name"
+    t.string   "content_type"
     t.integer  "content_size"
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false

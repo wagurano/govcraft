@@ -33,11 +33,16 @@ class ArchiveDocument < ApplicationRecord
     :content_name
   end
 
+  def has_content?
+    read_attribute(:content).present?
+  end
+
   def image?
-    content_type.start_with? 'image'
+    content_type.try(:start_with?, 'image')
   end
 
   def valid_name
+    return false if content_name.blank?
     self.content_name.gsub(/\\+/, "%20")
   end
 
@@ -92,13 +97,15 @@ class ArchiveDocument < ApplicationRecord
   private
 
   def update_content_attributes
-    if content.present? && content_changed?
+    if read_attribute(:content).present? && content_changed?
       self.content_type = content.file.content_type
       self.content_size = content.file.size
     end
   end
 
   def download_content(url)
+    return if read_attribute(:content).blank?
+
     begin
       google_file = google_drive_session.file_by_url(url)
     rescue GoogleDrive::Error

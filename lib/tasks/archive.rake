@@ -1,33 +1,66 @@
 namespace :archive do
-  desc "인자 [:archive_id, :google_folder_id]가 필수, 구글드라이브 폴더내의 파일을 아카이브업로드포멧 엑셀로 만듭니다."
-  task 'generate_format:google_drive', [:archive_id, :default_category_slug, :google_folder_id] => :environment do |t, args|
-    session = GoogleDrive::Session.from_config("google-drive-config.json")
-    collection = session.file_by_id(args[:google_folder_id])
-    if collection.resource_type != 'folder'
-      puts "폴더가 아닙니다"
-      return
-    end
+  desc "특조위 자료 업로드"
+  task 'inv_board', [:file_path] => :environment do |t, args|
+    xlsx = Roo::Spreadsheet.open args[:file_path]
 
-    archive = Archive.find_by(id: args[:archive_id])
-    if archive.blank?
-      puts "해당 아카이브를 찾을 수 없습니다"
-      return
-    end
-    unless archive.subcategories.exists? slug: args[:default_category_slug]
-      puts "해당 카테고리를 찾을 수 없습니다"
-      return
-    end
+    archive = Archive.find_by(id: 1)
 
-    puts ApplicationController.renderer.render(
-      handlers: [:axlsx],
-      layout: false,
-      template: '/bulk_tasks/template',
-      formats: [:xlsx],
-      locals: {
-        archive: archive,
-        google_drive_files: collection.files,
-        default_category_slug: args[:default_category_slug]
-      }
-    )
+    attributes_map = { code: 3, report_date: 6, title: 8,
+      recipients: 9, reporter: 10, reviewer: 11,
+      open_level: 15, open_desc: 24, open_reclassification: 26}
+    attributes_count = 45
+    xlsx.sheet(2).each_row_streaming(offset: 1, pad_cells: true) do |row|
+      if empty_row?(row, attributes_count)
+        break
+      end
+
+      row_data = fetch_all(row, attributes_map)
+
+      document = archive.documents.build
+      document.user = User.find_by(nickname: '달리')
+      document.title = row_data[:code]
+      document.body = """
+        <div class='inv-documents'>
+          <p>#{row_data[:title]}</p>
+          <ul>
+            #{list_item(row_data, '보고자', :reporter)}
+            #{list_item(row_data, '검토자', :reviewer)}
+            #{list_item(row_data, '공개구분', :open_level)}
+            #{list_item(row_data, '비공개사유', :open_desc)}
+            #{list_item(row_data, '공개구분 재분류', :open_reclassification)}
+          </ul>
+        </div>
+      """
+      document.media_type = '문서'
+      document.content_creator = row_data[:reporter]
+      document.content_recipients = row_data[:recipients]
+      report_date = row_data[:report_date]
+      if report_date.present?
+        year, month, day = report_date.split('.')
+        document.content_created_date = "#{year}#{month.presence || '00'}#{day.presence || '00'}"
+      end
+      document.category_slug = 'inv-documents'
+      document.save!
+    end
+  end
+
+  def fetch_all(row, attributes_map)
+    Hash[attributes_map.map do |attribute, index|
+      [attribute, fetch_data(row, index)]
+    end]
+  end
+
+  def fetch_data(row, index)
+    row[index].try(:formatted_value)
+  end
+
+  def empty_row? row, attributes_count
+    row[0...attributes_count].all? do |cell|
+      cell.nil? or cell.formatted_value.try(:strip).blank?
+    end
+  end
+
+  def list_item(row_data, label, attribute)
+    "<li>#{label}: #{row_data[attribute]}</li>" if row_data[attribute].present?
   end
 end

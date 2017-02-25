@@ -17,49 +17,51 @@
         = link_to '삭제', @archive_document, method: :delete, data: { confirm: '삭제하시겠습니까?' }
 
     .post-block__content
-      .panel.panel-default
-        .panel-heading
-          .download
-            = link_to [:download, @archive_document] do
-              = file_type_icon(@archive_document.content_type)
-              #{@archive_document.content_name}
-              %i.fa.fa-download
-          - if @archive_document.clypit.present?
-            .clypit
-              %iframe{ frameborder: "0", height: "160", src: "https://clyp.it/#{@archive_document.clypit.audio_file_id}/widget", width: "100%"}
+      - if @archive_document.has_content?
+        .panel.panel-default
+          .panel-heading
+            .download
+              = link_to [:download, @archive_document] do
+                = file_type_icon(@archive_document.content_type)
+                #{@archive_document.content_name}
+                %i.fa.fa-download
+            - if @archive_document.clypit.present?
+              .clypit
+                %iframe{ frameborder: "0", height: "160", src: "https://clyp.it/#{@archive_document.clypit.audio_file_id}/widget", width: "100%"}
 
-        - if @archive_document.image?
-          .panel-body
-            .image
-              = image_tag @archive_document.content.md.url
+          - if @archive_document.image?
+            .panel-body
+              .image
+                = image_tag @archive_document.content.md.url
 
     .post-block__body
       = raw @archive_document.body
 
-    .well.well-mute
-      - if @archive_document.content_source.present?
+    .panel.panel-default
+      .panel-heading
+        - if @archive_document.content_source.present?
+          %div
+            생산처: #{@archive_document.content_source}
+
+        - if @archive_document.content_creator.present?
+          %div
+            생산자: #{@archive_document.content_creator}
+
+        - if @archive_document.content_created_date.present?
+          - year, month, day = @archive_document.parse_content_created_date
+          %div
+            생산일: #{[year.try('+', '.'), month.try('+', '.'), day.try('+', '.')].compact.join('')} #{@archive_document.content_created_time}
+
+        - if @archive_document.content_recipients.present?
+          %div
+            수신인: #{@archive_document.content_recipients}
+
+        - if @archive_document.donor.present?
+          %div
+            출처(제공자): #{@archive_document.is_secret_donor ? '비공개' : @archive_document.donor}
+
         %div
-          생산처: #{@archive_document.content_source}
-
-      - if @archive_document.content_creator.present?
-        %div
-          생산자: #{@archive_document.content_creator}
-
-      - if @archive_document.content_created_date.present?
-        - year, month, day = @archive_document.parse_content_created_date
-        %div
-          생산일: #{[year.try('+', '년'), month.try('+', '월'), day.try('+', '일')].compact.join(' ')} #{@archive_document.content_created_time}
-
-      - if @archive_document.content_recipients.present?
-        %div
-          수신인: #{@archive_document.content_recipients}
-
-      - if @archive_document.donor.present?
-        %div
-          출처(제공자): #{@archive_document.is_secret_donor ? '비공개' : @archive_document.donor}
-
-
-      등록일: #{l @archive_document.created_at}
+          등록일: #{l @archive_document.created_at}
 
     .post-block__comments
       = render 'comments/list', commentable: @archive_document
