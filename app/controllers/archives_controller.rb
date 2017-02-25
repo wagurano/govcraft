@@ -7,8 +7,8 @@ class ArchivesController < ApplicationController
   end
 
   def show
-    @documents = @archive.documents
     @category = @archive.all_categories.find_by(slug: params[:category_slug])
+    @documents = @archive.documents
     @documents = @documents.tagged_with(params[:tag]) if params[:tag].present?
     @documents = @documents.where(category_slug: params[:category_slug]) if params[:category_slug].present?
     @documents = @documents.page(params[:page])
