@@ -4,6 +4,7 @@ namespace :archive do
     xlsx = Roo::Spreadsheet.open args[:file_path]
 
     archive = Archive.find_by(id: 1)
+    archive.documents.where(category_slug: 'inv-documents').destroy_all
 
     attributes_map = { code: 3, report_date: 6, title: 8,
       recipients: 9, reporter: 10, reviewer: 11,
@@ -18,11 +19,12 @@ namespace :archive do
 
       document = archive.documents.build
       document.user = User.find_by(nickname: '달리')
-      document.title = row_data[:code]
+      document.title = "[#{row_data[:code]}] #{row_data[:title]}"
       document.body = """
         <div class='inv-documents'>
           <p>#{row_data[:title]}</p>
           <ul>
+            #{list_item(row_data, '문서번호', :code)}
             #{list_item(row_data, '보고자', :reporter)}
             #{list_item(row_data, '검토자', :reviewer)}
             #{list_item(row_data, '공개구분', :open_level)}
