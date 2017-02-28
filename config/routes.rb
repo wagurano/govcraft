@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   get 'about', to: 'pages#about', as: :about
-  get 'weekly', to: 'pages#weekly', as: :weekly
 
   resources :users
   resources :comments
