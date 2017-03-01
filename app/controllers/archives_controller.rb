@@ -14,6 +14,10 @@ class ArchivesController < ApplicationController
     @documents = @documents.page(params[:page])
   end
 
+  def recent_documents
+    @documents = @archive.documents.reorder('').recent.limit(10)
+  end
+
   def download
     @archive = Archive.find(params[:id])
     respond_to do |format|

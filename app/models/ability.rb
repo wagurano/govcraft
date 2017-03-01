@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can [:read, :search, :social_card], :all
+    can [:read, :search, :social_card, :recent_documents], :all
     can [:events], Project
     can :create, [Sign, Comment, Like]
     can :cancel, Like

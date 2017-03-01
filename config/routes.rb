@@ -92,6 +92,7 @@ Rails.application.routes.draw do
   end
   resources :timeline_documents
   resources :archives do
+    get :recent_documents, on: :member
     resources :bulk_tasks do
       get :attachment, on: :member
       get :template, on: :collection
