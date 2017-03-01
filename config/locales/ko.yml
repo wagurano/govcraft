@@ -165,13 +165,39 @@ ko:
         content_creator: 생산자
         content_source: 생산처
         content_created_date: 생산일
+        content_created_date: 생산일
         content_created_time: 생산시각
-        content_recipients: 수신인
+        human_formatted_content_created_datetime: 생산일시
+        content_recipients: 수(발)신인
         donor: 출처(제공자)
+        human_formatted_donor: 출처(제공자)
         is_secret_donor: 출처(제공자) 비공개여부
         tag_list: 태그
         remote_content_url: 자료 다운로드 주소
         category_slug: 분류코드
+      archive/sewol_inv_document:
+        part_no: 부서번호
+        part_name: 부서
+        code: 부서-연도-문서번호
+        doc_no: 문서번호
+        report_date: 보고일자
+        doc_type: 문서구분
+        title: 제목
+        recipients: 수(발)신자
+        reporter: 보고자
+        reviewer: 검토자
+        has_attachment: 붙임
+        status: 상태
+        doc_kind: 종류
+        open_type: 공개구분
+        open_level_desc: 비공개사유
+        open_retype: 공개구분 재분류
+        open_relevel_desc: 비공개사유 재분류
+        partial_open_redaction: 부분공개시 편집수정(redaction) 참조사항
+        prod_code_no: 생산등록 번호
+        task_card_name: 과제카드명
+        task_name: 과제명
+        task_storaging_period: 과제보존기간
     errors:
       models:
         user:

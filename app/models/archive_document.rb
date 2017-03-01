@@ -16,6 +16,7 @@ class ArchiveDocument < ApplicationRecord
   belongs_to :category, class_name: ArchiveCategory, optional: true, primary_key: :slug, foreign_key: :category_slug
   has_many :comments, as: :commentable
   has_one :clypit, dependent: :destroy
+  has_one :sewol_inv_document, dependent: :nullify, class_name: Archive::SewolInvDocument
 
   attr_accessor :google_access_token
 
@@ -92,6 +93,15 @@ class ArchiveDocument < ApplicationRecord
     return if value.blank?
 
     download_content(value)
+  end
+
+  def human_formatted_content_created_datetime
+    year, month, day = parse_content_created_date
+    "#{[year.try('+', '.'), month.try('+', '.'), day.try('+', '.')].compact.join('')} #{content_created_time}".try(:strip)
+  end
+
+  def human_formatted_donor
+    "#{is_secret_donor ? '비공개' : donor}"
   end
 
   private

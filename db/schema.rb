@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170225055106) do
+ActiveRecord::Schema.define(version: 20170228143750) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -65,6 +65,33 @@ ActiveRecord::Schema.define(version: 20170225055106) do
     t.boolean  "is_secret_donor"
     t.index ["archive_id"], name: "index_archive_documents_on_archive_id", using: :btree
     t.index ["user_id"], name: "index_archive_documents_on_user_id", using: :btree
+  end
+
+  create_table "archive_sewol_inv_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+    t.integer "archive_document_id"
+    t.string  "part_no"
+    t.string  "part_name"
+    t.string  "code"
+    t.string  "doc_no"
+    t.string  "report_date"
+    t.string  "doc_type"
+    t.string  "title"
+    t.string  "recipients"
+    t.string  "reporter"
+    t.string  "reviewer"
+    t.string  "has_attachment"
+    t.string  "status"
+    t.string  "doc_kind"
+    t.string  "open_type"
+    t.text    "open_level_desc",        limit: 65535
+    t.string  "open_retype"
+    t.text    "open_relevel_desc",      limit: 65535
+    t.string  "partial_open_redaction"
+    t.string  "prod_code_no"
+    t.string  "task_card_name"
+    t.string  "task_name"
+    t.string  "task_storaging_period"
+    t.index ["archive_document_id"], name: "index_archive_sewol_inv_documents_on_archive_document_id", using: :btree
   end
 
   create_table "archives", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

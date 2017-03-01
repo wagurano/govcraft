@@ -18,7 +18,7 @@
         - @archive_document.archive.categories.each do |category|
           %optgroup{ label: category.name }
           - category.children.each do |subcategory|
-            %option{ value: subcategory.slug }
+            %option{ value: subcategory.slug, selected: subcategory.slug == f.object.category_slug }
               = subcategory.slug
               \-
               = subcategory.name

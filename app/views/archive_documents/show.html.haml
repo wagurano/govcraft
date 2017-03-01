@@ -36,34 +36,28 @@
 
     .post-block__body
       = raw @archive_document.body
+      - if @archive_document.sewol_inv_document.present?
+        %p
+          %i.fa.fa-info-circle
+          %a(href='http://www.archives.go.kr/' target='_blank')> 국가기록원
+          에 보관 중인 자료입니다.
 
     .panel.panel-default
       .panel-heading
-        - if @archive_document.content_source.present?
-          %div
-            생산처: #{@archive_document.content_source}
-
-        - if @archive_document.content_creator.present?
-          %div
-            생산자: #{@archive_document.content_creator}
-
-        - if @archive_document.content_created_date.present?
-          - year, month, day = @archive_document.parse_content_created_date
-          %div
-            생산일: #{[year.try('+', '.'), month.try('+', '.'), day.try('+', '.')].compact.join('')} #{@archive_document.content_created_time}
-
-        - if @archive_document.content_recipients.present?
-          %div
-            수신인: #{@archive_document.content_recipients}
-
-        - if @archive_document.donor.present?
-          %div
-            출처(제공자): #{@archive_document.is_secret_donor ? '비공개' : @archive_document.donor}
-
+        - if @archive_document.sewol_inv_document.present?
+          - sewol_inv_document = @archive_document.sewol_inv_document
+          - %i(code reporter reviewer open_type open_level_desc open_retype).each do |attribute|
+            - if sewol_inv_document.send(attribute).present?
+              %div
+                #{Archive::SewolInvDocument.human_attribute_name(attribute)}: #{sewol_inv_document.send(attribute)}
+        - else
+          - %i(content_source content_creator human_formatted_content_created_datetime content_recipients human_formatted_donor).each do |attribute|
+            - if @archive_document.send(attribute).present?
+              %div
+                #{ArchiveDocument.human_attribute_name(attribute)}: #{@archive_document.send(attribute)}
         %div
           등록일: #{l @archive_document.created_at}
 
     .post-block__comments
       = render 'comments/list', commentable: @archive_document
 
-= render 'archive_documents/list', archive: @archive
