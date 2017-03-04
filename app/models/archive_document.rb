@@ -92,7 +92,19 @@ class ArchiveDocument < ApplicationRecord
   def process_bulk_of_remote_content_url(value)
     return if value.blank?
 
-    download_content(value)
+    begin
+      google_file = google_drive_session.file_by_url(value)
+    rescue GoogleDrive::Error
+      self.remote_content_url = value
+      return
+    end
+
+    Tempfile.open(['archive', File.extname(google_file.title)]) do |temp_file|
+      google_file.download_to_file(temp_file.path)
+
+      self.content = temp_file.open
+      self.content_name = google_file.title
+    end
   end
 
   def human_formatted_content_created_datetime
@@ -110,24 +122,6 @@ class ArchiveDocument < ApplicationRecord
     if read_attribute(:content).present? && content_changed?
       self.content_type = content.file.content_type
       self.content_size = content.file.size
-    end
-  end
-
-  def download_content(url)
-    return if read_attribute(:content).blank?
-
-    begin
-      google_file = google_drive_session.file_by_url(url)
-    rescue GoogleDrive::Error
-      self.remote_content_url = url
-      return
-    end
-
-    Tempfile.open(['archive', File.extname(google_file.title)]) do |temp_file|
-      google_file.download_to_file(temp_file.path)
-
-      self.content = temp_file.open
-      self.content_name = google_file.title
     end
   end
 end
