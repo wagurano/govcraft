@@ -1,7 +1,6 @@
 %section#site-hero-block
   .ui.message.huge.inverted
     .ui.container
-      %h1.ui.huge.header.inverted 우리가 주인이당! Would You Party?
       %p
         우주당은 시민들의 정치 놀이터입니다.
         %br
@@ -10,11 +9,20 @@
 %section
   .ui.container.grid
     .column
+      .ui.ignored.primary.icon.message
+        %i.icon.users{style: 'font-size: 2em;'}
+        .content
+          %h3.header 우주당 당원들이 빠띠 모여 프로젝트를 진행하고 있습니다. 같이 참여해보세요!
+          %p= link_to '우주당 빠띠로 가기', 'https://wouldyou.parti.xyz/', target: '_blank', class: 'ui blue button'
+
+%section
+  .ui.container.grid
+    .column
       .ui.ignored.positive.icon.message
         %i.icon.mobile
         .content
           %h3.header 우주당 당원들이 지금 슬랙에서 이야기를 나누는 중입니다. 함께 하시겠습니까?
-          %p= link_to '초대장 받기', 'http://slack.wouldyouparty.org', target: '_blank', class: 'ui green button'
+          %p= link_to '슬랙 초대장 받기', 'http://slack.wouldyouparty.org', target: '_blank', class: 'ui green button'
 
 %section.page-block
   .ui.container.grid
