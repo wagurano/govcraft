@@ -121,6 +121,7 @@ Rails.application.routes.draw do
       end
     end
     resources :comments
+    post '/download_emails', to: 'users#download_emails', as: :download_emails
   end
 
   if Rails.env.development?
