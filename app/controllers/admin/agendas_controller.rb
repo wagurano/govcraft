@@ -1,4 +1,4 @@
-class AgendasController < ApplicationController
+class Admin::AgendasController < Admin::BaseController
   load_and_authorize_resource
 
   def index
@@ -8,7 +8,7 @@ class AgendasController < ApplicationController
   def create
     @agenda.user = current_user
     if @agenda.save
-      redirect_to @agenda
+      redirect_to admin_agendas_path
     else
       render 'new'
     end
@@ -16,7 +16,7 @@ class AgendasController < ApplicationController
 
   def update
     if @agenda.update(agenda_params)
-      redirect_to @agenda
+      redirect_to admin_agendas_path
     else
       render 'edit'
     end
@@ -24,12 +24,12 @@ class AgendasController < ApplicationController
 
   def destroy
     @agenda.destroy
-    redirect_to agendas_path
+    redirect_to admin_agendas_path
   end
 
   private
 
   def agenda_params
-    params.require(:agenda).permit(:outline, :problem, :solution, :memo)
+    params.require(:agenda).permit(:name)
   end
 end

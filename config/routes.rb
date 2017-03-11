@@ -114,6 +114,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'base#home', as: :home
+    resources :agendas
     resources :roles do
       collection do
         post :add

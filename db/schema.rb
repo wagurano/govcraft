@@ -10,20 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228143750) do
+ActiveRecord::Schema.define(version: 20170311041356) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
-    t.text     "problem",               limit: 65535
-    t.text     "solution",              limit: 65535
     t.text     "memo",                  limit: 65535
     t.string   "image"
     t.integer  "comments_count",                      default: 0
     t.integer  "likes_count",                         default: 0
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
-    t.string   "outline"
     t.integer  "anonymous_likes_count",               default: 0
+    t.string   "name"
     t.index ["user_id"], name: "index_agendas_on_user_id", using: :btree
   end
 
@@ -152,6 +150,26 @@ ActiveRecord::Schema.define(version: 20170228143750) do
     t.index ["archive_id"], name: "index_bulk_tasks_on_archive_id", using: :btree
     t.index ["job_id"], name: "index_bulk_tasks_on_job_id", using: :btree
     t.index ["user_id"], name: "index_bulk_tasks_on_user_id", using: :btree
+  end
+
+  create_table "campaigns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+    t.string   "title"
+    t.text     "body",               limit: 65535
+    t.integer  "user_id"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.integer  "views_count",                      default: 0
+    t.string   "image"
+    t.boolean  "discussion_enabled",               default: true
+    t.boolean  "petition_enabled",                 default: true
+    t.boolean  "poll_enabled",                     default: true
+    t.boolean  "wiki_enabled",                     default: true
+    t.string   "discussion_title"
+    t.string   "poll_title"
+    t.string   "petition_title"
+    t.string   "wiki_title"
+    t.string   "slug"
+    t.index ["user_id"], name: "index_campaigns_on_user_id", using: :btree
   end
 
   create_table "candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

@@ -1,0 +1,6 @@
+= form_for [:admin, @agenda], html: { class: 'ui form' } do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+
+  = f.submit '저장', class: 'ui button'
