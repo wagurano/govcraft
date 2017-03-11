@@ -14,7 +14,8 @@
             %td
               %h3= agenda.name
             %td
-              10개의 이슈
+              = agenda.issues.count
+              개의 이슈
             %td.right.aligned
               = link_to '수정', edit_admin_agenda_path(agenda), class: 'ui small button'
               = link_to '삭제', admin_agenda_path(agenda), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'ui small button'

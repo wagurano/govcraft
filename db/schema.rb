@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170311041356) do
+ActiveRecord::Schema.define(version: 20170311044624) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -306,6 +306,8 @@ ActiveRecord::Schema.define(version: 20170311041356) do
     t.integer  "following_issues_count", default: 0
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.integer  "agenda_id"
+    t.index ["agenda_id"], name: "index_issues_on_agenda_id", using: :btree
     t.index ["title"], name: "index_issues_on_title", unique: true, using: :btree
   end
 

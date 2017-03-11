@@ -1,4 +1,5 @@
 class Issue < ApplicationRecord
+  belongs_to :agenda
   has_many :following_issues, dependent: :destroy
   has_many :followers, -> { order 'following_issues.created_at desc' }, through: :following_issues, source: :user
   has_many :comments, as: :commentable

@@ -11,16 +11,14 @@ class Ability
 
     if user
       can :create, [
-          FollowingIssue,
           Project, Discussion, Petition, Poll, Feedback, Survey, Wiki,
-          Memorial, Agenda, Timeline, TimelineDocument, Event,
+          Memorial, Timeline, TimelineDocument, Event,
           Election, Candidate, Article, Person, Race, Player,
           Thumb
         ]
       can [:update, :destroy], [
-          FollowingIssue,
           Project, Discussion, Petition, Poll, Survey, Wiki,
-          Memorial, Agenda, Timeline, TimelineDocument, Event,
+          Memorial, Timeline, TimelineDocument, Event,
           Comment, Sign, Election, Candidate, Article, Person,
           Race, Player
         ], :user_id => user.id

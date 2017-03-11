@@ -1,0 +1,10 @@
+= form_for [:admin, @issue], html: { class: 'ui form' } do |f|
+  .field
+    = f.label :agenda_id
+    = f.collection_select :agenda_id, Agenda.all, :id, :name, {}, { class: 'ui selection dropdown'}
+
+  .field
+    = f.label :title
+    = f.text_field :title
+
+  = f.submit '저장', class: 'ui button'

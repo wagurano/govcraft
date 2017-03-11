@@ -6,7 +6,6 @@ class Admin::AgendasController < Admin::BaseController
   end
 
   def create
-    @agenda.user = current_user
     if @agenda.save
       redirect_to admin_agendas_path
     else

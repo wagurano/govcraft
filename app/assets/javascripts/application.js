@@ -42,6 +42,7 @@ $(document).imagesLoaded( { }, function() {
       toolbarFixed: false,
     });
     $('.redactor .redactor-editor').prop('contenteditable', true);
+    $('select.dropdown').dropdown();
   }
 );
 

@@ -2,8 +2,10 @@
   .ui.container
     %h3
       우주당 운영
-    .ui.four.item.menu
+    .ui.five.item.menu
       = link_to '의제', admin_agendas_path, class: 'item'
+      = link_to '이슈', admin_issues_path, class: 'item'
+
       = link_to '일꾼', admin_roles_path, class: 'item'
       = link_to '댓글', admin_comments_path, class: 'item'
       = link_to '회원 이메일 다운로드', admin_download_emails_path(format: :xlsx), method: :post, class: 'item'

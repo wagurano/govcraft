@@ -26,9 +26,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :issues
-  resources :following_issues
-
   get 'campaigns/:id', to: redirect { |params, req| "/p/#{Project.find_by(id: params[:id]).slug}"}, constraints: lambda { |request, params|
     Project.exists?(id: params[:id])
   }
@@ -77,7 +74,6 @@ Rails.application.routes.draw do
   resources :articles do
     post :create_by_slack, on: :collection
   end
-  resources :agendas
 
   class AllTimelineConstraint
     def matches?(request)
@@ -115,6 +111,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'base#home', as: :home
     resources :agendas
+    resources :issues
     resources :roles do
       collection do
         post :add
