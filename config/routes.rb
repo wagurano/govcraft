@@ -112,6 +112,7 @@ Rails.application.routes.draw do
     root 'base#home', as: :home
     resources :agendas
     resources :issues
+    resources :speakers
     resources :roles do
       collection do
         post :add
