@@ -1,0 +1,24 @@
+%section.page-block
+  %h3 스피커
+  %table.ui.table
+    %thead
+      %tr
+        %th 이름
+        %th 조직
+        %th 분류
+        %th
+          = link_to '추가', new_admin_speaker_path, class: 'ui right floated small primary button'
+    %tbody
+      - @speakers.each do |speaker|
+        %tr
+          %td
+            %h3
+              = image_tag speaker.image.sm, class: 'ui avatar image' if speaker.image.file.present?
+              = speaker.name
+          %td
+            = speaker.organization
+          %td
+            = speaker.category
+          %td.right.aligned
+            = link_to '수정', edit_admin_speaker_path(speaker), class: 'ui small secondary basic button'
+            = link_to '삭제', admin_speaker_path(speaker), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'ui small negative basic button'
