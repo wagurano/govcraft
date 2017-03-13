@@ -1,0 +1,18 @@
+= form_for [:admin, @opinion], html: { class: 'ui form' } do |f|
+  .field
+    = f.label :issue_id
+    = f.collection_select :issue_id, Issue.all, :id, :title, {}, { class: 'ui selection dropdown' }
+
+  .field
+    = f.label :speaker_id
+    = f.collection_select :speaker_id, Speaker.all, :id, :name, {}, { class: 'ui selection dropdown' }
+
+  .field
+    = f.label :quote
+    = f.text_area :quote
+
+  .field
+    = f.label :body
+    = f.text_area :body
+
+  = f.submit '저장', class: 'ui button'

@@ -63,6 +63,9 @@ Rails.application.routes.draw do
       resources :candidates
     end
   end
+
+  resources :opinions, only: [:show]
+
   resources :people do
     get :search, on: :collection
   end
@@ -113,6 +116,7 @@ Rails.application.routes.draw do
     resources :agendas
     resources :issues
     resources :speakers
+    resources :opinions
     resources :roles do
       collection do
         post :add
