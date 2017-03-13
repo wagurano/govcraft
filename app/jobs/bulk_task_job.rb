@@ -49,29 +49,31 @@ class BulkTaskJob
     end
 
     xlsx = Roo::Spreadsheet.open @bulk_task.attachment.file.respond_to?(:url) ? @bulk_task.attachment.url : @bulk_task.attachment.file
-    xlsx.sheet(0).each_row_streaming(offset: 1, pad_cells: true) do |row|
-      if empty_row?(row, @bulk_task.target_model)
-        break
-      end
-      begin
-        id = fetch_id(row, @bulk_task.target_model)
-        return if id.blank?
-
-        @bulk_task.processing_count += 1
-        if id == 0
-          model_instance = @bulk_task.target_model.new
-        else
-          model_instance = @bulk_task.target_model.find_by(id: id)
-          if model_instance.blank?
-            @bulk_task.set_current_error '해당 조직 없음'
-            next
-          end
+    ActiveRecord::Base.transaction do
+      xlsx.sheet(0).each_row_streaming(offset: 1, pad_cells: true) do |row|
+        if empty_row?(row, @bulk_task.target_model)
+          break
         end
+        begin
+          id = fetch_id(row, @bulk_task.target_model)
+          return if id.blank?
 
-        process_model(row, model_instance, @bulk_task)
-      ensure
-        if (@bulk_task.processing_count % 1000.0) == 0
-          @bulk_task.save
+          @bulk_task.processing_count += 1
+          if id == 0
+            model_instance = @bulk_task.target_model.new
+          else
+            model_instance = @bulk_task.target_model.find_by(id: id)
+            if model_instance.blank?
+              @bulk_task.set_current_error '해당 조직 없음'
+              next
+            end
+          end
+
+          process_model(row, model_instance, @bulk_task)
+        ensure
+          if (@bulk_task.processing_count % 1000.0) == 0
+            @bulk_task.save
+          end
         end
       end
     end

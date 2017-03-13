@@ -16,7 +16,7 @@ module GovCraft
     config.i18n.available_locales = [:en, :ko]
     config.i18n.default_locale = :ko
     config.autoload_paths << Rails.root.join('lib')
-    config.active_job.queue_adapter = ((Rails.env.test? or  Rails.env.development?) ? :inline : :sidekiq)
+    config.active_job.queue_adapter = ((!ENV['SIDEKIQ'] and (Rails.env.test? or Rails.env.development?)) ? :inline : :sidekiq)
     config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
   end
 end
