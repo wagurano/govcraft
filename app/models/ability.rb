@@ -10,6 +10,7 @@ class Ability
     can :download, Timeline
 
     if user
+      can [:new_email, :send_email], Agenda
       can :create, [
           Project, Discussion, Petition, Poll, Feedback, Survey, Wiki,
           Memorial, Timeline, TimelineDocument, Event,

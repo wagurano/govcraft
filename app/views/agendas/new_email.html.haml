@@ -1,0 +1,27 @@
+.agenda-container
+  = render 'agendas/header', agenda: @agenda
+
+%section#speaker-block.page-block
+  .container
+    %h3.ui.header
+      #{@member["empNm"]} 국회의원님에게
+    - if @member["assemEmail"].blank?
+      %p 이메일을 알 수 없는 국회의원입니다.
+      %p 전화번호 : #{@member["assemTel"]}
+    - else
+      = form_tag send_email_agenda_path(@agenda) do
+        = hidden_field_tag :assembly_id, @member["id"]
+        .form-group
+          = label_tag :sender, '보내는 사람'
+          = text_field_tag :sender, current_user.nickname, class: 'form-control'
+        .form-group
+          = label_tag :title, '제목'
+          = text_field_tag :title, "[우주당] #{@agenda.name} #{Agenda.model_name.human}에 대해 의견을 듣고자 합니다", class: 'form-control'
+        .form-group
+          %textarea{ name: :body, rows: 40, class: 'form-control redactor' }
+            #{@agenda.name} #{Agenda.model_name.human}에 대해 아래 제안에 대한 의견을 듣고자 합니다
+            %br
+            - @agenda.issues.each do |issue|
+              \# #{issue.title}
+        = submit_tag '발송', class: 'ui button'
+

@@ -110,11 +110,15 @@ Rails.application.routes.draw do
   resources :memorials
   get 'google_api/auth_callback', to: 'google_api#auth_callback', as: :auth_callback_google_api
   get 'google_api/auth', to: 'google_api#auth', as: :auth_google_api
-  resources :agendas
+  resources :agendas do
+    get :new_email, on: :member
+    post :send_email, on: :member
+  end
   resources :speakers
 
   namespace :admin do
     root 'base#home', as: :home
+    get :refresh_assembly_members, to: 'base#refresh_assembly_members'
     resources :agendas
     resources :issues
     resources :speakers

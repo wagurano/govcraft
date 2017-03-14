@@ -1,5 +1,5 @@
 %section#issues.page-block
-  .ui.container
+  .container
     %h3= Issue.model_name.human
     - agenda.issues.each do |issue|
       %h4= issue.title
@@ -9,3 +9,5 @@
           - if local_assigns[:speaker].present?
             - opinions = opinions.where(speaker: speaker)
           = render opinions
+          - if opinions.empty?
+            %p 아직 #{Opinion.model_name.human}이 없습니다.

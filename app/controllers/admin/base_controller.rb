@@ -5,6 +5,11 @@ class Admin::BaseController < ApplicationController
   def home
   end
 
+  def refresh_assembly_members
+    view_context.refresh_assembly_members
+    redirect_to admin_home_path
+  end
+
   private
 
   def admin_only

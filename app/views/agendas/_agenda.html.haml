@@ -6,7 +6,7 @@
       = link_to agenda.name, agenda, class: 'header'
       .meta
         %span
-          이슈 #{agenda.issues.count}개
+          #{Issue.model_name.human} #{agenda.issues.count}개
       .description
       .extra
 
