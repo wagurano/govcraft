@@ -10,7 +10,7 @@
       %p 전화번호 : #{@member["assemTel"]}
     - else
       = form_tag send_email_agenda_path(@agenda) do
-        = hidden_field_tag :assembly_id, @member["id"]
+        = hidden_field_tag :assembly_member_id, @member["id"]
         .form-group
           = label_tag :sender, '보내는 사람'
           = text_field_tag :sender, current_user.nickname, class: 'form-control'
@@ -19,9 +19,10 @@
           = text_field_tag :title, "[우주당] #{@agenda.name} #{Agenda.model_name.human}에 대해 의견을 듣고자 합니다", class: 'form-control'
         .form-group
           %textarea{ name: :body, rows: 40, class: 'form-control redactor' }
-            #{@agenda.name} #{Agenda.model_name.human}에 대해 아래 제안에 대한 의견을 듣고자 합니다
+            #{@agenda.name} #{Agenda.model_name.human}의 아래 제안에 대한 의견을 듣고자 합니다
             %br
-            - @agenda.issues.each do |issue|
-              \# #{issue.title}
+            - @agenda.issues.each_with_index do |issue, index|
+              #{index+1}. #{issue.title}
+              %br
         = submit_tag '발송', class: 'ui button', data: { confirm: '정말 메일을 발송하시겠습니까?', disable_with: "발송 중..."}
 

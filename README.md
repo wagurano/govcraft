@@ -22,6 +22,7 @@ production:
   SLACK_ARTICLE_WEBHOOK_KEY: xx
   GOOGLE_CLIENT_ID: xx
   GOOGLE_CLIENT_SECRET: xx
+  DATA_GO_KR_API_KEY: xx
 ```
 
 
@@ -87,18 +88,24 @@ export GOOGLE_CLIENT_ID="xx"
 export GOOGLE_CLIENT_SECRET="xx"
 ```
 
+### 국회의원 정보 data.go.kr
+data.go.kr의 키를 발급받아 .powenv에 저장한다
+
+```
+export DATA_GO_KR_API_KEY=xxx
+```
+
+이후 한번만 아래 명령어를 실행한다.
+```
+bin/rake data:load_once_assembly_members
+```
+
 ### 구글API연결
 
 .powenv에 등록합니다.
 
 ```
 export GOOGLE_API_KEY="xx"
-```
-
-#### 스키마
-
-```
-$ bin/rails db:setup
 ```
 
 ### 로컬에서 한글 이름의 파일을 다운로드하면 파일 이름이 깨질 때

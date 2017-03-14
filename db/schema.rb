@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170312110944) do
+ActiveRecord::Schema.define(version: 20170314120358) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20170312110944) do
     t.index ["user_id"], name: "index_archive_documents_on_user_id", using: :btree
   end
 
-  create_table "archive_sewol_inv_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "archive_sewol_inv_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer "archive_document_id"
     t.string  "part_no"
     t.string  "part_name"
@@ -127,6 +127,29 @@ ActiveRecord::Schema.define(version: 20170312110944) do
     t.integer  "hot_score",                           default: 0
     t.string   "hot_scored_datestamp"
     t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
+  end
+
+  create_table "assembly_members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.string "deptCd"
+    t.string "num"
+    t.string "assemEmail"
+    t.string "assemHomep"
+    t.string "assemTel"
+    t.string "bthDate"
+    t.string "electionNum"
+    t.string "empNm"
+    t.string "engNm"
+    t.text   "examCd",      limit: 65535
+    t.text   "hbbyCd",      limit: 65535
+    t.string "hjNm"
+    t.text   "memTitle",    limit: 65535
+    t.string "origNm"
+    t.string "polyNm"
+    t.string "reeleGbnNm"
+    t.text   "secretary",   limit: 65535
+    t.text   "secretary2",  limit: 65535
+    t.string "shrtNm"
+    t.string "staff"
   end
 
   create_table "bulk_tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -247,7 +270,7 @@ ActiveRecord::Schema.define(version: 20170312110944) do
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
 
-  create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "user_id",    null: false
     t.integer  "survey_id",  null: false
     t.integer  "option_id",  null: false
@@ -315,7 +338,7 @@ ActiveRecord::Schema.define(version: 20170312110944) do
     t.index ["user_id"], name: "index_memorials_on_user_id", using: :btree
   end
 
-  create_table "opinions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "opinions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string   "quote"
     t.text     "body",       limit: 65535
     t.integer  "speaker_id"
@@ -335,7 +358,7 @@ ActiveRecord::Schema.define(version: 20170312110944) do
     t.index ["survey_id"], name: "index_options_on_survey_id", using: :btree
   end
 
-  create_table "participations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "participations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "user_id",    null: false
     t.integer  "project_id", null: false
     t.datetime "created_at", null: false
@@ -494,7 +517,7 @@ ActiveRecord::Schema.define(version: 20170312110944) do
     t.index ["user_id"], name: "index_signs_on_user_id", using: :btree
   end
 
-  create_table "speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string "name",         null: false
     t.string "organization"
     t.string "category",     null: false

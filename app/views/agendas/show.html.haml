@@ -11,7 +11,9 @@
       .container
         %h3 국회의원에게 #{Opinion.model_name.human}요청하기
         = form_tag new_email_agenda_path(@agenda), method: :get do
-          = select_tag :assembly_id, options_for_select(assembly_members), class: 'js-choose-assembly-members'
+          %select{ name: :assembly_member_id, class: 'js-choose-assembly-members' }
+            - AssemblyMember.order_by_origNm.each do |member|
+              %option{ value: member.id, disabled: member.assemEmail.blank? } #{member.origNm} - #{member.empNm} #{member.polyNm} #{('(이메일 주소 준비중)' if member.assemEmail.blank?)}
           = submit_tag '작성', class: 'ui button'
 %section#agenda-block.page-block
   .container

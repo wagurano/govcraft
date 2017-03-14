@@ -6,7 +6,7 @@ class Admin::BaseController < ApplicationController
   end
 
   def refresh_assembly_members
-    view_context.refresh_assembly_members
+    AssemblyMember.refresh!
     redirect_to admin_home_path
   end
 
