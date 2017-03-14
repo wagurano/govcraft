@@ -23,5 +23,5 @@
             %br
             - @agenda.issues.each do |issue|
               \# #{issue.title}
-        = submit_tag '발송', class: 'ui button'
+        = submit_tag '발송', class: 'ui button', data: { confirm: '정말 메일을 발송하시겠습니까?', disable_with: "발송 중..."}
 
