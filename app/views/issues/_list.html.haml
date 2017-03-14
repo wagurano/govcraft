@@ -5,7 +5,7 @@
       %h4= issue.title
       .section
         .row.masonry-container
-          - opinions = issue.opinions
+          - opinions = issue.opinions.recent
           - if local_assigns[:speaker].present?
             - opinions = opinions.where(speaker: speaker)
           = render opinions

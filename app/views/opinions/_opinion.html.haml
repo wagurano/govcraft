@@ -14,3 +14,5 @@
         - if opinion.body.present?
           .opinion__body
             = strip_tags opinion.body
+        .opinion__likes
+          = render 'likes/button', likable: opinion

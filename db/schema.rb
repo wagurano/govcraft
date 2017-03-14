@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314120358) do
+ActiveRecord::Schema.define(version: 20170314132507) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -340,11 +340,13 @@ ActiveRecord::Schema.define(version: 20170314120358) do
 
   create_table "opinions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string   "quote"
-    t.text     "body",       limit: 65535
+    t.text     "body",                  limit: 65535
     t.integer  "speaker_id"
     t.integer  "issue_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.integer  "likes_count",                         default: 0
+    t.integer  "anonymous_likes_count",               default: 0
     t.index ["issue_id"], name: "index_opinions_on_issue_id", using: :btree
     t.index ["speaker_id"], name: "index_opinions_on_speaker_id", using: :btree
   end
