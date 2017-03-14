@@ -1,0 +1,12 @@
+.column
+  .ui.card.fluid
+    .image{ style: "height: 140px; background-image: url(#{agenda.image_url(:md)}); background-size: cover; background-position: center center;" }
+      %a.ui.red.ribbon.label= Agenda.model_name.human
+    .content
+      = link_to agenda.name, agenda, class: 'header'
+      .meta
+        %span
+          이슈 #{agenda.issues.count}개
+      .description
+      .extra
+

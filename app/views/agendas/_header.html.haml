@@ -1,0 +1,9 @@
+%section.cover-section{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(agenda.image_url(:lg))});"}
+  .ui.container
+    %h1.ui.center.aligned.huge.header.inverted.text-keep-all
+      .ui.red.label= Agenda.model_name.human
+      %br
+      = agenda.name
+    .agenda-intro
+      .agenda-desc= smart_format agenda.memo
+

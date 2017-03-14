@@ -1,0 +1,11 @@
+.agenda-container
+  = render 'agendas/header', agenda: @agenda
+
+%section#agenda-block.page-block
+  .container
+    .post-block__issues
+      = render 'issues/list', agenda: @agenda
+    .post-block__speakers
+      = render 'speakers/list', agenda: @agenda
+    .post-block__comments
+      = render 'comments/list', commentable: @agenda

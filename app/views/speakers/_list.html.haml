@@ -1,0 +1,6 @@
+%section#issues.page-block
+  .ui.container
+    %h3= Speaker.model_name.human
+    .speakers.ui.six.column.grid
+      = render agenda.speakers, local_assigns
+

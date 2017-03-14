@@ -1,0 +1,12 @@
+.column
+  = link_to speaker_path(agenda_id: local_assigns[:agenda].try(:id)) do
+    .ui.fluid.card
+      .image
+        %img{ src: speaker.image.sm.url }
+      .content
+        = speaker.name
+        .text-muted= speaker.organization
+        - if local_assigns[:agenda]
+          .opinions-count
+            #{agenda.opinions_by(speaker).count}개 #{Opinion.model_name.human}
+        %button.btn.btn-default.btn-xs 트위터 보내기

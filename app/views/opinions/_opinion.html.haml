@@ -1,0 +1,15 @@
+- speaker = opinion.speaker
+.col-sm-6
+  %div[opinion]
+    .panel.panel-default.panel-floating.opinion-card
+      .panel-body
+        .opinion__speaker
+          .img-user{style: "background-image: url(#{speaker.image.sm.url}); with: 20px; height: 20px;"}
+          = speaker.name
+          %span.text-muted= speaker.organization
+        - if opinion.quote.present?
+          %h4.opinion__quote
+            = opinion.quote
+        - if opinion.body.present?
+          .opinion__body
+            = strip_tags opinion.body

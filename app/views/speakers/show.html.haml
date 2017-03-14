@@ -1,0 +1,13 @@
+.agenda-container
+  = render 'agendas/header', agenda: @agenda
+
+%section#speaker-block.page-block
+  .container
+    %h3.ui.header
+      %img.ui.circular.image{ src: @speaker.image.sm.url }
+      = @speaker.name
+      %small.text-mute= @speaker.organization
+    .post-block__issues
+      = render 'issues/list', agenda: @agenda, speaker: @speaker
+    .post-block__comments
+      = render 'comments/list', commentable: @agenda

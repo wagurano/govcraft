@@ -1,0 +1,11 @@
+%section#issues.page-block
+  .ui.container
+    %h3= Issue.model_name.human
+    - agenda.issues.each do |issue|
+      %h4= issue.title
+      .section
+        .row.masonry-container
+          - opinions = issue.opinions
+          - if local_assigns[:speaker].present?
+            - opinions = opinions.where(speaker: speaker)
+          = render opinions
