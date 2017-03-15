@@ -29,6 +29,6 @@ class Admin::SpeakersController < Admin::BaseController
   private
 
   def speaker_params
-    params.require(:speaker).permit(:image, :name, :organization, :category, :position_list)
+    params.require(:speaker).permit(:image, :name, :organization, :category, :position_list, :email)
   end
 end

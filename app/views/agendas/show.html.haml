@@ -23,6 +23,8 @@
                   .ui.list.grid
                     - speakers.each do |speaker|
                       = render 'speakers/line', speaker: speaker, agenda: @agenda
+                      - if quote == nil
+                        = link_to '답변 요청하기', new_email_agenda_path(@agenda, speaker_id: speaker.id),  class: 'ui button request-btn'
 
 %section#agenda-block.page-block
   .container
