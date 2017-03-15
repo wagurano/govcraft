@@ -12,7 +12,7 @@
       - if @speaker.email.present?
         .ui.violet.segment
           %h4.ui.header
-            #{@speaker.name}에게 #{Opinion.model_name.human} 요청하기
+            #{@speaker.name}님에게 #{Opinion.model_name.human} 요청하기
             %small 현재까지 총 #{@speaker.sent_requests_count}회 발송됨
           = link_to '작성', new_email_agenda_path(@agenda, speaker_id: @speaker.id),  class: 'ui button'
 
