@@ -2,6 +2,8 @@
 .ui.raised.segment[opinion]
   %h4.ui.header
     = opinion.quote
-  - if opinion.body.present?
-    .opinion__body
+  .opinion__body
+    - if opinion.body.present?
       != opinion.body
+    - else
+      %p{ style: 'color: #aaa' } 상세한 답변은 아직 없습니다.

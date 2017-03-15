@@ -9,17 +9,18 @@ class AgendasController < ApplicationController
   end
 
   def new_email
-    @member = AssemblyMember.find(params[:assembly_member_id])
-    render_404 and return if @member.blank?
+    @speaker = Speaker.find(params[:speaker_id])
+    render_404 and return if @speaker.blank?
   end
 
   def send_email
-    @member = AssemblyMember.find(params[:assembly_member_id])
-    render_404 and return if @member.blank? or @member.assemEmail.blank?
+    @speaker = Speaker.find(params[:speaker_id])
+    render_404 and return if @speaker.blank? or @speaker.email.blank?
 
-    AgendaMailer.push(params[:sender], @member.empNm, @member.assemEmail, @agenda.id, params[:title], params[:body]).deliver_later
+    AgendaMailer.push(params[:sender], @speaker.name, @speaker.email, @agenda.id, params[:title], params[:body]).deliver_later
+    @speaker.sent_request.create(user: current_user)
 
     flash[:success] = '메일을 발송했습니다'
-    redirect_to @agenda
+    redirect_to speaker_path(@speaker, agenda_id: @agenda.id)
   end
 end

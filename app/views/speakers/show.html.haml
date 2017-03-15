@@ -9,16 +9,22 @@
       %small.text-mute= @speaker.organization
 
     .post-block__request
-      %h4 #{@speaker.name}에게 #{Opinion.model_name.human} 요청하기
-      = form_tag new_email_agenda_path(@agenda), method: :get do
-        = hidden_field :speaker_id, @speaker.id
-        = submit_tag '작성', class: 'ui button'
+      - if @speaker.email.present?
+        .ui.violet.segment
+          %h4.ui.header
+            #{@speaker.name}에게 #{Opinion.model_name.human} 요청하기
+            %small 현재까지 총 #{@speaker.sent_requests_count}회 발송됨
+          = link_to '작성', new_email_agenda_path(@agenda, speaker_id: @speaker.id),  class: 'ui button'
 
     .post-block__issues
       = render 'issues/list_by_speaker', agenda: @agenda, speaker: @speaker
 
+    %hr
+
     .post-block__request
-      %h4 #{@speaker.name}에게 #{Opinion.model_name.human} 요청하기
-      = form_tag new_email_agenda_path(@agenda), method: :get do
-        = hidden_field :speaker_id, @speaker.id
-        = submit_tag '작성', class: 'ui button'
+      - if @speaker.email.present?
+        .ui.violet.segment
+          %h4.ui.header
+            #{@speaker.name}에게 #{Opinion.model_name.human} 요청하기
+            %small 현재까지 총 #{@speaker.sent_requests_count}회 발송됨
+          = link_to '작성', new_email_agenda_path(@agenda, speaker_id: @speaker.id),  class: 'ui button'

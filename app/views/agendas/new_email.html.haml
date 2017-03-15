@@ -4,13 +4,12 @@
 %section#speaker-block.page-block
   .container
     %h3.ui.header
-      #{@member["empNm"]} 국회의원님에게
-    - if @member["assemEmail"].blank?
+      #{@speaker.name}님에게
+    - if @speaker.email.blank?
       %p 이메일을 알 수 없는 국회의원입니다.
-      %p 전화번호 : #{@member["assemTel"]}
     - else
       = form_tag send_email_agenda_path(@agenda) do
-        = hidden_field_tag :assembly_member_id, @member["id"]
+        = hidden_field_tag :speaker_id, @speaker["id"]
         .form-group
           = label_tag :sender, '보내는 사람'
           = text_field_tag :sender, current_user.nickname, class: 'form-control'

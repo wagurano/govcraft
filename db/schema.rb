@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315013359) do
+ActiveRecord::Schema.define(version: 20170315015455) do
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
@@ -504,6 +504,15 @@ ActiveRecord::Schema.define(version: 20170315013359) do
     t.index ["name"], name: "index_roles_on_name", using: :btree
   end
 
+  create_table "sent_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.integer  "speaker_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["speaker_id"], name: "index_sent_requests_on_speaker_id", using: :btree
+    t.index ["user_id"], name: "index_sent_requests_on_user_id", using: :btree
+  end
+
   create_table "signs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
     t.integer  "petition_id",                                         null: false
@@ -520,11 +529,12 @@ ActiveRecord::Schema.define(version: 20170315013359) do
   end
 
   create_table "speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
-    t.string "name",         null: false
-    t.string "organization"
-    t.string "category",     null: false
-    t.string "image"
-    t.string "email"
+    t.string  "name",                            null: false
+    t.string  "organization"
+    t.string  "category",                        null: false
+    t.string  "image"
+    t.string  "email"
+    t.integer "sent_requests_count", default: 0
   end
 
   create_table "speeches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -718,4 +728,6 @@ ActiveRecord::Schema.define(version: 20170315013359) do
   end
 
   add_foreign_key "events", "users"
+  add_foreign_key "sent_requests", "speakers"
+  add_foreign_key "sent_requests", "users"
 end

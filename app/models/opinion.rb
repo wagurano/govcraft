@@ -3,6 +3,7 @@ class Opinion < ApplicationRecord
 
   belongs_to :speaker
   belongs_to :issue
+  has_many :comments, as: :commentable, dependent: :destroy
 
   scope :recent, -> { order('id DESC') }
   scope :of_issue, ->(issue) { where(issue: issue) }

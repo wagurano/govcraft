@@ -3,7 +3,8 @@
     %h1.ui.center.aligned.huge.header.inverted.text-keep-all
       .ui.red.label= Agenda.model_name.human
       %br
-      = agenda.name
+      = link_to @agenda, style: 'color: white' do
+        = agenda.name
     .agenda-intro
       .agenda-desc= smart_format agenda.memo
 
