@@ -1,0 +1,11 @@
+.answer-speakers
+  .ui.list.grid
+    - speakers[0..15].each do |speaker|
+      .eight.wide.column
+        = render 'speakers/line', speaker: speaker, agenda: @agenda
+      - if quote == nil
+        .eight.wide.column
+          = link_to '답변 요청하기', new_email_agenda_path(@agenda, speaker_id: speaker.id),  class: 'ui button', style: 'height: 100%; margin-top: 12px;'
+    - if speakers.count > 15
+      .sixteen.wide.column
+        = link_to "#{speakers.count}명 전체보기", issue, class: 'ui button'
