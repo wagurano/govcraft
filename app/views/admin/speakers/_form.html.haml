@@ -2,6 +2,10 @@
   .field
     = f.label :image
     = f.file_field :image
+    = f.hidden_field :image_cache, value: f.object.image_cache
+    %p
+    - if f.object.read_attribute(:image).present? and f.object.image?
+      = image_tag f.object.image.xs.url
 
   .field
     = f.label :name

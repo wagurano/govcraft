@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315053110) do
+ActiveRecord::Schema.define(version: 20170315053254) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -146,27 +146,29 @@ ActiveRecord::Schema.define(version: 20170315053110) do
   end
 
   create_table "assembly_members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
-    t.string "deptCd"
-    t.string "num"
-    t.string "assemEmail"
-    t.string "assemHomep"
-    t.string "assemTel"
-    t.string "bthDate"
-    t.string "electionNum"
-    t.string "empNm"
-    t.string "engNm"
-    t.text   "examCd",      limit: 65535
-    t.text   "hbbyCd",      limit: 65535
-    t.string "hjNm"
-    t.text   "memTitle",    limit: 65535
-    t.string "origNm"
-    t.string "polyNm"
-    t.string "reeleGbnNm"
-    t.text   "secretary",   limit: 65535
-    t.text   "secretary2",  limit: 65535
-    t.string "shrtNm"
-    t.string "staff"
-    t.string "jpgLink"
+    t.string  "deptCd"
+    t.string  "num"
+    t.string  "assemEmail"
+    t.string  "assemHomep"
+    t.string  "assemTel"
+    t.string  "bthDate"
+    t.string  "electionNum"
+    t.string  "empNm"
+    t.string  "engNm"
+    t.text    "examCd",      limit: 65535
+    t.text    "hbbyCd",      limit: 65535
+    t.string  "hjNm"
+    t.text    "memTitle",    limit: 65535
+    t.string  "origNm"
+    t.string  "polyNm"
+    t.string  "reeleGbnNm"
+    t.text    "secretary",   limit: 65535
+    t.text    "secretary2",  limit: 65535
+    t.string  "shrtNm"
+    t.string  "staff"
+    t.integer "speaker_id"
+    t.string  "jpgLink"
+    t.index ["speaker_id"], name: "index_assembly_members_on_speaker_id", using: :btree
   end
 
   create_table "bulk_tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -521,7 +523,7 @@ ActiveRecord::Schema.define(version: 20170315053110) do
     t.index ["name"], name: "index_roles_on_name", using: :btree
   end
 
-  create_table "sent_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "sent_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer  "speaker_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
