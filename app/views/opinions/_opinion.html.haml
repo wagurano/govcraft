@@ -1,18 +1,7 @@
 - speaker = opinion.speaker
-.col-sm-6.col-xs-12
-  %div[opinion]
-    .panel.panel-default.panel-floating.opinion-card
-      .panel-body
-        .opinion__speaker
-          = link_to speaker_path(speaker, agenda_id: opinion.issue.agenda.id) do
-            .img-user{style: "background-image: url(#{speaker.image.sm.url}); with: 20px; height: 20px;"}
-            = speaker.name
-            %span.text-muted= speaker.organization
-        - if opinion.quote.present?
-          %h4.opinion__quote
-            = opinion.quote
-        - if opinion.body.present?
-          .opinion__body
-            = strip_tags opinion.body
-        .opinion__likes
-          = render 'likes/button', likable: opinion
+.ui.raised.segment[opinion]
+  %h4.ui.header
+    = opinion.quote
+  - if opinion.body.present?
+    .opinion__body
+      != opinion.body

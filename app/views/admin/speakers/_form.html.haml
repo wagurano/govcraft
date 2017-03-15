@@ -15,4 +15,8 @@
     = f.label :category
     = f.text_field :category
 
+  .field
+    = f.label :position_list
+    = f.text_field :position_list, value: @speaker.position_list.try(:to_s), placeholder: 'ex)대선주자, 국회의원', class: 'form-control'
+
   = f.submit '저장', class: 'ui button'

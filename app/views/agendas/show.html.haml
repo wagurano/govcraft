@@ -1,20 +1,46 @@
 .agenda-container
   = render 'agendas/header', agenda: @agenda
 
-%section#agenda-block.page-block
-  .post-block__issues
-    = render 'issues/list', agenda: @agenda
-  .post-block__speakers
-    = render 'speakers/list', agenda: @agenda
-  .post-block__push
-    %section#issues.page-block
-      .container
-        %h3 국회의원에게 #{Opinion.model_name.human}요청하기
-        = form_tag new_email_agenda_path(@agenda), method: :get do
-          %select{ name: :assembly_member_id, class: 'js-choose-assembly-members' }
-            - AssemblyMember.order_by_origNm.each do |member|
-              %option{ value: member.id, disabled: member.assemEmail.blank? } #{member.origNm} - #{member.empNm} #{member.polyNm} #{('(이메일 주소 준비중)' if member.assemEmail.blank?)}
-          = submit_tag '작성', class: 'ui button'
+%section#agenda-block.page-block.page-vip_candidate
+  .ui.container
+    %h3 대선주자의 #{Opinion.model_name.human}
+    - @agenda.issues.each do |issue|
+      %h4= issue.title
+      %table.ui.celled.padded.table.fixed
+        %thead
+          %tr
+            %th.single.line 찬성
+            %th 반대
+            %th 답변없음
+        %tbody
+          %tr
+            - ["찬성", "반대", nil].each do |quote|
+              %td{ style: 'width: 33.3%'}
+                - speakers = issue.categorized_speakers('대선주자', quote)
+                .ui.horizontal.list.link
+                  - speakers.each do |speaker|
+                    = render 'speakers/line', speaker: speaker, agenda: @agenda
+
+%section#agenda-block.page-block.page-assembly
+  .ui.container
+    %h3 국회의원의 #{Opinion.model_name.human}
+    - @agenda.issues.each do |issue|
+      %h4= issue.title
+      %table.ui.celled.padded.table.fixed
+        %thead
+          %tr
+            %th.single.line 찬성
+            %th 반대
+            %th 답변없음
+        %tbody
+          %tr
+            - ["찬성", "반대", nil].each do |quote|
+              %td{ style: 'width: 33.3%'}
+                - speakers = issue.categorized_speakers('국회의원', quote)
+                .ui.horizontal.list.link
+                  - speakers.each do |speaker|
+                    = render 'speakers/line', speaker: speaker, agenda: @agenda
+
 %section#agenda-block.page-block
   .container
     .post-block__comments

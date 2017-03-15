@@ -7,7 +7,18 @@
       %img.ui.circular.image{ src: @speaker.image.sm.url }
       = @speaker.name
       %small.text-mute= @speaker.organization
+
+    .post-block__request
+      %h4 #{@speaker.name}에게 #{Opinion.model_name.human} 요청하기
+      = form_tag new_email_agenda_path(@agenda), method: :get do
+        = hidden_field :speaker_id, @speaker.id
+        = submit_tag '작성', class: 'ui button'
+
     .post-block__issues
-      = render 'issues/list', agenda: @agenda, speaker: @speaker
-    .post-block__comments
-      = render 'comments/list', commentable: @agenda
+      = render 'issues/list_by_speaker', agenda: @agenda, speaker: @speaker
+
+    .post-block__request
+      %h4 #{@speaker.name}에게 #{Opinion.model_name.human} 요청하기
+      = form_tag new_email_agenda_path(@agenda), method: :get do
+        = hidden_field :speaker_id, @speaker.id
+        = submit_tag '작성', class: 'ui button'
