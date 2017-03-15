@@ -9,17 +9,15 @@
         .sub.header #{position}에게 #{Opinion.model_name.human}을 #{@agenda.speakers.of_position(position).count}개 받았습니다.
       - @agenda.issues.each do |issue|
         %h4= issue.title
-        %table.ui.celled.padded.table.fixed
-          %thead
-            %tr
-              %th.single.line 찬성
-              %th 반대
-              %th 답변없음
-          %tbody
-            %tr
-              - ["찬성", "반대", nil].each do |quote|
-                %td{ style: 'width: 33.3%'}
-                  - speakers = issue.categorized_speakers(position, quote)
+        .answers-list
+          .row
+            - ["찬성", "반대", nil].each do |quote|
+              - speakers = issue.categorized_speakers(position, quote)
+              .col-sm-4{ class: ('hidden-xs' if speakers.empty?) }
+                .answer-position
+                  = quote || "#{Opinion.model_name.human}없음"
+
+                .answer-speakers
                   .ui.list.grid
                     - speakers.each do |speaker|
                       = render 'speakers/line', speaker: speaker, agenda: @agenda
