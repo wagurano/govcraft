@@ -21,4 +21,4 @@
                 = quote || "#{Opinion.model_name.human}없음"
                 %span{ style: 'font-weight: normal' } #{speakers.count}명
 
-              = render 'issues/speakers', speakers: speakers
+              = render 'issues/speakers', speakers: speakers, quote: quote
