@@ -5,11 +5,23 @@
     %meta{:charset => "utf-8"}/
     = stylesheet_link_tag 'emails/summary', media: 'all'
   %body
-    %div
+    %p #{@recipient_name}님! 안녕하세요.
+    %p
       우주당
-      %a(href="#{agenda_url(@agenda)}") #{Agenda.model_name.human} #{@agenda.name}
+      %a(href="#{agenda_url(@agenda)}" target="_blank") #{Agenda.model_name.human}: #{@agenda.name}
       에서 #{@sender}님이 #{@recipient_name}님께 발신한 메일입니다.
-    %hr
-
-    %div
+    .container
       != @body
+
+    %div(style="margin-top: 60px;")
+      %table
+        %tr
+          %td
+            %a(href='http://wouldyouparty.org/')
+              %img(src="#{Rails.application.config.action_mailer.asset_host}/logo.png" width="104" height="70")
+          %td(style="padding-left: 12px;")
+            %a(href='http://wouldyouparty.org/' target="_blank" style='color: #777; text-decoration: none;')
+              직접 민주주의 프로젝트 정당
+              %br
+              %strong '우리가 주인이다: 우주당'
+              http://wouldyouparty.org/
