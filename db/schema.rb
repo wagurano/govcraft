@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315023709) do
+ActiveRecord::Schema.define(version: 20170315053110) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(version: 20170315023709) do
     t.text   "secretary2",  limit: 65535
     t.string "shrtNm"
     t.string "staff"
+    t.string "jpgLink"
   end
 
   create_table "bulk_tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

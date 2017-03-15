@@ -17,4 +17,9 @@ namespace :data do
       end
     end
   end
+
+  desc '국회의원 정보를 갱신합니다'
+  task 'reload_assembly_members' => :environment do
+    AssemblyMember.update!
+  end
 end
