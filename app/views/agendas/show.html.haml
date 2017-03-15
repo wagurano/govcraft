@@ -6,7 +6,7 @@
     .container
       %h2.ui.dividing.header
         #{position} #{Opinion.model_name.human}
-        .sub.header #{position}에게 #{Opinion.model_name.human}을 #{@agenda.speakers.of_position(position).count}개 받았습니다.
+        .sub.header #{position}에게 #{@agenda.speakers.of_position(position).count}개의 #{Opinion.model_name.human}을 받았습니다.
       - @agenda.issues.each do |issue|
         %h4= issue.title
         .answers-list
@@ -16,13 +16,16 @@
               .col-sm-4{ class: ('hidden-xs' if speakers.empty?) }
                 .answer-position
                   = quote || "#{Opinion.model_name.human}없음"
+                  %span{ style: 'font-weight: normal' } #{speakers.count}명
 
                 .answer-speakers
                   .ui.list.grid
-                    - speakers.each do |speaker|
+                    - speakers[0..15].each do |speaker|
                       = render 'speakers/line', speaker: speaker, agenda: @agenda
                       - if quote == nil
                         = link_to '답변 요청하기', new_email_agenda_path(@agenda, speaker_id: speaker.id),  class: 'ui button request-btn'
+                    - if speakers.count > 15
+                      = link_to '더보기', issue, class: 'item wide column'
 
 %section#agenda-block.page-block
   .container

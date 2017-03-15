@@ -1,0 +1,29 @@
+.agenda-container
+  = render 'agendas/header', agenda: @agenda
+
+%section.page-block.page-opinions
+  .ui.container
+    %h2= @issue.title
+
+- %w(대선주자 국회의원).each do |position|
+  %section.page-block.page-opinions
+    .ui.container
+      %h4.ui.dividing.header
+        #{position} #{Opinion.model_name.human}
+        .sub.header #{position}에게 #{@agenda.speakers.of_position(position).count}개의 #{Opinion.model_name.human}을 받았습니다.
+
+      .answers-list
+        .row
+          - ["찬성", "반대", nil].each do |quote|
+            - speakers = @issue.categorized_speakers(position, quote)
+            .col-sm-4{ class: ('hidden-xs' if speakers.empty?) }
+              .answer-position
+                = quote || "#{Opinion.model_name.human}없음"
+                %span{ style: 'font-weight: normal' } #{speakers.count}명
+
+              .answer-speakers
+                .ui.list.grid
+                  - speakers.each do |speaker|
+                    = render 'speakers/line', speaker: speaker, agenda: @agenda
+                    - if quote == nil
+                      = link_to '답변 요청하기', new_email_agenda_path(@agenda, speaker_id: speaker.id),  class: 'ui button request-btn'

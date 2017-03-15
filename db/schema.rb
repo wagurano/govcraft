@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20170315053254) do
     t.index ["user_id"], name: "index_archive_documents_on_user_id", using: :btree
   end
 
-  create_table "archive_sewol_inv_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "archive_sewol_inv_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.integer "archive_document_id"
     t.string  "part_no"
     t.string  "part_name"
@@ -166,8 +166,8 @@ ActiveRecord::Schema.define(version: 20170315053254) do
     t.text    "secretary2",  limit: 65535
     t.string  "shrtNm"
     t.string  "staff"
-    t.integer "speaker_id"
     t.string  "jpgLink"
+    t.integer "speaker_id"
     t.index ["speaker_id"], name: "index_assembly_members_on_speaker_id", using: :btree
   end
 
@@ -192,6 +192,26 @@ ActiveRecord::Schema.define(version: 20170315053254) do
     t.index ["archive_id"], name: "index_bulk_tasks_on_archive_id", using: :btree
     t.index ["job_id"], name: "index_bulk_tasks_on_job_id", using: :btree
     t.index ["user_id"], name: "index_bulk_tasks_on_user_id", using: :btree
+  end
+
+  create_table "campaigns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+    t.string   "title"
+    t.text     "body",               limit: 65535
+    t.integer  "user_id"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.integer  "views_count",                      default: 0
+    t.string   "image"
+    t.boolean  "discussion_enabled",               default: true
+    t.boolean  "petition_enabled",                 default: true
+    t.boolean  "poll_enabled",                     default: true
+    t.boolean  "wiki_enabled",                     default: true
+    t.string   "discussion_title"
+    t.string   "poll_title"
+    t.string   "petition_title"
+    t.string   "wiki_title"
+    t.string   "slug"
+    t.index ["user_id"], name: "index_campaigns_on_user_id", using: :btree
   end
 
   create_table "candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -357,7 +377,7 @@ ActiveRecord::Schema.define(version: 20170315053254) do
     t.index ["user_id"], name: "index_memorials_on_user_id", using: :btree
   end
 
-  create_table "opinions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "opinions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.string   "quote"
     t.text     "body",                  limit: 65535
     t.integer  "speaker_id"
@@ -523,7 +543,7 @@ ActiveRecord::Schema.define(version: 20170315053254) do
     t.index ["name"], name: "index_roles_on_name", using: :btree
   end
 
-  create_table "sent_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  create_table "sent_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
@@ -547,7 +567,7 @@ ActiveRecord::Schema.define(version: 20170315053254) do
     t.index ["user_id"], name: "index_signs_on_user_id", using: :btree
   end
 
-  create_table "speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.string  "name",                            null: false
     t.string  "organization"
     t.string  "category",                        null: false

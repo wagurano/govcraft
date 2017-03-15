@@ -64,8 +64,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :opinions, only: [:show]
-
   resources :people do
     get :search, on: :collection
   end
@@ -110,10 +108,13 @@ Rails.application.routes.draw do
   resources :memorials
   get 'google_api/auth_callback', to: 'google_api#auth_callback', as: :auth_callback_google_api
   get 'google_api/auth', to: 'google_api#auth', as: :auth_google_api
+
   resources :agendas do
     get :new_email, on: :member
     post :send_email, on: :member
   end
+  resources :issues, only: [:show]
+  resources :opinions, only: [:show]
   resources :speakers
 
   namespace :admin do
