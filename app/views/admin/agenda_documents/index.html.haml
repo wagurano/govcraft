@@ -1,0 +1,27 @@
+%section.page-block
+  %h3 #{AgendaDocument.model_name.human} 수정
+  %table.ui.table
+    %thead
+      %tr
+        %th #{Speaker.model_name.human}
+        %th #{Agenda.model_name.human}
+        %th 파일
+        %th 요약
+        %th
+          = link_to '추가', new_admin_agenda_document_path, class: 'ui right floated small primary button'
+    %tbody
+      - @agenda_documents.each do |agenda_document|
+        %tr
+          %td
+            = agenda_document.speaker.name
+          %td
+            = agenda_document.agenda.name
+          %td
+            = link_to "#{agenda_document.name} 다운로드", agenda_document.attachment.url, target: '_blank'
+            - if agenda_document.image?
+              = image_tag agenda_document.attachment.sm.url
+          %td
+            = agenda_document.desc
+          %td.right.aligned
+            = link_to '수정', edit_admin_agenda_document_path(agenda_document), class: 'ui small button'
+            = link_to '삭제', admin_agenda_document_path(agenda_document), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'ui small button'

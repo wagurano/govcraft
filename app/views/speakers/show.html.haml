@@ -1,7 +1,7 @@
 .agenda-container
   = render 'agendas/header', agenda: @agenda
 
-%section#speaker-block.page-block
+%section.speaker-request-block.page-block
   .container
     %h3.ui.header
       %img.ui.circular.image{ src: @speaker.image.sm.url }
@@ -16,11 +16,31 @@
             %small 현재까지 총 #{@speaker.sent_requests_count}회 발송됨
           = link_to '작성', new_email_agenda_path(@agenda, speaker_id: @speaker.id),  class: 'ui button'
 
+%section.speaker-request-block.page-block
+  .container
     .post-block__issues
       = render 'issues/list_by_speaker', agenda: @agenda, speaker: @speaker
 
-    %hr
+    - agenda_documents = @speaker.agenda_documents.of_ageda(@agenda)
+    - if agenda_documents.any?
+      .post-block__documents
+        %section#issues.page-block
+          %h3= AgendaDocument.model_name.human
+          .ui.relaxed.list
+            - agenda_documents.each do |agenda_document|
+              .item
+                - if agenda_document.image?
+                  %img.ui.image{ src: agenda_document.attachment.xs.url }
+                - else
+                  %img.ui.image{ src: 'file-icon.png' }
+                .content
+                  = link_to agenda_document.desc, agenda_document.attachment.url, class: 'header', target: '_blank'
+                  .description=l agenda_document.created_at
 
+
+%section.speaker-request-block.page-block
+  .container
+    %hr
     .post-block__request
       - if @speaker.email.present?
         .ui.violet.segment

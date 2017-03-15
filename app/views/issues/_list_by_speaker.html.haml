@@ -1,5 +1,4 @@
 %section#issues.page-block
-  %h3= Issue.model_name.human
   - agenda.issues.each do |issue|
     %h4= issue.title
     - opinions = issue.opinions.recent.of_speaker(speaker)

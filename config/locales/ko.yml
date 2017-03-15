@@ -38,10 +38,11 @@ ko:
     models:
       poll_and_survey: 투표
       user: 당원
-      issue: 제안
+      issue: 의제
       speaker: 발언자
       agenda: 의제
-      opinion: 오피니언
+      agenda_document: 의제 관련 문서
+      opinion: 의견
       project: 프로젝트
       discussion: 게시판
       petition: 서명

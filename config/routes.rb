@@ -123,6 +123,7 @@ Rails.application.routes.draw do
     resources :issues
     resources :speakers
     resources :opinions
+    resources :agenda_documents
     resources :roles do
       collection do
         post :add

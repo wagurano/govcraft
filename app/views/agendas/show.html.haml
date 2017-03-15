@@ -1,45 +1,26 @@
 .agenda-container
   = render 'agendas/header', agenda: @agenda
 
-%section#agenda-block.page-block.page-vip_candidate
-  .ui.container
-    %h3 대선주자의 #{Opinion.model_name.human}
-    - @agenda.issues.each do |issue|
-      %h4= issue.title
-      %table.ui.celled.padded.table.fixed
-        %thead
-          %tr
-            %th.single.line 찬성
-            %th 반대
-            %th 답변없음
-        %tbody
-          %tr
-            - ["찬성", "반대", nil].each do |quote|
-              %td{ style: 'width: 33.3%'}
-                - speakers = issue.categorized_speakers('대선주자', quote)
-                .ui.horizontal.list.link
-                  - speakers.each do |speaker|
-                    = render 'speakers/line', speaker: speaker, agenda: @agenda
-
-%section#agenda-block.page-block.page-assembly
-  .ui.container
-    %h3 국회의원의 #{Opinion.model_name.human}
-    - @agenda.issues.each do |issue|
-      %h4= issue.title
-      %table.ui.celled.padded.table.fixed
-        %thead
-          %tr
-            %th.single.line 찬성
-            %th 반대
-            %th 답변없음
-        %tbody
-          %tr
-            - ["찬성", "반대", nil].each do |quote|
-              %td{ style: 'width: 33.3%'}
-                - speakers = issue.categorized_speakers('국회의원', quote)
-                .ui.horizontal.list.link
-                  - speakers.each do |speaker|
-                    = render 'speakers/line', speaker: speaker, agenda: @agenda
+- %w(대선주자 국회의원).each do |position|
+  %section.page-block.page-opinions
+    .ui.container
+      %h3 #{position} #{Opinion.model_name.human}
+      - @agenda.issues.each do |issue|
+        %h4= issue.title
+        %table.ui.celled.padded.table.fixed
+          %thead
+            %tr
+              %th.single.line 찬성
+              %th 반대
+              %th 답변없음
+          %tbody
+            %tr
+              - ["찬성", "반대", nil].each do |quote|
+                %td{ style: 'width: 33.3%'}
+                  - speakers = issue.categorized_speakers(position, quote)
+                  .ui.list.grid
+                    - speakers.each do |speaker|
+                      = render 'speakers/line', speaker: speaker, agenda: @agenda
 
 %section#agenda-block.page-block
   .container

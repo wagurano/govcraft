@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315015455) do
+ActiveRecord::Schema.define(version: 20170315023709) do
+
+  create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.integer  "speaker_id",               null: false
+    t.integer  "agenda_id",                null: false
+    t.integer  "user_id"
+    t.string   "attachment",               null: false
+    t.string   "name"
+    t.string   "file_type"
+    t.string   "file_size"
+    t.text     "desc",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["agenda_id"], name: "index_agenda_documents_on_agenda_id", using: :btree
+    t.index ["speaker_id"], name: "index_agenda_documents_on_speaker_id", using: :btree
+    t.index ["user_id"], name: "index_agenda_documents_on_user_id", using: :btree
+  end
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
