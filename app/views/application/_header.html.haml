@@ -6,11 +6,8 @@
         우주당
 
       = link_to Project.model_name.human, projects_path, class: 'item'
+      = link_to Agenda.model_name.human, agendas_path, class: 'item'
       = link_to Article.model_name.human, articles_path, class: 'item'
-      = link_to Archive.model_name.human, archives_path, class: 'item'
-      = link_to Timeline.model_name.human, timelines_path, class: 'item'
-      = link_to Memorial.model_name.human, memorials_path, class: 'item'
-      = link_to Event.model_name.human, events_path, class: 'item'
 
       .menu.right
         - if user_signed_in?
