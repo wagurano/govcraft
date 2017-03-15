@@ -3,8 +3,10 @@
 
 - %w(대선주자 국회의원).each do |position|
   %section.page-block.page-opinions
-    .ui.container
-      %h3 #{position} #{Opinion.model_name.human}
+    .container
+      %h2.ui.dividing.header
+        #{position} #{Opinion.model_name.human}
+        .sub.header #{position}에게 #{Opinion.model_name.human}을 #{@agenda.speakers.of_position(position).count}개 받았습니다.
       - @agenda.issues.each do |issue|
         %h4= issue.title
         %table.ui.celled.padded.table.fixed
