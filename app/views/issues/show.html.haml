@@ -10,7 +10,7 @@
     .ui.container
       %h4.ui.dividing.header
         #{position} #{Opinion.model_name.human}
-        .sub.header #{position}에게 #{@agenda.speakers.of_position(position).count}개의 #{Opinion.model_name.human}을 받았습니다.
+        .sub.header #{position}으로부터 #{@agenda.speakers.of_position(position).count}개의 #{Opinion.model_name.human}을 받았습니다.
 
       .answers-list
         .row
@@ -21,4 +21,4 @@
                 = quote || "#{Opinion.model_name.human}없음"
                 %span{ style: 'font-weight: normal' } #{speakers.count}명
 
-              = render 'issues/speakers', speakers: speakers, issue: @issue, quote: quote
+              = render 'issues/speakers', speakers: speakers, issue: @issue, quote: quote, show_all: true

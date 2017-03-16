@@ -18,7 +18,7 @@
                   = quote || "#{Opinion.model_name.human}없음"
                   %span{ style: 'font-weight: normal' } #{speakers.count}명
 
-                = render 'issues/speakers', speakers: speakers, issue: issue, quote: quote
+                = render 'issues/speakers', speakers: speakers, issue: issue, quote: quote, show_all: false
 
 %section#agenda-block.page-block
   .container

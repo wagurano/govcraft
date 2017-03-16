@@ -1,4 +1,8 @@
-- max_count = quote == nil ? 15 : 30
+- if show_all
+  - max_count = 10000
+- else
+  - max_count = quote == nil ? 15 : 30
+
 .answer-speakers
   .ui.list.grid
     - speakers.shuffle[0..max_count].each do |speaker|
