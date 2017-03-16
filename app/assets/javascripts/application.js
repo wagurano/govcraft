@@ -139,7 +139,7 @@ $(function(){
     window.open(url, '_blank');
   });
 
-  $('.js-choose-assembly-members').select2();
+  $('.js-select2').select2();
   $('.gov-action-people-select').select2({
     ajax: {
       url: "/people/search.json",

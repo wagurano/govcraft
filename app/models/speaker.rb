@@ -9,5 +9,9 @@ class Speaker < ApplicationRecord
   scope :of_position, ->(position) { tagged_with(position, on: :positions) }
 
   acts_as_taggable_on :positions
+
+  def details
+    "#{name} - #{organization}"
+  end
 end
 

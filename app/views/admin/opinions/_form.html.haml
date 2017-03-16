@@ -5,7 +5,7 @@
 
   .field
     = f.label :speaker_id
-    = f.collection_select :speaker_id, Speaker.all, :id, :name, {}, { class: 'ui selection dropdown' }
+    = f.collection_select :speaker_id, Speaker.all, :id, :details, {}, { class: 'js-select2' }
 
   .field
     = f.label :quote
