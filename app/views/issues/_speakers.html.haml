@@ -1,17 +1,16 @@
 - max_count = quote == nil ? 15 : 30
 .answer-speakers
   .ui.list.grid
-    - 15.times do
-      - speakers.shuffle[0..max_count].each do |speaker|
-        .item.eight.wide.column
-          = image_tag speaker.image, class: 'ui avatar image'
-          .content
-            = link_to speaker.name, speaker_path(speaker, agenda_id: @agenda.id), class: 'header'
-            .description= speaker.organization
+    - speakers.shuffle[0..max_count].each do |speaker|
+      .item.eight.wide.column
+        = image_tag speaker.image, class: 'ui avatar image'
+        .content
+          = link_to speaker.name, speaker_path(speaker, agenda_id: @agenda.id), class: 'header'
+          .description= speaker.organization
 
-        - if quote == nil
-          .eight.wide.column
-            = link_to '답변 요청하기', new_email_agenda_path(@agenda, speaker_id: speaker.id),  class: 'ui mini button'
-      - if speakers.count > max_count
-        .sixteen.wide.column
-          = link_to "#{speakers.count}명 모두 보기", issue, class: 'ui button'
+      - if quote == nil
+        .eight.wide.column
+          = link_to '답변 요청하기', new_email_agenda_path(@agenda, speaker_id: speaker.id),  class: 'ui mini button'
+    - if speakers.count > max_count
+      .sixteen.wide.column
+        = link_to "#{speakers.count}명 모두 보기", issue, class: 'ui button'
