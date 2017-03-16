@@ -8,6 +8,7 @@ class Ability
     can :cancel, Like
     can :create_by_slack, Article
     can :download, Timeline
+    can :widget, Agenda
 
     if user
       can [:new_email, :send_email], Agenda

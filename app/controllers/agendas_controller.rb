@@ -8,6 +8,10 @@ class AgendasController < ApplicationController
   def show
   end
 
+  def widget
+    render layout: 'strip'
+  end
+
   def new_email
     @speaker = Speaker.find(params[:speaker_id])
     render_404 and return if @speaker.blank?

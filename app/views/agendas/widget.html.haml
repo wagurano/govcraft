@@ -1,6 +1,4 @@
 .agenda-container
-  = render 'agendas/header', agenda: @agenda
-
 - %w(대선주자 국회의원).each do |position|
   %section.page-block.page-opinions
     .container
@@ -12,16 +10,11 @@
         .opinion-speakers-list
           .row
             - ["찬성", "반대", nil].each do |quote|
-              - max_count = quote == nil ? 15 : 30
+              - max_count = quote == nil ? 4 : 8
               - speakers = issue.categorized_speakers(position, quote)
               .col-sm-4{ class: ('hidden-xs' if speakers.empty?) }
                 .position
                   = quote || "#{Opinion.model_name.human}없음"
                   %span{ style: 'font-weight: normal' } #{speakers.count}명
 
-                = render 'issues/speakers', speakers: speakers, issue: issue, quote: quote, max_count: max_count
-
-%section#agenda-block.page-block
-  .container
-    .post-block__comments
-      = render 'comments/list', commentable: @agenda
+                = render 'issues/speakers', speakers: speakers, issue: issue, quote: quote, max_count: max_count, widget: true

@@ -29,11 +29,17 @@
 
     = render 'application/sidebar'
     .pusher
-      = render 'application/header'
+      - if content_for?(:header)
+        = yield :header
+      - else
+        = render 'application/header'
       = render 'breadcrumb'
       = yield
 
-    = render 'footer'
+    - if content_for?(:footer)
+      = yield :footer
+    - else
+      = render 'footer'
 
     %script{:src => "https://www.gstatic.com/charts/loader.js"}
     = javascript_include_tag 'application'

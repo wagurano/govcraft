@@ -110,8 +110,11 @@ Rails.application.routes.draw do
   get 'google_api/auth', to: 'google_api#auth', as: :auth_google_api
 
   resources :agendas do
-    get :new_email, on: :member
-    post :send_email, on: :member
+    member do
+      get :new_email
+      post :send_email
+      get :widget
+    end
   end
   resources :issues, only: [:show]
   resources :opinions, only: [:show]

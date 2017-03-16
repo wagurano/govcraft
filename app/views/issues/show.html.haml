@@ -12,13 +12,13 @@
         #{position} #{Opinion.model_name.human}
         .sub.header #{position}으로부터 #{@agenda.speakers.of_position(position).count}개의 #{Opinion.model_name.human}을 받았습니다.
 
-      .answers-list
+      .opinion-speakers-list
         .row
           - ["찬성", "반대", nil].each do |quote|
             - speakers = @issue.categorized_speakers(position, quote)
             .col-sm-4{ class: ('hidden-xs' if speakers.empty?) }
-              .answer-position
+              .position
                 = quote || "#{Opinion.model_name.human}없음"
                 %span{ style: 'font-weight: normal' } #{speakers.count}명
 
-              = render 'issues/speakers', speakers: speakers, issue: @issue, quote: quote, show_all: true
+              = render 'issues/speakers', speakers: speakers, issue: @issue, quote: quote
