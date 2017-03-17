@@ -14,6 +14,3 @@
         - if project.wiki_enabled
           = link_to '#anchor-project-wiki', class: 'item' do
             위키
-        - if project.discussions.any? && project.discussion_enabled
-          = link_to '#anchor-project-discussion', class: 'item' do
-            = project.try(:component_title, 'discussion')

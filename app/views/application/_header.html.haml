@@ -5,9 +5,13 @@
         = image_tag 'favicons/favicon-32x32.png', style: 'width: 16px; margin-right: 5px;'
         우주당
 
-      = link_to Project.model_name.human, projects_path, class: 'item'
       = link_to Agenda.model_name.human, agendas_path, class: 'item'
+      = link_to Project.model_name.human, projects_path, class: 'item'
+      = link_to Petition.model_name.human, petitions_path, class: 'item'
+      = link_to Survey.model_name.human, surveys_path, class: 'item'
+      = link_to Poll.model_name.human, polls_path, class: 'item'
       = link_to Article.model_name.human, articles_path, class: 'item'
+      = link_to '커뮤니티', 'https://wouldyou.parti.xyz', target: '_blank', class: 'item'
 
       .menu.right
         - if user_signed_in?
