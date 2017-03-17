@@ -11,7 +11,10 @@
 
       - if quote == nil
         .eight.wide.column
-          = link_to "답변 요청하기 #{"(#{speaker.sent_requests_count})" if speaker.sent_requests_count > 0}", new_email_agenda_path(@agenda, speaker_id: speaker.id), target: ('_wyp' if local_assigns[:widget]), class: 'ui mini button'
+          = link_to new_email_agenda_path(@agenda, speaker_id: speaker.id), target: ('_wyp' if local_assigns[:widget]), class: "ui mini button #{'basic' if speaker.requested_by?(current_user)}", style: 'position: relative;' do
+            #{Opinion.model_name.human} 요청하기
+            - if speaker.sent_requests_count > 0
+              .floating.ui.blue.mini.label= speaker.sent_requests_count
     - if local_assigns[:max_count].present? and all_count > local_assigns[:max_count]
       .sixteen.wide.column
         = link_to "#{all_count}명 모두 보기", issue, target: ('_wyp' if local_assigns[:widget]), class: 'ui button'

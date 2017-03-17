@@ -3,7 +3,7 @@ class Speaker < ApplicationRecord
   validates :name, presence: true
   mount_uploader :image, ImageUploader
 
-  has_many :sent_request, dependent: :destroy
+  has_many :sent_requests, dependent: :destroy
   has_many :agenda_documents, dependent: :destroy
 
   scope :of_position, ->(position) { tagged_with(position, on: :positions) }
@@ -12,6 +12,10 @@ class Speaker < ApplicationRecord
 
   def details
     "#{name} - #{organization}"
+  end
+
+  def requested_by? someone
+    sent_requests.exists? user: someone
   end
 end
 

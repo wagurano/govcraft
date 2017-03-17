@@ -1,0 +1,12 @@
+- if speaker.email.present?
+  .ui.violet.segment.clearing
+    = link_to '작성', new_email_agenda_path(agenda, speaker_id: speaker.id),  class: 'ui right floated button'
+    %p
+      #{speaker.name}님에게 #{Opinion.model_name.human} 요청하기
+      %br
+      %small
+        - if speaker.requested_by? current_user
+          %strong 이미 #{current_user.nickname}님은 #{Opinion.model_name.human}을 요청하셨습니다.
+        현재까지 총
+        %strong #{speaker.sent_requests_count}회
+        요청되었습니다.
