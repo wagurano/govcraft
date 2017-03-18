@@ -6,7 +6,7 @@
       .item.eight.wide.column
         = image_tag speaker.image, class: 'ui avatar image'
         .content
-          = link_to speaker.name, speaker_path(speaker, agenda_id: @agenda.id), class: 'header'
+          = link_to speaker.name, speaker_path(speaker, agenda_id: @agenda.id), target: ('_wyp' if local_assigns[:widget]), class: 'header'
           .description= speaker.organization
 
       - if quote == nil
