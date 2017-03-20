@@ -23,6 +23,6 @@
             - @agenda.issues.each_with_index do |issue, index|
               #{index+1}. #{issue.title}
               %br
-            위 제안에 대한 #{Opinion.model_name.human}을 이메일(help@parti.xyz)로 보내주시면 감사하겠습니다.
+            위 제안에 대한 #{Opinion.model_name.human}을 이메일(info@wouldyouparty.org)로 보내주시면 감사하겠습니다.
         = submit_tag '발송', class: 'ui button', data: { confirm: '정말 메일을 발송하시겠습니까?', disable_with: "발송 중..."}
 
