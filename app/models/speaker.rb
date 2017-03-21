@@ -18,5 +18,9 @@ class Speaker < ApplicationRecord
     return false if someone.blank?
     sent_requests.exists? user: someone
   end
+
+  def has_opinion_of? agenda
+    opinions.exists?(issue: agenda.issues)
+  end
 end
 
