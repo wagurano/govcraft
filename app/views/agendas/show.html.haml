@@ -12,14 +12,13 @@
         .opinion-speakers-list
           .row
             - ["찬성", "반대", nil].each do |quote|
-              - max_count = quote == nil ? 15 : 30
               - speakers = issue.categorized_speakers(position, quote)
               .col-sm-4{ class: ('hidden-xs' if speakers.empty?) }
                 .position
                   = quote || "#{Opinion.model_name.human}없음"
                   %span{ style: 'font-weight: normal' } #{speakers.count}명
 
-                = render 'issues/speakers', speakers: speakers, issue: issue, quote: quote, max_count: max_count
+                = render 'issues/speakers', speakers: speakers, issue: issue, quote: quote, max_count: 15
 
 %section#agenda-block.page-block
   .container
