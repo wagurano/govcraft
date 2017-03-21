@@ -11,18 +11,20 @@
       = form_tag send_email_agenda_path(@agenda) do
         = hidden_field_tag :speaker_id, @speaker["id"]
         .form-group
-          = label_tag :sender, '보내는 사람'
-          = text_field_tag :sender, current_user.nickname, class: 'form-control'
+          = label_tag :sender, '보내는 사람(이름/닉네임이나 이메일)'
+          = text_field_tag :sender, params[:sender] || current_user.try(:nickname), class: 'form-control'
         .form-group
           = label_tag :title, '제목'
-          = text_field_tag :title, "[우주당] #{@agenda.name} #{Agenda.model_name.human}에 대해 의견을 듣고자 합니다", class: 'form-control'
+          = text_field_tag :title, params[:title] || "[우주당] #{@agenda.name} #{Agenda.model_name.human}에 대해 의견을 듣고자 합니다", class: 'form-control'
         .form-group
-          %textarea{ name: :body, rows: 40, class: 'form-control redactor' }
-            #{@agenda.name} #{Agenda.model_name.human}의 아래 제안에 대한 의견을 듣고자 합니다
+          - request_opinion = capture do
+            #{@agenda.name} #{Agenda.model_name.human}에 대한 의견을 듣고자 합니다
             %br
             - @agenda.issues.each_with_index do |issue, index|
               #{index+1}. #{issue.title}
               %br
-            위 제안에 대한 #{Opinion.model_name.human}을 이메일(info@wouldyouparty.org)로 보내주시면 감사하겠습니다.
+            위 #{Agenda.model_name.human}에 대한 #{Opinion.model_name.human}을 이메일(info@wouldyouparty.org)로 보내주시면 감사하겠습니다.
+          %textarea{ name: :body, rows: 40, class: 'form-control redactor' }
+            = params[:body] || request_opinion
         = submit_tag '발송', class: 'ui button', data: { confirm: '정말 메일을 발송하시겠습니까?', disable_with: "발송 중..."}
 

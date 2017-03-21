@@ -21,6 +21,10 @@ class AgendasController < ApplicationController
     @speaker = Speaker.find(params[:speaker_id])
     render_404 and return if @speaker.blank? or @speaker.email.blank?
 
+    if %i(sender title body).any? { |k| params[k].blank? }
+      flash[:error] = '값을 모두 채워주세요'
+      render 'new_email' and return
+    end
     AgendaMailer.push(params[:sender], @speaker.name, @speaker.email, @agenda.id, params[:title], params[:body]).deliver_later
     @speaker.sent_requests.create(user: current_user)
 

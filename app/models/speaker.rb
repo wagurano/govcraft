@@ -15,6 +15,7 @@ class Speaker < ApplicationRecord
   end
 
   def requested_by? someone
+    return false if someone.blank?
     sent_requests.exists? user: someone
   end
 end
