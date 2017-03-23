@@ -120,6 +120,8 @@ ko:
         problem: 한국사회의 문제(진단)
         solution: 대안(처방)
         memo: 참고
+        request_opinion_example: 의견요청메일 예시
+        request_amendment_example: 촉구요청메일 예시
       timeline:
         title: 제목
         body: 내용

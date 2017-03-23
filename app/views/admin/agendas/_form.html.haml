@@ -2,5 +2,11 @@
   .field
     = f.label :name
     = f.text_field :name
+  .field
+    = f.label :request_opinion_example
+    ~ f.text_area :request_opinion_example
+  .field
+    = f.label :request_amendment_example
+    ~ f.text_area :request_amendment_example
 
   = f.submit '저장', class: 'ui button'
