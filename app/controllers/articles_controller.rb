@@ -5,7 +5,8 @@ class ArticlesController < ApplicationController
 
   def index
     sort = params[:sort] || 'hot'
-    @articles = Article.send(sort).recent.page params[:page]
+    tag = params[:tag]
+    @articles = tag.present? ? Article.tagged_with(tag).send(sort).recent.page(params[:page]) : Article.send(sort).recent.page(params[:page])
   end
 
   def new

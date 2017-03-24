@@ -15,7 +15,7 @@
       - tag_counts.each do |tag|
         - if params[:tag] == tag.name
           %span{ style: 'display: inline-block; background-color: #4a5dd0; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; color: #fff; margin-bottom: 7px;' }
-            = link_to tag.name, articles_path(), style: 'color: #fff'
+            = link_to tag.name, articles_path(tag: tag.name), style: 'color: #fff'
             %small
               = tag.count
         - else
