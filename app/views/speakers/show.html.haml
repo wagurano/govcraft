@@ -9,7 +9,7 @@
       %small.text-mute= @speaker.organization
 
     .post-block__request
-      = render 'speakers/send_button', agenda: @agenda, speaker: @speaker
+      = render 'speakers/send_button', agenda: @agenda, speaker: @speaker, is_question: true
 
 %section.speaker-request-block.page-block
   .container
@@ -37,4 +37,4 @@
   .container
     %hr
     .post-block__request
-      = render 'speakers/send_button', agenda: @agenda, speaker: @speaker
+      = render 'speakers/send_button', agenda: @agenda, speaker: @speaker, is_question: true
