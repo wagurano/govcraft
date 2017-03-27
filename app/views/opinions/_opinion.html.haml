@@ -4,6 +4,6 @@
     = opinion.quote
   .opinion__body
     - if opinion.body.present?
-      != opinion.body
+      != simple_format opinion.body
     - else
       %p{ style: 'color: #aaa' } 상세한 #{Opinion.model_name.human}은 아직 없습니다.
