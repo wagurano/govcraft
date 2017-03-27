@@ -1,6 +1,7 @@
 - all_count = speakers.count
 - speakers = speakers.shuffle[0...max_count] if local_assigns[:max_count]
 - button_label = quote.nil? ? "#{Opinion.model_name.human} 요청하기" : "개정 촉구하기"
+- hide_request ||= false
 .answer-speakers
   .ui.list.grid
     - speakers.each do |speaker|
@@ -10,11 +11,12 @@
           = link_to speaker.name, speaker_path(speaker, agenda_id: @agenda.id), target: ('_wyp' if local_assigns[:widget]), class: 'header'
           .description= speaker.organization
 
-      .item.eight.wide.column
-        = link_to new_email_agenda_path(@agenda, speaker_id: speaker.id), target: ('_wyp' if local_assigns[:widget]), class: "ui mini button #{'basic' if speaker.requested_by?(current_user)}", style: 'position: relative;' do
-          = button_label
-          - if speaker.sent_requests_count > 0
-            .floating.ui.blue.mini.label= speaker.sent_requests_count
+      - unless hide_request
+        .item.eight.wide.column
+          = link_to new_email_agenda_path(@agenda, speaker_id: speaker.id), target: ('_wyp' if local_assigns[:widget]), class: "ui mini button #{'basic' if speaker.requested_by?(current_user)}", style: 'position: relative;' do
+            = button_label
+            - if speaker.sent_requests_count > 0
+              .floating.ui.blue.mini.label= speaker.sent_requests_count
     - if local_assigns[:max_count].present? and all_count > local_assigns[:max_count]
       .sixteen.wide.column
         = link_to "#{all_count}명 모두 보기", issue, target: ('_wyp' if local_assigns[:widget]), class: 'ui button'
