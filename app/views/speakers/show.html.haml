@@ -17,24 +17,31 @@
       = render 'issues/list_by_speaker', agenda: @agenda, speaker: @speaker
 
     - agenda_documents = @speaker.agenda_documents.of_ageda(@agenda)
-    - if agenda_documents.any?
+    - if agenda_documents.any? or (user_signed_in? and current_user.has_role? :admin)
       .post-block__documents
         %section#issues.page-block
           %h3= AgendaDocument.model_name.human
-          .ui.relaxed.list
+          .row.masonry-container
             - agenda_documents.each do |agenda_document|
-              .item
-                - if agenda_document.image?
-                  %img.ui.image{ src: agenda_document.attachment.xs.url }
-                - else
-                  %img.ui.image{ src: 'file-icon.png' }
-                .content
-                  = link_to agenda_document.desc, agenda_document.attachment.url, class: 'header', target: '_blank'
-                  .description=l agenda_document.created_at
-
+              .col-xs-12.col-sm-4{ style: 'margin-bottom: 24px' }
+                .thumbnail
+                  = link_to agenda_document.attachment.url, target: '_blank' do
+                    - if agenda_document.image?
+                      %img{ src: agenda_document.attachment.sm.url }
+                    - else
+                      %img{ src: 'file-icon.png' }
+                  .caption
+                    = link_to agenda_document.desc, agenda_document.attachment.url, class: 'description', target: '_blank'
+                    = link_to l(agenda_document.created_at), agenda_document.attachment.url, class: 'text-mute', target: '_blank'
+          - if user_signed_in? and current_user.has_role? :admin
+            = link_to new_admin_agenda_document_path(agenda_id: @agenda.id, speaker_id: @speaker.id), target: '_admin', class: 'btn btn-primary' do
+              %i.fa.fa-upload
+              업로드
 
 %section.speaker-request-block.page-block
   .container
     %hr
     .post-block__request
       = render 'speakers/send_button', agenda: @agenda, speaker: @speaker, is_question: true
+
+

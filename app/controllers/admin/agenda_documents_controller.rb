@@ -26,6 +26,11 @@ class Admin::AgendaDocumentsController < Admin::BaseController
     redirect_to admin_agenda_documents_path
   end
 
+  def new
+    @agenda_document.agenda_id = params[:agenda_id] if params[:agenda_id].present?
+    @agenda_document.speaker_id = params[:speaker_id] if params[:speaker_id].present?
+  end
+
   private
 
   def agenda_document_params
