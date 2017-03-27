@@ -2,11 +2,11 @@ class Vote < ApplicationRecord
   include Choosable
 
   belongs_to :user
-  belongs_to :poll, counter_cache: true
+  belongs_to :votable, polymorphic: true, counter_cache: true
 
-  counter_culture :poll, :column_name => proc {|model| "#{model.choice}s_count" }
+  # counter_culture :votable, :column_name => proc {|model| "#{model.choice}s_count" }
 
-  validates :user, uniqueness: { scope: :poll }, if: "user.present?"
+  validates :user, uniqueness: { scope: [:votable_id, :votable_type] }, if: "user.present?"
 
   scope :recent, -> { order('id DESC') }
 end

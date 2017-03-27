@@ -12,6 +12,6 @@
         .poll__body
           = strip_tags poll.body if poll.body.present?
 
-        = render 'votes/panel', poll: poll, show_voters: false
+        = render 'votes/panel', votable: poll, show_voters: false
 
 

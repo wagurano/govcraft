@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323023804) do
+ActiveRecord::Schema.define(version: 20170327110319) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -168,8 +168,8 @@ ActiveRecord::Schema.define(version: 20170323023804) do
     t.text    "secretary2",  limit: 65535
     t.string  "shrtNm"
     t.string  "staff"
-    t.integer "speaker_id"
     t.string  "jpgLink"
+    t.integer "speaker_id"
     t.index ["speaker_id"], name: "index_assembly_members_on_speaker_id", using: :btree
   end
 
@@ -368,6 +368,9 @@ ActiveRecord::Schema.define(version: 20170323023804) do
     t.datetime "updated_at",                                      null: false
     t.integer  "likes_count",                         default: 0
     t.integer  "anonymous_likes_count",               default: 0
+    t.integer  "votes_count",                         default: 0
+    t.integer  "agrees_count",                        default: 0
+    t.integer  "disagrees_count",                     default: 0
     t.index ["issue_id"], name: "index_opinions_on_issue_id", using: :btree
     t.index ["speaker_id"], name: "index_opinions_on_speaker_id", using: :btree
   end
@@ -525,7 +528,7 @@ ActiveRecord::Schema.define(version: 20170323023804) do
     t.index ["name"], name: "index_roles_on_name", using: :btree
   end
 
-  create_table "sent_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  create_table "sent_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
@@ -714,13 +717,14 @@ ActiveRecord::Schema.define(version: 20170323023804) do
 
   create_table "votes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
-    t.integer  "poll_id",    null: false
     t.string   "choice"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["poll_id"], name: "index_votes_on_poll_id", using: :btree
-    t.index ["user_id", "poll_id"], name: "index_votes_on_user_id_and_poll_id", unique: true, using: :btree
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "votable_type", null: false
+    t.integer  "votable_id",   null: false
+    t.index ["user_id", "votable_id", "votable_type"], name: "index_votes_on_user_id_and_votable_id_and_votable_type", unique: true, using: :btree
     t.index ["user_id"], name: "index_votes_on_user_id", using: :btree
+    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id", using: :btree
   end
 
   create_table "wiki_revisions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

@@ -1,30 +1,30 @@
 module VoteHelper
-  def anonymous_voted? poll, choice = nil
+  def anonymous_voted? votable, choice = nil
     if choice.nil?
-      fetch_anonymous_choice(poll).present?
+      fetch_anonymous_choice(votable).present?
     else
-      voted_polls[poll.id] == choice.to_s
+      voted_votables["#{votable.class.name}_#{votable.id}"] == choice.to_s
     end
   end
 
-  def mark_anonymous_voted_poll(poll, choice)
-    updated = voted_polls
-    updated[poll.id] = choice
+  def mark_anonymous_voted_poll(votable, choice)
+    updated = voted_votables
+    updated["#{votable.class.name}_#{votable.id}"] = choice
     cookies.permanent.signed[:qus_qus] = JSON.generate(updated)
   end
 
-  def fetch_anonymous_vote poll
-   a = Vote.new(choice: fetch_anonymous_choice(poll))
+  def fetch_anonymous_vote votable
+   a = Vote.new(choice: fetch_anonymous_choice(votable))
   end
 
   private
 
-  def fetch_anonymous_choice poll
-    voted_polls[poll.id.to_s]
+  def fetch_anonymous_choice votable
+    voted_votables["#{votable.class.name}_#{votable.id}"]
   end
 
-  def voted_polls
-    cookie_voted_polls = cookies.permanent.signed[:qus_qus]
-    cookie_voted_polls.present? ? JSON.parse(cookie_voted_polls) : {}
+  def voted_votables
+    cookie_voted_votables = cookies.permanent.signed[:qus_qus]
+    cookie_voted_votables.present? ? JSON.parse(cookie_voted_votables) : {}
   end
 end
