@@ -163,6 +163,7 @@ ko:
         duration: 기간(일)
         cover_image: 대표이미지
         options: 옵션
+        multi_selectable: 다중선택 가능여부
       archive_document:
         id: ID
         title: 제목

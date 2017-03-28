@@ -38,6 +38,10 @@ class Survey < ApplicationRecord
     (option.feedbacks_count / feedbacks_count.to_f * 100).ceil
   end
 
+  def feedback_users_count
+    feedbacks.count('distinct user_id')
+  end
+
   private
 
   def has_options

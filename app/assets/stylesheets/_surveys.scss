@@ -157,3 +157,11 @@
     }
   }
 }
+
+.options-panel .option-body,
+.options-panel .option-desc {
+  display: inline-block;
+  .survey-card & {
+    display: block;
+  }
+}

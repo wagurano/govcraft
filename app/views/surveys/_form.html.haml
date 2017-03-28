@@ -23,6 +23,13 @@
       = f.number_field :duration, class: 'form-control'
 
   .form-group
+    = f.label :multi_selectable
+    .help-block
+      %label{ style: 'font-weight: normal;' }
+        = f.check_box :multi_selectable
+        하나 이상을 선택할 수 있습니다.
+
+  .form-group
     = f.label :cover_image
     = f.file_field :cover_image, class: 'form-control'
 

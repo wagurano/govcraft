@@ -86,7 +86,7 @@ class SurveysController < ApplicationController
   private
 
   def survey_params
-    params.require(:survey).permit(:title, :body, :project_id, :duration, :cover_image, options_attributes: [:id, :body])
+    params.require(:survey).permit(:title, :body, :project_id, :duration, :cover_image, :multi_selectable, options_attributes: [:id, :body, :desc])
   end
 
   def reset_meta_tags

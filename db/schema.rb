@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328062309) do
+ActiveRecord::Schema.define(version: 20170328121733) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -299,7 +299,6 @@ ActiveRecord::Schema.define(version: 20170328062309) do
     t.datetime "updated_at", null: false
     t.index ["option_id"], name: "index_feedbacks_on_option_id", using: :btree
     t.index ["survey_id"], name: "index_feedbacks_on_survey_id", using: :btree
-    t.index ["user_id", "survey_id"], name: "index_feedbacks_on_user_id_and_survey_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_feedbacks_on_user_id", using: :btree
   end
 
@@ -381,6 +380,7 @@ ActiveRecord::Schema.define(version: 20170328062309) do
     t.integer  "feedbacks_count",               default: 0, null: false
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+    t.string   "desc"
     t.index ["survey_id"], name: "index_options_on_survey_id", using: :btree
   end
 
@@ -583,17 +583,18 @@ ActiveRecord::Schema.define(version: 20170328062309) do
   create_table "surveys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title"
     t.text     "body",                  limit: 65535
-    t.integer  "user_id",                                         null: false
+    t.integer  "user_id",                                             null: false
     t.integer  "project_id"
     t.integer  "likes_count",                         default: 0
     t.integer  "anonymous_likes_count",               default: 0
-    t.integer  "feedbacks_count",                     default: 0, null: false
-    t.integer  "views_count",                         default: 0, null: false
-    t.integer  "duration",                            default: 0, null: false
+    t.integer  "feedbacks_count",                     default: 0,     null: false
+    t.integer  "views_count",                         default: 0,     null: false
+    t.integer  "duration",                            default: 0,     null: false
     t.string   "cover_image"
     t.string   "social_card"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.boolean  "multi_selectable",                    default: false, null: false
     t.index ["project_id"], name: "index_surveys_on_project_id", using: :btree
     t.index ["user_id"], name: "index_surveys_on_user_id", using: :btree
   end

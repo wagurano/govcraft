@@ -6,15 +6,21 @@ class FeedbacksController < ApplicationController
     survey = @option.survey
 
     if survey.open?
-      previous_feedback = survey.feedbacks.find_by user: current_user
+      feedbacks = survey.feedbacks.where user: current_user
+      previous_feedback = feedbacks.find_by(option: @option)
+      is_present_previous_feedback = previous_feedback.present?
 
-      if previous_feedback.present?
-        previous_feedback.destroy
-        if previous_feedback.option != @option
+      if survey.multi_selectable?
+        if is_present_previous_feedback
+          previous_feedback.destroy
+        else
           feedback = create_feedback(@option)
         end
       else
-        feedback = create_feedback(@option)
+        feedbacks.destroy_all
+        unless is_present_previous_feedback
+          feedback = create_feedback(@option)
+        end
       end
     end
 

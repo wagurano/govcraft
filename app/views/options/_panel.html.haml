@@ -20,7 +20,10 @@
           - if survey.open?
             %i.check.circle.outline.icon{ style: "font-size: 2em; line-height: 1.5em; color: #{option.selected?(current_user) ? '#4a5dd0' : '#bbb'};"}
           .content{ style: 'width: 100%' }
-            .header= option.body
+            .header
+              .option-body= option.body
+              - if option.desc.present?
+                .option-desc{ style: 'font-weight: normal;' }= option.desc
             .description{ style: 'margin-top: 3px;' }
               .chart{ class: ('active' if option.selected?(current_user)) }
                 %span.chart__label #{option.feedbacks_count}명
@@ -32,4 +35,4 @@
       마감
     - if survey.feedbacks_count > 0
       &middot;
-      총투표 #{survey.feedbacks_count}명
+      총투표 #{survey.feedback_users_count}명
