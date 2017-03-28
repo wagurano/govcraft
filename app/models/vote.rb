@@ -4,7 +4,7 @@ class Vote < ApplicationRecord
   belongs_to :user
   belongs_to :votable, polymorphic: true, counter_cache: true
 
-  # counter_culture :votable, :column_name => proc {|model| "#{model.choice}s_count" }
+  counter_culture :votable, :column_name => proc {|model| "#{model.choice}s_count" }
 
   validates :user, uniqueness: { scope: [:votable_id, :votable_type] }, if: "user.present?"
 
