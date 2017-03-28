@@ -9,6 +9,7 @@ class Ability
     can :create_by_slack, Article
     can :download, Timeline
     can [:widget, :new_email, :send_email], Agenda
+    can :vote_widget, Opinion
 
     if user
       can [:new_email, :send_email], Agenda
