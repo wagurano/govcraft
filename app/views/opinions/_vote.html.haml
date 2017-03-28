@@ -19,8 +19,8 @@
         = link_to polymorphic_url(['disagree', :votes], votable_id: @votable.id, votable_type: @votable.class.name, widget: true), method: :post, remote: true, class: 'btn btn-choice btn-lg btn-disagree btn-disagree__before' do
           = image_tag 'icon_thumb_down.png', class: 'choice__label choice__label__disagree'
           %span.choice__count= @votable.disagrees_count
-    - if @votable.comments.count > 0
-      = link_to speaker_path(@votable.speaker, agenda_id: Agenda.find_by(name:'여성').id, anchor: 'anchor-opinion-comments-list'), target: ('_wyp' if local_assigns[:widget]), class: 'header', target: '_blank' do
-        %span.votable-comments-count
-          .comment-icon
+    = link_to speaker_path(@votable.speaker, agenda_id: Agenda.find_by(name:'여성').id, anchor: 'anchor-opinion-comments-list'), target: ('_wyp' if local_assigns[:widget]), class: 'header', target: '_blank' do
+      %span.votable-comments-count
+        .comment-icon
+        - if @votable.comments.count > 0
           #{@votable.comments.count}
