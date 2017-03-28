@@ -26,7 +26,7 @@ class AgendasController < ApplicationController
       render 'new_email' and return
     end
     AgendaMailer.push(params[:sender], @speaker.name, @speaker.email, @agenda.id, params[:title], params[:body]).deliver_later
-    @speaker.sent_requests.create(user: current_user)
+    @speaker.sent_requests.create(user: current_user, agenda: @agenda)
 
     flash[:success] = '메일을 발송했습니다'
     redirect_to speaker_path(@speaker, agenda_id: @agenda.id)

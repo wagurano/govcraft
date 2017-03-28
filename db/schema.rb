@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327110319) do
+ActiveRecord::Schema.define(version: 20170328062309) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -531,8 +531,10 @@ ActiveRecord::Schema.define(version: 20170327110319) do
   create_table "sent_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "agenda_id"
+    t.index ["agenda_id"], name: "index_sent_requests_on_agenda_id", using: :btree
     t.index ["speaker_id"], name: "index_sent_requests_on_speaker_id", using: :btree
     t.index ["user_id"], name: "index_sent_requests_on_user_id", using: :btree
   end
