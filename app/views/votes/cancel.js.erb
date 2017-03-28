@@ -1,2 +1,7 @@
+<%- if @widget %>
+$('.vote-panel#<%= vote_panel_dom_id(@votable) %>').replaceWith('<%= j(render('opinions/vote', votable: @votable, show_voters: params[:show_voters] == 'true')) %>');
+UnobtrusiveFlash.showFlashFromCookies();
+<%- else %>
 $('.vote-panel#<%= vote_panel_dom_id(@votable) %>').replaceWith('<%= j(render('votes/panel', votable: @votable, show_voters: params[:show_voters] == 'true')) %>');
 UnobtrusiveFlash.showFlashFromCookies();
+<%- end %>

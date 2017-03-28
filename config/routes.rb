@@ -117,7 +117,11 @@ Rails.application.routes.draw do
     end
   end
   resources :issues, only: [:show]
-  resources :opinions, only: [:show]
+  resources :opinions, only: [:show] do
+    member do
+      get :vote_widget
+    end
+  end
   resources :speakers
 
   namespace :admin do

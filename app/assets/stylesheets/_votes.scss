@@ -1,0 +1,68 @@
+.vote-widget .vote-panel{
+  .vote-button {
+    margin: 0px 1px;
+  }
+  .btn-choice {
+    color: #fff;
+    padding: 4px 20px;
+  }
+  .btn-agree {
+    &:hover {
+      background-color: #ff3046;
+    }
+    &__after {
+      background-color: #ff3046;
+    }
+    &__before {
+      background-color: #fabcb7;
+    }
+  }
+  .btn-disagree {
+    &:hover {
+      background-color: #00b794;
+    }
+    &__after {
+      background-color: #00b794;
+    }
+    &__before {
+      background-color: #b4d4d6;
+    }
+  }
+  .choice {
+    &__label {
+      width: 20px;
+      display: inline-block;
+      &__agree {
+        margin-top: -4px;
+      }
+      &__disagree {
+        margin-top: -2px;
+      }
+    }
+    &__count {
+      font-size: 16px;
+      display: inline-block;
+    }
+  }
+  .votable-comments-count {
+    color: #b5b5b5;
+    padding-left: 4px;
+    &:hover {
+      color: #9241cb;
+      .comment-icon {
+        background-image: asset_url('icon_comment_purple.png');
+      }
+    }
+    .comment-icon {
+      width: 18px;
+      height: 18px;
+      background-image: asset_url('icon_comment_gray.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      display: inline-block;
+      margin-bottom: -4px;
+    }
+  }
+
+}

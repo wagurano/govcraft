@@ -4,6 +4,7 @@ class VotesController < ApplicationController
   before_action :authenticate_user!, except: [:agree, :disagree]
 
   def agree
+    @widget = params[:widget]
     fetch_votable
     choice(:agree)
 
@@ -14,6 +15,7 @@ class VotesController < ApplicationController
   end
 
   def disagree
+    @widget = params[:widget]
     fetch_votable
     choice(:disagree)
 
@@ -24,6 +26,7 @@ class VotesController < ApplicationController
   end
 
   def cancel
+    @widget = params[:widget]
     @votable ||= params[:votable_type].constantize.find params[:votable_id]
     @vote = @votable.fetch_vote_of(current_user)
 
