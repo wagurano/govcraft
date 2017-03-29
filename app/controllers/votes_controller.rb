@@ -44,7 +44,7 @@ class VotesController < ApplicationController
 
   def choice(choice)
     if !user_signed_in? and anonymous_voted?(@votable)
-      flash[:notice] = '로그인해서 투표한 경우만 바꿀 수 있습니다.'
+      render 'login_alert.js.erb'
       return
     end
 
