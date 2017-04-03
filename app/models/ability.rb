@@ -40,8 +40,13 @@ class Ability
         comment.commentable.try(:project) && user == comment.commentable.project.user
       end
 
-      if user.has_role? :admin
-        can :manage, :all
+      begin
+        if user.has_role? :admin
+          can :manage, :all
+        end
+      rescue NameError => e
+        Rails.logger.error user.inspect
+        raise e
       end
     end
   end
