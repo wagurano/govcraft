@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  TEMPLATES = %w( default map map_with_assembly speech )
+  TEMPLATES = %w( default default_with_photo map map_with_assembly speech )
 
   belongs_to :user
   belongs_to :project

@@ -4,17 +4,12 @@
   color: #fff;
   padding-top: 80px;
   padding-bottom: 40px;
-  text-align: center;
 
   h1.huge.header {
     font-size: 48px;
   }
-  .project_buttons {
-    text-align: center;
-  }
   .project_share {
     margin-bottom: 48px;
-    text-align: center;
   }
 
   .current-user-status {
@@ -30,9 +25,9 @@
   &__title {
     font-weight: bold;
     font-size: $font-size-base * 2.5;
-    @include text-stroke();
     margin-bottom: $font-size-base * 1.5;
     word-break: keep-all;
+    text-shadow: 1px 1px 0px #000;
   }
   &__body {
     font-size: $font-size-large;
