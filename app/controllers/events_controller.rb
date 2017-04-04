@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   before_action :reset_meta_tags, only: :show
 
   def index
-    @evnts = Event.recent
+    @events = Event.recent
   end
 
   def show
