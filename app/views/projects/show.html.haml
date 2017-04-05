@@ -5,7 +5,7 @@
   = render 'events/list', project: @project, events: @project.events.recent
 
 
-  - if @project.poll_enabled? or @project.survey_enabled?
+  - if @project.poll_enabled?
     %a{id: "anchor-project-poll-and-survey"}
     = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent
 
