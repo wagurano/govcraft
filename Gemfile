@@ -49,11 +49,6 @@ gem 'google_drive'
 gem 'rest-client', '~> 2.0'
 gem 'streamio-ffmpeg'
 
-# assets
-source 'https://rails-assets.org' do
-  gem 'rails-assets-trianglify'
-end
-
 # file upload
 gem 'carrierwave', '~> 0.10.0'
 gem "mini_magick"
