@@ -59,7 +59,7 @@
                 = f.label :image, '인증샷'
                 = f.file_field :image, class: 'form-control'
               .form-group
-                = f.label :body, '정책제안이나 질문'
+                = f.label :body, '정책제안'
                 ~ f.text_area :body, placeholder: '나의 의견은 ...', rows: 8, class: 'form-control input-lg', data: { 'rule-required': true }
               .form-group
                 = f.label :tag_list, '주제'
@@ -119,7 +119,7 @@
             = f.label :image, '인증샷'
             = f.file_field :image, class: 'form-control'
           .form-group
-            = f.label :body, '정책제안이나 질문'
+            = f.label :body, '정책제안'
             ~ f.text_area :body, placeholder: '나의 의견은 ...', rows: 8, class: 'form-control input-lg', data: { 'rule-required': true }
           .form-group
             = f.label :tag_list, '주제'
