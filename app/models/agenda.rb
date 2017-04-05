@@ -8,6 +8,8 @@ class Agenda < ApplicationRecord
   has_many :agenda_documents, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
 
+  acts_as_taggable
+
   mount_uploader :image, ImageUploader
 
   def opinions_by speaker

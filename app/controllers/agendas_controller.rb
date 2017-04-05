@@ -31,4 +31,8 @@ class AgendasController < ApplicationController
     flash[:success] = '메일을 발송했습니다'
     redirect_to speaker_path(@speaker, agenda_id: @agenda.id)
   end
+
+  def themes
+    @agendas = Agenda.tagged_with(params[:tag])
+  end
 end

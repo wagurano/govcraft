@@ -115,6 +115,9 @@ Rails.application.routes.draw do
       post :send_email
       get :widget
     end
+    collection do
+      get '/themes/:tag', action: :themes, as: :theme
+    end
   end
   resources :issues, only: [:show]
   resources :opinions, only: [:show] do
@@ -130,7 +133,11 @@ Rails.application.routes.draw do
     resources :agendas
     resources :issues
     resources :speakers
-    resources :opinions
+    resources :opinions do
+      collection do
+        get :new_or_edit
+      end
+    end
     resources :agenda_documents
     resources :roles do
       collection do

@@ -1,0 +1,47 @@
+.agenda-container
+  = render 'agendas/header_by_tag', tag: params[:tag]
+
+%section.page-block.page-opinions
+  .container
+    - @agendas.each do |agenda|
+      %h2.ui.block.header= agenda.name
+      - agenda.issues.each do |issue|
+        .clearfix{ style: 'margin-bottom: 12px;'}
+          - if user_signed_in? and current_user.is_admin?
+            .ui.pull-right
+              = form_tag new_or_edit_admin_opinions_path, method: :get, class: 'ui form', target: '_blank' do
+                .inline.field
+                  = hidden_field_tag :issue_id, issue.id
+                  %select{name: :speaker_id, class: 'ui compact dropdown'}
+                    - Speaker.of_position('대선주자').each do |speaker|
+                      %option{ value: speaker.id }
+                        = speaker.name
+                  %button.ui.button{ type: "submit" } 입력
+          %h3.ui.left.floated.header{ style: 'line-height: 2em'}
+            = issue.title
+            (#{issue.opinions.where(speaker: Speaker.of_position('대선주자')).count})
+
+        - if issue.opinions.where(speaker: Speaker.of_position('대선주자')).any?
+          .row
+            - Speaker.of_position('대선주자').each do |speaker|
+              - issue.opinions.of_speaker(speaker).each do |opinion|
+                .col-xs-12.col-sm-4
+                  = link_to speaker_path(speaker, tag: params[:tag]) do
+                    .ui.card{ style: 'width: 100%; margin-bottom: 12px;'}
+                      .content
+                        %img.ui.avatar.image{:src => speaker.image.xs.url}/
+                        = speaker.name
+                      .image
+                        %img/
+                      .content
+                        .description
+                          %p= simple_format h(opinion.body)
+                        %span.right.floated
+                          %i.heart.outline.like.icon
+                          17 likes
+                        %i.comment.icon
+                        3 comments
+                      .ui.bottom.attached.button
+                        %i.add.icon
+                        질의하기 (13)
+

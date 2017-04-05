@@ -7,7 +7,7 @@
       != simple_format opinion.body
     - else
       %p{ style: 'color: #aaa' } 상세한 #{Opinion.model_name.human}은 아직 없습니다.
-- if @agenda.name == '여성'
+- if opinion.issue.agenda.name == '여성'
   .text-center
     = render 'votes/panel', votable: opinion, show_voters: true
 

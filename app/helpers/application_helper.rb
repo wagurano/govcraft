@@ -73,4 +73,8 @@ module ApplicationHelper
     extension = 'txt' unless ALLOWED_EXTENSIONS.include?(extension)
     content_tag(:i, nil, class: ["fa", "fa-file-#{extension}-o"])
   end
+
+  def human_theme_name(tag)
+    {'choice2017' => '대선2017'}.fetch(tag, tag)
+  end
 end

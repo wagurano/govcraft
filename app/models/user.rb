@@ -107,6 +107,10 @@ class User < ApplicationRecord
     where(conditions.to_h).first
   end
 
+  def is_admin?
+    has_role?(:admin)
+  end
+
   private
 
   def set_uid

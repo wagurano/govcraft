@@ -1,0 +1,45 @@
+.agenda-container
+  = render 'agendas/header_by_tag', tag: params[:tag]
+
+%section.speaker-request-block.page-block
+  .container
+    %h3.ui.header
+      %img.ui.circular.image{ src: @speaker.image.sm.url }
+      = @speaker.name
+      %small.text-mute= @speaker.organization
+
+- @agendas.each do |agenda|
+
+  %section.speaker-request-block.page-block
+    .container
+      .post-block__issues
+        = render 'issues/list_by_speaker', agenda: agenda, speaker: @speaker
+
+      .post-block__request
+        = render 'speakers/send_button', agenda: agenda, speaker: @speaker, is_question: true
+
+      - agenda_documents = @speaker.agenda_documents.of_ageda(agenda)
+      - if agenda_documents.any? or (user_signed_in? and current_user.has_role? :admin)
+        .post-block__documents
+          %section#issues.page-block
+            %h3= AgendaDocument.model_name.human
+            .row.masonry-container
+              - agenda_documents.each do |agenda_document|
+                .col-xs-12.col-sm-4{ style: 'margin-bottom: 24px' }
+                  .thumbnail
+                    = link_to agenda_document.attachment.url, target: '_blank' do
+                      - if agenda_document.image?
+                        %img{ src: agenda_document.attachment.sm.url }
+                      - else
+                        %img{ src: 'file-icon.png' }
+                    .caption
+                      = link_to agenda_document.desc, agenda_document.attachment.url, class: 'description', target: '_blank'
+                      = link_to l(agenda_document.created_at), agenda_document.attachment.url, class: 'text-mute', target: '_blank'
+            - if user_signed_in? and current_user.has_role? :admin
+              = link_to new_admin_agenda_document_path(agenda_id: agenda.id, speaker_id: @speaker.id), target: '_admin', class: 'btn btn-primary' do
+                %i.fa.fa-upload
+                업로드
+
+
+
+
