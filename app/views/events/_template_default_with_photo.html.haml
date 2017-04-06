@@ -76,6 +76,9 @@
         .col-sm-6.col-md-4.col-lg-3
           .panel.panel-default.panel-floating[comment]
             .panel-body
+              - if comment.image.present?
+                .comment__image
+                  = image_tag comment.image_url(:lg), style: 'width: 100%;'
               .comment__body
                 %h4{ style: 'font-size: 16px; letter-spacing: -0.02em; line-height: 1.4;'}= smart_format comment.body
               .comment__tags
@@ -95,7 +98,7 @@
   %nav.navbar.navbar-default.navbar-fixed-bottom{ style: 'min-height: auto;'}
     %button.btn.btn-primary.btn-lg.btn-block{"data-target" => "#comment-form-modal", "data-toggle" => "modal", :type => "button"}
       %i.fa.fa-file-image-o
-      정책제안 혹은 질문 남기기
+      정책제안 남기기
 
 #comment-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
