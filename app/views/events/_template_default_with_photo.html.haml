@@ -37,7 +37,7 @@
         %span{ style: 'display: inline-block; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; margin-bottom: 7px;' }
           = link_to tag.name, event_path(event, {tag: tag.name})
           %small.text-muted
-            = tag.taggings_count
+            = tag.count
 
 %section
   .container-fluid
