@@ -8,6 +8,9 @@ class ReportsController < ApplicationController
     redirect_to root_path if @reportable.blank?
 
     @report = Report.new(reportable: @reportable, user: current_user)
+    if current_user.is_admin?
+      @report.force = params[:force]
+    end
     if @report.save
       flash[:success] = t('messages.reported')
     else

@@ -10,6 +10,6 @@ module Reportable
   end
 
   def screened?
-    reports_count > 10
+    reports_count > 10 or reports.exists?(force: true)
   end
 end
