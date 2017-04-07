@@ -32,6 +32,11 @@ class Ability
       can [:update], Wiki
       can [:revert], WikiRevision
 
+      # 프로젝트 개설자는 프로젝트에 속한 이벤트를 수정할 수 있다
+      can :update, [Event] do |model|
+        model.project && user == model.project.user
+      end
+
       # 프로젝트 개설자는 프로젝트에 속한 글과 댓글을 삭제할 수 있다
       can :destroy, [Discussion, Petition, Poll, Survey, Wiki, Event] do |model|
         model.project && user == model.project.user
