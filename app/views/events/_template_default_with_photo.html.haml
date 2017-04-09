@@ -78,7 +78,7 @@
             .panel-body
               - if comment.image.present?
                 .comment__image
-                  = image_tag comment.image_url(:md), style: 'width: 100%;'
+                  = image_tag comment.image.md.url, style: 'width: 100%;'
               .comment__body
                 %h4{ style: 'font-size: 16px; letter-spacing: -0.02em; line-height: 1.4;'}= smart_format comment.body
               .comment__tags
