@@ -2,12 +2,13 @@
 .panel.panel-default[opinion]
   .panel-body
     .row
-      .col-sm-8.col-xs-7
+      .col-sm-9.col-xs-7
         %p.lead= link_to opinion.quote, opinion
         .opinion__body
           - if opinion.body.present?
             != simple_format opinion.body
           - else
             %p{ style: 'color: #aaa' } 상세한 #{Opinion.model_name.human}은 아직 없습니다.
-      .col-sm-4.col-xs-5.text-right
+
+      .col-sm-3.col-xs-5.text-right
         = render 'votes/panel', votable: opinion, show_voters: false

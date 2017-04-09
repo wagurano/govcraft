@@ -12,12 +12,20 @@
 - @agendas.each_with_index do |agenda, i|
   %section.page-block{ class: "page-block-#{i%2}"}
     .container
-      %h2= agenda.name
+      %h2
+        = link_to agenda.name, agenda
 
       - agenda.issues.each do |issue|
         %section[issue]{ style: 'margin-bottom: 2em' }
-          %h3= issue.title
+          %h3
+            = issue.title
+            - if user_signed_in? and current_user.is_admin?
+              %small
+                = link_to new_or_edit_admin_opinions_path(issue_id: issue.id, speaker_id: @speaker.id), class: 'text-danger' do
+                  의견 수정
+
           - opinions = issue.opinions.recent.of_speaker(@speaker)
           = render opinions
           - if opinions.empty?
             %p 아직 #{Opinion.model_name.human}이 없습니다.
+          
