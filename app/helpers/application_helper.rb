@@ -75,6 +75,6 @@ module ApplicationHelper
   end
 
   def human_theme_name(tag)
-    {'choice2017' => '대선2017'}.fetch(tag, tag)
+    {'2017president' => '2017년 대통령 선거'}.fetch(tag, tag)
   end
 end
