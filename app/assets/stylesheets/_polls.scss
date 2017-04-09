@@ -109,7 +109,6 @@
   }
 }
 
-
 .vote-panel {
   border-radius: $btn-border-radius-large;
   .vote-button {
@@ -125,7 +124,7 @@
     }
     .choice__count {
       display: block;
-      font-size: $font-size-h2;
+      font-size: $font-size-h3;
       font-weight: bold;
     }
   }
@@ -136,6 +135,17 @@
   .votable-comments-count {
     body.app-polls-show & {
       display: none;
+    }
+  }
+}
+
+.opinion .vote-panel {
+  .vote-button {
+    margin: 0;
+  }
+  .btn-choice {
+    .choice__count {
+      font-size: $font-size-h4;
     }
   }
 }

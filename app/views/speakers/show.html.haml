@@ -1,47 +1,23 @@
-.agenda-container
-  = render 'agendas/header', agenda: @agenda
+- if @agenda
+  .agenda-container
+    = render 'agendas/header', agenda: @agenda
 
-%section.speaker-request-block.page-block
+%section.cover-section{style: "background-image: linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .5))"}
   .container
-    %h3.ui.header
-      %img.ui.circular.image{ src: @speaker.image.sm.url }
+    %h1
+      = image_tag @speaker.image.xs.url
       = @speaker.name
-      %small.text-mute= @speaker.organization
+      %small{ style: 'color: #fff' }= @speaker.organization
 
-    .post-block__request
-      = render 'speakers/send_button', agenda: @agenda, speaker: @speaker, is_question: true
+- @agendas.each_with_index do |agenda, i|
+  %section.page-block{ class: "page-block-#{i%2}"}
+    .container
+      %h2= agenda.name
 
-%section.speaker-request-block.page-block
-  .container
-    .post-block__issues
-      = render 'issues/list_by_speaker', agenda: @agenda, speaker: @speaker
-
-    - agenda_documents = @speaker.agenda_documents.of_ageda(@agenda)
-    - if agenda_documents.any? or (user_signed_in? and current_user.has_role? :admin)
-      .post-block__documents
-        %section#issues.page-block
-          %h3= AgendaDocument.model_name.human
-          .row.masonry-container
-            - agenda_documents.each do |agenda_document|
-              .col-xs-12.col-sm-4{ style: 'margin-bottom: 24px' }
-                .thumbnail
-                  = link_to agenda_document.attachment.url, target: '_blank' do
-                    - if agenda_document.image?
-                      %img{ src: agenda_document.attachment.sm.url }
-                    - else
-                      %img{ src: 'file-icon.png' }
-                  .caption
-                    = link_to agenda_document.desc, agenda_document.attachment.url, class: 'description', target: '_blank'
-                    = link_to l(agenda_document.created_at), agenda_document.attachment.url, class: 'text-mute', target: '_blank'
-          - if user_signed_in? and current_user.has_role? :admin
-            = link_to new_admin_agenda_document_path(agenda_id: @agenda.id, speaker_id: @speaker.id), target: '_admin', class: 'btn btn-primary' do
-              %i.fa.fa-upload
-              업로드
-
-%section.speaker-request-block.page-block
-  .container
-    %hr
-    .post-block__request
-      = render 'speakers/send_button', agenda: @agenda, speaker: @speaker, is_question: true
-
-
+      - agenda.issues.each do |issue|
+        %section[issue]{ style: 'margin-bottom: 2em' }
+          %h3= issue.title
+          - opinions = issue.opinions.recent.of_speaker(@speaker)
+          = render opinions
+          - if opinions.empty?
+            %p 아직 #{Opinion.model_name.human}이 없습니다.
