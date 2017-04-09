@@ -1,5 +1,5 @@
 class AgendasController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:themes]
 
   def index
     @agendas = Agenda.order('id DESC')
