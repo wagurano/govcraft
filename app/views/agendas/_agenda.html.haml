@@ -1,7 +1,6 @@
-.column
-  .ui.card.fluid
-    .image{ style: "height: 140px; background-image: url(#{agenda.image_url(:md)}); background-size: cover; background-position: center center;" }
-      %a.ui.red.ribbon.label= Agenda.model_name.human
+.col-md-3.col-sm-4.col-xs-12
+  .ui.card.fluid{ style: 'margin-bottom: 2em' }
+    .image{ style: "height: 140px; background-image: url(#{agenda.image.md.url}); background-size: cover; background-position: center center;" }
     .content
       = link_to agenda.name, agenda, class: 'header'
       .meta
@@ -9,4 +8,3 @@
           #{Issue.model_name.human} #{agenda.issues.count}개
       .description
       .extra
-
