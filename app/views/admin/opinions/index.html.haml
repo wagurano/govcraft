@@ -1,13 +1,13 @@
 %section.page-block
   %h3 오피니언
-  %table.ui.table
+  %table.table
     %thead
       %tr
         %th 스피커
         %th 이슈
         %th 요약
-        %th
-          = link_to '추가', new_admin_opinion_path, class: 'ui right floated small primary button'
+        %th.text-right
+          = link_to '추가', new_admin_opinion_path, class: 'btn btn-sm btn-primary'
     %tbody
       - @opinions.each do |opinion|
         %tr
@@ -17,6 +17,6 @@
             = opinion.issue.title
           %td
             = link_to opinion.quote, opinion
-          %td.right.aligned
-            = link_to '수정', edit_admin_opinion_path(opinion), class: 'ui small button'
-            = link_to '삭제', admin_opinion_path(opinion), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'ui small button'
+          %td.text-right
+            = link_to '수정', edit_admin_opinion_path(opinion), class: 'btn btn-xs btn-default'
+            = link_to '삭제', admin_opinion_path(opinion), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'

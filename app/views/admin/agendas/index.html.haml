@@ -1,21 +1,20 @@
 %section.page-block
-  .ui.container
-    %h3 의제
-    %table.ui.table
-      %thead
+  %h3 의제
+  %table.table
+    %thead
+      %tr
+        %th 의제명
+        %th 이슈
+        %th.text-right
+          = link_to '추가', new_admin_agenda_path, class: 'btn btn-sm btn-primary'
+    %tbody
+      - @agendas.each do |agenda|
         %tr
-          %th 의제명
-          %th 이슈
-          %th
-            = link_to '추가', new_admin_agenda_path, class: 'ui right floated small primary button'
-      %tbody
-        - @agendas.each do |agenda|
-          %tr
-            %td
-              %h3= agenda.name
-            %td
-              = agenda.issues.count
-              개의 이슈
-            %td.right.aligned
-              = link_to '수정', edit_admin_agenda_path(agenda), class: 'ui small button'
-              = link_to '삭제', admin_agenda_path(agenda), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'ui small button'
+          %td
+            %h5= agenda.name
+          %td
+            = agenda.issues.count
+            개의 이슈
+          %td.text-right
+            = link_to '수정', edit_admin_agenda_path(agenda), class: 'btn btn-xs btn-default'
+            = link_to '삭제', admin_agenda_path(agenda), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'
