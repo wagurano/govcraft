@@ -1,16 +1,16 @@
 .agenda-container
-  = render 'agendas/header', agenda: @agenda
-
-- if @agenda.name == '여성'
-  %section.page-block.page-opinions
+  %section.cover-section{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(@agenda.image_url(:lg))});"}
     .container
-      - @agenda.issues.each do |issue|
-        %h4= issue.title
-        .opinion-speakers-list
-          .row
-            - speakers = issue.speakers
-            = render 'issues/speakers', speakers: speakers, issue: issue, quote: nil, max_count: 15, hide_request: true
-- else
+      %h1
+        %small
+          %span.label.label-danger= Agenda.model_name.human
+        %br
+        = link_to @agenda, style: 'color: white' do
+          = @agenda.name
+      .agenda-intro
+        .agenda-desc= smart_format @agenda.memo
+
+- if @agenda.name == '선거제도'
   - %w(대선주자 국회의원).each do |position|
     %section.page-block.page-opinions
       .container
@@ -29,8 +29,13 @@
                     %span{ style: 'font-weight: normal' } #{speakers.count}명
 
                   = render 'issues/speakers', speakers: speakers, issue: issue, quote: quote, max_count: 15
-
-%section#agenda-block.page-block
-  .container
-    .post-block__comments
-      = render 'comments/list', commentable: @agenda
+- else
+  %section.page-block.page-opinions
+    .container
+      - @agenda.issues.each do |issue|
+        %h3= issue.title
+        .media-list
+          - if issue.opinions.where(speaker: Speaker.of_position('대선주자')).any?
+            - Speaker.of_position('대선주자').shuffle.each do |speaker|
+              - issue.opinions.of_speaker(speaker).each do |opinion|
+                = render 'opinions/line_item', opinion: opinion

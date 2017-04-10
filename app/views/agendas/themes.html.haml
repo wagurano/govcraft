@@ -10,9 +10,9 @@
 - @agendas.each_with_index do |agenda, i|
   %section.page-block.page-opinions{ class: "page-block-#{i%2}"}
     .container
-      %h2= agenda.name
+      %h3= link_to agenda.name, agenda
       - agenda.issues.each do |issue|
-        %h3{ style: 'line-height: 2em'}
+        %h4{ style: 'line-height: 2em'}
           = issue.title
           - if user_signed_in? and current_user.is_admin?
             .pull-right
