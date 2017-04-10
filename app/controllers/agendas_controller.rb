@@ -6,6 +6,9 @@ class AgendasController < ApplicationController
   end
 
   def show
+    if params[:theme_tag].present?
+      redirect_to theme_agendas_path(theme_tag: params[:theme_tag], anchor: view_context.dom_id(@agenda))
+    end
   end
 
   def widget
@@ -32,7 +35,7 @@ class AgendasController < ApplicationController
     redirect_to speaker_path(@speaker, agenda_id: @agenda.id)
   end
 
-  def themes
+  def theme
     @agendas = Agenda.tagged_with(params[:theme_tag])
   end
 end

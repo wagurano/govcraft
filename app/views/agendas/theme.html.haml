@@ -1,11 +1,11 @@
 = render 'agendas/theme_header', theme_tag: params[:theme_tag]
 
 - @agendas.each_with_index do |agenda, i|
-  %section.page-block.page-opinions{ class: "page-block-#{i%2}"}
+  %section.page-block.page-opinions[agenda]{ class: "page-block-#{i%2}"}
     .container
       %h3= link_to agenda.name, agenda
       - agenda.issues.each do |issue|
-        %h4{ style: 'line-height: 2em'}
+        %h4[issue]{ style: 'line-height: 2em'}
           = issue.title
           - if user_signed_in? and current_user.is_admin?
             .pull-right

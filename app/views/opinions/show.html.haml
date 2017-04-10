@@ -9,17 +9,14 @@
 
 %section.page-block
   .container
-    %h2
-      = link_to agenda.name, agenda
+    %h3
+      = link_to agenda.name, agenda_path(agenda, theme_tag: params[:theme_tag]), class: 'label label-default'
+      = link_to issue.title, issue_path(issue, theme_tag: params[:theme_tag])
+      %small
+        = link_to new_or_edit_admin_opinions_path(issue_id: issue.id, speaker_id: speaker.id), class: 'text-danger' do
+          의견 수정
 
     %section.opinion-show[@opinion]{ style: 'margin-bottom: 2em' }
-      %h3
-        = issue.title
-        - if user_signed_in? and current_user.is_admin?
-          %small
-            = link_to new_or_edit_admin_opinions_path(issue_id: issue.id, speaker_id: speaker.id), class: 'text-danger' do
-              의견 수정
-
       - opinions = issue.opinions.recent.of_speaker(speaker)
       = render @opinion, show_full: true, theme_tag: params[:theme_tag]
 
@@ -29,8 +26,9 @@
 
 %section.page-block
   .container
-    %h2
-      #{link_to "#{issue.title} #{Issue.model_name.human}", issue}에 대한 다른 #{Opinion.model_name.human}
+    %h3
+      = link_to agenda.name, agenda_path(agenda, theme_tag: params[:theme_tag]), class: 'label label-default'
+      #{link_to issue.title, issue_path(issue, theme_tag: params[:theme_tag])}에 대한 다른 #{Opinion.model_name.human}
 
     - the_other_opinions = issue.opinions.where.not(id: @opinion)
     %section[issue]{ style: 'margin-bottom: 2em' }

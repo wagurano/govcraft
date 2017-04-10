@@ -3,9 +3,9 @@
   .panel-body
     .row
       .col-sm-9.col-xs-7
-        %p.lead= link_to opinion.quote, opinion
+        - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
+        %p.lead= link_to opinion.quote, link_to_opinion
         .opinion__body
-          - link_to_opinion = opinion_path(opinion)
           - if opinion.body.present?
             - if local_assigns[:show_full]
               != simple_format h(opinion.body)
