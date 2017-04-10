@@ -29,6 +29,6 @@ class Admin::AgendasController < Admin::BaseController
   private
 
   def agenda_params
-    params.require(:agenda).permit(:name, :request_opinion_example, :request_amendment_example, :tag_list)
+    params.require(:agenda).permit(:name, :image, :request_opinion_example, :request_amendment_example, :tag_list)
   end
 end

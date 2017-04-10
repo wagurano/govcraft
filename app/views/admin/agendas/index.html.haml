@@ -11,7 +11,7 @@
       - @agendas.each do |agenda|
         %tr
           %td
-            %h5= agenda.name
+            %h5= link_to agenda.name, agenda, target: '_blank'
           %td
             = agenda.issues.count
             개의 이슈
