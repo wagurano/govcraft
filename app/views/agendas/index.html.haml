@@ -2,13 +2,13 @@
   .jumbotron
     .container
       %h1 2017년 대통령 선거 특집
-      %p 
-        사드 배치? 위안부 합의? 주거 안정 대책과 공공 보육에 이르기까지! 
+      %p
+        사드 배치? 위안부 합의? 주거 안정 대책과 공공 보육에 이르기까지!
         %br
         엄선된 19개의 의제별로 각 후보들은 어떤 입장을 가지고 있는지 확인하고 평소의 내 의견과 비교해 보세요.
       %p
-        = link_to '지금 바로 확인하기', theme_agendas_path(tag: '2017-president'), class: 'btn btn-primary btn-lg', role: 'button'
-      
+        = link_to '지금 바로 확인하기', theme_agendas_path(theme_tag: '2017-president'), class: 'btn btn-primary btn-lg', role: 'button'
+
 %section.page-block
   .container
     %h3.header

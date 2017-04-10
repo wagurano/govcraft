@@ -1,0 +1,7 @@
+.agenda-container
+  .agenda-container
+  %section.cover-section{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url('default-image.png')});"}
+    .container
+      %h1
+        = link_to theme_agendas_path(theme_tag: theme_tag), style: 'color: white' do
+          = human_theme_name(theme_tag)

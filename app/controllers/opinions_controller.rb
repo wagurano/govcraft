@@ -3,7 +3,6 @@ class OpinionsController < ApplicationController
   protect_from_forgery except: :vote_widget
 
   def show
-    redirect_to speaker_path(@opinion.speaker, anchor: "issue_#{@opinion.issue.id}")
   end
 
   def vote_widget

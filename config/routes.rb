@@ -116,7 +116,7 @@ Rails.application.routes.draw do
       get :widget
     end
     collection do
-      get '/themes/:tag', action: :themes, as: :theme
+      get '/themes/:theme_tag', action: :themes, as: :theme
     end
   end
   resources :issues, only: [:show]

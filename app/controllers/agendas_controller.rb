@@ -33,6 +33,6 @@ class AgendasController < ApplicationController
   end
 
   def themes
-    @agendas = Agenda.tagged_with(params[:tag])
+    @agendas = Agenda.tagged_with(params[:theme_tag])
   end
 end

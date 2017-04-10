@@ -38,4 +38,4 @@
           - if issue.opinions.where(speaker: Speaker.of_position('대선주자')).any?
             - Speaker.of_position('대선주자').shuffle.each do |speaker|
               - issue.opinions.of_speaker(speaker).each do |opinion|
-                = render 'opinions/line_item', opinion: opinion
+                = render 'opinions/line_item', opinion: opinion, theme_tag: params[:tag]

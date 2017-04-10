@@ -1,0 +1,33 @@
+- if params[:theme_tag].present?
+  = render 'agendas/theme_header', theme_tag: params[:theme_tag]
+
+- agenda = @opinion.issue.agenda
+- issue = @opinion.issue
+- speaker = @opinion.speaker
+%section.page-block
+  .container
+    %h2
+      = link_to agenda.name, agenda
+
+    %section[issue]{ style: 'margin-bottom: 2em' }
+      %h3
+        = issue.title
+        - if user_signed_in? and current_user.is_admin?
+          %small
+            = link_to new_or_edit_admin_opinions_path(issue_id: issue.id, speaker_id: speaker.id), class: 'text-danger' do
+              의견 수정
+
+      - opinions = issue.opinions.recent.of_speaker(speaker)
+      = render 'opinions/line_item', opinion: @opinion, show_full: true, theme_tag: params[:theme_tag]
+
+
+%section.page-block
+  .container
+    %h2
+      다른 #{Opinion.model_name.human}
+
+    - the_other_opinions = issue.opinions.where.not(id: @opinion)
+    %section[issue]{ style: 'margin-bottom: 2em' }
+      - the_other_opinions.each do |opinion|
+        - speaker = opinion.speaker
+        = render 'opinions/line_item', opinion: opinion, theme_tag: params[:theme_tag]
