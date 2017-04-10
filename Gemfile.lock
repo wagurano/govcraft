@@ -323,6 +323,8 @@ GEM
       haml (~> 4.0)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
+    html_truncator (0.4.1)
+      nokogiri (~> 1.5)
     htmlentities (4.3.4)
     http (1.0.4)
       addressable (~> 2.3)
@@ -692,6 +694,7 @@ DEPENDENCIES
   guard (~> 2.13.0)
   guard-minitest (~> 2.4.4)
   haml-rails (~> 0.9.0)
+  html_truncator
   htmlentities (~> 4.3, >= 4.3.4)
   identicon (~> 0.0.5)
   imgkit (~> 1.6, >= 1.6.1)

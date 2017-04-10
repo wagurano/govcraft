@@ -37,6 +37,7 @@ gem 'redactor2_rails', '~> 0.1.3'
 gem 'rails_autolink', '~> 1.1', '>= 1.1.6'
 gem 'magnific-popup-rails', '~> 1.1'
 gem 'cocoon'
+gem 'html_truncator'
 
 # tool
 gem 'axlsx', github: 'randym/axlsx', ref: 'd41258e'

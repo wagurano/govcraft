@@ -77,4 +77,9 @@ module ApplicationHelper
   def human_theme_name(tag)
     {'2017-president' => '2017년 대통령 선거'}.fetch(tag, tag)
   end
+
+  def smart_truncate_html(text, options = {})
+    max_length = options[:length] || 3
+    HTML_Truncator.truncate(text, max_length, options)
+  end
 end
