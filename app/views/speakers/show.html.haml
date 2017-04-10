@@ -2,12 +2,7 @@
   .agenda-container
     = render 'agendas/header', agenda: @agenda
 
-%section.cover-section{style: "background-image: linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .5))"}
-  .container
-    %h1
-      = image_tag @speaker.image.xs.url
-      = @speaker.name
-      %small{ style: 'color: #fff' }= @speaker.organization
+= render 'speakers/header', speaker: @speaker
 
 - @agendas.each_with_index do |agenda, i|
   %section.page-block{ class: "page-block-#{i%2}"}
@@ -28,4 +23,4 @@
           = render opinions
           - if opinions.empty?
             %p 아직 #{Opinion.model_name.human}이 없습니다.
-          
+

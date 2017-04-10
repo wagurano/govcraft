@@ -31,3 +31,15 @@
     margin-top: 20px;
   }
 }
+.panel-opinion {
+  .votable-comments-count {
+    margin-top: 6px;
+    display: block;
+  }
+}
+.opinion-show {
+  .votable-comments-count {
+    display: none;
+  }
+}
+

@@ -1,15 +1,18 @@
-- if params[:theme_tag].present?
-  = render 'agendas/theme_header', theme_tag: params[:theme_tag]
-
 - agenda = @opinion.issue.agenda
 - issue = @opinion.issue
 - speaker = @opinion.speaker
+
+- if params[:theme_tag].present?
+  = render 'agendas/theme_header', theme_tag: params[:theme_tag], speaker: speaker
+- else
+  = render 'speakers/header', speaker: speaker
+
 %section.page-block
   .container
     %h2
       = link_to agenda.name, agenda
 
-    %section[issue]{ style: 'margin-bottom: 2em' }
+    %section.opinion-show[@opinion]{ style: 'margin-bottom: 2em' }
       %h3
         = issue.title
         - if user_signed_in? and current_user.is_admin?
@@ -18,13 +21,16 @@
               의견 수정
 
       - opinions = issue.opinions.recent.of_speaker(speaker)
-      = render 'opinions/line_item', opinion: @opinion, show_full: true, theme_tag: params[:theme_tag]
+      = render @opinion, show_full: true, theme_tag: params[:theme_tag]
+
+      .post-block__comments
+        = render 'comments/list', commentable: @opinion
 
 
 %section.page-block
   .container
     %h2
-      다른 #{Opinion.model_name.human}
+      #{link_to "#{issue.title} #{Issue.model_name.human}", issue}에 대한 다른 #{Opinion.model_name.human}
 
     - the_other_opinions = issue.opinions.where.not(id: @opinion)
     %section[issue]{ style: 'margin-bottom: 2em' }

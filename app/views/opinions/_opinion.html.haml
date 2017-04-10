@@ -5,10 +5,14 @@
       .col-sm-9.col-xs-7
         %p.lead= link_to opinion.quote, opinion
         .opinion__body
+          - link_to_opinion = opinion_path(opinion)
           - if opinion.body.present?
-            != simple_format opinion.body
+            - if local_assigns[:show_full]
+              != simple_format h(opinion.body)
+            - else
+              != smart_truncate_html (simple_format opinion.body), length: 130, ellipsis: "... <a href='#{link_to_opinion}'>상세보기</a>"
           - else
             %p{ style: 'color: #aaa' } 상세한 #{Opinion.model_name.human}은 아직 없습니다.
 
       .col-sm-3.col-xs-5.text-right
-        = render 'votes/panel', votable: opinion, show_voters: false
+        = render 'votes/panel', votable: opinion, show_voters: false, comments_count_link: link_to_opinion

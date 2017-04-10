@@ -4,7 +4,17 @@ module ApplicationHelper
   end
 
   def screened(model, attr)
-    model.screened? ? content_tag(:span, '신고로 인해 가려진 글입니다', class: "text-muted") : model.send(attr)
+    if model.screened?
+      content_tag(:span, '신고로 인해 가려진 글입니다', class: "text-muted")
+    else
+      if block_given?
+        capture_haml do
+          yield model.send(attr)
+        end
+      else
+        model.send(attr)
+      end
+    end
   end
 
   def smart_format(text, html_options = {}, options = {})

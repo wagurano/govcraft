@@ -5,3 +5,8 @@
       %h1
         = link_to theme_agendas_path(theme_tag: theme_tag), style: 'color: white' do
           = human_theme_name(theme_tag)
+      - if local_assigns[:speaker].present?
+        %h2
+          = image_tag speaker.image.xs.url
+          = speaker.name
+          %small{ style: 'color: #fff' }= speaker.organization

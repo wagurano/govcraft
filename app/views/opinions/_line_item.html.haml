@@ -1,5 +1,5 @@
 - speaker = opinion.speaker
-.panel.panel-default
+.panel.panel-default.panel-opinion
   .panel-body
     .media[opinion]
       .media-left
@@ -7,6 +7,7 @@
           %img.media-object{:src => speaker.image.xs.url}
       .media-body
         .row
+          - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
           .col-sm-8.col-xs-7
             %h3.media-heading
               = link_to speaker_path(speaker) do
@@ -14,13 +15,13 @@
                 %small= speaker.organization
 
             %p.lead{ style: 'margin-bottom: 0;' }
-              = link_to opinion.quote, opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
+              = link_to opinion.quote, link_to_opinion
             - if opinion.body.present?
               - if local_assigns[:show_full]
                 != simple_format h(opinion.body)
               - else
-                != smart_truncate_html (simple_format opinion.body), length: 130, ellipsis: "... <a href='#{opinion_path(opinion, theme_tag: local_assigns[:theme_tag])}'>상세보기</a>"
+                != smart_truncate_html (simple_format opinion.body), length: 130, ellipsis: "... <a href='#{link_to_opinion}'>상세보기</a>"
             - else
               %p.text-muted 상세한 #{Opinion.model_name.human}은 아직 없습니다.
           .col-sm-4.col-xs-5.text-right
-            = render 'votes/panel', votable: opinion, show_voters: false
+            = render 'votes/panel', votable: opinion, show_voters: false, comments_count_link: link_to_opinion
