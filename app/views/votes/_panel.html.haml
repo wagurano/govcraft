@@ -19,16 +19,18 @@
         = link_to polymorphic_url(['disagree', :votes], votable_id: votable.id, votable_type: votable.class.name, show_voters: local_assigns[:show_voters]), method: :post, remote: true, class: 'btn btn-default btn-choice btn-lg' do
           %span.choice__label 반대
           %span.choice__count= votable.disagrees_count
-  - if votable.comments.count > 0
+  - if local_assigns[:comments_count_link]
     %span.votable-comments-count
-      - comment_count = capture do
+      = link_to comments_count_link do
         %i.fa.fa-commenting
-        #{votable.comments.count}
-      - if local_assigns[:comments_count_link]
-        = link_to comments_count_link do
-          = comment_count
-      - else
-        = comment_count
+        - if votable.comments.count > 0
+          #{votable.comments.count}
+        - else
+          댓글달기
+  - elsif votable.comments.count > 0
+    %span.votable-comments-count
+      %i.fa.fa-commenting
+      #{votable.comments.count}
 
   - if show_voters
     .row
