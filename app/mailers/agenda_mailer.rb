@@ -9,4 +9,17 @@ class AgendaMailer < ApplicationMailer
     mail(to: recipient_email,
       subject: title)
   end
+
+  def note(note_id)
+    @note = Note.find_by(id: note_id)
+    return if @note.blank?
+
+    @opinion = @note.opinion
+    @speaker = @opinion.speaker
+    return if @speaker.email.blank?
+
+
+    mail(to: @speaker.email,
+      subject: "[우주당] 귀하의 '#{@opinion.issue}'에 대한 입장에 대해 #{@note.user_nickname}님이 의견을 보냅니다.")
+  end
 end

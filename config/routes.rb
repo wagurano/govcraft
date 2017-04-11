@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :comments
+  resources :notes
   resources :likes do
     delete '/', on: :collection, to: 'likes#cancel'
   end

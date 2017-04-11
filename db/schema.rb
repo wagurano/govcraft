@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406035755) do
+ActiveRecord::Schema.define(version: 20170411093956) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -357,6 +357,23 @@ ActiveRecord::Schema.define(version: 20170406035755) do
     t.string   "url"
     t.integer  "anonymous_likes_count",               default: 0
     t.index ["user_id"], name: "index_memorials_on_user_id", using: :btree
+  end
+
+  create_table "notes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "user_id"
+    t.integer  "opinion_id",                                          null: false
+    t.text     "body",                  limit: 65535
+    t.string   "choice"
+    t.string   "writer_name"
+    t.string   "writer_email"
+    t.integer  "reports_count",                       default: 0
+    t.integer  "likes_count",                         default: 0
+    t.integer  "anonymous_likes_count",               default: 0
+    t.boolean  "sent_email",                          default: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.index ["opinion_id"], name: "index_notes_on_opinion_id", using: :btree
+    t.index ["user_id"], name: "index_notes_on_user_id", using: :btree
   end
 
   create_table "opinions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|

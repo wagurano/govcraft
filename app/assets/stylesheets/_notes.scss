@@ -1,0 +1,29 @@
+.post-block__notes {
+  background-color: $gray-lightest;
+}
+
+.notes-form {
+  margin-bottom: 48px;
+}
+.note {
+  .note__writer {
+    width: 36px;
+    height: 36px;
+    background-size: cover;
+    border-radius: 4px;
+    background-position: center;
+    margin-right: 12px;
+  }
+  .note__meta {
+    .note__writer_name {
+      font-weight: bold;
+      color: $text-color;
+    }
+    color: $gray-light;
+  }
+  .note__likes {
+    .btn-like {
+      width: 100px;
+    }
+  }
+}

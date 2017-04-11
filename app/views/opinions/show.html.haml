@@ -20,8 +20,10 @@
       - opinions = issue.opinions.recent.of_speaker(speaker)
       = render @opinion, show_full: true, theme_tag: params[:theme_tag]
 
-      .post-block__comments
-        = render 'comments/list', commentable: @opinion
+
+%section.page-block.post-block__notes
+  .container
+    = render 'notes/list', opinion: @opinion
 
 
 %section.page-block

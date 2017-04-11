@@ -11,7 +11,7 @@
       %a(href="#{agenda_url(@agenda)}" target="_blank") #{Agenda.model_name.human}: #{@agenda.name}
       에서 #{@sender}님이 #{@recipient_name}님께 발신한 메일입니다.
     .container
-      != @body
+      != simple_format h(@note.body)
 
     %div(style="margin-top: 60px;")
       %table

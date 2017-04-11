@@ -1,36 +1,38 @@
+- vote_link_options = { votable_id: votable.id, votable_type: votable.class.name, show_voters: local_assigns[:show_voters], reactions_count_link: local_assigns[:reactions_count_link] }
 .vote-panel{id: vote_panel_dom_id(votable)}
   - vote = user_signed_in? ? votable.fetch_vote_of(current_user) : fetch_anonymous_vote(votable)
   %span.vote-buttons
     .vote-button
       - if vote.present? && vote.choice == 'agree'
-        = link_to cancel_votes_path(votable_id: votable.id, votable_type: votable.class.name, show_voters: local_assigns[:show_voters]), method: :post, remote: true, class: 'btn btn-primary btn-choice btn-lg' do
+        = link_to cancel_votes_path(vote_link_options), method: :post, remote: true, class: 'btn btn-primary btn-choice btn-lg' do
           %span.choice__label 찬성
           %span.choice__count= votable.agrees_count
       - else
-        = link_to polymorphic_url(['agree', :votes], votable_id: votable.id, votable_type: votable.class.name, show_voters: local_assigns[:show_voters]), method: :post, remote: true, class: 'btn btn-default btn-choice btn-lg' do
+        = link_to polymorphic_url(['agree', :votes], vote_link_options), method: :post, remote: true, class: 'btn btn-default btn-choice btn-lg' do
           %span.choice__label 찬성
           %span.choice__count= votable.agrees_count
     .vote-button
       - if vote.present? && vote.choice == 'disagree'
-        = link_to cancel_votes_path(votable_id: votable.id, votable_type: votable.class.name, show_voters: local_assigns[:show_voters]), method: :post, remote: true, class: 'btn btn-danger btn-choice btn-lg' do
+        = link_to cancel_votes_path(vote_link_options), method: :post, remote: true, class: 'btn btn-danger btn-choice btn-lg' do
           %span.choice__label 반대
           %span.choice__count= votable.disagrees_count
       - else
-        = link_to polymorphic_url(['disagree', :votes], votable_id: votable.id, votable_type: votable.class.name, show_voters: local_assigns[:show_voters]), method: :post, remote: true, class: 'btn btn-default btn-choice btn-lg' do
+        = link_to polymorphic_url(['disagree', :votes], vote_link_options), method: :post, remote: true, class: 'btn btn-default btn-choice btn-lg' do
           %span.choice__label 반대
           %span.choice__count= votable.disagrees_count
-  - if local_assigns[:comments_count_link]
+  - reactions =  votable.try(:comments) || votable.try(:notes)
+  - if local_assigns[:reactions_count_link] and
     %span.votable-comments-count
-      = link_to comments_count_link do
+      = link_to reactions_count_link do
         %i.fa.fa-commenting
-        - if votable.comments.count > 0
-          #{votable.comments.count}
+        - if reactions.count > 0
+          #{reactions.count}
         - else
           댓글달기
-  - elsif votable.comments.count > 0
+  - elsif reactions.count > 0
     %span.votable-comments-count
       %i.fa.fa-commenting
-      #{votable.comments.count}
+      #{reactions.count}
 
   - if show_voters
     .row

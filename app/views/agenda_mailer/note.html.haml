@@ -1,0 +1,31 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    = stylesheet_link_tag 'emails/summary', media: 'all'
+  %body
+    %p #{@speaker.name}님! 안녕하세요.
+    %p
+      우주당
+      %a(href="#{opinion_url(@opinion)}" target="_blank") 의제 '#{@opinion.issue.title}'
+      에서 #{@speaker.name}님의 입장을 읽고
+      #{@note.user_nickname}님이 발신한 메일입니다.
+    .container
+      != simple_format h(@note.body)
+
+    %p{ style: 'text-align: center' }
+      %a{:href => opinion_url(@opinion), :style => "font-size: 14px; display: inline-block; color: rgb(150, 111, 214); background: none; border-radius: 3px; padding: 16px 20px; text-decoration: none; outline: 0px; font-family: AppleSDGothic, \"apple sd gothic neo\", \"noto sans korean\", \"noto sans korean regular\", \"noto sans cjk kr\", \"noto sans cjk\", \"nanum gothic\", \"malgun gothic\", dotum, sans-serif; border-width: 2px; border-style: solid; border-color: rgb(150, 111, 214);_display:inline", :target => "_blank"} 우주당으로 이동하기
+
+    %div(style="margin-top: 60px;")
+      %table
+        %tr
+          %td
+            %a(href='http://wouldyouparty.org/')
+              %img(src="#{Rails.application.config.action_mailer.asset_host}/email_logo.png" width="40" height="40")
+          %td(style="padding-left: 12px;")
+            %a(href='http://wouldyouparty.org/' target="_blank" style='color: #777; text-decoration: none;')
+              직접 민주주의 프로젝트 정당
+              %br
+              %strong '우리가 주인이다: 우주당'
+              http://wouldyouparty.org/

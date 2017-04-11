@@ -145,6 +145,10 @@ ko:
       article:
         url: URL
         body: 내용
+      note:
+        writer_name: 이름
+        writer_email: 이메일(선택)
+        body: 내용
       person:
         name: 이름
         body: 설명

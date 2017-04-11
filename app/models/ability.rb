@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     can [:read, :search, :social_card, :recent_documents], :all
     can [:events], Project
-    can :create, [Sign, Comment, Like]
+    can :create, [Sign, Comment, Like, Note]
     can :cancel, Like
     can :create_by_slack, Article
     can :download, Timeline

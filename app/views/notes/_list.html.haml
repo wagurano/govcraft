@@ -1,0 +1,57 @@
+%h4 의견을 남겨주세요
+
+.notes-form
+  .panel.panel-default
+    .panel-body
+      = form_for Note.new, html: { class: 'gov-action-form-validation' } do |f|
+        = f.hidden_field :opinion_id, value: opinion.id
+        - unless user_signed_in?
+          .row
+            .col-xs-12.col-md-6
+              .form-group
+                = f.label :writer_name
+                = f.text_field :writer_name, class: 'form-control', data: { 'rule-required': true }
+            .col-xs-12.col-md-6
+              .form-group
+                = f.label :writer_email
+                = f.text_field :writer_email, class: 'form-control'
+        .form-group
+          - unless user_signed_in?
+            = f.label :body
+          ~ f.text_area :body, rows: 6, placeholder: '제 생각에는...', class: 'form-control validate', data: { 'rule-required': true }
+        .form-group
+          - if opinion.speaker.email.present?
+            %label
+              %i.fa.fa-envelope-o
+              #{opinion.speaker.name}님에게
+              이메일도 보냅니다
+              = f.check_box :sent_email
+
+        - unless user_signed_in?
+          .form-group.recaptcha
+            .help-block 스팸 방지를 위해 사람인지 확인합니다. 아래 체크 박스를 클릭해 주세요.
+            = hidden_field_tag :hiddenRecaptcha, nil, class: 'validate'
+            .gov-action-recaptcha
+        = f.submit '작성', class: 'btn btn-default btn-sm'
+
+.notes
+  - opinion.notes.recent.each do |note|
+    .media[note]{ style: 'margin: 36px 0;'}
+      .media-left
+        .note__writer{ style: "background-image: url(#{note.user_image.xs.url});"}
+      .media-body
+        .note__meta
+          %span.note__writer_name
+            = note.user_nickname
+          = date_f note.created_at
+          - if can? :destroy, note
+            = link_to '삭제', note, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
+          - if current_user != note.user
+            = render 'reports/button', reportable: note
+
+        .note__body
+          = screened(note, :body) do |body|
+            != simple_format h(body)
+      .media-right{ style: 'position: relative; width: 100px;' }
+        .note__likes
+          = render 'likes/button', likable: note

@@ -34,6 +34,8 @@ class VotesController < ApplicationController
       errors_to_flash(@vote) unless @vote.destroy
     end
 
+    @votable.reload
+
     respond_to do |format|
       format.js
       format.html { redirect_back(fallback_location: @votable) }
