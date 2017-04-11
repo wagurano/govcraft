@@ -1,3 +1,10 @@
 #!/bin/bash
 
-ey ssh "sudo -i eybackup -e mysql --download 9:govcraft" -e omurice
+if [ $# -eq 0 ]
+  then
+    echo "No arguments supplied"
+    exit
+fi
+
+index=$1
+ey ssh "sudo -i eybackup -e mysql --download ${index}:govcraft" -e omurice
