@@ -1,5 +1,5 @@
 <%- if @widget %>
-$('.vote-panel#<%= vote_panel_dom_id(@votable) %>').replaceWith('<%= j(render('opinions/vote', votable: @votable, show_voters: params[:show_voters] == 'true', reactions_count_link: params[:reactions_count_link])) %>');
+$('.vote-panel#<%= vote_panel_dom_id(@votable) %>').replaceWith('<%= j(render('opinions/vote', opinion: @votable, agenda_name: params[:agenda_name], show_voters: params[:show_voters] == 'true', reactions_count_link: params[:reactions_count_link])) %>');
 UnobtrusiveFlash.showFlashFromCookies();
 <%- else %>
 $('.vote-panel#<%= vote_panel_dom_id(@votable) %>').replaceWith('<%= j(render('votes/panel', votable: @votable, show_voters: params[:show_voters] == 'true', reactions_count_link: params[:reactions_count_link])) %>');

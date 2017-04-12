@@ -1,26 +1,27 @@
+- opinion ||= @opinion
 .vote-widget
-  .vote-panel{id: vote_panel_dom_id(@votable)}
-    - vote = user_signed_in? ? @votable.fetch_vote_of(current_user) : fetch_anonymous_vote(@votable)
+  .vote-panel{id: vote_panel_dom_id(opinion)}
+    - vote = user_signed_in? ? opinion.fetch_vote_of(current_user) : fetch_anonymous_vote(opinion)
     .vote-button
       - if vote.present? && vote.choice == 'agree'
-        = link_to cancel_votes_path(votable_id: @votable.id, votable_type: @votable.class.name, widget: true), method: :post, remote: true, class: 'btn btn-choice btn-lg btn-agree btn-agree__after' do
+        = link_to cancel_votes_path(votable_id: opinion.id, votable_type: opinion.class.name, widget: true, agenda_name: agenda_name), method: :post, remote: true, class: 'btn btn-choice btn-lg btn-agree btn-agree__after' do
           = image_tag 'icon_thumb_up.png', class: 'choice__label choice__label__agree'
-          %span.choice__count= @votable.agrees_count
+          %span.choice__count= opinion.agrees_count
       - else
-        = link_to polymorphic_url(['agree', :votes], votable_id: @votable.id, votable_type: @votable.class.name, widget: true), method: :post, remote: true, class: 'btn btn-choice btn-lg btn-agree btn-agree__before' do
+        = link_to polymorphic_url(['agree', :votes], votable_id: opinion.id, votable_type: opinion.class.name, widget: true, agenda_name: agenda_name), method: :post, remote: true, class: 'btn btn-choice btn-lg btn-agree btn-agree__before' do
           = image_tag 'icon_thumb_up.png', class: 'choice__label choice__label__agree'
-          %span.choice__count= @votable.agrees_count
+          %span.choice__count= opinion.agrees_count
     .vote-button
       - if vote.present? && vote.choice == 'disagree'
-        = link_to cancel_votes_path(votable_id: @votable.id, votable_type: @votable.class.name, widget: true), method: :post, remote: true, class: 'btn btn-choice btn-lg btn-disagree btn-disagree__after' do
+        = link_to cancel_votes_path(votable_id: opinion.id, votable_type: opinion.class.name, widget: true, agenda_name: agenda_name), method: :post, remote: true, class: 'btn btn-choice btn-lg btn-disagree btn-disagree__after' do
           = image_tag 'icon_thumb_down.png', class: 'choice__label choice__label__disagree'
-          %span.choice__count= @votable.disagrees_count
+          %span.choice__count= opinion.disagrees_count
       - else
-        = link_to polymorphic_url(['disagree', :votes], votable_id: @votable.id, votable_type: @votable.class.name, widget: true), method: :post, remote: true, class: 'btn btn-choice btn-lg btn-disagree btn-disagree__before' do
+        = link_to polymorphic_url(['disagree', :votes], votable_id: opinion.id, votable_type: opinion.class.name, widget: true, agenda_name: agenda_name), method: :post, remote: true, class: 'btn btn-choice btn-lg btn-disagree btn-disagree__before' do
           = image_tag 'icon_thumb_down.png', class: 'choice__label choice__label__disagree'
-          %span.choice__count= @votable.disagrees_count
-    = link_to speaker_path(@votable.speaker, agenda_id: Agenda.find_by(name:'여성').id, anchor: 'anchor-opinion-comments-list'), target: ('_wyp' if local_assigns[:widget]), class: 'header', target: '_blank' do
+          %span.choice__count= opinion.disagrees_count
+    = link_to speaker_path(opinion.speaker, agenda_id: Agenda.find_by(name: params[:agenda_name]).id, anchor: 'anchor-opinion-comments-list'), target: ('_wyp' if local_assigns[:widget]), class: 'header', target: '_blank' do
       %span.votable-comments-count
         .comment-icon
-        - if @votable.comments.count > 0
-          #{@votable.comments.count}
+        - if opinion.notes.count > 0
+          #{opinion.notes.count}
