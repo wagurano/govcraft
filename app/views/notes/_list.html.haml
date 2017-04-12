@@ -1,4 +1,15 @@
-%h4 의견을 남겨주세요
+%h4
+  의견을 남겨주세요
+  &nbsp;
+  %span.text-muted
+    %i.fa.fa-commenting
+    - if opinion.notes.count > 0
+      #{opinion.notes.count}
+    - email_count = opinion.notes.where(sent_email: true).count
+    - if email_count > 0
+      \/
+      %i.fa.fa-envelope-o
+      #{opinion.notes.where(sent_email: true).count}
 
 .notes-form
   .panel.panel-default
