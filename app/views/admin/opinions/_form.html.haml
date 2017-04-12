@@ -11,6 +11,11 @@
     = f.label :quote
     = f.text_area :quote
 
+  - if @opinion.issue.blank? or @opinion.issue.has_stance?
+    .field
+      = f.label :stance
+      = f.select :stance, Opinion.stance.options, { include_blank: true }, class: 'ui selection dropdown'
+
   .field
     = f.label :body
     ~ f.text_area :body

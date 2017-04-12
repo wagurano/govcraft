@@ -1,0 +1,19 @@
+%section.page-block.page-opinions
+  - if speaker_positions.count > 1
+    %h4= position
+  .opinion-speakers-list
+    .row
+      - Opinion.stance.values.each do |stance|
+        - if stance == 'unsure'
+          - opinions = issue.opinions.any_of(Opinion.where(stance: nil), Opinion.where(stance: 'unsure'))
+        - else
+          - opinions = issue.opinions.where(stance: stance)
+        - stance_speakers = Speaker.where(id: opinions.pluck(:speaker_id)).distinct
+        .col-sm-4{ class: ('hidden-xs' if stance_speakers.empty?) }
+          .position
+            = t("enumerize.defaults.stance.#{stance}")
+            %span{ style: 'font-weight: normal' } #{stance_speakers.count}명
+
+          .answer-speakers
+            .ui.list.grid
+          = render 'issues/speakers', speakers: stance_speakers, issue: issue, quote: stance, max_count: 15

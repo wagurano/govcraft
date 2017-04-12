@@ -242,6 +242,11 @@ ko:
       choice:
         agree: 찬성
         disagree: 반대
+      stance:
+        agree: 찬성
+        disagree: 반대
+        unsuer: 무응답
+        partially: 일부찬성
   views:
     pagination:
       first: "&laquo; 처음"

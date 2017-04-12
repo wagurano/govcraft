@@ -34,6 +34,10 @@
     .container
       - @agenda.issues.each do |issue|
         %h3= issue.title
+        - if issue.has_stance?
+          - speaker_positions = Speaker.where(id: issue.opinions.pluck(:speaker_id)).all_tags(on: :positions).map(&:name)
+          - speaker_positions.each do |position|
+            = render 'opinions/stances', position: position, speakers: issue.speakers, speaker_positions: speaker_positions, issue: issue
         .media-list
           - if issue.opinions.where(speaker: Speaker.of_position('대선주자')).any?
             - Speaker.of_position('대선주자').shuffle.each do |speaker|

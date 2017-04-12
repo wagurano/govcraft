@@ -2,6 +2,9 @@ class Opinion < ApplicationRecord
   include Likable
   include Votable
 
+  extend Enumerize
+  enumerize :stance, in: %w[agree partially disagree unsuer]
+
   belongs_to :speaker
   belongs_to :issue
   has_many :notes, dependent: :destroy

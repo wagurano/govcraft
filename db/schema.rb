@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170411093956) do
+ActiveRecord::Schema.define(version: 20170412021548) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -327,10 +327,12 @@ ActiveRecord::Schema.define(version: 20170411093956) do
 
   create_table "issues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title"
-    t.integer  "following_issues_count", default: 0
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.integer  "following_issues_count",               default: 0
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
     t.integer  "agenda_id"
+    t.text     "body",                   limit: 65535
+    t.boolean  "has_stance",                           default: false
     t.index ["agenda_id"], name: "index_issues_on_agenda_id", using: :btree
     t.index ["title"], name: "index_issues_on_title", unique: true, using: :btree
   end
@@ -388,6 +390,7 @@ ActiveRecord::Schema.define(version: 20170411093956) do
     t.integer  "votes_count",                         default: 0
     t.integer  "agrees_count",                        default: 0
     t.integer  "disagrees_count",                     default: 0
+    t.string   "stance"
     t.index ["issue_id"], name: "index_opinions_on_issue_id", using: :btree
     t.index ["speaker_id"], name: "index_opinions_on_speaker_id", using: :btree
   end

@@ -40,6 +40,6 @@ class Admin::OpinionsController < Admin::BaseController
   private
 
   def opinion_params
-    params.require(:opinion).permit(:issue_id, :speaker_id, :quote, :body)
+    params.require(:opinion).permit(:issue_id, :speaker_id, :quote, :body, :stance)
   end
 end

@@ -6,7 +6,7 @@ class Speaker < ApplicationRecord
   has_many :sent_requests, dependent: :destroy
   has_many :agenda_documents, dependent: :destroy
 
-  scope :of_position, ->(position) { tagged_with(position, on: :positions) }
+  scope :of_position, ->(*positions) { tagged_with(positions, on: :positions) }
 
   acts_as_taggable_on :positions
 

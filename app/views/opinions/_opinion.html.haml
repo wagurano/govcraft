@@ -5,6 +5,18 @@
       .col-sm-9.col-xs-7
         - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
         %p.lead= link_to opinion.quote, link_to_opinion
+        - if opinion.stance.present?
+          %p.opinion__stance
+            - case opinion.stance
+            - when 'disagree'
+              %i.fa.fa-ban
+            - when 'agree'
+              %i.fa.fa-thumbs-up
+            - when 'unsuer'
+              %i.fa.fa-question-circle-o
+            - when 'partially'
+              %i.fa.fa-hand-lizard-o
+            = opinion.stance_text
         .opinion__body
           - if opinion.body.present?
             - if local_assigns[:show_full]

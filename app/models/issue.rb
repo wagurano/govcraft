@@ -6,11 +6,14 @@ class Issue < ApplicationRecord
   has_many :comments, as: :commentable
   has_many :speakers, -> { reorder('').distinct }, through: :opinions
 
+  acts_as_taggable
+
   validates :title, uniqueness: true, presence: true
 
   after_initialize :trim_title
 
   default_scope { order('title ASC') }
+  scope :with_theme, ->(theme) { tagged_with(theme) }
 
   def categorized_speakers(position, quote)
     if quote.present?

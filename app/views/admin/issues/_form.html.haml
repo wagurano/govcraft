@@ -7,4 +7,21 @@
     = f.label :title
     = f.text_field :title
 
+  .field
+    = f.label :body
+    ~ f.text_area :body
+
+  .form-group
+    = f.label :has_stance
+    .checkbox
+      %label
+        = f.check_box :has_stance
+        찬반입장을 받습니다.
+
+  .form-group
+    = f.label :tag_list
+    = f.text_field :tag_list, value: @issue.tag_list.try(:to_s), placeholder: '태그1, 태그2, 태그3', class: 'form-control'
+    %p.help-block
+      콤마로 테마를 구분해서 넣으세요.
+
   = f.submit '저장', class: 'ui button'

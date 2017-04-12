@@ -85,7 +85,17 @@ module ApplicationHelper
   end
 
   def human_theme_name(tag)
-    {'2017-president' => '2017년 대통령 선거'}.fetch(tag, tag)
+    {
+      '2017-president' => '2017년 대통령 선거',
+      'votefuture' => '2017년 미래에서 온 투표',
+    }.fetch(tag, tag)
+  end
+
+  def speaker_positions_of_theme(tag)
+    {
+      '2017-president' => ['대선주자'],
+      'votefuture' => ['대선주자'],
+    }.fetch(tag, tag)
   end
 
   def smart_truncate_html(text, options = {})

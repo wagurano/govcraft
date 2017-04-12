@@ -5,6 +5,7 @@
       %tr
         %th 이슈명
         %th 의제
+        %th 테마
         %th.text-right
           = link_to '추가', new_admin_issue_path, class: 'btn btn-sm btn-primary'
     %tbody
@@ -14,6 +15,8 @@
             %h5= issue.title
           %td
             = issue.agenda.name
+          %td
+            = issue.tag_list
           %td.text-right
             = link_to '수정', edit_admin_issue_path(issue), class: 'btn btn-xs btn-default'
             = link_to '삭제', admin_issue_path(issue), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'
