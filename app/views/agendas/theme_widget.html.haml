@@ -1,6 +1,7 @@
 - speaker_positions = speaker_positions_of_theme(params[:theme_tag])
 - speakers = Speaker.of_position(speaker_positions)
 - @agendas.each_with_index do |agenda, i|
+  %base(target="_blank")
   %section.page-block.page-opinions[agenda]{ class: "page-block-#{i%2}"}
     .container{ style: 'width: initial; padding: 24px;'}
       %h3= link_to agenda.name, agenda
