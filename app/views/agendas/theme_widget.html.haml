@@ -4,9 +4,10 @@
   %base(target="_blank")
   %section.page-block.page-opinions[agenda]{ class: "page-block-#{i%2}"}
     .container{ style: 'width: initial; padding: 24px;'}
-      %h3= link_to agenda.name, agenda
+      %h2{ style: 'border-bottom: 1px solid #c0c0c2;' }
+        = link_to agenda.name, agenda, style: 'color: #333333'
       - agenda.issues.with_theme(params[:theme_tag]).each do |issue|
-        %h4[issue]{ style: 'line-height: 2em'}
+        %h3[issue]
           = issue.title
 
         - if issue.body.present?
