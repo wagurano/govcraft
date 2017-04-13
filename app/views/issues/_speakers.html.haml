@@ -8,10 +8,11 @@
   .ui.list.grid
     - speakers.each do |speaker|
       .item.eight.wide.column
-        .ui.avatar.image{ style: "background-image: url(#{speaker.image}); width: 30px; height: 30px; table-layout: fixed; background-size: cover; background-position: top; background-repeat: no-repeat;" }
+        .ui.image{ style: 'padding: 0;' }
+          %span.ui.avatar.image{ style: "background-image: url(#{speaker.image}); width: 30px; height: 30px; table-layout: fixed; background-size: cover; background-position: top; background-repeat: no-repeat;" }
         .content
           = link_to speaker.name, speaker_path(speaker, agenda_id: agenda_id), target: ('_wyp' if local_assigns[:widget]), class: 'header'
-          .description= speaker.organization
+          .description.text-keep-all{ style: 'font-size: 10px' }= speaker.organization
 
       - if !hide_request and @agenda.present?
         .item.eight.wide.column
