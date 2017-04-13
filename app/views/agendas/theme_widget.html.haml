@@ -1,4 +1,3 @@
-= render 'agendas/theme_header', theme_tag: params[:theme_tag]
 - speaker_positions = speaker_positions_of_theme(params[:theme_tag])
 - speakers = Speaker.of_position(speaker_positions)
 - @agendas.each_with_index do |agenda, i|
@@ -8,17 +7,6 @@
       - agenda.issues.with_theme(params[:theme_tag]).each do |issue|
         %h4[issue]{ style: 'line-height: 2em'}
           = issue.title
-
-          - if user_signed_in? and current_user.is_admin?
-            .pull-right.hidden-sm
-              = form_tag new_or_edit_admin_opinions_path, method: :get, class: 'form-inline', target: '_blank' do
-                .inline.field
-                  = hidden_field_tag :issue_id, issue.id
-                  %select{name: :speaker_id, class: 'form-control'}
-                    - speakers.each do |speaker|
-                      %option{ value: speaker.id }
-                        = speaker.name
-                  %button.btn.btn-default{ type: "submit" } 입력
 
         - if issue.body.present?
           .issue-body
@@ -33,3 +21,6 @@
             - speakers.shuffle.each do |speaker|
               - issue.opinions.of_speaker(speaker).each do |opinion|
                 = render 'opinions/line_item', opinion: opinion, theme_tag: params[:theme_tag]
+
+= content_for :script do
+  %script(src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.11/iframeResizer.contentWindow.min.js" defer)

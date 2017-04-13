@@ -38,4 +38,9 @@ class AgendasController < ApplicationController
   def theme
     @agendas = Agenda.tagged_with(params[:theme_tag])
   end
+
+  def theme_widget
+    theme
+    render layout: 'strip'
+  end
 end
