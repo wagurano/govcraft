@@ -19,6 +19,11 @@
           .sub.header #{position} #{@agenda.speakers.of_position(position).count}명에게 #{Opinion.model_name.human}를 받았습니다.
         - @agenda.issues.each do |issue|
           %h4= issue.title
+
+          - if issue.body.present?
+            .issue-body
+              %p!= simple_format(h(issue.body))
+
           .opinion-speakers-list
             .row
               - ["찬성", "반대", nil].each do |quote|
@@ -34,6 +39,11 @@
     .container
       - @agenda.issues.each do |issue|
         %h3= issue.title
+
+        - if issue.body.present?
+          .issue-body
+            %p!= simple_format(h(issue.body))
+
         - if issue.has_stance?
           - speaker_positions = Speaker.where(id: issue.opinions.pluck(:speaker_id)).all_tags(on: :positions).map(&:name)
           - speaker_positions.each do |position|
