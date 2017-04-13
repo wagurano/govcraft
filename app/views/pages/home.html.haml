@@ -7,22 +7,21 @@
         직접 민주주의 방식을 활용하여 시민 주도의 정치 문화를 만듭니다.
 
 %section
-  .ui.container.grid
-    .column
-      .ui.ignored.primary.icon.message
-        %i.icon.users{style: 'font-size: 2em;'}
-        .content
-          %h3.header 우주당 당원들이 빠띠 모여 프로젝트를 진행하고 있습니다. 같이 참여해보세요!
-          %p= link_to '우주당 빠띠로 가기', 'https://wouldyou.parti.xyz/', target: '_blank', class: 'ui blue button'
+  .container
+    .alert.alert-info
+      = link_to 'https://wouldyou.parti.xyz/', target: '_blank', class: 'alert-link' do
+        %i.fa.fa-comments
+        우주당 빠띠로 가기
+      우주당 당원들이 빠띠 모여 프로젝트를 진행하고 있습니다. 같이 참여해보세요!
 
 %section
-  .ui.container.grid
-    .column
-      .ui.ignored.positive.icon.message
-        %i.icon.mobile
-        .content
-          %h3.header 우주당 당원들이 지금 슬랙에서 이야기를 나누는 중입니다. 함께 하시겠습니까?
-          %p= link_to '슬랙 초대장 받기', 'http://slack.wouldyouparty.org', target: '_blank', class: 'ui green button'
+  .container
+    .alert.alert-success
+      = link_to 'http://slack.wouldyouparty.org', target: '_blank', class: 'alert-link' do
+        %i.fa.fa-slack
+        슬랙 초대장 받기
+      우주당 당원들이 지금 슬랙에서 이야기를 나누는 중입니다. 함께 하시겠습니까?
+
 
 %section.page-block
   .ui.container.grid
