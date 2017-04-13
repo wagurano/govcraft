@@ -1,14 +1,12 @@
 #site-hero-block {
   margin-bottom: 1em;
-  .message {
-    background-image: image_url('wouldyou_main.png');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    border-radius: 0;
-    padding-top: 22em;
-    padding-bottom: 2em;
-  }
+  background-image: image_url('wouldyou_main.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-radius: 0;
+  padding-top: 22em;
+  padding-bottom: 2em;
 }
 
 .panel-floating {
