@@ -11,7 +11,11 @@
         .ui.image{ style: 'padding: 0;' }
           %span.ui.avatar.image{ style: "background-image: url(#{speaker.image}); width: 30px; height: 30px; table-layout: fixed; background-size: cover; background-position: top; background-repeat: no-repeat;" }
         .content
-          = link_to speaker.name, speaker_path(speaker, agenda_id: agenda_id), target: ('_wyp' if local_assigns[:widget]), class: 'header'
+          - if local_assigns[:link_to_opinon]
+            - speaker_link = opinion_path(speaker.opinions.find_by(issue: issue), theme_tag: local_assigns[:theme_tag])
+          - else
+            - speaker_link = speaker_path(speaker, agenda_id: agenda_id)
+          = link_to speaker.name, speaker_link, target: ('_wyp' if local_assigns[:widget]), class: 'header'
           .description.text-keep-all{ style: 'font-size: 10px' }= speaker.organization
 
       - if !hide_request and @agenda.present?

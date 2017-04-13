@@ -16,4 +16,4 @@
 
           .answer-speakers
             .ui.list.grid
-          = render 'issues/speakers', speakers: stance_speakers, issue: issue, quote: stance, max_count: 15
+          = render 'issues/speakers', speakers: stance_speakers, issue: issue, quote: stance, max_count: 15, link_to_opinon: true, theme_tag: local_assigns[:theme_tag]

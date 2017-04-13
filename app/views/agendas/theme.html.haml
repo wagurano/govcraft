@@ -26,7 +26,7 @@
 
         - if issue.has_stance?
           - speaker_positions.each do |position|
-            = render 'opinions/stances', position: position, speakers: speakers, speaker_positions: speaker_positions, issue: issue
+            = render 'opinions/stances', position: position, speakers: speakers, speaker_positions: speaker_positions, issue: issue, theme_tag: params[:theme_tag]
 
         - if issue.opinions.where(speaker: speakers).any?(&:has_content?)
           .media-list
