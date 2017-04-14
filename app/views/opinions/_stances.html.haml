@@ -11,7 +11,7 @@
         - stance_speakers = Speaker.where(id: opinions.pluck(:speaker_id)).distinct
         .col-sm-4{ class: ('hidden-xs' if stance_speakers.empty?) }
           .position
-            = t("enumerize.defaults.stance.#{stance}")
+            = t("enumerize.#{ local_assigns[:theme_tag] || 'default' }.stance.#{stance}", default: t("enumerize.defaults.stance.#{stance}"))
             %span{ style: 'font-weight: normal' } #{stance_speakers.count}명
 
           .answer-speakers

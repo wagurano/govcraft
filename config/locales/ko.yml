@@ -247,6 +247,12 @@ ko:
         disagree: 반대
         unsuer: 무응답
         partially: 일부찬성
+    votefuture:
+      stance:
+        agree: 반영
+        disagree: 미반영
+        unsuer: 무응답
+        partially: 일부반영
   views:
     pagination:
       first: "&laquo; 처음"
