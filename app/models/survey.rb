@@ -33,13 +33,18 @@ class Survey < ApplicationRecord
   end
 
   def percentage(option)
-    return 0 if feedbacks_count == 0 or option.feedbacks_count == 0
+    all_feedbacks_count = feedbacks_count + options.sum(:anonymous_feedbacks_count)
+    return 0 if all_feedbacks_count == 0 or option.all_feedbacks_count == 0
 
-    (option.feedbacks_count / feedbacks_count.to_f * 100).ceil
+    (option.all_feedbacks_count / all_feedbacks_count.to_f * 100).ceil
   end
 
   def feedback_users_count
     feedbacks.count('distinct user_id')
+  end
+
+  def has_anonymous_feedbacks?
+    options.sum(:anonymous_feedbacks_count) > 0
   end
 
   private

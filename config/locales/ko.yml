@@ -168,6 +168,7 @@ ko:
         cover_image: 대표이미지
         options: 옵션
         multi_selectable: 다중선택 가능여부
+        anonymous_feedbackable: 비로그인 투표가능
       archive_document:
         id: ID
         title: 제목

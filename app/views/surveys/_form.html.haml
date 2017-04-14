@@ -30,6 +30,13 @@
         하나 이상을 선택할 수 있습니다.
 
   .form-group
+    = f.label :anonymous_feedbackable
+    .help-block
+      %label{ style: 'font-weight: normal;' }
+        = f.check_box :anonymous_feedbackable
+        로그인하지 않아도 투표할 수 있습니다.
+
+  .form-group
     = f.label :cover_image
     = f.file_field :cover_image, class: 'form-control'
 
