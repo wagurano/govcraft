@@ -4,10 +4,10 @@
     .row
       .col-sm-9.col-xs-7
         - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
-        - if opinion.quote.present?
-          %p.lead= link_to opinion.quote, link_to_opinion
-        - if opinion.stance.present?
-          %p.opinion__stance
+        - lead = capture do
+          - if opinion.quote.present?
+            = opinion.quote
+          - if opinion.stance.present?
             - case opinion.stance
             - when 'disagree'
               %i.fa.fa-ban
@@ -18,6 +18,10 @@
             - when 'partially'
               %i.fa.fa-hand-lizard-o
             = opinion.stance_text
+
+        - if lead.try(:strip).present?
+          %p.lead= link_to lead, link_to_opinion
+
         .opinion__body
           - if opinion.body.present?
             - if local_assigns[:show_full]
