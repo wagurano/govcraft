@@ -42,6 +42,7 @@
           = link_to agenda.name, agenda
 
         - agenda.issues.each do |issue|
+          - next if !issue.opinions.exists?(speaker: @speaker)
           %section[issue]{ style: 'margin-bottom: 2em' }
             %h3
               = issue.title
@@ -49,6 +50,9 @@
                 %small
                   = link_to new_or_edit_admin_opinions_path(issue_id: issue.id, speaker_id: @speaker.id), class: 'text-danger' do
                     의견 수정
+            - if issue.body.present?
+              .issue-body
+                %p!= simple_format(h(issue.body))
 
             - opinions = issue.opinions.recent.of_speaker(@speaker)
             = render opinions
