@@ -14,14 +14,13 @@
                 = speaker.name
                 %small= speaker.organization
 
-            %p.lead{ style: 'margin-bottom: 0;' }
-              = link_to opinion.quote, link_to_opinion
+            - if opinion.quote.present?
+              %p.lead{ style: 'margin-bottom: 0;' }
+                = link_to opinion.quote, link_to_opinion
             - if opinion.body.present?
               - if local_assigns[:show_full]
                 != simple_format h(opinion.body)
               - else
-                != smart_truncate_html (simple_format opinion.body), length: 130, ellipsis: "... <a href='#{link_to_opinion}'>상세보기</a>"
-            - else
-              %p.text-muted 상세한 #{Opinion.model_name.human}은 아직 없습니다.
+                != smart_truncate_html (simple_format opinion.body), length: 40, ellipsis: "... <a href='#{link_to_opinion}'>상세보기</a>"
           .col-sm-4.col-xs-5.text-right
             = render 'votes/panel', votable: opinion, show_voters: false, reactions_count_link: link_to_opinion

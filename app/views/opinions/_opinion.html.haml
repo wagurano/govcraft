@@ -1,10 +1,11 @@
 - speaker = opinion.speaker
-.panel.panel-default[opinion]
+.panel.panel-opinion.panel-default[opinion]
   .panel-body
     .row
       .col-sm-9.col-xs-7
         - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
-        %p.lead= link_to opinion.quote, link_to_opinion
+        - if opinion.quote.present?
+          %p.lead= link_to opinion.quote, link_to_opinion
         - if opinion.stance.present?
           %p.opinion__stance
             - case opinion.stance
@@ -23,8 +24,6 @@
               != simple_format h(opinion.body)
             - else
               != smart_truncate_html (simple_format opinion.body), length: 130, ellipsis: "... <a href='#{link_to_opinion}'>상세보기</a>"
-          - else
-            %p{ style: 'color: #aaa' } 상세한 #{Opinion.model_name.human}은 아직 없습니다.
 
       .col-sm-3.col-xs-5.text-right
         = render 'votes/panel', votable: opinion, show_voters: false, reactions_count_link: link_to_opinion

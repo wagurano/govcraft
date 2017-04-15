@@ -4,13 +4,14 @@
 
 = render 'speakers/header', speaker: @speaker
 
-- @agendas.each_with_index do |agenda, i|
-  %section.page-block{ class: "page-block-#{i%2}"}
+
+- if @agenda.present?
+  %section.page-block
     .container
       %h2
-        = link_to agenda.name, agenda
+        = link_to @agenda.name, @agenda
 
-      - agenda.issues.each do |issue|
+      - @agenda.issues.each do |issue|
         %section[issue]{ style: 'margin-bottom: 2em' }
           %h3
             = issue.title
@@ -23,4 +24,34 @@
           = render opinions
           - if opinions.empty?
             %p 아직 #{Opinion.model_name.human}이 없습니다.
+
+- if @agenda.present?
+  %section.page-block{ class: "page-block-1"}
+    .container
+      %p
+        %strong
+          = link_to speaker_path(@speaker) do
+            #{@speaker.name}님의 다른 #{Agenda.model_name.human}에 대한  #{Opinion.model_name.human} 모두보기
+            %i.fa.fa-arrow-right
+  - base_index = 1
+- else
+  - @agendas.each_with_index do |agenda, i|
+    %section.page-block{ class: "page-block-#{i%2}"}
+      .container
+        %h2
+          = link_to agenda.name, agenda
+
+        - agenda.issues.each do |issue|
+          %section[issue]{ style: 'margin-bottom: 2em' }
+            %h3
+              = issue.title
+              - if user_signed_in? and current_user.is_admin?
+                %small
+                  = link_to new_or_edit_admin_opinions_path(issue_id: issue.id, speaker_id: @speaker.id), class: 'text-danger' do
+                    의견 수정
+
+            - opinions = issue.opinions.recent.of_speaker(@speaker)
+            = render opinions
+            - if opinions.empty?
+              %p 아직 #{Opinion.model_name.human}이 없습니다.
 

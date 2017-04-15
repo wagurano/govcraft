@@ -10,7 +10,7 @@
           = issue.title
 
           - if user_signed_in? and current_user.is_admin?
-            .pull-right.hidden-sm
+            .pull-right.hidden-sm.hidden-xs
               = form_tag new_or_edit_admin_opinions_path, method: :get, class: 'form-inline', target: '_blank' do
                 .inline.field
                   = hidden_field_tag :issue_id, issue.id

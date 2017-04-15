@@ -28,6 +28,9 @@
     margin-bottom: $font-size-base * 1.5;
     word-break: keep-all;
     text-shadow: 1px 1px 0px #000;
+    a {
+      color: white;
+    }
   }
   &__body {
     font-size: $font-size-large;
