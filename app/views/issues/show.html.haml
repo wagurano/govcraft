@@ -5,20 +5,36 @@
   .ui.container
     %h2= @issue.title
 
-- %w(대선주자 국회의원).each do |position|
+- if @agenda.name == '선거제도'
+  - %w(대선주자 국회의원).each do |position|
+    %section.page-block.page-opinions
+      .ui.container
+        %h4.ui.dividing.header
+          #{position} #{Opinion.model_name.human}
+          .sub.header #{position}으로부터 #{@agenda.speakers.of_position(position).count}개의 #{Opinion.model_name.human}을 받았습니다.
+
+        .opinion-speakers-list
+          .row
+            - ["찬성", "반대", nil].each do |quote|
+              - speakers = @issue.categorized_speakers(position, quote)
+              .col-sm-4{ class: ('hidden-xs' if speakers.empty?) }
+                .position
+                  = quote || "#{Opinion.model_name.human}없음"
+                  %span{ style: 'font-weight: normal' } #{speakers.count}명
+
+                = render 'issues/speakers', speakers: speakers, issue: @issue, quote: quote
+- else
   %section.page-block.page-opinions
-    .ui.container
-      %h4.ui.dividing.header
-        #{position} #{Opinion.model_name.human}
-        .sub.header #{position}으로부터 #{@agenda.speakers.of_position(position).count}개의 #{Opinion.model_name.human}을 받았습니다.
+    .container
+      - if @issue.body.present?
+        .issue-body
+          %p!= simple_format(h(@issue.body))
 
-      .opinion-speakers-list
-        .row
-          - ["찬성", "반대", nil].each do |quote|
-            - speakers = @issue.categorized_speakers(position, quote)
-            .col-sm-4{ class: ('hidden-xs' if speakers.empty?) }
-              .position
-                = quote || "#{Opinion.model_name.human}없음"
-                %span{ style: 'font-weight: normal' } #{speakers.count}명
-
-              = render 'issues/speakers', speakers: speakers, issue: @issue, quote: quote
+      - if @issue.has_any_stances?
+        = render 'opinions/stances', speakers: @issue.speakers, issue: @issue
+      .media-list
+        - if @issue.opinions.where(speaker: Speaker.of_position('대선주자')).any?
+          - Speaker.of_position('대선주자').shuffle.each do |speaker|
+            - @issue.opinions.of_speaker(speaker).each do |opinion|
+              - next unless opinion.has_content?
+              = render 'opinions/line_item', opinion: opinion, theme_tag: params[:tag]
