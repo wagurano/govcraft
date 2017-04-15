@@ -26,10 +26,13 @@
 
         - if issue.has_stance?
           - speaker_positions.each do |position|
-            = render 'opinions/stances', position: position, speakers: speakers, speaker_positions: speaker_positions, issue: issue, theme_tag: params[:theme_tag]
+            - speakers_of_position = speakers.of_position(position)
+            - if issue.has_any_stances?(speakers_of_position)
+              = render 'opinions/stances', position: (position if speaker_positions.count > 1), speakers: speakers_of_position, issue: issue, theme_tag: params[:theme_tag]
 
         - if issue.opinions.where(speaker: speakers).any?(&:has_content?)
           .media-list
             - speakers.shuffle.each do |speaker|
               - issue.opinions.of_speaker(speaker).each do |opinion|
+                - next unless opinion.has_content?
                 = render 'opinions/line_item', opinion: opinion, theme_tag: params[:theme_tag]

@@ -1,5 +1,5 @@
 %section.page-block.page-opinions
-  - if speaker_positions.count > 1
+  - if local_assigns[:position].present?
     %h4= position
   .opinion-speakers-list
     .row

@@ -44,12 +44,11 @@
           .issue-body
             %p!= simple_format(h(issue.body))
 
-        - if issue.has_stance?
-          - speaker_positions = Speaker.where(id: issue.opinions.pluck(:speaker_id)).all_tags(on: :positions).map(&:name)
-          - speaker_positions.each do |position|
-            = render 'opinions/stances', position: position, speakers: issue.speakers, speaker_positions: speaker_positions, issue: issue
+        - if issue.has_any_stances?
+          = render 'opinions/stances', speakers: issue.speakers, issue: issue
         .media-list
           - if issue.opinions.where(speaker: Speaker.of_position('대선주자')).any?
             - Speaker.of_position('대선주자').shuffle.each do |speaker|
               - issue.opinions.of_speaker(speaker).each do |opinion|
+                - next unless opinion.has_content?
                 = render 'opinions/line_item', opinion: opinion, theme_tag: params[:tag]

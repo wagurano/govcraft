@@ -24,6 +24,15 @@ class Issue < ApplicationRecord
     end
   end
 
+  def has_any_stances?(speakers = nil)
+    return false unless has_stance?
+
+    result = self.opinions.where.not(stance: nil)
+    result = result.where(speaker_id: speakers) unless speakers.nil?
+
+    result.exists?
+  end
+
   private
 
   def trim_title
