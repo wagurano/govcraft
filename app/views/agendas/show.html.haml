@@ -43,7 +43,7 @@
             = link_to human_theme_name(theme_tag), theme_agendas_path(theme_tag: theme_tag)
             %br.visible-xs-block
             %small= human_theme_body(theme_tag)
-        - issues .each do |issue|
+        - issues.each do |issue|
           %h3= issue.title
 
           - if issue.body.present?

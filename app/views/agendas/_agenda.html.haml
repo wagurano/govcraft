@@ -1,11 +1,15 @@
+- url = agenda_path(agenda, speaker_id: local_assigns[:speaker].try(:id))
 .col-md-3.col-sm-4.col-xs-12
   .ui.card.fluid{ style: 'margin-bottom: 2em' }
-    = link_to agenda do
+    = link_to url do
       .image{ style: "height: 140px; background-image: url(#{agenda.image.md.url}); background-size: cover; background-position: center center;" }
     .content
-      = link_to agenda.name, agenda, class: 'header', style: 'font-size: 1.2em'
+      = link_to agenda.name, url, class: 'header', style: 'font-size: 1.2em'
       .meta
         %span
-          #{Issue.model_name.human} #{agenda.issues.count}개
+          - if local_assigns[:speaker].present?
+            #{Opinion.model_name.human} #{speaker.opinions_of_agenda(agenda).count}개
+          -else
+            #{Issue.model_name.human} #{agenda.issues.count}개
       .description
       .extra

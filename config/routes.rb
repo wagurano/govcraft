@@ -127,7 +127,9 @@ Rails.application.routes.draw do
       get :vote_widget
     end
   end
-  resources :speakers
+  resources :speakers do
+    get :agenda, on: :member
+  end
 
   namespace :admin do
     root 'base#home', as: :home

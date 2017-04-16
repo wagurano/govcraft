@@ -10,6 +10,7 @@ class Ability
     can :download, Timeline
     can [:widget, :new_email, :send_email, :theme, :theme_widget], Agenda
     can :vote_widget, Opinion
+    can :agenda, Speaker
 
     if user
       can [:new_email, :send_email], Agenda

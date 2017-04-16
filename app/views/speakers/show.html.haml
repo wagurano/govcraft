@@ -1,61 +1,26 @@
-- if @agenda
-  .agenda-container
-    = render 'agendas/header', agenda: @agenda
-
 = render 'speakers/header', speaker: @speaker
 
-
-- if @agenda.present?
+- if @speaker.opinions.any?
   %section.page-block
     .container
-      %h2
-        = link_to @agenda.name, @agenda
+      %h3.header
+        최근 의견
+      - @speaker.opinions.recent.limit(2).each do |opinion|
+        %h4
+          .ui.mini.label= opinion.issue.agenda.name
+          = opinion.issue.title
+        - if opinion.issue.body.present?
+          .issue-body
+            %p!= simple_format(h(opinion.issue.body))
+        = render opinion
 
-      - @agenda.issues.each do |issue|
-        %section[issue]{ style: 'margin-bottom: 2em' }
-          %h3
-            = issue.title
-            - if user_signed_in? and current_user.is_admin?
-              %small
-                = link_to new_or_edit_admin_opinions_path(issue_id: issue.id, speaker_id: @speaker.id), class: 'text-danger' do
-                  의견 수정
-
-          - opinions = issue.opinions.recent.of_speaker(@speaker)
-          = render opinions
-          - if opinions.empty?
-            %p 아직 #{Opinion.model_name.human}이 없습니다.
-
-- if @agenda.present?
-  %section.page-block{ class: "page-block-1"}
-    .container
-      %p
-        %strong
-          = link_to speaker_path(@speaker) do
-            #{@speaker.name}님의 다른 #{Agenda.model_name.human}에 대한  #{Opinion.model_name.human} 모두보기
-            %i.fa.fa-arrow-right
-  - base_index = 1
-- else
-  - @agendas.each_with_index do |agenda, i|
-    %section.page-block{ class: "page-block-#{i%2}"}
-      .container
-        %h2
-          = link_to agenda.name, agenda
-
-        - agenda.issues.each do |issue|
-          - next if !issue.opinions.exists?(speaker: @speaker)
-          %section[issue]{ style: 'margin-bottom: 2em' }
-            %h3
-              = issue.title
-              - if user_signed_in? and current_user.is_admin?
-                %small
-                  = link_to new_or_edit_admin_opinions_path(issue_id: issue.id, speaker_id: @speaker.id), class: 'text-danger' do
-                    의견 수정
-            - if issue.body.present?
-              .issue-body
-                %p!= simple_format(h(issue.body))
-
-            - opinions = issue.opinions.recent.of_speaker(@speaker)
-            = render opinions
-            - if opinions.empty?
-              %p 아직 #{Opinion.model_name.human}이 없습니다.
-
+%section.page-block
+  .container
+    %h3.header
+      = Agenda.model_name.human
+    - if @agendas.any?
+      .row
+        = render @agendas, speaker: @speaker
+    - else
+      .well
+        아직 관련 #{Agenda.model_name.human} 정보가 없습니다.

@@ -22,5 +22,9 @@ class Speaker < ApplicationRecord
   def has_opinion_of? agenda
     opinions.exists?(issue: agenda.issues)
   end
+
+  def opinions_of_agenda agenda
+    opinions.where(issue: agenda.issues)
+  end
 end
 

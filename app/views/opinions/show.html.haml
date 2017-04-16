@@ -7,10 +7,19 @@
 - else
   = render 'speakers/header', speaker: speaker
 
+.agenda-container
+  %section.cover-section.cover-section-small{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(agenda.image_url(:lg))});"}
+    .container
+      %h2
+        %small
+          %span.label.label-danger= Agenda.model_name.human
+        %br
+        = link_to agenda_path(agenda, theme_tag: params[:theme_tag]), style: 'color: white' do
+          = agenda.name
+
 %section.page-block
   .container
     %h3
-      = link_to agenda.name, agenda_path(agenda, theme_tag: params[:theme_tag]), class: 'label label-default'
       = link_to issue.title, issue_path(issue, theme_tag: params[:theme_tag])
       %small
         = link_to new_or_edit_admin_opinions_path(issue_id: issue.id, speaker_id: speaker.id), class: 'text-danger' do

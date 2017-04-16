@@ -8,6 +8,13 @@ class AgendasController < ApplicationController
   def show
     if params[:theme_tag].present?
       redirect_to theme_agendas_path(theme_tag: params[:theme_tag], anchor: view_context.dom_id(@agenda))
+      return
+    end
+
+    speaker = Speaker.find_by(id: params[:speaker_id])
+    if speaker.present?
+      redirect_to agenda_speaker_path(speaker, agenda_id: @agenda)
+      return
     end
   end
 
