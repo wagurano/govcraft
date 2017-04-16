@@ -1,5 +1,12 @@
 %section.page-block
   %h3 이슈
+  = form_tag nil, class: 'form-inline', method: :get do
+    .form-group
+      = label_tag :agenda_id
+      = select_tag :agenda_id, options_from_collection_for_select(Agenda.all, :id, :name), class: 'form-control js-select2'
+    = submit_tag '보기', class: 'btn btn-default btn-sm'
+
+  %hr
   %table.table
     %thead
       %tr
@@ -12,7 +19,7 @@
       - @issues.each do |issue|
         %tr
           %td
-            %h5= issue.title
+            %h5= link_to issue.title, issue
           %td
             = issue.agenda.name
           %td

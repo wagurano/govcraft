@@ -3,6 +3,7 @@ class Admin::IssuesController < Admin::BaseController
 
   def index
     @issues = Issue.all
+    @issues = @issues.where(agenda_id: params[:agenda_id])if params[:agenda_id].present?
   end
 
   def create

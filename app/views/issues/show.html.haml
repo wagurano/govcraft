@@ -2,13 +2,16 @@
   = render 'agendas/header', agenda: @agenda
 
 %section.page-block.page-opinions
-  .ui.container
+  .container
     %h2= @issue.title
+    - if @issue.body.present?
+      .issue-body
+        != simple_format(h(@issue.body.strip))
 
 - if @agenda.name == '선거제도'
   - %w(대선주자 국회의원).each do |position|
     %section.page-block.page-opinions
-      .ui.container
+      .container
         %h4.ui.dividing.header
           #{position} #{Opinion.model_name.human}
           .sub.header #{position}으로부터 #{@agenda.speakers.of_position(position).count}개의 #{Opinion.model_name.human}을 받았습니다.
@@ -26,10 +29,6 @@
 - else
   %section.page-block.page-opinions
     .container
-      - if @issue.body.present?
-        .issue-body
-          %p!= simple_format(h(@issue.body))
-
       - if @issue.has_any_stances?
         = render 'opinions/stances', speakers: @issue.speakers, issue: @issue
       .media-list

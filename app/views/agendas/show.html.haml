@@ -18,7 +18,7 @@
           #{position} #{Opinion.model_name.human}
           .sub.header #{position} #{@agenda.speakers.of_position(position).count}명에게 #{Opinion.model_name.human}를 받았습니다.
         - @agenda.issues.each do |issue|
-          %h4= issue.title
+          %h3= issue.title
 
           - if issue.body.present?
             .issue-body
@@ -38,7 +38,7 @@
   %section.page-block.page-opinions
     .container
       - @agenda.issues.each do |issue|
-        %h3= issue.title
+        %h2= issue.title
 
         - if issue.body.present?
           .issue-body

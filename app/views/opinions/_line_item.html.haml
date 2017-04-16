@@ -4,11 +4,11 @@
     .media[opinion]
       .media-left
         = link_to speaker_path(speaker) do
-          %img.media-object{:src => speaker.image.xs.url}
+          %img.media-object.speaker-image{style: "background-image: url(#{speaker.image.xs.url});"}
       .media-body
         .row
           - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
-          .col-sm-8.col-xs-7
+          .col-sm-8.col-xs-12
             %h3.media-heading
               = link_to speaker_path(speaker) do
                 = speaker.name
@@ -22,5 +22,5 @@
                 != simple_format h(opinion.body)
               - else
                 != smart_truncate_html (simple_format opinion.body), length: 40, ellipsis: "... <a href='#{link_to_opinion}'>상세보기</a>"
-          .col-sm-4.col-xs-5.text-right
+          .col-sm-4.col-xs-12.text-right-sm.margin-xs-12
             = render 'votes/panel', votable: opinion, show_voters: false, reactions_count_link: link_to_opinion

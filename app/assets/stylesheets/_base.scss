@@ -186,3 +186,13 @@ label.error {
   }
 }
 
+@media (min-width: $screen-sm-min) {
+  .text-right-sm {
+    text-align: right;
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  .margin-xs-12 { margin-top: 12px; }
+}
+
