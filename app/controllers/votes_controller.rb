@@ -52,15 +52,16 @@ class VotesController < ApplicationController
 
     @vote = @votable.fetch_vote_of(current_user) if user_signed_in?
 
-    if @vote.blank?
-      @vote = @votable.votes.build(choice: choice, user: current_user)
-      mark_anonymous_voted_poll(@votable, choice) unless user_signed_in?
-      errors_to_flash(@vote) unless @votable.save
-    elsif @vote.choice != choice
-      @vote.update_attributes(choice: choice)
-      errors_to_flash(@vote) unless @vote.save
+    ActiveRecord::Base.transaction do
+      if @vote.blank?
+        @vote = @votable.votes.build(choice: choice, user: current_user)
+        mark_anonymous_voted_poll(@votable, choice) unless user_signed_in?
+        errors_to_flash(@vote) unless @votable.save
+      elsif @vote.choice != choice
+        @vote.update_attributes(choice: choice)
+        errors_to_flash(@vote) unless @vote.save
+      end
     end
-
     @votable.reload
   end
 

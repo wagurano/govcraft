@@ -10,7 +10,12 @@ module VoteHelper
   def mark_anonymous_voted_poll(votable, choice)
     updated = voted_votables
     updated["#{votable.class.name}_#{votable.id}"] = choice
-    cookies.permanent.signed[:qus_qus] = JSON.generate(updated)
+    begin
+      cookies.permanent.signed[:qus_qus] = JSON.generate(updated)
+    rescue ActionDispatch::Cookies::CookieOverflow => e
+      flash[:error] = t('errors.messages.no_more_anonymous')
+      raise ActiveRecord::Rollback
+    end
   end
 
   def fetch_anonymous_vote votable

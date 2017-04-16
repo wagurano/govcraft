@@ -6,7 +6,13 @@ module FeedbackHelper
     else
       updated["#{option.survey.id}"] << option.id
     end
-    cookies.permanent.signed[:oasis_tiger] = JSON.generate(updated)
+
+    begin
+      cookies.permanent.signed[:oasis_tiger] = JSON.generate(updated)
+    rescue ActionDispatch::Cookies::CookieOverflow => e
+      flash[:error] = t('errors.messages.no_more_anonymous')
+      raise ActiveRecord::Rollback
+    end
   end
 
   def mark_anonymous_unselected_option(survey, option = nil)
@@ -18,7 +24,12 @@ module FeedbackHelper
         updated["#{survey.id}"].reject! { |id| id == option.id }
       end
     end
-    cookies.permanent.signed[:oasis_tiger] = JSON.generate(updated)
+    begin
+      cookies.permanent.signed[:oasis_tiger] = JSON.generate(updated)
+    rescue ActionDispatch::Cookies::CookieOverflow => e
+      flash[:error] = t('errors.messages.no_more_anonymous')
+      raise ActiveRecord::Rollback
+    end
   end
 
   def fetch_anonymous_selected_option_ids(survey)

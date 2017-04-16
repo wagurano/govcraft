@@ -14,7 +14,13 @@ module LikeHelper
   def mark_anonymous_liked likable
     updated = liked_likables
     updated << likable_code(likable)
-    cookies.permanent.signed[:kong_kong] = JSON.generate(updated)
+
+    begin
+      cookies.permanent.signed[:kong_kong] = JSON.generate(updated)
+    rescue ActionDispatch::Cookies::CookieOverflow => e
+      flash[:error] = t('errors.messages.no_more_anonymous')
+      raise ActiveRecord::Rollback
+    end
   end
 
   private

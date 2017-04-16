@@ -9,13 +9,16 @@ class LikesController < ApplicationController
       @like.user = current_user
       errors_to_flash(@like) unless @like.save
     else
-      if !anonymous_liked?(@like.likable)
-        if @likable.increment!(:anonymous_likes_count)
-          mark_anonymous_liked @likable
-        else
-          errors_to_flash(@like)
+      ActiveRecord::Base.transaction do
+        if !anonymous_liked?(@like.likable)
+          if @likable.increment!(:anonymous_likes_count)
+            mark_anonymous_liked @likable
+          else
+            errors_to_flash(@like)
+          end
         end
       end
+      @likable.reload
     end
   end
 

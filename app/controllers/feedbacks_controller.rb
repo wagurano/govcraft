@@ -52,6 +52,7 @@ class FeedbacksController < ApplicationController
       end
     end
 
+    @option.reload
     @survey = survey
   end
 
