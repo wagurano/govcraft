@@ -10,7 +10,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
   if Rails.env.production? or Rails.env.staging?
+    def action_missing(name)
+      render_404
+    end
+
     rescue_from ActiveRecord::RecordNotFound, ActionController::UnknownFormat do |exception|
       render_404
     end
