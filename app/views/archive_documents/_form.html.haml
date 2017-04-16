@@ -7,7 +7,7 @@
 
   .form-group
     = f.label :body
-    = f.text_area :body, class: 'form-control redactor'
+    ~ f.text_area :body, class: 'form-control redactor'
 
   - if params[:category_slug].present?
     = f.hidden_field :category_slug, value: params[:category_slug]

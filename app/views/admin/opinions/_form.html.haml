@@ -9,7 +9,7 @@
 
   .field
     = f.label :quote
-    = f.text_area :quote
+    ~ f.text_area :quote
 
   - if @opinion.issue.blank? or @opinion.issue.has_stance?
     .field

@@ -9,7 +9,7 @@
         = f.text_field :signer_email, class: 'form-control'
       .form-group
         = f.label :body
-        = f.text_area :body, class: 'form-control'
+        ~ f.text_area :body, class: 'form-control'
 
       - if @sign.petition.id == 29
         .form-group

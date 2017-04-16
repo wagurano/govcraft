@@ -1,34 +1,39 @@
 - speaker = opinion.speaker
 .panel.panel-opinion.panel-default[opinion]
   .panel-body
-    .row
-      .col-sm-9.col-xs-12
-        - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
-        - lead = capture do
-          - if opinion.quote.present?
-            != simple_format h(opinion.quote), class: 'lead'
-          - if opinion.stance.present?
-            %p.lead
-              - case opinion.stance
-              - when 'disagree'
-                %i.fa.fa-ban
-              - when 'agree'
-                %i.fa.fa-thumbs-o-up
-              - when 'unsuer'
-                %i.fa.fa-question-circle-o
-              - when 'partially'
-                %i.fa.fa-hand-lizard-o
-            = opinion.stance_text
+    .media[opinion]
+      .media-left
+        = link_to speaker_path(speaker) do
+          .media-object.image.speaker-image.speaker-image--mini{style: "background-image: url(#{speaker.image.xs.url});"}
+      .media-body
+        .row
+          .col-sm-9.col-xs-12
+            - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
+            - lead = capture do
+              - if opinion.quote.present?
+                != simple_format h(opinion.quote), class: 'lead'
+              - if opinion.stance.present?
+                %p.lead
+                  - case opinion.stance
+                  - when 'disagree'
+                    %i.fa.fa-ban
+                  - when 'agree'
+                    %i.fa.fa-thumbs-o-up
+                  - when 'unsuer'
+                    %i.fa.fa-question-circle-o
+                  - when 'partially'
+                    %i.fa.fa-hand-lizard-o
+                  = opinion.stance_text
 
-        - if lead.try(:strip).present?
-          = link_to lead, link_to_opinion
+            - if lead.try(:strip).present?
+              = link_to lead, link_to_opinion
 
-        .opinion__body
-          - if opinion.body.present?
-            - if local_assigns[:show_full]
-              != simple_format h(opinion.body)
-            - else
-              != smart_truncate_html (simple_format opinion.body), length: 130, ellipsis: "... <a href='#{link_to_opinion}'>상세보기</a>"
+            .opinion__body
+              - if opinion.body.present?
+                - if local_assigns[:show_full]
+                  != simple_format h(opinion.body)
+                - else
+                  != smart_truncate_html (simple_format opinion.body), length: 130, ellipsis: "... <a href='#{link_to_opinion}'>상세보기</a>"
 
-      .col-sm-3.col-xs-12.text-right-sm
-        = render 'votes/panel', votable: opinion, show_voters: false, reactions_count_link: link_to_opinion
+          .col-sm-3.col-xs-12.text-right-sm.margin-xs-12
+            = render 'votes/panel', votable: opinion, show_voters: false, reactions_count_link: link_to_opinion

@@ -2,10 +2,7 @@
 - issue = @opinion.issue
 - speaker = @opinion.speaker
 
-- if params[:theme_tag].present?
-  = render 'agendas/theme_header', theme_tag: params[:theme_tag], speaker: speaker
-- else
-  = render 'speakers/header', speaker: speaker
+= render 'speakers/header', speaker: speaker, theme_tag: params[:theme_tag]
 
 .agenda-container
   %section.cover-section.cover-section-small{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(agenda.image_url(:lg))});"}

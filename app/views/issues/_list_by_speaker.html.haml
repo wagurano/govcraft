@@ -1,7 +1,0 @@
-%section#issues.page-block
-  - agenda.issues.each do |issue|
-    %h4= issue.title
-    - opinions = issue.opinions.recent.of_speaker(speaker)
-    = render opinions
-    - if opinions.empty?
-      %p 아직 #{Opinion.model_name.human}이 없습니다.

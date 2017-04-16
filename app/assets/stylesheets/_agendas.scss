@@ -56,10 +56,19 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  &--mini {
+    background-position: top;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%
+  }
 }
 .issue-body {
   font-size: 16px;
   font-weight: 200;
+}
+.opinion__body {
+  margin-top: 12px;
 }
 .cover-section.cover-section-small {
   padding-top: 20px;

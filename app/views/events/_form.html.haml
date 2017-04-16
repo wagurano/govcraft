@@ -13,7 +13,7 @@
 
   .form-group
     = f.label :body
-    = f.text_area :body, class: 'form-control redactor'
+    ~ f.text_area :body, class: 'form-control redactor'
 
   .form-group
     = f.label :slug
@@ -21,7 +21,7 @@
 
   .form-group
     = f.label :css
-    = f.text_area :css, rows: 10, class: 'form-control'
+    ~ f.text_area :css, rows: 10, class: 'form-control'
 
   .form-group
     = f.submit '저장', class: 'btn btn-primary'
