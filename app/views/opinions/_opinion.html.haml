@@ -6,21 +6,22 @@
         - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
         - lead = capture do
           - if opinion.quote.present?
-            = opinion.quote
+            != simple_format h(opinion.quote), class: 'lead'
           - if opinion.stance.present?
-            - case opinion.stance
-            - when 'disagree'
-              %i.fa.fa-ban
-            - when 'agree'
-              %i.fa.fa-thumbs-up
-            - when 'unsuer'
-              %i.fa.fa-question-circle-o
-            - when 'partially'
-              %i.fa.fa-hand-lizard-o
+            %p.lead
+              - case opinion.stance
+              - when 'disagree'
+                %i.fa.fa-ban
+              - when 'agree'
+                %i.fa.fa-thumbs-o-up
+              - when 'unsuer'
+                %i.fa.fa-question-circle-o
+              - when 'partially'
+                %i.fa.fa-hand-lizard-o
             = opinion.stance_text
 
         - if lead.try(:strip).present?
-          %p.lead= link_to lead, link_to_opinion
+          = link_to lead, link_to_opinion
 
         .opinion__body
           - if opinion.body.present?

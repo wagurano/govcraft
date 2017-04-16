@@ -15,8 +15,8 @@
                 %small= speaker.organization
 
             - if opinion.quote.present?
-              %p.lead{ style: 'margin-bottom: 0;' }
-                = link_to opinion.quote, link_to_opinion
+              = link_to link_to_opinion do
+                != simple_format h(opinion.quote), class: 'lead'
             - if opinion.body.present?
               - if local_assigns[:show_full]
                 != simple_format h(opinion.body)

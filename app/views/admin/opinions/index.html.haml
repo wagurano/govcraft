@@ -1,8 +1,15 @@
 %section.page-block
   %h3 오피니언
+  = form_tag nil, class: 'form-inline', method: :get do
+    .form-group
+      = label_tag :issue_id
+      = select_tag :issue_id, options_from_collection_for_select(Issue.all, :id, :title), class: 'form-control js-select2', style: 'width: 300px'
+    = submit_tag '보기', class: 'btn btn-default btn-sm'
+
   %table.table
     %thead
       %tr
+        %th ID
         %th 스피커
         %th 이슈
         %th 요약
@@ -12,11 +19,13 @@
       - @opinions.each do |opinion|
         %tr
           %td
+            = link_to opinion.id, opinion
+          %td.text-nowrap
             = opinion.speaker.name
           %td
             = opinion.issue.title
           %td
             = link_to opinion.quote, opinion
-          %td.text-right
+          %td.text-right.text-nowrap
             = link_to '수정', edit_admin_opinion_path(opinion), class: 'btn btn-xs btn-default'
             = link_to '삭제', admin_opinion_path(opinion), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'

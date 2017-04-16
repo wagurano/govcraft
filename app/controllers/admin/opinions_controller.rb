@@ -3,6 +3,7 @@ class Admin::OpinionsController < Admin::BaseController
 
   def index
     @opinions = Opinion.all.recent
+    @opinions = @opinions.where(issue_id: params[:issue_id])if params[:issue_id].present?
   end
 
   def create

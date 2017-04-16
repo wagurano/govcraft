@@ -37,6 +37,7 @@ class Issue < ApplicationRecord
     tags.first.try(:name)
   end
 
+
   private
 
   def trim_title
