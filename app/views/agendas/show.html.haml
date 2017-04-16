@@ -35,20 +35,26 @@
 
                   = render 'issues/speakers', speakers: speakers, issue: issue, quote: quote, max_count: 15
 - else
-  %section.page-block.page-opinions
-    .container
-      - @agenda.issues.each do |issue|
-        %h2= issue.title
+  - @agenda.issues_group_by_theme.each_with_index do |(theme_tag, issues), i|
+    %section.page-block.page-opinions{ class: "page-block-#{i%2}"}
+      .container
+        - if theme_tag.present?
+          %h2.ui.dividing.header
+            = link_to human_theme_name(theme_tag), theme_agendas_path(theme_tag: theme_tag)
+            %br.visible-xs-block
+            %small= human_theme_body(theme_tag)
+        - issues .each do |issue|
+          %h3= issue.title
 
-        - if issue.body.present?
-          .issue-body
-            %p!= simple_format(h(issue.body))
+          - if issue.body.present?
+            .issue-body
+              %p!= simple_format(h(issue.body))
 
-        - if issue.has_any_stances?
-          = render 'opinions/stances', speakers: issue.speakers, issue: issue
-        .media-list
-          - if issue.opinions.where(speaker: Speaker.of_position('대선주자')).any?
-            - Speaker.of_position('대선주자').shuffle.each do |speaker|
-              - issue.opinions.of_speaker(speaker).each do |opinion|
-                - next unless opinion.has_content?
-                = render 'opinions/line_item', opinion: opinion, theme_tag: params[:tag]
+          - if issue.has_any_stances?
+            = render 'opinions/stances', speakers: issue.speakers, issue: issue
+          .media-list
+            - if issue.opinions.where(speaker: Speaker.of_position('대선주자')).any?
+              - Speaker.of_position('대선주자').shuffle.each do |speaker|
+                - issue.opinions.of_speaker(speaker).each do |opinion|
+                  - next unless opinion.has_content?
+                  = render 'opinions/line_item', opinion: opinion, theme_tag: params[:tag]

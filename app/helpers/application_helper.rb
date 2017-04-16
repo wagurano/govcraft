@@ -91,6 +91,13 @@ module ApplicationHelper
     }.fetch(tag, tag)
   end
 
+  def human_theme_body(tag)
+    {
+      '2017-president' => '2017대선주권자행동과 함께 대선후보 정책을 검증합니다.',
+      'votefuture' => '초록우산 어린이재단의 대한민국 아동이 제안하는 19대 대선 아동공약입니다.',
+    }.fetch(tag, tag)
+  end
+
   def speaker_positions_of_theme(tag)
     {
       '2017-president' => ['대선주자'],

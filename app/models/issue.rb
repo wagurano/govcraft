@@ -33,6 +33,10 @@ class Issue < ApplicationRecord
     result.exists?
   end
 
+  def theme_name
+    tags.first.try(:name)
+  end
+
   private
 
   def trim_title
