@@ -10,29 +10,28 @@
 
     .media-list
       - if petitions.any?
-        - 5.times do
-          - petitions.each do |petition|
-            .well
-              .media
-                .media-body
-                  %h3.media-heading
-                    = link_to petition do
-                      = petition.title
-                      - if petition.comments.count > 0
-                        %small (#{petition.comments.count})
-                  %p
-                    %span.nickname
-                      %i.fa.fa-user
-                      = petition.user.nickname
-                    %span.created_at
-                      %i.fa.fa-calendar
-                      = date_f petition.created_at
-                .media-right
+        - petitions.each do |petition|
+          .well
+            .media
+              .media-body
+                %h3.media-heading
                   = link_to petition do
-                    .pull-right
-                      .btn.btn-primary.btn-lg
-                        - if petition.has_goal?
-                          #{petition.percentage}% 달성
-                        - else
-                          #{number_with_delimiter(petition.signs_count)}명 참여
+                    = petition.title
+                    - if petition.comments.count > 0
+                      %small (#{petition.comments.count})
+                %p
+                  %span.nickname
+                    %i.fa.fa-user
+                    = petition.user.nickname
+                  %span.created_at
+                    %i.fa.fa-calendar
+                    = date_f petition.created_at
+              .media-right
+                = link_to petition do
+                  .pull-right
+                    .btn.btn-primary.btn-lg
+                      - if petition.has_goal?
+                        #{petition.percentage}% 달성
+                      - else
+                        #{number_with_delimiter(petition.signs_count)}명 참여
 
