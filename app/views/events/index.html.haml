@@ -1,1 +1,12 @@
-= render 'list', events: @events
+%section
+  .container
+    .page-header
+      %h2= Event.model_name.human
+
+    .ui.three.stackable.cards
+      - @events.each do |event|
+        .ui.card
+          .image{ style: "height: 200px; background-image: url(#{event.image_url(:md)}); background-size: cover; background-position: top center;"}
+            %a.ui.purple.ribbon.label= Event.model_name.human
+          .content
+            = link_to event.title, event, class: 'header'
