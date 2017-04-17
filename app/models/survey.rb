@@ -33,10 +33,10 @@ class Survey < ApplicationRecord
   end
 
   def percentage(option)
-    all_feedbacks_count = feedbacks_count + options.sum(:anonymous_feedbacks_count)
-    return 0 if all_feedbacks_count == 0 or option.all_feedbacks_count == 0
+    max_count = options.map{|o| o.all_feedbacks_count}.max
+    return 0 if max_count == 0
 
-    (option.all_feedbacks_count / all_feedbacks_count.to_f * 100).ceil
+    (option.all_feedbacks_count / max_count.to_f * 100).ceil
   end
 
   def feedback_users_count

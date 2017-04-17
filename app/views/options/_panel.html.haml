@@ -18,7 +18,7 @@
             - attrs = { 'data-url': new_user_session_path, 'data-method': :get }
         .item.gov-action-rails-link{ attrs.merge(style: 'margin-bottom: 12px') }
           - if survey.open?
-            %i.check.circle.outline.icon{ style: "font-size: 2em; line-height: 1.5em; color: #{option_selected?(option, current_user) ? '#4a5dd0' : '#bbb'};"}
+            %i.check.square.outline.icon{ style: "font-size: 2em; line-height: 1.5em; color: #{option_selected?(option, current_user) ? '#4a5dd0' : '#bbb'};"}
           .content{ style: 'width: 100%' }
             .header
               .option-body= option.body
