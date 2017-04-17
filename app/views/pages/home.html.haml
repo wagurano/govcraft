@@ -1,6 +1,7 @@
 #site-hero-carousel.carousel.slide{"data-ride" => "carousel"}
   %ol.carousel-indicators
     %li.active{"data-slide-to" => "0", "data-target" => "#site-hero-carousel"}
+    %li{"data-slide-to" => "1", "data-target" => "#site-hero-carousel"}
 
   .carousel-inner{:role => "listbox"}
     .item.active
@@ -12,6 +13,16 @@
           %strong
             "직접 민주주의 프로젝트 정당"
           입니다.
+    .item
+      = link_to 'http://zine.wouldyouparty.org/201703.html', target: '_blank' do
+        = image_tag "zine.png"
+        .carousel-caption
+          %p.lead
+            해결하고 싶었던 이슈를 좀 더 재미있게
+            %br.visible-xs
+            %strong
+              <월간 우주당>
+            이 시작됩니다.
 
   %a.left.carousel-control{"data-slide" => "prev", :href => "#site-hero-carousel", :role => "button"}
     %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
