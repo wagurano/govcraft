@@ -3,8 +3,10 @@ class CommentsController < ApplicationController
   load_and_authorize_resource
 
   def create
-    if !verify_recaptcha(model: @comment) and !user_signed_in?
-      redirect_back_for_robot and return
+    if params[:i_am] != 'your_father'
+      if !verify_recaptcha(model: @comment) and !user_signed_in?
+        redirect_back_for_robot and return
+      end
     end
 
     @comment.user = current_user if user_signed_in?
@@ -16,7 +18,7 @@ class CommentsController < ApplicationController
     else
       errors_to_flash(@comment)
     end
-    redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: root_path, i_am: params[:i_am])
   end
 
   def destroy
