@@ -27,17 +27,18 @@
 
 %section{ style: 'margin: 28px 0;' }
   .container-fluid
-    - event.comments.tag_counts_on(:tags).each do |tag|
-      - if params[:tag] == tag.name
-        %span{ style: 'display: inline-block; background-color: #4a5dd0; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; color: #fff; margin-bottom: 7px;' }
-          = link_to tag.name, event_path(event, {tag: tag.name}), style: 'color: #fff'
-          %small
-            = tag.count
-      - else
-        %span{ style: 'display: inline-block; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; margin-bottom: 7px;' }
-          = link_to tag.name, event_path(event, {tag: tag.name})
-          %small.text-muted
-            = tag.count
+    - event.comments.tag_counts_on(:tags).sort_by(&:count).reverse.each do |tag|
+      - if tag.count >= 5
+        - if params[:tag] == tag.name
+          %span{ style: 'display: inline-block; background-color: #4a5dd0; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; color: #fff; margin-bottom: 7px;' }
+            = link_to tag.name, event_path(event, {tag: tag.name}), style: 'color: #fff'
+            %small
+              = tag.count
+        - else
+          %span{ style: 'display: inline-block; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; margin-bottom: 7px;' }
+            = link_to tag.name, event_path(event, {tag: tag.name})
+            %small.text-muted
+              = tag.count
 
 %section
   .container-fluid
