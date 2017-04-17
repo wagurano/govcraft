@@ -10,7 +10,8 @@
             - if @article.image_present?
               = image_tag @article.image.sm.url, class: 'media-object'
           .media-body
-            %h2.media-heading= @article.title
+            %h2.media-heading
+              = link_to @article.title, @article.url
             .meta
               %span= @article.site_name
               - if @article.user.present?
