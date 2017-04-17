@@ -4,8 +4,7 @@
     %li{"data-slide-to" => "1", "data-target" => "#site-hero-carousel"}
 
   .carousel-inner{:role => "listbox"}
-    .item.active
-      = image_tag "wouldyou_main.png"
+    .item.active{ style: "background-image: url(#{image_url('wouldyou_main.png')})" }
       .carousel-caption
         %p.lead
           우주당은 시민의 힘으로 만드는
@@ -13,9 +12,8 @@
           %strong
             "직접 민주주의 프로젝트 정당"
           입니다.
-    .item
+    .item{ style: "background-image: url(#{image_url('zine.png')})" }
       = link_to 'http://zine.wouldyouparty.org/201703.html', target: '_blank' do
-        = image_tag "zine.png"
         .carousel-caption
           %p.lead
             해결하고 싶었던 이슈를 좀 더 재미있게
