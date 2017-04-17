@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   HASHTAG_REGEX = /(?:\s|^)(#(?!(?:\d+|[ㄱ-ㅎ가-힣a-z0-9_]+?_|_[ㄱ-ㅎ가-힣a-z0-9_]+?)(?:\s|$))([ㄱ-ㅎ가-힣a-z0-9\-_]+))/i
 
   def index
-    sort = params[:sort] || 'hot'
+    sort = params[:sort] || 'recent'
     tag = params[:tag]
     @articles = tag.present? ? Article.tagged_with(tag).send(sort).recent.page(params[:page]) : Article.send(sort).recent.page(params[:page])
   end
