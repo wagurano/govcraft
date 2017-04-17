@@ -60,7 +60,7 @@
       - if @new_articles.any?
         .content
           .content-title
-            시민뉴스
+            뉴스
           .sub-content
             - @new_articles.each do |article|
               = link_to polymorphic_url(article) do

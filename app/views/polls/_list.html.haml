@@ -1,24 +1,24 @@
-%section#polls.page-block
-  .ui.container
+.container
+  .page-header
     - if @project.present?
-      %h3
+      %h2
         = local_assigns[:title_label] || @project.try(:component_title, 'poll')
         %small
           = link_to "제안하기", new_poll_path(project_id: @project)
     - else
-      %h3= Poll.model_name.human
+      %h2= Poll.model_name.human
 
-    .section
-      - if polls.any?
-        .row.masonry-container
-          = render polls
+  %section
+    - if polls.any?
+      .row.masonry-container
+        = render polls
 
-      - else
-        - if @project.present?
-          .ui.icon.message
-            %i.inbox.icon
-            .content
-              .header
-                가장 먼저 투표를 제안해 보세요.
-              %p
-                = link_to "#{Poll.model_name.human} 제안하기", new_poll_path(project_id: @project)
+    - else
+      - if @project.present?
+        .ui.icon.message
+          %i.inbox.icon
+          .content
+            .header
+              가장 먼저 투표를 제안해 보세요.
+            %p
+              = link_to "#{Poll.model_name.human} 제안하기", new_poll_path(project_id: @project)

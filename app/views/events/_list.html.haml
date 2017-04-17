@@ -1,12 +1,12 @@
 - if events.any?
-  %section.page-block
-    .container
-      %h3= local_assigns[:title_label] || Event.model_name.human
+  .container
+    .page-header
+      %h2= local_assigns[:title_label] || Event.model_name.human
 
-      .ui.three.stackable.cards
-        - events.each do |event|
-          .ui.card
-            .image{ style: "height: 200px; background-image: url(#{event.image_url(:md)}); background-size: cover; background-position: top center;"}
-              %a.ui.purple.ribbon.label= Event.model_name.human
-            .content
-              = link_to event.title, event, class: 'header'
+    .ui.three.stackable.cards
+      - events.each do |event|
+        .ui.card
+          .image{ style: "height: 200px; background-image: url(#{event.image_url(:md)}); background-size: cover; background-position: top center;"}
+            %a.ui.purple.ribbon.label= Event.model_name.human
+          .content
+            = link_to event.title, event, class: 'header'
