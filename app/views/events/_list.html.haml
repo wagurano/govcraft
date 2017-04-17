@@ -1,7 +1,7 @@
 - if events.any?
   %section.page-block
-    .ui.container
-      %h3.header= local_assigns[:title_label] || Event.model_name.human
+    .container
+      %h3= local_assigns[:title_label] || Event.model_name.human
 
       .ui.three.stackable.cards
         - events.each do |event|

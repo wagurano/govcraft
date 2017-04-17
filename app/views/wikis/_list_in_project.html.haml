@@ -1,9 +1,9 @@
 %section#wikis-in-project.page-block
-  .ui.container
-    %h4
+  .container
+    %h3
       = local_assigns[:title_label] || @project.try(:component_title, 'wiki')
-      %small
-        = link_to "페이지 추가", new_wiki_path(project_id: @project)
+      %small.pull-right
+        = link_to "페이지 추가", new_wiki_path(project_id: @project), class: 'btn btn-default btn-sm'
     - if wikis.any?
       .ui.divided.items
         - wikis.each do |wiki|
@@ -29,11 +29,7 @@
 
     - else
       - if @project.present?
-        .ui.icon.message
+        .alert.alert-info
           %i.inbox.icon
-          .content
-            .header
-              첫 위키 페이지를 작성해 보세요.
-            %p
-            = link_to "#{Wiki.model_name.human} 추가하기", new_wiki_path(project_id: @project)
-
+          첫 위키 페이지를 작성해 보세요.
+          = link_to "#{Wiki.model_name.human} 추가하기", new_wiki_path(project_id: @project), class: 'alert-link'

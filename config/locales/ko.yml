@@ -75,6 +75,14 @@ ko:
         subtitle: 부제목
         body: 내용
         image: 대표이미지
+        discussion_enabled: 토론 기능 사용
+        discussion_title: 토론 기능 이름
+        poll_enabled: 투표 기능 사용
+        poll_title: 투표 기능 이름
+        petition_enabled: 서명 기능 사용
+        petition_title: 서명 기능 이름
+        wiki_enabled: 위키 기능 사용
+        wiki_title: 위키 기능 이름
       discussion:
         title: 제목
         body: 내용

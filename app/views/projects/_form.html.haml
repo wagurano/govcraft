@@ -1,59 +1,84 @@
-= form_for @project do |f|
-  .form-group
-    = f.label :title
-    = f.text_field :title, class: 'form-control'
+.panel.panel-default
+  = form_for @project do |f|
+    .panel-body
 
-  .form-group
-    = f.label :subtitle
-    = f.text_field :subtitle, class: 'form-control'
+      %h3 기본 정보
 
-  .form-group
-    = f.label :body
-    ~ f.text_area :body, rows: 8, class: 'form-control'
+      .form-group.form-group-lg
+        = f.label :title
+        = f.text_field :title, class: 'form-control'
 
-  .form-group
-    = f.label :slug
-    .input-group
-      .input-group-addon
-        #{request.base_url}/c/
-      = f.text_field :slug, class: 'form-control'
-    %p.help-block 영문자와 숫자, -만 넣어주세요. 이미 등록된 주소는 사용할 수 없습니다.
+      .form-group
+        = f.label :subtitle
+        = f.text_field :subtitle, class: 'form-control'
 
-  .form-group
-    = f.label :image
-    = f.file_field :image, class: 'form-control'
+      .form-group
+        = f.label :body
+        ~ f.text_area :body, rows: 8, class: 'form-control'
 
-  .form-group
-    = f.label :discussion_enabled
-    = f.check_box :discussion_enabled, class: 'form-control'
+      .form-group
+        = f.label :slug
+        .input-group
+          .input-group-addon
+            #{request.base_url}/c/
+          = f.text_field :slug, class: 'form-control'
+        %p.help-block 영문자와 숫자, -만 넣어주세요. 이미 등록된 주소는 사용할 수 없습니다.
 
-  .form-group
-    = f.label :discussion_title
-    = f.text_field :discussion_title, class: 'form-control'
+      .form-group
+        = f.label :image
+        = f.file_field :image, class: 'form-control'
+        %p.help-block 패턴 이미지를 사용하는게 좋습니다.
 
-  .form-group
-    = f.label :poll_enabled
-    = f.check_box :poll_enabled, class: 'form-control'
+      %hr
 
-  .form-group
-    = f.label :poll_title
-    = f.text_field :poll_title, class: 'form-control'
+      %h3 프로젝트 기능
 
-  .form-group
-    = f.label :petition_enabled
-    = f.check_box :petition_enabled, class: 'form-control'
+      .row
+        .col-sm-3
+          .checkbox
+            %label
+              = f.check_box :discussion_enabled
+              = Project.human_attribute_name("discussion_enabled")
 
-  .form-group
-    = f.label :petition_title
-    = f.text_field :petition_title, class: 'form-control'
+        .col-sm-9
+          .form-group
+            = f.text_field :discussion_title, placeholder: Project.human_attribute_name("discussion_title"), class: 'form-control'
 
-  .form-group
-    = f.label :wiki_enabled
-    = f.check_box :wiki_enabled, class: 'form-control'
+      .row
+        .col-sm-3
+          .checkbox
+            %label
+              = f.check_box :poll_enabled
+              = Project.human_attribute_name("poll_enabled")
 
-  .form-group
-    = f.label :wiki_title
-    = f.text_field :wiki_title, class: 'form-control'
+        .col-sm-9
+          .form-group
+            = f.text_field :poll_title, placeholder: Project.human_attribute_name("poll_title"), class: 'form-control'
 
-  .form-group
-    = f.submit '저장', class: 'btn btn-primary'
+      .row
+        .col-sm-3
+          .checkbox
+            %label
+              = f.check_box :petition_enabled
+              = Project.human_attribute_name("petition_enabled")
+
+        .col-sm-9
+          .form-group
+            = f.text_field :petition_title, placeholder: Project.human_attribute_name("petition_title"), class: 'form-control'
+
+      .row
+        .col-sm-3
+          .checkbox
+            %label
+              = f.check_box :wiki_enabled
+              = Project.human_attribute_name("wiki_enabled")
+
+        .col-sm-9
+          .form-group
+            = f.text_field :wiki_title, placeholder: Project.human_attribute_name("wiki_title"), class: 'form-control'
+
+      %hr
+
+      .form-group
+        = f.submit '저장', class: 'btn btn-primary btn-lg'
+        = link_to '취소', :back, class: 'btn'

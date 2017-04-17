@@ -1,46 +1,52 @@
 %section#discussions.page-block
-  .ui.container
+  .container
     - if @project.present?
       %h3
         = local_assigns[:title_label] || @project.try(:component_title, 'discussion')
-        %small
-          = link_to "글쓰기", new_discussion_path(project_id: @project)
+        %small.pull-right
+          = link_to "게시글 쓰기", new_discussion_path(project_id: @project), class: 'btn btn-default btn-sm'
     - else
       %h3
         = Discussion.model_name.human
 
     - if discussions.any?
-      .ui.divided.items
+      %table.table.table-bordered.hidden-xs
         - discussions.each do |discussion|
-          .item
-            .content
-              .ui.right.floated.primary.button
-                %i.fa.fa-heart
-                = discussion.merged_likes_count
-              %h4.header
+          %tr
+            %td
+              = discussion.id
+            %td
+              %h4
                 = link_to discussion do
                   = discussion.title
                   - if discussion.comments.count > 0
                     %small
                       (#{discussion.comments.count})
 
-              .meta
-                - if @project.nil? && discussion.project
-                  .ui.basic.small.label
-                    = link_to discussion.project.title, discussion.project
-                %span.nickname
-                  %i.user.icon
-                  = link_to discussion.user.nickname, discussion.user
-                %span.created_at
-                  %i.calendar.icon
-                  = date_f discussion.created_at
+            %td
+              %span.nickname
+                %i.fa.fa-user
+                = link_to discussion.user.nickname, discussion.user
+            %td.text-center
+              %i.fa.fa-heart
+              = discussion.merged_likes_count
+            %td.text-right
+              = date_f discussion.created_at
+
+      .list-group.visible-xs
+        - discussions.each do |discussion|
+          = link_to discussion, class: 'list-group-item' do
+            %span.badge
+              %i.fa.fa-heart
+              = discussion.merged_likes_count
+            %h4.list-group-item-heading= discussion.title
+            %p
+              %i.fa.fa-user
+              = discussion.user.nickname
 
     - else
       - if @project.present?
-        .ui.icon.message
+        .alert.alert-info
           %i.inbox.icon
-          .content
-            .header
-              아직 게시글이 없습니다. 이야기를 시작해 볼까요?
-            %p
-              = link_to "게시글 쓰기", new_discussion_path(project_id: @project)
+          아직 게시글이 없습니다. 이야기를 시작해 볼까요?
+          = link_to "게시글 쓰기", new_discussion_path(project_id: @project), class: 'alert-link'

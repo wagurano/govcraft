@@ -1,11 +1,10 @@
 %section#polls.page-block
-  .ui.container
+  .container
     %h3
       = local_assigns[:title_label] || @project.try(:component_title, 'poll_and_survey')
-      %small
-        = link_to "찬반투표 열기", new_poll_path(project_id: @project)
-        \|
-        = link_to "다항투표 열기", new_survey_path(project_id: @project)
+      %small.pull-right
+        = link_to "찬반투표 시작하기", new_poll_path(project_id: @project), class: 'btn btn-default btn-sm'
+        = link_to "설문 시작하기", new_survey_path(project_id: @project), class: 'btn btn-default btn-sm'
 
     .section
       - models = [polls + surveys].flatten.sort_by(&:created_at).reverse
@@ -16,10 +15,9 @@
 
       - else
         - if @project.present?
-          .panel-body
-            %small.text-muted
-              가장 먼저 투표를 제안해 보세요.
-              %br
-              = link_to "찬반투표 열기", new_poll_path(project_id: @project)
-              \|
-              = link_to "다항투표 열기", new_survey_path(project_id: @project)
+          .alert.alert-info
+            %i.inbox.icon
+            가장 먼저 투표를 제안해 보세요.
+            = link_to "찬반투표 시작하기", new_poll_path(project_id: @project), class: 'alert-link'
+            \|
+            = link_to "설문 시작하기", new_survey_path(project_id: @project), class: 'alert-link'
