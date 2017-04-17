@@ -1,38 +1,48 @@
 = render 'agendas/theme_header', theme_tag: params[:theme_tag]
-- speaker_positions = speaker_positions_of_theme(params[:theme_tag])
-- speakers = Speaker.of_position(speaker_positions)
-- @agendas.each_with_index do |agenda, i|
-  %section.page-block.page-opinions[agenda]{ class: "page-block-#{i%2}"}
-    .container
-      %h2= link_to agenda.name, agenda
-      - agenda.issues.with_theme(params[:theme_tag]).each do |issue|
-        %h3[issue]{ style: 'line-height: 2em'}
-          = issue.title
 
-          - if user_signed_in? and current_user.is_admin?
-            .pull-right.hidden-sm.hidden-xs
-              = form_tag new_or_edit_admin_opinions_path, method: :get, class: 'form-inline', target: '_blank' do
-                .inline.field
-                  = hidden_field_tag :issue_id, issue.id
-                  %select{name: :speaker_id, class: 'form-control'}
-                    - speakers.each do |speaker|
-                      %option{ value: speaker.id }
-                        = speaker.name
-                  %button.btn.btn-default{ type: "submit" } 입력
+%section.page-block{ style: 'background-color: #eee' }
+  .container
+    %ul.nav.nav-pills{ role: 'tablist' }
+      - @agendas.each_with_index do |agenda, i|
+        %li{ class: ('active' if i == 0) }
+          %a{ href: "#agenda_#{i}", role: "tab", data: { toggle: "tab"} }= agenda.name
 
-        - if issue.body.present?
-          .issue-body
-            %p!= simple_format(h(issue.body))
+%section.page-block
+  .container
+    .tab-content
+      - speaker_positions = speaker_positions_of_theme(params[:theme_tag])
+      - speakers = Speaker.of_position(speaker_positions)
+      - @agendas.each_with_index do |agenda, i|
+        .tab-pane{ id: "agenda_#{i}", class: ('active' if i == 0) }
+          %h2= agenda.name
+          - agenda.issues.with_theme(params[:theme_tag]).each do |issue|
+            %h3[issue]{ style: 'line-height: 2em'}
+              = issue.title
 
-        - if issue.has_stance?
-          - speaker_positions.each do |position|
-            - speakers_of_position = speakers.of_position(position)
-            - if issue.has_any_stances?(speakers_of_position)
-              = render 'opinions/stances', position: (position if speaker_positions.count > 1), speakers: speakers_of_position, issue: issue, theme_tag: params[:theme_tag]
+              - if user_signed_in? and current_user.is_admin?
+                .pull-right.hidden-sm.hidden-xs
+                  = form_tag new_or_edit_admin_opinions_path, method: :get, class: 'form-inline', target: '_blank' do
+                    .inline.field
+                      = hidden_field_tag :issue_id, issue.id
+                      %select{name: :speaker_id, class: 'form-control'}
+                        - speakers.each do |speaker|
+                          %option{ value: speaker.id }
+                            = speaker.name
+                      %button.btn.btn-default{ type: "submit" } 입력
 
-        - if issue.opinions.where(speaker: speakers).any?(&:has_content?)
-          .media-list
-            - speakers.shuffle.each do |speaker|
-              - issue.opinions.of_speaker(speaker).each do |opinion|
-                - next unless opinion.has_content?
-                = render 'opinions/line_item', opinion: opinion, theme_tag: params[:theme_tag]
+            - if issue.body.present?
+              .issue-body
+                %p!= simple_format(h(issue.body))
+
+            - if issue.has_stance?
+              - speaker_positions.each do |position|
+                - speakers_of_position = speakers.of_position(position)
+                - if issue.has_any_stances?(speakers_of_position)
+                  = render 'opinions/stances', position: (position if speaker_positions.count > 1), speakers: speakers_of_position, issue: issue, theme_tag: params[:theme_tag]
+
+            - if issue.opinions.where(speaker: speakers).any?(&:has_content?)
+              .panel.panel-default
+                - speakers.shuffle.each do |speaker|
+                  - issue.opinions.of_speaker(speaker).each do |opinion|
+                    - next unless opinion.has_content?
+                    = render 'opinions/line_item', opinion: opinion, theme_tag: params[:theme_tag]
