@@ -5,7 +5,7 @@
     %ul.nav.nav-pills{ role: 'tablist' }
       - @agendas.each_with_index do |agenda, i|
         %li{ class: ('active' if i == 0) }
-          %a{ href: "#agenda_#{i}", role: "tab", data: { toggle: "tab"} }= agenda.name
+          %a{ href: "#agenda_#{i}", role: "tab", data: { toggle: "tab"}, style: "padding: 5px 8px" }= agenda.name
 
 %section.page-block
   .container
