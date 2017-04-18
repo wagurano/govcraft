@@ -1,4 +1,11 @@
 = form_for @event do |f|
+  - if params[:project_id].present?
+    = f.hidden_field :project_id, value: params[:project_id]
+  - else
+    .form-group
+      = f.label :project_id
+      = f.collection_select :project_id, Project.all, :id, :title, {}, { class: 'js-select2 form-control' }
+
   .form-group
     = f.label :image
     = f.file_field :image, class: 'form-control'
@@ -6,7 +13,14 @@
   .form-group
     = f.label :template
     = f.select :template, Event::TEMPLATES, {}, class: 'form-control'
-
+    .help-block
+      템플릿 예시 :
+      %ul
+        - Event::TEMPLATES.each do |template|
+          %li
+            = template
+            - sample_event = Event.where.not(id: @event.try(:id)).where(template: template).first
+            = link_to sample_event.title, sample_event, target: '_blank'
   .form-group
     = f.label :title
     = f.text_field :title, class: 'form-control'
@@ -18,10 +32,12 @@
   .form-group
     = f.label :slug
     = f.text_field :slug, class: 'form-control'
-
+    .help-block
+      입력하지 않아도 됩니다.
   .form-group
     = f.label :css
     ~ f.text_area :css, rows: 10, class: 'form-control'
-
+    .help-block
+      입력하지 않아도 됩니다.
   .form-group
     = f.submit '저장', class: 'btn btn-primary'
