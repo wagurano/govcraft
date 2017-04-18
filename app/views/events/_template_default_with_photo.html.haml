@@ -74,8 +74,7 @@
                   .gov-action-recaptcha
               = f.submit '작성', class: 'btn btn-primary btn-sm btn-block'
 
-      - comments = params[:tag].present? ? event.comments.tagged_with(params[:tag]) : event.comments
-      - comments.order('id DESC').each do |comment|
+      - @comments.each do |comment|
         .col-sm-6.col-md-4.col-lg-3
           .panel.panel-default.panel-floating[comment]
             .panel-body
@@ -96,6 +95,8 @@
                   = render 'reports/button', reportable: comment
               .comment__like{ style: 'margin-top: 14px;' }
                 = render 'likes/button', likable: comment
+    .text-center
+      = paginate @comments, theme: 'twitter-bootstrap-3'
 
 %section.visible-xs
   %nav.navbar.navbar-default.navbar-fixed-bottom{ style: 'min-height: auto;'}
