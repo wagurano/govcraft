@@ -1,7 +1,29 @@
 = render 'agendas/theme_header', theme_tag: params[:theme_tag]
 
+- speaker_positions = speaker_positions_of_theme(params[:theme_tag])
+- speakers = Speaker.of_position(speaker_positions)
+%section.page-block
+  .container
+    - speakers_and_votes_count = speakers.map{|s| { speaker: s, votes_count: s.opinions.sum(:votes_count) }}.sort_by{|h| h[:votes_count]}.reverse
+    - max_votes = speakers_and_votes_count[0][:votes_count]
+    - speakers_and_votes_count.each do |s|
+      - speaker = s[:speaker]
+      - votes_count = s[:votes_count]
+      - agrees_count = speaker.opinions.sum(:agrees_count)
+      - disagrees_count = speaker.opinions.sum(:disagrees_count)
+      %div
+        %h4
+          = link_to speaker.name, speaker
+          .text-muted.pull-right
+            총투표 #{votes_count}건
+        .progress
+          .progress-bar.progress-bar-striped.progress-bar-success{ style: "width:#{agrees_count/max_votes.to_f*100}%" }
+            #{agrees_count}건
+          .progress-bar.progress-bar-striped.progress-bar-danger{ style: "width:#{disagrees_count/max_votes.to_f*100}%" }
+            #{disagrees_count}건
 %section.page-block{ style: 'background-color: #eee' }
   .container
+    %h3 주요 의제
     %ul.nav.nav-pills{ role: 'tablist' }
       - @agendas.each_with_index do |agenda, i|
         %li{ class: ('active' if i == 0) }
@@ -10,8 +32,6 @@
 %section.page-block
   .container
     .tab-content
-      - speaker_positions = speaker_positions_of_theme(params[:theme_tag])
-      - speakers = Speaker.of_position(speaker_positions)
       - @agendas.each_with_index do |agenda, i|
         .tab-pane{ id: "agenda_#{i}", class: ('active' if i == 0) }
           %h2= agenda.name
