@@ -1,25 +1,49 @@
 - speaker = opinion.speaker
 %li.list-group-item.panel-opinion
   .media[opinion]
-    .media-left
-      = link_to speaker_path(speaker) do
-        %img.media-object.speaker-image{style: "background-image: url(#{speaker.image.xs.url});"}
-    .media-body
-      - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
-      %h3.media-heading
+    .hidden-xs
+      .media-left
         = link_to speaker_path(speaker) do
-          = speaker.name
-          %small= speaker.organization
+          %img.media-object.speaker-image{style: "background-image: url(#{speaker.image.xs.url});"}
+      .media-body
+        - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
+        %h3.media-heading
+          = link_to speaker_path(speaker) do
+            = speaker.name
+            %small= speaker.organization
 
-      - if opinion.quote.present?
-        = link_to link_to_opinion do
-          != simple_format h(opinion.quote), style: 'font-size: 1.3em; margin-bottom: 0.4em;'
+        - if opinion.quote.present?
+          = link_to link_to_opinion do
+            != simple_format h(opinion.quote), style: 'font-size: 1.3em; margin-bottom: 0.4em;'
 
-      - if opinion.body.present?
-        - if local_assigns[:show_full]
-          != simple_format h(opinion.body)
-        - else
-          != smart_truncate_html (simple_format opinion.body), length: 40, ellipsis: "... <a href='#{link_to_opinion}'>상세보기</a>"
+        - if opinion.body.present?
+          - if local_assigns[:show_full]
+            != simple_format h(opinion.body)
+          - else
+            != smart_truncate_html (simple_format opinion.body), length: 40, ellipsis: "... <a href='#{link_to_opinion}'>상세보기</a>"
 
-    .media-right.text-right{ style: 'white-space: nowrap;' }
-      = render 'votes/panel', votable: opinion, show_voters: false, reactions_count_link: link_to_opinion
+      .media-right.text-right{ style: 'white-space: nowrap;' }
+        = render 'votes/panel', votable: opinion, show_voters: false, reactions_count_link: link_to_opinion
+
+    .visible-xs
+      .media-left
+        = link_to speaker_path(speaker) do
+          %img.media-object.speaker-image{style: "background-image: url(#{speaker.image.xs.url});"}
+      .media-body
+        - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
+        %h3.media-heading
+          = link_to speaker_path(speaker) do
+            = speaker.name
+            %small= speaker.organization
+        - if opinion.quote.present?
+          = link_to link_to_opinion do
+            != simple_format h(opinion.quote), style: 'font-size: 1.3em; margin-bottom: 0.4em;'
+
+        - if opinion.body.present?
+          - if local_assigns[:show_full]
+            != simple_format h(opinion.body)
+          - else
+            != smart_truncate_html (simple_format opinion.body), length: 40, ellipsis: "... <a href='#{link_to_opinion}'>상세보기</a>"
+
+        .m-t.text-center
+          = render 'votes/panel', votable: opinion, show_voters: false, reactions_count_link: link_to_opinion
