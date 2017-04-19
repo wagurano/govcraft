@@ -22,15 +22,16 @@
             #{agrees_count}건
           .progress-bar.progress-bar-striped.progress-bar-danger{ style: "width:#{disagrees_count/max_votes.to_f*100}%" }
             #{disagrees_count}건
-%section.page-block
+
+%section.page-block{ style:'background-color:#ddd' }
   .container
     %h3 주요 의제
-    %ul.nav.nav-tabs.tabs-material{ role: 'tablist' }
+    .slick{ data: { slick: '{"arrows":true, "infinite":false, "slidesToShow":1, "swipeToSlide":true, "variableWidth":true}' }}
       - @agendas.each_with_index do |agenda, i|
-        %li{ class: ('active' if i == 0) }
-          %a{ href: "#agenda_#{i}", role: "tab", data: { toggle: "tab"}, style: 'padding:0 10px 10px 0;'}
+        %div{ style: 'padding:0 10px 10px 0;' }
+          %a{ href: "#agenda_#{i}", role: "tab", data: { toggle: "tab"}}
             .card{ style: 'margin-bottom:0' }
-              .card-image{ style: "position: relative; width: 100px; height: 100px; background-image: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)), url(#{agenda.image.sm.url}); background-size: cover; background-position: center center; text-align:center; color: white;" }
+              .card-image{ style: "position: relative; width: 100px; height: 100px; background-image: linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)), url(#{agenda.image.sm.url}); background-size: cover; background-position: center center; text-align:center; color: white;" }
                 %h5{ style: 'position:absolute; left:0; right:0; bottom:0; '}= agenda.name
 
 %section.page-block

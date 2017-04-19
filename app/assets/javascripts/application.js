@@ -13,6 +13,7 @@
 //= require jssocials
 //= require chartkick
 //= require select2
+//= require jquery.slick
 //= require kakao
 //= require mobile-detect
 //= require magnific-popup
@@ -50,6 +51,8 @@ $(document).imagesLoaded( { }, function() {
 Kakao.init('6a30dead1bff1ef43b7e537f49d2f655');
 
 $(function(){
+  $(".slick").slick();
+
   $('.share-box').each(function(i, elm) {
     var $elm = $(elm);
     $elm.jsSocials({
