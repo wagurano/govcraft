@@ -7,14 +7,14 @@
           %img.media-object.speaker-image{style: "background-image: url(#{speaker.image.xs.url});"}
       .media-body
         - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
-        %h3.media-heading
+        %h4.media-heading
           = link_to speaker_path(speaker) do
             = speaker.name
             %small= speaker.organization
 
         - if opinion.quote.present?
           = link_to link_to_opinion do
-            != simple_format h(opinion.quote), style: 'font-size: 1.3em; margin-bottom: 0.4em;'
+            != simple_format h(opinion.quote), style: 'font-size: 1.5em; font-weight: 100; margin: .5em 0 .4em;'
 
         - if opinion.body.present?
           - if local_assigns[:show_full]
@@ -31,13 +31,13 @@
           %img.media-object.speaker-image{style: "background-image: url(#{speaker.image.xs.url});"}
       .media-body
         - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
-        %h3.media-heading
+        %h4.media-heading
           = link_to speaker_path(speaker) do
             = speaker.name
             %small= speaker.organization
         - if opinion.quote.present?
           = link_to link_to_opinion do
-            != simple_format h(opinion.quote), style: 'font-size: 1.3em; margin-bottom: 0.4em;'
+            != simple_format h(opinion.quote), style: 'font-size: 1.5em; font-weight: 100; margin: .5em 0 .4em;'
 
         - if opinion.body.present?
           - if local_assigns[:show_full]
