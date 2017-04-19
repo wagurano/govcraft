@@ -2,7 +2,7 @@
 
 - speaker_positions = speaker_positions_of_theme(params[:theme_tag])
 - speakers = Speaker.of_position(speaker_positions)
-%section.page-block
+%section.page-block{ style: 'background-color: #eee' }
   .container
     - speakers_and_votes_count = speakers.map{|s| { speaker: s, votes_count: s.opinions.sum(:votes_count) }}.sort_by{|h| h[:votes_count]}.reverse
     - max_votes = speakers_and_votes_count[0][:votes_count]
@@ -21,17 +21,20 @@
             #{agrees_count}건
           .progress-bar.progress-bar-striped.progress-bar-danger{ style: "width:#{disagrees_count/max_votes.to_f*100}%" }
             #{disagrees_count}건
-%section.page-block{ style: 'background-color: #eee' }
+%section.page-block
   .container
     %h3 주요 의제
-    %ul.nav.nav-pills{ role: 'tablist' }
+    %ul.nav.nav-tabs.tabs-material{ role: 'tablist' }
       - @agendas.each_with_index do |agenda, i|
         %li{ class: ('active' if i == 0) }
-          %a{ href: "#agenda_#{i}", role: "tab", data: { toggle: "tab"}, style: "padding: 5px 8px" }= agenda.name
+          %a{ href: "#agenda_#{i}", role: "tab", data: { toggle: "tab"}, style: 'padding:0 10px 10px 0;'}
+            .card{ style: 'margin-bottom:0' }
+              .card-image{ style: "position: relative; width: 100px; height: 100px; background-image: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)), url(#{agenda.image.sm.url}); background-size: cover; background-position: center center; text-align:center; color: white;" }
+                %h5{ style: 'position:absolute; left:0; right:0; bottom:0; '}= agenda.name
 
 %section.page-block
   .container
-    .tab-content
+    .tab-content{ style: 'border:0' }
       - @agendas.each_with_index do |agenda, i|
         .tab-pane{ id: "agenda_#{i}", class: ('active' if i == 0) }
           %h2= agenda.name
@@ -62,7 +65,8 @@
 
             - if issue.opinions.where(speaker: speakers).any?(&:has_content?)
               .panel.panel-default
-                - speakers.shuffle.each do |speaker|
-                  - issue.opinions.of_speaker(speaker).each do |opinion|
-                    - next unless opinion.has_content?
-                    = render 'opinions/line_item', opinion: opinion, theme_tag: params[:theme_tag]
+                .list-group
+                  - speakers.shuffle.each do |speaker|
+                    - issue.opinions.of_speaker(speaker).each do |opinion|
+                      - next unless opinion.has_content?
+                      = render 'opinions/line_item', opinion: opinion, theme_tag: params[:theme_tag]

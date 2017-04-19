@@ -1,15 +1,15 @@
-.column
-  .ui.card.fluid
-    .image{ style: "height: 140px; background-image: url(#{memorial.image_url(:md)}); background-size: cover; background-position: center center;" }
-      %a.ui.black.ribbon.label= Memorial.model_name.human
-    .content
+.col-md-3.col-sm-4.col-xs-12
+  .card
+    .card-image{ style: "height: 140px; background-image: url(#{memorial.image_url(:md)}); background-size: cover; background-position: center center;" }
+      %span.label.label-warning.label-ribbon-left= Memorial.model_name.human
+    .card-content
       = link_to memorial.title, memorial, class: 'header'
-      .meta
+      .card-meta
         %span
           - if memorial.url.present?
             = link_to memorial.url, memorial.url, target: '_blank'
           - else
             %strong= number_with_delimiter memorial.comments_count
             개의 추모글이 모였습니다
-      .description
-      .extra
+      .card-description
+      .card-extra

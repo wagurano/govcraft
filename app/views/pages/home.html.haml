@@ -46,14 +46,12 @@
 
 %section.page-block
   .container
-    .column
-      %h3= Project.model_name.human
-      .ui.four.column.grid.doubling.stackable
-        = render @projects
+    %h3= Project.model_name.human
+    .row.masonry-container
+      = render @projects
 
 %section.page-block
   .container
-    .column
-      %h3= Memorial.model_name.human
-      .ui.four.column.grid.doubling.stackable
-        = render @memorials
+    %h3= Memorial.model_name.human
+    .row.masonry-container
+      = render @memorials

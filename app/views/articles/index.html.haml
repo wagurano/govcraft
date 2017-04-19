@@ -26,7 +26,7 @@
 
 %section.page-block
   .container
-    %ul.nav.nav-tabs
+    %ul.nav.nav-tabs.tabs-material.m-b
       %li{ class: ('active' if params[:sort] == 'hot') }
         = link_to articles_path(sort: :hot, tag: params[:tag]) do
           인기순
@@ -34,8 +34,10 @@
         = link_to articles_path(sort: :recent, tag: params[:tag]) do
           최신순
 
-    .ui.divided.items
-      = render @articles
+    %section
+      .panel.panel-default
+        .list-group
+          = render @articles
 
     .text-center
       = paginate @articles, theme: 'twitter-bootstrap-3'

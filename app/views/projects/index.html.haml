@@ -6,5 +6,5 @@
         %small.pull-right
           = link_to '프로젝트 만들기', new_project_path, class: 'btn btn-default' if can? :create, Project
 
-    .ui.four.column.grid.doubling.stackable
+    .row.masonry-container
       = render @projects
