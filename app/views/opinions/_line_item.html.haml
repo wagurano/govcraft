@@ -1,5 +1,5 @@
 - speaker = opinion.speaker
-.list-group-item.panel-opinion
+.list-group-item.panel-opinion{ style: 'padding: 15px;' }
   .media[opinion]
     .hidden-xs
       .media-left
@@ -8,13 +8,14 @@
       .media-body
         - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
         %h4.media-heading
+          - if opinion.quote.present?
+            = link_to link_to_opinion do
+              != simple_format h(opinion.quote), style: 'font-size: 1.2em; font-weight: 200;'
+
+        %p
           = link_to speaker_path(speaker) do
             = speaker.name
-            %small= speaker.organization
-
-        - if opinion.quote.present?
-          = link_to link_to_opinion do
-            != simple_format h(opinion.quote), style: 'font-size: 1.5em; font-weight: 100; margin: .5em 0 .4em;'
+            %span.text-muted= speaker.organization
 
         - if opinion.body.present?
           - if local_assigns[:show_full]

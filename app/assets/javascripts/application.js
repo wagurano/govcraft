@@ -231,6 +231,18 @@ $(function(){
 
     $elm.webuiPopover(options);
   });
+
+  // bootstrap tab & location hash
+  if (location.hash !== '' && location.hash.startsWith('#tab_')) {
+    var tab = location.hash.replace('tab_','');
+    $(".tab-pane.active").removeClass('active');
+    $(".tab-pane" + tab).addClass('active');
+  }
+
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+    window.location.hash = 'tab_'+  e.target.hash.substr(1) ;
+    return false;
+  });
 });
 
 $(document).ajaxError(function (e, xhr, settings) {

@@ -23,15 +23,19 @@
           .progress-bar.progress-bar-striped.progress-bar-danger{ style: "width:#{disagrees_count/max_votes.to_f*100}%" }
             #{disagrees_count}건
 
-%section.page-block{ style:'background-color:#ddd' }
+%section.page-block
   .container
-    %h3 주요 의제
-    .slick{ data: { slick: '{"arrows":true, "infinite":false, "slidesToShow":1, "swipeToSlide":true, "variableWidth":true}' }}
+    .page-header
+      %h2
+        주요 의제
+        %span.text-danger #{@agendas.count}
+        개
+    .nav-tabs{ style: 'border:0' }
       - @agendas.each_with_index do |agenda, i|
-        %div{ style: 'padding:0 10px 10px 0;' }
-          %a{ href: "#agenda_#{i}", role: "tab", data: { toggle: "tab"}}
+        %div{ style: 'padding:0 10px 10px 0; display: inline-block;' }
+          %a{ href: "#agenda_#{i}", role: "tab", data: { toggle: "tab" }}
             .card{ style: 'margin-bottom:0' }
-              .card-image{ style: "position: relative; width: 100px; height: 100px; background-image: linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)), url(#{agenda.image.sm.url}); background-size: cover; background-position: center center; text-align:center; color: white;" }
+              .card-image{ style: "position: relative; width: 100px; height: 100px; background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.5)), url(#{agenda.image.sm.url}); background-size: cover; background-position: center center; text-align:center; color: white;" }
                 %h5{ style: 'position:absolute; left:0; right:0; bottom:0; '}= agenda.name
 
 %section.page-block
@@ -39,10 +43,10 @@
     .tab-content{ style: 'border:0; padding:0' }
       - @agendas.each_with_index do |agenda, i|
         .tab-pane{ id: "agenda_#{i}", class: ('active' if i == 0) }
-          %h3= agenda.name
+          %h2= agenda.name
           - agenda.issues.with_theme(params[:theme_tag]).each do |issue|
-            .page-block
-              %h4[issue]
+            %section{ style: 'margin-bottom: 3em;' }
+              %h3[issue]
                 = issue.title
 
                 - if user_signed_in? and current_user.is_admin?
