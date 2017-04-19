@@ -1,23 +1,25 @@
-= form_for [:admin, @opinion], html: { class: 'ui form' } do |f|
-  .field
-    = f.label :issue_id
-    = f.collection_select :issue_id, Issue.all, :id, :title, {}, { class: 'ui selection dropdown' }
+.panel.panel-default
+  .panel-body
+    = form_for [:admin, @opinion] do |f|
+      .form-group
+        = f.label :issue_id
+        = f.collection_select :issue_id, Issue.all, :id, :title, {}, { class: 'form-control' }
 
-  .field
-    = f.label :speaker_id
-    = f.collection_select :speaker_id, Speaker.all, :id, :details, {}, { class: 'js-select2' }
+      .form-group
+        = f.label :speaker_id
+        = f.collection_select :speaker_id, Speaker.all, :id, :details, {}, { class: 'form-control js-select2' }
 
-  .field
-    = f.label :quote
-    ~ f.text_area :quote
+      .form-group
+        = f.label :quote
+        ~ f.text_area :quote, rows: 10, class: 'form-control'
 
-  - if @opinion.issue.blank? or @opinion.issue.has_stance?
-    .field
-      = f.label :stance
-      = f.select :stance, Opinion.stance.options, { include_blank: true }, class: 'ui selection dropdown'
+      - if @opinion.issue.blank? or @opinion.issue.has_stance?
+        .form-group
+          = f.label :stance
+          = f.select :stance, Opinion.stance.options, { include_blank: true }, class: 'form-control'
 
-  .field
-    = f.label :body
-    ~ f.text_area :body
+      .form-group
+        = f.label :body
+        ~ f.text_area :body, rows: 10, class: 'form-control'
 
-  = f.submit '저장', class: 'ui button'
+      = f.submit '저장', class: 'ui button'

@@ -27,16 +27,14 @@
       .container
         .unobtrusive-flash-container
 
-    = render 'application/sidebar'
-    .pusher
-      = render 'application/header'
+    = render 'application/header'
 
-      .ui.grid.container
-        .row
-          .four.wide.column
-            = render 'admin/menu'
-          .twelve.wide.column
-            = yield
+    .container
+      .row
+        .col-sm-3
+          = render 'admin/menu'
+        .col-sm-9
+          = yield
 
     %script{:src => "https://www.gstatic.com/charts/loader.js"}
     = javascript_include_tag 'application'
