@@ -4,13 +4,14 @@
 - speakers = Speaker.of_position(speaker_positions)
 %section.page-block{ style: 'background-color: #eee' }
   .container
-    - speakers_and_votes_count = speakers.map{|s| { speaker: s, votes_count: s.opinions.sum(:votes_count) }}.sort_by{|h| h[:votes_count]}.reverse
+    - speakers_and_votes_count = speakers.map{|s| { speaker: s, votes_count: s.opinions.of_theme(params[:theme_tag]).sum(:votes_count) }}.sort_by{|h| h[:votes_count]}.reverse
     - max_votes = speakers_and_votes_count[0][:votes_count]
     - speakers_and_votes_count.each do |s|
       - speaker = s[:speaker]
       - votes_count = s[:votes_count]
-      - agrees_count = speaker.opinions.sum(:agrees_count)
-      - disagrees_count = speaker.opinions.sum(:disagrees_count)
+      - opinions = speaker.opinions.of_theme(params[:theme_tag])
+      - agrees_count = opinions.sum(:agrees_count)
+      - disagrees_count = opinions.sum(:disagrees_count)
       %div
         %h4
           = link_to speaker.name, speaker
