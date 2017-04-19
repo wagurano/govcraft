@@ -26,6 +26,10 @@ class Comment < ApplicationRecord
     user.present? ? user.nickname : commenter_name
   end
 
+  def user_email
+    user.present? ? user.email : commenter_email
+  end
+
   private
 
   def save_gps

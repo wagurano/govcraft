@@ -72,7 +72,9 @@ Rails.application.routes.draw do
   resources :players
   resources :thumbs
 
-  resources :events
+  resources :events do
+    get 'data', on: :member
+  end
   resources :articles do
     post :create_by_slack, on: :collection
   end

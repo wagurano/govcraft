@@ -28,6 +28,7 @@ class Ability
         ], :user_id => user.id
 
       can :data, [Petition], user_id: user.id
+      can :data, [Event], user_id: user.id
 
       # 모든 당원은 위키를 수정하고 원복할 수 있다
       can [:update], Wiki
