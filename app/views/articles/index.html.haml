@@ -14,15 +14,13 @@
       - tag_counts.each do |tag|
         - if tag.count > 5
           - if params[:tag] == tag.name
-            %span{ style: 'display: inline-block; background-color: #4a5dd0; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; color: #fff; margin-bottom: 7px;' }
-              = link_to tag.name, articles_path(tag: tag.name), style: 'color: #fff'
-              %small
-                = tag.count
+            = link_to articles_path(tag: tag.name), class: 'btn btn-primary' do
+              = tag.name
+              %small= tag.count
           - else
-            %span{ style: 'display: inline-block; padding: 7px 14px; border: 1px solid #4a5dd0; border-radius: 28px; margin-bottom: 7px;' }
-              = link_to tag.name, articles_path(tag: tag.name)
-              %small.text-muted
-                = tag.count
+            = link_to articles_path(tag: tag.name), class: 'btn btn-default btn-inverted' do
+              = tag.name
+              %small= tag.count
 
 %section.page-block
   .container
