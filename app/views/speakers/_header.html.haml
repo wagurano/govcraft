@@ -1,11 +1,14 @@
-%section.cover-section{style: "background-image: linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .5))"}
+%section.cover-section
   .container
-    - if local_assigns[:theme_tag].present?
-      %h3
-        = link_to theme_agendas_path(theme_tag: theme_tag), style: 'color: white' do
-          = human_theme_name(theme_tag)
-    %h1.cover-section__title
-      = link_to speaker_path(speaker) do
-        = image_tag speaker.image.xs.url
-        = speaker.name
-      %small{ style: 'color: #fff' }= speaker.organization
+    .media
+      .media-left
+        = image_tag speaker.image.xs.url, class: 'media-object'
+      .media-body
+        %h1.media-heading.cover-section__title
+          = link_to speaker_path(speaker) do
+            = speaker.name
+          %small{ style: 'color: #fff' }
+            %span.speaker__organization= speaker.organization
+        %p
+          - speaker.positions.each do |position|
+            %span.label.label-default.speaker__positions= position

@@ -3,28 +3,15 @@
 - if @speaker.opinions.any?
   %section.page-block
     .container
-      %h2.header
-        최근 의견
+      .page-header
+        %h2
+          최근 의견
       - @speaker.opinions.recent.limit(2).each do |opinion|
-        %h3
-          %small
-            %span.label.label-danger= Agenda.model_name.human
-            = link_to agenda_path(opinion.issue.agenda, theme_tag: params[:theme_tag]) do
-              = opinion.issue.agenda.name
-          %br
-          = opinion.issue.title
-        - if opinion.issue.body.present?
-          .issue-body
-            %p!= simple_format(h(opinion.issue.body))
-        = render opinion
+        %section.m-b
+          %h3= opinion.issue.title
+          - if opinion.issue.body.present?
+            .issue-body
+              %p!= simple_format(h(opinion.issue.body))
+          = render opinion
 
-%section.page-block
-  .container
-    %h2.header
-      = Agenda.model_name.human
-    - if @agendas.any?
-      .row
-        = render @agendas, speaker: @speaker
-    - else
-      .well
-        아직 관련 #{Agenda.model_name.human} 정보가 없습니다.
+= render 'agendas/tabs', agendas: @agendas, speakers: Speaker.where(id: @speaker), speaker_positions: ['대선주자']

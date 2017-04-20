@@ -1,5 +1,5 @@
 .agenda-container
-  %section.cover-section{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(@agenda.image_url(:lg))});"}
+  %section.cover-section{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(@agenda.image_url(:lg))}); background-position: center center;"}
     .container
       %h1
         %small
@@ -14,9 +14,10 @@
   - %w(대선주자 국회의원).each do |position|
     %section.page-block.page-opinions
       .container
-        %h2.ui.dividing.header
-          #{position} #{Opinion.model_name.human}
-          .sub.header #{position} #{@agenda.speakers.of_position(position).count}명에게 #{Opinion.model_name.human}를 받았습니다.
+        .page-header
+          %h2
+            #{position} #{Opinion.model_name.human}
+            %small #{position} #{@agenda.speakers.of_position(position).count}명에게 #{Opinion.model_name.human}를 받았습니다.
         - @agenda.issues.each do |issue|
           %h3= issue.title
 
@@ -39,22 +40,24 @@
     %section.page-block.page-opinions{ class: "page-block-#{i%2}"}
       .container
         - if theme_tag.present?
-          %h2.ui.dividing.header
-            = link_to human_theme_name(theme_tag), theme_agendas_path(theme_tag: theme_tag)
-            %br.visible-xs-block
-            %small= human_theme_body(theme_tag)
+          .alert.alert-warning
+            %h3
+              = link_to human_theme_name(theme_tag), theme_agendas_path(theme_tag: theme_tag), class: 'alert-link'
+              %br.visible-xs-block
+              %small= human_theme_body(theme_tag)
         - issues.each do |issue|
-          %h3= issue.title
+          %section{ style: 'margin-bottom: 3em;' }
+            %h3= issue.title
 
-          - if issue.body.present?
-            .issue-body
-              %p!= simple_format(h(issue.body))
+            - if issue.body.present?
+              .issue-body
+                %p!= simple_format(h(issue.body))
 
-          - if issue.has_any_stances?
-            = render 'opinions/stances', speakers: issue.speakers, issue: issue
-          .media-list
-            - if issue.opinions.where(speaker: Speaker.of_position('대선주자')).any?
-              - Speaker.of_position('대선주자').shuffle.each do |speaker|
-                - issue.opinions.of_speaker(speaker).each do |opinion|
-                  - next unless opinion.has_content?
-                  = render 'opinions/line_item', opinion: opinion, theme_tag: params[:tag]
+            - if issue.has_any_stances?
+              = render 'opinions/stances', speakers: issue.speakers, issue: issue
+            .media-list
+              - if issue.opinions.where(speaker: Speaker.of_position('대선주자')).any?
+                - Speaker.of_position('대선주자').shuffle.each do |speaker|
+                  - issue.opinions.of_speaker(speaker).each do |opinion|
+                    - next unless opinion.has_content?
+                    = render 'opinions/line_item', opinion: opinion, theme_tag: params[:tag]

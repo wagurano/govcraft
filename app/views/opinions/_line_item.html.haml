@@ -21,7 +21,7 @@
           - if local_assigns[:show_full]
             != simple_format h(opinion.body)
           - else
-            != smart_truncate_html (simple_format opinion.body), length: 40, ellipsis: "... <a href='#{link_to_opinion}'>상세보기</a>"
+            != smart_truncate_html (simple_format opinion.body), length: 40, ellipsis: "... <a href='#{link_to_opinion}'>이전 발언 모두 보기</a>"
 
       .media-right.text-right{ style: 'white-space: nowrap;' }
         = render 'votes/panel', votable: opinion, show_voters: false, reactions_count_link: link_to_opinion
@@ -44,7 +44,7 @@
           - if local_assigns[:show_full]
             != simple_format h(opinion.body)
           - else
-            != smart_truncate_html (simple_format opinion.body), length: 40, ellipsis: "... <a href='#{link_to_opinion}'>상세보기</a>"
+            != smart_truncate_html (simple_format opinion.body), length: 40, ellipsis: "... <a href='#{link_to_opinion}'>이전 발언 모두 보기</a>"
 
         .m-t.text-center
           = render 'votes/panel', votable: opinion, show_voters: false, reactions_count_link: link_to_opinion
