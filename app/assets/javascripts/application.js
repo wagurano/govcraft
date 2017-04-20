@@ -241,6 +241,7 @@ $(function(){
 
   $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
     window.location.hash = 'tab_'+  e.target.hash.substr(1) ;
+    $('html, body').animate({scrollTop: ($('.tab-content').first().offset().top - 40)});
     return false;
   });
 });
