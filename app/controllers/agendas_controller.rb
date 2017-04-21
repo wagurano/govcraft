@@ -11,12 +11,6 @@ class AgendasController < ApplicationController
       redirect_to theme_agendas_path(theme_slug: params[:theme_slug], anchor: view_context.dom_id(@agenda))
       return
     end
-
-    speaker = Speaker.find_by(id: params[:speaker_id])
-    if speaker.present?
-      redirect_to agenda_speaker_path(speaker, agenda_id: @agenda)
-      return
-    end
   end
 
   def widget
