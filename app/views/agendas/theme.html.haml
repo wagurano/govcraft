@@ -4,6 +4,7 @@
 - speakers = Speaker.of_position(speaker_positions)
 %section.page-block{ style: 'background-color: #eee' }
   .container
+    %h3.title 주요 의제에 대한 시민반응(실시간 반영)
     - speakers_and_votes_count = speakers.map{|s| { speaker: s, votes_count: s.opinions.of_theme(params[:theme_tag]).sum(:votes_count) }}.sort_by{|h| h[:votes_count]}.reverse
     - max_votes = speakers_and_votes_count[0][:votes_count]
     - speakers_and_votes_count.each do |s|
@@ -16,7 +17,7 @@
         %h4
           = link_to speaker.name, speaker
           .text-muted.pull-right
-            총투표 #{votes_count}건
+            총 #{votes_count}건
         .progress
           .progress-bar.progress-bar-striped.progress-bar-success{ style: "width:#{agrees_count/max_votes.to_f*100}%" }
             #{agrees_count}건
