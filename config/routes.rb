@@ -117,10 +117,11 @@ Rails.application.routes.draw do
       get :new_email
       post :send_email
       get :widget
+      get '/themes/widget/:theme_slug', action: :theme_single_widget, as: :theme_single_widget
     end
     collection do
-      get '/themes/:theme_tag', action: :theme, as: :theme
-      get '/themes/widget/:theme_tag', action: :theme_widget, as: :theme_widget
+      get '/themes/:theme_slug', action: :theme, as: :theme
+      get '/themes/widget/:theme_slug', action: :theme_widget, as: :theme_widget
     end
   end
   resources :issues, only: [:show]
@@ -129,9 +130,7 @@ Rails.application.routes.draw do
       get :vote_widget
     end
   end
-  resources :speakers do
-    get :agenda, on: :member
-  end
+  resources :speakers
 
   namespace :admin do
     root 'base#home', as: :home
@@ -145,6 +144,12 @@ Rails.application.routes.draw do
       end
     end
     resources :agenda_documents
+    resources :agenda_themes do
+      member do
+        post :add_agenda
+        delete :remove_agenda
+      end
+    end
     resources :roles do
       collection do
         post :add

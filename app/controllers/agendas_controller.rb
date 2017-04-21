@@ -7,8 +7,8 @@ class AgendasController < ApplicationController
   end
 
   def show
-    if params[:theme_tag].present?
-      redirect_to theme_agendas_path(theme_tag: params[:theme_tag], anchor: view_context.dom_id(@agenda))
+    if params[:theme_slug].present?
+      redirect_to theme_agendas_path(theme_slug: params[:theme_slug], anchor: view_context.dom_id(@agenda))
       return
     end
 
@@ -44,7 +44,8 @@ class AgendasController < ApplicationController
   end
 
   def theme
-    @agendas = Agenda.tagged_with(params[:theme_tag])
+    @agenda_theme = AgendaTheme.find_by(slug: params[:theme_slug])
+    @agendas = @agenda_theme.agendas
   end
 
   def theme_widget
@@ -52,11 +53,16 @@ class AgendasController < ApplicationController
     render layout: 'strip'
   end
 
+  def theme_single_widget
+    @agenda_theme = AgendaTheme.find_by(slug: params[:theme_slug])
+    render layout: 'strip'
+  end
+
   private
 
   def reset_meta_tags
     prepare_meta_tags({
-      title: '2017대선오디션 달라진 대한민국을 이끌 적임자는 누구? 시민이 직접 검증하고 선택해요!',
+      title: '2017대선오디션 새로운 대한민국을 이끌 적임자는 누구? 시민이 직접 검증하고 선택해요!',
       description: '촛불대선, 새로운 대한민국을 만들기 위해 바꾸어야 할 과제들이 많지요. 대선 후보자들이 과거와 현재 어떤 입장을 갖고 있는지 제대로 뜯어보고 살펴보고, 찬/반을 선택해주세요. (* 이슈와 후보자별 검증 내용은 계속 업데이트 됩니다)',
       url: request.original_url,
       image: view_context.image_url('events/2017-president.jpg')

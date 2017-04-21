@@ -13,8 +13,33 @@ class Opinion < ApplicationRecord
   scope :of_issue, ->(issue) { where(issue: issue) }
   scope :of_quote, ->(quote) { where(quote: quote) }
   scope :of_speaker, ->(speaker) { where(speaker: speaker) }
-  scope :of_theme, ->(theme_tag) { where(issue: Issue.tagged_with(theme_tag)) }
+  scope :of_theme, ->(theme) { where(issue_id: Issue.where(agenda_theme_id: theme.id)) }
+
   def has_content?
     quote.present? or body.present?
+  end
+
+  def stance_text_by_theme
+    Opinion.stance_text_by_theme self.issue.agenda_theme, self.stance
+  end
+
+  def stance_long_text_by_theme
+    Opinion.stance_long_text_by_theme self.issue.agenda_theme, self.stance
+  end
+
+  def self.available_stance_values_by_theme agenda_theme
+    if agenda_theme.try(:slug) == 'votefuture'
+      Opinion.stance.values.reject { |v| v == 'disagree'}
+    else
+      Opinion.stance.values
+    end
+  end
+
+  def self.stance_text_by_theme agenda_theme, stance
+    I18n.t("enumerize.#{agenda_theme.try(:slug) || 'default'}.stance.#{stance}", default: I18n.t("enumerize.defaults.stance.#{stance}"))
+  end
+
+  def self.stance_long_text_by_theme agenda_theme, stance
+    I18n.t("enumerize.#{agenda_theme.try(:slug) || 'default'}.stance.long.#{stance}", default: I18n.t("enumerize.defaults.stance.long.#{stance}"))
   end
 end

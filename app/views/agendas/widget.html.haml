@@ -4,18 +4,20 @@
     .container
       %h2.ui.dividing.header
         #{position} #{Opinion.model_name.human}
-        .sub.header #{position} #{@agenda.speakers.of_position(position).count}명에게 #{Opinion.model_name.human}를 받았습니다.
+        %br
+        %small #{position} #{@agenda.speakers.of_position(position).count}명에게 #{Opinion.model_name.human}을 받았습니다.
       - @agenda.issues.each do |issue|
-        %h4= issue.title
-        .opinion-speakers-list
-          .row
-            - ["찬성", "반대", nil].each do |quote|
-              - speakers = issue.categorized_speakers(position, quote)
-              .col-sm-4{ class: ('hidden-xs' if speakers.empty?) }
-                .position
-                  = quote || "#{Opinion.model_name.human}없음"
-                  %span{ style: 'font-weight: normal' } #{speakers.count}명
+        %section{ style: 'margin-top: 48px' }
+          %h4= issue.title
+          .opinion-speakers-list
+            .row
+              - ["찬성", "반대", nil].each do |quote|
+                - speakers = issue.categorized_speakers(position, quote)
+                .col-sm-4{ class: ('hidden-xs' if speakers.empty?) }
+                  .position
+                    = quote || "#{Opinion.model_name.human}없음"
+                    %span{ style: 'font-weight: normal' } #{speakers.count}명
 
-                = render 'issues/speakers', speakers: speakers, issue: issue, quote: quote, max_count: 4, widget: true
+                  = render 'issues/speakers', speakers: speakers, issue: issue, quote: quote, max_count: 4, widget: true
 = content_for :script do
   %script(src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.11/iframeResizer.contentWindow.min.js" defer)

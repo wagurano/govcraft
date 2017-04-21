@@ -8,22 +8,13 @@
       .media-body
         .row
           .col-sm-9.col-xs-12
-            - link_to_opinion = opinion_path(opinion, theme_tag: local_assigns[:theme_tag])
+            - link_to_opinion = opinion_path(opinion)
             - lead = capture do
               - if opinion.quote.present?
                 != simple_format h(opinion.quote), class: 'lead'
               - if opinion.stance.present?
                 %p.lead
-                  - case opinion.stance
-                  - when 'disagree'
-                    %i.fa.fa-ban
-                  - when 'agree'
-                    %i.fa.fa-thumbs-o-up
-                  - when 'unsuer'
-                    %i.fa.fa-question-circle-o
-                  - when 'partially'
-                    %i.fa.fa-hand-lizard-o
-                  = opinion.stance_text
+                  = opinion.stance_long_text_by_theme
 
             - if lead.try(:strip).present?
               = link_to lead, link_to_opinion

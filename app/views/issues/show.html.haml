@@ -3,6 +3,9 @@
 
 %section.page-block.page-opinions
   .container
+    - if @issue.agenda_theme.present?
+      = render 'agenda_themes/line_item', agenda_theme: @issue.agenda_theme
+
     %h2= @issue.title
     - if @issue.body.present?
       .issue-body
@@ -36,4 +39,4 @@
           - Speaker.of_position('대선주자').shuffle.each do |speaker|
             - @issue.opinions.of_speaker(speaker).each do |opinion|
               - next unless opinion.has_content?
-              = render 'opinions/line_item', opinion: opinion, theme_tag: params[:tag]
+              = render 'opinions/line_item', opinion: opinion

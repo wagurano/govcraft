@@ -3,17 +3,21 @@
     %h4= position
   .opinion-speakers-list
     .row
-      - Opinion.stance.values.each do |stance|
+      - Opinion.available_stance_values_by_theme(issue.agenda_theme).each do |stance|
         - if stance == 'unsure'
-          - opinions = issue.opinions.any_of(Opinion.where(stance: nil), Opinion.where(stance: 'unsure'))
+          - if agenda_theme.try(:slug) == 'votefuture'
+            - opinions = issue.opinions.any_of(Opinion.where(stance: nil), Opinion.where(stance: 'unsure'), Opinion.where(stance: 'disagree'))
+          - else
+            - opinions = issue.opinions.any_of(Opinion.where(stance: nil), Opinion.where(stance: 'unsure'))
         - else
           - opinions = issue.opinions.where(stance: stance)
         - stance_speakers = Speaker.where(id: opinions.pluck(:speaker_id)).distinct
-        .col-sm-4{ class: ('hidden-xs' if stance_speakers.empty?) }
+        - available_stances = Opinion.available_stance_values_by_theme(issue.agenda_theme)
+        %div{ class: "#{('hidden-xs' if stance_speakers.empty?)} #{(issue.agenda_theme.try(:slug) == 'votefuture' ? "col-sm-4" : "col-sm-3")}" }
           .position
-            = t("enumerize.#{ local_assigns[:theme_tag] || 'default' }.stance.#{stance}", default: t("enumerize.defaults.stance.#{stance}"))
+            = Opinion.stance_text_by_theme(issue.agenda_theme, stance)
             %span{ style: 'font-weight: normal' } #{stance_speakers.count}명
 
           .answer-speakers
             .ui.list.grid
-          = render 'issues/speakers', speakers: stance_speakers, issue: issue, quote: stance, max_count: 15, link_to_opinon: true, theme_tag: local_assigns[:theme_tag]
+          = render 'issues/speakers', speakers: stance_speakers, issue: issue, quote: stance, max_count: 15, link_to_opinon: true

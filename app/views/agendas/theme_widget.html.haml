@@ -1,4 +1,4 @@
-- speaker_positions = speaker_positions_of_theme(params[:theme_tag])
+- speaker_positions = speaker_positions_of_theme(@agenda_theme)
 - speakers = Speaker.of_position(speaker_positions)
 - @agendas.each_with_index do |agenda, i|
   %base(target="_blank")
@@ -6,26 +6,8 @@
     .container{ style: 'width: initial; padding: 24px;'}
       %h2{ style: 'border-bottom: 1px solid #c0c0c2;' }
         = link_to agenda.name, agenda, style: 'color: #333333'
-      - agenda.issues.with_theme(params[:theme_tag]).each do |issue|
-        %h3[issue]
-          = issue.title
-
-        - if issue.body.present?
-          .issue-body
-            %p!= simple_format(h(issue.body))
-
-        - if issue.has_stance?
-          - speaker_positions.each do |position|
-            - speakers_of_position = speakers.of_position(position)
-            - if issue.has_any_stances?(speakers_of_position)
-              = render 'opinions/stances', position: (position if speaker_positions.count > 1), speakers: speakers_of_position, issue: issue, theme_tag: params[:theme_tag]
-
-        - if issue.opinions.where(speaker: speakers).any?(&:has_content?)
-          .media-list
-            - speakers.shuffle.each do |speaker|
-              - issue.opinions.of_speaker(speaker).each do |opinion|
-                - next unless opinion.has_content?
-                = render 'opinions/line_item', opinion: opinion, theme_tag: params[:theme_tag]
+      - agenda.issues.with_theme(@agenda_theme).each do |issue|
+        = render 'agendas/theme_issue', issue: issue, speakers: speakers
 
 = content_for :script do
   %script(src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.11/iframeResizer.contentWindow.min.js" defer)

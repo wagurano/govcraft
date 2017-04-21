@@ -2,22 +2,29 @@
 - issue = @opinion.issue
 - speaker = @opinion.speaker
 
-= render 'speakers/header', speaker: speaker, theme_tag: params[:theme_tag]
+= render 'speakers/header', speaker: speaker
 
 %section.page-block
   .container
+    - if issue.agenda_theme.present?
+      = render 'agenda_themes/line_item', agenda_theme: issue.agenda_theme
+
     .page-header
       %h2
         = link_to issue.agenda.name, issue.agenda
     %h3
-      = link_to issue.title, issue_path(issue, theme_tag: params[:theme_tag])
+      = link_to issue.title, issue
       %small
         = link_to new_or_edit_admin_opinions_path(issue_id: issue.id, speaker_id: speaker.id), class: 'text-danger' do
           #{Opinion.model_name.human} 수정
 
+    - if issue.body.present?
+      .issue-body
+        != simple_format(h(issue.body.strip))
+
     %section.opinion-show[@opinion]{ style: 'margin-bottom: 2em' }
       - opinions = issue.opinions.recent.of_speaker(speaker)
-      = render @opinion, show_full: true, theme_tag: params[:theme_tag]
+      = render @opinion, show_full: true
 
 
 %section.page-block.post-block__notes
@@ -28,6 +35,6 @@
   .container
     %p
       %strong
-        = link_to issue_path(issue, theme_tag: params[:theme_tag]) do
+        = link_to issue do
           #{issue.title}에 대한 다른 #{Opinion.model_name.human} 보기
           %i.fa.fa-arrow-right

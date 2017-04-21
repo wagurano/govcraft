@@ -26,5 +26,9 @@ class Speaker < ApplicationRecord
   def opinions_of_agenda agenda
     opinions.where(issue: agenda.issues)
   end
+
+  def self.positions(speakers)
+    speakers.tags_on(:positions)
+  end
 end
 

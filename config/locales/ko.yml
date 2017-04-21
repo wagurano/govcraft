@@ -43,7 +43,7 @@ ko:
       speaker: 발언자
       agenda: 의제
       agenda_document: 관련 자료
-      opinion: 정책
+      opinion: 의견
       project: 프로젝트
       discussion: 게시판
       petition: 서명
@@ -61,6 +61,7 @@ ko:
       speech: 촛불발언 동영상
       archive: 아카이브
       archive_document: 아카이브 자료
+      agenda_theme: 특집
     attributes:
       user:
         nickname: 아이디
@@ -257,12 +258,20 @@ ko:
         disagree: 반대
         unsuer: 의견없음
         partially: 일부찬성
+        long:
+          agree: 찬성합니다
+          disagree: 반대합니다
+          unsuer: 의견을 확인 중입니다
+          partially: 일부 찬성합니다
     votefuture:
       stance:
         agree: 반영
-        disagree: 미반영
-        unsuer: 의견없음
+        unsuer: 검토 중
         partially: 일부반영
+        long:
+          agree: 반영하겠습니다
+          unsuer: 검토 중입니다
+          partially: 일부 반영하겠습니
   views:
     pagination:
       first: "&laquo; 처음"

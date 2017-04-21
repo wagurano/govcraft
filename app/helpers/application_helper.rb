@@ -84,25 +84,13 @@ module ApplicationHelper
     content_tag(:i, nil, class: ["fa", "fa-file-#{extension}-o"])
   end
 
-  def human_theme_name(tag)
-    {
-      '2017-president' => '2017년 대통령 선거',
-      'votefuture' => '2017년 미래에서 온 투표',
-    }.fetch(tag, tag)
-  end
+  def speaker_positions_of_theme(agenda_theme)
+    return nil if agenda_theme.blank?
 
-  def human_theme_body(tag)
-    {
-      '2017-president' => '2017대선주권자행동과 함께 대선후보 정책을 검증합니다.',
-      'votefuture' => '초록우산 어린이재단의 대한민국 아동이 제안하는 19대 대선 아동공약입니다.',
-    }.fetch(tag, tag)
-  end
-
-  def speaker_positions_of_theme(tag)
     {
       '2017-president' => ['대선주자'],
       'votefuture' => ['대선주자'],
-    }.fetch(tag, tag)
+    }.fetch(agenda_theme.slug, nil)
   end
 
   def smart_truncate_html(text, options = {})

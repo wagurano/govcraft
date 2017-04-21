@@ -1,0 +1,15 @@
+%h3[issue]
+  = issue.title
+
+- if issue.body.present?
+  .issue-body
+    %p!= simple_format(h(issue.body))
+
+= render 'opinions/stances_list', issue: issue, speakers: speakers
+
+- if issue.opinions.where(speaker: speakers).any?(&:has_content?)
+  .media-list
+    - speakers.shuffle.each do |speaker|
+      - issue.opinions.of_speaker(speaker).each do |opinion|
+        - next unless opinion.has_content?
+        = render 'opinions/line_item', opinion: opinion

@@ -1,0 +1,9 @@
+- if issue.has_stance?
+  - speaker_positions_of_theme = speaker_positions_of_theme(issue.agenda_theme)
+  - if speaker_positions_of_theme.nil?
+    = render 'opinions/stances', speakers: speakers, issue: issue
+  - else
+    - speaker_positions_of_theme.each do |position|
+      - speakers_of_position = speakers.of_position(position)
+      - if issue.has_any_stances?(speakers_of_position)
+        = render 'opinions/stances', position: (position if speaker_positions_of_theme.count > 1), speakers: speakers_of_position, issue: issue

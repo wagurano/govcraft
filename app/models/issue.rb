@@ -1,5 +1,6 @@
 class Issue < ApplicationRecord
   belongs_to :agenda
+  belongs_to :agenda_theme, optional: true
   has_many :opinions, dependent: :destroy
   has_many :following_issues, dependent: :destroy
   has_many :followers, -> { order 'following_issues.created_at desc' }, through: :following_issues, source: :user
@@ -13,7 +14,7 @@ class Issue < ApplicationRecord
   after_initialize :trim_title
 
   default_scope { order('title ASC') }
-  scope :with_theme, ->(theme) { tagged_with(theme) }
+  scope :with_theme, ->(theme) { where('agenda_theme_id': theme.id) }
 
   def categorized_speakers(position, quote)
     if quote.present?
@@ -34,9 +35,12 @@ class Issue < ApplicationRecord
   end
 
   def theme_name
-    tags.first.try(:name)
+    agenda_theme.try(:title)
   end
 
+  def self.group_by_theme issues
+    issues.to_a.group_by{ |i| i.agenda_theme }.sort_by { |k,v| k.try(:name) }
+  end
 
   private
 

@@ -4,7 +4,7 @@
       %h2 특집
 
     %section{ style:"background-image: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)), url(#{image_url('events/2017-president.jpg')});background-size:cover; background-position: center center; border: 1px solid #ccc; padding: 3em 2em;" }
-      = link_to theme_agendas_path(theme_tag: '2017-president'), style: 'color: white;' do
+      = link_to theme_agendas_path(theme_slug: '2017-president'), style: 'color: white;' do
         %h2 2017대선오디션
         %p
           2017 대통령 선거. 우리는 변화와 희망에 투표합니다.
@@ -17,10 +17,10 @@
           %u 직접민주주의 프로젝트정당 <우주당>
           이 함께 합니다
         %p.m-t
-          = link_to '바로 보기', theme_agendas_path(theme_tag: '2017-president'), class: 'btn btn-danger'
+          = link_to '바로 보기', theme_agendas_path(theme_slug: '2017-president'), class: 'btn btn-danger'
 
     %section{ style:"background-image: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)), url(#{image_url('events/votefuture.png')});background-size:cover; background-position: center center; border: 1px solid #ccc; padding: 3em 2em;" }
-      = link_to theme_agendas_path(theme_tag: 'votefuture'), style: 'color: white;' do
+      = link_to theme_agendas_path(theme_slug: 'votefuture'), style: 'color: white;' do
         %h2 미래에서 온 투표
         %p
           대한민국 아동이 제안하는 19대 대선 아동공약
@@ -33,7 +33,7 @@
           %u 직접민주주의 프로젝트정당 <우주당>
           이 함께 합니다
         %p.m-t
-          = link_to '바로 보기', theme_agendas_path(theme_tag: 'votefuture'), class: 'btn btn-danger'
+          = link_to '바로 보기', theme_agendas_path(theme_slug: 'votefuture'), class: 'btn btn-danger'
 
 %section.page-block
   .container

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170414163802) do
+ActiveRecord::Schema.define(version: 20170421111925) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -26,6 +26,24 @@ ActiveRecord::Schema.define(version: 20170414163802) do
     t.index ["agenda_id"], name: "index_agenda_documents_on_agenda_id", using: :btree
     t.index ["speaker_id"], name: "index_agenda_documents_on_speaker_id", using: :btree
     t.index ["user_id"], name: "index_agenda_documents_on_user_id", using: :btree
+  end
+
+  create_table "agenda_themes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "title",                    null: false
+    t.text     "body",       limit: 65535
+    t.string   "slug",                     null: false
+    t.integer  "project_id"
+    t.string   "cover"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["project_id"], name: "index_agenda_themes_on_project_id", using: :btree
+    t.index ["slug"], name: "index_agenda_themes_on_slug", using: :btree
+  end
+
+  create_table "agenda_themes_agendas", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer "agenda_theme_id"
+    t.integer "agenda_id"
+    t.index ["agenda_theme_id", "agenda_id"], name: "index_agenda_themes_agendas_on_agenda_theme_id_and_agenda_id", unique: true, using: :btree
   end
 
   create_table "agendas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -333,7 +351,9 @@ ActiveRecord::Schema.define(version: 20170414163802) do
     t.integer  "agenda_id"
     t.text     "body",                   limit: 65535
     t.boolean  "has_stance",                           default: false
+    t.integer  "agenda_theme_id"
     t.index ["agenda_id"], name: "index_issues_on_agenda_id", using: :btree
+    t.index ["agenda_theme_id"], name: "index_issues_on_agenda_theme_id", using: :btree
     t.index ["title"], name: "index_issues_on_title", unique: true, using: :btree
   end
 

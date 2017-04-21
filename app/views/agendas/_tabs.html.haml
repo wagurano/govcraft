@@ -1,3 +1,5 @@
+- is_one_speaker_view = local_assigns[:speaker].present?
+- is_one_theme_view = local_assigns[:agenda_theme].present?
 %section.page-block
   .container
     .page-header
@@ -27,37 +29,47 @@
         .tab-pane{ id: "agenda_#{i}", class: ('active' if i == 0) }
           .page-header
             %h2= agenda.name
-          - issues = params[:theme_tag].present? ? agenda.issues.with_theme(params[:theme_tag]) : agenda.issues
-          - issues.each do |issue|
-            %section{ style: 'margin-bottom: 3em;' }
-              %h3[issue]
-                = issue.title
+          - issues = is_one_theme_view ? agenda.issues.with_theme(agenda_theme) : agenda.issues
 
-                - if user_signed_in? and current_user.is_admin?
-                  .pull-right.hidden-sm.hidden-xs
-                    = form_tag new_or_edit_admin_opinions_path, method: :get, class: 'form-inline', target: '_blank' do
-                      .inline.field
-                        = hidden_field_tag :issue_id, issue.id
-                        %select{name: :speaker_id, class: 'form-control'}
-                          - speakers.each do |speaker|
-                            %option{ value: speaker.id }
-                              = speaker.name
-                        %button.btn.btn-default{ type: "submit" } 입력
+          - Issue.group_by_theme(issues).each_with_index do |(agenda_theme, issues), i|
+            - next if is_one_speaker_view and !Opinion.where(issue_id: issues).exists?(speaker: local_assigns[:speaker])
+            %section
+              - if !is_one_theme_view and agenda_theme.present?
+                = render 'agenda_themes/line_item', agenda_theme: agenda_theme
+              - issues.each do |issue|
+                - next if is_one_speaker_view and !issue.opinions.exists?(speaker: local_assigns[:speaker])
+                %section{ style: 'margin-bottom: 3em;' }
+                  %h3[issue]
+                    = issue.title
 
-              - if issue.body.present?
-                .issue-body
-                  %p!= simple_format(h(issue.body))
+                    - if user_signed_in? and current_user.is_admin?
+                      .pull-right.hidden-sm.hidden-xs
+                        = form_tag new_or_edit_admin_opinions_path, method: :get, class: 'form-inline', target: '_blank' do
+                          .inline.field
+                            = hidden_field_tag :issue_id, issue.id
+                            %select{name: :speaker_id, class: 'form-control'}
+                              - all_speakers = local_assigns[:speakers] || [local_assigns[:speaker]]
+                              - all_speakers.each do |speaker|
+                                %option{ value: speaker.id }
+                                  = speaker.name
+                            %button.btn.btn-default{ type: "submit" } 입력
 
-              - if issue.has_stance?
-                - speaker_positions.each do |position|
-                  - speakers_of_position = speakers.of_position(position)
-                  - if issue.has_any_stances?(speakers_of_position)
-                    = render 'opinions/stances', position: (position if speaker_positions.count > 1), speakers: speakers_of_position, issue: issue, theme_tag: params[:theme_tag]
+                  - if issue.body.present?
+                    .issue-body
+                      %p!= simple_format(h(issue.body))
 
-              - if issue.opinions.where(speaker: speakers).any?(&:has_content?)
-                .panel.panel-default
-                  .list-group
-                    - speakers.shuffle.each do |speaker|
-                      - issue.opinions.of_speaker(speaker).each do |opinion|
-                        - next unless opinion.has_content?
-                        = render 'opinions/line_item', opinion: opinion, theme_tag: params[:theme_tag]
+                  - if local_assigns[:speaker].present?
+                    .panel.panel-default
+                      .list-group
+                        - issue.opinions.of_speaker(speaker).each do |opinion|
+                          = render 'opinions/line_item', opinion: opinion
+                  - else
+                    = render 'opinions/stances_list', issue: issue, speakers: speakers
+
+                    - if issue.opinions.where(speaker: speakers).any?(&:has_content?)
+                      .panel.panel-default
+                        .list-group
+                          - speakers.shuffle.each do |speaker|
+                            - issue.opinions.of_speaker(speaker).each do |opinion|
+                              - next unless opinion.has_content?
+                              = render 'opinions/line_item', opinion: opinion

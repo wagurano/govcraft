@@ -7,6 +7,7 @@ class Agenda < ApplicationRecord
   has_many :speakers, -> { reorder('').distinct }, through: :opinions
   has_many :agenda_documents, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
+  has_and_belongs_to_many :agenda_themes, uniq: true
 
   acts_as_taggable
 
@@ -14,9 +15,5 @@ class Agenda < ApplicationRecord
 
   def opinions_by speaker
     opinions.where(speaker: speaker)
-  end
-
-  def issues_group_by_theme
-    issues.to_a.group_by{ |i| i.theme_name }.sort_by { |k,v| k }.reverse
   end
 end

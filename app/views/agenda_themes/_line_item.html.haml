@@ -1,0 +1,16 @@
+- if agenda_theme.slug == '2017-president'
+  .alert.alert-warning{ style: "background-image: url(#{image_url('events/2017-president.jpg')}); background-size: cover; background-position: center; box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.5);" }
+    %h3
+      = link_to agenda_theme.title, theme_agendas_path(theme_slug: agenda_theme.slug), style: 'color: white'
+      %br.visible-xs-block
+      %small{ style: 'color: white' }
+        != simple_format h(agenda_theme.body), {}, wrapper_tag: 'span'
+- else
+  .alert.alert-warning
+    %h3
+      = link_to agenda_theme.title, theme_agendas_path(theme_slug: agenda_theme.slug), class: 'alert-link'
+      %br.visible-xs-block
+      %small
+        != simple_format h(agenda_theme.body), {}, wrapper_tag: 'span'
+
+

@@ -75,3 +75,13 @@
   padding-bottom: 20px;
   background-position: center;
 }
+
+// speakers
+.answer-speakers{
+  .speaker {
+    margin: 3px 0;
+    @media (max-width: $screen-xs-max) {
+      padding: 0 15px;
+    }
+  }
+}

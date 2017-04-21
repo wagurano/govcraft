@@ -14,4 +14,4 @@
               %p!= simple_format(h(opinion.issue.body))
           = render opinion
 
-= render 'agendas/tabs', agendas: @agendas, speakers: Speaker.where(id: @speaker), speaker_positions: ['대선주자']
+= render 'agendas/tabs', agendas: @agendas, speaker: @speaker
