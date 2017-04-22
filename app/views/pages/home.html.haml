@@ -4,7 +4,7 @@
     %li{"data-slide-to" => "1", "data-target" => "#site-hero-carousel"}
 
   .carousel-inner{:role => "listbox"}
-    .item.active{ style: "background-image: url(#{image_url('wouldyou_main.png')})" }
+    .item.embed-responsive.embed-responsive-16by9.active{ style: "background-image: url(#{image_url('wouldyou_main.png')})" }
       .carousel-caption
         %p.lead
           우주당은 시민의 힘으로 만드는
@@ -12,7 +12,7 @@
           %strong
             "직접 민주주의 프로젝트 정당"
           입니다.
-    .item{ style: "background-image: url(#{image_url('zine.png')})" }
+    .item.embed-responsive.embed-responsive-16by9{ style: "background-image: url(#{image_url('zine.png')})" }
       = link_to 'http://zine.wouldyouparty.org/201703.html', target: '_blank' do
         .carousel-caption
           %p.lead
@@ -21,6 +21,13 @@
             %strong
               <월간 우주당>
             이 시작됩니다.
+    .item.embed-responsive.embed-responsive-16by9{ style: "background-image: url(#{image_url('events/sewolarchive.jpg')})" }
+      = link_to 'http://sewolarchive.org', target: '_blank' do
+        .carousel-caption
+          %p.lead
+            %strong
+              <세월호 아카이브>
+            를 구축합니다
 
   %a.left.carousel-control{"data-slide" => "prev", :href => "#site-hero-carousel", :role => "button"}
     %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
