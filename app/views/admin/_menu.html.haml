@@ -1,21 +1,19 @@
 .page-block
-  %h3 운영툴
+  .well
+    %ul.nav.nav-sidebar.m-b
+      %li
+        %h4 정책DB
+      %li= link_to '의제', admin_agendas_path, class: 'item'
+      %li= link_to '이슈', admin_issues_path, class: 'item'
+      %li= link_to '발언자', admin_speakers_path, class: 'item'
+      %li= link_to '오피니언', admin_opinions_path, class: 'item'
+      %li= link_to AgendaDocument.model_name.human, admin_agenda_documents_path, class: 'item'
+      %li= link_to '특집', admin_agenda_themes_path, class: 'item'
 
-  .ui.vertical.menu
-    .item
-      .header 정책배틀
-      .menu
-        = link_to '의제', admin_agendas_path, class: 'item'
-        = link_to '이슈', admin_issues_path, class: 'item'
-        = link_to '발언자', admin_speakers_path, class: 'item'
-        = link_to '오피니언', admin_opinions_path, class: 'item'
-        = link_to AgendaDocument.model_name.human, admin_agenda_documents_path, class: 'item'
-        = link_to '특집', admin_agenda_themes_path, class: 'item'
-
-    .item
-      .header 회원
-      .menu
-        = link_to '일꾼', admin_roles_path, class: 'item'
-        = link_to '댓글', admin_comments_path, class: 'item'
-        = link_to '회원 이메일 다운로드', admin_download_emails_path(format: :xlsx), method: :post, class: 'item'
-        = link_to '국회의원 정보 갱신', admin_refresh_assembly_members_path, class: 'item'
+    %ul.nav.nav-sidebar
+      %li
+        %h4 회원
+      %li= link_to '일꾼', admin_roles_path, class: 'item'
+      %li= link_to '댓글', admin_comments_path, class: 'item'
+      %li= link_to '회원 이메일 다운로드', admin_download_emails_path(format: :xlsx), method: :post, class: 'item'
+      %li= link_to '국회의원 정보 갱신', admin_refresh_assembly_members_path, class: 'item'

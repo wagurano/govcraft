@@ -29,11 +29,11 @@
 
     = render 'application/header'
 
-    .container
+    .container-fluid
       .row
-        .col-sm-3
+        .col-sm-3.col-md-2
           = render 'admin/menu'
-        .col-sm-9
+        .col-sm-9.col-md-10
           = yield
 
     %script{:src => "https://www.gstatic.com/charts/loader.js"}

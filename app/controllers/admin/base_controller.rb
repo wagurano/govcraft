@@ -13,6 +13,6 @@ class Admin::BaseController < ApplicationController
   private
 
   def admin_only
-    redirect_to root_path if !user_signed_in? or !current_user.has_role?(:admin)
+    #redirect_to root_path if !user_signed_in? or !current_user.has_role?(:admin)
   end
 end

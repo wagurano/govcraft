@@ -1,32 +1,30 @@
 %section.page-block
-  .container
-    %h3
-      = link_to '우주운영', admin_home_path
-      &gt; 댓글
-    %section
-      %table.table{ style: 'table-layout: fixed;' }
-        %thead
-          %tr
-            %td{ style: 'width: 50px'} 삭제
-            %td 내용
-            %td{ style: 'width: 100px'} 글쓴이 &middot; 날짜
-            %td 원글 타입 &middot; 제목
-        - @comments.each do |comment|
-          %tr
-            %td
-              = link_to [:admin, comment], method: :delete, data: { confirm: '정말 삭제하시겠습니까?' } do
-                %i.fa.fa-trash
-            %td
-              != comment.body
-            %td
-              = comment.user_nickname
-              %br
-              = date_f comment.created_at
-            %td
-              [#{comment.commentable.model_name.human}]
-              %br
-              - if comment.commentable.present?
-                = link_to polymorphic_url(comment.commentable), html: { target: '_blank' } do
-                  = comment.commentable.try(:title) || '바로가기'
-      .text-center
-        = paginate @comments, theme: 'twitter-bootstrap-3'
+  .page-header
+    %h2 댓글
+  %section
+    %table.table.table-bordered
+      %thead
+        %tr
+          %td 내용
+          %td 글쓴이 &middot; 날짜
+          %td 원글 타입 &middot; 제목
+          %td
+      - @comments.each do |comment|
+        %tr
+          %td
+            != comment.body
+          %td
+            = comment.user_nickname
+            %br
+            = date_f comment.created_at
+          %td
+            [#{comment.commentable.model_name.human}]
+            %br
+            - if comment.commentable.present?
+              = link_to polymorphic_url(comment.commentable), html: { target: '_blank' } do
+                = comment.commentable.try(:title) || '바로가기'
+          %td.text-right
+            = link_to [:admin, comment], method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-default btn-xs' do
+              %i.fa.fa-trash
+    .text-center
+      = paginate @comments, theme: 'twitter-bootstrap-3'
