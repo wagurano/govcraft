@@ -6,7 +6,7 @@
         = link_to speaker_path(speaker) do
           %img.media-object.speaker-image{style: "background-image: url(#{speaker.image.xs.url});"}
       .media-body
-        %h4.media-heading
+        %h5.media-heading
           - lead = capture do
             - if opinion.quote.present?
               != simple_format h(opinion.quote), style: 'font-size: 1.2em; font-weight: 200;'
@@ -24,7 +24,8 @@
           - if local_assigns[:show_full]
             != simple_format h(opinion.body)
           - else
-            != smart_truncate_html (simple_format opinion.body), length: 40, ellipsis: "... <a href='#{opinion_path(opinion)}'>이전 발언 모두 보기</a>"
+            .text-muted
+              != smart_truncate_html opinion.body, length: 40, ellipsis: "... <a href='#{opinion_path(opinion)}'>이전 발언 모두 보기</a>"
 
       .media-right.text-right{ style: 'white-space: nowrap;' }
         = render 'votes/panel', votable: opinion, show_voters: false, reactions_count_link: opinion_path(opinion)
@@ -34,7 +35,7 @@
         = link_to speaker_path(speaker) do
           %img.media-object.speaker-image{style: "background-image: url(#{speaker.image.xs.url});"}
       .media-body
-        %h4.media-heading
+        %h5.media-heading
           = link_to speaker_path(speaker) do
             = speaker.name
             %small= speaker.organization
@@ -46,7 +47,8 @@
           - if local_assigns[:show_full]
             != simple_format h(opinion.body)
           - else
-            != smart_truncate_html (simple_format opinion.body), length: 40, ellipsis: "... <a href='#{opinion_path(opinion)}'>이전 발언 모두 보기</a>"
+            .text-muted
+              != smart_truncate_html opinion.body, length: 40, ellipsis: "... <a href='#{opinion_path(opinion)}'>이전 발언 모두 보기</a>"
 
         .m-t.text-center
           = render 'votes/panel', votable: opinion, show_voters: false, reactions_count_link: opinion_path(opinion)
