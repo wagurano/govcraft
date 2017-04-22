@@ -1,21 +1,25 @@
 = form_for [:admin, @issue], html: { class: 'ui form' } do |f|
-  .field
+  .form-group
     = f.label :agenda_id
-    = f.collection_select :agenda_id, Agenda.all, :id, :name, {}, { class: 'ui selection dropdown'}
+    = f.collection_select :agenda_id, Agenda.all, :id, :name, {}, { class: 'js-select2 form-control' }
 
-  .field
+  .form-group
+    = f.label :agenda_theme_id
+    = f.collection_select :agenda_theme_id, AgendaTheme.all, :id, :title, {include_blank: '테마 없음'}, { class: 'js-select2 form-control' }
+
+  .form-group
     = f.label :title
-    = f.text_field :title
+    = f.text_field :title, class: 'form-control'
 
-  .field
+  .form-group
     = f.label :body
-    ~ f.text_area :body
+    ~ f.text_area :body, class: 'form-control'
 
   .form-group
     = f.label :has_stance
     .checkbox
       %label
-        = f.check_box :has_stance
+        = f.check_box :has_stance, class: 'form-control'
         찬반입장을 받습니다.
 
   .form-group
@@ -24,4 +28,4 @@
     %p.help-block
       콤마로 테마를 구분해서 넣으세요.
 
-  = f.submit '저장', class: 'ui button'
+  = f.submit '저장', class: 'btn btn-primary'

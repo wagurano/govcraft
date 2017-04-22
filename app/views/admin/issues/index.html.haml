@@ -21,7 +21,7 @@
           %td
             %h5= link_to issue.title, issue
           %td
-            = issue.agenda.name
+            = issue.agenda.try(:name)
           %td
             = issue.tag_list
           %td.text-right
