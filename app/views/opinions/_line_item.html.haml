@@ -10,7 +10,7 @@
           - lead = capture do
             - if opinion.quote.present?
               != simple_format h(opinion.quote), style: 'font-size: 1.2em; font-weight: 200;'
-            - if opinion.stance.present?
+            - if opinion.issue.has_stance? && opinion.stance.present?
               %p{ style: 'font-size: 1.2em; font-weight: 200;' }= opinion.stance_long_text_by_theme
           - if lead.try(:strip).present?
             = link_to lead, opinion_path(opinion)
