@@ -1,27 +1,30 @@
 %section.page-block
-  %h3 #{AgendaDocument.model_name.human} 수정
-  %table.table
-    %thead
-      %tr
-        %th #{Speaker.model_name.human}
-        %th #{Agenda.model_name.human}
-        %th 파일
-        %th 요약
-        %th.text-right
-          = link_to '추가', new_admin_agenda_document_path, class: 'btn btn-sm btn-primary'
-    %tbody
-      - @agenda_documents.each do |agenda_document|
+  .page-header
+    %h2 #{AgendaDocument.model_name.human} 수정
+
+  .panel.panel-default
+    %table.table.table-bordered
+      %thead
         %tr
-          %td
-            = agenda_document.speaker.name
-          %td
-            = agenda_document.agenda.name
-          %td
-            = link_to "#{agenda_document.name} 다운로드", agenda_document.attachment.url, target: '_blank'
-            - if agenda_document.image?
-              = image_tag agenda_document.attachment.sm.url
-          %td
-            = agenda_document.desc
-          %td.text-right
-            = link_to '수정', edit_admin_agenda_document_path(agenda_document), class: 'btn btn-xs btn-default'
-            = link_to '삭제', admin_agenda_document_path(agenda_document), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'
+          %th #{Speaker.model_name.human}
+          %th #{Agenda.model_name.human}
+          %th 파일
+          %th 요약
+          %th.text-right
+            = link_to '추가', new_admin_agenda_document_path, class: 'btn btn-sm btn-primary'
+      %tbody
+        - @agenda_documents.each do |agenda_document|
+          %tr
+            %td
+              = agenda_document.speaker.name
+            %td
+              = agenda_document.agenda.name
+            %td
+              = link_to "#{agenda_document.name} 다운로드", agenda_document.attachment.url, target: '_blank'
+              - if agenda_document.image?
+                = image_tag agenda_document.attachment.sm.url
+            %td
+              = agenda_document.desc
+            %td.text-right
+              = link_to '수정', edit_admin_agenda_document_path(agenda_document), class: 'btn btn-xs btn-default'
+              = link_to '삭제', admin_agenda_document_path(agenda_document), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'

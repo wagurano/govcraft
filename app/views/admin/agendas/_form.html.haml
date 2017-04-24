@@ -1,25 +1,27 @@
-= form_for [:admin, @agenda] do |f|
-  .form-group
-    = f.label :name
-    = f.text_field :name, class: 'form-control'
+.panel.panel-default
+  .panel-body
+    = form_for [:admin, @agenda] do |f|
+      .form-group
+        = f.label :name
+        = f.text_field :name, class: 'form-control'
 
-  .form-group
-    = f.label :image
-    = f.file_field :image
+      .form-group
+        = f.label :image
+        = f.file_field :image
 
-  .form-group
-    = f.label :tag_list
-    = f.text_field :tag_list, value: @agenda.tag_list.try(:to_s), placeholder: '태그1, 태그2, 태그3', class: 'form-control'
-    %p.help-block
-      콤마로 테마를 구분해서 넣으세요.
+      .form-group
+        = f.label :tag_list
+        = f.text_field :tag_list, value: @agenda.tag_list.try(:to_s), placeholder: '태그1, 태그2, 태그3', class: 'form-control'
+        %p.help-block
+          콤마로 테마를 구분해서 넣으세요.
 
-  .form-group
-    = f.label :request_opinion_example
-    ~ f.text_area :request_opinion_example, class: 'form-control'
+      .form-group
+        = f.label :request_opinion_example
+        ~ f.text_area :request_opinion_example, class: 'form-control'
 
-  .form-group
-    = f.label :request_amendment_example
-    ~ f.text_area :request_amendment_example, class: 'form-control'
+      .form-group
+        = f.label :request_amendment_example
+        ~ f.text_area :request_amendment_example, class: 'form-control'
 
-  .form-group
-    = f.submit '저장', class: 'btn btn-default'
+      .form-group
+        = f.submit '저장', class: 'btn btn-default'

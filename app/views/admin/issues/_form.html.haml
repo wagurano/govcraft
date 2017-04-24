@@ -1,31 +1,33 @@
-= form_for [:admin, @issue], html: { class: 'ui form' } do |f|
-  .form-group
-    = f.label :agenda_id
-    = f.collection_select :agenda_id, Agenda.all, :id, :name, {}, { class: 'js-select2 form-control' }
+.panel.panel-default
+  .panel-body
+    = form_for [:admin, @issue], html: { class: 'ui form' } do |f|
+      .form-group
+        = f.label :agenda_id
+        = f.collection_select :agenda_id, Agenda.all, :id, :name, {}, { class: 'js-select2 form-control' }
 
-  .form-group
-    = f.label :agenda_theme_id
-    = f.collection_select :agenda_theme_id, AgendaTheme.all, :id, :title, {include_blank: '테마 없음'}, { class: 'js-select2 form-control' }
+      .form-group
+        = f.label :agenda_theme_id
+        = f.collection_select :agenda_theme_id, AgendaTheme.all, :id, :title, {include_blank: '테마 없음'}, { class: 'js-select2 form-control' }
 
-  .form-group
-    = f.label :title
-    = f.text_field :title, class: 'form-control'
+      .form-group
+        = f.label :title
+        = f.text_field :title, class: 'form-control'
 
-  .form-group
-    = f.label :body
-    ~ f.text_area :body, class: 'form-control'
+      .form-group
+        = f.label :body
+        ~ f.text_area :body, class: 'form-control'
 
-  .form-group
-    = f.label :has_stance
-    .checkbox
-      %label
-        = f.check_box :has_stance, class: 'form-control'
-        찬반입장을 받습니다.
+      .form-group
+        = f.label :has_stance
+        .checkbox
+          %label
+            = f.check_box :has_stance, class: 'form-control'
+            찬반입장을 받습니다.
 
-  .form-group
-    = f.label :tag_list
-    = f.text_field :tag_list, value: @issue.tag_list.try(:to_s), placeholder: '태그1, 태그2, 태그3', class: 'form-control'
-    %p.help-block
-      콤마로 테마를 구분해서 넣으세요.
+      .form-group
+        = f.label :tag_list
+        = f.text_field :tag_list, value: @issue.tag_list.try(:to_s), placeholder: '태그1, 태그2, 태그3', class: 'form-control'
+        %p.help-block
+          콤마로 테마를 구분해서 넣으세요.
 
-  = f.submit '저장', class: 'btn btn-primary'
+      = f.submit '저장', class: 'btn btn-primary'

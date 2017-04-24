@@ -1,35 +1,41 @@
 %section.page-block
-  %h3 의제 특집
-  %table.table
-    %thead
-      %tr
-        %th 특집명
-        %th 주소용 영문명
-        %th 의제
-        %th.text-right
-          = link_to '추가', new_admin_agenda_theme_path, class: 'btn btn-sm btn-primary'
-    %tbody
-      - @agenda_themes.each do |agenda_theme|
+  .page-header
+    %h2 의제 특집
+
+  .panel.panel-default
+    %table.table.table-bordered
+      %thead
         %tr
-          %td
-            %h5= link_to agenda_theme.title, theme_agendas_path(agenda_theme.slug), target: '_blank'
-          %td
-            = agenda_theme.slug
-          %td
-            - agenda_theme.agendas.each do |agenda|
-              .btn-group
-                %a.btn.btn-default{:href => "#"}= agenda.name
-                %a.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                  %span.caret
-                %ul.dropdown-menu
-                  %li
-                    = link_to remove_agenda_admin_agenda_theme_path(agenda_theme, agenda_id: agenda.id), method: :delete do
-                      삭제
+          %th 특집명
+          %th 주소용 영문명
+          %th 의제
+          %th.text-right
+            = link_to '추가', new_admin_agenda_theme_path, class: 'btn btn-sm btn-primary'
+      %tbody
+        - @agenda_themes.each do |agenda_theme|
+          %tr
+            %td.text-nowrap
+              %h5= link_to agenda_theme.title, theme_agendas_path(agenda_theme.slug), target: '_blank'
+            %td.text-nowrap
+              = agenda_theme.slug
+            %td
+              %ul.list-inline
+                - agenda_theme.agendas.each do |agenda|
+                  %li{ style: 'margin-bottom: 8px' }
+                    .btn-group
+                      %a.btn.btn-default{:href => "#"}= agenda.name
+                      %a.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                        %span.caret
+                      %ul.dropdown-menu
+                        %li
+                          = link_to remove_agenda_admin_agenda_theme_path(agenda_theme, agenda_id: agenda.id), method: :delete do
+                            삭제
 
-            = form_tag add_agenda_admin_agenda_theme_path(agenda_theme) do
-              = select_tag :agenda_id, options_from_collection_for_select(Agenda.where.not(id: agenda_theme.agendas), :id, :name), class: 'js-select2 form-control'
-              = submit_tag '추가'
+                %li
+                  = form_tag add_agenda_admin_agenda_theme_path(agenda_theme), class: 'form-inline' do
+                    = select_tag :agenda_id, options_from_collection_for_select(Agenda.where.not(id: agenda_theme.agendas), :id, :name), class: 'js-select2 form-control'
+                    = submit_tag '추가', class: 'btn btn-default'
 
-          %td.text-right
-            = link_to '수정', edit_admin_agenda_theme_path(agenda_theme), class: 'btn btn-xs btn-default'
-            = link_to '삭제', admin_agenda_theme_path(agenda_theme), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'
+            %td.text-right.text-nowrap
+              = link_to '수정', edit_admin_agenda_theme_path(agenda_theme), class: 'btn btn-xs btn-default'
+              = link_to '삭제', admin_agenda_theme_path(agenda_theme), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'

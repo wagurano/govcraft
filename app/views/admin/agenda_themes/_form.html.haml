@@ -1,34 +1,36 @@
-= form_for [:admin, @agenda_theme] do |f|
-  .form-group
-    = f.label :title
-    = f.text_field :title, class: 'form-control'
+.panel.panel-default
+  .panel-body
+    = form_for [:admin, @agenda_theme] do |f|
+      .form-group
+        = f.label :title
+        = f.text_field :title, class: 'form-control'
 
-  .form-group
-    = f.label :body
-    ~ f.text_area :body, class: 'form-control'
+      .form-group
+        = f.label :body
+        ~ f.text_area :body, class: 'form-control'
 
-  .form-group
-    = f.label :slug
-    = f.text_field :slug, class: 'form-control'
-    .help-block 주소에 사용되는 영문명입니다.
+      .form-group
+        = f.label :slug
+        = f.text_field :slug, class: 'form-control'
+        .help-block 주소에 사용되는 영문명입니다.
 
-  .form-group
-    = f.label :cover
-    = f.file_field :cover
-    = f.hidden_field :cover_cache, value: f.object.cover_cache
-    .help-block
-    - if @agenda_theme.read_attribute(:cover).present?
-      = image_tag @agenda_theme.cover.xs.url, class: 'img-thumbnail', style: 'max-width: 40px'
-      %label{ style: 'font-weight: normal;' }
-        = f.check_box :remove_cover
-        삭제하기
+      .form-group
+        = f.label :cover
+        = f.file_field :cover
+        = f.hidden_field :cover_cache, value: f.object.cover_cache
+        .help-block
+        - if @agenda_theme.read_attribute(:cover).present?
+          = image_tag @agenda_theme.cover.xs.url, class: 'img-thumbnail', style: 'max-width: 40px'
+          %label{ style: 'font-weight: normal;' }
+            = f.check_box :remove_cover
+            삭제하기
 
-  - if params[:project_id].present?
-    = f.hidden_field :project_id, value: params[:project_id]
-  - else
-    .form-group
-      = f.label :project_id
-      = f.collection_select :project_id, Project.all, :id, :title, {include_blank: '프로젝트 없음'}, { class: 'js-select2 form-control' }
+      - if params[:project_id].present?
+        = f.hidden_field :project_id, value: params[:project_id]
+      - else
+        .form-group
+          = f.label :project_id
+          = f.collection_select :project_id, Project.all, :id, :title, {include_blank: '프로젝트 없음'}, { class: 'js-select2 form-control' }
 
-  .form-group
-    = f.submit '저장', class: 'btn btn-default'
+      .form-group
+        = f.submit '저장', class: 'btn btn-primary'

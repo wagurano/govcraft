@@ -1,22 +1,25 @@
 %section.page-block
-  %h3 발언자
-  %table.table
-    %thead
-      %tr
-        %th 이름
-        %th 조직
-        %th 분류
-        %th 포지션
-        %th.text-right
-          = link_to '추가', new_admin_speaker_path, class: 'btn btn-sm btn-primary'
-    %tbody
-      - @speakers.each do |speaker|
+  .page-header
+    %h2 발언자
+
+  .panel.panel-default
+    %table.table.table-bordered
+      %thead
         %tr
-          %td
-            %h5= speaker.name
-          %td= speaker.organization
-          %td= speaker.category
-          %td= speaker.positions.pluck(:name).join(',')
-          %td.text-right
-            = link_to '수정', edit_admin_speaker_path(speaker), class: 'btn btn-xs btn-default'
-            = link_to '삭제', admin_speaker_path(speaker), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'
+          %th 이름
+          %th 조직
+          %th 분류
+          %th 포지션
+          %th.text-right
+            = link_to '추가', new_admin_speaker_path, class: 'btn btn-sm btn-primary'
+      %tbody
+        - @speakers.each do |speaker|
+          %tr
+            %td
+              %h5= speaker.name
+            %td= speaker.organization
+            %td= speaker.category
+            %td= speaker.positions.pluck(:name).join(',')
+            %td.text-right
+              = link_to '수정', edit_admin_speaker_path(speaker), class: 'btn btn-xs btn-default'
+              = link_to '삭제', admin_speaker_path(speaker), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'

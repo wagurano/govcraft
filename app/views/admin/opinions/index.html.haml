@@ -1,12 +1,16 @@
 %section.page-block
-  %h3 오피니언
-  = form_tag nil, class: 'form-inline', method: :get do
-    .form-group
-      = label_tag :issue_id
-      = select_tag :issue_id, options_from_collection_for_select(Issue.all, :id, :title), class: 'form-control js-select2', style: 'width: 300px'
-    = submit_tag '보기', class: 'btn btn-default btn-sm'
+  .page-header
+    %h2 오피니언
 
-  %table.table
+  .panel.panel-default
+    .panel-body
+      = form_tag nil, class: 'form-inline', method: :get do
+        .form-group
+          = label_tag :issue_id
+          = select_tag :issue_id, options_from_collection_for_select(Issue.all, :id, :title), class: 'form-control js-select2', style: 'width: 300px'
+        = submit_tag '보기', class: 'btn btn-default btn-sm'
+
+  %table.table.table-bordered
     %thead
       %tr
         %th ID

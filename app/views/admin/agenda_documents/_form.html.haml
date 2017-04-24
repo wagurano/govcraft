@@ -1,22 +1,25 @@
-= form_for [:admin, @agenda_document], html: { class: 'ui form' } do |f|
-  .field
-    = f.label :agenda_id
-    = f.collection_select :agenda_id, Agenda.all, :id, :name, {}, { class: 'ui selection dropdown' }
+.panel.panel-default
+  .panel-body
+    = form_for [:admin, @agenda_document] do |f|
+      .form-group
+        = f.label :agenda_id
+        = f.collection_select :agenda_id, Agenda.all, :id, :name, {}, { class: 'form-control' }
 
-  .field
-    = f.label :speaker_id
-    = f.collection_select :speaker_id, Speaker.all, :id, :details, {}, { class: 'js-select2' }
+      .form-group
+        = f.label :speaker_id
+        = f.collection_select :speaker_id, Speaker.all, :id, :details, {}, { class: 'js-select2 form-control' }
 
-  .field
-    = f.label :attachment
-    = f.file_field :attachment
-    = f.hidden_field :attachment_cache, value: f.object.attachment_cache
-    %p
-    - if f.object.read_attribute(:attachment).present? and f.object.image?
-      = image_tag f.object.attachment.xs.url
+      .form-group
+        = f.label :attachment
+        = f.file_field :attachment, class: 'form-control'
+        = f.hidden_field :attachment_cache, value: f.object.attachment_cache
+        %p
+        - if f.object.read_attribute(:attachment).present? and f.object.image?
+          = image_tag f.object.attachment.xs.url
 
-  .field
-    = f.label :desc
-    ~ f.text_area :desc
+      .form-group
+        = f.label :desc
+        ~ f.text_area :desc, class: 'form-control'
 
-  = f.submit '저장', class: 'ui button'
+      .form-group
+        = f.submit '저장', class: 'btn btn-primary'

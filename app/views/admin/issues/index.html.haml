@@ -1,29 +1,33 @@
 %section.page-block
-  %h3 이슈
-  = form_tag nil, class: 'form-inline', method: :get do
-    .form-group
-      = label_tag :agenda_id
-      = select_tag :agenda_id, options_from_collection_for_select(Agenda.all, :id, :name), class: 'form-control js-select2'
-    = submit_tag '보기', class: 'btn btn-default btn-sm'
+  .page-header
+    %h2 이슈
 
-  %hr
-  %table.table
-    %thead
-      %tr
-        %th 이슈명
-        %th 의제
-        %th 테마
-        %th.text-right
-          = link_to '추가', new_admin_issue_path, class: 'btn btn-sm btn-primary'
-    %tbody
-      - @issues.each do |issue|
+  .panel.panel-default
+    .panel-body
+      = form_tag nil, class: 'form-inline', method: :get do
+        .form-group
+          = label_tag :agenda_id
+          = select_tag :agenda_id, options_from_collection_for_select(Agenda.all, :id, :name), class: 'form-control js-select2'
+        = submit_tag '보기', class: 'btn btn-default btn-sm'
+
+  .panel.panel-default
+    %table.table.table-bordered
+      %thead
         %tr
-          %td
-            %h5= link_to issue.title, issue
-          %td
-            = issue.agenda.try(:name)
-          %td
-            = issue.agenda_theme.try(:title)
-          %td.text-right
-            = link_to '수정', edit_admin_issue_path(issue), class: 'btn btn-xs btn-default'
-            = link_to '삭제', admin_issue_path(issue), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'
+          %th 이슈명
+          %th 의제
+          %th 테마
+          %th.text-right
+            = link_to '추가', new_admin_issue_path, class: 'btn btn-sm btn-primary'
+      %tbody
+        - @issues.each do |issue|
+          %tr
+            %td
+              %h5= link_to issue.title, issue
+            %td.text-nowrap
+              = issue.agenda.try(:name)
+            %td.text-nowrap
+              = issue.agenda_theme.try(:title)
+            %td.text-right.text-nowrap
+              = link_to '수정', edit_admin_issue_path(issue), class: 'btn btn-xs btn-default'
+              = link_to '삭제', admin_issue_path(issue), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'

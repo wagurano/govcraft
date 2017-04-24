@@ -1,34 +1,37 @@
-= form_for [:admin, @speaker], html: { class: 'ui form' } do |f|
-  .field
-    = f.label :image
-    = f.file_field :image
-    = f.hidden_field :image_cache, value: f.object.image_cache
-    %p
-    - if f.object.read_attribute(:image).present? and f.object.image?
-      = image_tag f.object.image.xs.url
+.panel.panel-default
+  .panel-body
+    = form_for [:admin, @speaker] do |f|
+      .form-group
+        = f.label :image
+        = f.file_field :image, class: 'form-control'
+        = f.hidden_field :image_cache, value: f.object.image_cache
+        %p
+        - if f.object.read_attribute(:image).present? and f.object.image?
+          = image_tag f.object.image.xs.url
 
-  .field
-    = f.label :name
-    = f.text_field :name
+      .form-group
+        = f.label :name
+        = f.text_field :name, class: 'form-control'
 
-  .field
-    = f.label :organization
-    = f.text_field :organization
+      .form-group
+        = f.label :organization
+        = f.text_field :organization, class: 'form-control'
 
-  .field
-    = f.label :email
-    = f.email_field :email
+      .form-group
+        = f.label :email
+        = f.email_field :email, class: 'form-control'
 
-  .field
-    = f.label :twitter
-    = f.text_field :twitter, placeholder: '아이디만 적어주세요 (ex. @nick_name이라면 nick_name만 쓰기 )'
+      .form-group
+        = f.label :twitter
+        = f.text_field :twitter, placeholder: '아이디만 적어주세요 (ex. @nick_name이라면 nick_name만 쓰기 )', class: 'form-control'
 
-  .field
-    = f.label :category
-    = f.text_field :category
+      .form-group
+        = f.label :category
+        = f.text_field :category, class: 'form-control'
 
-  .field
-    = f.label :position_list
-    = f.text_field :position_list, value: @speaker.position_list.try(:to_s), placeholder: 'ex)대선주자, 국회의원', class: 'form-control'
+      .form-group
+        = f.label :position_list
+        = f.text_field :position_list, value: @speaker.position_list.try(:to_s), placeholder: 'ex)대선주자, 국회의원', class: 'form-control'
 
-  = f.submit '저장', class: 'ui button'
+      .form-group
+        = f.submit '저장', class: 'btn btn-primary'
