@@ -5,7 +5,10 @@ class SpeakersController < ApplicationController
     @agendas = Agenda.where(id: Issue.where(id: @speaker.opinions.select(:issue_id)).select(:agenda_id))
     if params[:agenda_id].present?
       @agenda = Agenda.find params[:agenda_id]
-      render 'speakers/show_agenda'
+      respond_to do |format|
+        format.js { render 'speakers/show_agenda' }
+        format.html
+      end
     end
   end
 end
