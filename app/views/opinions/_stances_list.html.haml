@@ -1,5 +1,5 @@
 - if issue.has_stance?
-  - speaker_positions_of_theme = speaker_positions_of_theme(issue.agenda_theme)
+  - speaker_positions_of_theme = issue.agenda_theme.speaker_positions
   - if speaker_positions_of_theme.nil?
     = render 'opinions/stances', speakers: speakers, issue: issue
   - else

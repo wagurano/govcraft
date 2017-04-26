@@ -84,15 +84,6 @@ module ApplicationHelper
     content_tag(:i, nil, class: ["fa", "fa-file-#{extension}-o"])
   end
 
-  def speaker_positions_of_theme(agenda_theme)
-    return nil if agenda_theme.blank?
-
-    {
-      '2017-president' => ['대선주자'],
-      'votefuture' => ['대선주자'],
-    }.fetch(agenda_theme.slug, nil)
-  end
-
   def smart_truncate_html(text, options = {})
     max_length = options[:length] || 3
     HTML_Truncator.truncate(text, max_length, options)

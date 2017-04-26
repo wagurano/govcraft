@@ -1,11 +1,9 @@
 = render 'agendas/theme_header', agenda_theme: @agenda_theme
 
-- speaker_positions = speaker_positions_of_theme(@agenda_theme)
-- speakers = Speaker.of_position(speaker_positions)
 %section.page-block{ style: 'background-color: #eee' }
   .container
     %h3.title 주요 의제에 대한 시민반응(실시간 반영)
-    - speakers_and_votes_count = speakers.map{|s| { speaker: s, votes_count: s.opinions.of_theme(@agenda_theme).sum(:votes_count) }}.sort_by{|h| h[:votes_count]}.reverse
+    - speakers_and_votes_count = @speakers.map{|s| { speaker: s, votes_count: s.opinions.of_theme(@agenda_theme).sum(:votes_count) }}.sort_by{|h| h[:votes_count]}.reverse
     - max_votes = speakers_and_votes_count[0][:votes_count]
     - speakers_and_votes_count.each do |s|
       - speaker = s[:speaker]
@@ -24,4 +22,4 @@
           .progress-bar.progress-bar-striped.progress-bar-danger{ style: "width:#{disagrees_count/max_votes.to_f*100}%" }
             #{disagrees_count}건
 
-= render 'agendas/tabs', agendas: @agendas, speakers: speakers, agenda_theme: @agenda_theme
+= render 'agendas/tabs', agendas: @agendas, speakers: @speakers, agenda_theme: @agenda_theme

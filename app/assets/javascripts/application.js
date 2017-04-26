@@ -4,7 +4,6 @@
 //= require bootstrap
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
-//= require semantic-ui
 //= require imagesloaded.pkgd
 //= require masonry.pkgd
 //= require redactor2_rails/config
@@ -232,18 +231,33 @@ $(function(){
     $elm.webuiPopover(options);
   });
 
-  // bootstrap tab & location hash
-  if (location.hash !== '' && location.hash.startsWith('#tab_')) {
-    var tab = location.hash.replace('tab_','');
-    $(".tab-pane.active").removeClass('active');
-    $(".tab-pane" + tab).addClass('active');
-  }
 
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-    window.location.hash = 'tab_'+  e.target.hash.substr(1) ;
+  // agenda theme bootstrap tab & location hash
+  $('a.js-agenda-theme-tab[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    $('.tab-pane.active .js-loading').show();
+    $('.tab-pane.active .js-tab-content').hide();
+
+    window.location.hash = e.target.hash.substr(1) ;
     $('html, body').animate({scrollTop: ($('.tab-content').first().offset().top - 40)});
-    return false;
+
+    var agenda_id = $(this).data("agenda-id");
+    var href = $(this).attr("href");
+    $.ajax({
+      type: "GET",
+      url: href,
+      data: { agenda_id: agenda_id },
+      dataType: "script",
+      complete: function() {
+        $('html, body').animate({scrollTop: ($('.tab-content').first().offset().top - 40)});
+      }
+    });
   });
+
+  if (location.hash !== '' && location.hash.startsWith('#agenda_tab_')) {
+    $('.tab-pane.active .js-tab-content').hide();
+    var agenda_id = location.hash.replace('#agenda_tab_','');
+    $('a.js-agenda-theme-tab[data-toggle="tab"][data-agenda-id="' + agenda_id + '"]').tab('show');
+  }
 });
 
 $(document).ajaxError(function (e, xhr, settings) {
