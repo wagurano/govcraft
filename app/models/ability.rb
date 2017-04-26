@@ -8,7 +8,7 @@ class Ability
     can :cancel, Like
     can :create_by_slack, Article
     can :download, Timeline
-    can [:widget, :new_email, :send_email, :theme, :theme_widget], Agenda
+    can [:widget, :new_email, :send_email, :theme, :theme_widget, :theme_single_widget], Agenda
     can :vote_widget, Opinion
     can :agenda, Speaker
 

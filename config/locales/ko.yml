@@ -271,7 +271,7 @@ ko:
         long:
           agree: 반영하겠습니다
           unsuer: 검토 중입니다
-          partially: 일부 반영하겠습니
+          partially: 일부 반영하겠습니다
   views:
     pagination:
       first: "&laquo; 처음"

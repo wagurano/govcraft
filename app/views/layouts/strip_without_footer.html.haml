@@ -1,8 +1,9 @@
 - content_for :header do
   %div
 - content_for :footer do
+  %div{ 'data-iframe-height': true }
+- content_for :messenger do
   %div
-
 :css
   body { padding-top: 0 !important; }
 = render file: 'layouts/application'

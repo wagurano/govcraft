@@ -12,7 +12,8 @@
               = image_tag 'favicons/favicon-32x32.png', width: 18
               %strong
                 우주당
-
+- content_for :messenger do
+  %div
 :css
   body { min-width: 0 !important;, padding-top: 0 !important; }
 = render file: 'layouts/application'

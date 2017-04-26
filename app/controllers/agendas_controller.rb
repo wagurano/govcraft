@@ -56,7 +56,7 @@ class AgendasController < ApplicationController
 
   def theme_single_widget
     @agenda_theme = AgendaTheme.find_by(slug: params[:theme_slug])
-    render layout: 'strip'
+    render layout: 'strip_without_footer'
   end
 
   private
