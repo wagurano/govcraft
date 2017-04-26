@@ -13,6 +13,8 @@ class Agenda < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
+  scope :sort_by_name, -> { order("if(ascii(substring(name, 1)) < 128, 1, 0)").order(:name) }
+
   def opinions_by speaker
     opinions.where(speaker: speaker)
   end
