@@ -25,7 +25,7 @@
 %section.page-block
   .container
     .tab-content{ style: 'border:0; padding:0' }
-      = render 'agendas/tab', local_assigns.merge(agenda: agendas.first)
+      = render 'agendas/tab', local_assigns.merge(agenda: agendas.sort_by_name.first)
 
 
 %section.page-block{ style: 'background-color: #eee' }
