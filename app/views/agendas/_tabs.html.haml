@@ -1,4 +1,4 @@
-%section.page-block
+%section.page-block#agends-list
   .container
     .page-header
       %h2
@@ -24,3 +24,11 @@
   .container
     .tab-content{ style: 'border:0; padding:0' }
       = render 'agendas/tab', local_assigns.merge(agenda: agendas.first)
+
+
+%section.page-block{ style: 'background-color: #eee' }
+  .container
+    %strong
+      = link_to "#agends-list" do
+        다른 #{Agenda.model_name.human} 보기
+        %i.fa.fa-arrow-up
