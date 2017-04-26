@@ -18,4 +18,12 @@ class Agenda < ApplicationRecord
   def opinions_by speaker
     opinions.where(speaker: speaker)
   end
+
+  def hot?(theme = nil)
+    if theme.present?
+      Opinion.where(issue_id: issues.with_theme(theme)).sum(:votes_count) > 1000
+    else
+      Opinion.where(issue_id: issues).sum(:votes_count) > 1000
+    end
+  end
 end
