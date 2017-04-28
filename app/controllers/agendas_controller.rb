@@ -39,6 +39,9 @@ class AgendasController < ApplicationController
 
   def theme
     @agenda_theme = AgendaTheme.find_by(slug: params[:theme_slug])
+    if @agenda_theme.blank?
+      render_404 and return
+    end
     @agendas = @agenda_theme.agendas
     @speaker_positions = @agenda_theme.speaker_positions
     @speakers = Speaker.of_position(@speaker_positions)
