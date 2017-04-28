@@ -47,6 +47,15 @@
   }
 }
 
+.media {
+  .media-meta {
+    color: $gray-light;
+    span {
+      margin-right: $font-size-base;
+    }
+  }
+}
+
 .page-block {
   padding-top: 1.5em;
   padding-bottom: 1.5em;

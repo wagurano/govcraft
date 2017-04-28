@@ -10,6 +10,8 @@ class Petition < ApplicationRecord
   mount_uploader :cover_image, ImageUploader
   mount_uploader :social_image, ImageUploader
 
+  validates :signs_goal_count, :numericality => { :greater_than_or_equal_to => 0 }
+
   scope :recent, -> { order('id DESC') }
 
   def signed? someone

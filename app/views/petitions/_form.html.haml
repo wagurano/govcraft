@@ -1,42 +1,62 @@
-= form_for @petition do |f|
-  - if @project.present?
-    = f.hidden_field :project_id, value: @project.id
+.panel.panel-default
+  .panel-body
+    = form_for @petition do |f|
 
-  .form-group
-    = f.label :title
-    = f.text_field :title, class: 'form-control'
+      - if @petition.errors
+        .alert.alert-danger
+          %ul.list-unstyled
+            - @petition.errors.full_messages.each do |msg|
+              %li= msg
 
-  .form-group
-    = f.label :signs_goal_count
-    = f.number_field :signs_goal_count, class: 'form-control'
+      %fieldset
+        %legend 기본정보
 
-  .form-group
-    = f.label :body
-    ~ f.text_area :body, class: 'form-control redactor'
+        - if @project.present?
+          = f.hidden_field :project_id, value: @project.id
 
-  .form-group
-    = f.label :cover_image
-    = f.file_field :cover_image, class: 'form-control'
+        .form-group
+          = f.label :title
+          = f.text_field :title, class: 'form-control'
 
-  .form-group
-    = f.label :social_image
-    = f.file_field :social_image, class: 'form-control'
+        .form-group
+          = f.label :signs_goal_count
+          = f.number_field :signs_goal_count, class: 'form-control'
+          %p.help-block
+            목표인수를 따로 정하지 않으려면 0으로 입력해 주세요.
 
-  .form-group
-    = f.label :thanks_mention
-    ~ f.text_area :thanks_mention, class: 'form-control redactor'
-  %p.help-block
-    비워두시면, 서명 이후에 '#{t('messages.signed')}'라는 문구로 표시됩니다.
-    %br
-    {{number}}라고 쓰시면 그자리에 서명 순번이 표시됩니다.
+        .form-group
+          = f.label :body
+          ~ f.text_area :body, class: 'form-control redactor'
 
-  .form-group
-    = f.label :comment_enabled
-    = f.check_box :comment_enabled, class: 'form-control'
+        .form-group
+          = f.label :cover_image
+          = f.file_field :cover_image, class: 'form-control'
 
-  .form-group
-    = f.label :sign_title
-    = f.text_field :sign_title, class: 'form-control'
+        %legend.m-t 추가 기능
 
-  .form-group
-    = f.submit '저장', class: 'btn btn-primary'
+        .form-group
+          .checkbox
+            %label
+              = f.check_box :comment_enabled
+              = Petition.human_attribute_name("comment_enabled")
+
+        .form-group
+          = f.label :sign_title
+          = f.text_field :sign_title, class: 'form-control'
+          %p.help-block
+            서명 폼의 제목을 정할 수 있습니다.
+
+        .form-group
+          = f.label :social_image
+          = f.file_field :social_image, class: 'form-control'
+
+        .form-group
+          = f.label :thanks_mention
+          ~ f.text_area :thanks_mention, class: 'form-control redactor'
+          %p.help-block
+            비워두시면, 서명 이후에 '#{t('messages.signed')}'라는 문구로 표시됩니다.
+            %br
+            {{number}}라고 쓰시면 그자리에 서명 순번이 표시됩니다.
+
+        .form-group
+          = f.submit '저장', class: 'btn btn-primary btn-lg'
