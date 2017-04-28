@@ -36,4 +36,29 @@ namespace :data do
     end
   end
 
+  desc '이벤트 이미지 데이터를 받습니다'
+  task 'download_event', [:id] => :environment do |task, args|
+    event = Event.find args[:id]
+    Dir.mktmpdir do |dir|
+      zipFileName = "event_#{event.id}.zip"
+      Zip::File.open(zipFileName, Zip::File::CREATE) do |zipFile|
+        event.comments.each do |comment|
+          next if comment.read_attribute(:image).blank?
+          puts comment.image.url
+          file_name = "#{comment.id}_#{comment.read_attribute(:image)}"
+          file_path = File.join(dir, file_name)
+          if comment.image.file.respond_to?(:url)
+            # s3
+            File.open(file_path, 'wb') do |file|
+              file << open(comment.image.url).read
+            end
+          else
+            # local storage
+            FileUtils.cp(comment.image.path, file_path)
+          end
+          zipFile.add(file_name, file_path)
+        end
+      end
+    end
+  end
 end
