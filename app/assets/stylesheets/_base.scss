@@ -196,3 +196,15 @@ label.error {
   .margin-xs-12 { margin-top: 12px; }
 }
 
+#footer {
+  background-color: $gray-darker;
+  color: $gray-lightest;
+  padding: $font-size-base 0;
+  a {
+    color: $gray-lightest;
+    margin-right: $font-size-base;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
