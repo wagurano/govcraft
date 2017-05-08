@@ -13,7 +13,7 @@ class PetitionsController < ApplicationController
     @signs = params[:mode] == 'widget' ? @signs.limit(10) : @signs.page(params[:page])
 
     if params[:mode] == 'widget'
-      render layout: 'strip'
+      render '_widget', layout: 'strip'
     end
   end
 

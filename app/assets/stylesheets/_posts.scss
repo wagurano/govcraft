@@ -6,9 +6,6 @@
   padding-top: 80px;
   padding-bottom: 40px;
 
-  h1.huge.header {
-    font-size: 48px;
-  }
   .project_share {
     margin-bottom: 48px;
   }
@@ -16,6 +13,7 @@
   .current-user-status {
     margin-top: -86px;
   }
+
   &__project a {
     color: $gray-lighter;
     &:hover {
@@ -64,6 +62,51 @@
       &__list {
         padding: 14px 0;
       }
+    }
+  }
+}
+
+.panel-post {
+  .panel-heading {
+    padding: $font-size-base * 5 10px;
+    text-align: center;
+  }
+  &.panel-default .panel-heading {
+    background-color: #fff;
+  }
+  .panel-body {
+    border-bottom: 1px solid #ddd;
+    padding: $font-size-base * 3;
+    &:last-child {
+      border-bottom: none;
+    }
+    .panel-post__body {
+      font-size: 1.25em;
+    }
+  }
+  .sign-panel {
+    &__status__count {
+      text-align: right;
+      font-size: $font-size-small;
+    }
+    &__users {
+      border-bottom: 1px solid $gray-lighter;
+      padding: $font-size-base 0;
+      word-break: keep-all;
+      .sign {
+        display: inline-block;
+        color: $gray-lightest;
+        margin: 2px;
+        a {
+          color: $gray-lighter;
+        }
+      }
+    }
+    &__list {
+      padding: $font-size-base 0;
+    }
+    &__form {
+      padding: $font-size-base 0;
     }
   }
 }

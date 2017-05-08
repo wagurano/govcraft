@@ -54,21 +54,21 @@
   - if petition.signs_count > 0
     - if !local_assigns[:hide_users]
       .sign-panel__users
-        %h4 참여자
-        %div
-          - petition.signs.recent.limit(first_sign_users_count).each do |sign|
-            = image_tag 'icon-candle.png', width: 20, height: 20, class: 'img-circle'
-            = sign.user_name
-          - if petition.signs.count > first_sign_users_count
-            - if local_assigns[:widget]
-              = link_to "... #{petition.signs.count - first_sign_users_count}명 더보기", petition_url(@petition), target: '_blank'
-            - else
-              = link_to "... #{petition.signs.count - first_sign_users_count}명 더보기", petition_signs_path(petition)
+        - petition.signs.recent.limit(first_sign_users_count).each do |sign|
+          %i.fa.fa-user
+          = sign.user_name
+        - if petition.signs.count > first_sign_users_count
+          - if local_assigns[:widget]
+            = link_to "... #{petition.signs.count - first_sign_users_count}명 더보기", petition_url(@petition), target: '_blank'
+          - else
+            = link_to "... #{petition.signs.count - first_sign_users_count}명 더보기", petition_signs_path(petition)
 
     .sign-panel__list
       - @signs.each do |sign|
         %div
-          %span.text-primary= sign.user_name
+          %strong
+            %i.fa.fa-user
+            = sign.user_name
           = raw(screened(sign, :body))
           - if !local_assigns[:widget]
             %small

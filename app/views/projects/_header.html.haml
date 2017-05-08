@@ -1,19 +1,19 @@
 %section.cover-section{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(project.image_url(:lg))});"}
   .container
-    %h1
+    %h1.cover-section__title
       %small.label.label-danger{ style: 'font-size: .5em;' }= Project.model_name.human
       %br
       = project.title
 
-    .buttons
-      - if can? :edit, project
-        = link_to '수정', edit_project_path(project), class: 'ui button'
-      - if can? :destroy, project
-        = link_to '삭제', project, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'ui button'
-      - if can? :edit, project
-        = link_to '이벤트만들기', new_event_path(project_id: project.id), class: 'ui button'
-
     - if params[:controller] == 'projects'
+      .buttons
+        - if can? :edit, project
+          = link_to '수정', edit_project_path(project), class: 'ui button'
+        - if can? :destroy, project
+          = link_to '삭제', project, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'ui button'
+        - if can? :edit, project
+          = link_to '이벤트만들기', new_event_path(project_id: project.id), class: 'ui button'
+
       .share{ style: 'margin-top: 14px;' }
         .share-box{ 'data-share-image': image_url(project.image) }
 
