@@ -1,33 +1,32 @@
 - if @project
   = render 'projects/header', project: @project
 
-%section#discussion-block.page-block.post-block
+%section#discussion-block.page-block
   .container
-    .post-block__title
-      %h3= @discussion.title
-
-    .post-block__info
-      .row
-        .col-xs-6
-          %span.post-block__user
+    .panel.panel-default.panel-post
+      .panel-heading
+        %h2= @discussion.title
+        %p
+          %span.panel-post__user
             = link_to @discussion.user.nickname
-          %span.post-block__date
+          %span.panel-post__date
             = date_f @discussion.created_at
           - if can? :edit, @discussion
             = link_to '수정', edit_discussion_path(@discussion)
           - if can? :destroy, @discussion
             = link_to '삭제', @discussion, method: :delete, data: { confirm: '삭제하시겠습니까?' }
-        .col-xs-6.text-right
-          조회 #{@discussion.views_count}
+          %span 조회 #{@discussion.views_count}
 
-    .post-block__body
-      = raw @discussion.body
+      .panel-body
+        .panel-post__body
+          = raw @discussion.body
 
-    .post-block__like
-      = render 'likes/button', likable: @discussion
+        .panel-post__like.text-center
+          = render 'likes/button', likable: @discussion
 
-    .post-block__share.text-center
-      .share-box{ 'data-share-image': image_url('seo.png') }
+        .panel-post__share.text-center
+          .share-box{ 'data-share-image': image_url('seo.png') }
 
-    .post-block__comments
-      = render 'comments/list', commentable: @discussion
+      .panel-body
+        .panel-post__comments
+          = render 'comments/list', commentable: @discussion
