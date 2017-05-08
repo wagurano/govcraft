@@ -49,18 +49,6 @@ module ApplicationHelper
     !browser.device.mobile? and !browser.device.tablet?
   end
 
-  def hide_gnb_and_footer?
-    ( params[:controller] == 'projects' && params[:action] == 'show' ) ||
-    ( params[:controller] == 'projects' && params[:action] == 'events' ) ||
-    ( params[:controller] == 'polls' && params[:action] == 'show' ) ||
-    ( params[:controller] == 'surveys' && params[:action] == 'show' ) ||
-    ( params[:controller] == 'petitions' && params[:action] == 'show' ) ||
-    ( params[:controller] == 'wikis' && params[:action] == 'show' ) ||
-    ( params[:controller] == 'discussions' && params[:action] == 'show' ) ||
-    ( params[:controller] == 'events' && params[:action] == 'show' ) ||
-    ( params[:controller] == 'speeches' && params[:action] == 'index' )
-  end
-
   def excerpt(text, options = {})
     options[:length] = 130 unless options.has_key?(:length)
     truncate((strip_tags(text).try(:html_safe)), options)
