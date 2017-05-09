@@ -31,7 +31,7 @@ production:
 기본적인 Rail 개발 환경에 rbenv, pow/powder를 이용합니다.
 
 ```
-$ rbenv install 2.3.1
+$ rbenv install 2.3.4
 $ bundle install
 ```
 
