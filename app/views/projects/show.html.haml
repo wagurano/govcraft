@@ -1,21 +1,45 @@
 = render 'header', project: @project
 
 %a{id: "anchor-project-event"}
-= render 'events/list', project: @project, events: @project.events.recent
 
-- if @project.discussion_enabled?
-  %a{id: "anchor-project-discussion"}
-  = render 'discussions/list_in_project', discussions: @project.discussions.recent
+/ 민달팽이 경지님 요청 kimhyunmi101 - 2017.06.13
+- if 'kimhyunmi101' == @project.slug
 
-- if @project.poll_enabled?
-  %a{id: "anchor-project-poll-and-survey"}
-  = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent
+  - if @project.discussion_enabled?
+    %a{id: "anchor-project-discussion"}
+    = render 'discussions/list_in_project', discussions: @project.discussions.recent
 
-- if @project.petition_enabled?
-  %a{id: "anchor-project-petition"}
-  = render 'petitions/list_in_project', petitions: @project.petitions.recent
+  - if @project.poll_enabled?
+    %a{id: "anchor-project-poll-and-survey"}
+    = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent
 
-- if @project.wiki_enabled?
-  %a{id: "anchor-project-wiki"}
-  = render 'wikis/list_in_project', wikis: @project.wikis.recent
+  = render 'events/list', project: @project, events: @project.events.recent
+
+  - if @project.petition_enabled?
+    %a{id: "anchor-project-petition"}
+    = render 'petitions/list_in_project', petitions: @project.petitions.recent
+
+  - if @project.wiki_enabled?
+    %a{id: "anchor-project-wiki"}
+    = render 'wikis/list_in_project', wikis: @project.wikis.recent
+
+
+- else
+  = render 'events/list', project: @project, events: @project.events.recent
+
+  - if @project.discussion_enabled?
+    %a{id: "anchor-project-discussion"}
+    = render 'discussions/list_in_project', discussions: @project.discussions.recent
+
+  - if @project.poll_enabled?
+    %a{id: "anchor-project-poll-and-survey"}
+    = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent
+
+  - if @project.petition_enabled?
+    %a{id: "anchor-project-petition"}
+    = render 'petitions/list_in_project', petitions: @project.petitions.recent
+
+  - if @project.wiki_enabled?
+    %a{id: "anchor-project-wiki"}
+    = render 'wikis/list_in_project', wikis: @project.wikis.recent
 
