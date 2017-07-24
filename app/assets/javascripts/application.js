@@ -9,6 +9,7 @@
 //= require redactor2_rails/config
 //= require redactor
 //= require redactor2_rails/langs/ko
+//= require fontcolor
 //= require jssocials
 //= require chartkick
 //= require select2
@@ -39,7 +40,8 @@ $(document).imagesLoaded( { }, function() {
           UnobtrusiveFlash.showFlashMessage(json.error.data[0], {type: 'notice'})
         }
       },
-      toolbarFixed: false,
+      toolbarFixed: true,
+      plugins: ['fontcolor']
     });
     $('.redactor .redactor-editor').prop('contenteditable', true);
     $('select.dropdown').dropdown();

@@ -15,15 +15,18 @@
 
     .post-block__info
       %span.post-block__user
-        = link_to @wiki_revision.user.nickname
+        = render 'users/line', user: @wiki_revision.user
       %span.post-block__date
         = date_f @wiki_revision.created_at
       - if can? :edit, wiki
         = link_to '되돌리기', revert_wiki_revision_path(@wiki_revision), method: :put
 
-    .post-block__body
-      = raw @wiki_revision.body
+    .panel.panel-default.post-block__body
+      .panel-body
+        = raw @wiki_revision.body
 
     .post-block__note
       %h4 메모
-      = simple_format @wiki_revision.note
+      .panel.panel-default
+        .panel-body
+          = simple_format @wiki_revision.note
