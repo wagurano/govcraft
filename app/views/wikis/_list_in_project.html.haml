@@ -1,32 +1,32 @@
 %section#wikis-in-project
   .container
     .page-header
-      %h2
+      %h3
         = local_assigns[:title_label] || @project.try(:component_title, 'wiki')
         %small.pull-right
           = link_to "페이지 추가", new_wiki_path(project_id: @project), class: 'btn btn-default btn-sm'
-    - if wikis.any?
-      .ui.divided.items
-        - wikis.each do |wiki|
-          .item
-            .content
-              .ui.right.floated.button
-                %i.fa.fa-edit
-                = wiki.wiki_revisions.count
 
-              %h4.header
-                = link_to wiki do
-                  = wiki.title
-                  - if wiki.comments.count > 0
-                    %small
-                      (#{wiki.comments.count})
-              .meta
-                - if @project.nil? && wiki.project
-                  .ui.basic.small.label
-                    = wiki.project.title
-                %span.nickname
-                  %i.user.icon
-                  = wiki.wiki_revisions.last.user.nickname
+    - if wikis.any?
+      .panel.panel-default
+        .list-group
+          - wikis.each do |wiki|
+            .list-group-item
+              .media
+                .media-body
+                  %h4.media-heading
+                    = link_to wiki do
+                      = wiki.title
+                      - if wiki.comments.count > 0
+                        %small
+                          (#{wiki.comments.count})
+                  .media-meta
+                    %span.nickname
+                      최종 수정자
+                      = render 'users/line', user: wiki.wiki_revisions.last.user
+                .media-right
+                  .pull-right
+                    .btn.btn-default
+                      #{wiki.wiki_revisions.count}차례 수정
 
     - else
       - if @project.present?

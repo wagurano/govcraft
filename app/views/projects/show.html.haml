@@ -25,6 +25,10 @@
 
 
 - else
+  - if @project.wiki_enabled?
+    %a{id: "anchor-project-wiki"}
+    = render 'wikis/list_in_project', wikis: @project.wikis.recent
+
   = render 'events/list', project: @project, events: @project.events.recent
 
   - if @project.discussion_enabled?
@@ -38,8 +42,4 @@
   - if @project.petition_enabled?
     %a{id: "anchor-project-petition"}
     = render 'petitions/list_in_project', petitions: @project.petitions.recent
-
-  - if @project.wiki_enabled?
-    %a{id: "anchor-project-wiki"}
-    = render 'wikis/list_in_project', wikis: @project.wikis.recent
 
