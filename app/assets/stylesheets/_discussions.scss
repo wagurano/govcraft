@@ -44,3 +44,9 @@ section#discussions-in-project {
     }
   }
 }
+
+.discussion-categories {
+  li.active {
+    font-weight: bold;
+  }
+}

@@ -3,7 +3,8 @@
     %h1.cover-section__title
       %small.label.label-danger{ style: 'font-size: .5em;' }= Project.model_name.human
       %br
-      = project.title
+      = link_to @project do
+        = project.title
 
     - if params[:controller] == 'projects'
       .buttons

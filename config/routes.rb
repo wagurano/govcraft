@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   end
   resources :speeches
   resources :discussions
+  resources :discussion_categories
   resources :petitions do
     resources :signs
     get 'data', on: :member

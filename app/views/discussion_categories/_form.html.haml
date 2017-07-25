@@ -1,0 +1,9 @@
+= form_for @discussion_category do |f|
+  = f.hidden_field :project_id, value: @discussion_category.project.id
+
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+
+  .form-group
+    = f.submit '저장', class: 'btn btn-primary'

@@ -5,10 +5,23 @@
         %h3
           = local_assigns[:title_label] || @project.try(:component_title, 'discussion')
           %small.pull-right
-            = link_to "게시글 쓰기", new_discussion_path(project_id: @project), class: 'btn btn-default btn-sm'
+            = link_to "게시글 쓰기", new_discussion_path(project_id: @project, discussion_category_id: params[:discussion_category_id]), class: 'btn btn-default btn-sm'
+            - if can? :manage, @project
+              = link_to "#{DiscussionCategory.model_name.human} 추가", new_discussion_category_path(project_id: @project), class: 'btn btn-default btn-sm'
       - else
         %h3
           = Discussion.model_name.human
+
+    - if @project.present? and @project.discussion_categories.any?
+      %ul.list-inline.discussion-categories
+        %li{ class: ('active' if params[:discussion_category_id].blank?) }
+          = link_to "전체(#{discussions.count})", discussions_path(project_id: @project)
+        - @project.discussion_categories.each do | discussion_category |
+          \|
+          %li{ class: ('active' if discussion_category.id.to_s == params[:discussion_category_id]) }
+            = link_to "#{discussion_category.title}#{"(#{discussion_category.discussions_count})" if discussion_category.discussions_count > 0}", discussions_path(project_id: @project, discussion_category_id: discussion_category.id)
+            - if can? :manage, @project
+              = link_to "삭제", discussion_category_path(discussion_category), method: :delete, class: 'btn btn-default btn-xs', data: { confirm: '삭제하시겠습니까?' }
 
     - if discussions.any?
       .panel.panel-default
@@ -50,4 +63,4 @@
         .alert.alert-info
           %i.inbox.icon
           아직 게시글이 없습니다. 이야기를 시작해 볼까요?
-          = link_to "게시글 쓰기", new_discussion_path(project_id: @project), class: 'alert-link'
+          = link_to "게시글 쓰기", new_discussion_path(project_id: @project, discussion_category_id: params[:discussion_category_id]), class: 'alert-link'

@@ -16,6 +16,7 @@
           - if can? :destroy, @discussion
             = link_to '삭제', @discussion, method: :delete, data: { confirm: '삭제하시겠습니까?' }
           %span 조회 #{@discussion.views_count}
+          %span= @discussion.discussion_category.try(:title)
 
       .panel-body
         .panel-post__body

@@ -64,7 +64,7 @@ class BulkTaskJob
           else
             model_instance = @bulk_task.target_model.find_by(id: id)
             if model_instance.blank?
-              @bulk_task.set_current_error '해당 조직 없음'
+              @bulk_task.set_current_error '해당 데이터 없음'
               next
             end
           end

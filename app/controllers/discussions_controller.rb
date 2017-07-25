@@ -4,6 +4,10 @@ class DiscussionsController < ApplicationController
 
   def index
     @discussions = Discussion.recent
+
+    @project = Project.find_by(slug: params[:project_id]) if params[:project_id]
+    @discussions = @discussions.where(project: @project) if @project.present?
+    @discussions = @discussions.where(discussion_category_id: params[:discussion_category_id]) if params[:discussion_category_id]
   end
 
   def show
@@ -14,6 +18,7 @@ class DiscussionsController < ApplicationController
 
   def new
     @project = Project.find(params[:project_id]) if params[:project_id]
+    @discussion.discussion_category_id = params[:discussion_category_id] if params[:discussion_category_id]
   end
 
   def create
@@ -30,11 +35,13 @@ class DiscussionsController < ApplicationController
   end
 
   def update
-    if @discussion.update(discussion_params)
-      redirect_to @discussion
-    else
-      render 'edit'
+    @discussion.assign_attributes(discussion_params)
+
+    if @discussion.save
+      redirect_to @discussion and return
     end
+
+    render 'edit'
   end
 
   def destroy
@@ -45,7 +52,7 @@ class DiscussionsController < ApplicationController
   private
 
   def discussion_params
-    params.require(:discussion).permit(:title, :body, :project_id)
+    params.require(:discussion).permit(:title, :body, :project_id, :discussion_category_id)
   end
 
   def reset_meta_tags

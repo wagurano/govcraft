@@ -46,6 +46,7 @@ ko:
       opinion: 의견
       project: 프로젝트
       discussion: 게시판
+      discussion_category: 카테고리
       petition: 서명
       poll: 찬반투표
       survey: 설문
@@ -87,6 +88,9 @@ ko:
       discussion:
         title: 제목
         body: 내용
+        discussion_category: 카테고리
+      discussion_category:
+        title: 제목
       petition:
         title: 제목
         body: 내용

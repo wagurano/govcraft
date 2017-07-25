@@ -10,6 +10,7 @@ class Project < ApplicationRecord
   has_many :events, dependent: :destroy
   has_many :surveys, dependent: :destroy
   has_many :participations, dependent: :destroy
+  has_many :discussion_categories, dependent: :destroy
 
   mount_uploader :image, ImageUploader
 

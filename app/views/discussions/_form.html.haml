@@ -2,6 +2,10 @@
   - if @project.present?
     = f.hidden_field :project_id, value: @project.id
 
+  - if @project.present? and @project.discussion_categories.any?
+    .form-group
+      = f.label :discussion_category
+      = f.select :discussion_category_id, options_for_select( @project.discussion_categories.map { |c| [ c.title, c.id ] }, @discussion.discussion_category_id ), {}, class: 'form-control'
   .form-group
     = f.label :title
     = f.text_field :title, class: 'form-control'
