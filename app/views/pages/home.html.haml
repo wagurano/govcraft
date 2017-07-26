@@ -1,75 +1,58 @@
-%section#home-section
+%section#about-section
   .container
-    %h2.main-title
-      우주당은 시민의 힘으로 만드는
+    %h2
+      더 많은 우주인들을 통해<br/>
+      %span
+        새로운 정치
+      가<br/>
+      쏘아올려질 수 있도록
       %br
-      %span.bold
-        직접 민주주의 프로젝트 정당
-      입니다.
-    %p
-      = link_to 'http://slack.wouldyouparty.org', target: '_blank', class: 'alert-link' do
-        %i.fa.fa-slack
-        우주당 슬랙 초대장 받기
-      = link_to 'https://wouldyou.parti.xyz/', target: '_blank', class: 'alert-link' do
-        %i.fa.fa-comments
-        우주당 빠띠로 가기
-/ #site-hero-carousel.carousel.slide{"data-ride" => "carousel"}
-/   .carousel-inner{:role => "listbox"}
-/     .item.embed-responsive.embed-responsive-16by9.active{ style: "background-image: url(#{image_url('wouldyou_main.png')})" }
-/       .carousel-caption
-/         %p.lead
-/           우주당은 시민의 힘으로 만드는
-/           %br.visible-xs
-/           %strong
-/             "직접 민주주의 프로젝트 정당"
-/           입니다.
-/     .item.embed-responsive.embed-responsive-16by9{ style: "background-image: url(#{image_url('top/mw-voteforwomen.png')})" }
-/       = link_to 'http://zine.wouldyouparty.org/201703.html', target: '_blank' do
-/         .carousel-caption
-/           %p.lead
-/             해결하고 싶었던 이슈를 좀 더 재미있게
-/             %br.visible-xs
-/             %strong
-/               <월간 우주당>
-/             이 시작됩니다.
-/     .item.embed-responsive.embed-responsive-16by9{ style: "background-image: url(#{image_url('top/sewolarchive.jpg')})" }
-/       = link_to 'http://sewolarchive.org', target: '_blank' do
-/         .carousel-caption
-/           %p.lead
-/             %strong
-/               <세월호 아카이브>
-/             를 구축합니다
-
-/   %a.left.carousel-control{"data-slide" => "prev", :href => "#site-hero-carousel", :role => "button"}
-/     %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
-/     %span.sr-only Previous
-/   %a.right.carousel-control{"data-slide" => "next", :href => "#site-hero-carousel", :role => "button"}
-/     %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
-/     %span.sr-only Next
-
-%section.page-block
-  .container
-    / .alert.alert-danger
-    /   = link_to 'http://slack.wouldyouparty.org', target: '_blank', class: 'alert-link' do
-    /     %i.fa.fa-slack
-    /     우주당 슬랙 초대장 받기
-    /   우주당 당원들이 지금 슬랙에서 이야기를 나누는 중입니다. 함께 수다 떨어요!
-
-    / .alert.alert-info
-    /   = link_to 'https://wouldyou.parti.xyz/', target: '_blank', class: 'alert-link' do
-    /     %i.fa.fa-comments
-    /     우주당 빠띠로 가기
-    /   우주당 당원들이 빠띠에 모여 프로젝트를 진행하고 있습니다. 구경해 보실까요?
-
-
-%section.page-block
-  .container
-    %h3= Project.model_name.human
-    .row.masonry-container
-      = render @projects
-
-%section.page-block
-  .container
-    %h3= Memorial.model_name.human
-    .row.masonry-container
-      = render @memorials
+%section#agenda-section
+  %h5.text-center
+    진행 중인 아젠다<br/>
+    ㅡ
+  .row
+    .col-md-1
+    .col-md-2
+      .agenda-card{style:"color:#EB6E7B;"}
+        %i.glyphicon.glyphicon-book
+        %br
+        %a{href:"https://wouldyou.parti.xyz/p/my-consititution", target:"_blank"}
+          개헌
+    .col-md-2
+      .agenda-card{style:"color:#BA99FD;"}
+        %i.glyphicon.glyphicon-book
+        %br
+        %a{href:"https://wouldyou.parti.xyz/p/votebetter", target:"_blank"}
+          선거법 개혁
+    .col-md-2
+      .agenda-card{style:"color:#688FE2;"}
+        %i.glyphicon.glyphicon-book
+        %br
+        %a{href:"https://wouldyou.parti.xyz/p/votebetter", target:"_blank"}
+          젠더
+    .col-md-2
+      .agenda-card{style:"color:#8A8FFC;"}
+        %i.glyphicon.glyphicon-book
+        %br
+        %a{href:"https://wouldyou.parti.xyz/p/gender", target:"_blank"}
+          기본소득
+    .col-md-2
+      .agenda-card{style:"color:#FD8BB5;"}
+        %i.glyphicon.glyphicon-book
+        %br
+        %a{href:"http://sewolarchive.org", target:"_blank"}
+          세월호
+    .col-md-1
+%section#together-section
+  더 이상 정당 중심, 특정 인물 중심의 정치만 존재하지 않도록,<br/>
+  더 쉽고 재미있고 실용적인 우리의 정치를 할 수 있는 프로젝트 정당<br/>
+  %strong{style:"font-size:20px;"}
+    우리가주인이당<br/>
+  %a{href:'https://medium.com/%EC%9A%B0%EB%A6%AC%EA%B0%80-%EC%A3%BC%EC%9D%B8%EC%9D%B4%EB%8B%B9/%EC%A7%81%EC%A0%91-%EB%AF%BC%EC%A3%BC%EC%A3%BC%EC%9D%98-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%A0%95%EB%8B%B9-%EC%9A%B0%EB%A6%AC%EA%B0%80-%EC%A3%BC%EC%9D%B8%EC%9D%B4%EB%8B%B9-66e951b4f45b'}
+    더 보기
+  <br/><br/>
+  .wouldyou-join{onclick:"window.open(\'http://slack.wouldyouparty.org/\')"}
+    %i.fa.fa-slack
+  .wouldyou-join{onclick:"window.open(\'https://www.facebook.com/groups/1820856674866416/\')"}
+    %i.fa.fa-facebook
