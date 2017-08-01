@@ -1,16 +1,33 @@
 = render 'header', project: @project
 
-%a{id: "anchor-project-event"}
-- if @project.wiki_enabled?
-  %a{id: "anchor-project-wiki"}
-  = render 'wikis/list_in_project', wikis: @project.wikis.recent
-= render 'events/list', project: @project, events: @project.events.recent
-- if @project.discussion_enabled?
-  %a{id: "anchor-project-discussion"}
-  = render 'discussions/list_in_project', discussions: @project.discussions.recent
-- if @project.poll_enabled?
-  %a{id: "anchor-project-poll-and-survey"}
-  = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent
-- if @project.petition_enabled?
-  %a{id: "anchor-project-petition"}
-  = render 'petitions/list_in_project', petitions: @project.petitions.recent
+- if 'rebootkorea' == @project.slug
+  %a{id: "anchor-project-event"}
+  - if @project.wiki_enabled?
+    %a{id: "anchor-project-wiki"}
+    = render 'wikis/list_in_project', wikis: @project.wikis.recent
+  = render 'events/list', project: @project, events: @project.events.recent
+  - if @project.poll_enabled?
+    %a{id: "anchor-project-poll-and-survey"}
+    = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent
+  - if @project.discussion_enabled?
+    %a{id: "anchor-project-discussion"}
+    = render 'discussions/list_in_project', discussions: @project.discussions.recent
+  - if @project.petition_enabled?
+    %a{id: "anchor-project-petition"}
+    = render 'petitions/list_in_project', petitions: @project.petitions.recent
+
+- else
+  %a{id: "anchor-project-event"}
+  - if @project.wiki_enabled?
+    %a{id: "anchor-project-wiki"}
+    = render 'wikis/list_in_project', wikis: @project.wikis.recent
+  = render 'events/list', project: @project, events: @project.events.recent
+  - if @project.discussion_enabled?
+    %a{id: "anchor-project-discussion"}
+    = render 'discussions/list_in_project', discussions: @project.discussions.recent
+  - if @project.poll_enabled?
+    %a{id: "anchor-project-poll-and-survey"}
+    = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent
+  - if @project.petition_enabled?
+    %a{id: "anchor-project-petition"}
+    = render 'petitions/list_in_project', petitions: @project.petitions.recent
