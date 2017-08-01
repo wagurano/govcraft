@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725110312) do
+ActiveRecord::Schema.define(version: 20170801071344) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -511,6 +511,14 @@ ActiveRecord::Schema.define(version: 20170725110312) do
     t.integer  "anonymous_likes_count",               default: 0
     t.index ["project_id"], name: "index_polls_on_project_id", using: :btree
     t.index ["user_id"], name: "index_polls_on_user_id", using: :btree
+  end
+
+  create_table "project_admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+    t.index ["project_id"], name: "index_project_admins_on_project_id", using: :btree
+    t.index ["user_id", "project_id"], name: "index_project_admins_on_user_id_and_project_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_project_admins_on_user_id", using: :btree
   end
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

@@ -11,6 +11,7 @@ class Project < ApplicationRecord
   has_many :surveys, dependent: :destroy
   has_many :participations, dependent: :destroy
   has_many :discussion_categories, dependent: :destroy
+  has_many :project_admins, dependent: :destroy
 
   mount_uploader :image, ImageUploader
 
@@ -36,6 +37,10 @@ class Project < ApplicationRecord
 
   def polls_and_surveys_recent
     [polls + surveys].flatten.sort_by(&:created_at).reverse
+  end
+
+  def project_admin? someone
+    project_admins.exists? user: someone
   end
 
   private

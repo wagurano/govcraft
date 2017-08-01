@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :archives, dependent: :restrict_with_exception
   has_many :bulk_tasks, dependent: :destroy
   has_many :send_requests, dependent: :destroy
+  has_many :project_admins, dependent: :destroy
 
   # validations
   VALID_NICKNAME_REGEX = /\A[ㄱ-ㅎ가-힣a-z0-9_]+\z/i

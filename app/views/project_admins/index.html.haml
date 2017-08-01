@@ -1,0 +1,25 @@
+%section
+  .container
+    .page-header
+      %h2 프로젝트 관리자
+
+    - if can? :update, @project
+      .well
+        .role-form
+          = form_for ProjectAdmin.new do |f|
+            = f.hidden_field :project_id, value: @project.id
+            .form-group
+              = text_field_tag :user_nickname, '', class: 'form-control'
+            = submit_tag '새로운 운영자 추가하기', class: 'btn btn-default'
+
+    .row.m-t
+      - @project.project_admins.each do |project_admin|
+        - user = project_admin.user
+        .col-sm-3
+          .well.well-sm
+            = image_tag user.image.sm, class: 'user-thumb-sm'
+            = user.nickname
+            - if can? :manage, project_admin
+              .pull-right
+                = link_to project_admin, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-default' do
+                  %i.fa.fa-trash

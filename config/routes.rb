@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   resources :projects, path: :p do
     get 'events', on: :member
   end
+  resources :project_admins
   resources :participations do
     delete :cancel, on: :collection
   end
