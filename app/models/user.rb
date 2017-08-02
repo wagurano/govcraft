@@ -19,7 +19,6 @@ class User < ApplicationRecord
   has_many :participated_projects, through: :participations, source: :project
   has_many :archives, dependent: :restrict_with_exception
   has_many :bulk_tasks, dependent: :destroy
-  has_many :send_requests, dependent: :destroy
   has_many :project_admins, dependent: :destroy
 
   # validations
