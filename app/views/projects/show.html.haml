@@ -11,7 +11,7 @@
     = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent
   - if @project.discussion_enabled?
     %a{id: "anchor-project-discussion"}
-    = render 'discussions/list_in_project', discussions: @project.discussions.recent
+    = render 'discussions/list_in_project', discussions: @project.discussions.recent.page(1).per(10)
   - if @project.petition_enabled?
     %a{id: "anchor-project-petition"}
     = render 'petitions/list_in_project', petitions: @project.petitions.recent
@@ -24,7 +24,7 @@
   = render 'events/list', project: @project, events: @project.events.recent
   - if @project.discussion_enabled?
     %a{id: "anchor-project-discussion"}
-    = render 'discussions/list_in_project', discussions: @project.discussions.recent
+    = render 'discussions/list_in_project', discussions: @project.discussions.recent.page(1).per(10)
   - if @project.poll_enabled?
     %a{id: "anchor-project-poll-and-survey"}
     = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent

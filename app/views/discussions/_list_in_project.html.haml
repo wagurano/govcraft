@@ -1,3 +1,4 @@
+- on_project_show = params[:controller] == 'projects' and params[:action] = 'show'
 %section
   .container
     .page-header
@@ -15,7 +16,7 @@
     - if @project.present? and @project.discussion_categories.any?
       %ul.list-inline.discussion-categories
         %li{ class: ('active' if params[:discussion_category_id].blank?) }
-          = link_to "전체(#{discussions.count})", discussions_path(project_id: @project)
+          = link_to "전체(#{@project.discussions.count})", discussions_path(project_id: @project)
         - @project.discussion_categories.each do | discussion_category |
           \|
           %li{ class: ('active' if discussion_category.id.to_s == params[:discussion_category_id]) }
@@ -24,8 +25,8 @@
               = link_to "삭제", discussion_category_path(discussion_category), method: :delete, class: 'btn btn-default btn-xs', data: { confirm: '삭제하시겠습니까?' }
 
     - if discussions.any?
-      .panel.panel-default
-        %table.table.hidden-xs
+      .panel.panel-default.hidden-xs
+        %table.table
           - discussions.each do |discussion|
             %tr
               %td
@@ -58,6 +59,13 @@
               %i.fa.fa-user
               = discussion.user.nickname
 
+      - if on_project_show and discussions.count < discussions.total_count
+        = link_to discussions_path(project_id: @project), class: 'btn btn-default btn-block' do
+          #{discussions.total_count}개 게시글 모두 보기
+          %i.fa.fa-arrow-right
+      - else
+        .text-center
+          = paginate discussions, theme: 'twitter-bootstrap-3'
     - else
       - if @project.present?
         .alert.alert-info

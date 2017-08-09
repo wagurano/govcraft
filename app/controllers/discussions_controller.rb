@@ -3,7 +3,7 @@ class DiscussionsController < ApplicationController
   before_action :reset_meta_tags, only: :show
 
   def index
-    @discussions = Discussion.recent
+    @discussions = Discussion.recent.page(params[:page])
 
     @project = Project.find_by(slug: params[:project_id]) if params[:project_id]
     @discussions = @discussions.where(project: @project) if @project.present?
