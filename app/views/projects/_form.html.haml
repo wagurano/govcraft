@@ -40,9 +40,14 @@
               = f.check_box :discussion_enabled
               = Project.human_attribute_name("discussion_enabled")
 
-        .col-sm-9
+        .col-sm-6
           .form-group
             = f.text_field :discussion_title, placeholder: Project.human_attribute_name("discussion_title"), class: 'form-control'
+
+        .col-sm-3
+          .form-group.form-inline
+            순서:
+            = f.text_field :discussion_sequence, class: 'form-control'
 
       .row
         .col-sm-3
@@ -51,9 +56,14 @@
               = f.check_box :poll_enabled
               = Project.human_attribute_name("poll_enabled")
 
-        .col-sm-9
+        .col-sm-6
           .form-group
             = f.text_field :poll_title, placeholder: Project.human_attribute_name("poll_title"), class: 'form-control'
+
+        .col-sm-3
+          .form-group.form-inline
+            순서:
+            = f.text_field :poll_sequence, class: 'form-control'
 
       .row
         .col-sm-3
@@ -62,9 +72,14 @@
               = f.check_box :petition_enabled
               = Project.human_attribute_name("petition_enabled")
 
-        .col-sm-9
+        .col-sm-6
           .form-group
             = f.text_field :petition_title, placeholder: Project.human_attribute_name("petition_title"), class: 'form-control'
+
+        .col-sm-3
+          .form-group.form-inline
+            순서:
+            = f.text_field :petition_sequence, class: 'form-control'
 
       .row
         .col-sm-3
@@ -73,9 +88,20 @@
               = f.check_box :wiki_enabled
               = Project.human_attribute_name("wiki_enabled")
 
-        .col-sm-9
+        .col-sm-6
           .form-group
             = f.text_field :wiki_title, placeholder: Project.human_attribute_name("wiki_title"), class: 'form-control'
+
+        .col-sm-3
+          .form-group.form-inline
+            순서:
+            = f.text_field :wiki_sequence, class: 'form-control'
+
+      .row
+        .col-sm-6
+          .form-group.form-inline
+            이벤트 순서:
+            = f.text_field :event_sequence, class: 'form-control'
 
       %hr
 

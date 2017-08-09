@@ -50,7 +50,8 @@ class ProjectsController < ApplicationController
     params.require(:project).permit(
       :title, :subtitle, :body, :image, :slug,
       :discussion_enabled, :poll_enabled, :petition_enabled, :wiki_enabled,
-      :discussion_title, :poll_title, :petition_title, :wiki_title
+      :discussion_title, :poll_title, :petition_title, :wiki_title,
+      :discussion_sequence, :poll_sequence, :petition_sequence, :wiki_sequence, :event_sequence
     )
   end
 
