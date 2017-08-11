@@ -46,8 +46,7 @@ class Project < ApplicationRecord
   DEFAULT_SORTED_COMPONENT_NAMES = %i(wiki event discussion poll petition)
   def component_sequence(component_name)
     attr = :"#{component_name}_sequence"
-    return 0 unless respond_to?(attr)
-    (read_attribute(attr) * 10) + DEFAULT_SORTED_COMPONENT_NAMES.index(component_name.to_sym)
+    ((try(attr) || 0) * 10) + DEFAULT_SORTED_COMPONENT_NAMES.index(component_name.to_sym)
   end
 
   def component_names_sorted
