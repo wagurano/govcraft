@@ -42,7 +42,7 @@
     %span.nav-toxic{ style: 'margin-left: 14px' }
       = link_to event_path(@event, {toxic: true}) do
         %i.fa.fa-warning
-        박제된 의견
+        검토 중인 의견
         (#{@event.comments.where(toxic: true).count})
 
 
