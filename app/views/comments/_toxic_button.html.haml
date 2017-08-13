@@ -1,0 +1,5 @@
+%span.link-toxic
+  - if comment.toxic?
+    = link_to '박제취소', comment_path(comment, {comment: {toxic: false}}), method: :put, remote: true
+  - else
+    = link_to '박제', comment_path(comment, {comment: {toxic: true}}), method: :put, remote: true

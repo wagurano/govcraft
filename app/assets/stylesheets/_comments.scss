@@ -39,3 +39,12 @@
     }
   }
 }
+
+.comment.comment-toxic {
+  .comment__body::before {
+    color: $gray-lightest;
+    background-color: $brand-danger;
+    content: '소중한 의견 감사합니다. 검찰에서 만나요.';
+    padding: 2px 4px;
+  }
+}

@@ -38,7 +38,15 @@
           = link_to tag.name, event_path(event, {tag: tag.name})
           %small.text-muted
             = tag.count
-%section
+
+    %span.nav-toxic{ style: 'margin-left: 14px' }
+      = link_to event_path(@event, {toxic: true}) do
+        %i.fa.fa-warning
+        박제된 의견
+        (#{@event.comments.where(toxic: true).count})
+
+
+%section{ style: 'margin: 28px 0;' }
   .container-fluid
     .row.masonry-container
       .col-sm-6.col-md-4.col-lg-3
@@ -66,9 +74,10 @@
               = f.submit '작성', class: 'btn btn-primary btn-sm btn-block'
 
       - comments = params[:tag].present? ? event.comments.tagged_with(params[:tag]) : event.comments
-      - comments.order('id DESC').each do |comment|
+      - comments = params[:toxic].present? ? comments.where(toxic: true) : comments.where(toxic: false)
+      - comments.recent.each do |comment|
         .col-sm-6.col-md-4.col-lg-3
-          .panel.panel-default.panel-floating[comment]
+          .panel.panel-default.panel-floating[comment]{ class: (comment.toxic? ? 'comment-toxic': '') }
             .panel-body
               .comment__body
                 %h4{ style: 'font-size: 16px; letter-spacing: -0.02em; line-height: 1.4;'}= smart_format comment.body
@@ -82,5 +91,6 @@
                   = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
                 - if current_user != comment.user
                   = render 'reports/button', reportable: comment
+
               .comment__like{ style: 'margin-top: 14px;' }
                 = render 'likes/button', likable: comment

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170809085353) do
+ActiveRecord::Schema.define(version: 20170812225249) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -246,10 +246,10 @@ ActiveRecord::Schema.define(version: 20170809085353) do
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
     t.string   "commentable_type"
-    t.integer  "commentable_id",                                  null: false
+    t.integer  "commentable_id",                                      null: false
     t.text     "body",                  limit: 65535
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.string   "choice"
     t.string   "commenter_name"
     t.string   "commenter_email"
@@ -260,6 +260,7 @@ ActiveRecord::Schema.define(version: 20170809085353) do
     t.float    "longitude",             limit: 24
     t.string   "full_street_address"
     t.integer  "anonymous_likes_count",               default: 0
+    t.boolean  "toxic",                               default: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
@@ -513,7 +514,7 @@ ActiveRecord::Schema.define(version: 20170809085353) do
     t.index ["user_id"], name: "index_polls_on_user_id", using: :btree
   end
 
-  create_table "project_admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "project_admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.integer "user_id"
     t.integer "project_id"
     t.index ["project_id"], name: "index_project_admins_on_project_id", using: :btree

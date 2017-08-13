@@ -1,0 +1,2 @@
+$('#comment_<%= @comment.id %>').toggleClass('comment-toxic');
+$('#comment_<%= @comment.id %>').find('.link-toxic').replaceWith('<%= j(render('comments/toxic_button', comment: @comment)) %>');

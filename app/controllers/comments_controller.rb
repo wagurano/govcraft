@@ -21,6 +21,10 @@ class CommentsController < ApplicationController
     redirect_back(fallback_location: root_path, i_am: params[:i_am])
   end
 
+  def update
+    @comment.update(comment_params)
+  end
+
   def destroy
     @comment.destroy
     redirect_to :back
@@ -33,7 +37,8 @@ class CommentsController < ApplicationController
       :body, :commentable_id, :commentable_type,
       :commenter_name, :commenter_email,
       :full_street_address,
-      :tag_list, :image
+      :tag_list, :image,
+      :toxic
     )
   end
 end

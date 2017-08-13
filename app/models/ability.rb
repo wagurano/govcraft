@@ -23,11 +23,15 @@ class Ability
       can [:update, :destroy], [
           Project, Discussion, Petition, Poll, Survey, Wiki,
           Memorial, Timeline, TimelineDocument, Event,
-          Comment, Sign, Election, Candidate, Article, Person,
+          Sign, Election, Candidate, Article, Person,
           Race, Player
         ], :user_id => user.id
       can :update, Project do |project|
         user == project.user or project.project_admin?(user)
+      end
+
+      can :destroy, Comment do |comment|
+        comment.toxic == false && user == comment.user
       end
 
       can :data, [Petition], user_id: user.id
