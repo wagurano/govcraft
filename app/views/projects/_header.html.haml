@@ -1,44 +1,37 @@
 %section.cover-section{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(project.image_url(:lg))});"}
   .container
-    %h1.cover-section__title
-      %small.label.label-danger{ style: 'font-size: .5em;' }= Project.model_name.human
-      %br
-      = link_to @project do
-        = project.title
+    %div{ style: 'background-color: rgba(0,0,0,0.5) !important; padding: 30px;' }
+      %h1.cover-section__title.text-center
+        %small.label.label-danger{ style: 'font-size: .5em;' }= Project.model_name.human
+        %br
+        = link_to @project do
+          = project.title
 
-    - if params[:controller] == 'projects'
-      .buttons
-        - if can? :edit, project
-          = link_to '수정', edit_project_path(project), class: 'btn btn-link'
-        - if can? :destroy, project
-          = link_to '삭제', project, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-link'
-        - if can? :edit, project
-          = link_to '이벤트만들기', new_event_path(project_id: project.id), class: 'btn btn-link'
-        - if can? :edit, project
-          = link_to '운영자', project_admins_path(project_id: project.id), class: 'btn btn-link'
+      - if params[:controller] == 'projects'
+        .cover-section__buttons.text-center
+          - if can? :edit, project
+            = link_to '수정', edit_project_path(project), class: 'btn btn-link'
+          - if can? :destroy, project
+            = link_to '삭제', project, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-link'
+          - if can? :edit, project
+            = link_to '이벤트추가', new_event_path(project_id: project.id), class: 'btn btn-link'
+          - if can? :edit, project
+            = link_to '운영자관리', project_admins_path(project_id: project.id), class: 'btn btn-link'
 
-      .share{ style: 'margin-top: 14px;' }
-        .share-box{ 'data-share-image': image_url(project.image) }
+        .cover-section__body{ style: 'padding: 20px; margin: 0 auto; font-size: 15px;'}
+          - if project.subtitle.present?
+            %h3= project.subtitle
+          - if project.id == 7
+            .project-video.row
+              .col-sm-12
+                .embed-responsive.embed-responsive-16by9
+                  %iframe.embed-responsive-item{:allowfullscreen => "", :frameborder => "0", :mozallowfullscreen => "", :src => "https://www.youtube.com/embed/AgvL7fnPsCs", :webkitallowfullscreen => ""}
+              .col-sm-12.help-block
+                Kevin MacLeod의 Griphop은(는) Creative Commons Attribution 라이선스(https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여됩니다.
+                %br
+                출처: http://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100413
+                %br
+                아티스트: http://incompetech.com/
+          = smart_format project.body
 
-- if params[:controller] == 'projects'
-  %section.page-block{ style: 'background-color: #eee' }
-    .container
-      - if project.subtitle.present?
-        %h3= project.subtitle
-      - if project.id == 7
-        .project-video.row
-          .col-sm-12
-            .embed-responsive.embed-responsive-16by9
-              %iframe.embed-responsive-item{:allowfullscreen => "", :frameborder => "0", :mozallowfullscreen => "", :src => "https://www.youtube.com/embed/AgvL7fnPsCs", :webkitallowfullscreen => ""}
-          .col-sm-12.help-block
-            Kevin MacLeod의 Griphop은(는) Creative Commons Attribution 라이선스(https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여됩니다.
-            %br
-            출처: http://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100413
-            %br
-            아티스트: http://incompetech.com/
-      = smart_format project.body
-
-      %h5
-        %i.fa.fa-user
-        = link_to project.user.nickname, project.user
-        님의 제안
+        .share-box.text-center{ 'data-share-image': image_url(project.image) }
