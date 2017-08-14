@@ -43,7 +43,7 @@
       = link_to event_path(@event, {toxic: true}) do
         %i.fa.fa-warning
         검토 중인 의견
-        (#{@event.comments.where(toxic: true).count})
+        (#{event.comments.where(toxic: true).count})
 
 
 %section{ style: 'margin: 28px 0;' }
@@ -73,9 +73,7 @@
                   .gov-action-recaptcha
               = f.submit '작성', class: 'btn btn-primary btn-sm btn-block'
 
-      - comments = params[:tag].present? ? event.comments.tagged_with(params[:tag]) : event.comments
-      - comments = params[:toxic].present? ? comments.where(toxic: true) : comments.where(toxic: false)
-      - comments.recent.each do |comment|
+      - @comments.recent.each do |comment|
         .col-sm-6.col-md-4.col-lg-3
           .panel.panel-default.panel-floating[comment]{ class: (comment.toxic? ? 'comment-toxic': '') }
             .panel-body
@@ -94,3 +92,5 @@
 
               .comment__like{ style: 'margin-top: 14px;' }
                 = render 'likes/button', likable: comment
+    .text-center
+      = paginate @comments, theme: 'twitter-bootstrap-3'

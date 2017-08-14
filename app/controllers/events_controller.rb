@@ -12,6 +12,7 @@ class EventsController < ApplicationController
     @hero_speech = @event.speeches.sample
 
     @comments = params[:tag].present? ? @event.comments.tagged_with(params[:tag]) : @event.comments
+    @comments = params[:toxic].present? ? @comments.where(toxic: true) : @comments.where(toxic: false)
     @comments = @comments.order('id DESC')
     @comments = @comments.page(params[:page]).per 50
   end
