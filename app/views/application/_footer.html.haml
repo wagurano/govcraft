@@ -1,30 +1,40 @@
 %section#footer
   .container
     .row
-      .col-sm-6
-        = link_to '우주당 소개', 'https://medium.com/%EC%9A%B0%EB%A6%AC%EA%B0%80-%EC%A3%BC%EC%9D%B8%EC%9D%B4%EB%8B%B9/%EC%A7%81%EC%A0%91-%EB%AF%BC%EC%A3%BC%EC%A3%BC%EC%9D%98-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%A0%95%EB%8B%B9-%EC%9A%B0%EB%A6%AC%EA%B0%80-%EC%A3%BC%EC%9D%B8%EC%9D%B4%EB%8B%B9-66e951b4f45b', target: '_blank'
-        = link_to '우주당 후원', 'https://goo.gl/forms/P5toLtywmFPwruGw1', target: '_blank'
-        = link_to '문의하기', 'http://m.me/wouldyouparty.org', target: '_blank'
+      .col-sm-4.col-xs-6
+        %h4 우주당 사이트맵
+        %ul.list-unstyled
+          %li= link_to '홈', root_path
+          %li= link_to Agenda.model_name.human, agendas_path
+          %li= link_to Project.model_name.human, projects_path
+          %li= link_to Event.model_name.human, events_path
+          %li= link_to Petition.model_name.human, petitions_path
+          %li= link_to Article.model_name.human, articles_path
+          %li= link_to '커뮤니티', 'https://wouldyou.parti.xyz', target: '_blank'
+      .col-sm-4.col-xs-6
+        %h4 소개 및 미디어
+        %ul.list-unstyled
+          %li= link_to '소개', 'https://medium.com/%EC%9A%B0%EB%A6%AC%EA%B0%80-%EC%A3%BC%EC%9D%B8%EC%9D%B4%EB%8B%B9/%EC%A7%81%EC%A0%91-%EB%AF%BC%EC%A3%BC%EC%A3%BC%EC%9D%98-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%A0%95%EB%8B%B9-%EC%9A%B0%EB%A6%AC%EA%B0%80-%EC%A3%BC%EC%9D%B8%EC%9D%B4%EB%8B%B9-66e951b4f45b', target: '_blank'
+          %li= link_to '후원', 'https://goo.gl/forms/P5toLtywmFPwruGw1', target: '_blank'
+          %li= link_to '문의하기', 'http://m.me/wouldyouparty.org', target: '_blank'
+          %li
+            = link_to 'https://medium.com/우리가-주인이당', target: '_blank' do
+              미디엄
+          %li
+            = link_to 'https://www.facebook.com/wouldyouparty.org/', target: '_blank' do
+              페이스북
+          %li
+            = link_to 'https://twitter.com/wouldyouparty', target: '_blank' do
+              트위터
+      .col-sm-4.col-xs-12
+        %h4 로그인
+        %ul.list-unstyled
+          - if user_signed_in?
+            %li= current_user.nickname
+            %li= link_to '프로필 수정', edit_user_registration_path
+            %li= link_to '로그아웃', sign_out_path, method: :delete
+          - else
+            %li
+              = link_to new_user_session_path do
+                로그인 &middot; 가입
 
-      .col-sm-6
-        .visible-xs
-          = link_to 'https://medium.com/우리가-주인이당', target: '_blank' do
-            %i.fa.fa-medium.fa-fw
-            미디엄
-          = link_to 'https://www.facebook.com/wouldyouparty.org/', target: '_blank' do
-            %i.fa.fa-facebook.fa-fw
-            페이스북
-          = link_to 'https://twitter.com/wouldyouparty', target: '_blank' do
-            %i.fa.fa-twitter.fa-fw
-            트위터
-
-        .hidden-xs.text-right
-          = link_to 'https://medium.com/우리가-주인이당', target: '_blank' do
-            %i.fa.fa-medium.fa-fw
-            미디엄
-          = link_to 'https://www.facebook.com/wouldyouparty.org/', target: '_blank' do
-            %i.fa.fa-facebook.fa-fw
-            페이스북
-          = link_to 'https://twitter.com/wouldyouparty', target: '_blank' do
-            %i.fa.fa-twitter.fa-fw
-            트위터
