@@ -51,30 +51,13 @@
 
 .poll-card {
   padding: $font-size-base * 1.5 0;
-  background-position: top center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: $gray-lightest;
+  text-align: center;
+
   .panel-body {
     padding: 0 15px 14px;
   }
   .poll__title {
     margin-bottom: 14px;
-    a {
-      color: $gray;
-    }
-  }
-  &--cover-image {
-    color: #fff;
-    .panel-body {
-      text-shadow: 1px 1px 0px #000;
-    }
-    .poll__title {
-      a {
-        color: #fff;
-        text-shadow: 1px 1px 0px #000;
-      }
-    }
   }
   .poll__body {
     @include multi-text-ellipsis(5);
