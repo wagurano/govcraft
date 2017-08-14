@@ -1,32 +1,42 @@
 - wiki = @wiki_revision.wiki
+
 %section.page-block
   .container
     .row
       .col-xs-6
-        = link_to '페이지로 돌아가기', @wiki_revision.wiki, class: 'btn btn-default btn-sm'
+        = link_to '현재 페이지로 돌아가기', @wiki_revision.wiki, class: 'btn btn-default btn-sm'
       .col-xs-6.text-right
 
-%section#wiki-block.page-block.post-block
+%section#wiki-block.page-block
   .container
-    .post-block__title
-      %h3
-        %strong= wiki.title
-        이력
+    .panel.panel-default.panel-post
+      .panel-heading
+        %h2
+          %small.label.label-default
+            = Wiki.model_name.human
+            이력
+          %br
+          = wiki.title
+        %p
+          %span.post-block__user
+            = render 'users/line', user: @wiki_revision.user
+          %span.post-block__date
+            = date_f @wiki_revision.created_at
+          - if can? :edit, wiki
+            = link_to '되돌리기', revert_wiki_revision_path(@wiki_revision), method: :put
 
-    .post-block__info
-      %span.post-block__user
-        = render 'users/line', user: @wiki_revision.user
-      %span.post-block__date
-        = date_f @wiki_revision.created_at
-      - if can? :edit, wiki
-        = link_to '되돌리기', revert_wiki_revision_path(@wiki_revision), method: :put
-
-    .panel.panel-default.post-block__body
       .panel-body
-        = raw @wiki_revision.body
+        .panel-post__body
+          = raw @wiki_revision.body
 
-    .post-block__note
-      %h4 메모
-      .panel.panel-default
+      - if @wiki_revision.note.present?
         .panel-body
+          %h4 메모
           = simple_format @wiki_revision.note
+
+%section.page-block
+  .container
+    .row
+      .col-xs-6
+        = link_to '현재 페이지로 돌아가기', @wiki_revision.wiki, class: 'btn btn-default btn-sm'
+      .col-xs-6.text-right

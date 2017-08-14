@@ -1,19 +1,18 @@
 - if @project
   = render 'projects/header', project: @project
 
-%section#wiki-block.page-block.post-block
+%section#wiki-block.page-block
   .container
-    .post-block__title
-      %h3= @wiki.title
+    .panel.panel-default.panel-post
+      .panel-heading
+        %h2
+          %small.label.label-default
+            = Wiki.model_name.human
+          %br
+          = @wiki.title
 
-    .post-block__info
-      .row
-        .col-xs-6
-          %span.post-block__user
-            = render 'users/line', user: @wiki.user
-          %span.post-block__date
-            = date_f @wiki.created_at
-        .col-xs-6.text-right
+        %p
+          = date_f @wiki.created_at
           %span
             #{@wiki.wiki_revisions.count}차례 수정함
           &middot;
@@ -25,16 +24,13 @@
             &middot;
           조회 #{@wiki.views_count}
 
-    .panel.panel-default.post-block__body
       .panel-body
-        = raw @wiki.body
+        .panel-post__body
+          = raw @wiki.body
 
-    .post-block__like
-      = render 'likes/button', likable: @wiki
-
-    .post-block__comments
-      = render 'comments/list', commentable: @wiki
-
+      .panel-body
+        .panel-post__comments
+          = render 'comments/list', commentable: @wiki
 
 %section
   .container
