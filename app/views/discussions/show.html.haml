@@ -31,3 +31,7 @@
       .panel-body
         .panel-post__comments
           = render 'comments/list', commentable: @discussion
+
+- if @project
+  %section
+    = render 'discussions/list_in_project', discussions: @project.discussions.recent.page(1).per(10)
