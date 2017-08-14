@@ -21,7 +21,8 @@
     }
   }
   &__title {
-    font-weight: bold;
+    font-weight:300;
+    letter-spacing:-0.05em;
     font-size: $font-size-base * 2.5;
     margin-bottom: $font-size-base * 1.5;
     word-break: keep-all;
