@@ -144,4 +144,12 @@ class Event < ApplicationRecord
     ['홍철호', '경기', '김포시을',  '경기도 김포시 김포한강1로 247 해리움타운 508호'],
     ['황영철', '강원', '홍천군철원군화천군양구군인제군', '강원도 홍천군 홍천읍 진삼거리길 13 한샘빌딩 3층 후원회사무실']
   ]
+
+  def fallback_social_image_url
+    if self.project.try(:read_attribute, :social_image).present?
+      self.project.social_image_url
+    else
+      self.image_url
+    end
+  end
 end

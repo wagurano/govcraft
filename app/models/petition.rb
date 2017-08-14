@@ -29,4 +29,12 @@ class Petition < ApplicationRecord
   def has_cover_image?
     cover_image.file.present?
   end
+
+  def fallback_social_image_url
+    if self.read_attribute(:social_image).present?
+      self.social_image_url
+    else
+      self.project.try(:social_image_url)
+    end
+  end
 end

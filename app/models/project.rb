@@ -14,6 +14,7 @@ class Project < ApplicationRecord
   has_many :project_admins, dependent: :destroy
 
   mount_uploader :image, ImageUploader
+  mount_uploader :social_image, ImageUploader
 
   scope :recent, -> { order('id DESC') }
 

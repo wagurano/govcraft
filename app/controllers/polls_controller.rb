@@ -13,12 +13,6 @@ class PollsController < ApplicationController
     if params[:mode] == 'widget'
       render layout: 'strip'
     end
-
-    prepare_meta_tags title: @poll.title,
-      description: ApplicationController.helpers.strip_tags(@poll.body).strip.truncate(100),
-      url: poll_url,
-      image: social_card_poll_url(format: :png),
-      twitter_card_type: 'summary_large_image'
   end
 
   def new
@@ -85,10 +79,14 @@ class PollsController < ApplicationController
   end
 
   def reset_meta_tags
-    prepare_meta_tags({
-      title: "[투표] " + @poll.title,
-      description: @poll.body.html_safe,
-      url: request.original_url}
-    )
+    prepare_meta_tags title: @poll.title,
+      description: ApplicationController.helpers.strip_tags(@poll.body).strip.truncate(100),
+      url: poll_url,
+      image: (if @poll.fallback_social_image_url.present?
+        view_context.image_url(@poll.fallback_social_image_url)
+      else
+        social_card_poll_url(format: :png)
+      end),
+      twitter_card_type: 'summary_large_image'
   end
 end

@@ -60,7 +60,7 @@ class PetitionsController < ApplicationController
     prepare_meta_tags({
       title: "[서명] " + @petition.title,
       description: @petition.body.html_safe,
-      image: view_context.image_url(@petition.social_image_url),
+      image: (view_context.image_url(@petition.fallback_social_image_url) if @petition.fallback_social_image_url),
       url: request.original_url}
     )
   end

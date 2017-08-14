@@ -55,7 +55,7 @@ class EventsController < ApplicationController
       title: @event.title,
       description: @event.body.html_safe,
       url: request.original_url,
-      image: @event.image
+      image: (view_context.image_url(@event.fallback_social_image_url) if @event.fallback_social_image_url),
     })
   end
 end

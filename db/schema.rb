@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170812225249) do
+ActiveRecord::Schema.define(version: 20170814063908) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -514,7 +514,7 @@ ActiveRecord::Schema.define(version: 20170812225249) do
     t.index ["user_id"], name: "index_polls_on_user_id", using: :btree
   end
 
-  create_table "project_admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "project_admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer "user_id"
     t.integer "project_id"
     t.index ["project_id"], name: "index_project_admins_on_project_id", using: :btree
@@ -547,6 +547,7 @@ ActiveRecord::Schema.define(version: 20170812225249) do
     t.integer  "poll_sequence",                     default: 0
     t.integer  "wiki_sequence",                     default: 0
     t.integer  "event_sequence",                    default: 0
+    t.string   "social_image"
     t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
   end
 

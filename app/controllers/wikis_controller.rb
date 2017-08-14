@@ -54,6 +54,7 @@ class WikisController < ApplicationController
     prepare_meta_tags({
       title: "[위키] " + @wiki.title,
       description: @wiki.body.html_safe,
+      image: (view_context.image_url(@wiki.fallback_social_image_url) if @wiki.fallback_social_image_url),
       url: request.original_url}
     )
   end

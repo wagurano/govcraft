@@ -27,8 +27,24 @@
       .form-group
         = f.label :image
         = f.file_field :image, class: 'form-control'
+        = f.hidden_field :image_cache
         %p.help-block 패턴 이미지를 사용하는게 좋습니다.
+        - if f.object.read_attribute(:image).present?
+          = image_tag f.object.image.url, class: 'img-thumbnail', style: 'max-height: 100px'
+          %label{ style: 'font-weight: normal; margin-top: 6px' }
+            = f.check_box :remove_image
+            삭제하기
 
+      .form-group
+        = f.label :social_image
+        = f.file_field :social_image, class: 'form-control'
+        = f.hidden_field :social_image_cache
+        %p.help-block 큰 크기로 미리 보기를 표시하려면 최소한 600x315픽셀인 이미지를 사용해야 합니다. 최소 이미지 크기는 200x200픽셀입니다.
+        - if f.object.read_attribute(:social_image).present?
+          = image_tag f.object.social_image.url, class: 'img-thumbnail', style: 'max-height: 100px'
+          %label{ style: 'font-weight: normal; margin-top: 6px' }
+            = f.check_box :remove_social_image
+            삭제하기
       %hr
 
       %h3 프로젝트 기능

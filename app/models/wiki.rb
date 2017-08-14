@@ -9,4 +9,10 @@ class Wiki < ApplicationRecord
   scope :recent, -> { order('updated_at DESC') }
 
   attr_accessor :revision_note
+
+  def fallback_social_image_url
+    if self.project.try(:read_attribute, :social_image).present?
+      self.project.social_image_url
+    end
+  end
 end
