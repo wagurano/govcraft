@@ -38,7 +38,6 @@ section#petitions-in-project {
     }
     .petition-body {
       max-height: 4em;
-      @include multi-text-ellipsis(3);
     }
 
     > a {

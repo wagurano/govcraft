@@ -19,16 +19,6 @@
   word-break: keep-all;
 }
 
-// 글 생략 (여러줄)
-@mixin multi-text-ellipsis($lines) {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: $lines;
-  -webkit-box-orient: vertical;
-  word-wrap: break-word;
-}
-
 // 백그라운드 위에 반투명 검은 바탕색을 깝니다.
 @mixin texture-darken {
   position: relative;

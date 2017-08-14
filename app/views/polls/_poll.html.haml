@@ -10,8 +10,7 @@
         %h4.poll__title
           = link_to poll.title, poll
         .poll__body
-          = strip_tags poll.body if poll.body.present?
-
+          = excerpt poll.body, length: 210 if poll.body.present?
         = render 'votes/panel', votable: poll, show_voters: false
 
 

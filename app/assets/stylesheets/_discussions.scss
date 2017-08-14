@@ -33,7 +33,6 @@ section#discussions-in-project {
         font-weight: 400;
         color: $gray;
         line-height: 24px;
-        @include multi-text-ellipsis(4);
 
         &:first-child {
           .discussion-title {

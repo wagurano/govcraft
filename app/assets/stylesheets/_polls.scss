@@ -59,9 +59,6 @@
   .poll__title {
     margin-bottom: 14px;
   }
-  .poll__body {
-    @include multi-text-ellipsis(5);
-  }
   .vote-panel {
     margin-top: 14px;
     a {
