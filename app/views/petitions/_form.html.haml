@@ -2,7 +2,7 @@
   .panel-body
     = form_for @petition do |f|
 
-      - if @petition.errors
+      - if @petition.errors.any?
         .alert.alert-danger
           %ul.list-unstyled
             - @petition.errors.full_messages.each do |msg|
