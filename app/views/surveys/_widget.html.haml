@@ -1,22 +1,21 @@
 - cover_image = @survey.cover_image_url(:lg)
-%section.survey-widget.cover-section{ style: "padding-top: 0;" }
-  %section{ style: "padding-top: 20px; padding-bottom: 56px; background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image}); background-size: cover; background-position: center top; background-repeat: no-repeat;" }
-    .container
-      - if @survey.project
-        .cover-section__project
-          = link_to @survey.project.title, @survey.project, target: '_blank'
+%section.survey-widget.cover-section{ style: "padding-top: 20px; padding-bottom: 56px; background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image}); background-size: cover; background-position: center top; background-repeat: no-repeat;" }
+  .container
+    - if @survey.project
+      .cover-section__project
+        = link_to @survey.project.title, @survey.project, target: '_blank'
 
-      = link_to @survey, target: '_blank', style: 'color: #fff;' do
-        %h1.cover-section__title= @survey.title
+    = link_to @survey, target: '_blank', style: 'color: #fff;' do
+      %h1.cover-section__title= @survey.title
 
-        %h4.cover-section__users-count
-          %span
-            %i.fa.fa-user-o
-            = @survey.feedbacks_count
-            명 응답
-  %section{ style: 'background: #fff;' }
-    .container{ style: 'position: relative; top: -56px;' }
-      .cover-section__options{ style: "margin-top: 0; background-color: #eee;" }
-        = render 'options/panel', survey: @survey
-        = link_to '자세히 보기 >', survey_url(@survey), target: '_blank'
+      %h4.cover-section__users-count
+        %span
+          %i.fa.fa-user-o
+          = @survey.feedbacks_count
+          명 응답
+%section{ style: 'background: #fff;' }
+  .container{ style: 'position: relative; top: -56px;' }
+    .cover-section__options{ style: "margin-top: 0; background-color: #eee;" }
+      = render 'options/panel', survey: @survey
+    .well= link_to '자세히 보기 >', survey_url(@survey), target: '_blank'
 
