@@ -62,7 +62,7 @@ class ProjectsController < ApplicationController
     prepare_meta_tags({
       title: @project.title,
       description: @project.body.html_safe,
-      image: @project.image.url,
+      image: view_context.image_url(@project.fallback_social_image_url),
       url: request.original_url}
     )
   end

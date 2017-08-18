@@ -54,6 +54,14 @@ class Project < ApplicationRecord
     DEFAULT_SORTED_COMPONENT_NAMES.sort_by { |component_name| component_sequence(component_name) }
   end
 
+  def fallback_social_image_url
+    if self.read_attribute(:social_image).present?
+      self.social_image_url
+    else
+      self.image_url
+    end
+  end
+
   private
 
   def fallback_slug
@@ -61,4 +69,5 @@ class Project < ApplicationRecord
       update_columns(slug: self.id)
     end
   end
+
 end
