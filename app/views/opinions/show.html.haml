@@ -26,6 +26,9 @@
       - opinions = issue.opinions.recent.of_speaker(speaker)
       = render @opinion, show_full: true
 
+    .post-block__share
+      %h4 이 #{Opinion.model_name.human}를 친구들에게 알려 주세요
+      .share-box
 
 %section.page-block.post-block__notes
   .container
