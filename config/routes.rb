@@ -168,7 +168,7 @@ Rails.application.routes.draw do
     post '/download_emails', to: 'users#download_emails', as: :download_emails
   end
 
-  if Rails.env.development?
+  if Rails.env.development? or Rails.env.staging?
     mount LetterOpenerWeb::Engine, at: "/dev/emails"
   end
 end
