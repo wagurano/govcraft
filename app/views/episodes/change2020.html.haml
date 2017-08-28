@@ -1,0 +1,31 @@
+%section.page-block{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(@project.image_url(:lg))});"}
+  .container
+    %h3.title= link_to @project.title, @project, style: 'color: white'
+    - max_votes = @polls.maximum(:votes_count)
+%section.page-block
+  .container
+    - @polls.each do |poll|
+      - agrees_count = poll.agrees_count
+      - disagrees_count = poll.disagrees_count
+      %div
+        %h4
+          = poll.title
+          .text-muted.pull-right
+            총 #{poll.votes_count}건
+        .progress
+          .progress-bar.progress-bar-striped.progress-bar-success{ style: "width:#{agrees_count/max_votes.to_f*100}%" }
+            #{agrees_count}건
+          .progress-bar.progress-bar-striped.progress-bar-danger{ style: "width:#{disagrees_count/max_votes.to_f*100}%" }
+            #{disagrees_count}건
+
+    %div{ style: 'margin-top: 50px'}
+      = link_to change2020_polls_episodes_path, class: 'btn btn-primary btn-block' do
+        투표 참여하기
+        %br.hidden-sm.visible-xs-block
+        #{change2020_polls_episodes_url}
+
+= content_for :script do
+  :javascript
+    setTimeout(function () {
+      location.reload(true);
+    }, 5000);

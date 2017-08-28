@@ -36,6 +36,12 @@ Rails.application.routes.draw do
   resources :projects, path: :p do
     get 'events', on: :member
   end
+  resources :episodes do
+    collection do
+      get 'change2020'
+      get 'change2020_polls'
+    end
+  end
   resources :project_admins
   resources :participations do
     delete :cancel, on: :collection

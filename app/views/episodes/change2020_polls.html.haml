@@ -1,0 +1,17 @@
+%section.page-block{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(@project.image_url(:lg))});"}
+  .container
+    %h3.title= link_to @project.title, @project, style: 'color: white'
+    - max_votes = @polls.maximum(:votes_count)
+%section.page-block
+  .container
+    - max_votes = @polls.maximum(:votes_count)
+    - @polls.each do |poll|
+      - agrees_count = poll.agrees_count
+      - disagrees_count = poll.disagrees_count
+    - if @polls.any?
+      .row.masonry-container
+        - @polls.each do |model|
+          = render model, hide_project_title: true
+
+    %div{ style: 'margin-top: 100px'}
+      = link_to "\"#{@project.title}\" 페이지로", project_path(@project), class: 'btn btn-default btn-block'
