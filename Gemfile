@@ -117,8 +117,11 @@ group :development do
   gem 'puma'
 end
 
-group :development, :test do
+group :development, :staging do
   gem 'letter_opener_web'
+end
+
+group :development, :test do
   gem 'byebug'
   gem 'minitest-focus',     '~> 1.1', '>= 1.1.2'
   gem 'guard', '~> 2.13.0'
