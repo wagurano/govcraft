@@ -19,13 +19,13 @@
             #{disagrees_count}건
 
     %div{ style: 'margin-top: 50px'}
-      = link_to change2020_polls_episodes_path, class: 'btn btn-primary btn-block' do
+      = link_to project_path(@project), class: 'btn btn-primary btn-block' do
         투표 참여하기
         %br.hidden-sm.visible-xs-block
-        #{change2020_polls_episodes_url}
+        #{project_url(@project)}
 
 = content_for :script do
   :javascript
     setTimeout(function () {
       location.reload(true);
-    }, 30000);
+    }, 20000);
