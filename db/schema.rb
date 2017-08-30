@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170814063908) do
+ActiveRecord::Schema.define(version: 20170829092939) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -437,6 +437,17 @@ ActiveRecord::Schema.define(version: 20170814063908) do
     t.string   "desc"
     t.integer  "anonymous_feedbacks_count",               default: 0
     t.index ["survey_id"], name: "index_options_on_survey_id", using: :btree
+  end
+
+  create_table "organizations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "user_id"
+    t.string   "title",                     null: false
+    t.text     "description", limit: 65535
+    t.string   "slug",                      null: false
+    t.string   "logo"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["user_id"], name: "index_organizations_on_user_id", using: :btree
   end
 
   create_table "participations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|

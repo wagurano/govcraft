@@ -7,7 +7,18 @@ Rails.application.routes.draw do
     delete 'sign_out', to: 'devise/sessions#destroy'
   end
 
-  root 'pages#home'
+  class SubdomainConstraint
+    def matches?(request)
+      request.subdomain.present?
+    end
+  end
+
+  get '404', :to => 'application#page_not_found'
+
+  constraints(SubdomainConstraint.new) do
+    root 'pages#home'
+  end
+  root 'projects#index'
 
   get 'about', to: 'pages#about', as: :about
 
