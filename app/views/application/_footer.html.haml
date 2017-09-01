@@ -9,11 +9,11 @@
           %li
             %strong 사이트맵
           %li= link_to '홈', root_path
-          %li= link_to Agenda.model_name.human, agendas_path
-          %li= link_to Project.model_name.human, projects_path
-          %li= link_to Event.model_name.human, events_path
-          %li= link_to Petition.model_name.human, petitions_path
-          %li= link_to Article.model_name.human, articles_path
+          %li= link_to Agenda.model_name.human, agendas_url(subdomain: nil)
+          %li= link_to Project.model_name.human, projects_url(subdomain: nil)
+          %li= link_to Event.model_name.human, events_url(subdomain: nil)
+          %li= link_to Petition.model_name.human, petitions_url(subdomain: nil)
+          %li= link_to Article.model_name.human, articles_url(subdomain: nil)
           %li= link_to '커뮤니티', 'https://wouldyou.parti.xyz', target: '_blank'
       .col-xs-12
         %ul.list-inline
@@ -35,10 +35,10 @@
         %ul.list-inline
           - if user_signed_in?
             %li= current_user.nickname
-            %li= link_to '프로필 수정', edit_user_registration_path
-            %li= link_to '로그아웃', sign_out_path, method: :delete
+            %li= link_to '프로필 수정', edit_user_registration_url(subdomain: nil)
+            %li= link_to '로그아웃', sign_out_url(subdomain: nil), method: :delete
           - else
             %li
-              = link_to new_user_session_path do
+              = link_to new_user_session_url(subdomain: nil) do
                 로그인 &middot; 가입
 
