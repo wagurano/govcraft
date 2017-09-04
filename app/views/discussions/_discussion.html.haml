@@ -1,0 +1,19 @@
+%tr
+  %td
+    = discussion.id
+  %td
+    = link_to discussion do
+      = discussion.title
+      - if discussion.comments.count > 0
+        %small
+          (#{discussion.comments.count})
+
+  %td.text-nowrap
+    %span.nickname
+      %i.fa.fa-user
+      = link_to discussion.user.nickname, discussion.user
+  %td.text-nowrap
+    %i.fa.fa-heart
+    = discussion.merged_likes_count
+  %td.text-right
+    = date_f discussion.created_at

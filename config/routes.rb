@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   root 'projects#index'
 
   get 'about', to: 'pages#about', as: :about
+  get 'components', to: 'pages#components'
 
   resources :users
   resources :comments

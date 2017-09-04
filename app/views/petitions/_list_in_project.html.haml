@@ -12,28 +12,4 @@
     - if petitions.any?
       .panel.panel-default
         .list-group
-          - petitions.each do |petition|
-            .list-group-item
-              .media
-                .media-body
-                  %h4.media-heading
-                    = link_to petition do
-                      = petition.title
-                      - if petition.comments.count > 0
-                        %small (#{petition.comments.count})
-                  .media-meta
-                    = render 'users/line', user: petition.user
-                    - if petition.project.present?
-                      &middot;
-                      %span.project
-                        = link_to petition.project do
-                          = petition.project.title
-                .media-right
-                  = link_to petition do
-                    .pull-right
-                      .btn.btn-default
-                        - if petition.has_goal?
-                          #{petition.percentage}% 달성
-                        - else
-                          #{number_with_delimiter(petition.signs_count)}명 참여
-
+          = render petitions

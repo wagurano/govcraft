@@ -1,0 +1,91 @@
+%section.page-block
+  .container
+    .page-header
+      %h2 Bootstrap Theme
+    %div
+      = link_to 'https://github.com/doabit/semantic-ui-sass', 'https://github.com/doabit/semantic-ui-sass'
+
+%section.page-block
+  .container
+    .page-header
+      %h2 Icons
+
+%section.page-block
+  .container
+    .page-header
+      %h2 Colors
+
+%section.page-block
+  .container
+    .page-header
+      %h2 Typography
+
+    .well
+      %h1 이것은 h1입니다
+      %h2 이것은 h2입니다
+      %h3 이것은 h3입니다
+      %h4 이것은 h4입니다
+      %h5 이것은 h5입니다
+      %h6 이것은 h6입니다
+
+%section.page-block
+  .container
+    .page-header
+      %h2 Buttons
+
+%section.page-block
+  .container
+    .page-header
+      %h2 Pagination
+
+%section.page-block
+  .container
+    .page-header
+      %h2 Blocks
+    %pre
+      section.page-block 태그를 사용하면 위아래 마진이 추가된다
+
+%section.page-block
+  .container
+    .page-header
+      %h2 Modules
+
+    %section
+      %h3 Projects
+      %h4 header
+      = render 'projects/header', project: Project.last
+
+      %h4 card
+      .row
+        = render Project.last
+
+    %section
+      %h3 Petitions
+      %div
+        = render Petition.last
+
+    %section
+      %h3 Wikis
+      %div
+        = render Wiki.last
+
+    %section
+      %h3 Events
+      .row
+        = render Event.last
+
+    %section
+      %h3 Discussions
+      .panel.panel-default.hidden-xs
+        %table.table
+          = render Discussion.last
+
+    %section
+      %h3 Polls
+      .row
+        = render Poll.last
+
+    %section
+      %h3 Surveys
+      .row
+        = render Survey.last
