@@ -3,6 +3,7 @@ class Project < ApplicationRecord
   friendly_id :slug, use: [:slugged, :finders]
 
   belongs_to :user
+  has_many :stories, dependent: :destroy
   has_many :discussions, dependent: :destroy
   has_many :petitions, dependent: :destroy
   has_many :polls, dependent: :destroy

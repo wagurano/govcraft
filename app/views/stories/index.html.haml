@@ -1,0 +1,4 @@
+- if @project.present?
+  = render 'projects/header', project: @project
+
+= render 'discussions/list_in_project', discussions: @discussions

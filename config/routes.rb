@@ -59,6 +59,8 @@ Rails.application.routes.draw do
     delete :cancel, on: :collection
   end
   resources :speeches
+
+  resources :stories
   resources :discussions
   resources :discussion_categories
   resources :petitions do

@@ -1,5 +1,12 @@
 = render 'header', project: @project
 
+- if @project.stories.any?
+  %section.page-block
+    .container
+      %h3 최신 소식
+      .row
+        = render @project.stories.first(3)
+
 - @project.component_names_sorted.each do |component_name|
   - case component_name
   - when :wiki

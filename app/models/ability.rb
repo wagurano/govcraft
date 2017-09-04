@@ -15,13 +15,13 @@ class Ability
     if user
       can [:new_email, :send_email], Agenda
       can :create, [
-          Project, Discussion, Petition, Poll, Feedback, Survey, Wiki,
+          Project, Story, Discussion, Petition, Poll, Feedback, Survey, Wiki,
           Memorial, Timeline, TimelineDocument, Event,
           Election, Candidate, Article, Person, Race, Player,
           Thumb
         ]
       can [:update, :destroy], [
-          Project, Discussion, Petition, Poll, Survey, Wiki,
+          Project, Story, Discussion, Petition, Poll, Survey, Wiki,
           Memorial, Timeline, TimelineDocument, Event,
           Sign, Election, Candidate, Article, Person,
           Race, Player
@@ -47,7 +47,7 @@ class Ability
       end
 
       # 프로젝트 개설자 및 운영자는 프로젝트에 속한 글과 댓글을 삭제할 수 있다
-      can :destroy, [Discussion, Petition, Poll, Survey, Wiki, Event] do |model|
+      can :destroy, [Story, Discussion, Petition, Poll, Survey, Wiki, Event] do |model|
         model.project && ( user == model.project.user or model.project.project_admin?(user) )
       end
       can :destroy, Comment do |comment|
