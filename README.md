@@ -23,6 +23,7 @@ production:
   GOOGLE_CLIENT_ID: xx
   GOOGLE_CLIENT_SECRET: xx
   DATA_GO_KR_API_KEY: xx
+  PARTI_API_BASE: xx
 ```
 
 
@@ -106,6 +107,14 @@ bin/rake data:load_once_assembly_members
 
 ```
 export GOOGLE_API_KEY="xx"
+```
+
+### 빠띠API연결
+
+.powenv에 등록합니다.
+
+```
+export PARTI_API_BASE="xx"
 ```
 
 ### 로컬에서 한글 이름의 파일을 다운로드하면 파일 이름이 깨질 때
