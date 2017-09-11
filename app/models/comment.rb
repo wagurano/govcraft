@@ -35,10 +35,6 @@ class Comment < ApplicationRecord
     user.present? ? user.email : commenter_email
   end
 
-  def commentable_title
-    commentable.commentable_title
-  end
-
   private
 
   def save_gps

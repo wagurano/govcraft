@@ -265,6 +265,7 @@ ko:
         agree: 찬성
         disagree: 반대
         unsuer: 의견없음
+        hold: 유보
         partially: 일부찬성
         long:
           agree: 찬성합니다

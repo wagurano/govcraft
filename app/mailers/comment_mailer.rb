@@ -11,6 +11,6 @@ class CommentMailer < ApplicationMailer
     @comment.update_attributes(mailing: :sent)
 
     mail(to: @speaker.email,
-      subject: "[우주당] \"#{@comment.commentable_title}\"에 대해 #{@comment.user_nickname}님이 의견을 보냅니다.")
+      template_name: "target_speaker_#{@comment.commentable.class.name.underscore}")
   end
 end

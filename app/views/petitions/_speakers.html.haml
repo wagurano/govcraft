@@ -8,6 +8,21 @@
         .col-md-3.col-sm-4.col-xs-12
           .card
             .card-image{ style: "height: 140px; background-image: url(#{speaker.image.md.url}); background-size: cover; background-position: center center;" }
+              - statement = @petition.statements.speaker_by(speaker)
+              - if statement.try(:is_responed?) and
+                - if statement.stance.try(:agree?)
+                  - ribbon_class = 'label-success'
+                - elsif statement.stance.try(:hold?)
+                  - ribbon_class = 'label-warning'
+                - elsif statement.stance.try(:disagree?)
+                  - ribbon_class = 'label-danger'
+                - elsif statement.stance.blank?
+                  - ribbon_class = 'label-default'
+                %span.label.label-ribbon-left{ class: ribbon_class}
+                  - if statement.stance.present?
+                    = statement.stance.text
+                  - else
+                    응답
             .card-content
               = link_to speaker.name, speaker, class: 'header'
               .card-meta
@@ -27,3 +42,28 @@
                     = link_to "https://twitter.com/intent/tweet?text=@#{speaker.twitter} #{tweeter_msg}", target:'_blank' do
                       %i.fa.fa-twitter
                       멘션보내기
+
+- if @petition.statements.any?
+  .panel-body
+    .panel-post__statements
+      - @petition.statements.recent.each do |statement|
+        - speaker = statement.speaker
+        .panel.panel-opinion.panel-default[statement]
+          .panel-body{ style: 'padding: 14px' }
+            .media[statement]
+              .media-left
+                = link_to speaker_path(speaker) do
+                  .media-object.image.speaker-image{style: "background-image: url(#{speaker.image.xs.url});"}
+
+              .media-body
+                - if statement.stance.present?
+                  %h4.media-heading
+                    = statement.stance.text
+                %p
+                  = link_to speaker_path(speaker) do
+                    = speaker.name
+                    %span.text-muted= speaker.organization
+                - if statement.body.present?
+                  .opinion__body
+                    != statement.body
+

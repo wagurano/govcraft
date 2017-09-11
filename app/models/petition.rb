@@ -7,6 +7,7 @@ class Petition < ApplicationRecord
   has_many :signs, dependent: :destroy
   has_many :signed_users, through: :signs, source: :petition
   has_and_belongs_to_many :speakers, -> { uniq }
+  has_many :statements
 
   mount_uploader :cover_image, ImageUploader
   mount_uploader :social_image, ImageUploader
@@ -41,9 +42,5 @@ class Petition < ApplicationRecord
 
   def speakers? speaker
     speakers.include? speaker
-  end
-
-  def commentable_title
-    title
   end
 end

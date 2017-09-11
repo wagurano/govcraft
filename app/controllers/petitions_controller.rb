@@ -46,6 +46,12 @@ class PetitionsController < ApplicationController
     render_404 and return if @speaker.blank?
   end
 
+  def new_statement_speaker
+    @statement = Statement.find_by(key: params[:key])
+    render_404 and return if @statement.blank?
+    @speaker = @statement.speaker
+  end
+
   def new
     @project = Project.find(params[:project_id]) if params[:project_id].present?
   end

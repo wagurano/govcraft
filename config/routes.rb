@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     delete :cancel, on: :collection
   end
   resources :speeches
+  resources :statements
 
   resources :stories
   resources :discussions
@@ -72,6 +73,7 @@ Rails.application.routes.draw do
       put 'add_speaker'
       delete 'remove_speaker'
       get 'new_comment_speaker'
+      get 'new_statement_speaker'
     end
   end
   resources :polls do
