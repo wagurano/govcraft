@@ -1,4 +1,12 @@
 module ApplicationHelper
+  def root_subdomain
+    if Rails.env.production? or ENV["ROOT_SUBDOMAIN"].blank?
+      nil
+    else
+      ENV["ROOT_SUBDOMAIN"]
+    end
+  end
+
   def date_f(date)
     timeago_tag date, lang: :ko, limit: 3.days.ago
   end
