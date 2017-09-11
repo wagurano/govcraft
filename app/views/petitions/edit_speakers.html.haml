@@ -1,0 +1,44 @@
+%section.page-block
+  .container
+    .page-header
+      %h2 관련 인물
+
+    .panel.panel-default
+      .panel-body
+        = form_tag nil, method: :get do
+          = text_field_tag :q, params[:q], class: 'form-control', style: 'display: inline; width: auto'
+          = submit_tag '검색', class: 'btn btn-default'
+        - if @searched_speakers.try(:any?)
+          %hr
+          .row
+            - @searched_speakers.each do |speaker|
+              .col-xs-12.col-sm-4
+                .media
+                  .media-left
+                    = link_to speaker_path(speaker) do
+                      .image.speaker-image.speaker-image--mini{style: "background-image: url(#{speaker.image.xs.url});"}
+                  .media-body
+                    %strong= speaker.name
+                    %br
+                    = speaker.organization
+                  .media-right
+                    - if @petition.speakers?(speaker)
+                      .text-nowrap
+                        %i.fa.fa-check
+                        연결됨
+                    - else
+                      = link_to '연결하기', add_speaker_petition_path(@petition, speaker_id: speaker.id, q: params[:q]), method: :put, class: 'btn btn-default text-nowrap'
+    .panel.panel-default
+      .panel-body
+        - @petition.speakers.each do |speaker|
+          .col-xs-12.col-sm-4
+            .media
+              .media-left
+                = link_to speaker_path(speaker) do
+                  .image.speaker-image.speaker-image--mini{style: "background-image: url(#{speaker.image.xs.url});"}
+              .media-body
+                %strong= speaker.name
+                %br
+                = speaker.organization
+              .media-right
+                = link_to '연결끊기', remove_speaker_petition_path(@petition, speaker_id: speaker.id, q: params[:q]), method: :delete, class: 'btn btn-danger text-nowrap'

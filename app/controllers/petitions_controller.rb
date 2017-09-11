@@ -20,6 +20,27 @@ class PetitionsController < ApplicationController
   def data
   end
 
+  def edit_speakers
+    if params[:q].present?
+      @searched_speakers = Speaker.where('name like ?', "%#{params[:q]}%")
+    end
+  end
+
+  def add_speaker
+    @speaker = Speaker.find_by(id: params[:speaker_id])
+    render_404 and return if @speaker.blank?
+    @petition.speakers << @speaker unless @petition.speakers.include?(@speaker)
+    @petition.save
+    redirect_to edit_speakers_petition_path(@petition, q: params[:q])
+  end
+
+  def remove_speaker
+    @speaker = Speaker.find_by(id: params[:speaker_id])
+    render_404 and return if @speaker.blank?
+    @petition.speakers.delete(@speaker) if @petition.speakers.include?(@speaker)
+    redirect_to edit_speakers_petition_path(@petition, q: params[:q])
+  end
+
   def new
     @project = Project.find(params[:project_id]) if params[:project_id].present?
   end

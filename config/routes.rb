@@ -65,7 +65,12 @@ Rails.application.routes.draw do
   resources :discussion_categories
   resources :petitions do
     resources :signs
-    get 'data', on: :member
+    member do
+      get 'data'
+      get 'edit_speakers'
+      put 'add_speaker'
+      delete 'remove_speaker'
+    end
   end
   resources :polls do
     get 'social_card', on: :member

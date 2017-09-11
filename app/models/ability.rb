@@ -30,6 +30,8 @@ class Ability
         user == project.user or project.project_admin?(user)
       end
 
+      can [:edit_speakers, :add_speaker, :remove_speaker], Petition, :user_id => user.id
+
       can :destroy, Comment do |comment|
         comment.toxic == false && user == comment.user
       end

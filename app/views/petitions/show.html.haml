@@ -24,6 +24,8 @@
             = date_f @petition.created_at
           - if can? :edit, @petition
             = link_to '수정', edit_petition_path(@petition)
+          - if can? :edit, @petition
+            = link_to '관련인물관리', edit_speakers_petition_path(@petition)
           - if can? :destroy, @petition
             = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
           조회 #{@petition.views_count}
@@ -41,6 +43,9 @@
           %h4 이 이슈를 친구들에게 알려 주세요
           .share-box{ 'data-share-image': image_url(cover_image) }
           %input{value: "<iframe width='100%' height='800' src='#{petition_url(@petition, mode: :widget)}' frameborder='0'></iframe>", class: 'form-control'}
+
+      - if @petition.speakers.any?
+        = render 'petitions/speakers', petition: @petition
 
       - if @petition.comment_enabled
         .panel-body

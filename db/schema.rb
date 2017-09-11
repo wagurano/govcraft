@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904013938) do
+ActiveRecord::Schema.define(version: 20170911020218) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -489,6 +489,16 @@ ActiveRecord::Schema.define(version: 20170904013938) do
     t.string   "social_image"
     t.index ["project_id"], name: "index_petitions_on_project_id", using: :btree
     t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
+  end
+
+  create_table "petitions_speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.integer  "petition_id"
+    t.integer  "speaker_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["petition_id", "speaker_id"], name: "index_petitions_speakers_on_petition_id_and_speaker_id", unique: true, using: :btree
+    t.index ["petition_id"], name: "index_petitions_speakers_on_petition_id", using: :btree
+    t.index ["speaker_id"], name: "index_petitions_speakers_on_speaker_id", using: :btree
   end
 
   create_table "players", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
