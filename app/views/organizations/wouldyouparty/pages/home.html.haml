@@ -32,10 +32,10 @@
     %h3= Petition.model_name.human
 
     .row.masonry-container
-      = render Petition.recent.limit(3)
+      = render Petition.recent.where(project: @current_organization.projects).limit(3)
 
 
-- discussions = Discussion.recent.limit(10)
+- discussions = Discussion.recent.where(project: @current_organization.projects).limit(10)
 %section#discussions.page-block
   .container
     %h3= Discussion.model_name.human
