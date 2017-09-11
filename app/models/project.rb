@@ -1,8 +1,8 @@
 class Project < ApplicationRecord
   extend FriendlyId
   friendly_id :slug, use: [:slugged, :finders]
-
   belongs_to :user
+  belongs_to :organization, optional: true
   has_many :stories, dependent: :destroy
   has_many :discussions, dependent: :destroy
   has_many :petitions, dependent: :destroy

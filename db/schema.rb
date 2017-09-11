@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911020218) do
+ActiveRecord::Schema.define(version: 20170911072513) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -569,6 +569,8 @@ ActiveRecord::Schema.define(version: 20170911020218) do
     t.integer  "wiki_sequence",                     default: 0
     t.integer  "event_sequence",                    default: 0
     t.string   "social_image"
+    t.integer  "organization_id"
+    t.index ["organization_id"], name: "index_projects_on_organization_id", using: :btree
     t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
   end
 
