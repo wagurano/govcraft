@@ -1,64 +1,51 @@
 %section#about-section
   .container
     %h2
-      더 많은 우주인들을 통해<br/>
+      게임하듯이 정치하는<br/>
       %span
-        새로운 정치
-      가<br/>
-      쏘아올려질 수 있도록
+        시민들의 놀이터
       %br
-%section#agenda-section
-  %h5.text-center
-    진행 중인 아젠다<br/>
-    ㅡ
-  .row
-    .col-md-1
-    .col-md-2
-      .agenda-card{style:"color:#EB6E7B;"}
-        %i.glyphicon.glyphicon-book
-        %br
-        %a{href:"http://wouldyouparty.org/p/rebootkorea"}
-          개헌
-    .col-md-2
-      .agenda-card{style:"color:#BA99FD;"}
-        %i.glyphicon.glyphicon-book
-        %br
-        %a{href:"https://wouldyou.parti.xyz/p/votebetter", target:"_blank"}
-          선거법 개혁
-    .col-md-2
-      .agenda-card{style:"color:#688FE2;"}
-        %i.glyphicon.glyphicon-book
-        %br
-        %a{href:"https://wouldyou.parti.xyz/p/gender", target:"_blank"}
-          젠더
-    .col-md-2
-      .agenda-card{style:"color:#8A8FFC;"}
-        %i.glyphicon.glyphicon-book
-        %br
-        %a{href:"https://wouldyou.parti.xyz/p/basic-income", target:"_blank"}
-          기본소득
-    .col-md-2
-      .agenda-card{style:"color:#FD8BB5;"}
-        %i.glyphicon.glyphicon-book
-        %br
-        %a{href:"http://sewolarchive.org", target:"_blank"}
-          세월호
-    .col-md-1
-%section#together-section
-  더 이상 정당 중심, 특정 인물 중심의
-  %span.visible-xs-block
-  정치만 존재하지 않도록,<br/>
-  더 쉽고 재미있고 실용적인
-  %span.visible-xs-block
-  우리의 정치를 할 수 있는
-  %span.visible-xs-block
-  프로젝트 정당<br/>
-  %strong{style:"font-size:20px;"}
-    우리가주인이당<br/>
-  %a{href:'https://medium.com/%EC%9A%B0%EB%A6%AC%EA%B0%80-%EC%A3%BC%EC%9D%B8%EC%9D%B4%EB%8B%B9/%EC%A7%81%EC%A0%91-%EB%AF%BC%EC%A3%BC%EC%A3%BC%EC%9D%98-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%A0%95%EB%8B%B9-%EC%9A%B0%EB%A6%AC%EA%B0%80-%EC%A3%BC%EC%9D%B8%EC%9D%B4%EB%8B%B9-66e951b4f45b'}
-    더 보기
-  <br/><br/>
-  .wouldyou-join{onclick:"window.open(\'http://slack.wouldyouparty.org/\')"}
-    %i.fa.fa-slack
-  .wouldyou-join{onclick:"window.open(\'https://www.facebook.com/groups/1820856674866416/\')"}
-    %i.fa.fa-facebook
+      %strong
+        가브크래프트<br/>
+      %small
+        = link_to 'https://docs.parti.xyz/platform-govcraft.html', target: '_blank' do
+          플랫폼 소개
+        &middot;
+        = link_to 'https://docs.parti.xyz/', target: '_blank' do
+          빠띠 소개
+
+%section#projects.page-block
+  .container
+    %h3= Project.model_name.human
+
+    .row.masonry-container
+      = render Project.recent.limit(12)
+
+
+%section#petitions.page-block
+  .container
+    %h3= Petition.model_name.human
+
+    .row.masonry-container
+      = render Petition.recent.limit(3)
+
+
+- discussions = Discussion.recent.limit(10)
+%section#discussions.page-block
+  .container
+    %h3= Discussion.model_name.human
+
+    .panel.panel-default.hidden-xs
+      %table.table
+        = render discussions
+
+    .list-group.visible-xs
+      - discussions.each do |discussion|
+        = link_to discussion, class: 'list-group-item' do
+          %span.badge
+            %i.fa.fa-heart
+            = discussion.merged_likes_count
+          %h5.list-group-item-heading= discussion.title
+          %p
+            %i.fa.fa-user
+            = discussion.user.nickname

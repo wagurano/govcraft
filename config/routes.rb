@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   constraints(SubdomainConstraint.new) do
     root 'pages#home'
   end
-  root 'projects#index'
+
+  root 'pages#home'
 
   get 'about', to: 'pages#about', as: :about
   get 'components', to: 'pages#components'

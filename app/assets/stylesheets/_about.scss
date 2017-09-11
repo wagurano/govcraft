@@ -1,98 +1,101 @@
-#about-section{
-  background-image:asset-url('about-main.png');
-  padding-top:50px;
-  height:400px;
-  h2{
-    margin-top:50px;
-    font-size:50px;
-    letter-spacing:-0.04em;
-    color:#ffffff;
-    font-weight:200;
-    span{
-      font-weight:600;
-      color:#a567e4;
+#about-section {
+    background-color: $gray-darker;
+    &.wouldyouparty {
+        background-image: asset-url('about-main.png');
     }
-  }
-  p{
-    color:#eeeeee;
-    font-weight:100;
-    width:600px;
-  }
-  p.social-area{
-    padding:2px;
-    a{
-      color:#ffffff;
-      &:hover{
-        color:#debdff;
-      }
+    padding-top: 50px;
+    height: 400px;
+    h2 {
+        margin-top: 50px;
+        font-size: 50px;
+        letter-spacing: -0.04em;
+        color: #ffffff;
+        font-weight: 200;
+        span {
+            font-weight: 600;
+            color: #a567e4;
+        }
     }
-  }
-  @media (max-width: $screen-xs-max) {
-    padding-top: 10px !important;
-  }
+    p {
+        color: #eeeeee;
+        font-weight: 100;
+        width: 600px;
+    }
+    p.social-area {
+        padding: 2px;
+        a {
+            color: #ffffff;
+            &:hover {
+                color: #debdff;
+            }
+        }
+    }
+    @media (max-width: $screen-xs-max) {
+        padding-top: 10px !important;
+    }
 }
 
-#agenda-section{
-  padding:30px 0px;
-  h5{
-    font-size:15px;
-    font-weight:200;
-    color:$gray-dark;
-  }
-  .row{
-    text-align:center;
-  }
-  .agenda-card{
-    display:inline-block;
-    height:200px;
-    padding: 30px;
-    font-size: 18px;
-    font-weight: 300;
-    letter-spacing:-0.02em;
-    a{
-      color:inherit !important;
+#agenda-section {
+    padding: 30px 0px;
+    h5 {
+        font-size: 15px;
+        font-weight: 200;
+        color: $gray-dark;
     }
-    i{
-      margin:20px;
-      font-size:25px;
-      border: 3px solid;
-      width: 100px;
-      height: 100px;
-      padding: 30px;
-      border-radius: 100px;
+    .row {
+        text-align: center;
     }
-  }
+    .agenda-card {
+        display: inline-block;
+        height: 200px;
+        padding: 30px;
+        font-size: 18px;
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        a {
+            color: inherit !important;
+        }
+        i {
+            margin: 20px;
+            font-size: 25px;
+            border: 3px solid;
+            width: 100px;
+            height: 100px;
+            padding: 30px;
+            border-radius: 100px;
+        }
+    }
 }
 
-#together-section{
-  padding:50px 0px;
-  height:300px;
-  color:#ffffff;
-  font-size:15px;
-  font-weight:200;
-  text-align:center;
-  line-height: 28px;
-  background-color:#9572D5;
-  a{
-    color:inherit !important;
-    font-size:13px;
-    text-decoration:underline;
-  }
-  h5{
-    font-size:15px;
-    font-weight:200;
-    color:$gray-dark;
-  }
-  .wouldyou-join{
-    display: inline-block;
-    cursor:pointer;
-    width: 50px;
-    height: 50px;
-    background-color: #71599c;
-    padding: 10px;
-    margin: 5px;
-  }
-  @media (max-width: $screen-xs-max) {
-    height:350px !important;
-  }
+#together-section {
+    padding: 50px 0px;
+    height: 300px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 200;
+    text-align: center;
+    line-height: 28px;
+    background-color: #9572D5;
+    a {
+        color: inherit !important;
+        font-size: 13px;
+        text-decoration: underline;
+    }
+    h5 {
+        font-size: 15px;
+        font-weight: 200;
+        color: $gray-dark;
+    }
+    .wouldyou-join {
+        display: inline-block;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        background-color: #71599c;
+        padding: 10px;
+        margin: 5px;
+    }
+    @media (max-width: $screen-xs-max) {
+        height: 350px !important;
+    }
 }
