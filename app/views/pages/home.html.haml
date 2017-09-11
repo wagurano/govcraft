@@ -1,11 +1,13 @@
-%section#about-section
+%section#about-section{style:"height:600px;background-position:center; background-size:cover;background-image: url(#{asset_url('gov_bg3.png')});"}
   .container
     %h2
-      게임하듯이 정치하는<br/>
-      %span
-        시민들의 놀이터
+      게임하듯
+      %span.visible-xs-block
+      정치하는<br/>
+      %span.visible-xs-block
+      시민들의 놀이터
       %br
-      %strong
+      %strong{style:"font-size:61px;line-height:80px;"}
         가브크래프트<br/>
       %small
         = link_to 'https://docs.parti.xyz/platform-govcraft.html', target: '_blank' do

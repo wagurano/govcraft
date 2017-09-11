@@ -20,7 +20,7 @@
           - if can? :edit, project
             = link_to '운영자관리', project_admins_path(project_id: project.id), class: 'btn btn-link'
 
-        .cover-section__body{ style: 'padding: 20px; margin: 0 auto; font-size: 15px;'}
+        .cover-section__body{ style: 'text-align:center; padding: 20px; margin: 0 auto; font-size: 15px;'}
           - if project.subtitle.present?
             %h3= project.subtitle
           - if project.id == 7
