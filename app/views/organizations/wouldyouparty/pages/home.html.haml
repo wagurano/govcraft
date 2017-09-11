@@ -24,7 +24,7 @@
     %h3= Project.model_name.human
 
     .row.masonry-container
-      = render Project.recent.limit(12)
+      = render @current_organization.projects.recent.limit(12)
 
 
 %section#petitions.page-block
