@@ -17,6 +17,7 @@ ko:
     signed: '이 이슈를 친구들에게 알려 주세요'
     already_signed: '이미 서명하셨습니다.'
     commented: '댓글을 게시했습니다!'
+    need_to_email: '보내시는 분의 메일을 입력해주세요'
     reported: '신고되었습니다!'
     reverted: '복원되었습니다!'
     xlsx_help:

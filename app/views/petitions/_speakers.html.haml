@@ -15,3 +15,15 @@
                 #{speaker.organization}
               .card-description
               .card-extra
+                %span.text-nowrap
+                  = link_to new_comment_speaker_petition_path(@petition, speaker_id: speaker.id) do
+                    %i.fa.fa-comment-o
+                    - count = @petition.comments.with_target_speaker(speaker).count
+                    의견보내기 #{"(#{count})" if count > 0}
+                %br
+                - if speaker.twitter.present?
+                  %span.text-nowrap
+                    - tweeter_msg = "[우주당] '#{@petition.title}'에 대해 의견을 묻고자 합니다"
+                    = link_to "https://twitter.com/intent/tweet?text=@#{speaker.twitter} #{tweeter_msg}", target:'_blank' do
+                      %i.fa.fa-twitter
+                      멘션보내기

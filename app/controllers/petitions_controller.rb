@@ -41,6 +41,11 @@ class PetitionsController < ApplicationController
     redirect_to edit_speakers_petition_path(@petition, q: params[:q])
   end
 
+  def new_comment_speaker
+    @speaker = Speaker.find_by(id: params[:speaker_id])
+    render_404 and return if @speaker.blank?
+  end
+
   def new
     @project = Project.find(params[:project_id]) if params[:project_id].present?
   end

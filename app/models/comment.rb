@@ -3,17 +3,22 @@ class Comment < ApplicationRecord
   include Choosable
   include Reportable
 
+  extend Enumerize
+  enumerize :mailing, in: %i(disable ready sent fail)
+
   acts_as_taggable # Alias for acts_as_taggable_on :tags
 
   geocoded_by :full_street_address
 
   belongs_to :commentable, polymorphic: true
   belongs_to :user
+  belongs_to :target_speaker, optional: true, class_name: Speaker
 
   mount_uploader :image, ImageUploader
 
   scope :recent, -> { order(created_at: :desc) }
   scope :earlier, -> { order(created_at: :asc) }
+  scope :with_target_speaker, ->(speaker) { where(target_speaker: speaker) }
 
   validates :body, presence: true
   validates :commenter_email, format: { with: Devise.email_regexp }, if: 'commenter_email.present?'
@@ -28,6 +33,10 @@ class Comment < ApplicationRecord
 
   def user_email
     user.present? ? user.email : commenter_email
+  end
+
+  def commentable_title
+    commentable.commentable_title
   end
 
   private

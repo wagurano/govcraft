@@ -13,12 +13,32 @@ class CommentsController < ApplicationController
     if user_signed_in? and @comment.commentable.respond_to? :voted_by? and @comment.commentable.voted_by? current_user
       @comment.choice = @comment.commentable.fetch_vote_of(current_user).choice
     end
+
+    @comment.mailing ||= :disable
+    if @comment.mailing.ready? and @comment.user_id.blank? and @comment.commenter_email.blank?
+      flash[:error] = I18n.t('messages.need_to_email')
+      redirect_back(fallback_location: root_path, i_am: params[:i_am])
+      return
+    end
     if @comment.save
       flash[:notice] = I18n.t('messages.commented')
+
+      if @comment.mailing.ready?
+        if @comment.target_speaker.email.blank?
+          @comment.update_attributes(mailing: :fail)
+        else
+          CommentMailer.target_speaker(@comment.id).deliver_later
+        end
+      end
     else
       errors_to_flash(@comment)
     end
-    redirect_back(fallback_location: root_path, i_am: params[:i_am])
+
+    if params[:back_commentable].present?
+      redirect_to @comment.commentable
+    else
+      redirect_back(fallback_location: root_path, i_am: params[:i_am])
+    end
   end
 
   def update
@@ -38,6 +58,7 @@ class CommentsController < ApplicationController
       :commenter_name, :commenter_email,
       :full_street_address,
       :tag_list, :image,
+      :target_speaker_id, :mailing,
       :toxic
     )
   end

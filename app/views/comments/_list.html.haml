@@ -26,6 +26,11 @@
 .comments
   - commentable.comments.recent.each do |comment|
     .media[comment]{ style: 'margin: 14px 0;'}
+      - if comment.target_speaker.present?
+        .comment__to-speaker
+          %span.label.label-default.label-image
+            = image_tag comment.target_speaker.image.xs.url
+            #{comment.target_speaker.organization} #{comment.target_speaker.name}님에게 보낸 의견입니다.
       .media-body
         .comment__meta
           = comment.user_nickname
@@ -39,5 +44,5 @@
           .comment__choice{ class: comment.choice }= comment.choice.text
         .comment__body
           = raw screened(comment, :body)
-      .media-right{ style: 'vertical-align: middle;' }
+      .media-right.xs-hidden{ style: 'vertical-align: middle;' }
         = render 'likes/button', likable: comment

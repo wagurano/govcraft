@@ -261,7 +261,10 @@ ActiveRecord::Schema.define(version: 20170911072513) do
     t.string   "full_street_address"
     t.integer  "anonymous_likes_count",               default: 0
     t.boolean  "toxic",                               default: false
+    t.integer  "target_speaker_id"
+    t.string   "mailing",                                             null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
+    t.index ["target_speaker_id"], name: "index_comments_on_target_speaker_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 

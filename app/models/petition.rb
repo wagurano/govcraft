@@ -42,4 +42,8 @@ class Petition < ApplicationRecord
   def speakers? speaker
     speakers.include? speaker
   end
+
+  def commentable_title
+    title
+  end
 end
