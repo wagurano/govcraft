@@ -243,3 +243,8 @@ label.error {
         }
     }
 }
+
+// redactor에서 입력되는 그림의 폭을 제한
+figure img {
+    max-width: 100%;
+}
