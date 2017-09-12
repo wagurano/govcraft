@@ -63,6 +63,15 @@ class Project < ApplicationRecord
     end
   end
 
+  def action_count
+    petitions.count + polls.count + surveys.count + wikis.count + discussions.count + events.count +
+    petitions.sum(:signs_count) + polls.sum(:votes_count) + surveys.sum(:feedbacks_count)
+  end
+
+  def views_count
+    petitions.sum(:views_count) + polls.sum(:views_count) + surveys.sum(:views_count) + wikis.sum(:views_count) + discussions.sum(:views_count)
+  end
+
   private
 
   def fallback_slug

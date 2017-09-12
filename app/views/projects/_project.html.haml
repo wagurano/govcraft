@@ -1,12 +1,14 @@
 .col-md-3.col-sm-4.col-xs-12
-  .card
-    .card-image{ style: "height: 140px; background-image: url(#{project.image.md.url}); background-size: cover; background-position: center center;" }
-      %span.label.label-danger.label-ribbon-left= Project.model_name.human
-    .card-content
-      = link_to project.title, project, class: 'header'
-      .card-meta
-        %span
-          #{project.user.nickname}님의 제안
-      .card-description
-      .card-extra
+  .card.card-link
+    = link_to project do
+      .card-image{ style: "height: 140px; background-image: url(#{project.image.md.url}); background-size: cover; background-position: center center;" }
+        %span.label.label-danger.label-ribbon-left= Project.model_name.human
 
+    .card-content
+      = link_to project.title, project, class: 'card-header'
+      .card-meta
+      .card-description
+    - if project.action_count > 100
+      .card-extra.card-content
+        %i.fa.fa-user
+        = number_with_delimiter project.action_count
