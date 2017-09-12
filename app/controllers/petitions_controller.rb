@@ -49,6 +49,12 @@ class PetitionsController < ApplicationController
   def new_statement_speaker
     @statement = Statement.find_by(key: params[:key])
     render_404 and return if @statement.blank?
+
+    if params[:stance].present?
+      @statement.stance = params[:stance]
+      @statement.save
+    end
+
     @speaker = @statement.speaker
   end
 
