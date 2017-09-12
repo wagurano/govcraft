@@ -46,9 +46,12 @@ class PetitionsController < ApplicationController
     render_404 and return if @speaker.blank?
   end
 
-  def new_statement_speaker
-    @statement = Statement.find_by(key: params[:key])
-    render_404 and return if @statement.blank?
+  def update_statement_speaker
+    @statement_key = StatementKey.find_by(key: params[:key])
+    render_404 and return if @statement_key.blank?
+    return if @statement_key.expired?
+
+    @statement = @statement_key.statement
 
     if params[:stance].present?
       @statement.stance = params[:stance]

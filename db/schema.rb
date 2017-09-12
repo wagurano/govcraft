@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170911142132) do
+ActiveRecord::Schema.define(version: 20170912182437) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -674,6 +674,16 @@ ActiveRecord::Schema.define(version: 20170911142132) do
     t.boolean  "is_expired_view_count", default: false
     t.index ["event_id"], name: "index_speeches_on_event_id", using: :btree
     t.index ["user_id"], name: "index_speeches_on_user_id", using: :btree
+  end
+
+  create_table "statement_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.integer  "statement_id", null: false
+    t.string   "key",          null: false
+    t.datetime "expired_at",   null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["key"], name: "index_statement_keys_on_key", using: :btree
+    t.index ["statement_id"], name: "index_statement_keys_on_statement_id", using: :btree
   end
 
   create_table "statements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

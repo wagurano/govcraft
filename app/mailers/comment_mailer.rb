@@ -1,7 +1,9 @@
 class CommentMailer < ApplicationMailer
-  def target_speaker(comment_id)
+  def target_speaker(comment_id, statement_key_id)
     @comment = Comment.find_by(id: comment_id)
     return if @comment.blank?
+    @statement_key = StatementKey.find_by(id: statement_key_id)
+    return if @statement_key.blank?
 
     @speaker = @comment.target_speaker
     unless @speaker.try(:email).try(:present?)

@@ -73,7 +73,7 @@ Rails.application.routes.draw do
       put 'add_speaker'
       delete 'remove_speaker'
       get 'new_comment_speaker'
-      get 'new_statement_speaker'
+      get 'update_statement_speaker'
     end
   end
   resources :polls do

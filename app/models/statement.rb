@@ -1,6 +1,7 @@
 class Statement < ApplicationRecord
   belongs_to :speaker
   belongs_to :petition
+  has_many :statement_keys
 
   extend Enumerize
   enumerize :stance, in: %i(agree disagree hold)

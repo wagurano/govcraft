@@ -27,7 +27,12 @@ class CommentsController < ApplicationController
         if @comment.target_speaker.email.blank?
           @comment.update_attributes(mailing: :fail)
         else
-          CommentMailer.target_speaker(@comment.id).deliver_later
+          if @comment.commentable.respond_to? :statements
+            statement = @comment.commentable.statements.find_or_create_by(speaker: @comment.target_speaker)
+            statement_key = statement.statement_keys.build(key: SecureRandom.hex(50))
+            statement_key.save!
+            CommentMailer.target_speaker(@comment.id, statement_key.id).deliver_later
+          end
         end
       end
     else
