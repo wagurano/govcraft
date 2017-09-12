@@ -32,7 +32,7 @@
                 의견보내기#{"(#{count})" if count > 0}
               - if speaker.twitter.present?
                 .pull-right
-                  - tweeter_msg = "[우주당] '#{@petition.title}'에 대한 의견을 밝혀 주십시오. #{petition_url(@petition)}"
+                  - tweeter_msg = "'#{@petition.title}'에 대한 의견을 밝혀 주십시오. #{petition_url(@petition)}"
                   = link_to "https://twitter.com/intent/tweet?text=@#{speaker.twitter} #{tweeter_msg}", target:'_blank' do
                     멘션보내기
 
