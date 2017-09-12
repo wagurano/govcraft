@@ -7,28 +7,32 @@
       - cover_image = @petition.cover_image_url(:lg)
       .panel-heading
         %h2
-          %small.label.label-default
+          %small.label.label-danger
             = Petition.model_name.human
-          %br
           = @petition.title
 
-        %h4.users-count
-          %span
-            %i.fa.fa-user-o
-            = @petition.signs_count
-            명 참여
+        .users-count.btn.btn-danger.btn-inverted.btn-lg{ style: 'margin-top: 16px;'}
+          = @petition.signs_count
+          명 참여
 
-        %p
-          = link_to @petition.user.nickname
+        %div{ style: 'margin-top: 16px;'}
+          %span
+            = link_to @petition.user.nickname
+          &middot;
           %span.panel-post__date
             = date_f @petition.created_at
+          &middot;
+          %span
+            조회 #{@petition.views_count}
           - if can? :edit, @petition
+            &middot;
             = link_to '수정', edit_petition_path(@petition)
           - if can? :edit, @petition
+            &middot;
             = link_to '관련인물관리', edit_speakers_petition_path(@petition)
           - if can? :destroy, @petition
+            &middot;
             = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
-          조회 #{@petition.views_count}
 
       .panel-body
         .panel-post__body
@@ -60,7 +64,7 @@
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
             %span{"aria-hidden" => "true"} &#215;
           %h4.modal-title
-            서명 성공
+            서명에 참여해주셔서 감사합니다.
         .modal-body
           != flash[:sign_notice]
           .share-box{ 'data-share-image': image_url(cover_image) }
@@ -71,3 +75,10 @@
         $('#sign-success-modal').modal('show');
       });
   - flash.delete(:sign_notice)
+
+- if @petition.project
+  %section.page-block
+    .container
+      %h3 프로젝트
+      .row
+        = render @petition.project

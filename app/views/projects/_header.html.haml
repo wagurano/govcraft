@@ -1,13 +1,13 @@
-%section.cover-section{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(project.image_url(:lg))});"}
-  .container
-    %div{ style: 'background-color: rgba(0,0,0,0.5) !important; padding: 30px;' }
-      %h1.cover-section__title.text-center
-        %small.label.label-danger{ style: 'font-size: .5em;' }= Project.model_name.human
-        %br
-        = link_to @project do
-          = project.title
+- if params[:controller] == 'projects'
+  %section.cover-section{style: "background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(project.image_url(:lg))});"}
+    .container
+      %div{ style: 'background-color: rgba(0,0,0,0.5) !important; padding: 30px;' }
+        %h1.cover-section__title.text-center
+          %small.label.label-danger{ style: 'font-size: .5em;' }= Project.model_name.human
+          %br
+          = link_to @project do
+            = project.title
 
-      - if params[:controller] == 'projects'
         .cover-section__buttons.text-center
           - if can? :edit, project
             = link_to '프로젝트수정', edit_project_path(project), class: 'btn btn-link'
@@ -37,3 +37,11 @@
           = smart_format project.body
 
         .share-box.text-center{ 'data-share-image': image_url(project.image) }
+- else
+  %section.cover-section{style: "padding: 0; background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(project.image_url(:lg))});"}
+    %div{ style: 'background-color: rgba(0,0,0,0.5) !important; padding: 12px 24px;' }
+      .container
+        %h1.cover-section__title{ style: 'font-size: 24px;' }
+          %small.label.label-danger{ style: 'font-size: 12px;' }= Project.model_name.human
+          = link_to @project do
+            = project.title

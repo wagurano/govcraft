@@ -21,11 +21,11 @@
         .help-block 스팸 방지를 위해 사람인지 확인합니다. 아래 체크 박스를 클릭해 주세요.
         = hidden_field_tag :hiddenRecaptcha, nil, class: 'validate'
         .gov-action-recaptcha
-    = f.submit '작성', class: 'btn btn-default btn-sm'
+    = f.submit '작성', class: 'btn btn-default btn-inverted'
 
 .comments
   - commentable.comments.recent.each do |comment|
-    .media[comment]{ style: 'margin: 14px 0;'}
+    .media[comment]{ style: 'margin: 14px 0; border-top: 1px solid #ddd; padding-top: 12px;'}
       - if comment.target_speaker.present?
         .comment__to-speaker
           %span.label.label-default.label-image
@@ -33,7 +33,9 @@
             #{comment.target_speaker.organization} #{comment.target_speaker.name}님에게 보낸 의견입니다.
       .media-body
         .comment__meta
-          = comment.user_nickname
+          %span
+            %i.fa.fa-user-o
+            = comment.user_nickname
           = date_f comment.created_at
           - if can? :destroy, comment
             = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }

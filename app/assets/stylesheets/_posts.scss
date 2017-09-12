@@ -1,225 +1,221 @@
 .cover-section {
-  background-position: top center;
-  background-size: cover;
-  background-image: image_url('wouldyou_main.png');
-  color: #fff;
-  padding-top: 80px;
-  padding-bottom: 40px;
-
-  .project_share {
-    margin-bottom: 48px;
-  }
-
-  .current-user-status {
-    margin-top: -86px;
-  }
-
-  &__project a {
-    color: $gray-lighter;
-    &:hover {
-      text-decoration: underline;
+    background-position: top center;
+    background-size: cover;
+    background-image: image_url('wouldyou_main.png');
+    color: #fff;
+    padding-top: 80px;
+    padding-bottom: 40px;
+    .project_share {
+        margin-bottom: 48px;
     }
-  }
-  &__title {
-    font-weight:300;
-    letter-spacing:-0.05em;
-    font-size: $font-size-base * 2.5;
-    margin-bottom: $font-size-base * 1.5;
-    word-break: keep-all;
-    a {
-      color: white;
+    .current-user-status {
+        margin-top: -86px;
     }
-  }
-  &__body {
-    font-size: $font-size-large;
-    min-height: $font-size-large * $line-height-base * 2;
-    margin-bottom: $font-size-base*2;
-  }
-  &__buttons a {
-    color: $gray-lighter;
-  }
-  &__users-count {
-    margin-bottom: $font-size-base*2;
-    span {
-      border: 1px solid #fff;
-      border-radius: 20px;
-      padding: $font-size-base*0.5 $font-size-base;
-      }
-  }
-
-  &__votes {
-    background-color: rgba(0,0,0,.15);
-    border-radius: $border-radius-base;
-    margin: $font-size-base * 4 auto 0;
-    padding: $font-size-base * 2;
-  }
-  &__signs {
-    .sign-panel {
-      &__users {
-        border-bottom: 1px solid #dedede;
-        padding: 14px 0;
+    &__project a {
+        color: $gray-lighter;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    &__title {
+        font-weight: 300;
+        letter-spacing: -0.05em;
+        font-size: $font-size-base * 2.5;
+        margin-bottom: $font-size-base * 1.5;
         word-break: keep-all;
-      }
-      &__list {
-        padding: 14px 0;
-      }
+        a {
+            color: white;
+        }
     }
-  }
+    &__body {
+        font-size: $font-size-large;
+        min-height: $font-size-large * $line-height-base * 2;
+        margin-bottom: $font-size-base*2;
+    }
+    &__buttons a {
+        color: $gray-lighter;
+    }
+    &__users-count {
+        margin-bottom: $font-size-base*2;
+        span {
+            border: 1px solid #fff;
+            border-radius: 20px;
+            padding: $font-size-base*0.5 $font-size-base;
+        }
+    }
+    &__votes {
+        background-color: rgba(0, 0, 0, .15);
+        border-radius: $border-radius-base;
+        margin: $font-size-base * 4 auto 0;
+        padding: $font-size-base * 2;
+    }
+    &__signs {
+        .sign-panel {
+            &__users {
+                border-bottom: 1px solid #dedede;
+                padding: 14px 0;
+                word-break: keep-all;
+            }
+            &__list {
+                padding: 14px 0;
+            }
+        }
+    }
 }
 
 .panel-post {
-  .panel-heading {
-    padding: $font-size-base * 5 10px;
-    text-align: center;
-  }
-  &.panel-default .panel-heading {
-    background-color: #fff;
-  }
-  .panel-body {
-    border-bottom: 1px solid #ddd;
-    padding: $font-size-base * 3;
-    &:last-child {
-      border-bottom: none;
-    }
-    .panel-post__body {
-      font-size: 1.25em;
-    }
-  }
-  .sign-panel {
-    &__status__count {
-      text-align: right;
-      font-size: $font-size-small;
-    }
-    &__users {
-      border-bottom: 1px solid $gray-lighter;
-      padding: $font-size-base 0;
-      word-break: keep-all;
-      .sign {
-        display: inline-block;
-        color: $gray-lightest;
-        margin: 2px;
-        a {
-          color: $gray-lighter;
+    .panel-heading {
+        padding: $font-size-base * 2 10px;
+        text-align: center;
+        h2 small {
+            font-size: $font-size-base;
         }
-      }
     }
-    &__list {
-      padding: $font-size-base 0;
+    &.panel-default .panel-heading {
+        background-color: #fff;
     }
-    &__form {
-      padding: $font-size-base 0;
+    .panel-body {
+        border-bottom: 1px solid #ddd;
+        padding: $font-size-base * 3;
+        &:last-child {
+            border-bottom: none;
+        }
+        .panel-post__body {
+            font-size: 1.25em;
+        }
     }
-  }
+    .sign-panel {
+        &__status__count {
+            text-align: right;
+            font-size: $font-size-small;
+        }
+        &__users {
+            border-bottom: 1px solid $gray-lighter;
+            padding: $font-size-base 0;
+            word-break: keep-all;
+            .sign {
+                display: inline-block;
+                color: $gray-lightest;
+                margin: 2px;
+                a {
+                    color: $gray-lighter;
+                }
+            }
+        }
+        &__list {
+            padding: $font-size-base 0;
+        }
+        &__form {
+            padding: $font-size-base 0;
+        }
+    }
 }
 
 .post-block {
-  &__title {
-    border-bottom: 1px solid $gray-lighter;
-    font-size: $font-size-small;
-    margin-bottom: $font-size-base * 0.5;
-  }
-  &__info {
-    color: $text-muted;
-  }
-  &__image {
-    margin: $font-size-base 0;
-    text-align: center;
-    img {
-      max-width: 100%;
+    &__title {
+        border-bottom: 1px solid $gray-lighter;
+        font-size: $font-size-small;
+        margin-bottom: $font-size-base * 0.5;
     }
-  }
-  &__content {
-    margin: $font-size-base*2 0;
-  }
-  &__body {
-    margin: $font-size-base*2 0;
-    font-size: $font-size-base;
-    img {
-      max-width: 100%;
+    &__info {
+        color: $text-muted;
     }
-  }
-  &__like {
-    text-align: center;
-    margin: $font-size-base*2 0;
-  }
-  &__share {
-    border-top: 1px solid $gray-lighter;
-    padding-top: $font-size-base;
-  }
-  &__comments {
-    border-top: 1px solid $gray-lighter;
-    margin-top: $font-size-base*2;
-    padding-top: $font-size-base;
-  }
-  &__project {
-    border-top: 1px solid $gray-lighter;
-    margin-top: $font-size-base*2;
-    padding-top: $font-size-base;
-  }
-  &__votes {
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.15);
-    border-radius: 2px;
-    margin: 56px auto 0;
-    padding: 28px;
-  }
+    &__image {
+        margin: $font-size-base 0;
+        text-align: center;
+        img {
+            max-width: 100%;
+        }
+    }
+    &__content {
+        margin: $font-size-base*2 0;
+    }
+    &__body {
+        margin: $font-size-base*2 0;
+        font-size: $font-size-base;
+        img {
+            max-width: 100%;
+        }
+    }
+    &__like {
+        text-align: center;
+        margin: $font-size-base*2 0;
+    }
+    &__share {
+        border-top: 1px solid $gray-lighter;
+        padding-top: $font-size-base;
+    }
+    &__comments {
+        border-top: 1px solid $gray-lighter;
+        margin-top: $font-size-base*2;
+        padding-top: $font-size-base;
+    }
+    &__project {
+        border-top: 1px solid $gray-lighter;
+        margin-top: $font-size-base*2;
+        padding-top: $font-size-base;
+    }
+    &__votes {
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.15);
+        border-radius: 2px;
+        margin: 56px auto 0;
+        padding: 28px;
+    }
 }
 
 .post-block__signs {
-  margin: 0 auto 0;
-
-  .sign-panel {
-    &__status__count {
-      text-align: right;
-      font-size: $font-size-small;
-    }
-    &__users {
-      border-bottom: 1px solid $gray-lighter;
-      padding: $font-size-base 0;
-      font-size: $font-size-large;
-      word-break: keep-all;
-      .sign {
-        display: inline-block;
-        color: $gray-lightest;
-        margin: 2px;
-        a {
-          color: $gray-lighter;
+    margin: 0 auto 0;
+    .sign-panel {
+        &__status__count {
+            text-align: right;
+            font-size: $font-size-small;
         }
-        .img-user {
-          width: $font-size-base * 2;
-          height: $font-size-base * 2;
+        &__users {
+            border-bottom: 1px solid $gray-lighter;
+            padding: $font-size-base 0;
+            font-size: $font-size-large;
+            word-break: keep-all;
+            .sign {
+                display: inline-block;
+                color: $gray-lightest;
+                margin: 2px;
+                a {
+                    color: $gray-lighter;
+                }
+                .img-user {
+                    width: $font-size-base * 2;
+                    height: $font-size-base * 2;
+                }
+            }
         }
-      }
+        &__list {
+            border-bottom: 1px solid $gray-lighter;
+            padding: $font-size-base 0;
+        }
+        &__form {
+            padding: $font-size-base 0;
+        }
     }
-    &__list {
-      border-bottom: 1px solid $gray-lighter;
-      padding: $font-size-base 0;
-    }
-    &__form {
-      padding: $font-size-base 0;
-    }
-  }
 }
-
 
 .post-group {
-  .list-group-item {
-    .post__status {
-      float: right;
-      font-weight: bold;
+    .list-group-item {
+        .post__status {
+            float: right;
+            font-weight: bold;
+        }
+        .post__project {
+            font-size: $font-size-small * 0.9;
+            color: $gray;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .post__meta {
+            color: $text-muted;
+            font-size: $font-size-small;
+        }
     }
-    .post__project {
-      font-size: $font-size-small * 0.9;
-      color: $gray;
-      margin-bottom: 4px;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
-    .post__meta {
-      color: $text-muted;
-      font-size: $font-size-small;
-    }
-  }
 }
-
