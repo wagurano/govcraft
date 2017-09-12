@@ -7,7 +7,7 @@
     .page-header
       %h2
         %span.image.speaker-image.speaker-image--mini{style: "background-image: url(#{@speaker.image.xs.url}); display: inline-block; width: 1em; height: 1em;"}
-        #{@speaker.name}님에게 의견보내기
+        #{@speaker.name}님에게 촉구하기
     .comments-form
       = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
         = hidden_field_tag :back_commentable, '1'

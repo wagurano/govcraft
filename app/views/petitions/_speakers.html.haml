@@ -29,7 +29,7 @@
             .card-content.card-extra
               = link_to new_comment_speaker_petition_path(@petition, speaker_id: speaker.id) do
                 - count = @petition.comments.with_target_speaker(speaker).count
-                의견보내기#{"(#{count})" if count > 0}
+                촉구하기#{"(#{count})" if count > 0}
               - if speaker.twitter.present?
                 .pull-right
                   - tweeter_msg = "'#{@petition.title}'에 대한 의견을 밝혀 주십시오. #{petition_url(@petition)}"
