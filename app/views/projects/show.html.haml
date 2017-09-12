@@ -11,20 +11,25 @@
   - case component_name
   - when :wiki
     - if @project.wiki_enabled?
-      %a{id: "anchor-project-wiki"}
-      = render 'wikis/list_in_project', wikis: @project.wikis.recent
+      %section.page-block
+        %a{id: "anchor-project-wiki"}
+        = render 'wikis/list_in_project', wikis: @project.wikis.recent
   - when :event
-    %a{id: "anchor-project-event"}
-    = render 'events/list', project: @project, events: @project.events.recent
+    %section.page-block
+      %a{id: "anchor-project-event"}
+      = render 'events/list', project: @project, events: @project.events.recent
   - when :discussion
     - if @project.discussion_enabled?
-      %a{id: "anchor-project-discussion"}
-      = render 'discussions/list_in_project', discussions: @project.discussions.recent.page(1).per(10)
+      %section.page-block
+        %a{id: "anchor-project-discussion"}
+        = render 'discussions/list_in_project', discussions: @project.discussions.recent.page(1).per(10)
   - when :poll
     - if @project.poll_enabled?
-      %a{id: "anchor-project-poll-and-survey"}
-      = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent
+      %section.page-block
+        %a{id: "anchor-project-poll-and-survey"}
+        = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent
   - when :petition
     - if @project.petition_enabled?
-      %a{id: "anchor-project-petition"}
-      = render 'petitions/list_in_project', petitions: @project.petitions.recent
+      %section.page-block
+        %a{id: "anchor-project-petition"}
+        = render 'petitions/list_in_project', petitions: @project.petitions.recent

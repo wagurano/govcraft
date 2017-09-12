@@ -1,6 +1,6 @@
 .col-md-4.col-sm-6.col-xs-12
   .card[petition]
-    - if petition.project.present?
+    - if petition.project.present? && params[:controller] != 'projects'
       .card-content.card-extra{ style: 'background-color: #eee;' }
         %small
           %i.fa.fa-cube

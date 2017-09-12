@@ -1,10 +1,9 @@
 .container
-  .page-header
-    %h3
-      = local_assigns[:title_label] || @project.try(:component_title, 'poll_and_survey')
-      %small.pull-right
-        = link_to "찬반투표 시작하기", new_poll_path(project_id: @project), class: 'btn btn-default btn-sm'
-        = link_to "설문 시작하기", new_survey_path(project_id: @project), class: 'btn btn-default btn-sm'
+  %h3
+    = local_assigns[:title_label] || @project.try(:component_title, 'poll_and_survey')
+    %small.pull-right
+      = link_to "찬반투표 시작하기", new_poll_path(project_id: @project), class: 'btn btn-default btn-inverted btn-sm'
+      = link_to "설문 시작하기", new_survey_path(project_id: @project), class: 'btn btn-default btn-inverted btn-sm'
 
   .section
     - models = [polls + surveys].flatten.sort_by(&:created_at).reverse

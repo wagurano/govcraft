@@ -1,10 +1,9 @@
 %section#wikis-in-project
   .container
-    .page-header
-      %h3
-        = local_assigns[:title_label] || @project.try(:component_title, 'wiki')
-        %small.pull-right
-          = link_to "페이지 추가", new_wiki_path(project_id: @project), class: 'btn btn-default btn-sm'
+    %h3
+      = local_assigns[:title_label] || @project.try(:component_title, 'wiki')
+      %small.pull-right
+        = link_to "페이지 추가", new_wiki_path(project_id: @project), class: 'btn btn-default btn-inverted btn-sm'
 
     - if wikis.any?
       .panel.panel-default
