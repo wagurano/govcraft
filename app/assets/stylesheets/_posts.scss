@@ -76,7 +76,10 @@
     }
     .panel-body {
         border-bottom: 1px solid #ddd;
-        padding: $font-size-base * 3;
+        padding: $font-size-base * 2;
+        @media (max-width: $screen-xs-max) {
+            padding: $font-size-base;
+        }
         &:last-child {
             border-bottom: none;
         }
