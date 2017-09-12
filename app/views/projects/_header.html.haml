@@ -5,7 +5,7 @@
         %h1.cover-section__title.text-center
           %small.label.label-danger{ style: 'font-size: .5em;' }= Project.model_name.human
           %br
-          = link_to @project do
+          = link_to project do
             = project.title
 
         .cover-section__buttons.text-center
@@ -43,5 +43,5 @@
       .container
         %h1.cover-section__title{ style: 'font-size: 24px;' }
           %small.label.label-danger{ style: 'font-size: 12px;' }= Project.model_name.human
-          = link_to @project do
+          = link_to project do
             = project.title

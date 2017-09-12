@@ -47,7 +47,7 @@ class PetitionsController < ApplicationController
   end
 
   def update_statement_speaker
-    @statement_key = StatementKey.find_by(key: params[:key])
+    @statement_key = StatementKey.find_by(statement_id: params[:statement_id], key: params[:key])
     render_404 and return if @statement_key.blank?
     return if @statement_key.expired?
 

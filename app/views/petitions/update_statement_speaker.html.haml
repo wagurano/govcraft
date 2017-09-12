@@ -13,10 +13,10 @@
             서명에 대해 #{@speaker.name}님의 #{@statement.stance_text} 의견이 등록이 되었습니다.
             %br
             아래에서 찬반여부를 바꾸거나 추가 의견을 등록하실 수 있습니다.
-          %p
-            = link_to @petition do
-              "#{@petition.title}" 서명으로 이동하기
-              %i.fa.fa-arrow-right
+        %p
+          = link_to @petition do
+            "#{@petition.title}" 서명에서 확인하기
+            %i.fa.fa-arrow-right
     .container
       .page-header
         %h4
@@ -24,7 +24,7 @@
           #{@speaker.name}님 의견 등록
       .comments-form
         = form_for @statement, html: { class: 'gov-action-form-validation' } do |f|
-          = f.hidden_field :key
+          = hidden_field_tag :key, @statement_key.key
           .form-group
             = f.label :stance, '찬반여부'
             = f.select :stance, Statement.stance.options, { include_blank: true }, class: 'form-control'

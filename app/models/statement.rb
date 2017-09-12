@@ -13,4 +13,8 @@ class Statement < ApplicationRecord
   def is_responed?
     stance.present? or body.present?
   end
+
+  def valid_key? key
+    statement_keys.exists?(key: key) and !statement_keys.find_by(key: key).expired?
+  end
 end
