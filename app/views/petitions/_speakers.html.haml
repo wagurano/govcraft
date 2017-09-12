@@ -1,6 +1,6 @@
 .panel-body
   .panel-post__speakers
-    %h4 관련 인물에게 촉구하기
+    %h4= t("views.petition.speaker_section_title.id_#{@petition.id}", default: I18n.t("views.petition.speaker_section_title.default"))
 
     .row.masonry-container
       - @petition.speakers.each do |speaker|

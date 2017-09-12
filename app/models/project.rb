@@ -19,7 +19,7 @@ class Project < ApplicationRecord
 
   scope :recent, -> { order('id DESC') }
 
-  validates :slug, format: { with: /\A[a-z0-9-_]+\z/i }, uniqueness: true
+  validates :slug, format: { with: /\A[a-z0-9\-_]+\z/i }, uniqueness: true
 
   after_create :fallback_slug
 

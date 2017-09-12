@@ -288,3 +288,8 @@ ko:
       previous: "&lsaquo; 이전"
       next: "다음 &rsaquo;"
       truncate: "&hellip;"
+    petition:
+      speaker_section_title:
+        default: 관련 인물에게 촉구하기
+        id_55: 국회 정치개혁 특위에 촉구하기
+

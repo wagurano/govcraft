@@ -39,6 +39,7 @@ class ProjectsController < ApplicationController
     if @project.update(project_params)
       redirect_to @project
     else
+      errors_to_flash(@project)
       render 'edit'
     end
   end
