@@ -1,23 +1,25 @@
 = render 'header', project: @project
 
-- if @project.stories.any?
-  %section.page-block
-    .container
-      %h3 최신 소식
-      .row
-        = render @project.stories.first(3)
-
 - @project.component_names_sorted.each do |component_name|
   - case component_name
+  - when :story
+    - if @project.story_enabled? and @project.stories.any?
+      %section.page-block
+        %a{id: "anchor-project-story"}
+        .container
+          %h3= @project.component_title('story')
+          .row
+            = render @project.stories.first(3)
   - when :wiki
     - if @project.wiki_enabled?
       %section.page-block
         %a{id: "anchor-project-wiki"}
         = render 'wikis/list_in_project', wikis: @project.wikis.recent
   - when :event
-    %section.page-block
-      %a{id: "anchor-project-event"}
-      = render 'events/list', project: @project, events: @project.events.recent
+    - if @project.events.any?
+      %section.page-block
+        %a{id: "anchor-project-event"}
+        = render 'events/list', project: @project, events: @project.events.recent
   - when :discussion
     - if @project.discussion_enabled?
       %section.page-block

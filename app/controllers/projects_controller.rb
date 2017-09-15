@@ -57,9 +57,9 @@ class ProjectsController < ApplicationController
       :image, :remove_image,
       :social_image, :remove_social_image,
       :slug, :organization_id,
-      :discussion_enabled, :poll_enabled, :petition_enabled, :wiki_enabled,
-      :discussion_title, :poll_title, :petition_title, :wiki_title,
-      :discussion_sequence, :poll_sequence, :petition_sequence, :wiki_sequence, :event_sequence
+      :story_enabled, :discussion_enabled, :poll_enabled, :petition_enabled, :wiki_enabled,
+      :story_title, :discussion_title, :poll_title, :petition_title, :wiki_title,
+      :story_sequence, :discussion_sequence, :poll_sequence, :petition_sequence, :wiki_sequence, :event_sequence
     )
   end
 

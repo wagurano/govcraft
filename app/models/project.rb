@@ -45,7 +45,7 @@ class Project < ApplicationRecord
     project_admins.exists? user: someone
   end
 
-  DEFAULT_SORTED_COMPONENT_NAMES = %i(wiki event discussion poll petition)
+  DEFAULT_SORTED_COMPONENT_NAMES = %i(wiki event discussion poll petition story)
   def component_sequence(component_name)
     attr = :"#{component_name}_sequence"
     ((try(attr) || 0) * 10) + DEFAULT_SORTED_COMPONENT_NAMES.index(component_name.to_sym)

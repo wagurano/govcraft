@@ -79,6 +79,8 @@ ko:
         subtitle: 부제목
         body: 내용
         image: 대표이미지
+        story_enabled: 최신소식 기능 사용
+        story_title: 최신소식 기능 이름
         discussion_enabled: 토론 기능 사용
         discussion_title: 토론 기능 이름
         poll_enabled: 투표 기능 사용
