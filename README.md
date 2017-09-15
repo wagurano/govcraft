@@ -124,3 +124,9 @@ export PARTI_API_BASE="xx"
 ```
 export FILENAME_ENCODING="ISO-8859-1"
 ```
+
+### 조직 기본 데이터 등록
+
+```
+$ bin/rails organizations:seed
+```

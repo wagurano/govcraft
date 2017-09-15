@@ -5,6 +5,7 @@ class PagesController < ApplicationController
 
   def home
     home_method = :"home_#{@current_organization.try(:slug)}"
+    reset_meta_tags_for_home(@current_organization)
     if respond_to? home_method
       send home_method
     end
@@ -49,5 +50,14 @@ class PagesController < ApplicationController
       return
     end
     prepend_view_path "app/views/organizations/#{@current_organization.slug}"
+  end
+
+  def reset_meta_tags_for_home(organization)
+    prepare_meta_tags({
+      site_name: organization.try(:site_name).try(:html_safe),
+      title: organization.try(:title).try(:html_safe),
+      description: organization.try(:description).try(:html_safe),
+      url: request.original_url}
+    )
   end
 end

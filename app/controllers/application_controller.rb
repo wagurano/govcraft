@@ -61,11 +61,11 @@ class ApplicationController < ActionController::Base
   end
 
   def build_meta_options(options)
-    site_name = "우리가 주인이당! Would You Party?"
-    title = view_context.strip_tags(options[:title]) || "직접 민주주의 프로젝트 정당 우주당"
+    site_name = options[:site_name] || "가브크래프트"
+    title = view_context.strip_tags(options[:title]) || "시민 정치 놀이터 - 가브크래프트"
     image = options[:image] || view_context.image_url('seo.png')
     url = options[:url] || root_url
-    description = view_context.strip_tags(options[:description]) || "직접 민주주의 프로젝트 정당 우주당 '우리가 주인이당!'입니다"
+    description = view_context.strip_tags(options[:description]) || "게임하듯 정치하는 시민들의 놀이터 '가브크래프트'입니다"
     {
       title:       title,
       reverse:     true,

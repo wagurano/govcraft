@@ -1,6 +1,6 @@
 class PetitionsController < ApplicationController
   load_and_authorize_resource
-  before_action :reset_meta_tags, only: :show
+  before_action :reset_meta_tags_for_show, only: :show
 
   def index
     @petitions = Petition.recent
@@ -97,8 +97,9 @@ class PetitionsController < ApplicationController
     params.require(:petition).permit(:title, :body, :project_id, :signs_goal_count, :cover_image, :thanks_mention, :comment_enabled, :sign_title, :social_image)
   end
 
-  def reset_meta_tags
+  def reset_meta_tags_for_show
     prepare_meta_tags({
+      site_name: ("#{@petition.project.title} - #{@petition.project.user.nickname}" if @petition.project.present?),
       title: "[서명] " + @petition.title,
       description: @petition.body.html_safe,
       image: (view_context.image_url(@petition.fallback_social_image_url) if @petition.fallback_social_image_url),
