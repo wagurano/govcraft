@@ -38,10 +38,16 @@
 
         .share-box.text-center{ 'data-share-image': image_url(project.image) }
 - else
-  %section.cover-section{style: "padding: 0; background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3)), url(#{asset_url(project.image_url(:lg))});"}
-    %div{ style: 'background-color: rgba(0,0,0,0.5) !important; padding: 12px 24px;' }
-      .container
-        %h1.cover-section__title{ style: 'font-size: 24px;' }
-          %small.label.label-danger{ style: 'font-size: 12px;' }= Project.model_name.human
-          = link_to project do
-            = project.title
+  %nav.navbar.navbar-default
+    .container
+      .navbar-header
+        %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#project-header", "data-toggle" => "collapse", :type => "button"}
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        = link_to project, class: 'navbar-brand' do
+          = project.title
+
+      #project-header.collapse.navbar-collapse
+        %ul.nav.navbar-nav
