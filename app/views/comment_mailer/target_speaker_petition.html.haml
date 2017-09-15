@@ -8,17 +8,18 @@
     = stylesheet_link_tag 'emails/summary', media: 'all'
   %body
     %p
-      #{@speaker.name}님! 안녕하세요. 시민 정치 놀이터
-      = link_to 'http://govcraft.org/' do
-        '가브크래프트' http://govcraft.org/
-      입니다.
-    %p 아래와 같은 서명이 진행 중입니다.
+      #{@speaker.name}님! 안녕하세요. #{petition.user.nickname}입니다.
+    %p
+      시민 정치 놀이터
+      = link_to polymorphic_url(petition) do
+        '가브크래프트' #{polymorphic_url(petition)}
+      에서 아래와 같은 서명이 진행 중입니다.
     .container
       %h4= link_to petition.title, polymorphic_url(petition), target: "_blank"
       %p= raw petition.body
     %p
       = link_to polymorphic_url(petition), target: "_blank" do
-        "#{petition.title}" 서명으로 이동하기
+        "#{petition.title}" 서명으로 이동하려면 여기를 클릭해 주세요.
     %p
       이 서명에 대해 #{@comment.user_nickname}님이 #{@speaker.name}님에게 행동을 촉구합니다.
     .container
