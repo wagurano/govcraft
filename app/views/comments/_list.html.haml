@@ -23,28 +23,4 @@
         .gov-action-recaptcha
     = f.submit '작성', class: 'btn btn-default btn-inverted'
 
-.comments
-  - commentable.comments.recent.each do |comment|
-    .media[comment]{ style: 'margin: 14px 0; border-top: 1px solid #ddd; padding-top: 12px;'}
-      - if comment.target_speaker.present?
-        .comment__to-speaker
-          %span.label.label-default.label-image
-            = image_tag comment.target_speaker.image.xs.url
-            #{comment.target_speaker.organization} #{comment.target_speaker.name}님에게 보낸 의견입니다.
-      .media-body
-        .comment__meta
-          %span
-            %i.fa.fa-user-o
-            = comment.user_nickname
-          = date_f comment.created_at
-          - if can? :destroy, comment
-            = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
-          - if current_user != comment.user
-            = render 'reports/button', reportable: comment
-
-        - if comment.choice.present?
-          .comment__choice{ class: comment.choice }= comment.choice.text
-        .comment__body
-          = raw screened(comment, :body)
-      .media-right.xs-hidden{ style: 'vertical-align: middle;' }
-        = render 'likes/button', likable: comment
+= render 'comments/page', local_assigns.merge(comments: commentable.comments)
