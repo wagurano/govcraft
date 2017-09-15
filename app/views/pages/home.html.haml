@@ -27,9 +27,8 @@
 %section#petitions.page-block
   .container
     %h3= Petition.model_name.human
-
-    .row.masonry-container
-      = render Petition.recent.limit(3)
+    .row
+      = render Petition.recent.limit(4)
 
 
 - discussions = Discussion.recent.limit(10)

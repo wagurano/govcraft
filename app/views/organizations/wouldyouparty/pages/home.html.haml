@@ -30,8 +30,7 @@
 %section#petitions.page-block
   .container
     %h3.sub-title= Petition.model_name.human
-
-    .row.masonry-container
+    .row
       = render Petition.recent.where(project: @current_organization.projects).limit(3)
 
 

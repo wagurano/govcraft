@@ -1,38 +1,16 @@
-.col-md-4.col-sm-6.col-xs-12
-  .card[petition]
-    - if petition.project.present? && params[:controller] != 'projects'
-      .card-content.card-extra{ style: 'background-color: #eee;' }
-        %small
-          %i.fa.fa-cube
-          = link_to petition.project, class: 'text-muted' do
-            = petition.project.title
-
+.col-md-6.col-sm-6.col-xs-12
+  .petition-card[petition]
     = link_to petition do
-      .card-image{ style: "height: 200px; background-image: url(#{petition.cover_image_url(:md)}); background-size: cover; background-position: top center;"}
-    .card-content
-      = link_to petition.title, petition, class: 'card-header'
-      .card-description
-        = excerpt petition.body, length: 50 if petition.body.present?
-
-    .card-content.card-extra
-      - if petition.has_goal?
-        .progress{ style: 'margin-bottom: 0px' }
-          .progress-bar.progress-bar-warning.progress-bar-striped.active{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{petition.percentage}", :role => "progressbar", :style => "width: #{petition.percentage}%;"}
-        .pull-right #{petition.percentage}% 달성
-        #{number_with_delimiter(petition.signs_count)}명 참여
-      - else
-        #{petition.signs.last.user_name}님 외
-        #{number_with_delimiter(petition.signs_count)}명 참여
-
-    .card-content.card-extra
-      .pull-right
-        %span
-          %i.fa.fa-comments
-          #{petition.comments.count}
-        %span
-          %i.fa.fa-heart
-          = petition.merged_likes_count
-
-      %span.nickname
-        %i.fa.fa-user
-        = link_to petition.user.nickname, petition.user, class: 'text-muted'
+      .card-image{ style: "background-image: url(#{petition.cover_image_url(:md)});"}
+        .overlay
+          .title
+            = petition.title
+      .card-extra
+        - if petition.has_goal?
+          .progress
+            .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{petition.percentage}", :role => "progressbar", :style => "width: #{petition.percentage}%;"}
+          .pull-right #{petition.percentage}% 달성
+          #{number_with_delimiter(petition.signs_count)}명 참여
+        - else
+          #{petition.signs.last.user_name}님 외
+          #{number_with_delimiter(petition.signs_count)}명 참여
