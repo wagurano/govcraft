@@ -16,6 +16,7 @@ class EpisodesController < ApplicationController
   private
 
   def change2020_fetch_polls
-    @polls = Poll.where(id: [103, 104, 105, 106, 107])
+    # @polls = Poll.where(id: [103, 104, 105, 106, 107])
+    @polls = Poll.where(id: (112..123).to_a)
   end
 end
