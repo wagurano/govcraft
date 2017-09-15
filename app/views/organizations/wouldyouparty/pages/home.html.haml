@@ -21,10 +21,10 @@
 
 %section#projects.page-block
   .container
-    %h3= Project.model_name.human
-
-    .row.masonry-container
-      = render @current_organization.projects.recent.limit(12)
+    %h3.sub-title= Project.model_name.human
+    .row
+      = render @current_organization.projects.recent.limit(3)
+    %hr{style:"color:rgba(230, 230, 230, 1);height:2px;margin-top:25px;"}
 
 
 %section#petitions.page-block
