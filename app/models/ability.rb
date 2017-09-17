@@ -12,6 +12,7 @@ class Ability
     can :vote_widget, Opinion
     can :agenda, Speaker
     can [:new_comment_speaker], Petition
+    can [:download], ArchiveDocument
 
     if user
       can [:new_email, :send_email], Agenda
