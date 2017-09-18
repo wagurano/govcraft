@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915074450) do
+ActiveRecord::Schema.define(version: 20170918021128) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -680,7 +680,7 @@ ActiveRecord::Schema.define(version: 20170915074450) do
     t.index ["user_id"], name: "index_speeches_on_user_id", using: :btree
   end
 
-  create_table "statement_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "statement_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "statement_id", null: false
     t.string   "key",          null: false
     t.datetime "expired_at",   null: false
@@ -693,7 +693,6 @@ ActiveRecord::Schema.define(version: 20170915074450) do
   create_table "statements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "petition_id",               null: false
     t.integer  "speaker_id",                null: false
-    t.string   "key",                       null: false
     t.text     "body",        limit: 65535
     t.string   "stance"
     t.datetime "created_at",                null: false
