@@ -1,8 +1,9 @@
 %section.page-block
-  .ui.container
-    %h3.header
+  .container
+    %h3
       = Memorial.model_name.human
-      %small= link_to '추모관 열기', new_memorial_path
+      .pull-right
+        %small= link_to '추모관 열기', new_memorial_path
 
-    .ui.four.column.grid.doubling.stackable
+    .row
       = render @memorials

@@ -1,12 +1,9 @@
-.column
-  .ui.card.fluid
-    .image{ style: "height: 140px; background-image: url(#{archive.cover_image_url(:md)}); background-size: cover; background-position: center center;" }
-      %a.ui.brown.ribbon.label= Archive.model_name.human
-    .content
-      = link_to archive.title, archive, class: 'header'
-      .meta
+.col-md-4.col-sm-6.col-xs-12
+  = link_to archive, html_options = {class:'project-link'} do
+    .project-card
+      .card-image{ style: "height: 200px; background-image: url(#{archive.cover_image.md.url});" }
+      .project-title
+        = archive.title
+      .project-meta
         %span
-          #{date_f(archive.created_at)}부터
-          #{archive.documents.count}개의 자료를 모았습니다.
-      .description
-      .extra
+          #{archive.documents.count}개의 자료
