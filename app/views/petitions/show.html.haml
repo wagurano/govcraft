@@ -77,8 +77,4 @@
   - flash.delete(:sign_notice)
 
 - if @petition.project
-  %section.page-block
-    .container
-      %h3 프로젝트
-      .row
-        = render @petition.project
+  = render 'projects/post_footer', project: @petition.project

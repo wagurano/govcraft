@@ -1,0 +1,13 @@
+%section.page-block
+  .container
+    %h3 프로젝트
+    .row
+      = render project
+
+- if project.story_enabled? and project.stories.any?
+  %section.page-block
+    %a{id: "anchor-project-story"}
+    .container
+      %h3= project.component_title('story')
+      .row
+        = render project.stories.first(3)

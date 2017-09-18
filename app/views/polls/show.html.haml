@@ -4,7 +4,6 @@
   - if @poll.project
     = render 'projects/header', project: @poll.project
 
-
   %section#poll-block.page-block
     .container
       .panel.panel-default.panel-post
@@ -49,3 +48,5 @@
         .panel-body
           .panel-post__comments
             = render 'comments/list', commentable: @poll
+  - if @project
+    = render 'projects/post_footer', project: @project

@@ -43,3 +43,6 @@
               = date_f wiki_revision.created_at
               .pull-right
                 = render 'users/line', user: wiki_revision.user
+
+- if @project
+  = render 'projects/post_footer', project: @project

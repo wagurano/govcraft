@@ -5,7 +5,7 @@
     .card-content
       = link_to story.title, story, class: 'card-header'
       .card-description
-        = excerpt story.body, length: 210 if story.body.present?
+        = excerpt story.body, length: 100 if story.body.present?
 
     .card-content.card-extra
       .pull-right

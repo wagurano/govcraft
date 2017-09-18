@@ -54,7 +54,5 @@
       .post-block__comments
         = render 'comments/list', commentable: @survey
 
-      - if @survey.project
-        .post-block__project
-          %h4 프로젝트
-          = render @survey.project
+  - if @project
+    = render 'projects/post_footer', project: @project

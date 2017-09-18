@@ -31,3 +31,5 @@
         .panel-post__comments
           = render 'comments/list', commentable: @story
 
+- if @project
+  = render 'projects/post_footer', project: @project
