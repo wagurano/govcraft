@@ -1,0 +1,87 @@
+= form_for @archive_document do |f|
+  = f.hidden_field :archive_id
+
+  .form-group
+    = f.label :title
+    = f.text_field :title, required: true, class: 'form-control'
+
+  .form-group
+    = f.label :body
+    ~ f.text_area :body, class: 'form-control redactor'
+
+  - if params[:category_slug].present?
+    = f.hidden_field :category_slug, value: params[:category_slug]
+  - else
+    .form-group
+      = f.label :category_slug
+      = f.select :category_slug, [], {}, class: 'form-control' do
+        - @archive_document.archive.categories.each do |category|
+          %optgroup{ label: category.name }
+          - category.children.each do |subcategory|
+            %option{ value: subcategory.slug, selected: subcategory.slug == f.object.category_slug }
+              = subcategory.slug
+              \-
+              = subcategory.name
+
+  .form-group
+    = f.label :tag_list
+    = f.text_field :tag_list, value: @archive_document.tag_list.try(:to_s), placeholder: '태그1, 태그2, 태그3', class: 'form-control'
+    %p.help-block
+      콤마로 태그를 구분해서 넣으세요.
+
+  %hr
+
+  .form-group
+    = f.label :content
+    = f.file_field :content, class: 'form-control'
+    = f.hidden_field :content_cache, value: f.object.content_cache
+    .help-block
+    - if @archive_document.read_attribute(:content).present?
+      - if @archive_document.image?
+        = image_tag @archive_document.content.xs.url, class: 'img-thumbnail', style: 'max-width: 40px'
+      - else
+        = @archive_document.content_name
+      %label{ style: 'font-weight: normal;' }
+        = f.check_box :remove_content
+        삭제하기
+
+  .form-group
+    = f.label :media_type
+    = f.select :media_type, ArchiveDocument.media_type.options, {}, class: 'form-control'
+
+  .form-group
+    = f.label :content_creator
+    = f.text_field :content_creator, class: 'form-control'
+
+  .form-group
+    = f.label :content_source
+    = f.text_field :content_source, class: 'form-control'
+
+  .form-group
+    = f.label :content_recipients
+    = f.text_field :content_recipients, class: 'form-control'
+
+  .form-group
+    = f.label :donor
+    = f.text_field :donor, class: 'form-control'
+    .help-block
+      %label{ style: 'font-weight: normal;' }
+        = f.check_box :is_secret_donor
+        숨깁니다
+
+  .row
+    .col-sm-6
+      .form-group
+        = f.label :content_created_date
+        = f.text_field :content_created_date, class: 'form-control'
+      .help-block
+        %p 기록물의 생산년도, 월, 일 을 구분기호없이 8자리 입력(예:20160330) 생산년도만 알고 월/일을 모르는 경우 '20160000'으로, 일자를 모르는 경우 '20160300'으로 처리함
+
+    .col-sm-6
+      .form-group
+        = f.label :content_created_time
+        = f.text_field :content_created_time, placeholder: 'hh:mm:ss', class: 'form-control'
+
+  .form-group
+    = f.submit '저장', class: 'btn btn-primary'
+    = link_to '취소', :back, class: 'btn btn-default'

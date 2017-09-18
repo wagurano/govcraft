@@ -8,8 +8,9 @@ class ArchiveDocumentsController < ApplicationController
   end
 
   def new
-    @archive = Archive.find(params[:archive_id])
+    @archive ||= Archive.find(params[:archive_id])
     @archive_document = @archive.documents.build
+    render "archive_documents/#{@archive.slug}/new"
   end
 
   def create
@@ -17,6 +18,8 @@ class ArchiveDocumentsController < ApplicationController
     if @archive_document.save
       redirect_to archive_path(@archive_document.archive)
     else
+      errors_to_flash(@archive_document)
+      @archive = @archive_document.archive
       render 'new'
     end
   end
@@ -66,7 +69,7 @@ class ArchiveDocumentsController < ApplicationController
       :title, :body, :tag_list,
       :content_creator, :content_created_date, :content_created_time,
       :content_source, :content_recipients,
-      :content, :content_cache, :remove_content,
+      :content, :media_type, :content_cache, :remove_content,
       :category_slug, :donor, :is_secret_donor
     )
   end

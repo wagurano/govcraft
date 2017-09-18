@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20170921104011) do
-
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
     t.integer  "agenda_id",                null: false
@@ -138,6 +137,7 @@ ActiveRecord::Schema.define(version: 20170921104011) do
     t.integer  "likes_count",                  default: 0
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.string   "slug"
     t.index ["user_id"], name: "index_archives_on_user_id", using: :btree
   end
 

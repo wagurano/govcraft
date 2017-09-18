@@ -8,6 +8,10 @@
     ~ f.text_area :body, rows: 10, class: 'form-control'
 
   .form-group
+    = f.label :slug
+    ~ f.text_area :slug, class: 'form-control'
+
+  .form-group
     = f.label :cover_image
     = f.file_field :cover_image, class: 'form-control'
     = f.hidden_field :cover_image_cache, value: f.object.cover_image_cache
