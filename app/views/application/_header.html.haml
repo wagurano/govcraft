@@ -10,8 +10,7 @@
           [프로젝트]
           = @project.title
       - else
-        Democracy, everyday
-        /= @organization.try(:slogan) || ''
+        = @organization.try(:slogan) || 'Democracy, everyday'
     .right-navi.menu-btn{onclick:"javascript:toggleMenuList();"}
       %i.fa.fa-bars
     .right-navi.close-btn{onclick:"javascript:toggleMenuList();", style:"display:none;"}
