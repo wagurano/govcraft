@@ -1,2 +1,47 @@
-%section#parti-section
+%section#about-section.change2020
   .container
+    %h2
+      %small{style:"color:#2b659c"}
+        세대와 계층을 넘어<br/>
+      %strong
+        바꿈
+      이
+      %br
+      %strong
+        세상을 바꿉니다
+
+
+%section#projects.page-block
+  .container
+    %h3.sub-title= Project.model_name.human
+    .row
+      = render @current_organization.projects.recent.limit(3)
+    %hr{style:"color:rgba(230, 230, 230, 1);height:2px;margin-top:0px;"}
+
+
+%section#petitions.page-block
+  .container
+    %h3.sub-title= Petition.model_name.human
+    .row
+      = render Petition.recent.where(project: @current_organization.projects).limit(3)
+
+
+- discussions = Discussion.recent.where(project: @current_organization.projects).limit(10)
+%section#discussions.page-block
+  .container
+    %h3.sub-title= Discussion.model_name.human
+
+    .panel.panel-default.hidden-xs
+      %table.table
+        = render discussions
+
+    .list-group.visible-xs
+      - discussions.each do |discussion|
+        = link_to discussion, class: 'list-group-item' do
+          %span.badge
+            %i.fa.fa-heart
+            = discussion.merged_likes_count
+          %h5.list-group-item-heading= discussion.title
+          %p
+            %i.fa.fa-user
+            = discussion.user.nickname

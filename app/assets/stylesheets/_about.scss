@@ -3,6 +3,13 @@
     &.wouldyouparty {
         background-image: asset-url('about-main.png');
     }
+    &.change2020{
+        background: rgb(122,188,255); /* Old browsers */
+        background: -moz-linear-gradient(-45deg, rgba(122,188,255,1) 0%, rgba(96,171,248,1) 44%, rgba(32,111,176,1) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg, rgba(122,188,255,1) 0%,rgba(96,171,248,1) 44%,rgba(32,111,176,1) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg, rgba(122,188,255,1) 0%,rgba(96,171,248,1) 44%,rgba(32,111,176,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7abcff', endColorstr='#206fb0',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }
     padding-top: 50px;
     height: 400px;
     h2 {
