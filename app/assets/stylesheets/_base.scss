@@ -269,6 +269,9 @@ label.error {
     a {
         color: $gray-darker;
         padding:0px 2px;
+        &:hover{
+            color:$gray;
+        }
     }
 }
 
