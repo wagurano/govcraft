@@ -1,46 +1,13 @@
 %section#footer
   .container
-    .row
-      .col-xs-12
-        %h4
-          = link_to '가브크래프트', root_path, target: '_blank'
-      .col-xs-12
-        %ul.list-inline
-          %li
-            %strong 사이트맵
-          %li= link_to '홈', root_url(subdomain: root_subdomain)
-          %li= link_to Agenda.model_name.human, agendas_url(subdomain: root_subdomain)
-          %li= link_to Project.model_name.human, projects_url(subdomain: root_subdomain)
-          %li= link_to Event.model_name.human, events_url(subdomain: root_subdomain)
-          %li= link_to Petition.model_name.human, petitions_url(subdomain: root_subdomain)
-          %li= link_to Article.model_name.human, articles_url(subdomain: root_subdomain)
-          %li= link_to Archive.model_name.human, archives_url(subdomain: root_subdomain)
-          %li= link_to Memorial.model_name.human, memorials_url(subdomain: root_subdomain)
-          %li= link_to '커뮤니티', 'https://wouldyou.parti.xyz', target: '_blank'
-      .col-xs-12
-        %ul.list-inline
-          %li
-            %strong 소개 및 미디어
-          %li= link_to '소개', 'https://medium.com/%EC%9A%B0%EB%A6%AC%EA%B0%80-%EC%A3%BC%EC%9D%B8%EC%9D%B4%EB%8B%B9/%EC%A7%81%EC%A0%91-%EB%AF%BC%EC%A3%BC%EC%A3%BC%EC%9D%98-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%A0%95%EB%8B%B9-%EC%9A%B0%EB%A6%AC%EA%B0%80-%EC%A3%BC%EC%9D%B8%EC%9D%B4%EB%8B%B9-66e951b4f45b', target: '_blank'
-          %li= link_to '후원', 'https://goo.gl/forms/P5toLtywmFPwruGw1', target: '_blank'
-          %li= link_to '문의하기', 'http://m.me/wouldyouparty.org', target: '_blank'
-          %li
-            = link_to 'https://medium.com/우리가-주인이당', target: '_blank' do
-              미디엄
-          %li
-            = link_to 'https://www.facebook.com/wouldyouparty.org/', target: '_blank' do
-              페이스북
-          %li
-            = link_to 'https://twitter.com/wouldyouparty', target: '_blank' do
-              트위터
-      .col-xs-12
-        %ul.list-inline
-          - if user_signed_in?
-            %li= current_user.nickname
-            %li= link_to '프로필 수정', edit_user_registration_url(subdomain: root_subdomain)
-            %li= link_to '로그아웃', sign_out_url(subdomain: root_subdomain), method: :delete
-          - else
-            %li
-              = link_to new_user_session_url(subdomain: root_subdomain) do
-                로그인 &middot; 가입
-
+    %span{style:"padding-right:33px;border:1px solid $gray"}
+      contact@parti.xyz
+    %span{style:"padding-left:33px;"}
+      powered by 가브크래프트
+    .pull-right{style:"font-size:22px;"}
+      = link_to 'https://www.facebook.com/wouldyouparty.org/', target: '_blank' do
+        %i.fa.fa-facebook-square
+      = link_to 'https://twitter.com/wouldyouparty', target: '_blank' do
+        %i.fa.fa-twitter-square
+      = link_to 'https://medium.com/우리가-주인이당', target: '_blank' do
+        %i.fa.fa-medium

@@ -2,38 +2,47 @@
   #header-container.container-fluid
     = link_to root_url(subdomain: root_subdomain) do
       .title
-        우리가주인이당
+        - @organization = fetch_organization_of_request(request)
+        = @organization.try(:title) || '가브크래프트'
     .sub-title
-      Democracy, everyday
+      - if @project.present?
+        = link_to @project do
+          [프로젝트]
+          = @project.title
+      - else
+        Democracy, everyday
+        /= @organization.try(:slogan) || ''
     .right-navi.menu-btn{onclick:"javascript:toggleMenuList();"}
       %i.fa.fa-bars
     .right-navi.close-btn{onclick:"javascript:toggleMenuList();", style:"display:none;"}
       %i.fa.fa-times
     .menu-list{style:"display:none;"}
-      %a{href:""}
-        단체정보
       %br
-      %a{href:""}
-        프로젝트
+      = link_to Project.model_name.human, projects_url(subdomain: root_subdomain)
       %br
-      %a{href:""}
-        이벤트
+      = link_to Event.model_name.human, events_url(subdomain: root_subdomain)
       %br
-      %a{href:""}
-        서명
+      = link_to Petition.model_name.human, petitions_url(subdomain: root_subdomain)
       %br
-      %a{href:""}
-        커뮤니티
+      = link_to Article.model_name.human, articles_url(subdomain: root_subdomain)
+      %br
+      = link_to '커뮤니티', 'https://wouldyou.parti.xyz', target: '_blank'
       %br
       %br
       %span
-        member
+        - if user_signed_in?
+          = current_user.nickname
+          &nbsp;님
+        - else
+          member
       %br
-      %a{href:""}
-        로그인
-      %br
-      %a{href:""}
-        회원가입
+      - if user_signed_in?
+        = link_to '프로필', edit_user_registration_url(subdomain: root_subdomain)
+        %br
+        = link_to '로그아웃', sign_out_url(subdomain: root_subdomain), method: :delete
+      - else
+        = link_to new_user_session_url(subdomain: root_subdomain) do
+          로그인·가입
   :javascript
     function toggleMenuList(){
       document.getElementById("header-container").classList.toggle("drop-main-menu");
