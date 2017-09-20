@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20170921104011) do
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
     t.string   "category_slug"
-    t.string   "media_type",                                     null: false
+    t.string   "media_type"
     t.string   "content_created_date"
     t.string   "content_recipients"
     t.string   "donor"
@@ -412,6 +412,24 @@ ActiveRecord::Schema.define(version: 20170921104011) do
     t.datetime "updated_at",                                          null: false
     t.index ["opinion_id"], name: "index_notes_on_opinion_id", using: :btree
     t.index ["user_id"], name: "index_notes_on_user_id", using: :btree
+  end
+
+  create_table "npos_addtional_archive_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+    t.string   "address"
+    t.string   "npo_type"
+    t.string   "zipcode"
+    t.string   "homepage"
+    t.string   "tel"
+    t.string   "leader"
+    t.string   "leader_tel"
+    t.string   "email"
+    t.string   "business_area"
+    t.string   "open_year"
+    t.integer  "members_count"
+    t.integer  "workers_count"
+    t.integer  "finance"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "opinions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|

@@ -6,4 +6,4 @@
         자료 추가xxxxx
         - if params[:category_slug].present? and @archive.category_by_slug(params[:category_slug]).present?
           \- #{@archive.category_by_slug(params[:category_slug]).name} 카테고리
-    = render 'form'
+    = render 'archive_documents/npos/form'

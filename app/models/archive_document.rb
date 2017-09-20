@@ -17,6 +17,8 @@ class ArchiveDocument < ApplicationRecord
   has_many :comments, as: :commentable
   has_one :clypit, dependent: :destroy
   has_one :sewol_inv_document, dependent: :nullify, class_name: Archive::SewolInvDocument
+  has_one :additional, class_name: NposAddtionalArchiveDocument
+  accepts_nested_attributes_for :additional
 
   attr_accessor :google_access_token
 
@@ -24,7 +26,6 @@ class ArchiveDocument < ApplicationRecord
 
   validates :title, presence: true
   validates :body, presence: true
-  validates :media_type, presence: true
   validates :category_slug, presence: true
 
   default_scope { order('content_created_date DESC, content_created_time DESC, created_at DESC, id DESC') }

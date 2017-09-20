@@ -1,6 +1,5 @@
 class ArchiveDocumentsController < ApplicationController
   load_and_authorize_resource
-
   def show
     @archive = @archive_document.archive
     @documents = params[:tag].present? ? @archive.documents.tagged_with(params[:tag]) : @archive.documents
@@ -14,6 +13,7 @@ class ArchiveDocumentsController < ApplicationController
   end
 
   def create
+    abort archive_document_params.inspect
     @archive_document.user = current_user
     if @archive_document.save
       redirect_to archive_path(@archive_document.archive)
@@ -70,7 +70,8 @@ class ArchiveDocumentsController < ApplicationController
       :content_creator, :content_created_date, :content_created_time,
       :content_source, :content_recipients,
       :content, :media_type, :content_cache, :remove_content,
-      :category_slug, :donor, :is_secret_donor
+      :category_slug, :donor, :is_secret_donor,
+      additional: [:address, :zipcode]
     )
   end
 end
