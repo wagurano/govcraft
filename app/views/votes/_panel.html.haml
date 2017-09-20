@@ -13,7 +13,7 @@
           %span.choice__count= votable.agrees_count
     .vote-button
       - if vote.present? && vote.choice == 'disagree'
-        = link_to cancel_votes_path(vote_link_options), method: :post, remote: true, class: 'btn btn-danger btn-choice btn-lg' do
+        = link_to cancel_votes_path(vote_link_options), method: :post, remote: true, class: 'btn btn-primary-sub btn-choice btn-lg' do
           %span.choice__label 반대
           %span.choice__count= votable.disagrees_count
       - else

@@ -165,6 +165,13 @@
     }
 }
 
+.btn-primary-sub{
+    background-color: $brand-sub;
+    color:white;
+    &:hover{
+        background-color: $brand-sub-light;
+    }
+}
 //공통 타이틀 스타일
 h2.main-title{
     font-weight: 200;

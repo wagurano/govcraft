@@ -1,5 +1,5 @@
 .container
-  %h3
+  %h3.sub-title
     - if @project.present?
       = local_assigns[:title_label] || @project.try(:component_title, 'petition')
     - else

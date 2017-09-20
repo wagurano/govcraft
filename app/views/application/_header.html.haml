@@ -4,10 +4,11 @@
       .title
         - @organization = fetch_organization_of_request(request)
         = @organization.try(:title) || '가브크래프트'
-    .sub-title
+    .slogan-or-navi
       - if @project.present?
         = link_to @project do
-          [프로젝트]
+          %span.header-label
+            프로젝트
           = @project.title
       - else
         = @organization.try(:slogan) || 'Democracy, everyday'

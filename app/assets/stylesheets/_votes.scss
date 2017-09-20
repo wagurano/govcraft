@@ -1,9 +1,10 @@
 .vote-panel {
-  text-align: center;
+  text-align: left;
 }
 .vote-widget .vote-panel{
   .vote-button {
     margin: 0px 1px;
+    border-radius: 0px;
   }
   .btn-choice {
     color: #fff;
@@ -21,6 +22,7 @@
     }
   }
   .btn-disagree {
+    background-color:$brand-sub;
     &:hover {
       background-color: #00b794;
     }

@@ -51,14 +51,27 @@
 }
 
 .poll-card {
-  padding: $font-size-base * 1.5 0;
-  text-align: center;
-
+  padding: 20px;
+  text-align: left;
+  border: 1px solid $gray-light;
+  height:300px;
+  margin:15px 0px;
   .panel-body {
     padding: 0 15px 14px;
+    font-size: 14px;
+    color: $gray;
+    text-align: left;
+    line-height: 24px;
   }
-  .poll__title {
-    margin-bottom: 14px;
+  .poll__title{
+    line-height:32px;
+    margin:15px 0px;
+    a{
+      margin-bottom: 14px;
+      font-size:24px;
+      color:$gray-darker;
+      font-weight: bold;
+    }
   }
   .vote-panel {
     margin-top: 14px;

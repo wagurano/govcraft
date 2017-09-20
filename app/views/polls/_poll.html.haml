@@ -1,16 +1,15 @@
 - hide_project_title ||= false
-.col-sm-6
+.col-md-6.col-sm-6.col-xs-12
   %div[poll]
-    .panel.panel-default.panel-floating.poll-card
-      .panel-body
-        - if poll.project && !hide_project_title
-          .post__project
-            = link_to poll.project.title, poll.project
+    .poll-card
+      - if poll.project && !hide_project_title
+        .post__project
+          = link_to poll.project.title, poll.project
 
-        %h4.poll__title
-          = link_to poll.title, poll
-        .poll__body
-          = excerpt poll.body, length: 210 if poll.body.present?
-        = render 'votes/panel', votable: poll, show_voters: false
+      %h4.poll__title
+        = link_to poll.title, poll
+      .poll__body
+        = excerpt poll.body, length: 200 if poll.body.present?
+      = render 'votes/panel', votable: poll, show_voters: false
 
 
