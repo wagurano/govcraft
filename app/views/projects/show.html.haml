@@ -7,7 +7,7 @@
       %section.page-block
         %a{id: "anchor-project-story"}
         .container
-          %h3= @project.component_title('story')
+          %h3.sub-title= @project.component_title('story')
           .row
             = render @project.stories.first(3)
   - when :wiki
