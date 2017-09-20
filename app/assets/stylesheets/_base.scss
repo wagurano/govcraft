@@ -255,6 +255,28 @@ label.error {
     }
 }
 
+//공통 테이블
+.table{
+    border-top:2px solid $gray-light;
+    border-bottom:2px solid $gray-light;
+    tr{
+        height:59px;
+        &:hover{
+            background-color:$gray-lightest;
+        }
+    }
+    td{
+        vertical-align:middle !important;
+        color:$gray-base;
+        a{
+            color:$gray-dark;
+        }
+        span.title{
+            font-weight:bold;
+        }
+    }
+}
+
 #footer {
     height:96px;
     background-color:white;

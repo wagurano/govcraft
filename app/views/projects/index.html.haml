@@ -1,10 +1,9 @@
 %section
   .container
-    .page-header
-      %h2.header
-        = Project.model_name.human
-        %small.pull-right
-          = link_to '프로젝트 만들기', new_project_path, class: 'btn btn-default' if can? :create, Project
+    %h3.sub-title
+      = Project.model_name.human
+      %small.pull-right
+        = link_to '프로젝트 만들기', new_project_path, class: 'btn btn-default' if can? :create, Project
 
     .row
       = render @projects

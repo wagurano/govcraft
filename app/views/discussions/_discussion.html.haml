@@ -3,7 +3,8 @@
     = discussion.id
   %td
     = link_to discussion do
-      = discussion.title
+      %span.title
+        = discussion.title
       - if discussion.comments.count > 0
         %small
           (#{discussion.comments.count})

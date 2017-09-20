@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20170919040508) do
     t.integer  "likes_count",                  default: 0
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.string   "slug"
     t.index ["user_id"], name: "index_archives_on_user_id", using: :btree
   end
 
