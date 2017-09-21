@@ -1,10 +1,12 @@
 %section#parti-section
   .container
-    %h3 커뮤니티 공지사항
-    %ul
-    - @pinned_posts.each do |pinned_post|
-      %li= truncate(pinned_post["specific_desc_striped_tags"], :length => 30)
-    %h3 커뮤니티 최근 글
-    %ul
-    - @recent_posts.each do |recent_post|
-      %li= truncate(recent_post["specific_desc_striped_tags"], :length => 30)
+    - if @pinned_posts.any?
+      %h3 커뮤니티 공지사항
+      %ul
+      - @pinned_posts.each do |pinned_post|
+        %li= truncate(pinned_post["specific_desc_striped_tags"], :length => 30)
+    - if @recent_posts.any?
+      %h3 커뮤니티 최근 글
+      %ul
+      - @recent_posts.each do |recent_post|
+        %li= truncate(recent_post["specific_desc_striped_tags"], :length => 30)

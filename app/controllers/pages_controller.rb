@@ -17,12 +17,14 @@ class PagesController < ApplicationController
   end
 
   def home_urimanna
-    #Rest Client error 시 처리 필요
-    #캐시하기
-    highlight_posts = RestClient.get "#{ENV["PARTI_API_BASE"]}v1/groups/union/highlight_posts?limit=10"
-    json = JSON.parse(highlight_posts.body)
-    @pinned_posts = json["pinned"]
-    @recent_posts = json["recent"]
+    json = Rails.cache.read "urimanna_parti_highlight_posts"
+
+    @pinned_posts = json.try(:[], "pinned") || []
+    @recent_posts = json.try(:[], "recent") || []
+
+    if json.nil?
+      PartiHightlightPostsJob.perform_async
+    end
   end
 
   def about
