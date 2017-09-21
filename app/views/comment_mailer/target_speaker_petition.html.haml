@@ -10,7 +10,7 @@
     %p
       #{@speaker.name}님! 안녕하세요. #{petition.user.nickname}입니다.
     %p
-      시민 정치 놀이터
+      Democracy, everyday
       = link_to polymorphic_url(petition) do
         '가브크래프트' #{polymorphic_url(petition)}
       에서 아래와 같은 서명이 진행 중입니다.
@@ -41,7 +41,7 @@
               %img(src="#{Rails.application.config.action_mailer.asset_host}/email_logo.png" width="40" height="40")
           %td(style="padding-left: 12px;")
             %a(href='http://govcraft.org/' target="_blank" style='color: #777; text-decoration: none;')
-              시민 정치 놀이터
+              Democracy, everyday
               %br
               %strong '가브크래프트'
               http://govcraft.org/

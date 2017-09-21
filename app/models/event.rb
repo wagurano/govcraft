@@ -9,6 +9,7 @@ class Event < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   scope :recent, -> { order('id DESC') }
+  scope :by_organization, ->(organization) { where(project: organization.projects) }
 
   SLUG_CANDLE_SPEECH = 'candle-speech'
 

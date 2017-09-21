@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
 
   def build_meta_options(options)
     site_name = options[:site_name] || "가브크래프트"
-    title = view_context.strip_tags(options[:title]) || "시민 정치 놀이터 - 가브크래프트"
+    title = view_context.strip_tags(options[:title]) || "Democracy, everyday - 가브크래프트"
     image = options[:image] || view_context.image_url('seo.png')
     url = options[:url] || root_url
     description = view_context.strip_tags(options[:description]) || "게임하듯 정치하는 시민들의 놀이터 '가브크래프트'입니다"

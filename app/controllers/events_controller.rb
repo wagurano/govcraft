@@ -1,9 +1,13 @@
 class EventsController < ApplicationController
+  include OrganizationHelper
+
   load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
 
   def index
     @events = Event.recent
+    @current_organization = fetch_organization_of_request(request)
+    @events = @events.by_organization(@current_organization) if @current_organization.present?
   end
 
   def show

@@ -1,9 +1,13 @@
 class PetitionsController < ApplicationController
+  include OrganizationHelper
+
   load_and_authorize_resource
   before_action :reset_meta_tags_for_show, only: :show
 
   def index
     @petitions = Petition.recent
+    @current_organization = fetch_organization_of_request(request)
+    @petitions = @petitions.by_organization(@current_organization) if @current_organization.present?
   end
 
   def show

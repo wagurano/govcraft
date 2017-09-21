@@ -1,9 +1,9 @@
+- organization = fetch_organization_of_request(request)
 %section#site-header
   #header-container.container-fluid
     = link_to root_url(subdomain: root_subdomain) do
       .title
-        - @organization = fetch_organization_of_request(request)
-        = @organization.try(:title) || '가브크래프트'
+        = organization.try(:title) || '가브크래프트'
     .slogan-or-navi.hidden-xs
       - if @project.present?
         = link_to @project do
@@ -11,22 +11,32 @@
             프로젝트
           = @project.title
       - else
-        = @organization.try(:slogan) || 'Democracy, everyday'
+        = organization.try(:slogan) || 'Democracy, everyday'
     .right-navi.menu-btn{onclick:"javascript:toggleMenuList();"}
       %i.fa.fa-bars
     .right-navi.close-btn{onclick:"javascript:toggleMenuList();", style:"display:none;"}
       %i.fa.fa-times
     .menu-list{style:"display:none;"}
-      %br
-      = link_to Project.model_name.human, projects_url(subdomain: root_subdomain)
-      %br
-      = link_to Event.model_name.human, events_url(subdomain: root_subdomain)
-      %br
-      = link_to Petition.model_name.human, petitions_url(subdomain: root_subdomain)
-      %br
-      = link_to Article.model_name.human, articles_url(subdomain: root_subdomain)
-      %br
-      = link_to '커뮤니티', 'https://wouldyou.parti.xyz', target: '_blank'
+      - if organization.blank?
+        %br
+        = link_to Project.model_name.human, projects_url(subdomain: root_subdomain)
+        %br
+        = link_to Event.model_name.human, events_url(subdomain: root_subdomain)
+        %br
+        = link_to Petition.model_name.human, petitions_url(subdomain: root_subdomain)
+        %br
+        = link_to Article.model_name.human, articles_url(subdomain: root_subdomain)
+      - else
+        %br
+        = link_to Project.model_name.human, projects_path
+        %br
+        = link_to Event.model_name.human, events_path
+        %br
+        = link_to Petition.model_name.human, petitions_path
+        - if organization.community_url.present?
+          %br
+          = link_to '커뮤니티', organization.community_url, target: '_blank'
+
       %br
       %br
       %span
