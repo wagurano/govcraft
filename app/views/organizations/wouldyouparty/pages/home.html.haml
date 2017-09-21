@@ -54,3 +54,12 @@
           %p
             %i.fa.fa-user
             = discussion.user.nickname
+
+- stories = Story.recent.by_organization(@current_organization).limit(3)
+- if stories.any?
+  %section#stories.page-block
+    .container
+      = link_to stories_path do
+        %h3.sub-title= Story.model_name.human
+      .row
+        = render stories

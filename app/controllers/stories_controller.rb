@@ -1,9 +1,13 @@
 class StoriesController < ApplicationController
+  include OrganizationHelper
+
   load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
 
   def index
     @stories = Story.recent
+    @current_organization = fetch_organization_of_request(request)
+    @stories = @stories.by_organization(@current_organization) if @current_organization.present?
   end
 
   def show

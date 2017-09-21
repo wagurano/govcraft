@@ -1,4 +1,10 @@
-- if @project.present?
-  = render 'projects/header', project: @project
+.container
+  %h3.sub-title
+    - if @project.present?
+      = local_assigns[:title_label] || @project.try(:component_title, 'story')
+    - else
+      = Story.model_name.human
 
-= render 'discussions/list_in_project', discussions: @discussions
+  - if @stories.any?
+    .row.masonry-container
+      = render @stories

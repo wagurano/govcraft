@@ -52,3 +52,10 @@
           %p
             %i.fa.fa-user
             = discussion.user.nickname
+
+%section#stories.page-block
+  .container
+    = link_to stories_url(subdomain: root_subdomain) do
+      %h3.sub-title= Story.model_name.human
+    .row
+      = render Story.recent.limit(6)
