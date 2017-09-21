@@ -51,7 +51,7 @@ class Ability
       end
 
       # 프로젝트 개설자 및 운영자는 프로젝트에 속한 글과 댓글을 삭제할 수 있다
-      can :destroy, [Story, Discussion, Petition, Poll, Survey, Wiki, Event] do |model|
+      can [:destroy, :update], [Story, Discussion, Petition, Poll, Survey, Wiki, Event] do |model|
         model.project && ( user == model.project.user or model.project.project_admin?(user) )
       end
       can :destroy, Comment do |comment|
