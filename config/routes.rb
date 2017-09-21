@@ -7,16 +7,18 @@ Rails.application.routes.draw do
     delete 'sign_out', to: 'devise/sessions#destroy'
   end
 
-  class SubdomainConstraint
+  class OrganizationableConstraint
+    include OrganizationHelper
     def matches?(request)
-      request.subdomain.present?
+      organizationable_request? request
     end
   end
 
   get '404', :to => 'application#page_not_found'
 
-  constraints(SubdomainConstraint.new) do
+  constraints(OrganizationableConstraint.new) do
     root 'pages#home'
+    match '*path', to: redirect(subdomain: ApplicationController.helpers.root_subdomain), via: :all
   end
 
   root 'pages#home'
