@@ -16,7 +16,7 @@
       %i.fa.fa-bars
     .right-navi.close-btn{onclick:"javascript:toggleMenuList();", style:"display:none;"}
       %i.fa.fa-times
-    .menu-list{style:"display:none;"}
+    .menu-list.text-nowrap{style:"display:none;"}
       - if organization.blank?
         %br
         = link_to Project.model_name.human, projects_url(subdomain: root_subdomain)
