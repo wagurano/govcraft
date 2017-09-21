@@ -16,7 +16,7 @@
       %i.fa.fa-bars
     .right-navi.close-btn{onclick:"javascript:toggleMenuList();", style:"display:none;"}
       %i.fa.fa-times
-    - if @project.present?
+    - if @project.present? and !current_page?('/p/new')
       .right-navi.admin-menu
         .cover-section__buttons.text-center
           - if can? :edit, @project
