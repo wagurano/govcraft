@@ -1,4 +1,4 @@
-= render 'header', project: @project
+= render 'projects/header', project: @project
 
 - @project.component_names_sorted.each do |component_name|
   - case component_name
