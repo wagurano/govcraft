@@ -75,6 +75,7 @@ Rails.application.routes.draw do
   resources :stories
   resources :discussions
   resources :discussion_categories
+  resources :sympathies
   resources :petitions do
     resources :signs
     member do

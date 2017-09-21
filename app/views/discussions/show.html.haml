@@ -34,6 +34,6 @@
 
 - if @project
   %section
-    = render 'discussions/list_in_project', discussions: @project.discussions.recent.page(1).per(10)
+    = render 'discussions/list', discussions: @project.discussions.recent.page(1).per(10)
 
   = render 'projects/post_footer', project: @project

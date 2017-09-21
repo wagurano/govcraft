@@ -2,6 +2,12 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!, except: :create
   load_and_authorize_resource
 
+  def index
+    @commentable_model = params[:commentable_type].classify.safe_constantize
+    @commentable = @commentable_model.find(params[:commentable_id])
+    @comments = @commentable.comments.page(params[:page])
+  end
+
   def create
     if params[:i_am] != 'your_father'
       if !verify_recaptcha(model: @comment) and !user_signed_in?

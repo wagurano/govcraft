@@ -66,6 +66,7 @@ ko:
       archive: 아카이브
       archive_document: 아카이브 자료
       agenda_theme: 특집
+      sympathy: 추모
     attributes:
       user:
         nickname: 아이디
@@ -232,6 +233,9 @@ ko:
         task_card_name: 과제카드명
         task_name: 과제명
         task_storaging_period: 과제보존기간
+      sympathy:
+        title: 제목
+        body: 내용
     errors:
       models:
         user:
@@ -296,4 +300,8 @@ ko:
       speaker_section_title:
         default: 관련 인물에게 촉구하기
         id_55: 국회 정치개혁 특위에 촉구하기
+    comment:
+      form_title:
+        default: 의견을 남겨주세요
+        sympathy: 추모의 글을 남겨주세요
 

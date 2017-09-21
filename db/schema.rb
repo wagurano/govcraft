@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921051257) do
+ActiveRecord::Schema.define(version: 20170921104011) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -738,6 +738,19 @@ ActiveRecord::Schema.define(version: 20170921051257) do
     t.boolean  "anonymous_feedbackable",               default: false
     t.index ["project_id"], name: "index_surveys_on_project_id", using: :btree
     t.index ["user_id"], name: "index_surveys_on_user_id", using: :btree
+  end
+
+  create_table "sympathies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "title",                                    null: false
+    t.text     "body",           limit: 65535
+    t.integer  "user_id"
+    t.integer  "views_count",                  default: 0
+    t.integer  "comments_count",               default: 0
+    t.string   "cover_image"
+    t.string   "social_image"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.index ["user_id"], name: "index_sympathies_on_user_id", using: :btree
   end
 
   create_table "taggings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

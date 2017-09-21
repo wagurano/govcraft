@@ -17,13 +17,13 @@ class Ability
     if user
       can [:new_email, :send_email], Agenda
       can :create, [
-          Project, Story, Discussion, Petition, Poll, Feedback, Survey, Wiki,
+          Project, Story, Discussion, Petition, Poll, Feedback, Survey, Wiki, Sympathy,
           Memorial, Timeline, TimelineDocument, Event,
           Election, Candidate, Article, Person, Race, Player,
           Thumb
         ]
       can [:update, :destroy], [
-          Project, Story, Discussion, Petition, Poll, Survey, Wiki,
+          Project, Story, Discussion, Petition, Poll, Survey, Wiki, Sympathy,
           Memorial, Timeline, TimelineDocument, Event,
           Sign, Election, Candidate, Article, Person,
           Race, Player

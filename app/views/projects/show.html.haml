@@ -14,7 +14,7 @@
     - if @project.wiki_enabled?
       %section.page-block
         %a{id: "anchor-project-wiki"}
-        = render 'wikis/list_in_project', wikis: @project.wikis.recent
+        = render 'wikis/list', wikis: @project.wikis.recent
   - when :event
     - if @project.events.any?
       %section.page-block
@@ -24,7 +24,7 @@
     - if @project.discussion_enabled?
       %section.page-block
         %a{id: "anchor-project-discussion"}
-        = render 'discussions/list_in_project', discussions: @project.discussions.recent.page(1).per(10)
+        = render 'discussions/list', discussions: @project.discussions.recent.page(1).per(10)
   - when :poll
     - if @project.poll_enabled?
       %section.page-block
@@ -34,4 +34,4 @@
     - if @project.petition_enabled?
       %section.page-block
         %a{id: "anchor-project-petition"}
-        = render 'petitions/list_in_project', petitions: @project.petitions.recent
+        = render 'petitions/list', petitions: @project.petitions.recent

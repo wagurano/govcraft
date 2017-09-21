@@ -1,0 +1,10 @@
+.col-md-6.col-sm-6.col-xs-12
+  .sympathy-card[sympathy]
+    = link_to sympathy do
+      .card-image{ style: "background-image: url(#{sympathy.cover_image_url(:md)});"}
+        .overlay
+          .title
+            = sympathy.title
+      .card-extra
+        - if sympathy.comments.present?
+          #{sympathy.comments.last.user_nickname}님 외 #{number_with_delimiter(sympathy.comments.count)}명 참여

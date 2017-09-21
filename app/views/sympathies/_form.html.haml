@@ -1,0 +1,29 @@
+.panel.panel-default
+  .panel-body
+    = form_for @sympathy do |f|
+
+      - if @sympathy.errors.any?
+        .alert.alert-danger
+          %ul.list-unstyled
+            - @sympathy.errors.full_messages.each do |msg|
+              %li= msg
+
+      %fieldset
+        .form-group
+          = f.label :title
+          = f.text_field :title, class: 'form-control'
+
+        .form-group
+          = f.label :body
+          ~ f.text_area :body, class: 'form-control redactor'
+
+        .form-group
+          = f.label :cover_image
+          = f.file_field :cover_image, class: 'form-control'
+
+        .form-group
+          = f.label :social_image
+          = f.file_field :social_image, class: 'form-control'
+
+        .form-group
+          = f.submit '저장', class: 'btn btn-primary btn-lg'

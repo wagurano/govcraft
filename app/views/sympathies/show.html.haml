@@ -1,0 +1,43 @@
+%section#sympathy-block.page-block
+  .container
+    .panel.panel-default.panel-post
+      - cover_image = @sympathy.cover_image_url(:lg)
+      .panel-heading
+        %h2
+          %small.label.label-danger
+            = Sympathy.model_name.human
+          = @sympathy.title
+
+        .users-count.btn.btn-danger.btn-inverted.btn-lg{ style: 'margin-top: 16px;'}
+          = @sympathy.comments.count
+          명 참여
+
+        %div{ style: 'margin-top: 16px;'}
+          %span
+            = link_to @sympathy.user.nickname
+          &middot;
+          %span.panel-post__date
+            = date_f @sympathy.created_at
+          &middot;
+          %span
+            조회 #{@sympathy.views_count}
+          - if can? :edit, @sympathy
+            &middot;
+            = link_to '수정', [:edit, @sympathy]
+          - if can? :destroy, @sympathy
+            &middot;
+            = link_to '삭제', @sympathy, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+
+      .panel-body
+        .panel-post__body
+          = raw @sympathy.body
+
+      .panel-body
+        .panel-post__share
+          %h4 친구들에게 알려 주세요
+          .share-box{ 'data-share-image': image_url(cover_image) }
+
+      .panel-body
+        .panel-post__comments
+          = render 'comments/list', commentable: @sympathy
+
