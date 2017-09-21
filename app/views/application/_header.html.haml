@@ -4,7 +4,7 @@
       .title
         - @organization = fetch_organization_of_request(request)
         = @organization.try(:title) || '가브크래프트'
-    .slogan-or-navi
+    .slogan-or-navi.hidden-xs
       - if @project.present?
         = link_to @project do
           %span.header-label
