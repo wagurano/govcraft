@@ -6,21 +6,7 @@
       서명
     %br
     =@petition.title
-%section#petition-block
-  .user-info
-    .user-image{style: "background-image:url(#{asset_url(@petition.user.image)});"}
-    = link_to @petition.user.nickname
-  .container
-    - cover_image = @petition.cover_image_url(:lg)
-    .users-count.btn.btn-danger.btn-inverted.btn-lg{ style: 'margin-top: 16px;'}
-      = @petition.signs_count
-      명 참여
-
-    %div{ style: 'margin-top: 16px;'}
-      &middot;
-      %span.panel-post__date
-        = date_f @petition.created_at
-      &middot;
+    %div{ style: 'margin-top: 16px;font-size:16px;'}
       %span
         조회 #{@petition.views_count}
       - if can? :edit, @petition
@@ -32,8 +18,21 @@
       - if can? :destroy, @petition
         &middot;
         = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
-
+%section#petition-block
+  .user-info
+    .user-image{style: "background-image:url(#{asset_url(@petition.user.image)});"}
+    = link_to @petition.user.nickname
+  .container{style: "margin-top:-30px;"}
+    - cover_image = @petition.cover_image_url(:lg)
+    .petition-info-area
+      .petition-users-count-label
+        = @petition.signs_count
+        명 참여 중
+      .petition-join-btn
+        서명 함께하기
     %div
+      %span.panel-post__date
+        = date_f @petition.created_at
       = raw @petition.body
 
       .panel-body

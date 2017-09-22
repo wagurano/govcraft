@@ -42,6 +42,27 @@
 #petition-block {
 
 }
+.petition-info-area{
+  text-align:center;
+  .petition-users-count-label{
+    padding:15px 26px;
+    color:$brand-primary-dark;
+    background-color:$gray-light;
+    display:inline-block;
+    font-size:16px;
+    margin:15px;
+    font-weight:500;
+  }
+  .petition-join-btn{
+    display:inline-block;
+    background-color:$brand-sub;
+    color:white;
+    padding:15px 26px;
+    font-size:16px;
+    margin:15px;
+    font-weight:500;
+  }
+}
 section#petition-header{
   background-color:$brand-primary-dark;
   height:260px;
