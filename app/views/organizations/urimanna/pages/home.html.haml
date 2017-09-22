@@ -45,22 +45,29 @@
           %p
             %i.fa.fa-user
             = discussion.user.nickname
-- if @pinned_posts.any?
-  %h3 커뮤니티 공지사항
-  %ul
-  - @pinned_posts.each do |pinned_post|
-    %li= truncate(pinned_post["specific_desc_striped_tags"], :length => 30)
-- if @recent_posts.any?
-  %h3 커뮤니티 최근 글
-  %ul
-  - @recent_posts.each do |recent_post|
-    %li= truncate(recent_post["specific_desc_striped_tags"], :length => 30)
 
-- stories = Story.recent.by_organization(@current_organization).limit(3)
-- if stories.any?
-  %section#stories.page-block
-    .container
-      = link_to stories_path do
-        %h3.sub-title= Story.model_name.human
-      .row
-        = render stories
+%section#communities
+  .container
+    %h3.sub-title
+      커뮤니티
+    .board
+      .tab-title
+        .notice.active
+          공지사항
+        .recent
+          최신글
+      .tab-body
+        .notice
+          - @pinned_posts.each do |pinned_post|
+            .posts
+              %span.datetime
+                = date_f pinned_post["created_at"].to_date
+              %a{href:"http://parti.xyz"}
+                = truncate(pinned_post["specific_desc_striped_tags"], :length => 30)
+        .recent{style:"display:none;"}
+          - @recent_posts.each do |recent_post|
+            .posts
+              %span.datetime
+                = date_f recent_post["created_at"].to_date
+              %a{href:"http://parti.xyz"}
+                = truncate(recent_post["specific_desc_striped_tags"], :length => 30)

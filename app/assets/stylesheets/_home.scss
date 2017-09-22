@@ -84,7 +84,51 @@
   height:80px;
   border-bottom:1px solid $gray-light;
 }
-
+section#communities{
+  margin:30px 0px 60px 0px;
+  .board{
+    width:100%;
+    .tab-title div{
+      padding:15px 25px;
+      border:1px solid $gray-base;
+      display:inline;
+      background-color:white;
+      font-size:18px;
+      font-weight:500;
+    }
+    .active{
+      background-color:$gray-dark !important;
+      color:$gray-light;
+    }
+    .tab-body{
+      border-top:2px solid $gray-light;
+      border-bottom:2px solid $gray-light;
+      margin-top:-15px;
+      height:200px;
+      padding:50px 10px;
+      .posts{
+        display:inline-table;
+        height:80px;
+        width:200px;
+        font-size:16px;
+        line-height:30px;
+        margin:0px 40px 0px 0px;
+        .datetime{
+          color:$gray-darker;
+          font-weight:bold;
+          display:block;
+        }
+        a{
+          color:$gray-base;
+          &:hover{
+            color:$gray-darker;
+            font-weight:600;
+          }
+        }
+      }
+    }
+  }
+}
 /* group main */
 .urimanna p{
   font-size: 24px;
