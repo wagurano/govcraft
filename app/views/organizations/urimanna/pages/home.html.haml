@@ -1,12 +1,66 @@
-%section#parti-section
+%section#parti-section.urimanna
   .container
-    - if @pinned_posts.any?
-      %h3 커뮤니티 공지사항
-      %ul
-      - @pinned_posts.each do |pinned_post|
-        %li= truncate(pinned_post["specific_desc_striped_tags"], :length => 30)
-    - if @recent_posts.any?
-      %h3 커뮤니티 최근 글
-      %ul
-      - @recent_posts.each do |recent_post|
-        %li= truncate(recent_post["specific_desc_striped_tags"], :length => 30)
+    %p
+      전국적인 온라인 만민공동회 구축을 통해
+      %br
+      깨어있는 시민들의 자발적 네트워크를
+      %br
+      구축해 나가는 것을 지향합니다
+
+
+%section#projects.page-block
+  .container
+    %hr{style:"color:rgba(230, 230, 230, 1);height:2px;margin-top:0px;"}
+    = link_to projects_url(subdomain: root_subdomain) do
+      %h3.sub-title
+        = Project.model_name.human
+    .row
+      = render Project.recent.limit(3)
+    %hr{style:"color:rgba(230, 230, 230, 1);height:2px;margin-top:0px;"}
+
+
+%section#petitions.page-block
+  .container
+    = link_to petitions_url(subdomain: root_subdomain) do
+      %h3.sub-title= Petition.model_name.human
+    .row
+      = render Petition.recent.limit(3)
+
+
+- discussions = Discussion.recent.limit(10)
+%section#discussions.page-block
+  .container
+    = link_to discussions_url(subdomain: root_subdomain) do
+      %h3.sub-title= Discussion.model_name.human
+    %table.table
+      = render discussions
+
+    .list-group.visible-xs
+      - discussions.each do |discussion|
+        = link_to discussion, class: 'list-group-item' do
+          %span.badge
+            %i.fa.fa-heart
+            = discussion.merged_likes_count
+          %h5.list-group-item-heading= discussion.title
+          %p
+            %i.fa.fa-user
+            = discussion.user.nickname
+- if @pinned_posts.any?
+  %h3 커뮤니티 공지사항
+  %ul
+  - @pinned_posts.each do |pinned_post|
+    %li= truncate(pinned_post["specific_desc_striped_tags"], :length => 30)
+- if @recent_posts.any?
+  %h3 커뮤니티 최근 글
+  %ul
+  - @recent_posts.each do |recent_post|
+    %li= truncate(recent_post["specific_desc_striped_tags"], :length => 30)
+
+- stories = Story.recent.by_organization(@current_organization).limit(3)
+- if stories.any?
+  %section#stories.page-block
+    .container
+      = link_to stories_path do
+        %h3.sub-title= Story.model_name.human
+      .row
+        = render stories

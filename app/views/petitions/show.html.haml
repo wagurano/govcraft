@@ -1,42 +1,40 @@
 - if @project
   = render 'projects/header', project: @project
-
-%section#petition-block.page-block
+%section#petition-header
   .container
-    .panel.panel-default.panel-post
-      - cover_image = @petition.cover_image_url(:lg)
-      .panel-heading
-        %h2
-          %small.label.label-danger
-            = Petition.model_name.human
-          = @petition.title
+    %span.gov-label
+      서명
+    %br
+    =@petition.title
+%section#petition-block
+  .user-info
+    .user-image{style: "background-image:url(#{asset_url(@petition.user.image)});"}
+    = link_to @petition.user.nickname
+  .container
+    - cover_image = @petition.cover_image_url(:lg)
+    .users-count.btn.btn-danger.btn-inverted.btn-lg{ style: 'margin-top: 16px;'}
+      = @petition.signs_count
+      명 참여
 
-        .users-count.btn.btn-danger.btn-inverted.btn-lg{ style: 'margin-top: 16px;'}
-          = @petition.signs_count
-          명 참여
+    %div{ style: 'margin-top: 16px;'}
+      &middot;
+      %span.panel-post__date
+        = date_f @petition.created_at
+      &middot;
+      %span
+        조회 #{@petition.views_count}
+      - if can? :edit, @petition
+        &middot;
+        = link_to '수정', edit_petition_path(@petition)
+      - if can? :edit, @petition
+        &middot;
+        = link_to '관련인물관리', edit_speakers_petition_path(@petition)
+      - if can? :destroy, @petition
+        &middot;
+        = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
 
-        %div{ style: 'margin-top: 16px;'}
-          %span
-            = link_to @petition.user.nickname
-          &middot;
-          %span.panel-post__date
-            = date_f @petition.created_at
-          &middot;
-          %span
-            조회 #{@petition.views_count}
-          - if can? :edit, @petition
-            &middot;
-            = link_to '수정', edit_petition_path(@petition)
-          - if can? :edit, @petition
-            &middot;
-            = link_to '관련인물관리', edit_speakers_petition_path(@petition)
-          - if can? :destroy, @petition
-            &middot;
-            = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
-
-      .panel-body
-        .panel-post__body
-          = raw @petition.body
+    %div
+      = raw @petition.body
 
       .panel-body
         .panel-post__signs

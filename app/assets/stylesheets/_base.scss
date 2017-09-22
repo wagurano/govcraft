@@ -221,6 +221,16 @@ h3.sub-title{
     }
 }
 
+//공통 라벨 스타일
+.gov-label{
+    padding:12px 55px;
+    color:$brand-primary-dark;
+    font-size:16px;
+    display:inline-block;
+    background-color:$gray-light;
+    margin-bottom:20px;
+}
+
 .pagination {
     .prev,
     .next_page {
@@ -259,6 +269,30 @@ label.error {
 @media (max-width: $screen-xs-max) {
     .margin-xs-12 {
         margin-top: 12px;
+    }
+}
+//
+.user-info{
+    position:relative;
+    top: -40px;
+    text-align:center;
+    .user-image{
+        height:64px;
+        width:64px;
+        display:block;
+        border-radius:64px;
+        background-color:black;
+        margin-top:8px;
+        background-size:contain;
+        position:relative;
+        margin:0 auto;
+      }
+    a{
+        color:$gray-darker;
+        font-size:16px;
+        font-weight:500;
+        display:block;
+        line-height:40px;
     }
 }
 
