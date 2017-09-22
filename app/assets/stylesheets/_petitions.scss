@@ -48,6 +48,37 @@
     line-height: 28px;
   }
 }
+.sign-panel{
+  .progress{
+    background-color:$gray-light;
+  }
+  .progress-bar{
+    background-color:$brand-sub;
+    color:white;
+    font-weight:bold;
+  }
+  .sign-panel__users{
+    font-size:14px;
+  }
+  .sign-panel__status__count{
+    color:$gray-base;
+    font-size:14px;
+    span{
+      color:$brand-sub;
+      font-weight:bold;
+    }
+  }
+  .user-opinion-line{
+    font-size:14px;
+    font-weight:300;
+    tr{
+      height:32px;
+    }
+    td:first-child{
+      vertical-align:top;
+    }
+  }
+}
 .petition-info-area{
   text-align:center;
   .petition-users-count-label{
@@ -71,7 +102,7 @@
 }
 section#petition-header{
   background-color:$brand-primary-dark;
-  height:260px;
+  height:300px;
   text-align:center;
   color:white;
   padding:40px 0px 0px 0px;

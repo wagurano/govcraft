@@ -4,16 +4,17 @@
 
 .sign-panel
   - if petition.signs_goal_count > 0
-    .sign-panel__status
+    .sign-panel__status.text-right
       .sign-panel__status__count
         현재
-        = petition.signs_count
+        %span
+          = petition.signs_count
         \/
         목표
         = petition.signs_goal_count
 
       .progress
-        .progress-bar.progress-bar-warning.progress-bar-striped.active{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{petition.percentage}", :role => "progressbar", :style => "width: #{petition.percentage}%;"}
+        .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{petition.percentage}", :role => "progressbar", :style => "width: #{petition.percentage}%;"}
           #{petition.percentage}%
 
   - if user_signed_in? and petition.signed?(current_user)
@@ -62,26 +63,28 @@
             = link_to "... #{petition.signs.count - first_sign_users_count}명 더보기", petition_url(@petition), target: '_blank'
           - else
             = link_to "... #{petition.signs.count - first_sign_users_count}명 더보기", petition_signs_path(petition)
-
-    .sign-panel__list
+    %hr
+    %table.user-opinion-line
       - @signs.each do |sign|
-        %div
-          %strong
-            %i.fa.fa-user
-            = sign.user_name
-          = raw(screened(sign, :body))
-          - if !local_assigns[:widget]
-            %small
-              - if current_user != sign.user
-                = render 'reports/button', reportable: sign
-              - if can? :update, sign
-                = link_to '수정', [:edit, sign]
-              - if can? :destroy, sign
-                = link_to '취소', sign, method: :delete, data: { confirm: '정말 취소하시겠습니까?' }
-      - if !local_assigns[:widget]
-        .sign-panel__pagination.text-center
-          = paginate @signs, params: { controller: :petitions, activeon: :show }, theme: 'twitter-bootstrap-3'
-      - else
-        .text-center{ style: 'margin-top: 12px' }
-          = link_to '더보기 >', petition_url(@petition), target: '_blank'
+        %tr
+          %td{style:"width:80px;"}
+            %strong
+              %i.fa.fa-user
+              = sign.user_name
+          %td
+            = raw(screened(sign, :body))
+            - if !local_assigns[:widget]
+              %small
+                - if current_user != sign.user
+                  = render 'reports/button', reportable: sign
+                - if can? :update, sign
+                  = link_to '수정', [:edit, sign]
+                - if can? :destroy, sign
+                  = link_to '취소', sign, method: :delete, data: { confirm: '정말 취소하시겠습니까?' }
+    - if !local_assigns[:widget]
+      .sign-panel__pagination.text-center
+        = paginate @signs, params: { controller: :petitions, activeon: :show }, theme: 'twitter-bootstrap-3'
+    - else
+      .text-center{ style: 'margin-top: 12px' }
+        = link_to '더보기 >', petition_url(@petition), target: '_blank'
 

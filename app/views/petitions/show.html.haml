@@ -8,9 +8,7 @@
     =@petition.title
     %div{ style: 'margin-top: 16px;font-size:16px;'}
       %span
-        조회 #{@petition.views_count}
       - if can? :edit, @petition
-        &middot;
         = link_to '수정', edit_petition_path(@petition)
       - if can? :edit, @petition
         &middot;
@@ -39,16 +37,17 @@
       = @petition.views_count
     .petition-body
       = raw @petition.body
-
-      .panel-body
+      %h3.sub-title
+        서명하기
+      .panel-body{style:"border:1px solid rgba(230, 230, 230, 1);padding:25px 40px;"}
         .panel-post__signs
           = render 'signs/list', petition: @petition
 
-      .panel-body
+      %h3.sub-title 이 이슈를 친구들에게 알려 주세요
+      .panel-body{style:"border:1px solid rgba(230, 230, 230, 1);padding:25px 40px;" }
         .panel-post__share
-          %h4 이 이슈를 친구들에게 알려 주세요
-          .share-box{ 'data-share-image': image_url(cover_image) }
-          /%input{value: "<iframe width='100%' height='800' src='#{petition_url(@petition, mode: :widget)}' frameborder='0'></iframe>", class: 'form-control'}
+          .share-box{ 'data-share-image': image_url(cover_image)}
+          %input{value: "<iframe width='100%' height='800' src='#{petition_url(@petition, mode: :widget)}' frameborder='0'></iframe>", class: 'form-control'}
 
       - if @petition.speakers.any?
         = render 'petitions/speakers', petition: @petition
