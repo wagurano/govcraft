@@ -5,10 +5,4 @@
   - if sympathies.any?
     .row.masonry-container
       = render sympathies
-      .col-md-4.col-sm-6.col-xs-12
-        .bs-component
-          .card
-            .card-content
-              = link_to new_sympathy_path(project_id: @project), class: 'btn btn-default btn-inverted btn-block', style: 'line-height: 1.5' do
-                %i.fa.fa-plus-circle
-                새로운 서명 만들기
+

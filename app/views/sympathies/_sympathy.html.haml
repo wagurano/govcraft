@@ -6,5 +6,9 @@
           .title
             = sympathy.title
       .card-extra
-        - if sympathy.comments.present?
-          #{sympathy.comments.last.user_nickname}님 외 #{number_with_delimiter(sympathy.comments.count)}명 참여
+        = excerpt(sympathy.body, length: 90)
+        %br
+        - if sympathy.comments.count > 0
+          #{number_with_delimiter(sympathy.comments.count)}개의 추모글
+
+
