@@ -30,9 +30,14 @@
         명 참여 중
       .petition-join-btn
         서명 함께하기
+    %div{style:"font-weight:700;margin:40px 0px"}
+      %i.fa.fa-calendar
+      = date_f @petition.created_at
+      &nbsp;&nbsp;&nbsp;
+      %i.fa.fa-file-text-o
+      조회
+      = @petition.views_count
     %div
-      %span.panel-post__date
-        = date_f @petition.created_at
       = raw @petition.body
 
       .panel-body
