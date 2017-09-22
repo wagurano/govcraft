@@ -40,7 +40,13 @@
   }
 }
 #petition-block {
-
+  .petition-body{
+    font-size: 16px;
+    font-weight: 500;
+    color: $gray-dark;
+    text-align: left;
+    line-height: 28px;
+  }
 }
 .petition-info-area{
   text-align:center;
