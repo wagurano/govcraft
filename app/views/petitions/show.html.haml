@@ -26,8 +26,12 @@
       .petition-users-count-label
         = @petition.signs_count
         명 참여 중
-      .petition-join-btn
-        서명 함께하기
+      - if user_signed_in? and @petition.signed?(current_user)
+        .petition-users-count-label
+          서명 참여완료
+      - else
+        .petition-join-btn{onclick:"javascript:document.getElementById('sign_signer_name').focus();", style:"cursor:pointer;"}
+          서명 함께하기
     %div{style:"font-weight:700;margin:40px 0px"}
       %i.fa.fa-calendar
       = date_f @petition.created_at
@@ -37,7 +41,7 @@
       = @petition.views_count
     .petition-body
       = raw @petition.body
-      %h3.sub-title
+      %h3.sub-title#join-title
         서명하기
       .panel-body{style:"border:1px solid rgba(230, 230, 230, 1);padding:25px 40px;"}
         .panel-post__signs
@@ -79,3 +83,8 @@
 
 - if @petition.project
   = render 'projects/post_footer', project: @petition.project
+:javascript
+  function moveFocus(){
+    var join_field = document.getElementById('sign_signer_name);
+
+  }
