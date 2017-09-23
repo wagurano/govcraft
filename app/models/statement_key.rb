@@ -13,6 +13,6 @@ class StatementKey < ApplicationRecord
   private
 
   def init_expired_at
-    self.expired_at ||= 24.hours.since
+    self.expired_at ||= (24 * 7).hours.since
   end
 end
