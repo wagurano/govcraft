@@ -35,7 +35,7 @@
                 - if speaker.twitter.present?
                   .col-sm-6.col-xs-12.text-nowrap
                     - tweeter_msg = "'#{@petition.title}'에 대한 의견을 밝혀 주십시오. #{petition_url(@petition)}"
-                    = link_to "https://twitter.com/intent/tweet?text=#{tweeter_msg} @#{speaker.twitter}", target:'_blank' do
+                    = link_to "https://twitter.com/intent/tweet?text=@#{speaker.twitter} #{tweeter_msg}", target:'_blank' do
                       트윗보내기
 
 - if @petition.statements.responed_body.any?
