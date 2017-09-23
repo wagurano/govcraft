@@ -60,7 +60,7 @@
 
         - if @petition.comment_enabled
           .panel-post__comments
-            = render 'comments/page', commentable: @petition, comments: @petition.comments.with_target_speaker(@speaker)
+            = render 'comments/page', commentable: @petition, comments: @petition.comments.with_target_speaker(@speaker).page(1)
 
 - if @petition.project
   %section.page-block
