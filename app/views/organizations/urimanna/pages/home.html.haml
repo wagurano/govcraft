@@ -35,17 +35,6 @@
     %table.table
       = render discussions
 
-    .list-group.visible-xs
-      - discussions.each do |discussion|
-        = link_to discussion, class: 'list-group-item' do
-          %span.badge
-            %i.fa.fa-heart
-            = discussion.merged_likes_count
-          %h5.list-group-item-heading= discussion.title
-          %p
-            %i.fa.fa-user
-            = discussion.user.nickname
-
 %section#communities
   .container
     %h3.sub-title

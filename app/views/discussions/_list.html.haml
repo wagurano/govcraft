@@ -28,17 +28,6 @@
       %table.table
         = render discussions
 
-      .list-group.visible-xs
-        - discussions.each do |discussion|
-          = link_to discussion, class: 'list-group-item' do
-            %span.badge
-              %i.fa.fa-heart
-              = discussion.merged_likes_count
-            %h5.list-group-item-heading= discussion.title
-            %p
-              %i.fa.fa-user
-              = discussion.user.nickname
-
       - if on_project_show and discussions.count < discussions.total_count
         = link_to discussions_path(project_id: @project), class: 'btn btn-default btn-block' do
           #{discussions.total_count}개 게시글 모두 보기
