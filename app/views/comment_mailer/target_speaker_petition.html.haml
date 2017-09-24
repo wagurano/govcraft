@@ -5,10 +5,10 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:charset => "utf-8"}/
-    = stylesheet_link_tag 'emails/summary', media: 'all'
+    = stylesheet_link_tag 'emails/base', media: 'all'
   %body
     %p
-      #{@speaker.name}님! 안녕하세요. #{petition.user.nickname}입니다.
+      #{@speaker.name}님! 안녕하세요. #{@comment.user_nickname}입니다.
     %p
       Democracy, everyday
       = link_to polymorphic_url(petition) do
