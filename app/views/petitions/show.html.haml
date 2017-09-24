@@ -1,5 +1,3 @@
-- if @project
-  = render 'projects/header', project: @project
 %section#petition-header
   .container
     %span.gov-label
@@ -23,7 +21,7 @@
   .container{style: "margin-top:-30px;"}
     - cover_image = @petition.cover_image_url(:lg)
     .petition-info-area
-      .petition-users-count-label
+      = link_to petition_path(@petition, anchor: 'anchor-join'), class: 'petition-users-count-label' do
         = @petition.signs_count
         명 참여 중
       - if user_signed_in? and @petition.signed?(current_user)
@@ -41,6 +39,8 @@
       = @petition.views_count
     .petition-body
       = raw @petition.body
+
+      %a{id: "anchor-join"}
       %h3.sub-title#join-title
         서명하기
       .panel-body{style:"border:1px solid rgba(230, 230, 230, 1);padding:25px 40px;"}
@@ -73,6 +73,19 @@
         .modal-body
           != flash[:sign_notice]
           .share-box{ 'data-share-image': image_url(cover_image) }
+          - if @petition.speakers.any?
+            - speaker_section_title = t("views.petition.speaker_section_title.id_#{@petition.id}", default: I18n.t("views.petition.speaker_section_title.default"))
+            %h4= speaker_section_title
+            .row
+              - @petition.speakers.to_a.sample(2).each do |speaker|
+                .col-sm-4.col-xs-6
+                  = render 'petitions/speaker', speaker: speaker, petition: @petition
+              .col-sm-4.col-xs-6
+                .panel.panel-default
+                  .panel-body
+                    = link_to petition_path(@petition, anchor: "anchor-speakers"), class: "text-keep-all js-close-modal" do
+                      다른 #{speaker_section_title}
+                      %i.fa.fa-arrow-right
 
   = content_for :script do
     :javascript

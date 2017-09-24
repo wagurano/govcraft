@@ -1,3 +1,4 @@
+%a{id: "anchor-speakers"}
 .panel-body
   .panel-post__speakers
     %h4= t("views.petition.speaker_section_title.id_#{@petition.id}", default: I18n.t("views.petition.speaker_section_title.default"))
@@ -5,39 +6,7 @@
     .row.masonry-container
       - @petition.speakers.each do |speaker|
         .col-md-3.col-sm-4.col-xs-6
-          .card
-            = link_to speaker do
-              .card-image{ style: "height: 140px; background-image: url(#{speaker.image.md.url}); background-size: cover; background-position: center -30px;" }
-                - statement = @petition.statements.speaker_by(speaker)
-                - if statement.try(:is_responed?) and
-                  - if statement.stance.try(:agree?)
-                    - ribbon_class = 'label-success'
-                  - elsif statement.stance.try(:hold?)
-                    - ribbon_class = 'label-warning'
-                  - elsif statement.stance.try(:disagree?)
-                    - ribbon_class = 'label-danger'
-                  - elsif statement.stance.blank?
-                    - ribbon_class = 'label-default'
-                  %span.label.label-ribbon-left{ class: ribbon_class}
-                    - if statement.stance.present?
-                      = statement.stance.text
-                    - else
-                      응답
-            .card-content
-              = link_to speaker.name, speaker, class: 'card-header'
-              .card-meta= speaker.organization
-            .card-content.card-extra
-              .row
-                .col-sm-6.col-xs-12.text-nowrap
-                  = link_to new_comment_speaker_petition_path(@petition, speaker_id: speaker.id) do
-                    - count = @petition.comments.with_target_speaker(speaker).count
-                    촉구하기#{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}
-                - if speaker.twitter.present?
-                  .col-sm-6.col-xs-12.text-nowrap
-                    - encoding_title = CGI.escape(@petition.title)
-                    - tweeter_msg = "'#{encoding_title}'에 대한 의견을 밝혀 주십시오. #{petition_url(@petition)}"
-                    = link_to "https://twitter.com/intent/tweet?text=#{tweeter_msg} @#{speaker.twitter}", target:'_blank' do
-                      트윗보내기
+          = render 'petitions/speaker', speaker: speaker, petition: petition
 
 - if @petition.statements.responed_body.any?
   .panel-body

@@ -260,6 +260,10 @@ $(function(){
     var agenda_id = location.hash.replace('#agenda_tab_','');
     $('a.js-agenda-theme-tab[data-toggle="tab"][data-agenda-id="' + agenda_id + '"]').tab('show');
   }
+
+  $('.js-close-modal').click(function(){
+    $($(this).closest('.modal')).modal('hide');
+  })
 });
 
 $(document).ajaxError(function (e, xhr, settings) {
