@@ -1,5 +1,6 @@
-* , body {
-  font-family: 'Source Han Sans KR', 'Apple SD Gothic Neo', 'Noto Sans CJK KR', 'Noto Sans KR', 'Source Sans Pro', 'Helvetica Neue', Helvetica, '맑은 고딕', 'Malgun Gothic', '돋움', dotum, Arial, sans-serif;
+*,
+body {
+    font-family: 'Source Han Sans KR', 'Apple SD Gothic Neo', 'Noto Sans CJK KR', 'Noto Sans KR', 'Source Sans Pro', 'Helvetica Neue', Helvetica, '맑은 고딕', 'Malgun Gothic', '돋움', dotum, Arial, sans-serif;
 }
 
 @mixin text-stroke {
@@ -165,34 +166,36 @@
     }
 }
 
-.btn-primary-sub{
+.btn-primary-sub {
     background-color: $brand-sub;
-    color:white;
-    &:hover{
+    color: white;
+    &:hover {
         background-color: $brand-sub-light;
     }
 }
+
 //공통 타이틀 스타일
-h2.main-title{
+h2.main-title {
     font-weight: 200;
     letter-spacing: -0.04em;
     margin: 30px 0px;
     line-height: 40px;
-    span{
-      font-weight:600;
-      color:#6435C9;
+    span {
+        font-weight: 600;
+        color: #6435C9;
     }
 }
-h3.sub-title{
-    color:$brand-primary-light;
-    font-weight:bold;
-    font-size:24px;
-    margin:40px 0px;
+
+h3.sub-title {
+    color: $brand-primary-light;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 40px 0px;
 }
 
 //공통 카드 스타일
-.card-image{
-    background-size:cover;
+.card-image {
+    background-size: cover;
     background-position: top center;
 }
 
@@ -222,13 +225,13 @@ h3.sub-title{
 }
 
 //공통 라벨 스타일
-.gov-label{
-    padding:12px 55px;
-    color:$brand-primary-dark;
-    font-size:16px;
-    display:inline-block;
-    background-color:$gray-light;
-    margin-bottom:20px;
+.gov-label {
+    padding: 12px 55px;
+    color: $brand-primary-dark;
+    font-size: 16px;
+    display: inline-block;
+    background-color: $gray-light;
+    margin-bottom: 20px;
 }
 
 .pagination {
@@ -271,69 +274,65 @@ label.error {
         margin-top: 12px;
     }
 }
+
 //
-.user-info{
-    position:relative;
+.user-info {
+    position: relative;
     top: -40px;
-    text-align:center;
-    .user-image{
-        height:64px;
-        width:64px;
-        display:block;
-        border-radius:64px;
-        background-color:black;
-        margin-top:8px;
-        background-size:contain;
-        position:relative;
-        margin:0 auto;
-      }
-    a{
-        color:$gray-darker;
-        font-size:16px;
-        font-weight:500;
-        display:block;
-        line-height:40px;
+    text-align: center;
+    .user-image {
+        height: 64px;
+        width: 64px;
+        display: block;
+        border-radius: 64px;
+        background-color: black;
+        margin-top: 8px;
+        background-size: contain;
+        position: relative;
+        margin: 0 auto;
+    }
+    a {
+        color: $gray-darker;
+        font-size: 16px;
+        font-weight: 500;
+        display: block;
+        line-height: 40px;
     }
 }
 
 //공통 테이블
-.table{
-    border-top:2px solid $gray-light;
-    border-bottom:2px solid $gray-light;
-    tr{
-        height:59px;
-        &:hover{
-            background-color:$gray-lightest;
+.table {
+    border-top: 2px solid $gray-light;
+    border-bottom: 2px solid $gray-light;
+    tr {
+        height: 59px;
+        &:hover {
+            background-color: $gray-lightest;
         }
     }
-    td{
-        vertical-align:middle !important;
-        color:$gray-base;
-        a{
-            color:$gray-dark;
+    td {
+        vertical-align: middle !important;
+        color: $gray-base;
+        a {
+            color: $gray-dark;
         }
-        span.title{
-            font-weight:bold;
+        span.title {
+            font-weight: bold;
         }
     }
 }
 
 #footer {
-    height:96px;
-    background-color:white;
-    .container{
-        border-top:1px solid $gray-light;
-        padding: 33px 0px;
-        span:first-child{
-            border-right:1px solid $gray-darker;
-        }
-    }
+    background-color: white;
+    border-top: 1px solid $gray-light;
     color: $gray-darker;
+    padding-top: $font-size-base;
+    padding-bottom: $font-size-base;
     a {
         color: $gray-darker;
-        padding:0px 2px;
-        &:hover{
-            color:$gray;
+        padding-right: 4px;
+        &:hover {
+            color: $gray;
         }
     }
 }

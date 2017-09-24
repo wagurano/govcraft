@@ -1,13 +1,30 @@
 %section#footer
   .container
-    %span{style:"padding-right:33px;border:1px solid $gray"}
-      help@parti.xyz
-    %span{style:"padding-left:33px;"}
-      powered by 가브크래프트
-    .pull-right{style:"font-size:22px;"}
-      = link_to 'https://www.facebook.com/wouldyouparty.org/', target: '_blank' do
-        %i.fa.fa-facebook-square
-      = link_to 'https://twitter.com/wouldyouparty', target: '_blank' do
-        %i.fa.fa-twitter-square
-      = link_to 'https://medium.com/우리가-주인이당', target: '_blank' do
-        %i.fa.fa-medium
+    .row
+      .col-sm-6
+        %span
+          = link_to '가브크래프트', 'https://docs.parti.xyz/platform-govcraft.html', target: '_blank'
+        &middot;
+        %span
+          = link_to '문의', 'mailto:help@parti.xyz'
+        &middot;
+        %span
+          = link_to '이용약관', '#'
+        &middot;
+        %span
+          = link_to '개인정보처리방침', '#'
+      .col-sm-6
+        .hidden-xs.text-right{style:"font-size:22px;"}
+          = link_to 'https://www.facebook.com/wouldyouparty.org/', target: '_blank' do
+            %i.fa.fa-facebook-square
+          = link_to 'https://twitter.com/wouldyouparty', target: '_blank' do
+            %i.fa.fa-twitter-square
+          = link_to 'https://medium.com/우리가-주인이당', target: '_blank' do
+            %i.fa.fa-medium
+        .visible-xs{style:"font-size:22px;"}
+          = link_to 'https://www.facebook.com/wouldyouparty.org/', target: '_blank' do
+            %i.fa.fa-facebook-square
+          = link_to 'https://twitter.com/wouldyouparty', target: '_blank' do
+            %i.fa.fa-twitter-square
+          = link_to 'https://medium.com/우리가-주인이당', target: '_blank' do
+            %i.fa.fa-medium
