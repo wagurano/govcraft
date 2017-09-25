@@ -223,6 +223,40 @@ h3.sub-title {
         vertical-align: top;
     }
 }
+//컴포넌트 디테일 공통 헤더 스타일
+.componant-header{
+  background-color:$brand-primary-dark;
+  height:300px;
+  text-align:center;
+  color:white;
+  padding:40px 0px 0px 0px;
+  font-size:36px;
+  font-weight:bold;
+}
+
+.user-info{
+    position:relative;
+    top: -40px;
+    text-align:center;
+    .user-image{
+        height:64px;
+        width:64px;
+        display:block;
+        border-radius:64px;
+        background-color:black;
+        margin-top:8px;
+        background-size:contain;
+        position:relative;
+        margin:0 auto;
+      }
+    a{
+        color:$gray-darker;
+        font-size:16px;
+        font-weight:500;
+        display:block;
+        line-height:40px;
+    }
+}
 
 //공통 라벨 스타일
 .gov-label {

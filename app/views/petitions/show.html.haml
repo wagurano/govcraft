@@ -1,4 +1,4 @@
-%section#petition-header
+%section#petition-header.componant-header
   .container
     %span.gov-label
       서명
@@ -57,7 +57,9 @@
         = render 'petitions/speakers', petition: @petition
 
       - if @petition.comment_enabled
-        .panel-body
+        %h3.sub-title
+          의견을 남겨주세요
+        .panel-body{style:"border:1px solid rgba(230, 230, 230, 1);padding:25px 40px;" }
           .panel-post__comments
             = render 'comments/list', commentable: @petition
 

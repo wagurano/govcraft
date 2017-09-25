@@ -1,6 +1,4 @@
 - comments ||= commentable.comments.page(1)
-%h3.sub-title= t("views.comment.form_title.#{commentable.class.name.underscore}", default: t("views.comment.form_title.default"))
-
 .comments-form
   = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
     = f.hidden_field :commentable_type, value: commentable.class.name

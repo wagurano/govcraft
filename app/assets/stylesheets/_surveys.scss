@@ -1,173 +1,173 @@
 .survey-card{
   border:1px solid $gray-light;
-  .options-panel {
-    border: 1px solid $gray-lighter;
-    body.app-projects-show & {
-      border: none;
-    }
-    > .body > table {
-      width: 100%;
+}
+.options-panel {
+  border: 1px solid $gray-lighter;
+  body.app-projects-show & {
+    border: none;
+  }
+  > .body > table {
+    width: 100%;
 
-      td.body {
-        padding: 2px 0;
+    td.body {
+      padding: 2px 0;
 
-        span.closed {
-          color: $gray-lighter;
-        }
-      }
-      td.feedbacks-count {
-        width: 48px;
-        text-align: right;
+      span.closed {
+        color: $gray-lighter;
       }
     }
-    .chart {
-      border-radius: 4px;
-      border: 1px solid $gray-lighter;
-      background-color: #fff;
-      height: 2em;
-      position: relative;
-      &.active {
-        border: 2px solid $brand-primary;
-      }
-
-      .chart__bar {
-        background-color: $brand-primary-dark;
-        padding: 3px 0;
-        height: 100%;
-      }
-
-      .chart__label {
-        color: white;
-        font-weight:bold;
-        white-space: nowrap;
-        padding: 2px 16px;
-        line-height: 2em;
-        top: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width: 100%;
-        position: absolute;
-        font-size: 12px;
-      }
-      &.active .chart__label {
-        color: $gray-dark;
-      }
-    }
-    > .header {
-      padding-top:12px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #eaeaeb;
-      margin-bottom: 12px;
-      font-weight: bold;
-      background-color: $brand-primary-dark;
-
-      h4 a {
-        body.app-surveys-show & {
-          font-size: 24px;
-          font-weight: bold;
-        }
-        color: white;
-      }
-      .project {
-        body.app-projects-show &,
-        body.app-surveys-show &, {
-          display: none;
-        }
-      }
-    }
-    .content{
-      margin-bottom:20px;
-    }
-    > .footer {
-      padding:12px 0px;
-      border-top: 1px solid #eaeaeb;
-      margin-top: 12px;
-    }
-    > .body, > .header, > .footer {
-      padding-left: 24px;
-      padding-right: 24px;
-      color:$gray-dark;
-      font-weight:bold;
+    td.feedbacks-count {
+      width: 48px;
+      text-align: right;
     }
   }
-
-  .survey-social-card-section {
-    background-size: cover;
-    width: 1200px;
-    height: 630px;
-    padding: 0;
-    margin: 0;
-    display: table;
+  .chart {
+    border-radius: 4px;
+    border: 1px solid $gray-lighter;
+    background-color: #fff;
+    height: 2em;
     position: relative;
-    color: white;
-    font-family: 'Noto Sans KR';
-
-    &.has-cover {
-      box-shadow: inset 2000px 0 0 0 rgba(0,0,0,0.5);
+    &.active {
+      border: 2px solid $brand-primary;
     }
 
-    .card {
-      display: table-cell;
-      vertical-align: middle;
-      width: 1060px;
-      padding-bottom: 50px;
+    .chart__bar {
+      background-color: $brand-primary-dark;
+      padding: 3px 0;
+      height: 100%;
+    }
 
-      .info {
-        font-size: 30px;
-        font-weight: 300;
-        position: absolute;
-        left: 70px;
-        top: 55px;
+    .chart__label {
+      color: white;
+      font-weight:bold;
+      white-space: nowrap;
+      padding: 2px 16px;
+      line-height: 2em;
+      top: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+      position: absolute;
+      font-size: 12px;
+    }
+    &.active .chart__label {
+      color: $gray-dark;
+    }
+  }
+  > .header {
+    padding-top:12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eaeaeb;
+    margin-bottom: 12px;
+    font-weight: bold;
+    background-color: $brand-primary-dark;
+
+    h4 a {
+      body.app-surveys-show & {
+        font-size: 24px;
+        font-weight: bold;
+      }
+      color: white;
+    }
+    .project {
+      body.app-projects-show &,
+      body.app-surveys-show &, {
+        display: none;
+      }
+    }
+  }
+  .content{
+    margin-bottom:20px;
+  }
+  > .footer {
+    padding:12px 0px;
+    border-top: 1px solid #eaeaeb;
+    margin-top: 12px;
+  }
+  > .body, > .header, > .footer {
+    padding-left: 24px;
+    padding-right: 24px;
+    color:$gray-dark;
+    font-weight:bold;
+  }
+}
+
+.survey-social-card-section {
+  background-size: cover;
+  width: 1200px;
+  height: 630px;
+  padding: 0;
+  margin: 0;
+  display: table;
+  position: relative;
+  color: white;
+  font-family: 'Noto Sans KR';
+
+  &.has-cover {
+    box-shadow: inset 2000px 0 0 0 rgba(0,0,0,0.5);
+  }
+
+  .card {
+    display: table-cell;
+    vertical-align: middle;
+    width: 1060px;
+    padding-bottom: 50px;
+
+    .info {
+      font-size: 30px;
+      font-weight: 300;
+      position: absolute;
+      left: 70px;
+      top: 55px;
+    }
+
+    .title {
+      letter-spacing: -1px;
+      word-break: keep-all;
+      word-wrap: break-word;
+      font-weight: 300;
+      margin: 0 70px;
+      line-height: 1.2em;
+      &.short {
+        text-align: center;
+        font-size: 80px;
+      }
+      &.medium {
+        text-align: center;
+        font-size: 65px;
+      }
+      &.long {
+        font-size: 55px;
       }
 
-      .title {
-        letter-spacing: -1px;
-        word-break: keep-all;
-        word-wrap: break-word;
-        font-weight: 300;
-        margin: 0 70px;
-        line-height: 1.2em;
-        &.short {
-          text-align: center;
-          font-size: 80px;
-        }
-        &.medium {
-          text-align: center;
-          font-size: 65px;
-        }
-        &.long {
-          font-size: 55px;
-        }
+      .title-word {
+        display: inline-block;
+        white-space:nowrap;
+      }
+    }
 
-        .title-word {
+    .options {
+      padding: 0 180px;
+      font-size: 40px;
+      margin-top: 20px;
+
+      .option {
+        .option-word {
           display: inline-block;
           white-space:nowrap;
         }
       }
-
-      .options {
-        padding: 0 180px;
-        font-size: 40px;
+      .option + .option {
         margin-top: 20px;
-
-        .option {
-          .option-word {
-            display: inline-block;
-            white-space:nowrap;
-          }
-        }
-        .option + .option {
-          margin-top: 20px;
-        }
       }
     }
   }
+}
 
-  .options-panel .option-body,
-  .options-panel .option-desc {
-    display: inline-block;
-    .survey-card & {
-      display: block;
-    }
+.options-panel .option-body,
+.options-panel .option-desc {
+  display: inline-block;
+  .survey-card & {
+    display: block;
   }
 }
