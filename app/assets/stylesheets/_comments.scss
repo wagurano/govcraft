@@ -2,13 +2,21 @@
   .comment {
     border-top: 1px solid $gray-lighter;
     padding-top: $font-size-base;
-
     .comment__meta {
-      color: $text-muted;
-      font-size: $font-size-small;
-      margin-bottom: $font-size-small;
+      display:table;
+      color: $gray-dark;
+      font-weight:bold;
+      font-size: 14px;
+      margin-bottom:12px;
+      .comment__arrow{
+        font-size:18px;
+        line-height:32px;
+        float:left;
+      }
     }
     .comment__body {
+      font-size:14px;
+      color:$gray-base;
       h1, h2, h3, h4, h5 {
         font-size: $font-size-base !important;
         margin: 2px 0;
@@ -20,7 +28,6 @@
         max-width: 100%;
       }
     }
-
     .comment__choice {
       margin-bottom: 6px;
       display: inline-block;
@@ -37,12 +44,31 @@
         border-color: $brand-danger;
       }
     }
+    .comment__user-nm{
+      float:left;
+      display:inline-block;
+      line-height:32px;
+      margin:0px 10px 0px 5px;
+    }
+    .comment__to-speaker{
+      display:inline-block;
+    }
   }
 }
-
+.btn-comment{
+  background-color:$brand-primary-dark;
+  color:white;
+  font-size:24px;
+  width:100%;
+  padding:20px;
+  &:hover{
+    background-color:$brand-primary;
+    color:white;
+  }
+}
 .comment.comment-toxic {
   .comment__body::before {
-    color: $gray-lightest;
+    color: $gray-base;
     background-color: $brand-danger;
     content: '의견 감사합니다. 면밀히 검토하겠습니다.';
     padding: 2px 4px;

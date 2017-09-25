@@ -59,7 +59,7 @@
       - if @petition.comment_enabled
         %h3.sub-title
           의견을 남겨주세요
-        .panel-body{style:"border:1px solid rgba(230, 230, 230, 1);padding:25px 40px;" }
+        .panel-body.post-block{style:"border:1px solid rgba(230, 230, 230, 1);padding:25px 40px;" }
           .panel-post__comments
             = render 'comments/list', commentable: @petition
 

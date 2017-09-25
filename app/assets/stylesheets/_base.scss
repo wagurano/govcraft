@@ -248,7 +248,7 @@ h3.sub-title {
         background-size:contain;
         position:relative;
         margin:0 auto;
-      }
+    }
     a{
         color:$gray-darker;
         font-size:16px;
@@ -257,6 +257,7 @@ h3.sub-title {
         line-height:40px;
     }
 }
+
 
 //공통 라벨 스타일
 .gov-label {
@@ -331,6 +332,19 @@ label.error {
         font-weight: 500;
         display: block;
         line-height: 40px;
+    }
+}
+
+.user-image-sm{
+    height:32px;
+    width:32px;
+    background-color:black;
+    border-radius:32px;
+    display:inline-block;
+    background-size:cover;
+    background-position:center;
+    @media (max-width: $screen-sm-min) {
+        display:none;
     }
 }
 

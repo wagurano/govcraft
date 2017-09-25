@@ -1,17 +1,20 @@
 .comments
   - comments.recent.each do |comment|
     .media[comment]{ style: 'margin: 14px 0; border-top: 1px solid #ddd; padding-top: 12px;'}
-      - if comment.target_speaker.present?
-        .comment__to-speaker
-          %span.label.label-default.label-image
-            = image_tag comment.target_speaker.image.xs.url
-            #{comment.target_speaker.organization} #{comment.target_speaker.name}님에게 보낸 의견입니다.
+
       .media-body
         .comment__meta
-          %span
-            %i.fa.fa-user-o
+          - commenter = User.find_by(id: comment.user_id)
+          .user-image-sm{style:"float:left;background-image:url(#{asset_url(commenter.nil? ? comment.image : commenter.image)});"}
+          .comment__user-nm
             = comment.user_nickname
-          = date_f comment.created_at
+          - if comment.target_speaker.present?
+            .comment__to-speaker
+              %span.comment__arrow
+                >
+              .user-image-sm{style:"background-image:url(#{asset_url(comment.target_speaker.image.xs.url)});float:left;margin-left:5px;"}
+              .comment__user-nm
+                #{comment.target_speaker.organization} #{comment.target_speaker.name}님에게 보낸 의견입니다.
           - if can? :destroy, comment
             = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
           - if current_user != comment.user
@@ -21,6 +24,9 @@
           .comment__choice{ class: comment.choice }= comment.choice.text
         .comment__body
           = raw screened(comment, :body)
+          .comment__date
+            %i.fa.fa-calendar
+            = date_f comment.created_at
       .media-right.xs-hidden{ style: 'vertical-align: middle;' }
         = render 'likes/button', likable: comment
 - if comments.first.try(:commentable).present?

@@ -1,6 +1,6 @@
 .card
   = link_to speaker do
-    .card-image{ style: "height: 140px; background-image: url(#{speaker.image.md.url}); background-size: cover; background-position: center -30px;" }
+    .card-image{ style: "height: 170px; background-image: url(#{speaker.image.md.url}); background-size: cover; background-position: center; background-repeat:no-repeat;" }
       - statement = @petition.statements.speaker_by(speaker)
       - if statement.try(:is_responed?) and
         - if statement.stance.try(:agree?)
