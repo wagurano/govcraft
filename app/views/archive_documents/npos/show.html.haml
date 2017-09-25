@@ -5,7 +5,7 @@
     .post-block__title
       %h4
         = @archive_document.title
-
+        xxxxx
     .post-block__info
       %span.post-block__user
         = link_to @archive_document.user.nickname
@@ -15,6 +15,8 @@
         = link_to '수정', edit_archive_document_path(@archive_document)
       - if can? :destroy, @archive_document
         = link_to '삭제', @archive_document, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+
+    %div= @archive_document.inspect
 
     .post-block__content
       - if @archive_document.has_content?

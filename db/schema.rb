@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921104011) do
+ActiveRecord::Schema.define(version: 20170925012752) do
+
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
     t.integer  "agenda_id",                null: false
@@ -428,8 +429,10 @@ ActiveRecord::Schema.define(version: 20170921104011) do
     t.integer  "members_count"
     t.integer  "workers_count"
     t.integer  "finance"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "archive_document_id", null: false
+    t.index ["archive_document_id"], name: "index_npos_addtional_archive_documents_on_archive_document_id", using: :btree
   end
 
   create_table "opinions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|

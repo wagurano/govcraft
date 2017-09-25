@@ -4,27 +4,29 @@ class ArchiveDocumentsController < ApplicationController
     @archive = @archive_document.archive
     @documents = params[:tag].present? ? @archive.documents.tagged_with(params[:tag]) : @archive.documents
     @documents = @documents.page(params[:page])
+    render_show
   end
 
   def new
     @archive ||= Archive.find(params[:archive_id])
     @archive_document = @archive.documents.build
-    render "archive_documents/#{@archive.slug}/new"
+    render_new
   end
 
   def create
-    abort archive_document_params.inspect
     @archive_document.user = current_user
     if @archive_document.save
       redirect_to archive_path(@archive_document.archive)
     else
       errors_to_flash(@archive_document)
       @archive = @archive_document.archive
-      render 'new'
+      render_new
     end
   end
 
   def edit
+    @archive = @archive_document.archive
+    render_edit
   end
 
   def update
@@ -53,6 +55,18 @@ class ArchiveDocumentsController < ApplicationController
 
   private
 
+  def render_new
+    render "archive_documents/#{@archive.slug}/new"
+  end
+
+  def render_show
+    render "archive_documents/#{@archive.slug}/show"
+  end
+
+  def render_edit
+    render "archive_documents/#{@archive.slug}/edit"
+  end
+
   def encoded_file_name archive_document
     filename = archive_document.valid_name
     if browser.ie?
@@ -71,7 +85,7 @@ class ArchiveDocumentsController < ApplicationController
       :content_source, :content_recipients,
       :content, :media_type, :content_cache, :remove_content,
       :category_slug, :donor, :is_secret_donor,
-      additional: [:address, :zipcode]
+      additional_attributes: [:id, :address, :zipcode, :homepage, :tel, :leader, :leader_tel, :email, :business_area, :open_year, :members_count, :workers_count, :finance]
     )
   end
 end
