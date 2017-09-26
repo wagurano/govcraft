@@ -1,7 +1,6 @@
 .comments
   - comments.recent.each do |comment|
     .media[comment]{ style: 'margin: 14px 0; border-top: 1px solid #ddd; padding-top: 12px;'}
-
       .media-body
         .comment__meta
           - commenter = User.find_by(id: comment.user_id)

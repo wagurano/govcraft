@@ -130,12 +130,21 @@ section#communities{
   }
 }
 /* group main */
-.urimanna p{
-  font-size: 24px;
-  font-weight: 300;
-  color: $gray-base;
-  margin:50px 0px;
-  padding:50px 0px;
+
+.urimanna{
+  background-size:cover;
+  h2{
+    font-size:40px;
+    font-weight:bold;
+    color:white;
+    margin-top:100px;
+  }
+  p{
+    font-size: 18px;
+    font-weight: 300;
+    color: $gray-light;
+    margin-top:20px;
+  }
 }
 .urimanna{
   height:415px;

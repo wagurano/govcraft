@@ -1,5 +1,10 @@
-%section#parti-section.urimanna
-  .container
+%section#parti-section.urimanna{style:"background-image:url(#{asset_url('urimanna_keyvisual.png')})"}
+  .container.text-center
+    %h2
+      우리가 만드는 대한민국
+      %br
+      %span{style:"font-size:14px;"}
+        ⦁
     %p
       전국적인 온라인 만민공동회 구축을 통해
       %br
@@ -10,7 +15,6 @@
 
 %section#projects.page-block
   .container
-    %hr{style:"color:rgba(230, 230, 230, 1);height:2px;margin-top:0px;"}
     = link_to projects_url(subdomain: root_subdomain) do
       %h3.sub-title
         = Project.model_name.human
