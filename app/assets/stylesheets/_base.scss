@@ -225,13 +225,16 @@ h3.sub-title {
 }
 //컴포넌트 디테일 공통 헤더 스타일
 .componant-header{
-  background-color:$brand-primary-dark;
-  height:300px;
-  text-align:center;
-  color:white;
-  padding:40px 0px 0px 0px;
-  font-size:36px;
-  font-weight:bold;
+    background-color:$brand-primary-dark;
+    height:300px;
+    text-align:center;
+    color:white;
+    padding:40px 0px 0px 0px;
+    font-size:36px;
+    font-weight:bold;
+    @media (max-width: $screen-sm-min) {
+        height:400px;
+    }
 }
 
 .user-info{

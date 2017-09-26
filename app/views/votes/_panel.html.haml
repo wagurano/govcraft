@@ -37,9 +37,9 @@
   - if show_voters
     .row
       .col-xs-12
-        .vote__users
+        .vote__users.text-left
           - votable.votes.each do |v|
             - if v.user.present?
-              = image_tag v.user.image.sm.url, width: 20, height: 20, class: 'img-circle'
+              = image_tag v.user.image.sm.url, width: 32, height: 32, class: 'img-circle'
             - else
-              = image_tag 'default-user.png', width: 20, height: 20, class: 'img-circle'
+              = image_tag 'default-user.png', width: 32, height: 32, class: 'img-circle'
