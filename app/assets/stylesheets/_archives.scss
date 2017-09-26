@@ -1,11 +1,7 @@
 .jumbotron#archive-header-block {
-  background-color: $gray-dark;
   background-size: cover;
   background-position: center;
   border: none;
-  color: $gray-lightest;
-  box-shadow: inset 2000px 0 0 0 rgba(0, 0, 0, 0.5);
-
   .badge {
     background-color: $gray-light;
     color: $gray-dark;
@@ -19,11 +15,32 @@
       text-decoration: underline;
     }
   }
-  .archive__title, .archive__body, .archive__users {
-    text-shadow: 1px 1px 3px rgba(0,0,0,.5);
+  .archive__share{
+    .jssocials-share:first-child{
+      margin-top:-15px;
+    }
+    .jssocials-share:last-child{
+      margin-top:-1px;
+    }
   }
 }
-
+#archive-category{
+  .item{
+    line-height:28px;
+    .header{
+      font-weight:bold;
+      color:$brand-primary-dark;
+      margin-top:10px;
+    }
+    .menu{
+      margin-left:10px;
+      a{
+        color:$gray-dark;
+        font-wrap:keep-all;
+      }
+    }
+  }
+}
 .archive-card {
   .panel-body {
     min-height: 100px;
