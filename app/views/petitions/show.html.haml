@@ -1,4 +1,4 @@
-%section#petition-header.componant-header
+%section#petition-header.component-header
   .container
     %span.gov-label
       서명
@@ -43,12 +43,12 @@
       %a{id: "anchor-join"}
       %h3.sub-title#join-title
         서명하기
-      .panel-body{style:"border:1px solid rgba(230, 230, 230, 1);padding:25px 40px;"}
+      .panel-body.component-box
         .panel-post__signs
           = render 'signs/list', petition: @petition
 
       %h3.sub-title 이 이슈를 친구들에게 알려 주세요
-      .panel-body{style:"border:1px solid rgba(230, 230, 230, 1);padding:25px 40px;" }
+      .panel-body.component-box
         .share-box{ 'data-share-image': image_url(cover_image)}
         %div
           %input{value: "<iframe width='100%' height='800' src='#{petition_url(@petition, mode: :widget)}' frameborder='0'></iframe>", class: 'form-control'}
@@ -59,7 +59,7 @@
       - if @petition.comment_enabled
         %h3.sub-title
           의견을 남겨주세요
-        .panel-body.post-block{style:"border:1px solid rgba(230, 230, 230, 1);padding:25px 40px;" }
+        .panel-body.post-block.component-box
           .panel-post__comments
             = render 'comments/list', commentable: @petition
 

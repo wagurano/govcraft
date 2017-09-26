@@ -2,7 +2,7 @@
   = render 'widget'
 - else
   - cover_image = @survey.cover_image_url(:lg)
-  %section#survey-section.componant-header
+  %section#survey-section.component-header
     .container
       %span.gov-label
         설문
@@ -40,13 +40,13 @@
         = render 'options/panel', survey: @survey
 
       %h3.sub-title 이 이슈를 친구들에게 알려 주세요
-      .panel-body{style:"border:1px solid rgba(230, 230, 230, 1);padding:25px 40px;" }
+      .panel-body.component-box
         .share-box
         %div
           %input{value: "<iframe width='100%' height='495' src='#{survey_url(@survey, mode: :widget)}' frameborder='0'></iframe>", style: 'width: 100%;'}
 
       %h3.sub-title 의견을 남겨주세요
-      .panel-body{style:"border:1px solid rgba(230, 230, 230, 1);padding:25px 40px;" }
+      .panel-body.component-box
         = render 'comments/list', commentable: @survey
 
   - if @project

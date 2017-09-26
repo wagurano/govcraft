@@ -1,32 +1,21 @@
 - commentable = @petition
-%section#petition-block.page-block
+%section#petition-block.page-block.component-header
   .container
-    .panel.panel-default.panel-post
-      - cover_image = @petition.cover_image_url(:lg)
-      .panel-heading
-        %h2
-          %small.label.label-danger
-            = Petition.model_name.human
-          = link_to @petition do
-            = @petition.title
-
-        .users-count.btn.btn-danger.btn-inverted.btn-lg{ style: 'margin-top: 16px;'}
-          = @petition.signs_count
-          명 참여
-
-        %div{ style: 'margin-top: 16px;'}
-          %span
-            = link_to @petition.user.nickname
-          &middot;
-          %span.panel-post__date
-            = date_f @petition.created_at
-          &middot;
-          %span
-            조회 #{@petition.views_count}
-      .panel-body
-        %h4
-          %span.image.speaker-image.speaker-image--mini{style: "background-image: url(#{@speaker.image.xs.url}); display: inline-block; width: 1em; height: 1em;"}
-          #{@speaker.name}님에게 행동을 촉구하세요
+    %span.gov-label
+      서명
+    %br
+    =@petition.title
+    - cover_image = @petition.cover_image_url(:lg)
+%section
+  .user-info
+    .user-image{style: "background-image:url(#{asset_url(@petition.user.image)});"}
+    = link_to @petition.user.nickname
+  .container
+    .panel-body
+      %h3.sub-title{style:"margin:0px 0px 40px 0px;"}
+        %span.image.speaker-image.speaker-image--mini{style: "background-image: url(#{@speaker.image.xs.url}); display: inline-block; width: 1em; height: 1em;"}
+        #{@speaker.name}님에게 행동을 촉구하세요
+      .panel-body.component-box
         .comments-form
           = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
             = hidden_field_tag :back_commentable, '1'
@@ -59,7 +48,7 @@
             = f.submit '작성', class: 'btn btn-default btn-sm btn-inverted'
 
         - if @petition.comment_enabled
-          .panel-post__comments
+          .panel-post__comments.post-block
             = render 'comments/page', commentable: @petition, comments: @petition.comments.with_target_speaker(@speaker).page(1)
 
 - if @petition.project

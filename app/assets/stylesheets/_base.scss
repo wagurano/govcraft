@@ -224,9 +224,9 @@ h3.sub-title {
     }
 }
 //컴포넌트 디테일 공통 헤더 스타일
-.componant-header{
+.component-header{
     background-color:$brand-primary-dark;
-    height:300px;
+    height:320px;
     text-align:center;
     color:white;
     padding:40px 0px 0px 0px;
@@ -235,6 +235,11 @@ h3.sub-title {
     @media (max-width: $screen-sm-min) {
         height:400px;
     }
+}
+
+.component-box{
+    border:1px solid $gray-light;
+    padding:40px;
 }
 
 .user-info{
