@@ -1,7 +1,7 @@
-- organization = fetch_organization_of_request(request)
+- organization = fetch_organization_of_request(request) || @current_organization
 %section#site-header
   #header-container.container-fluid
-    = link_to root_url(subdomain: root_subdomain) do
+    = link_to root_url do
       .title
         = organization.try(:title) || '가브크래프트'
     .slogan-or-navi.hidden-xs
@@ -26,6 +26,18 @@
         = link_to Petition.model_name.human, petitions_url(subdomain: root_subdomain)
         %br
         = link_to Article.model_name.human, articles_url(subdomain: root_subdomain)
+      - elsif organization.slug = 'urimanna'
+        %br
+        = link_to '단체 정보', '#'
+        %br
+        = link_to Project.model_name.human, projects_path
+        %br
+        = link_to Event.model_name.human, events_path
+        %br
+        = link_to Petition.model_name.human, petitions_path
+        - if organization.community_url.present?
+          %br
+          = link_to '커뮤니티', organization.community_url, target: '_blank'
       - else
         %br
         = link_to Project.model_name.human, projects_path
@@ -36,7 +48,6 @@
         - if organization.community_url.present?
           %br
           = link_to '커뮤니티', organization.community_url, target: '_blank'
-
       %br
       %br
       %span
