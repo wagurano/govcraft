@@ -3,6 +3,7 @@ class PetitionsController < ApplicationController
 
   load_and_authorize_resource
   before_action :reset_meta_tags_for_show, only: :show
+  before_action :fetch_current_organization, only: [:show, :edit]
 
   def index
     @petitions = Petition.recent
@@ -98,7 +99,9 @@ class PetitionsController < ApplicationController
   private
 
   def fetch_current_organization
-    @current_organization = @project.organization
+    unless @petition.project.blank? or @petition.project.organization.blank?
+      @current_organization = @petition.project.organization
+    end
   end
 
   def petition_params

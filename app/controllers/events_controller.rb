@@ -3,6 +3,7 @@ class EventsController < ApplicationController
 
   load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
+  before_action :fetch_current_organization, only: [:show, :edit]
 
   def index
     @events = Event.recent
@@ -52,7 +53,9 @@ class EventsController < ApplicationController
   private
 
   def fetch_current_organization
-    @current_organization = @project.organization
+    unless @event.project.blank? or @event.project.organization.blank?
+      @current_organization = @event.project.organization
+    end
   end
 
   def event_params

@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
 
   load_and_authorize_resource find_by: :slug
   before_action :reset_meta_tags, only: [:show, :events]
+  before_action :fetch_current_organization, only: [:show, :edit]
 
   def index
     @projects = Project.order('id DESC')
