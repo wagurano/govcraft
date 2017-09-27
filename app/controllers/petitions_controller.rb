@@ -3,6 +3,7 @@ class PetitionsController < ApplicationController
 
   load_and_authorize_resource
   before_action :reset_meta_tags_for_show, only: :show
+  before_action :fetch_current_organization, only: [:show, :edit]
 
   def index
     @petitions = Petition.recent
@@ -96,6 +97,10 @@ class PetitionsController < ApplicationController
   end
 
   private
+
+  def fetch_current_organization
+    @current_organization = @project.organization
+  end
 
   def petition_params
     params.require(:petition).permit(:title, :body, :project_id, :signs_goal_count, :cover_image, :thanks_mention, :comment_enabled, :sign_title, :social_image)

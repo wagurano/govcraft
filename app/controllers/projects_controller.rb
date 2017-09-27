@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
 
   load_and_authorize_resource find_by: :slug
   before_action :reset_meta_tags, only: [:show, :events]
+  before_action :fetch_current_organization, only: [:show, :edit]
 
   def index
     @projects = Project.order('id DESC')
@@ -11,6 +12,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+
     @project.increment!(:views_count)
   end
 
@@ -50,6 +52,10 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def fetch_current_organization
+    @current_organization = @project.organization
+  end
 
   def project_params
     params.require(:project).permit(
