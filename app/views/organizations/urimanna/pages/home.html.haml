@@ -41,26 +41,49 @@
 
 %section#communities
   .container
-    %h3.sub-title
-      커뮤니티
+    = link_to 'http://kdemo.parti.xyz' do
+      %h3.sub-title
+        커뮤니티
     .board
       .tab-title
-        .notice.active
+        .notice.js-tab-toggle.active
           공지사항
-        .recent
+        .recent.js-tab-toggle
           최신글
       .tab-body
-        .notice
+        .notice.toggle-body
           - @pinned_posts.each do |pinned_post|
             .posts
               %span.datetime
                 = date_f pinned_post["created_at"].to_date
               %a{href:"http://parti.xyz"}
                 = truncate(pinned_post["specific_desc_striped_tags"], :length => 30)
-        .recent{style:"display:none;"}
-          - @recent_posts.each do |recent_post|
+        .recent.toggle-body{style:"display:none"}
+          - @recent_posts.first(4).each do |recent_post|
             .posts
               %span.datetime
                 = date_f recent_post["created_at"].to_date
               %a{href:"http://parti.xyz"}
                 = truncate(recent_post["specific_desc_striped_tags"], :length => 30)
+= content_for :footer do
+  %section#footer
+    .container
+      .row
+        .col-sm-6
+          %span
+            powered by 가브크래프트
+        .col-sm-6
+          .hidden-xs.text-right{style:"font-size:22px;"}
+            = link_to 'mailto:help@parti.xyz' do
+              %i.fa.fa-envelope-square
+            = link_to 'https://www.facebook.com/kdemokr/', target: '_blank' do
+              %i.fa.fa-facebook-square
+            = link_to 'https://twitter.com/kdemokr', target: '_blank' do
+              %i.fa.fa-twitter-square
+          .visible-xs{style:"font-size:22px;"}
+            = link_to 'mailto:help@parti.xyz' do
+              %i.fa.fa-envelope-square
+            = link_to 'https://www.facebook.com/kdemokr', target: '_blank' do
+              %i.fa.fa-facebook-square
+            = link_to 'https://twitter.com/kdemokr', target: '_blank' do
+              %i.fa.fa-twitter-square

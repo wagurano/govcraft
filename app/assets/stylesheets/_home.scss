@@ -95,6 +95,7 @@ section#communities{
       background-color:white;
       font-size:18px;
       font-weight:500;
+      cursor:pointer;
     }
     .active{
       background-color:$gray-dark !important;
@@ -112,7 +113,7 @@ section#communities{
         width:200px;
         font-size:16px;
         line-height:30px;
-        margin:0px 40px 0px 0px;
+        margin:0px 20px 0px 0px;
         .datetime{
           color:$gray-darker;
           font-weight:bold;
