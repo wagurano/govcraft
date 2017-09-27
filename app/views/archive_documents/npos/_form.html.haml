@@ -35,6 +35,9 @@
     .form-group
       = ff.hidden_field :archive_document_id
     .form-group
+      = ff.label '도시'
+      = ff.text_field :sub_region, class: 'form-control'
+    .form-group
       = ff.label '주소'
       = ff.text_field :address, class: 'form-control'
     .form-group
@@ -49,6 +52,9 @@
     .form-group
       = ff.label '전화'
       = ff.text_field :tel, class: 'form-control'
+    .form-group
+      = ff.label '팩스'
+      = ff.text_field :fax, class: 'form-control'
     .form-group
       = ff.label '대표자'
       = ff.text_field :leader, class: 'form-control'

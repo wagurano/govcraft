@@ -91,7 +91,7 @@ class ArchiveDocumentsController < ApplicationController
       :content_source, :content_recipients,
       :content, :media_type, :content_cache, :remove_content,
       :category_slug, :donor, :is_secret_donor,
-      additional_attributes: [:id, :address, :zipcode, :homepage, :tel, :leader, :leader_tel, :email, :business_area, :open_year, :members_count, :workers_count, :finance]
+      additional_attributes: [:id, :sub_region, :address, :zipcode, :homepage, :tel, :fax, :leader, :leader_tel, :email, :business_area, :open_year, :members_count, :workers_count, :finance]
     )
   end
 end

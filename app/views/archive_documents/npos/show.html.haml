@@ -47,6 +47,10 @@
           %td= @archive_document.additional.try(:tel)
         %tr
           %th
+            팩스
+          %td= @archive_document.additional.try(:fax)
+        %tr
+          %th
             이메일
           %td= @archive_document.additional.try(:email)
         %tr
