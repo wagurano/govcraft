@@ -41,6 +41,12 @@
     }
   }
 }
+#archive_document-block{
+  th{
+    vertical-align:middle;
+    background-color:$gray-lightest;
+  }
+}
 .archive-card {
   .panel-body {
     min-height: 100px;
