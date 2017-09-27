@@ -1,4 +1,4 @@
-%section.page-block
+%section#archive-category.page-block
   .container
     .row
       .hidden-xs.col-sm-3
@@ -12,13 +12,8 @@
                     = link_to subcategory.name, category_archive_path(@archive, category_slug: subcategory.slug)
 
       .col-sm-9.col-xs-12
-        %h2.ui.header
-          - if @category.present?
-            #{@category.name} (#{@documents.total_count})
-          - else
-            전체 자료 (#{@documents.total_count})
-          - if @category.try(:desc).present?
-            .sub.header= @category.desc
+        - if @category.try(:desc).present?
+          .sub.header= @category.desc
         - if @documents.empty?
           .ui.message
             %p 해당 자료가 없습니다.
@@ -26,13 +21,14 @@
           .ui.divided.items
             - @documents.each do |document|
               .item
-                - if document.image?
-                  .image
-                    = image_tag document.content.sm.url
                 .content
                   .header
-                    = file_type_icon(document.content_type)
+                    %i.fa.fa-building-o
                     = link_to document.title, archive_document_path(document)
+                    - if document.tags.any?
+                      .extra{style:"display:inline-flex;margin-left:10px;"}
+                        - document.tags.each do |tag|
+                          .ui.label.label-primary{style:"margin-right:5px;"}= tag
                   .meta
                     - if document.content_created_date.present?
                       %span
@@ -41,10 +37,6 @@
                         = document.content_created_time
                   .description
                     %p= strip_tags document.body
-                  - if document.tags.any?
-                    .extra
-                      - document.tags.each do |tag|
-                        .ui.label= tag
 
         .text-center
           = paginate @documents, theme: 'twitter-bootstrap-3'

@@ -24,7 +24,7 @@
       자료 이용하실 때는 반드시 가브크래프트 운영진에게 먼저 연락해 주세요. 메일:
       %a(href="mailto:help@parti.xyz") help@parti.xyz
     %h3.sub-title{style:"margin:10px 0px;"}
-      - unless @category.nil? and @documents.nil?
-        전체 자료 (#{@documents.total_count})
-      - if @category.present?
-        #{@category.name} (#{@documents.total_count})
+      - if !@category.nil?
+        전체 > #{@category.name} (#{@documents.total_count})
+      - elsif !@documents.nil?
+        전체 (#{@documents.total_count})

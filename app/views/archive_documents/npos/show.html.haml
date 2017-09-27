@@ -26,37 +26,37 @@
         %tr
           %th
             대표자
-          %td= @archive_document.try(:leader)
+          %td= @archive_document.additional.try(:leader)
         %tr
           %th
             영역
-          %td= @archive_document.try(:npo_type)
+          %td= @archive_document.additional.try(:npo_type)
         %tr
           %th
             홈페이지
-          %td= @archive_document.try(:homepage)
+          %td= @archive_document.additional.try(:homepage)
         %tr
           %th
             주소
           %td
-            [#{@archive_document.try(:zipcode)}]
-            = @archive_document.try(:address)
+            [#{@archive_document.additional.try(:zipcode)}]
+            = @archive_document.additional.try(:address)
         %tr
           %th
             전화번호
-          %td= @archive_document.try(:tel)
+          %td= @archive_document.additional.try(:tel)
         %tr
           %th
             이메일
-          %td= @archive_document.try(:email)
+          %td= @archive_document.additional.try(:email)
         %tr
           %th
             주요 사업
-          %td= @archive_document.try(:business_area)
+          %td= @archive_document.additional.try(:business_area)
         %tr
           %th
             설립 연도
-          %td= @archive_document.try(:open_year)
+          %td= @archive_document.additional.try(:open_year)
 
     .panel.panel-default
       .panel-heading

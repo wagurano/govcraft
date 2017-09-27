@@ -3,7 +3,7 @@
     .page-header
       %h3
         %strong= @archive.title
-        자료 추가xxxxx
+        자료 추가
         - if params[:category_slug].present? and @archive.category_by_slug(params[:category_slug]).present?
           \- #{@archive.category_by_slug(params[:category_slug]).name} 카테고리
     = render 'archive_documents/npos/form'

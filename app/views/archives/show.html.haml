@@ -1,2 +1,5 @@
 = render 'header', archive: @archive
-= render 'archive_documents/list', archive: @archive
+- if @archive.slug == 'npos'
+  = render 'archive_documents/npos/list', archive: @archive
+- else
+  = render 'archive_documents/list', archive: @archive

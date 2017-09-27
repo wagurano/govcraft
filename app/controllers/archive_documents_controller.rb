@@ -1,5 +1,11 @@
 class ArchiveDocumentsController < ApplicationController
   load_and_authorize_resource
+
+  def index
+    abort 'xxx'
+    render "archive_documents/#{@archive.slug}/list"
+  end
+
   def show
     @archive = @archive_document.archive
     @documents = params[:tag].present? ? @archive.documents.tagged_with(params[:tag]) : @archive.documents
