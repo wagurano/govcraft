@@ -61,4 +61,73 @@ namespace :data do
       end
     end
   end
+
+  desc '630 단체 데이터를 넣습니다'
+  task '630', [:file, :archive_id] => :environment do |task, args|
+    xlsx = Roo::Spreadsheet.open args[:file]
+    ActiveRecord::Base.transaction do
+      xlsx.sheet(0).each_row_streaming(offset: 1, pad_cells: true) do |row|
+        if empty_row?(row)
+          break
+        end
+        model_instance = ArchiveDocument.new
+        model_instance.build_additional
+        process_model(row, model_instance, args[:archive_id])
+      end
+    end
+  end
+
+  def empty_row? row
+    row[0].nil? or row[0].formatted_value.try(:strip).blank?
+  end
+
+  def process_model(row, model_instance, archive_id)
+    process_attributes(row, model_instance, archive_id)
+    model_instance.user = User.find_by(nickname: '갱')
+    model_instance.archive_id = archive_id
+    model_instance.body = "#{model_instance.additional.address} #{model_instance.additional.homepage}"
+    if model_instance.body.strip.blank?
+      model_instance.body = model_instance.title
+    end
+    model_instance.save!
+  end
+
+  def process_attributes(row, model_instance, archive_id)
+    parent_category = nil
+    attributes = %i(category title tag1 tag2 sub_region npo_type address zipcode homepage tel fax leader leader_tel email)
+    attributes.each do |name|
+      process_method = :"process_bulk_of_#{name}"
+      value = fetch_data(row, attributes, name).try(:strip)
+
+      next if value.blank?
+      if [:tag1, :tag2].include? name
+        model_instance.tag_list.add(value)
+      elsif :category == name
+        category = ArchiveCategory.find_by(archive_id: archive_id, slug: value)
+        if category.blank?
+          category = ArchiveCategory.create!(archive_id: archive_id, slug: value, name: value)
+        end
+        parent_category = category
+      elsif :sub_region == name
+        slug = "#{parent_category.slug}-#{value}"
+        category = ArchiveCategory.find_by(archive_id: archive_id, parent_id: parent_category.id, slug: slug)
+        if category.blank?
+          category = ArchiveCategory.create!(archive_id: archive_id, parent_id: parent_category.id, slug: slug, name: value)
+        end
+        model_instance.category_slug = category.slug
+      elsif :title == name
+        model_instance.assign_attributes(name => value)
+      elsif :homepage == name
+        model_instance.additional.assign_attributes(name => ActionView::Base.full_sanitizer.sanitize(value))
+      else
+        model_instance.additional.assign_attributes(name => value)
+      end
+    end
+
+    print("#{parent_category.name}-#{model_instance.category.name} : #{model_instance.title}\n")
+  end
+
+  def fetch_data(row, attributes, name)
+    row[attributes.index(name)].try(:formatted_value)
+  end
 end
