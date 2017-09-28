@@ -1,9 +1,14 @@
 - organization = fetch_organization_of_request(request) || @current_organization
 %section#site-header
   #header-container.container-fluid
-    = link_to root_url(subdomain: root_subdomain) do
-      .title
-        = organization.try(:title) || '가브크래프트'
+    - unless @current_organization.title.nil?
+      = link_to 'http://' + @current_organization.slug + '.govcraft.org' do
+        .title
+          = @current_organization.title
+    - else
+      = link_to root_url(subdomain: root_subdomain) do
+        .title
+          가브크래프트
     .slogan-or-navi.hidden-xs
       - if @project.present?
         = link_to @project do
