@@ -66,24 +66,4 @@
               = link_to recent_post["url"], target: "_blank" do
                 = truncate(recent_post["specific_desc_striped_tags"], :length => 30)
 = content_for :footer do
-  %section#footer
-    .container
-      .row
-        .col-sm-6
-          %span
-            powered by 가브크래프트
-        .col-sm-6
-          .hidden-xs.text-right{style:"font-size:22px;"}
-            = link_to 'mailto:help@parti.xyz' do
-              %i.fa.fa-envelope-square
-            = link_to 'https://www.facebook.com/kdemokr/', target: '_blank' do
-              %i.fa.fa-facebook-square
-            = link_to 'https://twitter.com/kdemokr', target: '_blank' do
-              %i.fa.fa-twitter-square
-          .visible-xs{style:"font-size:22px;"}
-            = link_to 'mailto:help@parti.xyz' do
-              %i.fa.fa-envelope-square
-            = link_to 'https://www.facebook.com/kdemokr', target: '_blank' do
-              %i.fa.fa-facebook-square
-            = link_to 'https://twitter.com/kdemokr', target: '_blank' do
-              %i.fa.fa-twitter-square
+  = render 'footer'

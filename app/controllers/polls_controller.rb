@@ -1,6 +1,7 @@
 class PollsController < ApplicationController
   load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
+  before_action :fetch_current_organization, only: [:show, :edit]
 
   def index
     @polls = Poll.recent
@@ -73,6 +74,12 @@ class PollsController < ApplicationController
   end
 
   private
+
+  def fetch_current_organization
+    unless @poll.project.blank? or @poll.project.organization.blank?
+      @current_organization = @poll.project.organization
+    end
+  end
 
   def poll_params
     params.require(:poll).permit(:title, :body, :project_id, :cover_image)

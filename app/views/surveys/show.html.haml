@@ -51,3 +51,7 @@
 
   - if @project
     = render 'projects/post_footer', project: @project
+
+- if @current_organization.try(:slug) == 'urimanna'
+  = content_for :footer do
+    = render 'organizations/urimanna/pages/footer'

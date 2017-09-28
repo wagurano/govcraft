@@ -35,3 +35,7 @@
       %section.page-block
         %a{id: "anchor-project-petition"}
         = render 'petitions/list', petitions: @project.petitions.recent
+
+- if @current_organization.try(:slug) == 'urimanna'
+  = content_for :footer do
+    = render 'organizations/urimanna/pages/footer'

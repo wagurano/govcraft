@@ -1,6 +1,7 @@
 class SurveysController < ApplicationController
   load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
+  before_action :fetch_current_organization, only: [:show, :edit]
 
   def index
     @surveys = Survey.recent
@@ -84,6 +85,12 @@ class SurveysController < ApplicationController
   end
 
   private
+
+  def fetch_current_organization
+    unless @survey.project.blank? or @survey.project.organization.blank?
+      @current_organization = @survey.project.organization
+    end
+  end
 
   def survey_params
     params.require(:survey).permit(:title, :body, :project_id, :duration, :cover_image, :multi_selectable, :anonymous_feedbackable, options_attributes: [:id, :body, :desc])
