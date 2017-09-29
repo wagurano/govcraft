@@ -46,5 +46,5 @@
   .container
     = link_to stories_url(subdomain: root_subdomain) do
       %h3.sub-title= Story.model_name.human
-    .row
+    .row.masonry-container
       = render Story.recent.limit(6)
