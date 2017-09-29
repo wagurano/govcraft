@@ -9,7 +9,7 @@
         .container
           %h3.sub-title= @project.component_title('story')
           .row
-            = render @project.stories.first(3)
+            = render @project.stories.recent.limit(3)
   - when :wiki
     - if @project.wiki_enabled?
       %section.page-block
