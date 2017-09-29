@@ -72,5 +72,3 @@
                 = date_f recent_post["created_at"].to_date
               = link_to recent_post["url"], target: "_blank" do
                 = truncate(recent_post["specific_desc_striped_tags"], :length => 30)
-= content_for :footer do
-  = render 'footer'

@@ -4,4 +4,4 @@
     .card-content
       = link_to event.title, event, class: 'header'
       .card-description
-        != smart_truncate_html event.body, length:15
+        = excerpt event.body, length:55

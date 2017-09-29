@@ -88,9 +88,6 @@
                     = link_to petition_path(@petition, anchor: "anchor-speakers"), class: "text-keep-all js-close-modal" do
                       다른 #{speaker_section_title}
                       %i.fa.fa-arrow-right
-- if @current_organization.try(:slug) == 'urimanna'
-  = content_for :footer do
-    = render 'organizations/urimanna/pages/footer'
 
   = content_for :script do
     :javascript
