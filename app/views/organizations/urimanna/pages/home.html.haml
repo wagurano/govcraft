@@ -12,6 +12,13 @@
       %br
       구축해 나가는 것을 지향합니다
 
+%section#agendas.page-block
+  .container
+    = link_to agendas_url(subdomain: root_subdomain) do
+      %h3.sub-title
+        = Agenda.model_name.human
+    .row
+      = render Agenda.limit(4)
 
 %section#projects.page-block
   .container
@@ -23,12 +30,12 @@
     %hr{style:"color:rgba(230, 230, 230, 1);height:2px;margin-top:0px;"}
 
 
-%section#petitions.page-block
+%section#events.page-block
   .container
-    = link_to petitions_url(subdomain: root_subdomain) do
-      %h3.sub-title= Petition.model_name.human
+    = link_to events_url(subdomain: root_subdomain) do
+      %h3.sub-title= Event.model_name.human
     .row
-      = render Petition.recent.limit(3)
+      = render Event.recent.limit(3)
 
 
 - discussions = Discussion.recent.limit(10)

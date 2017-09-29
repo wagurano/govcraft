@@ -201,6 +201,32 @@ h3.sub-title {
 }
 
 //공통 카드 스타일
+.component-card{
+  border-radius:0px;
+  border:1px solid $gray-light;
+  margin-bottom:30px;
+  .card-content{
+    padding:20px 15px;
+    .header{
+      font-weight:bold;
+      font-size:24px;
+      color:$gray-darker;
+    }
+  }
+  @mixin card-sub($color){
+    display:block;
+    color:$color;
+    font-weight:bold;
+    font-size:14px;
+    line-height:24px;
+  }
+  .card-sub a{
+    @include card-sub($brand-primary)
+  }
+  .card-sub span{
+    @include card-sub($gray-dark)
+  }
+}
 .card-image {
     background-size: cover;
     background-position: top center;
