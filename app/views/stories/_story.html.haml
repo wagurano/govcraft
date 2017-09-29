@@ -3,11 +3,11 @@
     = link_to story do
       .card-image{ style: "height: 200px; background-image: url(#{story.cover_url(:md)}); background-size: cover; background-position: top center;"}
     .card-content
-      = link_to story.title, story, class: 'card-header'
+      = link_to story.title, story, class: 'header'
       .card-description
         = excerpt story.body, length: 100 if story.body.present?
 
-    .card-content.card-extra
+    .card-content.card-extra{style:"border-top:1px solid #e6e6e6"}
       .pull-right
         %span
           %i.fa.fa-comments
