@@ -16,6 +16,10 @@
     font-weight:700;
     padding:25px 25px 25px 10px;
     height:80px;
+    @media (max-width: $screen-sm-min){
+      padding: 27px 5px 25px 10px;
+      border-right:0px;
+    }
   }
   .slogan-or-navi{
     display:inline-block;
@@ -46,7 +50,7 @@
     top:0;
     z-index:10; /* 리본보다 더 높게 */
     position:absolute;
-    .menu-btn, .slogan-or-navi {
+    .menu-btn, .slogan-or-navi, #urimanna_menu {
       display:none;
     }
     .title{
@@ -149,4 +153,19 @@ section#communities{
 }
 .urimanna{
   height:415px;
+}
+#urimanna_menu{
+  display:inline-block;
+  font-weight:bold;
+  font-size:16px;
+  a{
+    color:$gray-dark;
+    margin-right:40px;
+    &:hover{
+      color:$brand-primary
+    }
+  }
+  @media (max-width: $screen-sm-min) {
+    display:none;
+  }
 }
