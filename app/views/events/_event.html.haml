@@ -1,6 +1,7 @@
 .col-md-4.col-sm-6.col-xs-12
-  .card[event]
-    .card-image{ style: "height: 200px; background-image: url(#{event.image_url(:md)}); background-size: cover; background-position: top center;"}
-      %span.label.label-warning.label-ribbon-left= Event.model_name.human
+  .component-card{style:"height:350px;"}
+    .card-image{ style: "height: 160px; background-image: url(#{event.image_url(:md)}); background-size: cover; background-position: top center;"}
     .card-content
       = link_to event.title, event, class: 'header'
+      .card-description
+        != smart_truncate_html event.body, length:15

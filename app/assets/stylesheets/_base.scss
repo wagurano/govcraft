@@ -205,13 +205,21 @@ h3.sub-title {
   border-radius:0px;
   border:1px solid $gray-light;
   margin-bottom:30px;
+  overflow:hidden;
   .card-content{
     padding:20px 15px;
     .header{
       font-weight:bold;
       font-size:24px;
       color:$gray-darker;
+      &:hover{
+        color:$brand-primary-light;
+      }
     }
+  }
+  .card-description{
+    color:$gray;
+    margin:15px 0px;
   }
   @mixin card-sub($color){
     display:block;
