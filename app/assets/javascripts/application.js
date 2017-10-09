@@ -144,6 +144,10 @@ $(function(){
     });
   });
 
+  $('.js-top-menu i').click(function(){
+    $('#header-container').toggleClass('drop-main-menu');
+  })
+
   $('#communities .js-tab-toggle').click(function(){
     var flag = $(this).hasClass('active');
     if(!flag){

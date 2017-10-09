@@ -17,7 +17,7 @@
           = @project.title
       - else
         = organization.try(:slogan) || 'Democracy, everyday'
-    .right-navi.menu-btn{onclick:"javascript:toggleMenuList();"}
+    .right-navi.js-top-menu.menu-btn{onclick:"javascript:toggleMenuList();"}
       - if @current_organization.try(:slug) == 'urimanna'
         %div#urimanna_menu
           = link_to '단체 정보', '/archives/2'
@@ -25,7 +25,7 @@
           = link_to Agenda.model_name.human, agendas_path
           = link_to '커뮤니티', organization.try(:community_url), target: '_blank'
       %i.fa.fa-bars{style:"font-size:17px;"}
-    .right-navi.close-btn{onclick:"javascript:toggleMenuList();", style:"display:none;"}
+    .right-navi.js-top-menu.close-btn{onclick:"javascript:toggleMenuList();", style:"display:none;"}
       %i.fa.fa-times
     .menu-list.text-nowrap{style:"display:none;"}
       - if organization.blank?
@@ -92,7 +92,3 @@
       - else
         = link_to new_user_session_url(subdomain: root_subdomain) do
           로그인·가입
-  :javascript
-    function toggleMenuList(){
-      document.getElementById("header-container").classList.toggle("drop-main-menu");
-    }
