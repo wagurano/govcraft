@@ -8,6 +8,11 @@
     ~ f.text_area :body, rows: 10, class: 'form-control'
 
   .form-group
+  = f.label :organization_id
+  - org_hash = Hash[Organization.all.map { |o| [o.title, o.id] }]
+  = f.select :organization_id, org_hash, { include_blank: true }, class: 'form-control'
+
+  .form-group
     = f.label :slug
     = f.text_field :slug, class: 'form-control'
 

@@ -1,8 +1,8 @@
 class ArchiveDocumentsController < ApplicationController
   load_and_authorize_resource
+  before_action :fetch_current_organization, only: [:show, :edit]
 
   def index
-    abort 'xxx'
     render "archive_documents/#{@archive.slug}/list"
   end
 
@@ -16,6 +16,7 @@ class ArchiveDocumentsController < ApplicationController
   def new
     @archive ||= Archive.find(params[:archive_id])
     @archive_document = @archive.documents.build
+    @current_organization = @archive.organization
     render_new
   end
 
@@ -60,6 +61,12 @@ class ArchiveDocumentsController < ApplicationController
   end
 
   private
+
+  def fetch_current_organization
+    unless @archive_document.archive.blank? or @archive_document.archive.organization.blank?
+      @current_organization = @archive_document.archive.organization
+    end
+  end
 
   def render_new
     render "archive_documents/#{@archive.slug}/new"

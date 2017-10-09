@@ -1,6 +1,7 @@
 class ArchivesController < ApplicationController
   load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
+  before_action :fetch_current_organization, only: [:show, :edit]
 
   def index
     @archives = Archive.order('id DESC')
@@ -83,8 +84,14 @@ class ArchivesController < ApplicationController
 
   private
 
+  def fetch_current_organization
+    unless @archive.blank? or @archive.organization.blank?
+      @current_organization = @archive.organization
+    end
+  end
+
   def archive_params
-    params.require(:archive).permit(:title, :body, :slug, :cover_image, :cover_image_cache,
+    params.require(:archive).permit(:title, :body, :slug, :organization_id, :cover_image, :cover_image_cache,
       :remove_cover_image, :social_image, :social_image_cache, :remove_social_image,
       :google_drive_client_id, :google_drive_client_secret,
       categories_attributes: [ :id, :slug, :name, :desc, :_destroy, children_attributes: [ :archive_id, :id, :slug, :name, :desc, :_destroy ] ] )

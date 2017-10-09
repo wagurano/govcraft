@@ -2,6 +2,7 @@ class Archive < ApplicationRecord
   include Likable
 
   belongs_to :user
+  belongs_to :organization, optional: true
   has_many :documents, class_name: 'ArchiveDocument', dependent: :destroy
   has_many :all_categories, class_name: 'ArchiveCategory', dependent: :destroy
   has_many :categories, -> { where parent: nil }, class_name: 'ArchiveCategory'
