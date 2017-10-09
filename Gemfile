@@ -40,6 +40,11 @@ gem 'cocoon'
 gem 'html_truncator'
 gem 'jquery-slick-rails'
 
+# assets
+source 'https://rails-assets.org' do
+  gem 'rails-assets-trianglify'
+end
+
 # tool
 gem 'axlsx', github: 'randym/axlsx', ref: 'd41258e'
 gem 'axlsx_rails', '~> 0.5.0'

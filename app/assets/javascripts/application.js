@@ -21,10 +21,25 @@
 //= require jquery.validate.messages_ko
 //= require jquery.webui-popover
 //= require cocoon
+//= require trianglify
 
 UnobtrusiveFlash.flashOptions['timeout'] = 300000;
 
 $(document).imagesLoaded( { }, function() {
+
+  // trianglify
+  $('.pattern-trianglify').each(function(i, elm) {
+    $elm = $(elm);
+
+    var pattern = Trianglify({
+      width: 1200,
+      height: 600,
+      seed: $(elm).data('trianglify-seed')
+    });
+
+    $elm.css("background-image", "url('" + pattern.png() + "')");
+  });
+
 
   if ( $(window).width() > 739 ) {
     //masonry
