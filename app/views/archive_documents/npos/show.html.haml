@@ -6,8 +6,6 @@
       %h4
         = @archive_document.title
     .post-block__info
-      %span.post-block__user
-        = link_to @archive_document.user.nickname
       %span.post-block__date
         = date_f @archive_document.created_at
       - if can? :edit, @archive_document
