@@ -1,28 +1,30 @@
 - if @project
   = render 'projects/header', project: @project
-
-%section#wiki-block.page-block
+%section#wiki-header.component-header
   .container
+    %span.gov-label
+      위키
+    %br
+    =@wiki.title
+    %div{ style: 'margin-top: 16px;font-size:16px;'}
+      %span.panel-post__date
+      - if can? :edit, @wiki
+        = link_to '수정', edit_discussion_path(@wiki)
+      - if can? :destroy, @wiki
+        = link_to '삭제', @wiki, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+%section#wiki-block
+  .user-info
+    .user-image{style: "background-image:url(#{asset_url(@wiki.user.image)});"}
+    = link_to @wiki.user.nickname
+  .container
+    %div{style:"font-weight:700;margin:40px 0px"}
+      %i.fa.fa-calendar
+      = date_f @wiki.created_at
+      &nbsp;&nbsp;&nbsp;
+      %i.fa.fa-file-text-o
+      조회
+      = @wiki.views_count
     .panel.panel-default.panel-post
-      .panel-heading
-        %h2
-          %small.label.label-default
-            = Wiki.model_name.human
-          %br
-          = @wiki.title
-
-        %p
-          = date_f @wiki.created_at
-          %span
-            #{@wiki.wiki_revisions.count}차례 수정함
-          &middot;
-          - if can? :edit, @wiki
-            = link_to '페이지 수정하기', edit_wiki_path(@wiki)
-            &middot;
-          - if can? :destroy, @wiki
-            = link_to '삭제', @wiki, method: :delete, data: { confirm: '삭제하시겠습니까?' }
-            &middot;
-          조회 #{@wiki.views_count}
 
       .panel-body
         .panel-post__body
@@ -34,7 +36,7 @@
 
 %section
   .container
-    %h4 편집이력
+    %h3.sub-title 편집이력
     .panel.panel-default
       .list-group
         - @wiki.wiki_revisions.recent.each do |wiki_revision|
