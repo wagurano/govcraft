@@ -14,6 +14,19 @@
         line-height:32px;
         float:left;
       }
+      @media (max-width: $screen-sm-min) {
+        display:none;
+      }
+    }
+    .comment_meta_mobile{
+      margin:15px 0px;
+      display:none;
+      span{
+        color:$brand-primary-light;
+      }
+      @media (max-width: $screen-sm-min) {
+        display:block !important;
+      }
     }
     .comment__action{
       float:right;
@@ -38,6 +51,9 @@
       }
       img {
         max-width: 100%;
+      }
+      .comment__date{
+        float:left;
       }
     }
     .comment__choice {

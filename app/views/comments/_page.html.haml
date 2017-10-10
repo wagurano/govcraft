@@ -19,16 +19,23 @@
               = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
             - if current_user != comment.user
               = render 'reports/button', reportable: comment
-
+        .comment_meta_mobile
+          %span
+            #{comment.user_nickname}
+          님이
+          %span
+            #{comment.target_speaker.organization} #{comment.target_speaker.name}
+          님에게
         - if comment.choice.present?
           .comment__choice{ class: comment.choice }= comment.choice.text
         .comment__body
-          = raw screened(comment, :body)
+          %p
+            = raw screened(comment, :body)
           .comment__date
             %i.fa.fa-calendar
             = date_f comment.created_at
-      .media-right.xs-hidden{ style: 'vertical-align: middle;' }
-        = render 'likes/button', likable: comment
+          %div{style:"float:right;"}
+            = render 'likes/button', likable: comment
 - if comments.first.try(:commentable).present?
   - commentable = comments.first.commentable
   .text-center
