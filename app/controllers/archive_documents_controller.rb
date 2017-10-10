@@ -3,7 +3,6 @@ class ArchiveDocumentsController < ApplicationController
   before_action :fetch_current_organization, only: [:show, :edit]
 
   def index
-    render "archive_documents/#{@archive.slug}/list"
   end
 
   def show

@@ -30,6 +30,7 @@ class ArchiveDocument < ApplicationRecord
 
   default_scope { order('content_created_date DESC, content_created_time DESC, created_at DESC, id DESC') }
   scope :recent, -> { order('id DESC') }
+  scoped_search on: [:title]
 
   def original_filename_attribute
     :content_name
