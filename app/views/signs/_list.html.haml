@@ -74,7 +74,7 @@
           %td
             = raw(screened(sign, :body))
             - if !local_assigns[:widget]
-              %small
+              %small{style:"float:right;"}
                 - if current_user != sign.user
                   = render 'reports/button', reportable: sign
                 - if can? :update, sign
