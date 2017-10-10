@@ -14,11 +14,8 @@
         line-height:32px;
         float:left;
       }
-      @media (max-width: $screen-sm-min) {
-        display:none;
-      }
     }
-    .comment_meta_mobile{
+    .comment__to-speaker_mobile{
       margin:15px 0px;
       display:none;
       span{
@@ -80,6 +77,9 @@
     }
     .comment__to-speaker{
       display:inline-block;
+      @media (max-width: $screen-sm-min) {
+        display:none;
+      }
     }
   }
 }

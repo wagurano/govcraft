@@ -14,18 +14,19 @@
               .user-image-sm{style:"background-image:url(#{asset_url(comment.target_speaker.image.xs.url)});float:left;margin-left:5px;"}
               .comment__user-nm
                 #{comment.target_speaker.organization} #{comment.target_speaker.name}님에게 보낸 의견입니다.
+            .comment__to-speaker_mobile
+              %span
+                #{comment.user_nickname}
+              님이
+              %span
+                #{comment.target_speaker.organization} #{comment.target_speaker.name}
+              님에게
           .comment__action
             - if can? :destroy, comment
               = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
             - if current_user != comment.user
               = render 'reports/button', reportable: comment
-        .comment_meta_mobile
-          %span
-            #{comment.user_nickname}
-          님이
-          %span
-            #{comment.target_speaker.organization} #{comment.target_speaker.name}
-          님에게
+
         - if comment.choice.present?
           .comment__choice{ class: comment.choice }= comment.choice.text
         .comment__body
