@@ -49,5 +49,5 @@
           = paginate @documents, theme: 'twitter-bootstrap-3'
 
         - if can? :manage, @archive
-          = link_to '자료입력', new_archive_document_path(archive_id: @archive.id, category_slug: params[:category_slug]), class: 'ui primary button'
+          = link_to '자료 입력', new_archive_document_path(archive_id: @archive.id, category_slug: params[:category_slug]), class: 'ui primary button btn btn-like btn-default btn-inverted'
 }
