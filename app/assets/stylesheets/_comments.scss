@@ -16,7 +16,7 @@
       }
     }
     .comment__to-speaker_mobile{
-      margin:15px 0px;
+      margin:2px 0px;
       display:none;
       span{
         color:$brand-primary-light;
@@ -74,6 +74,10 @@
       display:inline-block;
       line-height:32px;
       margin:0px 10px 0px 5px;
+      @media (max-width: $screen-sm-min) {
+        margin:0px 2px 0px 0px !important;
+        color:$brand-primary-light;
+      }
     }
     .comment__to-speaker{
       display:inline-block;
