@@ -8,10 +8,22 @@
       font-weight:bold;
       font-size: 14px;
       margin-bottom:12px;
+      width:100%;
       .comment__arrow{
         font-size:18px;
         line-height:32px;
         float:left;
+      }
+    }
+    .comment__action{
+      float:right;
+      a{
+        margin-right:5px;
+        font-size:12px;
+        color:$gray;
+        &:hover{
+          color:$gray-darker;
+        }
       }
     }
     .comment__body {
