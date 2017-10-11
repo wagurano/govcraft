@@ -2,7 +2,7 @@
   = form_for @project do |f|
     .panel-body
 
-      %h3 기본 정보
+      %h3.sub-title 기본 정보
 
       .form-group.form-group-lg
         = f.label :title
@@ -24,10 +24,11 @@
           = f.text_field :slug, class: 'form-control'
         %p.help-block 영문자와 숫자, -만 넣어주세요. 이미 등록된 주소는 사용할 수 없습니다.
 
-      .form-group
-        = f.label :organization_id
-        - org_hash = Hash[Organization.all.map { |o| [o.title, o.id] }]
-        = f.select :organization_id, org_hash, { include_blank: true }, class: 'form-control'
+      - if @current_organization.present? and @current_organization.project_categories.any?
+        .form-group
+          = f.label :project_category_id
+          - project_category_hash = Hash[@current_organization.project_categories.map { |c| [c.title, c.id] }]
+          = f.select :project_category_id, project_category_hash, { include_blank: true }, class: 'form-control'
 
       .form-group
         = f.label :image
@@ -52,7 +53,7 @@
             삭제하기
       %hr
 
-      %h3 프로젝트 기능
+      %h3 캠페인 기능
 
       .row
         .col-sm-3

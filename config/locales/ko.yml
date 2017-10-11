@@ -46,7 +46,7 @@ ko:
       agenda: 의제
       agenda_document: 관련 자료
       opinion: 의견
-      project: 프로젝트
+      project: 캠페인
       story: 최근소식
       discussion: 게시판
       discussion_category: 카테고리
@@ -92,8 +92,8 @@ ko:
         wiki_enabled: 위키 기능 사용
         wiki_title: 위키 기능 이름
         social_image: 소셜공유 이미지(선택)
-        organization_id: 프로젝트 조직
-        slug: 프로젝트 웹페이지 주소
+        organization_id: 캠페인 조직
+        slug: 캠페인 웹페이지 주소
       discussion:
         title: 제목
         body: 내용
