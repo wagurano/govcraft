@@ -14,6 +14,8 @@ class PagesController < ApplicationController
     @timelines = Timeline.recent
     @memorials = Memorial.recent
     @articles = Article.hot.limit(10)
+    @projectCategory = ProjectCategory.all
+
   end
 
   def home_urimanna

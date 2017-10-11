@@ -23,6 +23,18 @@ namespace :organizations do
         title: '청년',
         slug: 'youth')
 
+      category_seed('urimanna',
+        title: '젠더',
+        slug: 'gender')
+
+      category_seed('urimanna',
+        title: '마을',
+        slug: 'village')
+
+      category_seed('urimanna',
+        title: '개헌',
+        slug: 'changelaw')
+
       seed(title: '바꿈',
         description: '',
         slug: 'change2020',

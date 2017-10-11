@@ -4,6 +4,9 @@
       = Project.model_name.human
       %small.pull-right
         = link_to '캠페인 만들기', new_project_path, class: 'btn btn-default' if can? :create, Project
-
     .row
-      = render @projects
+      - if @projects.nil?
+        .col-md-12.text-center{style:"margin:20px 0px 100px 0px;"}
+          조건에 맞는 캠페인이 없습니다.
+      - else
+        = render @projects
