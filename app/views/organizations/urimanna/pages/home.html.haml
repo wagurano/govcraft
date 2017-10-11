@@ -16,7 +16,7 @@
   .container
     = link_to agendas_url(subdomain: root_subdomain) do
       %h3.sub-title
-        = Agenda.model_name.human
+        의제 토론
     .row
       = render Agenda.limit(4)
 
@@ -37,14 +37,6 @@
     .row
       = render Event.recent.where(project: @current_organization.projects).limit(3)
 
-
-- discussions = Discussion.recent.limit(10)
-%section#discussions.page-block
-  .container
-    = link_to discussions_url(subdomain: root_subdomain) do
-      %h3.sub-title= Discussion.model_name.human
-    %table.table
-      = render discussions.where(project: @current_organization.projects)
 
 %section#communities
   .container

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171009083238) do
+ActiveRecord::Schema.define(version: 20171011013427) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -574,6 +574,14 @@ ActiveRecord::Schema.define(version: 20171009083238) do
     t.index ["user_id"], name: "index_project_admins_on_user_id", using: :btree
   end
 
+  create_table "project_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer "organization_id", null: false
+    t.string  "slug",            null: false
+    t.string  "title",           null: false
+    t.index ["organization_id"], name: "index_project_categories_on_organization_id", using: :btree
+    t.index ["slug"], name: "index_project_categories_on_slug", using: :btree
+  end
+
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title"
     t.text     "body",                limit: 65535
@@ -604,7 +612,9 @@ ActiveRecord::Schema.define(version: 20171009083238) do
     t.boolean  "story_enabled",                     default: true
     t.string   "story_title"
     t.integer  "story_sequence",                    default: 0
+    t.integer  "project_category_id"
     t.index ["organization_id"], name: "index_projects_on_organization_id", using: :btree
+    t.index ["project_category_id"], name: "index_projects_on_project_category_id", using: :btree
     t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
   end
 

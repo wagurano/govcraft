@@ -21,11 +21,13 @@ class ProjectsController < ApplicationController
   end
 
   def new
+    @current_organization = fetch_organization_of_request(request)
   end
   #create 도 프로젝트 조직 슬러그 들어가야 함
   def create
     @project = Project.new(project_params)
     @project.user = current_user
+    @project.organization = fetch_organization_of_request(request)
     if @project.save
       redirect_to @project
     else
@@ -62,7 +64,7 @@ class ProjectsController < ApplicationController
       :title, :subtitle, :body,
       :image, :remove_image,
       :social_image, :remove_social_image,
-      :slug, :organization_id,
+      :slug, :project_category_id,
       :story_enabled, :discussion_enabled, :poll_enabled, :petition_enabled, :wiki_enabled,
       :story_title, :discussion_title, :poll_title, :petition_title, :wiki_title,
       :story_sequence, :discussion_sequence, :poll_sequence, :petition_sequence, :wiki_sequence, :event_sequence

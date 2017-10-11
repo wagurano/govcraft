@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   class OrganizationableSubpagesConstraint
     include OrganizationHelper
     def matches?(request)
-      organizationable_request? request and !['/p', '/projects', '/petitions', '/events', '/stories'].include?(request.path)
+      organizationable_request? request and !['/p', '/p/new', '/p/create', '/projects', '/petitions', '/events', '/stories'].include?(request.path)
     end
   end
   constraints(OrganizationableSubpagesConstraint.new) do

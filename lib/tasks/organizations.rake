@@ -15,6 +15,14 @@ namespace :organizations do
         slogan: '일상 속에서의 민주주의 실현',
         community_url: 'https://kdemo.parti.xyz/')
 
+      category_seed('urimanna',
+        title: '환경',
+        slug: 'environment')
+
+      category_seed('urimanna',
+        title: '청년',
+        slug: 'youth')
+
       seed(title: '바꿈',
         description: '',
         slug: 'change2020',
@@ -28,5 +36,14 @@ namespace :organizations do
     organization = Organization.find_or_initialize_by slug: slug
     organization.assign_attributes(options)
     organization.save!
+  end
+
+  def category_seed(organization_slug, options)
+    slug = options[:slug]
+    organization = Organization.find_by(slug: organization_slug)
+    category = ProjectCategory.find_or_initialize_by slug: slug
+    category.assign_attributes(options)
+    category.organization = organization
+    category.save!
   end
 end
