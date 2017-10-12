@@ -9,7 +9,7 @@ namespace :organizations do
         slogan: '우리가 주인이 되는 직접 민주주의 프로젝트 정당',
         community_url: 'https://wouldyou.parti.xyz/')
 
-      seed(title: '우리가 만드는 대한민국',
+      seed(title: '우리가 만드는 나라',
         description: '',
         slug: 'urimanna',
         slogan: '일상 속에서의 민주주의 실현',
