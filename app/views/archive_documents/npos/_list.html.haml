@@ -13,8 +13,11 @@
         .ui.vertical.menu
           - @archive.categories.each do |category|
             .item{ class: ('active' if category == @category.try(:parent)) }
-              .header= category.name
-              .menu
+              .header.js-achv-folding-category
+                %i.fa.fa-folder
+                %i.fa.fa-folder-open{style:"display:none"}
+                = category.name
+              .menu{style:"display:none"}
                 - category.children.each do |subcategory|
                   .item{ class: ('active' if subcategory == @category) }
                     = link_to subcategory.name, category_archive_path(@archive, category_slug: subcategory.slug)

@@ -148,6 +148,11 @@ $(function(){
     $('#header-container').toggleClass('drop-main-menu');
   })
 
+  $('.js-achv-folding-category').click(function(){
+    $(this).next('.menu').toggle();
+    $(this).find('.fa').toggle();
+  })
+
   $('#communities .js-tab-toggle').click(function(){
     var flag = $(this).hasClass('active');
     if(!flag){
