@@ -3,9 +3,13 @@ class CommentsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @commentable_model = params[:commentable_type].classify.safe_constantize
-    @commentable = @commentable_model.find(params[:commentable_id])
-    @comments = @commentable.comments.page(params[:page])
+    if params[:commentable_type].nil?
+      redirect_to root_url
+    else
+      @commentable_model = params[:commentable_type].classify.safe_constantize
+      @commentable = @commentable_model.find(params[:commentable_id])
+      @comments = @commentable.comments.page(params[:page])
+    end
   end
 
   def create
