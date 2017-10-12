@@ -1,7 +1,7 @@
 %section#parti-section.urimanna{style:"background-image:url(#{asset_url('urimanna_keyvisual.png')})"}
   .container.text-center
     %h2
-      우리가 만드는 대한민국
+      우리가 만드는 나라
       %br
       %span{style:"font-size:14px;"}
         ⦁
@@ -22,7 +22,7 @@
 
 %section#projects.page-block
   .container
-    = link_to projects_url(subdomain: root_subdomain) do
+    = link_to 'http://urimanna.govcraft.org/p' do
       %h3.sub-title{style:"margin-bottom:20px;"}
         = Project.model_name.human
     .row
@@ -38,7 +38,7 @@
 
 %section#events.page-block
   .container
-    = link_to events_url(subdomain: root_subdomain) do
+    = link_to 'http://urimanna.govcraft.org/events' do
       %h3.sub-title= Event.model_name.human
     .row
       = render Event.recent.where(project: @current_organization.projects).limit(3)
