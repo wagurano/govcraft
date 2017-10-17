@@ -44,6 +44,13 @@ namespace :organizations do
         slug: 'change2020',
         slogan: '세상을 바꾸는 꿈',
         community_url: 'https://change.parti.xyz/')
+
+       seed(site_name: '전교조',
+        title: '전교조',
+        description: '교육의 자주성, 전문성 확립과 교육민주화 실현을 위한 전국의 유치원, 초등학교, 중·고등학교 교사들의 자주적 노동조합입니다',
+        slug: 'eduhope',
+        slogan: '교육과 세상을 바꾸는 전교조',
+        community_url: 'https://eduhope.parti.xyz/')
     end
   end
 

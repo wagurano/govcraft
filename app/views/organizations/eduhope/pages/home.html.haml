@@ -1,0 +1,44 @@
+%section#about-section.wouldyouparty
+  .container
+    %h2
+      교육과 세상을
+      %br
+      바꾸는
+      %br
+      %strong
+        전교조
+
+
+%section#projects.page-block
+  .container
+    = link_to projects_url(subdomain: root_subdomain) do
+      %h3.sub-title= Project.model_name.human
+    .row
+      = render @current_organization.projects.recent.limit(3)
+    %hr{style:"color:rgba(230, 230, 230, 1);height:2px;margin-top:0px;"}
+
+
+%section#petitions.page-block
+  .container
+    = link_to petitions_url(subdomain: root_subdomain) do
+      %h3.sub-title= Petition.model_name.human
+    .row
+      = render Petition.recent.where(project: @current_organization.projects).limit(3)
+
+
+- discussions = Discussion.recent.where(project: @current_organization.projects).limit(10)
+%section#discussions.page-block
+  .container
+    = link_to discussions_url(subdomain: root_subdomain) do
+      %h3.sub-title= Discussion.model_name.human
+    %table.table
+      = render discussions
+
+- stories = Story.recent.by_organization(@current_organization).limit(3)
+- if stories.any?
+  %section#stories.page-block
+    .container
+      = link_to stories_path do
+        %h3.sub-title= Story.model_name.human
+      .row
+        = render stories
