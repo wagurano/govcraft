@@ -64,7 +64,6 @@
       .panel-heading
         %div
           등록일: #{l @archive_document.created_at}
-
-    .post-block__comments
-      = render 'comments/list', commentable: @archive_document
+    %button.btn.btn-primary.btn-lg{onclick:"location.href='mailto:minju30y@gmail.com'"}
+      단체 정보 수정 요청
 
