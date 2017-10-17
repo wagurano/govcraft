@@ -18,7 +18,13 @@
       %h3.sub-title
         의제 토론
     .row
-      = render Agenda.limit(4)
+      - @projectCategory.each do |c|
+        = link_to projects_url(subdomain: root_subdomain, c: c.id) do
+          .col-md-2
+            .project-category-card.component-card
+              .title
+                %h4
+                  = c.title
 
 %section#projects.page-block
   .container
@@ -27,10 +33,6 @@
         = Project.model_name.human
     .row
       .col-md-12.col-xs-12
-        - @projectCategory.each do |c|
-          = link_to projects_url(subdomain: root_subdomain, c: c.id) do
-            .project-category-main-block
-              = c.title
     .row
       = render @current_organization.projects.recent.limit(3)
     %hr{style:"color:rgba(230, 230, 230, 1);height:2px;margin-top:0px;"}

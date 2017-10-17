@@ -24,8 +24,8 @@ namespace :organizations do
         slug: 'youth')
 
       category_seed('urimanna',
-        title: '젠더',
-        slug: 'gender')
+        title: '정치',
+        slug: 'politic')
 
       category_seed('urimanna',
         title: '마을',
