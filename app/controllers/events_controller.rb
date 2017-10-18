@@ -23,6 +23,8 @@ class EventsController < ApplicationController
   end
 
   def new
+    @project = Project.find(params[:project_id]) if params[:project_id].present?
+    @current_organization = @project.organization if @project.present?
   end
 
   def create

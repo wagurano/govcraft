@@ -1,5 +1,9 @@
 - if events.any?
   .container
-    %h3.sub-title= local_assigns[:title_label] || Event.model_name.human
+    %h3.sub-title
+      = local_assigns[:title_label] || Event.model_name.human
+      %small.pull-right
+        = link_to "이벤트 시작하기", new_event_path(project_id: @project), class: 'btn btn-default btn-inverted btn-sm'
+
     .row.masonry-container
       = render events
