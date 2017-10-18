@@ -1,6 +1,10 @@
 class DiscussionsController < ApplicationController
+  include OrganizationHelper
+
   load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
+  before_action :fetch_current_organization, only: [:show, :edit]
+
 
   def index
     @discussions = Discussion.recent.page(params[:page])
@@ -8,6 +12,9 @@ class DiscussionsController < ApplicationController
     @project = Project.find_by(slug: params[:project_id]) if params[:project_id]
     @discussions = @discussions.where(project: @project) if @project.present?
     @discussions = @discussions.where(discussion_category_id: params[:discussion_category_id]) if params[:discussion_category_id]
+
+    @current_organization = fetch_organization_of_request(request)
+    @discussions = @discussions.by_organization(@current_organization) if @current_organization.present?
   end
 
   def show
@@ -50,6 +57,12 @@ class DiscussionsController < ApplicationController
   end
 
   private
+
+  def fetch_current_organization
+    unless @discussion.project.blank? or @discussion.project.organization.blank?
+      @current_organization = @discussion.project.organization
+    end
+  end
 
   def discussion_params
     params.require(:discussion).permit(:title, :body, :project_id, :discussion_category_id)

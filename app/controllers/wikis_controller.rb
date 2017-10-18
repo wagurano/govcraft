@@ -1,6 +1,9 @@
 class WikisController < ApplicationController
+  include OrganizationHelper
+
   load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
+  before_action :fetch_current_organization, only: [:show, :edit]
 
   def index
     @wikis = Wiki.recent
@@ -13,6 +16,7 @@ class WikisController < ApplicationController
 
   def new
     @project = Project.find(params[:project_id]) if params[:project_id]
+    @current_organization = @project.organization if @project.present?
   end
 
   def create
@@ -45,6 +49,12 @@ class WikisController < ApplicationController
   end
 
   private
+
+  def fetch_current_organization
+    unless @wiki.project.blank? or @wiki.project.organization.blank?
+      @current_organization = @wiki.project.organization
+    end
+  end
 
   def wiki_params
     params.require(:wiki).permit(:title, :body, :project_id, :revision_note)

@@ -27,6 +27,7 @@ class SurveysController < ApplicationController
     2.times do
       @survey.options.build
     end
+    @current_organization = @project.organization if @project.present?
   end
 
   def create
