@@ -14,12 +14,11 @@
 
 %section#agendas.page-block
   .container
-    = link_to agendas_url(subdomain: root_subdomain) do
-      %h3.sub-title
-        의제 토론
+    %h3.sub-title
+      의제 토론
     .row
       - @projectCategory.each do |c|
-        = link_to projects_url(subdomain: root_subdomain, c: c.id) do
+        = link_to projects_url(c: c.id) do
           .col-md-2
             .project-category-card.component-card
               .title
@@ -28,7 +27,7 @@
 
 %section#projects.page-block
   .container
-    = link_to 'http://urimanna.govcraft.org/p' do
+    = link_to projects_url do
       %h3.sub-title{style:"margin-bottom:20px;"}
         = Project.model_name.human
     .row
@@ -40,7 +39,7 @@
 
 %section#events.page-block
   .container
-    = link_to 'http://urimanna.govcraft.org/events' do
+    = link_to events_path do
       %h3.sub-title= Event.model_name.human
     .row
       = render Event.recent.where(project: @current_organization.projects).limit(3)

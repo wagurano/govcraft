@@ -2,6 +2,7 @@
     background-color: $gray-darker;
     &.wouldyouparty {
         background-image: asset-url('about-main.png');
+        background-size: cover;
     }
     &.change2020{
         background: rgb(122,188,255); /* Old browsers */
