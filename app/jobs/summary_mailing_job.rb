@@ -14,7 +14,7 @@ class SummaryMailingJob
       new_petitions, new_polls, new_events, new_articles].select { |news| news.any? }.blank?
 
     User.where(enable_mailing: true).each do |user|
-      ApplicationMailer.summary(user, new_projects, new_petitions, new_polls, new_events, new_articles).deliver_now
+      # ApplicationMailer.summary(user, new_projects, new_petitions, new_polls, new_events, new_articles).deliver_now
     end
   end
 end
