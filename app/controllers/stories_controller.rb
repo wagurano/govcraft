@@ -17,6 +17,7 @@ class StoriesController < ApplicationController
 
   def new
     @project = Project.find(params[:project_id]) if params[:project_id]
+    @current_organization = @project.organization if @project.present?
   end
 
   def create
