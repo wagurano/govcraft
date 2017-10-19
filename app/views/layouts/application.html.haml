@@ -35,11 +35,6 @@
         = render 'application/header'
       = yield
 
-    - if content_for?(:messenger)
-    - else
-      - unless browser.device.mobile?
-        = render 'messenger'
-
     - if content_for?(:footer)
       = yield :footer
     - else
