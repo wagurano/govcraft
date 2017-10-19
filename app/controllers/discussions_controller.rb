@@ -26,6 +26,7 @@ class DiscussionsController < ApplicationController
   def new
     @project = Project.find(params[:project_id]) if params[:project_id]
     @discussion.discussion_category_id = params[:discussion_category_id] if params[:discussion_category_id]
+    @current_organization = @project.organization if @project.present?
   end
 
   def create
