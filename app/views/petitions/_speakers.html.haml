@@ -1,8 +1,7 @@
 %a{id: "anchor-speakers"}
-.panel-body
+%h3.sub-title= t("views.petition.speaker_section_title.id_#{@petition.id}", default: I18n.t("views.petition.speaker_section_title.default"))
+.panel-body{style:"padding:0px"}
   .panel-post__speakers
-    %h4= t("views.petition.speaker_section_title.id_#{@petition.id}", default: I18n.t("views.petition.speaker_section_title.default"))
-
     .row.masonry-container
       - @petition.speakers.each do |speaker|
         .col-md-3.col-sm-4.col-xs-6
@@ -31,4 +30,3 @@
                 - if statement.body.present?
                   .opinion__body
                     != statement.body
-
