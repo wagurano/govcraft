@@ -3,6 +3,8 @@ class StoriesController < ApplicationController
 
   load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
+  before_action :verify_organization
+
 
   def index
     @stories = Story.recent
@@ -60,5 +62,9 @@ class StoriesController < ApplicationController
       image: (view_context.image_url(@story.fallback_social_image_url) if @story.fallback_social_image_url),
       url: request.original_url}
     )
+  end
+
+  def current_organization
+    @story.try(:project).try(:organization) || fetch_organization_of_request(request)
   end
 end
