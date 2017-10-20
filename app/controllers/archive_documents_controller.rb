@@ -1,6 +1,8 @@
 class ArchiveDocumentsController < ApplicationController
+  include OrganizationHelper
+
   load_and_authorize_resource
-  before_action :fetch_current_organization, only: [:show, :edit]
+  before_action :verify_organization
 
   def index
   end
@@ -14,7 +16,6 @@ class ArchiveDocumentsController < ApplicationController
 
   def new
     @archive ||= Archive.find(params[:archive_id])
-    @archive_document = @archive.documents.build
     @current_organization = @archive.organization
     render_new
   end
@@ -61,12 +62,6 @@ class ArchiveDocumentsController < ApplicationController
 
   private
 
-  def fetch_current_organization
-    unless @archive_document.archive.blank? or @archive_document.archive.organization.blank?
-      @current_organization = @archive_document.archive.organization
-    end
-  end
-
   def render_new
     render "archive_documents/#{@archive.slug}/new"
   end
@@ -99,5 +94,9 @@ class ArchiveDocumentsController < ApplicationController
       :category_slug, :donor, :is_secret_donor,
       additional_attributes: [:id, :sub_region, :address, :zipcode, :homepage, :tel, :fax, :leader, :leader_tel, :email, :business_area, :open_year, :members_count, :workers_count, :finance]
     )
+  end
+
+  def current_organization
+    @archive_document.try(:archive).try(:organization) || fetch_organization_of_request(request)
   end
 end

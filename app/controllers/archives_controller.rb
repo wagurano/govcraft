@@ -1,5 +1,6 @@
 class ArchivesController < ApplicationController
   load_and_authorize_resource
+  before_action :verify_organization
   before_action :reset_meta_tags, only: :show
   before_action :fetch_current_organization, only: [:show, :edit]
 
@@ -109,5 +110,9 @@ class ArchivesController < ApplicationController
       description: @archive.body.html_safe,
       url: request.original_url}
     )
+  end
+
+  def current_organization
+    @archive.try(:organization) || fetch_organization_of_request(request)
   end
 end

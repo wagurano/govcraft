@@ -19,16 +19,6 @@ Rails.application.routes.draw do
     root 'pages#home'
   end
 
-  class OrganizationableSubpagesConstraint
-    include OrganizationHelper
-    def matches?(request)
-      organizationable_request? request and !['/p', '/p/new', '/p/create', '/projects', '/petitions', '/events', '/stories', '/archives/2', '/discussions', '/discussions/new'].include?(request.path)
-    end
-  end
-  constraints(OrganizationableSubpagesConstraint.new) do
-    match '*path', to: redirect(subdomain: ApplicationController.helpers.root_subdomain), via: :all
-  end
-
   root 'pages#home'
 
   get 'about', to: 'pages#about', as: :about

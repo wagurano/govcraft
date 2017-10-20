@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include OrganizationHelper
+
   protect_from_forgery with: :exception
   before_action :prepare_meta_tags, if: "request.get?"
   after_action :prepare_flash
@@ -121,5 +123,14 @@ class ApplicationController < ActionController::Base
         "https://www.googleapis.com/auth/drive",
         "https://spreadsheets.google.com/feeds/",
       ]}.merge(options))
+  end
+
+  def verify_organization
+    return unless request.format.html?
+
+    @current_organization = send(:current_organization)
+    valid_subdomain = @current_organization.try(:subdomain) || view_context.root_subdomain
+
+    redirect_to subdomain: valid_subdomain and return unless fetch_organization_of_request(request) == @current_organization
   end
 end
