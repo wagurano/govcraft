@@ -3,7 +3,7 @@ class EventsController < ApplicationController
 
   load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
-  before_action :fetch_current_organization, only: [:show, :edit]
+  before_action :verify_organization
 
   def index
     @events = Event.recent
@@ -54,12 +54,6 @@ class EventsController < ApplicationController
 
   private
 
-  def fetch_current_organization
-    unless @event.project.blank? or @event.project.organization.blank?
-      @current_organization = @event.project.organization
-    end
-  end
-
   def event_params
     params.require(:event).permit!
   end
@@ -71,5 +65,9 @@ class EventsController < ApplicationController
       url: request.original_url,
       image: (view_context.image_url(@event.fallback_social_image_url) if @event.fallback_social_image_url),
     })
+  end
+
+  def current_organization
+    @event.try(:project).try(:organization) || fetch_organization_of_request(request)
   end
 end

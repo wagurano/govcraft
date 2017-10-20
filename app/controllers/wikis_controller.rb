@@ -3,7 +3,7 @@ class WikisController < ApplicationController
 
   load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
-  before_action :fetch_current_organization, only: [:show, :edit]
+  before_action :verify_organization
 
   def index
     @wikis = Wiki.recent
@@ -50,12 +50,6 @@ class WikisController < ApplicationController
 
   private
 
-  def fetch_current_organization
-    unless @wiki.project.blank? or @wiki.project.organization.blank?
-      @current_organization = @wiki.project.organization
-    end
-  end
-
   def wiki_params
     params.require(:wiki).permit(:title, :body, :project_id, :revision_note)
   end
@@ -68,4 +62,9 @@ class WikisController < ApplicationController
       url: request.original_url}
     )
   end
+
+  def current_organization
+    @wiki.try(:project).try(:organization) || fetch_organization_of_request(request)
+  end
+
 end
