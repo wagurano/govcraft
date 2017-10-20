@@ -9,7 +9,7 @@
     %div{ style: 'margin-top: 16px;font-size:16px;'}
       %span.panel-post__date
       - if can? :edit, @wiki
-        = link_to '수정', edit_discussion_path(@wiki)
+        = link_to '수정', edit_wiki_path(@wiki)
       - if can? :destroy, @wiki
         = link_to '삭제', @wiki, method: :delete, data: { confirm: '삭제하시겠습니까?' }
 %section#wiki-block
