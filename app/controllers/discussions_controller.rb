@@ -3,7 +3,7 @@ class DiscussionsController < ApplicationController
 
   load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
-  before_action :fetch_current_organization, only: [:show, :edit]
+  before_action :verify_organization
 
 
   def index
@@ -59,12 +59,6 @@ class DiscussionsController < ApplicationController
 
   private
 
-  def fetch_current_organization
-    unless @discussion.project.blank? or @discussion.project.organization.blank?
-      @current_organization = @discussion.project.organization
-    end
-  end
-
   def discussion_params
     params.require(:discussion).permit(:title, :body, :project_id, :discussion_category_id)
   end
@@ -77,4 +71,9 @@ class DiscussionsController < ApplicationController
       url: request.original_url}
     )
   end
+
+  def current_organization
+    @discussion.try(:project).try(:organization) || fetch_organization_of_request(request)
+  end
+
 end

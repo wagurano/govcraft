@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 
   load_and_authorize_resource find_by: :slug
   before_action :reset_meta_tags, only: [:show, :events]
-  before_action :fetch_current_organization, only: [:show, :edit]
+  before_action :verify_organization
 
   def index
     @projects = Project.order('id DESC')
@@ -15,7 +15,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-
     @project.increment!(:views_count)
   end
 
@@ -24,7 +23,7 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @current_organization = fetch_organization_of_request(request)
+    @current_organization = current_organization
   end
   #create 도 프로젝트 조직 슬러그 들어가야 함
   def create
@@ -58,10 +57,6 @@ class ProjectsController < ApplicationController
 
   private
 
-  def fetch_current_organization
-    @current_organization = @project.organization
-  end
-
   def project_params
     params.require(:project).permit(
       :title, :subtitle, :body,
@@ -81,5 +76,9 @@ class ProjectsController < ApplicationController
       image: view_context.image_url(@project.fallback_social_image_url),
       url: request.original_url}
     )
+  end
+
+  def current_organization
+    @project.try(:organization) || fetch_organization_of_request(request)
   end
 end

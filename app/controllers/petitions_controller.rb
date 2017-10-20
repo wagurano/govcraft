@@ -3,7 +3,7 @@ class PetitionsController < ApplicationController
 
   load_and_authorize_resource
   before_action :reset_meta_tags_for_show, only: :show
-  before_action :fetch_current_organization, only: [:show, :edit]
+  before_action :verify_organization
 
   def index
     @petitions = Petition.recent
@@ -99,12 +99,6 @@ class PetitionsController < ApplicationController
 
   private
 
-  def fetch_current_organization
-    unless @petition.project.blank? or @petition.project.organization.blank?
-      @current_organization = @petition.project.organization
-    end
-  end
-
   def petition_params
     params.require(:petition).permit(:title, :body, :project_id, :signs_goal_count, :cover_image, :thanks_mention, :comment_enabled, :sign_title, :social_image)
   end
@@ -117,5 +111,9 @@ class PetitionsController < ApplicationController
       image: (view_context.image_url(@petition.fallback_social_image_url) if @petition.fallback_social_image_url),
       url: request.original_url}
     )
+  end
+
+  def current_organization
+    @petition.try(:project).try(:organization) || fetch_organization_of_request(request)
   end
 end
