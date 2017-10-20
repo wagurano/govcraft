@@ -1,5 +1,8 @@
 class WikiRevisionsController < ApplicationController
+  include OrganizationHelper
+
   load_and_authorize_resource
+  before_action :verify_organization
 
   def show
     @project = @wiki_revision.wiki.project
@@ -16,5 +19,11 @@ class WikiRevisionsController < ApplicationController
       errors_to_flash(@wiki)
       redirect_back fallback_location: @wiki_revision
     end
+  end
+
+  private
+
+  def current_organization
+    @wiki_revision.wiki.try(:project).try(:organization) || fetch_organization_of_request(request)
   end
 end
