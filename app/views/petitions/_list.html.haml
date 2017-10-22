@@ -5,7 +5,7 @@
     - else
       = Petition.model_name.human
     %small.pull-right
-      = link_to "서명 시작하기", new_petition_path(project_id: @project), class: 'btn btn-default btn-inverted btn-sm'
+      = link_to "서명 만들기", new_petition_path(project_id: @project), class: 'btn btn-default btn-inverted btn-sm'
 
 
   - if petitions.any?
