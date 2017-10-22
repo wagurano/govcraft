@@ -2,7 +2,7 @@
   %section.cover-section{style: "background-image: linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .6)), url(#{asset_url(project.image_url(:lg))});"}
     .container
       %h3.cover-section__title= project.title
-      .cover-section__body{ style: 'text-align:center; padding: 20px; margin: 0 auto; font-size: 15px;'}
+      .cover-section__body{ style: 'text-align:center; padding: 20px; margin: 0 auto; font-size: 15px; word-break: keep-all;'}
         - if project.subtitle.present?
           %h3= project.subtitle
         - if project.id == 7
