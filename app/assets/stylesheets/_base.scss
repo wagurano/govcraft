@@ -283,31 +283,6 @@ h3.sub-title {
     padding:40px;
 }
 
-.user-info{
-    position:relative;
-    top: -40px;
-    text-align:center;
-    .user-image{
-        height:64px;
-        width:64px;
-        display:block;
-        border-radius:64px;
-        background-color:black;
-        margin-top:8px;
-        background-size:contain;
-        position:relative;
-        margin:0 auto;
-    }
-    a{
-        color:$gray-darker;
-        font-size:16px;
-        font-weight:500;
-        display:block;
-        line-height:40px;
-    }
-}
-
-
 //공통 라벨 스타일
 .gov-label {
     padding: 12px 55px;
