@@ -165,6 +165,8 @@ ko:
         commenter_name: 이름
         commenter_email: 이메일(선택)
         image: 사진
+        body: 내용
+        tag_list: 태그(선택)
       article:
         url: URL
         body: 내용

@@ -59,11 +59,11 @@
                 = f.label :image, '인증샷'
                 = f.file_field :image, class: 'form-control'
               .form-group
-                = f.label :body, '정책제안'
+                = f.label :body
                 ~ f.text_area :body, placeholder: '나의 의견은 ...', rows: 8, class: 'form-control input-lg', data: { 'rule-required': true }
               .form-group
-                = f.label :tag_list, '주제'
-                = f.text_field :tag_list, placeholder: '정치, 여성, 복지, ...', class: 'form-control'
+                = f.label :tag_list
+                = f.text_field :tag_list, class: 'form-control'
               - if !user_signed_in? and params[:i_am] != 'your_father'
                 .form-group.recaptcha
                   .help-block 스팸 방지를 위해 사람인지 확인합니다. 아래 체크 박스를 클릭해 주세요.
@@ -99,7 +99,7 @@
   %nav.navbar.navbar-default.navbar-fixed-bottom{ style: 'min-height: auto;'}
     %button.btn.btn-primary.btn-lg.btn-block{"data-target" => "#comment-form-modal", "data-toggle" => "modal", :type => "button"}
       %i.fa.fa-file-image-o
-      정책제안 남기기
+      한마디 남기기
 
 #comment-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
@@ -123,11 +123,11 @@
             = f.label :image, '인증샷'
             = f.file_field :image, class: 'form-control'
           .form-group
-            = f.label :body, '정책제안'
+            = f.label :body
             ~ f.text_area :body, placeholder: '나의 의견은 ...', rows: 8, class: 'form-control input-lg', data: { 'rule-required': true }
           .form-group
-            = f.label :tag_list, '주제'
-            = f.text_field :tag_list, placeholder: '정치, 여성, 복지, ...', class: 'form-control'
+            = f.label :tag_list
+            = f.text_field :tag_list, class: 'form-control'
           - unless user_signed_in?
             .form-group.recaptcha
               .help-block 스팸 방지를 위해 사람인지 확인합니다. 아래 체크 박스를 클릭해 주세요.
