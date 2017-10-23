@@ -118,6 +118,12 @@
   background-color: #469bff;
 }
 
+.jssocials-share {
+  .fb_iframe_widget span {
+    vertical-align: baseline !important;
+  }
+}
+
 .jssocials-share-link {
   border-radius: 50%;
   font-size: $font-size-large;
