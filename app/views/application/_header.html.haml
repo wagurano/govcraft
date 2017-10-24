@@ -22,7 +22,6 @@
         %div#urimanna_menu
           = link_to '단체 정보', '/archives/2'
           = link_to Project.model_name.human, projects_path
-          = link_to Agenda.model_name.human, agendas_path
           = link_to '커뮤니티', organization.try(:community_url), target: '_blank'
       %i.fa.fa-bars{style:"font-size:17px;"}
     .right-navi.js-top-menu.close-btn{onclick:"javascript:toggleMenuList();", style:"display:none;"}
