@@ -7,8 +7,8 @@ class AgendaTheme < ApplicationRecord
 
   def speaker_positions
     {
-      '2017-president' => ['대선주자'],
-      'votefuture' => ['대선주자'],
+      '2017-president' => ['19대_대선후보'],
+      'votefuture' => ['19대_대선후보'],
     }.fetch(slug, nil)
   end
 end

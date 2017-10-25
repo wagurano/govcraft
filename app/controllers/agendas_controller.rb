@@ -45,7 +45,6 @@ class AgendasController < ApplicationController
     @agendas = @agenda_theme.agendas
     @speaker_positions = @agenda_theme.speaker_positions
     @speakers = Speaker.of_position(@speaker_positions)
-
     if params[:agenda_id].present?
       @agenda = Agenda.find params[:agenda_id]
       render 'theme_agenda'
