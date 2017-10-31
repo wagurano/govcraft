@@ -134,6 +134,7 @@ section#communities{
     }
   }
 }
+
 /* group main */
 
 .urimanna{
@@ -167,5 +168,18 @@ section#communities{
   }
   @media (max-width: $screen-sm-min) {
     display:none;
+  }
+}
+
+.vaw{
+  color: white;
+  padding: 70px 0px;
+  height: 400px;
+  h2{
+    font-size: 50px;
+    font-weight: bold;
+  }
+  p{
+    font-size: 20px;
   }
 }

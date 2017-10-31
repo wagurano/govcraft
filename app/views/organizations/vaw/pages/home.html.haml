@@ -1,0 +1,46 @@
+%section#parti-section.vaw{style:"background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.45)),url(#{asset_url('vaw_keyvisual.JPG')});background-size: cover;background-position: center"}
+  .container.text-center
+    %h2
+      여성폭력 인식개선
+      %br
+      %span{style:"font-size:14px;"}
+        ⦁
+    %p
+      2015년부터 2017년까지,
+      %br
+      여성에 대한 폭력을 예방‧근절하기 위해
+      %br
+      5개 기관이 시행한 시민 인식 개선 사업을 아카이빙합니다.
+
+
+%section#agendas.page-block
+  .container
+    %h3.sub-title
+      구분
+    .row
+      - @projectCategory.each do |c|
+        = link_to projects_url(c: c.id) do
+          .col-md-2
+            .project-category-card.component-card
+              .title
+                %h4
+                  = c.title
+
+%section#projects.page-block
+  .container
+    = link_to projects_url do
+      %h3.sub-title{style:"margin-bottom:20px;"}
+        = Project.model_name.human
+    .row
+      .col-md-12.col-xs-12
+    .row
+      = render @current_organization.projects.recent.limit(3)
+    %hr{style:"color:rgba(230, 230, 230, 1);height:2px;margin-top:0px;"}
+
+
+%section#events.page-block
+  .container
+    = link_to events_path do
+      %h3.sub-title= Event.model_name.human
+    .row
+      = render Event.recent.where(project: @current_organization.projects).limit(3)

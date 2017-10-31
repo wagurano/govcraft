@@ -45,12 +45,44 @@ namespace :organizations do
         slogan: '세상을 바꾸는 꿈',
         community_url: 'https://change.parti.xyz/')
 
-       seed(site_name: '전교조',
+      seed(site_name: '전교조',
         title: '전교조',
         description: '교육의 자주성, 전문성 확립과 교육민주화 실현을 위한 전국의 유치원, 초등학교, 중·고등학교 교사들의 자주적 노동조합입니다',
         slug: 'eduhope',
         slogan: '교육과 세상을 바꾸는 전교조',
         community_url: 'https://eduhope.parti.xyz/')
+
+      seed(site_name: '여성폭력 인식개선',
+        title: '여성폭력 인식개선',
+        description: '여성에 대한 폭력을 멈추기 위해',
+        slug: 'vaw',
+        slogan: '여성에 대한 폭력을 멈추기 위해')
+
+      category_seed('vaw',
+        title: '문화행사',
+        slug: 'culture')
+
+      category_seed('vaw',
+        title: '캠페인',
+        slug: 'campaign')
+
+      category_seed('vaw',
+        title: '교육',
+        slug: 'education')
+
+      category_seed('vaw',
+        title: '공모전',
+        slug: 'contest')
+
+      category_seed('vaw',
+        title: '컨텐츠 제작',
+        slug: 'content')
+
+      category_seed('vaw',
+        title: '토론회',
+        slug: 'roundtable')
+
+
     end
   end
 
