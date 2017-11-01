@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
   def new
     @current_organization = current_organization
   end
-  #create 도 프로젝트 조직 슬러그 들어가야 함
+
   def create
     @project = Project.new(project_params)
     @project.user = current_user
@@ -42,7 +42,13 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    if @project.update(project_params)
+    @project.assign_attributes(project_params)
+
+    if current_user.is_admin?
+      @project.organization_id = params[:project][:organization_id]
+    end
+
+    if @project.save
       redirect_to @project
     else
       errors_to_flash(@project)

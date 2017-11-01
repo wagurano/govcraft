@@ -141,6 +141,15 @@
             이벤트 순서:
             = f.text_field :event_sequence, class: 'form-control'
 
+
+      - if current_user.is_admin? and @project.persisted?
+        %hr
+
+        .form-group.form-group-lg
+          = f.label :organization
+          - org_hash = Hash[Organization.all.map { |o| [o.title, o.id] }]
+          = f.select :organization_id, org_hash, { include_blank: '[조직없음]' }, class: 'form-control'
+
       %hr
 
       .form-group
