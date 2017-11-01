@@ -66,6 +66,11 @@
         - if organization.community_url.present?
           %br
           = link_to '커뮤니티', organization.community_url, target: '_blank'
+        %div{style:"font-size:22px;line-height:35px;margin-top:-30px;"}
+          %br
+          = link_to '월간우주당', 'http://zine.wouldyouparty.org/', target: '_blank'
+          %br
+          = link_to '세월호아카이브', 'http://sewolarchive.org/', target: '_blank'
       - else
         %br
         = link_to Project.model_name.human, projects_path
