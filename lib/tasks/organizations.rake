@@ -82,6 +82,11 @@ namespace :organizations do
         title: '토론회',
         slug: 'roundtable')
 
+      seed(site_name: '국민개헌넷',
+        title: '국민개헌넷',
+        description: '국민주도 헌법개정 전국 네트워크',
+        slug: 'rebootkorea',
+        slogan: '국민주도 헌법개정 전국 네트워크')
 
     end
   end
