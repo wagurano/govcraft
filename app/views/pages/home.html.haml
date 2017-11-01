@@ -19,8 +19,11 @@
 
 %section#projects.page-block
   .container
-    = link_to projects_url(subdomain: root_subdomain) do
-      %h3.sub-title= Project.model_name.human
+    .clearfix
+      = link_to projects_url(subdomain: root_subdomain) do
+        %h3.sub-title
+          최근 #{Project.model_name.human}
+          %small #{Project.count}개 전체보기
     .row
       = render Project.recent.limit(12)
     %hr{style:"color:rgba(230, 230, 230, 1);height:2px;margin-top:0px;"}
