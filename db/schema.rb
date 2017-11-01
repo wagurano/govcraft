@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011013427) do
+ActiveRecord::Schema.define(version: 20171101071316) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -292,6 +292,7 @@ ActiveRecord::Schema.define(version: 20171011013427) do
     t.integer  "views_count",                          default: 0
     t.integer  "anonymous_likes_count",                default: 0
     t.integer  "discussion_category_id"
+    t.datetime "pinned_at"
     t.index ["discussion_category_id"], name: "index_discussions_on_discussion_category_id", using: :btree
     t.index ["project_id"], name: "index_discussions_on_project_id", using: :btree
     t.index ["user_id"], name: "index_discussions_on_user_id", using: :btree

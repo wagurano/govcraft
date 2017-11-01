@@ -8,6 +8,7 @@ class Discussion < ApplicationRecord
 
   scope :recent, -> { order('id DESC') }
   scope :by_organization, ->(organization) { where(project: organization.projects) }
+  scope :pinned, -> { where.not(pinned_at: nil).order('pinned_at DESC') }
 
   def fallback_social_image_url
     if self.project.try(:read_attribute, :social_image).present?

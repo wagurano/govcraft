@@ -26,6 +26,8 @@
 
     - if discussions.any?
       %table.table
+        - if @project.present?
+          = render partial: 'pinned_discussion', collection: @project.discussions.pinned
         = render discussions
 
       - if on_project_show and discussions.count < discussions.total_count

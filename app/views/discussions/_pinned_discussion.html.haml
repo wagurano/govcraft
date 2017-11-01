@@ -1,0 +1,33 @@
+- discussion = pinned_discussion
+%tr.alert-info
+  %td.text-center
+    %i.fa.fa-bookmark
+  %td
+    = link_to discussion do
+      %span.title
+        = discussion.title
+      - if discussion.comments.count > 0
+        %small
+          (#{discussion.comments.count})
+    .text-muted.visible-xs
+      %small
+        %span.nickname
+          %i.fa.fa-user
+          = link_to discussion.user.nickname, discussion.user
+        &middot;
+        %span
+          %i.fa.fa-heart
+            = discussion.merged_likes_count
+        &middot;
+        %span
+          = date_f discussion.created_at
+
+  %td.text-nowrap.hidden-xs
+    %span.nickname
+      %i.fa.fa-user
+      = link_to discussion.user.nickname, discussion.user
+  %td.text-nowrap.hidden-xs
+    %i.fa.fa-heart
+    = discussion.merged_likes_count
+  %td.text-right.hidden-xs
+    = date_f discussion.created_at
