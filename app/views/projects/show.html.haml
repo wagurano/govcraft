@@ -7,10 +7,10 @@
       %section.page-block
         %a{id: "anchor-project-story"}
         .container
-          = link_to stories_path, project: @project do
+          = link_to stories_path(project_id: @project), project: @project do
             %h3.sub-title= @project.component_title('story')
-          .row
-            = render @project.stories.recent.limit(3)
+          .row.masonry-container
+            = render @project.stories.recent.limit(6)
   - when :wiki
     - if @project.wiki_enabled?
       %section.page-block

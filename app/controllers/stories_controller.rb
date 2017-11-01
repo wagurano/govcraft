@@ -8,6 +8,10 @@ class StoriesController < ApplicationController
 
   def index
     @stories = Story.recent
+
+    @project = Project.find_by(slug: params[:project_id]) if params[:project_id]
+    @stories = @stories.where(project: @project) if @project.present?
+
     @current_organization = fetch_organization_of_request(request)
     @stories = @stories.by_organization(@current_organization) if @current_organization.present?
   end
