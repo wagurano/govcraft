@@ -9,16 +9,6 @@ Rails.application.routes.draw do
 
   get '404', :to => 'application#page_not_found'
 
-  class OrganizationableHomeConstraint
-    include OrganizationHelper
-    def matches?(request)
-      organizationable_request? request
-    end
-  end
-  constraints(OrganizationableHomeConstraint.new) do
-    root 'pages#home'
-  end
-
   root 'pages#home'
 
   get 'about', to: 'pages#about', as: :about

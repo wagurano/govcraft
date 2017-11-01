@@ -4,6 +4,9 @@ class PagesController < ApplicationController
   before_action :subdomain_view_path, only: :home
 
   def home
+    single_project = Project.find_by(slug: @current_organization.try(:single_project_slug), organization: @current_organization)
+    redirect_to single_project and return if single_project.present?
+
     home_method = :"home_#{@current_organization.try(:slug)}"
     reset_meta_tags_for_home(@current_organization)
     if respond_to? home_method
@@ -15,8 +18,6 @@ class PagesController < ApplicationController
     @memorials = Memorial.recent
     @articles = Article.hot.limit(10)
     @projectCategory = ProjectCategory.where(organization: @current_organization) if @current_organization.present?
-
-
   end
 
   def home_urimanna
