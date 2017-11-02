@@ -7,7 +7,7 @@ class Story < ApplicationRecord
 
   mount_uploader :cover, ImageUploader
 
-  scope :recent, -> { order('id DESC') }
+  scope :recent, -> { order('published_at DESC').order('id DESC') }
   scope :by_organization, ->(organization) { where(project: organization.projects) }
 
   def fallback_social_image_url

@@ -16,6 +16,10 @@
         = f.label :body
         ~ f.text_area :body, rows: 10, class: 'form-control redactor'
 
+      .form-group
+        = f.label :published_at
+        = f.text_field :published_at, class: 'form-control', placeholder: 'ex) 2017-09-10'
+
       %legend.m-t 추가 기능
 
       .form-group

@@ -183,6 +183,11 @@ ko:
         body: 설명
       player:
         person_id: 인물
+      story:
+        cover: 대표이미지
+        title: 제목
+        body: 내용
+        published_at: 발행일
       speech:
         title: 제목
         video_url: 동영상주소 URL(필수)

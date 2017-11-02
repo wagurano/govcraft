@@ -55,7 +55,7 @@ class StoriesController < ApplicationController
   private
 
   def story_params
-    params.require(:story).permit(:title, :body, :project_id, :cover, :comment_enabled)
+    params.require(:story).permit(:title, :body, :project_id, :cover, :comment_enabled, :published_at)
   end
 
   def reset_meta_tags

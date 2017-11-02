@@ -10,7 +10,7 @@
           %span.panel-post__user
             = link_to @story.user.nickname
           %span.panel-post__date
-            = date_f @story.created_at
+            = date_f @story.published_at
           - if can? :edit, @story
             = link_to '수정', edit_story_path(@story)
           - if can? :destroy, @story

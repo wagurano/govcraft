@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171101231934) do
+ActiveRecord::Schema.define(version: 20171102001556) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -753,6 +753,7 @@ ActiveRecord::Schema.define(version: 20171101231934) do
     t.boolean  "comment_enabled",                     default: true
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
+    t.datetime "published_at",                                       null: false
     t.index ["project_id"], name: "index_stories_on_project_id", using: :btree
     t.index ["user_id"], name: "index_stories_on_user_id", using: :btree
   end
