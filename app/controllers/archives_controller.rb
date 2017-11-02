@@ -113,7 +113,7 @@ class ArchivesController < ApplicationController
   end
 
   def current_organization
-    if @archive.present?
+    if @archive.present? and @archive.persisted?
       @archive.organization
     else
       fetch_organization_from_request

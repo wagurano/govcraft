@@ -64,7 +64,7 @@ class WikisController < ApplicationController
   end
 
   def current_organization
-    if @wiki.present?
+    if @wiki.present? and @wiki.persisted?
       @wiki.project.try(:organization)
     else
       fetch_organization_from_request

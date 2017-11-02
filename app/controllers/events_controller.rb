@@ -68,7 +68,7 @@ class EventsController < ApplicationController
   end
 
   def current_organization
-    if @event.present?
+    if @event.present? and @event.persisted?
       @event.project.try(:organization)
     else
       fetch_organization_from_request

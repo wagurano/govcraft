@@ -97,7 +97,7 @@ class ArchiveDocumentsController < ApplicationController
   end
 
   def current_organization
-    if @archive_document.present?
+    if @archive_document.present? and @archive_document.persisted?
       @archive_document.archive.try(:organization)
     else
       fetch_organization_from_request

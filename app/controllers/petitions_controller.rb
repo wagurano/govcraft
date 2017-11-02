@@ -114,7 +114,7 @@ class PetitionsController < ApplicationController
   end
 
   def current_organization
-    if @petition.present?
+    if @petition.present? and @petition.persisted?
       @petition.project.try(:organization)
     else
       fetch_organization_from_request

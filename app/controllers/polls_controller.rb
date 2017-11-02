@@ -92,7 +92,7 @@ class PollsController < ApplicationController
   end
 
   def current_organization
-    if @poll.present?
+    if @poll.present? and @poll.persisted?
       @poll.project.try(:organization)
     else
       fetch_organization_from_request

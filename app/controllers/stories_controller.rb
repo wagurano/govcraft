@@ -69,7 +69,7 @@ class StoriesController < ApplicationController
   end
 
   def current_organization
-    if @story.present?
+    if @story.present? and @story.persisted?
       @story.project.try(:organization)
     else
       fetch_organization_from_request

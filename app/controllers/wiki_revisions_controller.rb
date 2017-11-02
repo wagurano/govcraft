@@ -24,7 +24,7 @@ class WikiRevisionsController < ApplicationController
   private
 
   def current_organization
-    if @wiki_revision.present?
+    if @wiki_revision.present? and @wiki_revision.persisted?
       @wiki_revision.wiki.try(:project).try(:organization)
     else
       fetch_organization_from_request

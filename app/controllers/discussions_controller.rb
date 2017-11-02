@@ -5,7 +5,6 @@ class DiscussionsController < ApplicationController
   before_action :reset_meta_tags, only: :show
   before_action :verify_organization
 
-
   def index
     @discussions = Discussion.recent.page(params[:page])
 
@@ -73,7 +72,7 @@ class DiscussionsController < ApplicationController
   end
 
   def current_organization
-    if @discussion.present?
+    if @discussion.present? and @discussion.persisted?
       @discussion.project.try(:organization)
     else
       fetch_organization_from_request

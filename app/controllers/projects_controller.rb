@@ -85,7 +85,7 @@ class ProjectsController < ApplicationController
   end
 
   def current_organization
-    if @project.present?
+    if @project.present? and @project.persisted?
       @project.organization
     else
       fetch_organization_from_request

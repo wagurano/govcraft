@@ -100,7 +100,7 @@ class SurveysController < ApplicationController
   end
 
   def current_organization
-    if @survey.present?
+    if @survey.present? and @survey.persisted?
       @survey.project.try(:organization)
     else
       fetch_organization_from_request
