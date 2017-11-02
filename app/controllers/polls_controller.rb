@@ -92,7 +92,11 @@ class PollsController < ApplicationController
   end
 
   def current_organization
-    @poll.try(:project).try(:organization) || fetch_organization_of_request(request)
+    if @poll.present?
+      @poll.project.try(:organization)
+    else
+      fetch_organization_of_request(request)
+    end
   end
 
 end

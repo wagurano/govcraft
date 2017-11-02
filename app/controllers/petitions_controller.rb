@@ -114,6 +114,10 @@ class PetitionsController < ApplicationController
   end
 
   def current_organization
-    @petition.try(:project).try(:organization) || fetch_organization_of_request(request)
+    if @petition.present?
+      @petition.project.try(:organization)
+    else
+      fetch_organization_of_request(request)
+    end
   end
 end

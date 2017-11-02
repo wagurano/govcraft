@@ -85,6 +85,10 @@ class ProjectsController < ApplicationController
   end
 
   def current_organization
-    @project.try(:organization) || fetch_organization_of_request(request)
+    if @project.present?
+      @project.organization
+    else
+      fetch_organization_of_request(request)
+    end
   end
 end

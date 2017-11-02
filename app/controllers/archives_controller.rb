@@ -113,6 +113,10 @@ class ArchivesController < ApplicationController
   end
 
   def current_organization
-    @archive.try(:organization) || fetch_organization_of_request(request)
+    if @archive.present?
+      @archive.organization
+    else
+      fetch_organization_of_request(request)
+    end
   end
 end

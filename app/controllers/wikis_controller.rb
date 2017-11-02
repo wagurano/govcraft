@@ -64,7 +64,11 @@ class WikisController < ApplicationController
   end
 
   def current_organization
-    @wiki.try(:project).try(:organization) || fetch_organization_of_request(request)
+    if @wiki.present?
+      @wiki.project.try(:organization)
+    else
+      fetch_organization_of_request(request)
+    end
   end
 
 end

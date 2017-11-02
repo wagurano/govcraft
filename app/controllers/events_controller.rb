@@ -68,6 +68,10 @@ class EventsController < ApplicationController
   end
 
   def current_organization
-    @event.try(:project).try(:organization) || fetch_organization_of_request(request)
+    if @event.present?
+      @event.project.try(:organization)
+    else
+      fetch_organization_of_request(request)
+    end
   end
 end

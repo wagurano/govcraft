@@ -69,6 +69,10 @@ class StoriesController < ApplicationController
   end
 
   def current_organization
-    @story.try(:project).try(:organization) || fetch_organization_of_request(request)
+    if @story.present?
+      @story.project.try(:organization)
+    else
+      fetch_organization_of_request(request)
+    end
   end
 end
