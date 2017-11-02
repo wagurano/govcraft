@@ -1,4 +1,7 @@
-= render 'projects/header', project: @project
+- if lookup_context.exists?("projects/#{@project.slug}/_header")
+  = render "projects/#{@project.slug}/header", project: @project
+- else
+  = render 'projects/header', project: @project
 
 - @project.component_names_sorted.each do |component_name|
   - case component_name
