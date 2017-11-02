@@ -100,7 +100,7 @@ class ArchiveDocumentsController < ApplicationController
     if @archive_document.present?
       @archive_document.archive.try(:organization)
     else
-      fetch_organization_of_request(request)
+      fetch_organization_from_request
     end
   end
 end

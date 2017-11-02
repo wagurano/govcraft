@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.order('id DESC')
-    @current_organization = fetch_organization_of_request(request)
+    @current_organization = fetch_organization_from_request
     @projects = @projects.where(organization: @current_organization) if @current_organization.present?
     if params[:c].present?
       @projects = @projects.find_by(project_category: params[:c])
@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.user = current_user
-    @project.organization = fetch_organization_of_request(request)
+    @project.organization = fetch_organization_from_request
     if @project.save
       redirect_to @project
     else
@@ -88,7 +88,7 @@ class ProjectsController < ApplicationController
     if @project.present?
       @project.organization
     else
-      fetch_organization_of_request(request)
+      fetch_organization_from_request
     end
   end
 end

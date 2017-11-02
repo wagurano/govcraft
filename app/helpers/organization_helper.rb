@@ -1,5 +1,5 @@
 module OrganizationHelper
-  def fetch_organization_of_request(request)
+  def fetch_organization_from_request
     return nil unless organizationable_request?(request)
     Organization.find_by_slug request.subdomains[0]
   end

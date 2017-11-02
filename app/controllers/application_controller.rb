@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   if Rails.env.production? or Rails.env.staging?
     rescue_from ActiveRecord::RecordNotFound, ActionController::UnknownFormat do |exception|
       render_404
@@ -99,6 +98,21 @@ class ApplicationController < ActionController::Base
     redactor2_current_user
   end
 
+  def after_sign_in_path_for(resource)
+    omniauth_params = request.env['omniauth.params'] || session["omniauth.params_data"] || {}
+    organization = Organization.find_by_slug(omniauth_params['organization_slug'])
+    organization ||= fetch_organization_from_request
+
+    result = stored_location_for(resource) || '/'
+    if result.starts_with?('http')
+      result_url = URI.parse(result)
+      result = result_url.path
+      result += "?" + result_url.query if result_url.query.present?
+    end
+    result = URI.join(root_url(subdomain: organization.subdomain), result).to_s if organization.present?
+    result
+  end
+
   private
 
   def prepare_flash
@@ -131,6 +145,6 @@ class ApplicationController < ActionController::Base
     @current_organization = send(:current_organization)
     valid_subdomain = @current_organization.try(:subdomain) || view_context.root_subdomain
 
-    redirect_to subdomain: valid_subdomain and return unless fetch_organization_of_request(request) == @current_organization
+    redirect_to subdomain: valid_subdomain and return unless fetch_organization_from_request == @current_organization
   end
 end

@@ -50,7 +50,7 @@ class PagesController < ApplicationController
 
   def subdomain_view_path
     return unless organizationable_request?(request)
-    @current_organization ||= fetch_organization_of_request(request)
+    @current_organization ||= fetch_organization_from_request
     if @current_organization.blank?
       redirect_to "http://#{Rails.application.routes.default_url_options[:host]}"
       return

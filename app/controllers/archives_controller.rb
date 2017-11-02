@@ -116,7 +116,7 @@ class ArchivesController < ApplicationController
     if @archive.present?
       @archive.organization
     else
-      fetch_organization_of_request(request)
+      fetch_organization_from_request
     end
   end
 end

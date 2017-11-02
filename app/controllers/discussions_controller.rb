@@ -13,7 +13,7 @@ class DiscussionsController < ApplicationController
     @discussions = @discussions.where(project: @project) if @project.present?
     @discussions = @discussions.where(discussion_category_id: params[:discussion_category_id]) if params[:discussion_category_id]
 
-    @current_organization = fetch_organization_of_request(request)
+    @current_organization = fetch_organization_from_request
     @discussions = @discussions.by_organization(@current_organization) if @current_organization.present?
   end
 
@@ -76,7 +76,7 @@ class DiscussionsController < ApplicationController
     if @discussion.present?
       @discussion.project.try(:organization)
     else
-      fetch_organization_of_request(request)
+      fetch_organization_from_request
     end
   end
 

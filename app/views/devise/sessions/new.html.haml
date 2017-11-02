@@ -8,10 +8,10 @@
 
         .panel.panel-default
           .panel-body
-            = link_to user_facebook_omniauth_authorize_path(provider: :facebook), class: 'btn btn-join btn-join-facebook btn-block btn-lg' do
+            = link_to user_facebook_omniauth_authorize_url(subdomain: root_subdomain, organization_slug: fetch_organization_from_request.try(:slug), provider: :facebook), class: 'btn btn-join btn-join-facebook btn-block btn-lg' do
               %i.fa.fa-facebook.fa-fw
               페이스북으로 가입 혹은 로그인
-            = link_to user_twitter_omniauth_authorize_path(provider: :twitter), class: 'btn btn-join btn-join-twitter btn-block btn-lg' do
+            = link_to user_twitter_omniauth_authorize_url(subdomain: root_subdomain, organization_slug: fetch_organization_from_request.try(:slug), provider: :twitter), class: 'btn btn-join btn-join-twitter btn-block btn-lg' do
               %i.fa.fa-twitter.fa-fw
               트위터로 가입 혹은 로그인
 
@@ -20,7 +20,7 @@
           .panel-body
             %p.email-login-box-title 또는 이메일로 로그인
 
-            = form_for User.new, url: session_path(:user) do |f|
+            = form_for User.new, url: session_path(:user, subdomain: root_subdomain) do |f|
               = f.hidden_field :provider, value: 'email'
               .form-group
                 = f.email_field :email, placeholder: '이메일을 입력하세요', class: 'form-control'

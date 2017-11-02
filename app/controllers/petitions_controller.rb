@@ -7,7 +7,7 @@ class PetitionsController < ApplicationController
 
   def index
     @petitions = Petition.recent
-    @current_organization = fetch_organization_of_request(request)
+    @current_organization = fetch_organization_from_request
     @petitions = @petitions.by_organization(@current_organization) if @current_organization.present?
   end
 
@@ -117,7 +117,7 @@ class PetitionsController < ApplicationController
     if @petition.present?
       @petition.project.try(:organization)
     else
-      fetch_organization_of_request(request)
+      fetch_organization_from_request
     end
   end
 end

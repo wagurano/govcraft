@@ -1,4 +1,4 @@
-- organization = fetch_organization_of_request(request) || @current_organization
+- organization = fetch_organization_from_request || @current_organization
 %section#site-header
   #header-container.container-fluid
     - unless @current_organization.nil?
@@ -92,7 +92,7 @@
       - if user_signed_in?
         = link_to '프로필', edit_user_registration_url(subdomain: root_subdomain)
         %br
-        = link_to '로그아웃', sign_out_url(subdomain: root_subdomain), method: :delete
+        = link_to '로그아웃', sign_out_path, method: :delete
       - else
-        = link_to new_user_session_url(subdomain: root_subdomain) do
+        = link_to new_user_session_path do
           로그인·가입

@@ -27,7 +27,7 @@ class WikiRevisionsController < ApplicationController
     if @wiki_revision.present?
       @wiki_revision.wiki.try(:project).try(:organization)
     else
-      fetch_organization_of_request(request)
+      fetch_organization_from_request
     end
   end
 end
