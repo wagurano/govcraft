@@ -11,8 +11,17 @@
       %fieldset
         %legend 기본정보
 
-        - if @project.present?
-          = f.hidden_field :project_id, value: @project.id
+        - if @project.present? and @petition.project.blank?
+          - @petition.project = @project
+        - if current_user.is_admin?
+          - all_projects = Project.all
+        - else
+          - all_projects = (@petition.project.try(:organization).try(:projects) || fetch_organization_from_request.try(:projects) || Project.where(organization: nil)).admin_by(current_user)
+
+        - if all_projects.any?
+          .form-group
+            = f.label :project_id
+            = f.collection_select :project_id, all_projects, :id, :title, {include_blank: '프로젝트 없음'}, { class: 'js-select2 form-control' }
 
         .form-group
           = f.label :title

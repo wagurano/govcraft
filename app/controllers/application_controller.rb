@@ -147,4 +147,8 @@ class ApplicationController < ActionController::Base
 
     redirect_to subdomain: valid_subdomain and return unless fetch_organization_from_request == @current_organization
   end
+
+  def current_ability
+    @current_ability ||= Ability.new(current_user, params)
+  end
 end

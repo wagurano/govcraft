@@ -1,7 +1,7 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
+  def initialize(user, params = {})
     can [:read, :search, :social_card, :recent_documents], :all
     can [:events], Project
     can :create, [Sign, Comment, Like, Note]
@@ -17,11 +17,21 @@ class Ability
     if user
       can [:new_email, :send_email], Agenda
       can :create, [
-          Project, Story, Discussion, Petition, Poll, Feedback, Survey, Wiki, Sympathy,
+          Project, Story, Discussion, Poll, Feedback, Survey, Wiki, Sympathy,
           Memorial, Timeline, TimelineDocument, Event,
           Election, Candidate, Article, Person, Race, Player,
           Thumb
         ]
+
+      # 서명 만들기
+      can :create_peition, [Project] do |project|
+        project.blank? or project.project_admin?(user)
+      end
+      can :create, [Petition] do |petition|
+        project = petition.try(:project) || (Project.find_by(slug: params[:project_id]) if params[:project_id].present?)
+        project.blank? or project.project_admin?(user)
+      end
+
       can [:update, :destroy], [
           Project, Story, Discussion, Petition, Poll, Survey, Wiki, Sympathy,
           Memorial, Timeline, TimelineDocument, Event,

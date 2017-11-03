@@ -101,6 +101,7 @@ ko:
       discussion_category:
         title: 제목
       petition:
+        project_id: 캠페인
         title: 제목
         body: 내용
         signs_goal_count: 서명 목표인수

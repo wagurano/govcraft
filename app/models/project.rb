@@ -19,6 +19,7 @@ class Project < ApplicationRecord
   mount_uploader :social_image, ImageUploader
 
   scope :recent, -> { order('id DESC') }
+  scope :admin_by, ->(user) { where(id: ProjectAdmin.where(user: user).select(:project_id)) }
 
   validates :slug, format: { with: /\A[a-z0-9\-_]+\z/i }, uniqueness: true
 
