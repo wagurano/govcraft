@@ -19,7 +19,7 @@
       .form-group.date-form
         = f.label :published_at
         .input-group.date#js-published_at
-          = f.text_field :published_at, class: 'form-control', placeholder: 'ex) 2017-09-10'
+          = f.text_field :published_at, value: @story.published_at.try(:strftime, "%Y-%m-%d"), class: 'form-control', placeholder: 'ex) 2017-09-10'
           .input-group-addon
             %span.glyphicon.glyphicon-calendar
 

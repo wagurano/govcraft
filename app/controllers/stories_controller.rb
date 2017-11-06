@@ -31,6 +31,7 @@ class StoriesController < ApplicationController
     if @story.save
       redirect_to @story || @project
     else
+      errors_to_flash @story
       render 'new'
     end
   end
@@ -43,6 +44,7 @@ class StoriesController < ApplicationController
     if @story.update(story_params)
       redirect_to @story
     else
+      errors_to_flash @story
       render 'edit'
     end
   end

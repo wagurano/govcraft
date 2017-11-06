@@ -72,8 +72,9 @@ Kakao.init('6a30dead1bff1ef43b7e537f49d2f655');
 $(function(){
   $(".slick").slick();
 
-  $("#js-published_at").datetimepicker({
-    format: 'YYYY-MM-DD'
+  $(".js-published_at").datetimepicker({
+    format: 'YYYY-MM-DD',
+    locale: 'ko'
   });
 
 

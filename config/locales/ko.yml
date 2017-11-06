@@ -8,11 +8,13 @@ ko:
   errors:
     format: "%{attribute}%{message}"
     messages:
-      invalid: "을(를) 다시 확인해주세요. 영문이나 숫자 혹은 _,-만 기입할 수 있습니다. 반드시 기입해야 합니다."
+      invalid: "을(를) 다시 확인해주세요."
       blank: "을(를) 입력해 주세요."
       not_saved: "이 저장되지 않았습니다."
       taken: "은(는) 이미 사용 중입니다."
       no_more_anonymous: '아! 이제부터는 로그인을 하셔야 합니다'
+      need_yyyy_mm_dd: ' 날짜는 yyyy-mm-dd로 넣어주세요. 예) 2017-02-10'
+      need_nickname_format: ' 영문이나 숫자 혹은 _,-만 기입할 수 있습니다. 반드시 기입해야 합니다.'
   messages:
     saved: '저장되었습니다'
     signed: '이 이슈를 친구들에게 알려 주세요'
@@ -251,13 +253,13 @@ ko:
             email:
               taken: 이미 다른 회원이 사용 중인 이메일입니다.
             password:
-              too_short: 비밀번호가 너무 짧습니다.
-              too_long: 비밀번호가 너무 깁니다.
+              too_short: ' 너무 짧습니다.'
+              too_long: ' 너무 깁니다.'
             nickname:
-              exclusion: '%{attribute}에 입력한 값이 올바르지 않습니다. 예시) users, admin, all 등은 사용할 수 없습니다.'
-              invalid: '%{attribute} 형식이 올바르지 않습니다.'
-              too_long: '%{attribute}는 20자를 넘을 수 없습니다.'
-              taken: '이미 사용중인 %{attribute}입니다.'
+              exclusion: ' 입력한 값이 올바르지 않습니다. 예시) users, admin, all 등은 사용할 수 없습니다.'
+              invalid: ' 형식이 올바르지 않습니다.'
+              too_long: ' 20자를 넘을 수 없습니다.'
+              taken: ' 이미 사용중입니다.'
             password_confirmation:
               confirmation: 비밀번호와 다릅니다.
             confirmation_token:
