@@ -39,6 +39,8 @@ gem 'magnific-popup-rails', '~> 1.1'
 gem 'cocoon'
 gem 'html_truncator'
 gem 'jquery-slick-rails'
+gem 'bootstrap3-datetimepicker-rails'
+gem 'momentjs-rails'
 
 # assets
 source 'https://rails-assets.org' do

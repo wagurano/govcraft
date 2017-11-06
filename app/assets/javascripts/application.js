@@ -22,6 +22,9 @@
 //= require jquery.webui-popover
 //= require cocoon
 //= require trianglify
+//= require moment
+//= require bootstrap-datetimepicker
+
 
 UnobtrusiveFlash.flashOptions['timeout'] = 300000;
 
@@ -68,6 +71,11 @@ Kakao.init('6a30dead1bff1ef43b7e537f49d2f655');
 
 $(function(){
   $(".slick").slick();
+
+  $("#js-published_at").datetimepicker({
+    format: 'YYYY-MM-DD'
+  });
+
 
   $('.share-box').each(function(i, elm) {
     var $elm = $(elm);
