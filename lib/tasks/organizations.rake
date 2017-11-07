@@ -15,30 +15,6 @@ namespace :organizations do
         slogan: '일상 속에서의 민주주의 실현',
         community_url: 'https://kdemo.parti.xyz/')
 
-      category_seed('urimanna',
-        title: '환경',
-        slug: 'environment')
-
-      category_seed('urimanna',
-        title: '청년',
-        slug: 'youth')
-
-      category_seed('urimanna',
-        title: '젠더',
-        slug: 'gender')
-
-      category_seed('urimanna',
-        title: '마을',
-        slug: 'village')
-
-      category_seed('urimanna',
-        title: '개헌',
-        slug: 'changelaw')
-
-      category_seed('urimanna',
-        title: '정치',
-        slug: 'politics')
-
       seed(title: '바꿈',
         description: '',
         slug: 'change2020',
@@ -57,30 +33,6 @@ namespace :organizations do
         description: '여성에 대한 폭력을 멈추기 위해',
         slug: 'vaw',
         slogan: '여성에 대한 폭력을 멈추기 위해')
-
-      category_seed('vaw',
-        title: '문화행사',
-        slug: 'culture')
-
-      category_seed('vaw',
-        title: '캠페인',
-        slug: 'campaign')
-
-      category_seed('vaw',
-        title: '교육',
-        slug: 'education')
-
-      category_seed('vaw',
-        title: '공모전',
-        slug: 'contest')
-
-      category_seed('vaw',
-        title: '컨텐츠 제작',
-        slug: 'content')
-
-      category_seed('vaw',
-        title: '토론회',
-        slug: 'roundtable')
 
       seed(site_name: '국민개헌넷',
         title: '국민개헌넷',
