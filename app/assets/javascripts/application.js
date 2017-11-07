@@ -73,8 +73,7 @@ $(function(){
   $(".slick").slick();
 
   $(".js-published_at").datetimepicker({
-    format: 'YYYY-MM-DD',
-    locale: 'ko'
+    format: 'YYYY-MM-DD'
   });
 
 
