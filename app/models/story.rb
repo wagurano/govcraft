@@ -11,7 +11,7 @@ class Story < ApplicationRecord
   scope :by_organization, ->(organization) { where(project: organization.projects) }
 
   validates :title, presence: true
-  VALID_PUBLISHED_AT_REGEX = /\A\d{4}-\d{2}-\d{2}\z/
+  VALID_PUBLISHED_AT_REGEX = /\A\d{4}-\d{2}-\d{2}/
 
   validates :published_at,
     presence: true,
