@@ -16,8 +16,12 @@
   .container
     %h3.sub-title
       의제 토론
+      - if current_user.try(:is_admin?)
+        = link_to project_categories_path do
+          %small
+            관리
     .row
-      - @projectCategory.each do |c|
+      - @project_categories.each do |c|
         = link_to projects_url(c: c.id) do
           .col-md-2
             .project-category-card.component-card

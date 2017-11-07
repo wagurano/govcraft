@@ -1,0 +1,20 @@
+.container
+  %ul.list-unstyled
+    - @project_categories.each do |project_category|
+      %li
+        = project_category.title
+        = link_to '삭제', project_category, method: :delete, class: 'btn btn-danger', data: { confirm: '카테고리가 삭제됩니다. 삭제하시겠습니까?' }
+  %hr
+  %h3
+    카테고리 추가
+  = form_for ProjectCategory.new do |f|
+    .form-group
+      = f.label :title
+      = f.text_field :title, class: 'form-control'
+
+    .form-group
+      = f.label :slug
+      = f.text_field :slug, class: 'form-control'
+
+    = f.submit '저장'
+

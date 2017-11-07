@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   resources :speeches
   resources :statements
 
+  resources :project_categories
   resources :stories
   resources :discussions
   resources :discussion_categories

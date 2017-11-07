@@ -17,7 +17,7 @@ class PagesController < ApplicationController
     @timelines = Timeline.recent
     @memorials = Memorial.recent
     @articles = Article.hot.limit(10)
-    @projectCategory = ProjectCategory.where(organization: @current_organization) if @current_organization.present?
+    @project_categories = ProjectCategory.where(organization: @current_organization) if @current_organization.present?
   end
 
   def home_urimanna

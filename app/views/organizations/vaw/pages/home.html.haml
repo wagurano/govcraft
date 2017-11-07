@@ -18,7 +18,7 @@
     %h3.sub-title
       구분
     .row
-      - @projectCategory.each do |c|
+      - @project_categories.each do |c|
         = link_to projects_url(c: c.id) do
           .col-md-2
             .project-category-card.component-card
