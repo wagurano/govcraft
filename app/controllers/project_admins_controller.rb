@@ -10,11 +10,13 @@ class ProjectAdminsController < ApplicationController
     user_nickname = params[:user_nickname]
     user = User.find_by(nickname: user_nickname)
     redirect_back(fallback_location: root_path) and return if user.blank? or
-      @project_admin.project.blank? or
-      @project_admin.project.project_admins.exists?(user: user)
+      @project_admin.adminable.blank? or
+      @project_admin.adminable.project_admins.exists?(user: user)
 
     @project_admin.user = user
-    @project_admin.save!
+    if @project_admin.save
+      errors_to_flash(@project_admin)
+    end
 
     redirect_back(fallback_location: root_path)
   end
@@ -27,6 +29,6 @@ class ProjectAdminsController < ApplicationController
   private
 
   def project_admin_params
-    params.require(:project_admin).permit(:project_id)
+    params.require(:project_admin).permit(:adminable_type, :adminable_id)
   end
 end

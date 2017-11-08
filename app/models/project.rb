@@ -13,7 +13,7 @@ class Project < ApplicationRecord
   has_many :surveys, dependent: :destroy
   has_many :participations, dependent: :destroy
   has_many :discussion_categories, dependent: :destroy
-  has_many :project_admins, dependent: :destroy
+  has_many :project_admins, dependent: :destroy, as: :adminable
 
   mount_uploader :image, ImageUploader
   mount_uploader :social_image, ImageUploader

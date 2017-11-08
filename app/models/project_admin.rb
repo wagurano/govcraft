@@ -1,6 +1,6 @@
 class ProjectAdmin < ApplicationRecord
   belongs_to :user
-  belongs_to :adminable
+  belongs_to :adminable, polymorphic: true
 
-  validates :project, uniqueness: { scope: [:user_id] }, presence: true
+  validates :adminable_id, uniqueness: { scope: [:adminable_type, :user_id] }, presence: true
 end

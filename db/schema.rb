@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102001556) do
+ActiveRecord::Schema.define(version: 20171108015131) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "speaker_id",               null: false
@@ -570,9 +570,10 @@ ActiveRecord::Schema.define(version: 20171102001556) do
 
   create_table "project_admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer "user_id"
-    t.integer "project_id"
-    t.index ["project_id"], name: "index_project_admins_on_project_id", using: :btree
-    t.index ["user_id", "project_id"], name: "index_project_admins_on_user_id_and_project_id", unique: true, using: :btree
+    t.string  "adminable_type", null: false
+    t.integer "adminable_id",   null: false
+    t.index ["adminable_type", "adminable_id"], name: "index_project_admins_on_adminable_type_and_adminable_id", using: :btree
+    t.index ["user_id", "adminable_id", "adminable_type"], name: "index_project_admins_on_user_and_adminable", unique: true, using: :btree
     t.index ["user_id"], name: "index_project_admins_on_user_id", using: :btree
   end
 
