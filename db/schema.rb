@@ -568,7 +568,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["user_id"], name: "index_polls_on_user_id", using: :btree
   end
 
-  create_table "project_admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "project_admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer "user_id"
     t.string  "adminable_type", null: false
     t.integer "adminable_id",   null: false

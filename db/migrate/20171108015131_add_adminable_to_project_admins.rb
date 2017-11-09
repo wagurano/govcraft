@@ -5,6 +5,7 @@ class AddAdminableToProjectAdmins < ActiveRecord::Migration[5.0]
     reversible do |dir|
       dir.up do
         transaction do
+          execute "ALTER TABLE project_admins ROW_FORMAT=DYNAMIC;"
           execute <<-SQL
             UPDATE project_admins
                SET adminable_type = 'Project',
