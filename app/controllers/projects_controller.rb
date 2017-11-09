@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
     @current_organization = fetch_organization_from_request
     @projects = @projects.where(organization: @current_organization) if @current_organization.present?
     if params[:c].present?
-      @projects = @projects.find_by(project_category: params[:c])
+      @projects = @projects.where(project_category: params[:c])
     end
   end
 
