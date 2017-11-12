@@ -69,8 +69,8 @@ class Ability
       end
 
       # 프로젝트 개설자 및 운영자는 프로젝트 운영자를 관리할 수 있다
-      can :manage, ProjectAdmin do |pj|
-        pj.project && pj.project.project_admin?(user)
+      can :manage, ProjectAdmin do |project_admin|
+        project_admin.adminable && project_admin.adminable.project_admin?(user)
       end
 
       begin
