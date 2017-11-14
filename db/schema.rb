@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108015131) do
+ActiveRecord::Schema.define(version: 20171114160624) do
 
-  create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "speaker_id",               null: false
     t.integer  "agenda_id",                null: false
     t.integer  "user_id"
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["user_id"], name: "index_archive_documents_on_user_id", using: :btree
   end
 
-  create_table "archive_sewol_inv_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "archive_sewol_inv_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer "archive_document_id"
     t.string  "part_no"
     t.string  "part_name"
@@ -168,7 +168,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
   end
 
-  create_table "assembly_members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "assembly_members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "deptCd"
     t.string  "num"
     t.string  "assemEmail"
@@ -330,7 +330,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
 
-  create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id",    null: false
     t.integer  "survey_id",  null: false
     t.integer  "option_id",  null: false
@@ -341,7 +341,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["user_id"], name: "index_feedbacks_on_user_id", using: :btree
   end
 
-  create_table "following_issues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC" do |t|
+  create_table "following_issues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "issue_id",   null: false
     t.integer  "user_id",    null: false
     t.datetime "created_at", null: false
@@ -418,7 +418,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["user_id"], name: "index_notes_on_user_id", using: :btree
   end
 
-  create_table "npos_addtional_archive_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "npos_addtional_archive_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "address"
     t.string   "npo_type"
     t.string   "zipcode"
@@ -440,7 +440,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["archive_document_id"], name: "index_npos_addtional_archive_documents_on_archive_document_id", using: :btree
   end
 
-  create_table "opinions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "opinions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "quote"
     t.text     "body",                  limit: 65535
     t.integer  "speaker_id"
@@ -483,7 +483,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["user_id"], name: "index_organizations_on_user_id", using: :btree
   end
 
-  create_table "participations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "participations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id",    null: false
     t.integer  "project_id", null: false
     t.datetime "created_at", null: false
@@ -493,7 +493,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["user_id"], name: "index_participations_on_user_id", using: :btree
   end
 
-  create_table "people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "name",                     null: false
     t.text     "body",       limit: 65535
     t.string   "image"
@@ -524,7 +524,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
   end
 
-  create_table "petitions_speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "petitions_speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "petition_id"
     t.integer  "speaker_id"
     t.datetime "created_at",  null: false
@@ -534,7 +534,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["speaker_id"], name: "index_petitions_speakers_on_speaker_id", using: :btree
   end
 
-  create_table "players", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "players", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "person_id",                       null: false
     t.integer  "user_id",                         null: false
     t.integer  "race_id",                         null: false
@@ -621,7 +621,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
   end
 
-  create_table "races", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "races", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title",                    null: false
     t.text     "body",       limit: 65535
     t.integer  "user_id",                  null: false
@@ -668,7 +668,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["name"], name: "index_roles_on_name", using: :btree
   end
 
-  create_table "sent_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "sent_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "speaker_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
@@ -694,7 +694,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["user_id"], name: "index_signs_on_user_id", using: :btree
   end
 
-  create_table "speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "name",                            null: false
     t.string  "organization"
     t.string  "category",                        null: false
@@ -817,7 +817,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
 
-  create_table "thumb_stats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
+  create_table "thumb_stats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "race_id",                       null: false
     t.integer  "player_id",                     null: false
     t.integer  "thumbs_up_count",   default: 0
@@ -905,7 +905,7 @@ ActiveRecord::Schema.define(version: 20171108015131) do
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
   end
 
-  create_table "users_roles", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC" do |t|
+  create_table "users_roles", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer "user_id"
     t.integer "role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
