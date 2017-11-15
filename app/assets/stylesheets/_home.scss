@@ -182,6 +182,12 @@ section#communities{
   p{
     font-size: 20px;
   }
+  @media (max-width: $screen-xs-max) {
+    h2{
+      font-size: 40px;
+    }
+    height: 450px;
+  }
 
 }
 #vaw-organizations{
