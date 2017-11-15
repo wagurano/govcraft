@@ -35,7 +35,7 @@
         %i.fa.fa-facebook
         페이스북에 남기기
 
-      = link_to "https://twitter.com/intent/tweet?text=#{@event.sns_event.try(:tweet)}", target:'_blank', id: 'to-twitter', class: 'btn btn-danger btn-lg' do
+      = link_to "https://twitter.com/intent/tweet?#{{text: @event.sns_event.try(:tweet)}.to_param}", target:'_blank', id: 'to-twitter', class: 'btn btn-danger btn-lg' do
         %i.fa.fa-twitter
         트위터에 남기기
 
