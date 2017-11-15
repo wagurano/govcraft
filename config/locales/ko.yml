@@ -93,6 +93,7 @@ ko:
         petition_title: 서명 기능 이름
         wiki_enabled: 위키 기능 사용
         wiki_title: 위키 기능 이름
+        event_title: 이벤트 기능 이름
         social_image: 소셜공유 이미지(선택)
         organization_id: 캠페인 조직
         slug: 캠페인 웹페이지 주소
