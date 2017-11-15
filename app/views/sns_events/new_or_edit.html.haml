@@ -1,0 +1,25 @@
+%section.page-block
+  .container
+    .page-header
+      %h3
+        %strong= @event.title
+        해시태그 운영
+    = form_for @sns_event do |f|
+      = f.hidden_field :event_id
+
+      .form-group
+        = f.label :facebook_hashtags
+        = f.text_field :facebook_hashtags, class: 'form-control', placeholder: '선택사항입니다. 예) #서울시'
+
+      .form-group
+        = f.label :facebook_href
+        = f.text_field :facebook_href, class: 'form-control', placeholder: '선택사항입니다. 예) http://govcraft.org'
+
+      .form-group
+        = f.label :tweet
+        = f.text_field :tweet, class: 'form-control', placeholder: '선택사항입니다. 예) 트위터 메시지'
+
+      .form-group
+        = f.submit '저장', class: 'btn btn-primary'
+        = link_to '취소', :back, class: 'btn btn-default'
+

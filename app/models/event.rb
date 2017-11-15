@@ -1,10 +1,11 @@
 class Event < ApplicationRecord
-  TEMPLATES = %w( default default_with_photo map map_with_assembly speech )
+  TEMPLATES = %w( default default_with_photo map map_with_assembly speech sns )
 
   belongs_to :user
   belongs_to :project
   has_many :comments, as: :commentable
   has_many :speeches, dependent: :destroy
+  has_one :sns_event
 
   mount_uploader :image, ImageUploader
 

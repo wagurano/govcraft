@@ -98,6 +98,9 @@ Rails.application.routes.draw do
   resources :events do
     get 'data', on: :member
   end
+  resources :sns_events do
+    get 'new_or_edit', on: :collection
+  end
   resources :articles do
     post :create_by_slack, on: :collection
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171114160624) do
+ActiveRecord::Schema.define(version: 20171115025457) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "speaker_id",               null: false
@@ -692,6 +692,16 @@ ActiveRecord::Schema.define(version: 20171114160624) do
     t.index ["petition_id"], name: "index_signs_on_petition_id", using: :btree
     t.index ["user_id", "petition_id"], name: "index_signs_on_user_id_and_petition_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_signs_on_user_id", using: :btree
+  end
+
+  create_table "sns_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "facebook_hashtags"
+    t.string   "facebook_href"
+    t.text     "tweet",             limit: 65535
+    t.integer  "event_id",                        null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["event_id"], name: "index_sns_events_on_event_id", using: :btree
   end
 
   create_table "speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

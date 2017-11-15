@@ -130,6 +130,10 @@ ko:
         body: 설명
         template: 이벤트형식
         image: 커버이미지
+      sns_event:
+        facebook_hashtags: 페이스북 해시태그
+        facebook_href: 페이스북 링크
+        tweet: 트위터 메시지
       election:
         title: 선거명
       candidate:

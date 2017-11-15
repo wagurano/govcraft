@@ -20,7 +20,8 @@
           %li
             = template
             - sample_event = Event.where.not(id: @event.try(:id)).where(template: template).first
-            = link_to sample_event.title, sample_event, target: '_blank'
+            - if sample_event.present?
+              = link_to sample_event.title, sample_event, target: '_blank'
   .form-group
     = f.label :title
     = f.text_field :title, class: 'form-control'
