@@ -205,6 +205,9 @@ section#communities{
       font-size: 14px;
       background-color: $gray-lighter;
     }
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+    }
   }
   .last-organization-area{
     width: 440px;
@@ -216,5 +219,8 @@ section#communities{
     padding: 50px;
     background-color: #eeeeee;
     line-height: 25px;
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+    }
   }
 }
