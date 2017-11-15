@@ -40,10 +40,13 @@
     .title{
         height: 100%;
         padding: 40px 10px;
-        background-color: rgba(0,0,0,0.5);
+        background-color: rgba(0,0,0,0.6);
         color: white;
         font-size: 22px;
         font-weight: bold;
         text-align: center;
+        &:hover{
+            background-color: rgba(0,0,0,0.3);
+        }
     }
 }
