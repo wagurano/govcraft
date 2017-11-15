@@ -182,4 +182,39 @@ section#communities{
   p{
     font-size: 20px;
   }
+
+}
+#vaw-organizations{
+  .js-organization-area{
+    width: 220px;
+    height: 220px;
+    border: 1px solid $gray-light;
+    display: inline-block;
+    margin-right: -1px;
+    float: left;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    &:hover{
+      background-color: #eeeeee;
+    }
+    .desc{
+      height: 100%;
+      display: none;
+      padding: 15px;
+      font-size: 14px;
+      background-color: $gray-lighter;
+    }
+  }
+  .last-organization-area{
+    width: 440px;
+    height: 220px;
+    border: 1px solid $gray-light;
+    display:inline-block;
+    float:left;
+    margin-right: -1px;
+    padding: 50px;
+    background-color: #eeeeee;
+    line-height: 25px;
+  }
 }

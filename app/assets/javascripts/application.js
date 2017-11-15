@@ -76,6 +76,11 @@ $(function(){
     format: 'YYYY-MM-DD'
   });
 
+  $( ".js-organization-area" ).hover(
+    function() {
+      $( this ).find(".desc").toggle();
+    }
+  );
 
   $('.share-box').each(function(i, elm) {
     var $elm = $(elm);
