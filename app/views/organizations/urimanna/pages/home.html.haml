@@ -24,7 +24,7 @@
       - @project_categories.each do |c|
         = link_to projects_url(c: c.id) do
           .col-md-2
-            .project-category-card.component-card
+            .project-category-card.component-card{ style: "background-image: url(#{asset_url('organizations/urimanna/'+c.slug+'.png')})"}
               .title
                 %h4
                   = c.title

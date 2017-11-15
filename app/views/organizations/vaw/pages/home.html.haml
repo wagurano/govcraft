@@ -17,15 +17,13 @@
 %section#agendas.page-block
   .container
     .row
-      /- image_map = { 'a': 'xxx' , 'b': 'xx' }
       / { style: "background-image: ru#{image_map[c.slug]}" }
       - @project_categories.each do |c|
         = link_to projects_url(c: c.id) do
           .col-md-2
-            .project-category-card.component-card
+            .project-category-card.component-card{ style: "background-image: url(#{asset_url('organizations/vaw/'+c.slug+'.png')})"}
               .title
-                %h4
-                  = c.title
+                = c.title
 
 
 %section#projects.page-block

@@ -36,12 +36,14 @@
 }
 .project-category-card{
     height:200px;
+    background-size: cover;
     .title{
-        height:100px;
-        padding:10px;
-        background-color:$brand-primary-dark;
-        h4{
-            color:white;
-        }
+        height: 100%;
+        padding: 40px 10px;
+        background-color: rgba(0,0,0,0.5);
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
     }
 }
