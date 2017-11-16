@@ -48,5 +48,9 @@
         &:hover{
             background-color: rgba(0,0,0,0.3);
         }
+        @media (max-width: $screen-xs-max) {
+            font-size: 40px;
+            padding: 65px 10px;
+        }
     }
 }
