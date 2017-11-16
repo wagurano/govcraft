@@ -56,7 +56,7 @@
         - if organization.community_url.present?
           %br
           = link_to '커뮤니티', organization.community_url, target: '_blank'
-      - elsif organization.slug = 'wouldyouparty'
+      - elsif organization.slug == 'wouldyouparty'
         %br
         = link_to Project.model_name.human, projects_path
         %br
@@ -71,6 +71,9 @@
           = link_to '월간우주당', 'http://zine.wouldyouparty.org/', target: '_blank'
           %br
           = link_to '세월호아카이브', 'http://sewolarchive.org/', target: '_blank'
+      - elsif organization.slug == 'vaw'
+        %br
+          = link_to Project.model_name.human, projects_path
       - else
         %br
         = link_to Project.model_name.human, projects_path
