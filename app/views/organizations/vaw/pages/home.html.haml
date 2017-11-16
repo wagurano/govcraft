@@ -30,7 +30,8 @@
   .container
     = link_to projects_url do
       %h3.sub-title
-        = Project.model_name.human
+        프로젝트
+        %small #{Project.count}개 프로젝트 모두 보기
     .row
       .col-md-12.col-xs-12
     .row
