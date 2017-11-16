@@ -41,38 +41,43 @@
   .container
     %h3.sub-title
       함께 하는 단체
-    .js-organization-area{style: "background-image: url(#{asset_url('organizations/vaw/kw_logo.png')})"}
-      .desc
-        %h4
-          한국여성의전화
-        여성에 대한 모든 폭력으로부터 여성 인권을 보장하고 지원하는 활동을 합니다.
-    .js-organization-area{style: "background-image: url(#{asset_url('organizations/vaw/sn_logo.png')})"}
-      .desc
-        %h4
-          성남여성의전화
-        폭력 없는 세상, 성평등한 사회를 위하여 1994년 창립하여 여성주의적 가치를 가지고 활동해온 비영리 여성인권운동단체입니다
-    .js-organization-area{style: "background-image: url(#{asset_url('organizations/vaw/arcon_logo.png')})"}
-      .desc
-        %h4
-          아르콘
-        ARCON은 문화예술의 가치 확산과 사회의 지속가능발전에 기여하고자 설립되었습니다.
-        문화예술을 통해 우리 사회의 긍정적 변화를 이끌며, 사회적 약자의 치유와 자기성장을 지원하고자 합니다.
-    .js-organization-area{style: "background-image: url(#{asset_url('organizations/vaw/daegu_logo.png')})"}
-      .desc
-        %h4
-          대구이주여성인권센터
-        생명.평등.평화를 이주여성과 함께하는 대구이주여성인권센터
-    .js-organization-area{style: "background-image: url(#{asset_url('organizations/vaw/cc_logo.png')})"}
-      .desc
-        %h4
-          춘천가정성폭력상담소
-        가정폭력 및 성폭력 피해자들의 상담을 통해 그들의 아픔을 함께 나누고 건강한 가정을 되찾을 수 있도록 돕는 비영리기관입니다.
-
-    .js-organization-area{style: "background-image: url(#{asset_url('organizations/vaw/ss_logo.png')})"}
-      .desc
-        %h4
-          사회복지공동모금회
-        어렵고 힘든 이웃들에게 희망을 주기 위해 1998년 설립된 민간모금기관입니다.
+    = link_to 'https://hotline.or.kr/', target: "blank" do
+      .js-organization-area{style: "background-image: url(#{asset_url('organizations/vaw/kw_logo.png')})"}
+        .desc
+          %h4
+            한국여성의전화
+          여성에 대한 모든 폭력으로부터 여성 인권을 보장하고 지원하는 활동을 합니다.
+    = link_to 'http://www.snwhotline.or.kr/main.do', target: "blank" do
+      .js-organization-area{style: "background-image: url(#{asset_url('organizations/vaw/sn_logo.png')})"}
+        .desc
+          %h4
+            성남여성의전화
+          폭력 없는 세상, 성평등한 사회를 위하여 1994년 창립하여 여성주의적 가치를 가지고 활동해온 비영리 여성인권운동단체입니다
+    = link_to 'http://arcon.or.kr', target: "blank" do
+      .js-organization-area{style: "background-image: url(#{asset_url('organizations/vaw/arcon_logo.png')})"}
+        .desc
+          %h4
+            아르콘
+          ARCON은 문화예술의 가치 확산과 사회의 지속가능발전에 기여하고자 설립되었습니다.
+          문화예술을 통해 우리 사회의 긍정적 변화를 이끌며, 사회적 약자의 치유와 자기성장을 지원하고자 합니다.
+    = link_to 'http://www.dgwmigrant.org', target: "blank" do
+      .js-organization-area{style: "background-image: url(#{asset_url('organizations/vaw/daegu_logo.png')})"}
+        .desc
+          %h4
+            대구이주여성인권센터
+          생명.평등.평화를 이주여성과 함께하는 대구이주여성인권센터
+    = link_to 'http://chgwsc.com/', target: "blank" do
+      .js-organization-area{style: "background-image: url(#{asset_url('organizations/vaw/cc_logo.png')})"}
+        .desc
+          %h4
+            춘천가정폭력·성폭력상담소
+          가정폭력 및 성폭력 피해자들의 상담을 통해 그들의 아픔을 함께 나누고 건강한 가정을 되찾을 수 있도록 돕는 비영리기관입니다.
+    = link_to 'http://www.chest.or.kr/', target: "blank" do
+      .js-organization-area{style: "background-image: url(#{asset_url('organizations/vaw/ss_logo.png')})"}
+        .desc
+          %h4
+            사회복지공동모금회
+          어렵고 힘든 이웃들에게 희망을 주기 위해 1998년 설립된 민간모금기관입니다.
 
     .last-organization-area
       이 캠페인은

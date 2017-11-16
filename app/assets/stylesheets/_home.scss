@@ -201,15 +201,14 @@ section#communities{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    &:hover{
-      background-color: #eeeeee;
-    }
+    margin-top: -1px;
     .desc{
       height: 100%;
       display: none;
       padding: 15px;
       font-size: 14px;
-      background-color: $gray-lighter;
+      color: dimgray;
+      background-color: #f1f1f1;
     }
     @media (max-width: $screen-xs-max) {
       width: 100%;
@@ -222,6 +221,7 @@ section#communities{
     display:inline-block;
     float:left;
     margin-right: -1px;
+    margin-top: -1px;
     padding: 50px;
     background-color: #eeeeee;
     line-height: 25px;
