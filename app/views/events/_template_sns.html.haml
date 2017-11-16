@@ -61,9 +61,11 @@
       console.log()
       $('#to-facebook').on('click', function(e) {
         FB.ui({
+          appId: '#{ENV["FACEBOOK_APP_ID"]}',
+          display: 'popup',
           method: 'feed',
           hashtag: #{@event.sns_event.try(:facebook_hashtags).present? ? "'#{@event.sns_event.facebook_hashtags}'" : "null"},
-          link: #{@event.sns_event.try(:facebook_href).present? ? "'#{@event.sns_event.facebook_href}'" : "null"}
+          link: "#{(@event.sns_event.try(:facebook_href).present? ? @event.sns_event.facebook_href : request.url)}"
         }, function(response){});
       });
     }(document, 'script', 'facebook-jssdk'));
