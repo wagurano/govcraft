@@ -9,6 +9,7 @@
         = excerpt(sympathy.body, length: 90)
         %br
         - if sympathy.comments.count > 0
-          #{number_with_delimiter(sympathy.comments.count)}개의 추모글
+          %span.label.label-default
+            #{number_with_delimiter(sympathy.comments.count)}개의 추모글
 
 
