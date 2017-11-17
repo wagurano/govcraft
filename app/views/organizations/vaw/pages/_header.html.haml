@@ -1,0 +1,4 @@
+- project_categories = ProjectCategory.where(organization: organization)
+- project_categories.each do |project_category|
+  %br
+  = link_to project_category.title, projects_url(c: project_category.id)
