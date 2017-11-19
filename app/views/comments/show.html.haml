@@ -1,0 +1,3 @@
+- if @comment.commentable.try(:template).present?
+  = render "#{@comment.commentable.class.name.pluralize.underscore}/template_#{@comment.commentable.template}/comment", event: @event
+

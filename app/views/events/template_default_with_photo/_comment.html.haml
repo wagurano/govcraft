@@ -1,0 +1,13 @@
+- event = @comment.commentable
+
+= render 'events/template_default_with_photo/header', local_assigns.merge(event: event)
+
+%section{ style: 'margin: 28px 0 0;' }
+  .container
+    = render 'events/template_default_with_photo/comment_box', local_assigns.merge(event: event, comment: @comment)
+    .nav{ style: 'margin: 28px 0;' }
+      = link_to event do
+        %i.fa.fa-arrow-left
+        목록으로
+:css
+  = #{event.css}

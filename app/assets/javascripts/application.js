@@ -28,6 +28,21 @@
 
 UnobtrusiveFlash.flashOptions['timeout'] = 300000;
 
+// blank
+$.is_blank = function (obj) {
+  if (!obj || $.trim(obj) === "") return true;
+  if (obj.length && obj.length > 0) return false;
+
+  for (var prop in obj) if (obj[prop]) return false;
+
+  if (obj) return false;
+  return true;
+}
+
+$.is_present = function(obj) {
+  return ! $.is_blank(obj);
+}
+
 $(document).imagesLoaded( { }, function() {
 
   // trianglify
@@ -179,13 +194,25 @@ $(function(){
   $('[data-toggle="tooltip"]').tooltip();
   AOS.init();
 
-  $('.gov-action-link').on('click', function(e) {
-    var href = $(e.target).closest('a').attr('href');
+  $('.js-link').on('click', function(e) {
+    var href = $(e.target).closest('a').attr('href')
     if (href && href != "#") {
       return true;
     }
-    var url = $(e.currentTarget).data('url');
-    window.open(url, '_blank');
+
+    var $no_parti_link = $(e.target).closest('[data-no-parti-link="no"]')
+    if ($no_parti_link.length) {
+      return true;
+    }
+
+    e.preventDefault();
+    var url = $(e.currentTarget).data("url");
+
+    if($.is_present($(this).data('link-target'))) {
+      window.open(url, $(this).data('link-target'));
+    } else {
+      window.location.href  = url;
+    }
   });
 
   $('.js-select2').select2();

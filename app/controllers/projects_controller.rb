@@ -18,10 +18,6 @@ class ProjectsController < ApplicationController
     @project.increment!(:views_count)
   end
 
-  def events
-    @project.increment!(:views_count)
-  end
-
   def new
     @current_organization = current_organization
   end
