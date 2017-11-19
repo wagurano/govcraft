@@ -1,8 +1,8 @@
-.panel.panel-default.panel-floating.js-link.cursor-pointer[comment]{ 'data-url': comment_path(comment) }
+.panel.panel-default.panel-floating.js-link[comment]{ 'data-url': (comment_path(comment) unless local_assigns[:no_link]), class: ('cursor-pointer' unless local_assigns[:no_link]) }
   .panel-body
     - if comment.image.present?
       .comment__image
-        = image_tag comment.image.md.url, style: 'width: 100%;'
+        = image_tag comment.image_url(:lg), style: 'max-width: 100%; margin-left: auto; margin-right: auto; display: block;'
     .comment__body
       %h4{ style: 'font-size: 16px; letter-spacing: -0.02em; line-height: 1.4;'}= smart_format comment.body
     .comment__tags
@@ -15,5 +15,9 @@
         = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
       - if current_user != comment.user
         = render 'reports/button', reportable: comment
-    .comment__like{ style: 'margin-top: 14px;' }
+    .comment__actions{ style: 'margin-top: 14px;' }
       = render 'likes/button', likable: comment
+      - if comment.comments.count > 0
+        = link_to comment_path(comment, anchor: 'anchor-comments-list'), class: 'btn btn-sm btn-inverted btn-default' do
+          댓글 #{comment.comments.count}
+

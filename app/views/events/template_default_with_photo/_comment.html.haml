@@ -1,12 +1,21 @@
-- event = @comment.commentable
+- event = comment.commentable
 
 = render 'events/template_default_with_photo/header', local_assigns.merge(event: event)
 
 %section{ style: 'margin: 28px 0 0;' }
   .container
-    = render 'events/template_default_with_photo/comment_box', local_assigns.merge(event: event, comment: @comment)
+    = render 'events/template_default_with_photo/comment_box', local_assigns.merge(event: event, comment: comment, no_link: true)
+
+%section.page-block.page-block-normal
+  .container
+    %h3.sub-title
+      의견을 남겨주세요
+    .panel-body.post-block.component-box
+      .panel-post__comments
+        = render 'comments/list', commentable: comment
+
     .nav{ style: 'margin: 28px 0;' }
-      = link_to event do
+      = link_to event, class: 'btn btn-sm btn-default' do
         %i.fa.fa-arrow-left
         목록으로
 :css

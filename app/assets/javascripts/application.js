@@ -208,10 +208,12 @@ $(function(){
     e.preventDefault();
     var url = $(e.currentTarget).data("url");
 
-    if($.is_present($(this).data('link-target'))) {
-      window.open(url, $(this).data('link-target'));
-    } else {
-      window.location.href  = url;
+    if(url) {
+      if($.is_present($(this).data('link-target'))) {
+        window.open(url, $(this).data('link-target'));
+      } else {
+        window.location.href  = url;
+      }
     }
   });
 

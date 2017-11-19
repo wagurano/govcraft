@@ -13,6 +13,7 @@ class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true
   belongs_to :user
   belongs_to :target_speaker, optional: true, class_name: Speaker
+  has_many :comments, class_name: Comment, as: :commentable, dependent: :destroy
 
   mount_uploader :image, ImageUploader
 

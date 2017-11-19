@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, except: [:create, :index]
+  before_action :authenticate_user!, except: [:create, :index, :show]
   load_and_authorize_resource
 
   def index
