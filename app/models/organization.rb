@@ -5,5 +5,11 @@ class Organization < ApplicationRecord
   def subdomain
     [slug, ApplicationController.helpers.root_subdomain].compact.join(".")
   end
+
+  def seo_image_path
+    if File.exists?(Rails.root.join('app', 'assets', 'images', 'organizations', slug, 'seo_image.png'))
+      "organizations/#{slug}/seo_image.png"
+    end
+  end
 end
 
