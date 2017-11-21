@@ -54,7 +54,12 @@ Rails.application.routes.draw do
 
   resources :project_categories
   resources :stories
-  resources :discussions
+  resources :discussions do
+    member do
+      put :unpin
+      put :pin
+    end
+  end
   resources :discussion_categories
   resources :sympathies
   resources :petitions do

@@ -15,4 +15,8 @@ class Discussion < ApplicationRecord
       self.project.social_image_url
     end
   end
+
+  def pinned?
+    pinned_at.present?
+  end
 end

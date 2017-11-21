@@ -56,6 +56,18 @@ class DiscussionsController < ApplicationController
     redirect_to @discussion.project || discussions_path
   end
 
+  def pin
+    @discussion.pinned_at = DateTime.now
+    @discussion.save
+    redirect_to @discussion
+  end
+
+  def unpin
+    @discussion.pinned_at = nil
+    @discussion.save
+    redirect_to @discussion
+  end
+
   private
 
   def discussion_params
