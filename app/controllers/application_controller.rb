@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
     current_organization = fetch_organization_from_request
     site_name = options[:site_name] || current_organization.try(:title) || "가브크래프트"
     title = view_context.strip_tags(options[:title]) || current_organization.try(:title) || "Democracy, everyday - 가브크래프트"
-    image = options[:image] || view_context.image_url(current_organization.try(:seo_image_path)) || view_context.image_url('seo.png')
+    image = options[:image] || (current_organization.try(:seo_image_path) and view_context.image_url(current_organization.try(:seo_image_path))) || view_context.image_url('seo.png')
     url = options[:url] || root_url
     description = view_context.strip_tags(options[:description]) || "게임하듯 정치하는 시민들의 놀이터 '가브크래프트'입니다"
     {
