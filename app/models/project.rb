@@ -25,6 +25,8 @@ class Project < ApplicationRecord
 
   after_create :fallback_slug
 
+  attr_accessor :user_nickname
+
   def component_title(modle_name)
     if model_name == 'event'
       abort 'test'

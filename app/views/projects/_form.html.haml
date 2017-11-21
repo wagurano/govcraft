@@ -12,6 +12,11 @@
         = f.label :subtitle
         = f.text_field :subtitle, class: 'form-control'
 
+      - if current_user.is_admin?
+        .form-group
+          = f.label :user_nickname
+          = f.text_field :user_nickname, class: 'form-control'
+
       .form-group
         = f.label :body
         ~ f.text_area :body, rows: 8, class: 'form-control'

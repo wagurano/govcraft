@@ -24,7 +24,6 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-    @project.user = current_user
     @project.organization = fetch_organization_from_request
     if @project.save
       redirect_to @project
@@ -35,11 +34,11 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    @project.user_nickname = @project.user.nickname
   end
 
   def update
-    @project.assign_attributes(project_params)
-
+    @project.user = User.find_by! nickname: params[:project][:user_nickname] if params[:project][:user_nickname].present?
     if current_user.is_admin?
       @project.organization_id = params[:project][:organization_id]
     end
@@ -61,7 +60,7 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(
-      :title, :subtitle, :body,
+      :title, :subtitle, :user_nickname, :body,
       :image, :remove_image,
       :social_image, :remove_social_image,
       :slug, :project_category_id,
