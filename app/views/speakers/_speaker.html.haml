@@ -1,11 +1,11 @@
 .card
-  .image
-    %img{ src: speaker.image.sm.url }
-  .content
-    = link_to speaker_path(speaker, agenda_id: local_assigns[:agenda].try(:id)) do
-      = speaker.name
-      .text-muted= speaker.organization
-      - if local_assigns[:agenda]
-        .opinions-count
-          #{agenda.opinions_by(speaker).count}개 #{Opinion.model_name.human}
-    %button.btn.btn-default.btn-xs 트윗 보내기
+  = link_to speaker do
+    .card-image{ style: "height: 170px; background-image: url(#{speaker.image.md.url}); background-size: cover; background-position: center; background-repeat:no-repeat;" }
+  .card-content
+    = link_to speaker.name, speaker, class: 'card-header'
+    .card-meta= speaker.organization
+  .card-content.card-extra
+    - if speaker.opinions.count > 0
+      의견 #{speaker.opinions.count}개
+    - else
+      의견 없음

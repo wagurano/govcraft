@@ -9,7 +9,7 @@
 
   .js-tab-content
     .page-header
-      %h2= agenda.name
+      %h3= agenda.name
     - issues = is_one_theme_view ? agenda.issues.with_theme(agenda_theme) : agenda.issues
 
     - Issue.group_by_theme(issues).each_with_index do |(agenda_theme, issues), i|

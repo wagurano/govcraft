@@ -1,0 +1,10 @@
+%section#parti-section
+  .container.text-center
+    %h2 인물
+
+%section#events.page-block
+  .container
+    .row
+      - Speaker.order(:name).each do |speaker|
+        .col-xs-6.col-sm-3
+          = render speaker

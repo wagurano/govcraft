@@ -31,12 +31,10 @@
         = render 'agendas/tab', local_assigns.merge(agenda: agendas.sort_by_name.first)
 
 
-  %section.page-block{ style: 'background-color: #eee' }
-    .container
       %strong
-        = link_to "#agends-list" do
-          다른 #{Agenda.model_name.human} 보기
+        = link_to "#agends-list", class: 'btn btn-default' do
           %i.fa.fa-arrow-up
+          다른 #{Agenda.model_name.human} 보기
 - else
   %section.page-block#agends-list
     .help-block.text-center
