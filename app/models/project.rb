@@ -22,6 +22,7 @@ class Project < ApplicationRecord
   scope :admin_by, ->(user) { where(id: ProjectAdmin.where(user: user).where(adminable_type: 'Project').select(:adminable_id)) }
 
   validates :slug, format: { with: /\A[a-z0-9\-_]+\z/i }, uniqueness: true
+  validates :user, presence: true
 
   after_create :fallback_slug
 
