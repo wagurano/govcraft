@@ -38,6 +38,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    @project.assign_attributes(project_params)
     @project.user = User.find_by! nickname: params[:project][:user_nickname] if params[:project][:user_nickname].present?
     if current_user.is_admin?
       @project.organization_id = params[:project][:organization_id]
