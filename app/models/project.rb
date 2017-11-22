@@ -50,7 +50,7 @@ class Project < ApplicationRecord
   end
 
   def project_admin? someone
-    project_admins.exists? user: someone
+    user == someone or project_admins.exists?(user: someone)
   end
 
   DEFAULT_SORTED_COMPONENT_NAMES = %i(wiki event discussion poll petition story)

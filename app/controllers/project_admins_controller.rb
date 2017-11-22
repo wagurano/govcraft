@@ -14,7 +14,7 @@ class ProjectAdminsController < ApplicationController
       @project_admin.adminable.project_admins.exists?(user: user)
 
     @project_admin.user = user
-    if @project_admin.save
+    if !@project_admin.save
       errors_to_flash(@project_admin)
     end
 

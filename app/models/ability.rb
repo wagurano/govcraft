@@ -74,7 +74,12 @@ class Ability
 
       # 프로젝트 개설자 및 운영자는 프로젝트 운영자를 관리할 수 있다
       can :manage, ProjectAdmin do |project_admin|
-        project_admin.adminable && project_admin.adminable.project_admin?(user)
+        if project_admin.persisted?
+          project_admin.adminable && project_admin.adminable.project_admin?(user)
+        elsif params[:project_admin][:adminable_type] == "Project"
+          project = Project.find_by id: params[:project_admin][:adminable_id]
+          project.project_admin?(user)
+        end
       end
 
       begin
