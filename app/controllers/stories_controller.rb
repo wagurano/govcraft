@@ -22,7 +22,8 @@ class StoriesController < ApplicationController
   end
 
   def new
-    @project = Project.find(params[:project_id]) if params[:project_id]
+    #@project = Project.find(params[:project_id]) if params[:project_id]
+    @project = Project.find(params[:story][:project_id]) if params[:story][:project_id]
     @current_organization = @project.organization if @project.present?
   end
 
@@ -32,6 +33,7 @@ class StoriesController < ApplicationController
       redirect_to @story || @project
     else
       errors_to_flash @story
+      send('new')
       render 'new'
     end
   end
