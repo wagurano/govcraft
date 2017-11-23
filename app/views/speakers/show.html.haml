@@ -31,7 +31,7 @@
               = petition.title
           .panel-body
             - statement = petition.statements.find_by(speaker: @speaker)
-            - if statement.body.present? or statement.stance.present?
+            - if statement.present? and (statement.body.present? or statement.stance.present?)
               - if statement.stance.present?
                 %h4.media-heading
                   = statement.stance.text
