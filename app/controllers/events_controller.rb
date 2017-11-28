@@ -69,6 +69,10 @@ class EventsController < ApplicationController
     statementable_update_statement_speaker(@event)
   end
 
+  def remove_speaker
+    statementable_remove_speaker(@event)
+  end
+
   private
 
   def event_params

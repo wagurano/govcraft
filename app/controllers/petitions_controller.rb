@@ -51,6 +51,10 @@ class PetitionsController < ApplicationController
     statementable_update_statement_speaker(@petition)
   end
 
+  def remove_speaker
+    statementable_remove_speaker(@petition)
+  end
+
   def new
     @project = Project.find(params[:project_id]) if params[:project_id].present?
     @current_organization = @project.organization if @project.present?

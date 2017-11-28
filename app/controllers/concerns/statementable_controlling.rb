@@ -44,4 +44,11 @@ module StatementableControlling
     @statementable = statementable
     render 'statementable/update_statement_speaker'
   end
+
+  def statementable_remove_speaker(statementable)
+    @speaker = Speaker.find_by(id: params[:speaker_id])
+    render_404 and return if @speaker.blank?
+    statementable.speakers.delete(@speaker) << @speaker if statementable.speakers.include?(@speaker)
+    redirect_to polymorphic_path([:edit_speakers, statementable], q: params[:q])
+  end
 end
