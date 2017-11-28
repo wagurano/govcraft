@@ -11,6 +11,7 @@ class Event < ApplicationRecord
   has_and_belongs_to_many :speakers, -> { uniq }
 
   mount_uploader :image, ImageUploader
+  mount_uploader :social_image, ImageUploader
 
   scope :recent, -> { order('id DESC') }
   scope :by_organization, ->(organization) { where(project: organization.projects) }
@@ -151,7 +152,9 @@ class Event < ApplicationRecord
   ]
 
   def fallback_social_image_url
-    if self.project.try(:read_attribute, :social_image).present?
+    if self.read_attribute(:social_image).present?
+      self.social_image.lg.url
+    elsif self.project.try(:read_attribute, :social_image).present?
       self.project.social_image_url
     else
       self.image_url

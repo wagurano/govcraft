@@ -2,7 +2,7 @@
   .container
     .page-header
       %h2
-        = link_to (@statementable.try(:title) || "현재 글의"), @statement
+        = link_to (@statementable.try(:title) || "현재 글의"), @statementable
         촉구인물
 
     .panel.panel-default

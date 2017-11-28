@@ -130,7 +130,8 @@ ko:
         title: 제목
         body: 설명
         template: 이벤트형식
-        image: 커버이미지
+        image: 커버이미지(선택)
+        social_image: 소셜공유이미지(선택)
         template_names:
           default: "목소리 모으기"
           default_with_photo: "사진 모으기"

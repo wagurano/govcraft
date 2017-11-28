@@ -9,6 +9,28 @@
   .form-group
     = f.label :image
     = f.file_field :image, class: 'form-control'
+    = f.hidden_field :image_cache, value: f.object.image_cache
+    .help-block
+    - if f.object.read_attribute(:image).present?
+      = image_tag f.object.image.xs.url, class: 'img-thumbnail', style: 'max-width: 40px'
+      %label{ style: 'font-weight: normal;' }
+        = f.check_box :remove_image
+        삭제하기
+
+  .form-group
+    = f.label :social_image
+    = f.file_field :social_image, class: 'form-control'
+    = f.hidden_field :social_image_cache, value: f.object.social_image_cache
+    .help-block
+    - if f.object.read_attribute(:social_image).present?
+      = image_tag f.object.social_image.xs.url, class: 'img-thumbnail', style: 'max-width: 40px'
+      %label{ style: 'font-weight: normal;' }
+        = f.check_box :remove_social_image
+        삭제하기
+
+  .form-group
+    = f.label :image
+    = f.file_field :image, class: 'form-control'
 
   .form-group
     - @event.template = :default if @event.template.blank?
