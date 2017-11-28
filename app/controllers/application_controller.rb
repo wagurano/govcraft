@@ -146,7 +146,16 @@ class ApplicationController < ActionController::Base
     @current_organization = send(:current_organization)
     valid_subdomain = @current_organization.try(:subdomain) || view_context.root_subdomain
 
-    redirect_to subdomain: valid_subdomain and return unless fetch_organization_from_request == @current_organization
+    unless fetch_organization_from_request == @current_organization
+      if request.get?
+        redirect_to params.to_hash.merge(subdomain: valid_subdomain)
+      else
+        flash['error'] = '앗! 뭔가 잘못되었습니다.'
+        ExceptionNotifier.notify_exception("verify_organization에 오류가 있습니다")
+        redirect_to root_url(subdomain: valid_subdomain)
+      end
+      return
+    end
   end
 
   def current_ability

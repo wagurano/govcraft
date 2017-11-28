@@ -1,0 +1,36 @@
+%a{id: "anchor-speakers"}
+%h3.sub-title 촉구하기
+.panel-body{style:"padding:0px"}
+  .panel-post__speakers
+    .row.masonry-container
+      - event.speakers.each do |speaker|
+        .col-md-2.col-sm-3.col-xs-6
+          = render 'events/template_press/speaker', speaker: speaker, event: event
+
+%a{id: "anchor-speakers"}
+%h3.sub-title 응답메시지
+- if event.statements.responed_body.any?
+  .panel-body{style:"padding:0px"}
+    .panel-post__statements
+      .row.masonry-container
+        - event.statements.responed_body.recent.each do |statement|
+          - speaker = statement.speaker
+          .col-md-6.col-sm-12
+            .panel.panel-opinion.panel-default[statement]
+              .panel-body{ style: 'padding: 14px' }
+                .media[statement]
+                  .media-left
+                    = link_to speaker_path(speaker) do
+                      .media-object.image.speaker-image{style: "background-image: url(#{speaker.image.xs.url});"}
+
+                  .media-body
+                    - if statement.stance.present?
+                      %h4.media-heading
+                        = statement.stance.text
+                    %p
+                      = link_to speaker_path(speaker) do
+                        = speaker.name
+                        %span.text-muted= speaker.organization
+                    - if statement.body.present?
+                      .opinion__body
+                        != statement.body

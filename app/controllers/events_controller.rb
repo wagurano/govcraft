@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   include OrganizationHelper
+  include StatementableControlling
 
   load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
@@ -50,6 +51,22 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     redirect_to events_path
+  end
+
+  def edit_speakers
+    statementable_edit_speakers(@event)
+  end
+
+  def add_speaker
+    statementable_add_speaker(@event)
+  end
+
+  def new_comment_speaker
+    statementable_new_comment_speaker(@event)
+  end
+
+  def update_statement_speaker
+    statementable_update_statement_speaker(@event)
   end
 
   private

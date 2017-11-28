@@ -131,6 +131,14 @@ ko:
         body: 설명
         template: 이벤트형식
         image: 커버이미지
+        template_names:
+          default: "목소리 모으기"
+          default_with_photo: "사진 모으기"
+          map: "지도 표시하기"
+          sns: "해시태그 행동하기"
+          press: "촉구하기"
+          speech: "[특별판] 촛불발언 발언"
+          map_with_assembly: "[특별판] 박근혜 탄핵"
       sns_event:
         facebook_hashtags: 페이스북 해시태그
         facebook_href: 페이스북 링크

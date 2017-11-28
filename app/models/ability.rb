@@ -46,7 +46,9 @@ class Ability
         user == discussion.user or discussion.try(:project).try(:project_admin?, user)
       end
 
-      can [:edit_speakers, :add_speaker, :remove_speaker], Petition, :user_id => user.id
+      can [:edit_speakers, :add_speaker, :remove_speaker], [Petition, Event] do |event|
+        user == event.user or event.try(:project).try(:project_admin?, user)
+      end
 
       can :destroy, Comment do |comment|
         comment.toxic == false && user == comment.user

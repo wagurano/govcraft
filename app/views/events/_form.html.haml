@@ -11,14 +11,17 @@
     = f.file_field :image, class: 'form-control'
 
   .form-group
+    - @event.template = :default if @event.template.blank?
     = f.label :template
-    = f.select :template, Event::TEMPLATES, {}, class: 'form-control'
+    - template_selections = Hash[Event::TEMPLATES.map { |n| [t("activerecord.attributes.event.template_names.#{n}"), n] }]
+    = f.select :template, template_selections.sort{|a, b| a[0] <=> b[0]}, {}, class: 'form-control'
     .help-block
       템플릿 예시 :
       %ul
         - Event::TEMPLATES.each do |template|
           %li
-            = template
+            = t("activerecord.attributes.event.template_names.#{template}")
+            \:
             - sample_event = Event.where.not(id: @event.try(:id)).where(template: template).first
             - if sample_event.present?
               = link_to sample_event.title, sample_event, target: '_blank'

@@ -10,7 +10,7 @@
         = link_to '수정', edit_petition_path(@petition)
       - if can? :edit, @petition
         &middot;
-        = link_to '관련인물관리', edit_speakers_petition_path(@petition)
+        = link_to '촉구인물관리', edit_speakers_petition_path(@petition)
       - if can? :destroy, @petition
         &middot;
         = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }

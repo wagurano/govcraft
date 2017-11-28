@@ -101,7 +101,14 @@ Rails.application.routes.draw do
   resources :thumbs
 
   resources :events do
-    get 'data', on: :member
+    member do
+      get 'data'
+      get 'edit_speakers'
+      put 'add_speaker'
+      delete 'remove_speaker'
+      get 'new_comment_speaker'
+      get 'update_statement_speaker'
+    end
   end
   resources :sns_events do
     get 'new_or_edit', on: :collection

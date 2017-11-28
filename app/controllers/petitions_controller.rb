@@ -1,5 +1,6 @@
 class PetitionsController < ApplicationController
   include OrganizationHelper
+  include StatementableControlling
 
   load_and_authorize_resource
   before_action :reset_meta_tags_for_show, only: :show
@@ -29,41 +30,25 @@ class PetitionsController < ApplicationController
     if params[:q].present?
       @searched_speakers = Speaker.where('name like ?', "%#{params[:q]}%")
     end
+
+    @statementable = @petition
+    render 'statementable/edit_speakers'
+  end
+
+  def edit_speakers
+    statementable_edit_speakers(@petition)
   end
 
   def add_speaker
-    @speaker = Speaker.find_by(id: params[:speaker_id])
-    render_404 and return if @speaker.blank?
-    @petition.speakers << @speaker unless @petition.speakers.include?(@speaker)
-    @petition.save
-    redirect_to edit_speakers_petition_path(@petition, q: params[:q])
-  end
-
-  def remove_speaker
-    @speaker = Speaker.find_by(id: params[:speaker_id])
-    render_404 and return if @speaker.blank?
-    @petition.speakers.delete(@speaker) if @petition.speakers.include?(@speaker)
-    redirect_to edit_speakers_petition_path(@petition, q: params[:q])
+    statementable_add_speaker(@petition)
   end
 
   def new_comment_speaker
-    @speaker = Speaker.find_by(id: params[:speaker_id])
-    render_404 and return if @speaker.blank?
+    statementable_new_comment_speaker(@petition)
   end
 
   def update_statement_speaker
-    @statement_key = StatementKey.find_by(statement_id: params[:statement_id], key: params[:key])
-    render_404 and return if @statement_key.blank?
-    return if @statement_key.expired?
-
-    @statement = @statement_key.statement
-
-    if params[:stance].present?
-      @statement.stance = params[:stance]
-      @statement.save
-    end
-
-    @speaker = @statement.speaker
+    statementable_update_statement_speaker(@petition)
   end
 
   def new

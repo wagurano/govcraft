@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115042501) do
+ActiveRecord::Schema.define(version: 20171127005335) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "speaker_id",               null: false
@@ -328,6 +328,16 @@ ActiveRecord::Schema.define(version: 20171115042501) do
     t.text     "css",            limit: 65535
     t.index ["project_id"], name: "index_events_on_project_id", using: :btree
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
+  end
+
+  create_table "events_speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "event_id"
+    t.integer  "speaker_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id", "speaker_id"], name: "index_events_speakers_on_event_id_and_speaker_id", unique: true, using: :btree
+    t.index ["event_id"], name: "index_events_speakers_on_event_id", using: :btree
+    t.index ["speaker_id"], name: "index_events_speakers_on_speaker_id", using: :btree
   end
 
   create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -742,14 +752,15 @@ ActiveRecord::Schema.define(version: 20171115042501) do
   end
 
   create_table "statements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.integer  "petition_id",               null: false
-    t.integer  "speaker_id",                null: false
-    t.text     "body",        limit: 65535
+    t.integer  "speaker_id",                       null: false
+    t.text     "body",               limit: 65535
     t.string   "stance"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.index ["petition_id"], name: "index_statements_on_petition_id", using: :btree
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "statementable_type"
+    t.integer  "statementable_id"
     t.index ["speaker_id"], name: "index_statements_on_speaker_id", using: :btree
+    t.index ["statementable_type", "statementable_id"], name: "index_statements_on_statementable_type_and_statementable_id", using: :btree
   end
 
   create_table "stories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

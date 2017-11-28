@@ -9,7 +9,7 @@ class StatementsController < ApplicationController
     else
       errors_to_flash(@statement)
     end
-    redirect_to @statement.petition
+    redirect_to @statement.statementable
   end
 
   private
