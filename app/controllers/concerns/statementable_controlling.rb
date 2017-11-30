@@ -21,11 +21,16 @@ module StatementableControlling
   end
 
   def statementable_new_comment_speaker(statementable)
-    @speaker = Speaker.find_by(id: params[:speaker_id])
-    render_404 and return if @speaker.blank?
-
     @statementable = statementable
-    render 'statementable/new_comment_speaker'
+
+    if params[:speaker_id].present?
+      @speaker = Speaker.find_by(id: params[:speaker_id])
+      render_404 and return if @speaker.blank?
+
+      render 'statementable/new_comment_speaker'
+    else
+      render 'statementable/new_comment_speaker_for_all'
+    end
   end
 
   def statementable_update_statement_speaker(statementable)

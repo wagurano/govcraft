@@ -12,14 +12,15 @@ class Comment < ApplicationRecord
 
   belongs_to :commentable, polymorphic: true
   belongs_to :user
-  belongs_to :target_speaker, optional: true, class_name: Speaker
+  #belongs_to :target_speaker, optional: true, class_name: Speaker
+  has_and_belongs_to_many :target_speakers, class_name: 'Speaker', join_table: 'comments_target_speakers'
   has_many :comments, class_name: Comment, as: :commentable, dependent: :destroy
 
   mount_uploader :image, ImageUploader
 
   scope :recent, -> { order(created_at: :desc) }
   scope :earlier, -> { order(created_at: :asc) }
-  scope :with_target_speaker, ->(speaker) { where(target_speaker: speaker) }
+  scope :with_target_speaker, ->(speaker) { joins(:target_speakers).where('comments_target_speakers.speaker_id = ?', speaker.id) }
 
   validates :body, presence: true
   validates :commenter_email, format: { with: Devise.email_regexp }, if: 'commenter_email.present?'
@@ -27,6 +28,8 @@ class Comment < ApplicationRecord
   after_validation :fetch_geocode, if: ->(obj){ obj.full_street_address.present? and obj.full_street_address_changed? }
 
   before_save :save_gps
+
+  attr_accessor :target_speaker_id
 
   def user_nickname
     user.present? ? user.nickname : commenter_name

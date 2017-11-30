@@ -8,7 +8,6 @@ class Event < ApplicationRecord
   has_many :comments, as: :commentable
   has_many :speeches, dependent: :destroy
   has_one :sns_event
-  has_and_belongs_to_many :speakers, -> { uniq }
 
   mount_uploader :image, ImageUploader
   mount_uploader :social_image, ImageUploader

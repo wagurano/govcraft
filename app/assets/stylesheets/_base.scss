@@ -266,16 +266,19 @@ h3.sub-title {
 }
 //컴포넌트 디테일 공통 헤더 스타일
 .component-header{
-    background-color:$brand-primary-dark;
-    height:320px;
-    text-align:center;
-    color:white;
-    padding:40px 0px 0px 0px;
-    font-size:36px;
-    font-weight:bold;
-    @media (max-width: $screen-sm-min) {
-        height:400px;
-    }
+  background-color: $brand-primary-dark;
+  height: 320px;
+  text-align: center;
+  color: white;
+  padding: 40px 0px 0px 0px;
+  font-size: 36px;
+  font-weight: bold;
+  @media (max-width: $screen-sm-min) {
+    height: 400px;
+  }
+  &-auto-height {
+    height: auto;
+  }
 }
 
 .component-box{
@@ -415,5 +418,13 @@ figure img {
 }
 
 .cursor-pointer {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.page-header.page-header-narrow {
+  border: none;
+  margin: 0;
+  h1, h2, h3, h4, h5, h6 {
+    margin: 40px 0px 20px;
+  }
 }

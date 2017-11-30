@@ -3,6 +3,7 @@ module Statementable
 
   included do
     has_many :statements, as: :statementable
+    has_and_belongs_to_many :speakers, -> { uniq }
   end
 
   def speakers? speaker

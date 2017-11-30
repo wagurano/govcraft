@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
       @commentable_model = params[:commentable_type].classify.safe_constantize
       @commentable = @commentable_model.find(params[:commentable_id])
       @comments = @commentable.comments.page(params[:page])
+      @comments = @comments.with_target_speaker(Speaker.find_by(id: params[:speaker_id])) if params[:speaker_id].present?
     end
   end
 
@@ -30,18 +31,31 @@ class CommentsController < ApplicationController
       redirect_back(fallback_location: root_path, i_am: params[:i_am])
       return
     end
+
+    if @comment.mailing.ready? and @comment.commentable.respond_to?(:speakers)
+      if @comment.target_speaker_id.blank?
+        @comment.commentable.speakers.each do |speaker|
+          @comment.target_speakers << speaker
+        end
+      else
+        @comment.target_speakers << Speaker.find_by(id: @comment.target_speaker_id)
+      end
+    end
+
     if @comment.save
       flash[:notice] = I18n.t('messages.commented')
 
       if @comment.mailing.ready?
-        if @comment.target_speaker.email.blank?
+        if @comment.target_speakers.empty? { |s| s.email.present? }
           @comment.update_attributes(mailing: :fail)
         else
           if @comment.commentable.respond_to? :statements
-            statement = @comment.commentable.statements.find_or_create_by(speaker: @comment.target_speaker)
-            statement_key = statement.statement_keys.build(key: SecureRandom.hex(50))
-            statement_key.save!
-            CommentMailer.target_speaker(@comment.id, statement_key.id).deliver_later
+            @comment.target_speakers.each do |speaker|
+              statement = @comment.commentable.statements.find_or_create_by(speaker: speaker)
+              statement_key = statement.statement_keys.build(key: SecureRandom.hex(50))
+              statement_key.save!
+              CommentMailer.target_speaker(@comment.id, speaker.id, statement_key.id).deliver_later
+            end
           end
         end
       end

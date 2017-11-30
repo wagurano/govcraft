@@ -5,19 +5,19 @@
     %br
     = link_to @statementable, style: 'color: #fff' do
       = @statementable.title
+
 %section
   .container
     .page-header.page-header-narrow
       %h3.sub-title
-        %span.image.speaker-image.speaker-image--mini{style: "background-image: url(#{@speaker.image.xs.url}); display: inline-block; width: 1.2em; height: 1.2em;"}
-        #{@speaker.name}님에게 행동을 촉구합니다
+        모든 인물 #{@statementable.speakers.count}명에게 행동을 촉구합니다.
     .panel-body.component-box
       .comments-form
         = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
           = hidden_field_tag :back_commentable, '1'
           = f.hidden_field :commentable_type, value: commentable.class.name
           = f.hidden_field :commentable_id, value: commentable.id
-          = f.hidden_field :target_speaker_id, value: @speaker.id
+          = f.hidden_field :mailing, value: :ready
           - unless user_signed_in?
             .row
               .col-xs-12.col-md-6
@@ -26,16 +26,10 @@
                   = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
               .col-xs-12.col-md-6
                 .form-group
-                  = f.label :commenter_email, @speaker.email.present? ? "이메일(#{@speaker.name}님에게 메일을 발송하려면 반드시 넣어주세요)" : nil
+                  = f.label "이메일(반드시 넣어주세요)"
                   = f.text_field :commenter_email, class: 'form-control'
           .form-group
-            ~ f.text_area :body, placeholder: '제 생각에는...', class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
-          - if @speaker.email.present?
-            .form-group
-              .checkbox
-                %label
-                  = f.check_box :mailing, { checked: true }, 'ready', 'disable'
-                  #{@speaker.name}님에게 메일로도 발송합니다.
+            ~ f.text_area :body, placeholder: '의견...', class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
           - unless user_signed_in?
             .form-group.recaptcha
               .help-block 스팸 방지를 위해 사람인지 확인합니다. 아래 체크 박스를 클릭해 주세요.
@@ -45,7 +39,7 @@
 
       - if !@statementable.respond_to?(:comment_enabled, true) or @statementable.comment_enabled
         .panel-post__comments.post-block
-          = render 'comments/page', commentable: @statementable, comments: @statementable.comments.with_target_speaker(@speaker).page(1), show_form: false
+          = render 'comments/page', commentable: @statementable, comments: @statementable.comments.page(1), show_form: false
 
 - if @statementable.project
   %section.page-block

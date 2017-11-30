@@ -10,5 +10,5 @@
 
 %section#comments-block.page-block.post-block
   .container
-    .post-block__comments
-      = render 'comments/list', commentable: @commentable, comments: @comments
+    .post-block__comments.post-block__comments__no-form
+      = render 'comments/list', commentable: @commentable, comments: @comments, show_form: params[:show_form]

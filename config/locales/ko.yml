@@ -325,6 +325,10 @@ ko:
         default: 관련 인물에게 촉구하기
         id_55: 국회 정치개혁 특위에 촉구하기
         id_56: 국회 관련 의원 및 서울시 교육감에게 촉구하기
+      speaker_section_response_title:
+        default: 관련 인물 응답
+        id_55: 국회 정치개혁 특위 응답
+        id_56: 국회 관련 의원 및 서울시 교육감 응답
     comment:
       form_title:
         default: 의견을 남겨주세요

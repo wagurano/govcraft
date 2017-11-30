@@ -5,11 +5,13 @@
     .row.masonry-container
       - event.speakers.each do |speaker|
         .col-md-2.col-sm-3.col-xs-6
-          = render 'events/template_press/speaker', speaker: speaker, event: event
+          = render 'statementables/speaker', speaker: speaker, statementable: event
+    = link_to [:new_comment_speaker, event], class: 'btn btn-primary btn-lg' do
+      #{event.speakers.count}명 모두에게 촉구하기
+      %i.fa.fa-arrow-right
 
-%a{id: "anchor-speakers"}
-%h3.sub-title 응답메시지
 - if event.statements.responed_body.any?
+  %h3.sub-title 응답메시지
   .panel-body{style:"padding:0px"}
     .panel-post__statements
       .row.masonry-container
@@ -21,7 +23,7 @@
                 .media[statement]
                   .media-left
                     = link_to speaker_path(speaker) do
-                      .media-object.image.speaker-image{style: "background-image: url(#{speaker.image.xs.url});"}
+                      .media-object.image.user-image-sm{style: "background-image: url(#{speaker.image.xs.url}); background-size:cover; background-repeat: no-repeat; background-position: top;"}
 
                   .media-body
                     - if statement.stance.present?

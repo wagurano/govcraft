@@ -1,0 +1,34 @@
+- statement = statementable.statements.speaker_by(speaker)
+- if statement.try(:is_responed?) and
+  - if statement.stance.try(:agree?) || true
+    - ribbon_class = 'label-success'
+  - elsif statement.stance.try(:hold?)
+    - ribbon_class = 'label-warning'
+  - elsif statement.stance.try(:disagree?)
+    - ribbon_class = 'label-danger'
+  - elsif statement.stance.blank?
+    - ribbon_class = 'label-default'
+  %span.label.label-ribbon-right{ class: ribbon_class, style: 'position: absolute; right: 20px; top: 0;'}
+    - if statement.stance.present?
+      = statement.stance.text
+    - else
+      응답
+.panel.panel-default
+  .panel-body
+    .media
+      .media-left
+        = link_to speaker, class: 'card-header' do
+          .user-image-sm{ style: "background-image: url(#{speaker.image.md.url}); background-size:cover; background-repeat: no-repeat; background-position: top;" }
+      .media-body
+        %h5.media-heading
+          = speaker.name
+          %span.text-muted= speaker.organization
+        .text-nowrap{ style: 'font-size: 14px;' }
+          = link_to polymorphic_url([:new_comment_speaker, statementable], speaker_id: speaker.id) do
+            - count = statementable.comments.with_target_speaker(speaker).count
+            촉구하기#{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}
+          - if speaker.twitter.present?
+            - encoding_title = CGI.escape(statementable.title)
+            - tweeter_msg = "'#{encoding_title}'에 대한 의견을 밝혀 주십시오. #{polymorphic_url(statementable)}"
+            = link_to "https://twitter.com/intent/tweet?text=#{tweeter_msg} @#{speaker.twitter}", target:'_blank' do
+              트윗보내기
