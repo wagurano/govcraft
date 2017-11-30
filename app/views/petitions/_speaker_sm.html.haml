@@ -1,0 +1,34 @@
+.panel.panel-default
+  - statement = @petition.statements.speaker_by(speaker)
+  - if statement.try(:is_responed?) and
+    - if statement.stance.try(:agree?) || true
+      - ribbon_class = 'label-success'
+    - elsif statement.stance.try(:hold?)
+      - ribbon_class = 'label-warning'
+    - elsif statement.stance.try(:disagree?)
+      - ribbon_class = 'label-danger'
+    - elsif statement.stance.blank?
+      - ribbon_class = 'label-default'
+    %span.label.label-ribbon-left{ class: ribbon_class}
+      - if statement.stance.present?
+        = statement.stance.text
+      - else
+        응답
+  .panel-body
+    .media
+      .media-left
+        = link_to speaker, class: 'card-header' do
+          = image_tag speaker.image.md.url, class: 'user-image-sm'
+      .media-body
+        %h5.media-heading
+          = speaker.name
+          %span.text-muted= speaker.organization
+        .text-nowrap{ style: 'font-size: 14px;' }
+          = link_to new_comment_speaker_petition_path(petition, speaker_id: speaker.id) do
+            - count = @petition.comments.with_target_speaker(speaker).count
+            촉구하기#{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}
+          - if speaker.twitter.present?
+            - encoding_title = CGI.escape(@petition.title)
+            - tweeter_msg = "'#{encoding_title}'에 대한 의견을 밝혀 주십시오. #{petition_url(@petition)}"
+            = link_to "https://twitter.com/intent/tweet?text=#{tweeter_msg} @#{speaker.twitter}", target:'_blank' do
+              트윗보내기
