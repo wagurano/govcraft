@@ -165,6 +165,11 @@
   width: 180px;
 }
 
+.user-thumb-md {
+  width: $font-size-base*2;
+  height: $font-size-base*2;
+  border-radius: 50%;
+}
 .user-thumb {
   width: $font-size-base*1.5;
   height: $font-size-base*1.5;

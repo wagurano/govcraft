@@ -81,7 +81,7 @@
             .row
               - @petition.speakers.to_a.sample(2).each do |speaker|
                 .col-sm-4.col-xs-6
-                  = render 'petitions/speaker', speaker: speaker, petition: @petition
+                = render 'statementables/speaker', speaker: speaker, statementable: @petition
               .col-sm-4.col-xs-6
                 .panel.panel-default
                   .panel-body

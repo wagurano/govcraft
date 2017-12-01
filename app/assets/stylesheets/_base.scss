@@ -175,10 +175,13 @@ body {
 }
 
 .btn-inverted{
-    &:hover{
-        color:$brand-primary;
-        background-color:$gray-light !important;
-    }
+  &:hover{
+    color: $brand-primary;
+    background-color: $gray-light !important;
+  }
+  &.btn-default:hover{
+    color: $gray-dark;
+  }
 }
 
 //공통 타이틀 스타일

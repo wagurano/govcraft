@@ -4,7 +4,7 @@
   .panel-post__speakers
     .row.masonry-container
       - event.speakers.each do |speaker|
-        .col-md-2.col-sm-3.col-xs-6
+        .col-md-3.col-sm-4.col-xs-12
           = render 'statementables/speaker', speaker: speaker, statementable: event
     - if event.speakers.count > 1
       = link_to [:new_comment_speaker, event], class: 'btn btn-primary btn-lg' do
