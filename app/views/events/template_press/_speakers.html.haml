@@ -6,9 +6,10 @@
       - event.speakers.each do |speaker|
         .col-md-2.col-sm-3.col-xs-6
           = render 'statementables/speaker', speaker: speaker, statementable: event
-    = link_to [:new_comment_speaker, event], class: 'btn btn-primary btn-lg' do
-      #{event.speakers.count}명 모두에게 촉구하기
-      %i.fa.fa-arrow-right
+    - if event.speakers.count > 1
+      = link_to [:new_comment_speaker, event], class: 'btn btn-primary btn-lg' do
+        #{event.speakers.count}명 모두에게 촉구하기
+        %i.fa.fa-arrow-right
 
 - if event.statements.responed_body.any?
   %h3.sub-title 응답메시지
