@@ -3,13 +3,33 @@ module StatementableControlling
 
   private
 
+  def init_statementable(statementable)
+    statementable.title_to_speaker = statementable.title
+    statementable.message_to_speaker = statementable.body
+  end
+
+  def statementable_update_message_to_speaker(statementable)
+    @statementable = statementable
+    if @statementable.update_attributes(title_to_speaker: params[:title_to_speaker], message_to_speaker: params[:message_to_speaker])
+      redirect_to @statementable
+    else
+      error_to_flash(@statementable)
+      render 'statementables/edit_message_to_speaker'
+    end
+  end
+
+  def statementable_edit_message_to_speaker(statementable)
+    @statementable = statementable
+    render 'statementables/edit_message_to_speaker'
+  end
+
   def statementable_edit_speakers(statementable)
     if params[:q].present?
       @searched_speakers = Speaker.where('name like ?', "%#{params[:q]}%")
     end
 
     @statementable = statementable
-    render 'statementable/edit_speakers'
+    render 'statementables/edit_speakers'
   end
 
   def statementable_add_speaker(statementable)
@@ -22,14 +42,18 @@ module StatementableControlling
 
   def statementable_new_comment_speaker(statementable)
     @statementable = statementable
+    @comment = Comment.new
+    if @statementable.respond_to? :message_to_speaker
+      @comment.body = @statementable.message_to_speaker + "<p></p>"
+    end
 
     if params[:speaker_id].present?
       @speaker = Speaker.find_by(id: params[:speaker_id])
       render_404 and return if @speaker.blank?
 
-      render 'statementable/new_comment_speaker'
+      render 'statementables/new_comment_speaker'
     else
-      render 'statementable/new_comment_speaker_for_all'
+      render 'statementables/new_comment_speaker_for_all'
     end
   end
 
@@ -47,7 +71,7 @@ module StatementableControlling
 
     @speaker = @statement.speaker
     @statementable = statementable
-    render 'statementable/update_statement_speaker'
+    render 'statementables/update_statement_speaker'
   end
 
   def statementable_remove_speaker(statementable)

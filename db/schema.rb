@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171130132300) do
+ActiveRecord::Schema.define(version: 20171202002849) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "speaker_id",               null: false
@@ -327,16 +327,18 @@ ActiveRecord::Schema.define(version: 20171130132300) do
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "slug"
     t.string   "title"
-    t.text     "body",           limit: 65535
+    t.text     "body",               limit: 65535
     t.string   "image"
     t.integer  "user_id"
-    t.integer  "comments_count",               default: 0
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.integer  "comments_count",                   default: 0
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.integer  "project_id"
     t.string   "template"
-    t.text     "css",            limit: 65535
+    t.text     "css",                limit: 65535
     t.string   "social_image"
+    t.string   "title_to_speaker"
+    t.text     "message_to_speaker", limit: 65535
     t.index ["project_id"], name: "index_events_on_project_id", using: :btree
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end

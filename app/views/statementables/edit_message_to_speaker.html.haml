@@ -1,0 +1,22 @@
+- commentable = @statementable
+%section#petition-block.page-block.component-header.component-header-auto-height
+  .container
+    %span.gov-label= @statementable.class.model_name.human
+    %br
+    = link_to @statementable, style: 'color: #fff' do
+      = @statementable.title
+%section{ style: 'margin-bottom: 20px' }
+  .container
+    .page-header.page-header-narrow
+      %h3.sub-title
+        촉구메시지
+    .panel-body.component-box
+      .comments-form
+        = form_tag [:update_message_to_speaker, @statementable], method: :put, html: { class: 'gov-action-form-validation' } do
+          .form-group
+            = label_tag '제목'
+            = text_field_tag 'title_to_speaker', @statementable.title_to_speaker, class: 'form-control validate', data: { 'rule-required': true }
+          .form-group
+            ~ text_area_tag :message_to_speaker, @statementable.message_to_speaker, class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
+          = submit_tag '작성', class: 'btn btn-default btn-sm btn-inverted'
+

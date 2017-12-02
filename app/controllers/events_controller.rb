@@ -30,6 +30,7 @@ class EventsController < ApplicationController
 
   def create
     @event.user = current_user
+    init_statementable(@event)
     if @event.save
       redirect_to @event
     else
@@ -51,6 +52,14 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     redirect_to events_path
+  end
+
+  def update_message_to_speaker
+    statementable_update_message_to_speaker(@event)
+  end
+
+  def edit_message_to_speaker
+    statementable_edit_message_to_speaker(@event)
   end
 
   def edit_speakers

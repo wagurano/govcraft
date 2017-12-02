@@ -32,7 +32,7 @@ class PetitionsController < ApplicationController
     end
 
     @statementable = @petition
-    render 'statementable/edit_speakers'
+    render 'statementables/edit_speakers'
   end
 
   def edit_speakers

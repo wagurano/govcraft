@@ -1,5 +1,5 @@
 - petition = @comment.commentable
-- message.subject = "\"#{petition.title}\"에 대해 #{@comment.user_nickname}님이 행동을 촉구합니다"
+- message.subject = petition.formatted_title_to_speaker(@comment.user_nickname)
 !!!
 %html
   %head
@@ -8,11 +8,11 @@
     = stylesheet_link_tag 'emails/base', media: 'all'
   %body
     %p
-      #{@speaker.name}님! 안녕하세요. #{@comment.user_nickname}입니다.
+      #{@speaker.name}님! 안녕하세요. Democracy, everyday 가브크래프트입니다.
     %p
       Democracy, everyday
       = link_to polymorphic_url(petition) do
-        '가브크래프트' #{polymorphic_url(petition)}
+        "#{petition.title}" #{polymorphic_url(petition)}
       에서 아래와 같은 서명이 진행 중입니다.
     .container
       %h4= link_to petition.title, polymorphic_url(petition), target: "_blank"

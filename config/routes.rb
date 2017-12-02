@@ -51,6 +51,17 @@ Rails.application.routes.draw do
   end
   resources :speeches
   resources :statements
+  concern :statementable do
+    member do
+      get 'edit_message_to_speaker'
+      put 'update_message_to_speaker'
+      get 'edit_speakers'
+      put 'add_speaker'
+      delete 'remove_speaker'
+      get 'new_comment_speaker'
+      get 'update_statement_speaker'
+    end
+  end
 
   resources :project_categories
   resources :stories
@@ -62,15 +73,10 @@ Rails.application.routes.draw do
   end
   resources :discussion_categories
   resources :sympathies
-  resources :petitions do
+  resources :petitions, concerns: :statementable do
     resources :signs
     member do
       get 'data'
-      get 'edit_speakers'
-      put 'add_speaker'
-      delete 'remove_speaker'
-      get 'new_comment_speaker'
-      get 'update_statement_speaker'
     end
   end
   resources :polls do
@@ -100,14 +106,9 @@ Rails.application.routes.draw do
   resources :players
   resources :thumbs
 
-  resources :events do
+  resources :events, concerns: :statementable do
     member do
       get 'data'
-      get 'edit_speakers'
-      put 'add_speaker'
-      delete 'remove_speaker'
-      get 'new_comment_speaker'
-      get 'update_statement_speaker'
     end
   end
   resources :sns_events do

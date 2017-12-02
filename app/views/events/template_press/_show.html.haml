@@ -14,8 +14,13 @@
         - if can? :edit, event
           = link_to '수정', edit_event_path(event)
         - if can? :edit, event
+          &middot;
+          = link_to '촉구메시지관리', edit_message_to_speaker_event_path(event)
+        - if can? :edit, event
+          &middot;
           = link_to '촉구인물관리', edit_speakers_event_path(event)
         - if can? :destroy, event
+          &middot;
           = link_to '삭제', event, method: :delete, data: { confirm: '삭제하시겠습니까?' }
 
     .cover-section__body= raw event.body
