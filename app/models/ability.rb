@@ -11,7 +11,7 @@ class Ability
     can [:widget, :new_email, :send_email, :theme, :theme_widget, :theme_single_widget], Agenda
     can :vote_widget, Opinion
     can :agenda, Speaker
-    can [:new_comment_speaker], Petition
+    can [:new_comment_speaker], :all
     can [:download], ArchiveDocument
     can [:update_statement_speaker], :all
 
