@@ -13,12 +13,13 @@ class Ability
     can :agenda, Speaker
     can [:new_comment_speaker], Petition
     can [:download], ArchiveDocument
+    can [:update_statement_speaker], :all
 
     if user
       can [:new_email, :send_email], Agenda
       can :create, [
           Project, Story, Discussion, Poll, Feedback, Survey, Wiki, Sympathy,
-          Memorial, Timeline, TimelineDocument, Event,
+          Memorial, Timeline, TimelineDocument,
           Election, Candidate, Article, Person, Race, Player,
           Thumb
         ]
@@ -29,6 +30,15 @@ class Ability
       end
       can :create, [Petition] do |petition|
         project = petition.try(:project) || (Project.find_by(slug: params[:project_id]) if params[:project_id].present?)
+        project.blank? or project.project_admin?(user)
+      end
+
+      # 이벤트 만들기
+      can :create_event, [Project] do |project|
+        project.blank? or project.project_admin?(user)
+      end
+      can :create, [Event] do |event|
+        project = event.try(:project) || (Project.find_by(slug: params[:project_id]) if params[:project_id].present?)
         project.blank? or project.project_admin?(user)
       end
 
@@ -46,7 +56,7 @@ class Ability
         user == discussion.user or discussion.try(:project).try(:project_admin?, user)
       end
 
-      can [:edit_speakers, :add_speaker, :remove_speaker], [Petition, Event] do |event|
+      can [:edit_speakers, :add_speaker, :remove_speaker, :edit_message_to_speaker, :update_message_to_speaker], [Petition, Event] do |event|
         user == event.user or event.try(:project).try(:project_admin?, user)
       end
 
