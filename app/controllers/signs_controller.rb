@@ -8,10 +8,6 @@ class SignsController < ApplicationController
   end
 
   def create
-    if !verify_recaptcha(model: @sign) and !user_signed_in?
-      redirect_back_for_robot and return
-    end
-
     if user_signed_in? and @sign.petition.signed?(current_user)
       flash[:notice] = t('messages.already_signed')
       redirect_to(@sign.petition) and return
