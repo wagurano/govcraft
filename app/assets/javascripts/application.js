@@ -9,6 +9,7 @@
 //= require redactor2_rails/config
 //= require redactor
 //= require redactor2_rails/langs/ko
+//= require alignment
 //= require fontcolor
 //= require jssocials
 //= require chartkick
@@ -74,7 +75,7 @@ $(document).imagesLoaded( { }, function() {
         }
       },
       toolbarFixed: true,
-      plugins: ['fontcolor']
+      plugins: ['fontcolor', 'alignment']
     });
     $('.redactor .redactor-editor').prop('contenteditable', true);
     $('select.dropdown').dropdown();
