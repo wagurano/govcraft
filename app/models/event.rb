@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   include Statementable
 
-  TEMPLATES = %w( default default_with_photo map map_with_assembly speech sns press )
+  TEMPLATES = %w( default default_with_photo map map_with_assembly speech sns press any_speech )
 
   belongs_to :user
   belongs_to :project
