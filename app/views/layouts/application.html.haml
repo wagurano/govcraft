@@ -11,6 +11,8 @@
     %title 우리가 주인이당! Would You Party?
 
     = stylesheet_link_tag 'application', media: 'all'
+    - if @current_organization.present?
+      = stylesheet_link_tag "organizations/#{@current_organization.slug}/#{@current_organization.slug}_default", media: 'all'
     %link{:href => "https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css", :rel => "stylesheet", :type => "text/css"}/
     %link{href: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel: "stylesheet"}
     %link{href:"https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css", title:"timeline-styles", rel:"stylesheet"}
