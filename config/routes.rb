@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get 'about', to: 'pages#about', as: :about
   get 'components', to: 'pages#components'
+  get 'privacy', to: "pages#privacy", as: 'privacy'
+  get 'terms', to: "pages#terms", as: 'terms'
 
   resources :users
   resources :comments
