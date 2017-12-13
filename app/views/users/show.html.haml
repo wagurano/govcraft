@@ -11,7 +11,33 @@
         %dd= date_f @user.created_at
 
     %section.page-block
-    .row
-      .col-sm-6
-        %h4 참여 중인 #{Project.model_name.human}
-        = render @user.participated_projects
+      %h3.sub-title
+        참여 중인 #{Project.model_name.human}
+      .row
+        .col-sm-6
+
+          = render @user.participated_projects
+
+    %section.page-block
+      %h3.sub-title
+        참여 중인 #{Petition.model_name.human}
+      .row
+        - signs = Sign.where(user: @user)
+        - signs.each do |sign|
+          - petition = Petition.find(sign.petition_id)
+          .col-md-6.col-sm-6.col-xs-12
+            .petition-card[petition]
+              = link_to petition do
+                .card-image{ style: "background-image: url(#{petition.cover_image_url(:md)});"}
+                  .overlay
+                    .title
+                      = petition.title
+                .card-extra
+                  - if petition.has_goal?
+                    .progress
+                      .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{petition.percentage}", :role => "progressbar", :style => "width: #{petition.percentage}%;"}
+                    .pull-right #{petition.percentage}% 달성
+                    #{number_with_delimiter(petition.signs_count)}명 참여
+                  - else
+                    #{petition.signs.last.user_name}님 외
+                    #{number_with_delimiter(petition.signs_count)}명 참여
