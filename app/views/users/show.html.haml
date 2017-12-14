@@ -14,8 +14,7 @@
       %h3.sub-title
         참여 중인 #{Project.model_name.human}
       .row
-        .col-sm-6
-          = render @user.participated_projects
+        = render @user.participated_projects
 
     %section.page-block
       %h3.sub-title
