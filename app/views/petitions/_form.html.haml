@@ -41,6 +41,53 @@
           = f.label :cover_image
           = f.file_field :cover_image, class: 'form-control'
 
+        %legend.m-t 서명 폼
+
+        .form-group
+          = f.label :sign_title
+          = f.text_field :sign_title, class: 'form-control'
+          %p.help-block
+            한마디 입력란의 설명을 정할 수 있습니다.
+
+        .form-group
+          .checkbox
+            %label
+              = f.check_box :use_signer_real_name
+              %strong 실명을 받습니다.
+        .form-group
+          = f.label :signer_real_name_title
+          = f.text_field :signer_real_name_title, class: 'form-control'
+          %p.help-block
+            실명 입력란에 대한 설명을 정합니다. 비워두면 "#{t('activerecord.attributes.sign.signer_real_name')}"으로 표시됩니다.
+
+        .form-group
+          .checkbox
+            %label
+              = f.check_box :use_signer_email
+              %strong 이메일을 받습니다.
+        .form-group
+          = f.label :signer_email_title
+          = f.text_field :signer_email_title, class: 'form-control'
+          %p.help-block
+            이메일 입력란에 대한 설명을 정합니다. 비워두면 "#{t('activerecord.attributes.sign.signer_email')}"으로 표시됩니다.
+
+        .form-group
+          .checkbox
+            %label
+              = f.check_box :use_signer_address
+              %strong 주소를 받습니다.
+        .form-group
+          = f.label :signer_email_title
+          = f.text_field :signer_email_title, class: 'form-control'
+          %p.help-block
+            주소 입력란에 대한 설명을 정합니다. 비워두면 "#{t('activerecord.attributes.sign.signer_address')}"로 표시됩니다.
+
+        .form-group
+          = f.label :confirm_privacy
+          ~ f.text_area :confirm_privacy, class: 'form-control redactor'
+          %p.help-block
+            개인보호 정책 동의에 추가할 문구입니다. (선택사항)
+
         %legend.m-t 추가 기능
 
         .form-group
@@ -48,12 +95,6 @@
             %label
               = f.check_box :comment_enabled
               = Petition.human_attribute_name("comment_enabled")
-
-        .form-group
-          = f.label :sign_title
-          = f.text_field :sign_title, class: 'form-control'
-          %p.help-block
-            서명 폼의 제목을 정할 수 있습니다.
 
         .form-group
           = f.label :social_image

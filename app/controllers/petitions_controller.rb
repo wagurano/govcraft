@@ -15,7 +15,7 @@ class PetitionsController < ApplicationController
   def show
     @project = @petition.project
     @petition.increment!(:views_count)
-    @signs = @petition.signs.recent.where.not(body: [nil, ''])
+    @signs = @petition.signs.recent
     @signs = params[:mode] == 'widget' ? @signs.limit(10) : @signs.page(params[:page])
 
     if params[:mode] == 'widget'
@@ -89,7 +89,10 @@ class PetitionsController < ApplicationController
   private
 
   def petition_params
-    params.require(:petition).permit(:title, :body, :project_id, :signs_goal_count, :cover_image, :thanks_mention, :comment_enabled, :sign_title, :social_image)
+    params.require(:petition).permit(:title, :body, :project_id, :signs_goal_count, :cover_image, :thanks_mention,
+      :comment_enabled, :sign_title, :social_image, :confirm_privacy,
+      :use_signer_email, :use_signer_address, :use_signer_real_name,
+      :signer_email_title, :signer_address_title, :signer_real_name_title)
   end
 
   def reset_meta_tags_for_show

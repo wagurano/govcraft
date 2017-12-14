@@ -28,7 +28,7 @@
         .petition-users-count-label
           서명 참여완료
       - else
-        .petition-join-btn{onclick:"javascript:document.getElementById('sign_signer_name').focus();", style:"cursor:pointer;"}
+        %a.petition-join-btn(href="#anchor-join")
           서명 함께하기
     %div{style:"font-weight:700;margin:40px 0px"}
       %i.fa.fa-calendar

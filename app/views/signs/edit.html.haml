@@ -1,12 +1,23 @@
-%section
+%section{ style: 'margin-top: 30px' }
   .container
     = form_for @sign do |f|
-      .form-group
-        = f.label :signer_name
-        = f.text_field :signer_name, class: 'form-control'
-      .form-group
-        = f.label :signer_email
-        = f.text_field :signer_email, class: 'form-control'
+      - if @sign.petition.use_signer_real_name?
+        .form-group
+          = f.label :signer_real_name
+          = f.text_field :signer_real_name, class: 'form-control'
+      - else
+        .form-group
+          = f.label :signer_name
+          = f.text_field :signer_name, class: 'form-control'
+      - if @sign.petition.use_signer_email?
+        .form-group
+          = f.label :signer_email
+          = f.text_field :signer_email, class: 'form-control'
+      - if @sign.petition.use_signer_address?
+        .form-group
+          = f.label :signer_address
+          = f.text_field :signer_address, class: 'form-control'
+
       .form-group
         = f.label :body
         ~ f.text_area :body, class: 'form-control'
@@ -18,3 +29,4 @@
 
       .form-group
         = f.submit class: 'btn btn-primary'
+

@@ -112,10 +112,16 @@ ko:
         social_image: 소셜공유이미지(선택)
         thanks_mention: 서명한 뒤에 표시되는 문구(선택)
         comment_enabled: 댓글 사용 여부
-        sign_title: 서명폼 제목
+        sign_title: 한마디 입력란 안내문구
+        signer_real_name_title: 실명 입력란 안내문구
+        signer_email_title: 이메일 입력란 안내문구
+        signer_address_title: 주소 입력란 안내문구
+        confirm_privacy: 개인정보 보호정책
       sign:
         signer_name: 이름
         signer_email: 이메일
+        signer_real_name: 실명
+        signer_address: 주소
         body: 나의 한마디
         extra_29_confirm_join: "[행동하기1] 신문광고 제작에 참여합니다 : 후원계좌 농협 356-0516-9884-93 박진"
       poll:
@@ -282,9 +288,6 @@ ko:
               invalid: "비밀번호가 틀립니다."
             reset_password_token:
               invalid: "링크가 바르지 않습니다."
-        sign:
-          signer:
-            blank: 과 이메일을 넣어주세요.
         comment:
           commenter:
             blank: 과 이메일을 넣어주세요.
