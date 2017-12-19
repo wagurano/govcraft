@@ -1,14 +1,23 @@
-%section.cover-section
+%section.speaker-section
   .container
     .media
       .media-left
-        = image_tag speaker.image.xs.url, class: 'media-object'
+        = image_tag speaker.image.xs.url, class: 'media-object speaker-img'
       .media-body
-        %h1.media-heading.cover-section__title
+        %h3.media-heading
           = link_to speaker_path(speaker) do
             = speaker.name
-          %small{ style: 'color: #fff' }
-            %span.speaker__organization= speaker.organization
+        %p
+          #{speaker.organization} 소속
+          %br
+          - if speaker.email.present?
+            %a{ href: "mailto:#{speaker.email}"}
+              %i.fa.fa-envelope
+              이메일
+          - if speaker.twitter.present?
+            %a{ href: "http://twitter.com/#{speaker.twitter}", target: "_blank" }
+              %i.fa.fa-twitter
+              트위터
         %p
           - speaker.positions.each do |position|
             %span.label.label-default.speaker__positions= position
