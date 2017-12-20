@@ -41,6 +41,7 @@ ko:
         category_slug: "[필수] 분류코드는 동일 파일의 '분류코드' 시트를 참조합니다."
   activerecord:
     models:
+      organization: 조직
       poll_and_survey: 투표
       user: 당원
       issue: 이슈

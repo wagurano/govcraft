@@ -9,8 +9,8 @@
     = link_to '최신소식추가', new_story_path('story[project_id]': project.id), class: 'btn btn-link'
   - if can? :edit, project
     = link_to '이벤트추가', new_event_path(project_id: project.id), class: 'btn btn-link'
-  - if can? :edit, project
-    = link_to '운영자관리', admins_path(project_id: project.id), class: 'btn btn-link'
+  - if can? :update_organizers, project
+    = link_to '운영자관리', organizers_path(project_id: project.id), class: 'btn btn-link'
 
 - if admin_menu.try(:strip).present?
   .admin-menu

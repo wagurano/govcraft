@@ -1,0 +1,26 @@
+%section
+  .container
+    .page-header
+      %h3.sub-title #{@organizable.class.model_name.human} 관리자
+
+    - if can? :update_organizers, @organizable
+      .well
+        .role-form
+          = form_for Organizer.new do |f|
+            = f.hidden_field :organizable_type, value: @organizable.class.name
+            = f.hidden_field :organizable_id, value: @organizable.id
+            .form-group
+              = text_field_tag :user_nickname, '', class: 'form-control'
+            = submit_tag '새로운 운영자 추가하기', class: 'btn btn-default'
+
+    .row.m-t
+      - @organizable.organizers.each do |organizer|
+        - user = organizer.user
+        .col-sm-3
+          .well.well-sm
+            = image_tag user.image.sm, class: 'user-thumb-sm'
+            = user.nickname
+            - if can? :manage, organizer
+              .pull-right
+                = link_to organizer, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-default' do
+                  %i.fa.fa-trash

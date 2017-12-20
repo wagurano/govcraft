@@ -15,8 +15,8 @@
         참여 중인 #{Project.model_name.human}
       .row
         - own_project_ids = Project.where(user: @user).map &:id
-        - admin_project_ids = Admin.where(user: @user, adminable_type: "Project").map &:adminable_id
-        - projects = Project.where(id: own_project_ids + admin_project_ids)
+        - organizer_project_ids = Organizer.where(user: @user, organizable_type: "Project").map &:organizable_id
+        - projects = Project.where(id: own_project_ids + organizer_project_ids)
         = render projects
 
     %section.page-block

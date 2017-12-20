@@ -21,16 +21,16 @@
         = smart_format project.body
 
         .cover-section__admins
-          - if project.admins.any?
-            %p 참여(#{project.admins.count})
+          - if project.organizers.any?
+            %p 참여(#{project.organizers.count})
 
           = link_to project.user do
             = image_tag project.user.image_url(:sm), class: 'user-image-sm'
-          - if project.admins.any?
+          - if project.organizers.any?
             %i.fa.fa-times
-            - project.admins.each do |admin|
-              - if project.user != admin.user
-                = link_to admin.user do
-                  = image_tag admin.user.image_url(:sm), class: 'user-image-sm'
+            - project.organizers.each do |organizer|
+              - if project.user != organizer.user
+                = link_to organizer.user do
+                  = image_tag organizer.user.image_url(:sm), class: 'user-image-sm'
 
       = render 'projects/header_admin_menu', project: project

@@ -12,3 +12,6 @@
   = link_to '월간우주당', 'http://zine.wouldyouparty.org/', target: '_blank'
   %br
   = link_to '세월호아카이브', 'http://sewolarchive.org/', target: '_blank'
+  - if can? :update_organizers, fetch_organization_from_request
+    %br
+    = link_to '운영자관리', organizers_path

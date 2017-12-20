@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171220131806) do
-
-  create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.integer "user_id"
-    t.string  "adminable_type", null: false
-    t.integer "adminable_id",   null: false
-    t.index ["adminable_type", "adminable_id"], name: "index_admins_on_adminable_type_and_adminable_id", using: :btree
-    t.index ["user_id", "adminable_id", "adminable_type"], name: "index_project_admins_on_user_and_adminable", unique: true, using: :btree
-    t.index ["user_id"], name: "index_admins_on_user_id", using: :btree
-  end
+ActiveRecord::Schema.define(version: 20171220141253) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "speaker_id",               null: false
@@ -513,6 +504,15 @@ ActiveRecord::Schema.define(version: 20171220131806) do
     t.string   "community_url"
     t.string   "single_project_slug"
     t.index ["user_id"], name: "index_organizations_on_user_id", using: :btree
+  end
+
+  create_table "organizers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer "user_id"
+    t.string  "organizable_type", null: false
+    t.integer "organizable_id",   null: false
+    t.index ["organizable_type", "organizable_id"], name: "index_organizers_on_organizable_type_and_organizable_id", using: :btree
+    t.index ["user_id", "organizable_id", "organizable_type"], name: "index_project_admins_on_user_and_adminable", unique: true, using: :btree
+    t.index ["user_id"], name: "index_organizers_on_user_id", using: :btree
   end
 
   create_table "participations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

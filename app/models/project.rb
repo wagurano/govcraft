@@ -1,4 +1,5 @@
 class Project < ApplicationRecord
+  include Organizable
   extend FriendlyId
   friendly_id :slug, use: [:slugged, :finders]
   belongs_to :user
@@ -13,13 +14,11 @@ class Project < ApplicationRecord
   has_many :surveys, dependent: :destroy
   has_many :participations, dependent: :destroy
   has_many :discussion_categories, dependent: :destroy
-  has_many :admins, dependent: :destroy, as: :adminable
 
   mount_uploader :image, ImageUploader
   mount_uploader :social_image, ImageUploader
 
   scope :recent, -> { order('id DESC') }
-  scope :admin_by, ->(user) { where(id: Admin.where(user: user).where(adminable_type: 'Project').select(:adminable_id)) }
 
   validates :slug, format: { with: /\A[a-z0-9\-_]+\z/i }, uniqueness: true
   validates :user, presence: true
@@ -44,10 +43,6 @@ class Project < ApplicationRecord
 
   def polls_and_surveys_recent
     [polls + surveys].flatten.sort_by(&:created_at).reverse
-  end
-
-  def admin? someone
-    user == someone or admins.exists?(user: someone)
   end
 
   DEFAULT_SORTED_COMPONENT_NAMES = %i(wiki event discussion poll petition story)

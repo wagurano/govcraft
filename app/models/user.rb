@@ -19,14 +19,14 @@ class User < ApplicationRecord
   has_many :participated_projects, through: :participations, source: :project
   has_many :archives, dependent: :restrict_with_exception
   has_many :bulk_tasks, dependent: :destroy
-  has_many :admins, dependent: :destroy
+  has_many :organizers, dependent: :destroy
 
   # validations
   VALID_NICKNAME_REGEX = /\A[ㄱ-ㅎ가-힣a-z0-9_]+\z/i
 
   validates :nickname,
     presence: true,
-    exclusion: { in: %w(app new edit index session login logout users admin all crew issue group project) },
+    exclusion: { in: %w(app new edit index session login logout users organizer admin all crew issue group project) },
     format: { with: VALID_NICKNAME_REGEX, message: :need_nickname_format },
     uniqueness: { case_sensitive: false },
     length: { maximum: 20 }

@@ -47,7 +47,7 @@ Rails.application.routes.draw do
       get 'change2020_polls'
     end
   end
-  resources :admins
+  resources :organizers
   resources :participations do
     delete :cancel, on: :collection
   end
