@@ -1,5 +1,5 @@
 %a{id: "anchor-speakers"}
-%h3.sub-title= t("views.petition.speaker_section_title.id_#{@petition.id}", default: I18n.t("views.petition.speaker_section_title.default"))
+%h3.sub-title= @petition.speaker_section_title.presence || I18n.t("views.petition.speaker_section_title.default")
 .panel-body{style:"padding:0px"}
   .panel-post__speakers
     .row.masonry-container
@@ -8,7 +8,7 @@
           = render 'statementables/speaker', speaker: speaker, statementable: petition
 
 - if @petition.statements.responed_body.any?
-  %h3.sub-title= t("views.petition.speaker_section_response_title.id_#{@petition.id}", default: I18n.t("views.petition.speaker_section_response_title.default"))
+  %h3.sub-title= @petition.speaker_section_response_title.presence || I18n.t("views.petition.speaker_section_response_title.default")
   .panel-body{style:"padding:0px"}
     .panel-post__statements
       - @petition.statements.responed_body.recent.each do |statement|

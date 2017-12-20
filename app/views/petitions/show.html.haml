@@ -76,7 +76,7 @@
           != flash[:sign_notice]
           .share-box{ 'data-share-image': image_url(cover_image) }
           - if @petition.speakers.any?
-            - speaker_section_title = t("views.petition.speaker_section_title.id_#{@petition.id}", default: I18n.t("views.petition.speaker_section_title.default"))
+            - speaker_section_title = @petition.speaker_section_title.presence || I18n.t("views.petition.speaker_section_title.default")
             %h4= speaker_section_title
             .row
               - @petition.speakers.to_a.sample(2).each do |speaker|

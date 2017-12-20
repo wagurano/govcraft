@@ -17,7 +17,10 @@
         = render 'reports/button', reportable: comment
     .comment__actions{ style: 'margin-top: 14px;' }
       = render 'likes/button', likable: comment
-      - if comment.comments.count > 0
-        = link_to comment_path(comment, anchor: 'anchor-comments-list'), class: 'btn btn-sm btn-inverted btn-default' do
+
+      = link_to comment_path(comment, anchor: 'anchor-comments-list'), class: 'btn btn-sm btn-inverted btn-default' do
+        - if comment.comments.count > 0
           댓글 #{comment.comments.count}
+        - else
+          댓글쓰기
 

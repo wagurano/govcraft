@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171214162743) do
+ActiveRecord::Schema.define(version: 20171220014134) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "speaker_id",               null: false
@@ -528,28 +528,30 @@ ActiveRecord::Schema.define(version: 20171214162743) do
 
   create_table "petitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title"
-    t.text     "body",                   limit: 65535
+    t.text     "body",                           limit: 65535
     t.integer  "project_id"
     t.integer  "user_id"
-    t.datetime "created_at",                                           null: false
-    t.datetime "updated_at",                                           null: false
-    t.integer  "likes_count",                          default: 0
-    t.integer  "signs_goal_count",                     default: 1000
-    t.integer  "signs_count",                          default: 0
-    t.integer  "views_count",                          default: 0
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at",                                                   null: false
+    t.integer  "likes_count",                                  default: 0
+    t.integer  "signs_goal_count",                             default: 1000
+    t.integer  "signs_count",                                  default: 0
+    t.integer  "views_count",                                  default: 0
     t.string   "cover_image"
-    t.integer  "anonymous_likes_count",                default: 0
-    t.text     "thanks_mention",         limit: 65535
-    t.boolean  "comment_enabled",                      default: true
+    t.integer  "anonymous_likes_count",                        default: 0
+    t.text     "thanks_mention",                 limit: 65535
+    t.boolean  "comment_enabled",                              default: true
     t.string   "sign_title"
     t.string   "social_image"
-    t.boolean  "use_signer_real_name",                 default: false
-    t.boolean  "use_signer_email",                     default: true
-    t.boolean  "use_signer_address",                   default: false
+    t.boolean  "use_signer_real_name",                         default: false
+    t.boolean  "use_signer_email",                             default: true
+    t.boolean  "use_signer_address",                           default: false
     t.string   "signer_real_name_title"
     t.string   "signer_email_title"
     t.string   "signer_address_title"
-    t.text     "confirm_privacy",        limit: 65535
+    t.text     "confirm_privacy",                limit: 65535
+    t.string   "speaker_section_title"
+    t.string   "speaker_section_response_title"
     t.index ["project_id"], name: "index_petitions_on_project_id", using: :btree
     t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
   end
