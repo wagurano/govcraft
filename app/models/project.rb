@@ -29,9 +29,6 @@ class Project < ApplicationRecord
   attr_accessor :user_nickname
 
   def component_title(modle_name)
-    if model_name == 'event'
-      abort 'test'
-    end
     model = modle_name.classify.safe_constantize
     name_by_model = model.blank? ? I18n.t("activerecord.models.#{modle_name}") : model.model_name.human
     send(:"#{modle_name}_title").blank? ? name_by_model : send(:"#{modle_name}_title")

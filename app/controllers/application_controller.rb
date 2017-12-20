@@ -114,6 +114,8 @@ class ApplicationController < ActionController::Base
     result
   end
 
+  helper_method :seletable_projects_in_form
+
   private
 
   def prepare_flash
@@ -160,5 +162,21 @@ class ApplicationController < ActionController::Base
 
   def current_ability
     @current_ability ||= Ability.new(current_user, params)
+  end
+
+  def seletable_projects_in_form(model)
+    if current_user.is_admin?
+      Project.all
+    else
+      organization_from_request = fetch_organization_from_request
+      if model.project.try(:organization).present?
+        all_projects = model.project.organization.projects
+      elsif organization_from_request.present?
+        all_projects = organization_from_request.projects
+      else
+        all_projects = Project.where(organization: nil)
+      end
+      all_projects = all_projects.admin_by(current_user)
+    end
   end
 end

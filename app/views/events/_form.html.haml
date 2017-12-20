@@ -1,10 +1,12 @@
+- if @project.present? and @event.project.blank?
+  - @event.project = @project
+
 = form_for @event do |f|
-  - if params[:project_id].present?
-    = f.hidden_field :project_id, value: params[:project_id]
-  - else
+  - all_projects = seletable_projects_in_form(@event)
+  - if all_projects.any?
     .form-group
       = f.label :project_id
-      = f.collection_select :project_id, Project.all, :id, :title, {include_blank: '프로젝트 없음'}, { class: 'js-select2 form-control' }
+      = f.collection_select :project_id, all_projects, :id, :title, {include_blank: '프로젝트 없음'}, { class: 'js-select2 form-control' }
 
   .form-group
     = f.label :image

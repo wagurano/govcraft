@@ -2,8 +2,9 @@
   .container
     %h3.sub-title
       = local_assigns[:title_label] || @project.try(:component_title, 'event') || Event.model_name.human
-      %small.pull-right
-        = link_to "이벤트 시작하기", new_event_path(project_id: @project), class: 'btn btn-default btn-inverted btn-sm'
+      - if user_signed_in? and (@project.blank? or can?(:create_event, @project))
+        %small.pull-right
+          = link_to "이벤트 시작하기", new_event_path(project_id: @project), class: 'btn btn-default btn-inverted btn-sm'
 
     .row.masonry-container
       = render events
