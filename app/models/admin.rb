@@ -1,4 +1,4 @@
-class ProjectAdmin < ApplicationRecord
+class Admin < ApplicationRecord
   belongs_to :user
   belongs_to :adminable, polymorphic: true
 

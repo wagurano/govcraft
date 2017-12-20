@@ -21,14 +21,14 @@
         = smart_format project.body
 
         .cover-section__admins
-          - if project.project_admins.any?
-            %p 참여(#{project.project_admins.count})
+          - if project.admins.any?
+            %p 참여(#{project.admins.count})
 
           = link_to project.user do
             = image_tag project.user.image_url(:sm), class: 'user-image-sm'
-          - if project.project_admins.any?
+          - if project.admins.any?
             %i.fa.fa-times
-            - project.project_admins.each do |admin|
+            - project.admins.each do |admin|
               - if project.user != admin.user
                 = link_to admin.user do
                   = image_tag admin.user.image_url(:sm), class: 'user-image-sm'

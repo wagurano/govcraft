@@ -6,7 +6,7 @@
     - if can? :update, @project
       .well
         .role-form
-          = form_for ProjectAdmin.new do |f|
+          = form_for Admin.new do |f|
             = f.hidden_field :adminable_type, value: 'Project'
             = f.hidden_field :adminable_id, value: @project.id
             .form-group
@@ -14,13 +14,13 @@
             = submit_tag '새로운 운영자 추가하기', class: 'btn btn-default'
 
     .row.m-t
-      - @project.project_admins.each do |project_admin|
-        - user = project_admin.user
+      - @project.admins.each do |admin|
+        - user = admin.user
         .col-sm-3
           .well.well-sm
             = image_tag user.image.sm, class: 'user-thumb-sm'
             = user.nickname
-            - if can? :manage, project_admin
+            - if can? :manage, admin
               .pull-right
-                = link_to project_admin, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-default' do
+                = link_to admin, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-default' do
                   %i.fa.fa-trash

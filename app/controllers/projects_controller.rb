@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
     end
     @project.organization = fetch_organization_from_request
     if @project.save
-      @project.project_admins.create(user: current_user)
+      @project.admins.create(user: current_user)
       redirect_to @project
     else
       errors_to_flash(@project)

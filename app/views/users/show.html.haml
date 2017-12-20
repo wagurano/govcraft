@@ -15,7 +15,7 @@
         참여 중인 #{Project.model_name.human}
       .row
         - own_project_ids = Project.where(user: @user).map &:id
-        - admin_project_ids = ProjectAdmin.where(user: @user, adminable_type: "Project").map &:adminable_id
+        - admin_project_ids = Admin.where(user: @user, adminable_type: "Project").map &:adminable_id
         - projects = Project.where(id: own_project_ids + admin_project_ids)
         = render projects
 

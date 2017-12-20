@@ -26,20 +26,20 @@ class Ability
 
       # 서명 만들기
       can :create_peition, [Project] do |project|
-        project.blank? or project.project_admin?(user)
+        project.blank? or project.admin?(user)
       end
       can :create, [Petition] do |petition|
         project = petition.try(:project) || (Project.find_by(slug: params[:project_id]) if params[:project_id].present?)
-        project.blank? or project.project_admin?(user)
+        project.blank? or project.admin?(user)
       end
 
       # 이벤트 만들기
       can :create_event, [Project] do |project|
-        project.blank? or project.project_admin?(user)
+        project.blank? or project.admin?(user)
       end
       can :create, [Event] do |event|
         project = event.try(:project) || (Project.find_by(slug: params[:project_id]) if params[:project_id].present?)
-        project.blank? or project.project_admin?(user)
+        project.blank? or project.admin?(user)
       end
 
       can [:update, :destroy], [
@@ -49,15 +49,15 @@ class Ability
           Race, Player
         ], :user_id => user.id
       can :update, Project do |project|
-        user == project.user or project.project_admin?(user)
+        user == project.user or project.admin?(user)
       end
 
       can :pin, Discussion do |discussion|
-        user == discussion.user or discussion.try(:project).try(:project_admin?, user)
+        user == discussion.user or discussion.try(:project).try(:admin?, user)
       end
 
       can [:edit_speakers, :add_speaker, :remove_speaker, :edit_message_to_speaker, :update_message_to_speaker], [Petition, Event] do |event|
-        user == event.user or event.try(:project).try(:project_admin?, user)
+        user == event.user or event.try(:project).try(:admin?, user)
       end
 
       can :destroy, Comment do |comment|
@@ -73,24 +73,24 @@ class Ability
 
       # 프로젝트 개설자 및 운영자는 프로젝트에 속한 이벤트를 수정할 수 있다
       can :update, [Event] do |model|
-        model.project && ( user == model.project.user or model.project.project_admin?(user) )
+        model.project && ( user == model.project.user or model.project.admin?(user) )
       end
 
       # 프로젝트 개설자 및 운영자는 프로젝트에 속한 글과 댓글을 삭제할 수 있다
       can [:destroy, :update], [Story, Discussion, Petition, Poll, Survey, Wiki, Event] do |model|
-        model.project && ( user == model.project.user or model.project.project_admin?(user) )
+        model.project && ( user == model.project.user or model.project.admin?(user) )
       end
       can :destroy, Comment do |comment|
-        comment.commentable.try(:project) && ( user == comment.commentable.project.user or comment.commentable.project.project_admin?(user) )
+        comment.commentable.try(:project) && ( user == comment.commentable.project.user or comment.commentable.project.admin?(user) )
       end
 
       # 프로젝트 개설자 및 운영자는 프로젝트 운영자를 관리할 수 있다
-      can :manage, ProjectAdmin do |project_admin|
-        if project_admin.persisted?
-          project_admin.adminable && project_admin.adminable.project_admin?(user)
-        elsif params[:project_admin][:adminable_type] == "Project"
-          project = Project.find_by id: params[:project_admin][:adminable_id]
-          project.project_admin?(user)
+      can :manage, Admin do |admin|
+        if admin.persisted?
+          admin.adminable && admin.adminable.admin?(user)
+        elsif params[:admin][:adminable_type] == "Project"
+          project = Project.find_by id: params[:admin][:adminable_id]
+          project.admin?(user)
         end
       end
 
