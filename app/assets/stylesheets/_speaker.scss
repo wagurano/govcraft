@@ -15,6 +15,15 @@
     a{
       color: white;
     }
+    p{
+      font-weight: 200;
+    }
   }
-
+}
+.speaker-opinion{
+  background-color: $gray-light;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: -20px;
+  margin-bottom: 20px;
 }

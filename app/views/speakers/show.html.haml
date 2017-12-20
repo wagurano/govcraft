@@ -23,20 +23,6 @@
       .page-header
         %h2
           = Petition.model_name.human
-          응답 현황
+          참여 현황
       - @speaker.petitions.each do |petition|
-        .panel.panel-default
-          .panel-heading
-            = link_to petition do
-              = petition.title
-          .panel-body
-            - statement = petition.statements.find_by(speaker: @speaker)
-            - if statement.present? and (statement.body.present? or statement.stance.present?)
-              - if statement.stance.present?
-                %h4.media-heading
-                  = statement.stance.text
-              - if statement.body.present?
-                .opinion__body
-                  != simple_format h(statement.body)
-            - else
-              아직 응답이 없습니다.
+        = render petition, speaker: @speaker

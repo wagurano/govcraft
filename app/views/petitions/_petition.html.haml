@@ -11,5 +11,15 @@
             .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{petition.percentage}", :role => "progressbar", :style => "width: #{petition.percentage}%;"}
           .pull-right #{petition.percentage}% 달성
           #{number_with_delimiter(petition.signs_count)}명 참여
-        - else
-          #{number_with_delimiter(petition.signs_count)}명 참여
+  - if local_assigns[:speaker].present?
+    .speaker-opinion
+      - statement = petition.statements.find_by(speaker: @speaker)
+      - if statement.present? and (statement.body.present? or statement.stance.present?)
+        - if statement.stance.present?
+          %h4.media-heading
+            = statement.stance.text
+        - if statement.body.present?
+          .opinion__body
+            != simple_format h(statement.body)
+      - else
+        이 서명에 대해 아직 응답하지 않았습니다.
