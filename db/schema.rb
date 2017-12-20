@@ -544,7 +544,7 @@ ActiveRecord::Schema.define(version: 20171220014134) do
     t.string   "sign_title"
     t.string   "social_image"
     t.boolean  "use_signer_real_name",                         default: false
-    t.boolean  "use_signer_email",                             default: true
+    t.boolean  "use_signer_email",                             default: false
     t.boolean  "use_signer_address",                           default: false
     t.string   "signer_real_name_title"
     t.string   "signer_email_title"
