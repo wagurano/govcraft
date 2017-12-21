@@ -28,7 +28,8 @@
             - count = statementable.comments.with_target_speaker(speaker).count
             촉구하기#{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}
             %i.fa.fa-chevron-right
-          - if speaker.twitter.present?
+          %br
+          - if speaker.email.nil? and speaker.twitter.present?
             - encoding_title = CGI.escape(statementable.title)
             - tweeter_msg = "'#{encoding_title}'에 대한 의견을 밝혀 주십시오. #{polymorphic_url(statementable)}"
             = link_to "https://twitter.com/intent/tweet?text=#{tweeter_msg} @#{speaker.twitter}", target:'_blank', class: "request-speaker-btn" do
