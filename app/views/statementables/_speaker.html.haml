@@ -13,24 +13,25 @@
       = statement.stance.text
     - else
       응답
-.panel.panel-default
+.panel.panel-default.speaker-panel
   .panel-body
     .media
       .media-left
         = link_to speaker, class: 'card-header' do
           .user-thumb-md{ style: "background-image: url(#{speaker.image.md.url}); background-size:cover; background-repeat: no-repeat; background-position: top;" }
       .media-body
-        %h5.media-heading
+        %h5.media-heading.speaker-name
           = speaker.name
-          .text-muted= speaker.organization
-    .row
-      .col-xs-6{ style: "padding-right: 3px;" }
-        = link_to polymorphic_url([:new_comment_speaker, statementable], speaker_id: speaker.id), class: "btn btn-default btn-inverted btn-xs btn-block" do
-          - count = statementable.comments.with_target_speaker(speaker).count
-          촉구하기#{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}
-      - if speaker.twitter.present?
-        - encoding_title = CGI.escape(statementable.title)
-        - tweeter_msg = "'#{encoding_title}'에 대한 의견을 밝혀 주십시오. #{polymorphic_url(statementable)}"
-        .col-xs-6{ style: "padding-left: 3px;" }
-          = link_to "https://twitter.com/intent/tweet?text=#{tweeter_msg} @#{speaker.twitter}", target:'_blank', class: "btn btn-default btn-inverted btn-xs btn-block" do
-            트윗보내기
+          %span.text-muted= speaker.organization
+        .request-speaker
+          = link_to polymorphic_url([:new_comment_speaker, statementable], speaker_id: speaker.id), class: "request-speaker-btn" do
+            - count = statementable.comments.with_target_speaker(speaker).count
+            촉구하기#{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}
+            %i.fa.fa-chevron-right
+          - if speaker.twitter.present?
+            - encoding_title = CGI.escape(statementable.title)
+            - tweeter_msg = "'#{encoding_title}'에 대한 의견을 밝혀 주십시오. #{polymorphic_url(statementable)}"
+            = link_to "https://twitter.com/intent/tweet?text=#{tweeter_msg} @#{speaker.twitter}", target:'_blank', class: "request-speaker-btn" do
+              트윗보내기
+              %i.fa.fa-chevron-right
+

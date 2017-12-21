@@ -27,3 +27,31 @@
   margin-top: -20px;
   margin-bottom: 20px;
 }
+.speaker-panel{
+  border-radius: 0px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  .panel-body{
+    padding: 15px 10px 5px 10px;
+  }
+  .request-speaker-btn{
+    font-size: 14px;
+    color: $brand-primary;
+    font-weight: bold;
+  }
+  .speaker-name{
+    font-size: 16px;
+    font-weight: bold;
+    span{
+      display: block;
+      font-size: 14px;
+      font-weight: 200;
+      color: $gray;
+      line-height: 20px;
+    }
+  }
+  .request-speaker{
+    border-top: 1px solid $gray-light;
+    padding: 8px 0px;
+  }
+}
