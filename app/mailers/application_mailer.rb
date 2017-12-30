@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "info@wouldyouparty.org"
+  default from: "contact@govcraft.org"
   layout 'mailer'
 
   def summary(user, new_projects, new_petitions, new_polls, new_events, new_articles)
