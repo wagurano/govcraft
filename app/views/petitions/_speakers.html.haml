@@ -2,10 +2,22 @@
 %h3.sub-title= @petition.speaker_section_title.presence || I18n.t("views.petition.speaker_section_title.default")
 .panel-body{style:"padding:0px"}
   .panel-post__speakers
-    .row.masonry-container
-      - @petition.speakers.each do |speaker|
-        .col-md-3.col-sm-4.col-xs-12
-          = render 'statementables/speaker', speaker: speaker, statementable: petition
+    - speakers_group = @petition.speakers.to_a.group_by { |speaker| petition.speeched?(speaker) }
+
+    - if speakers_group[true].try(:any?)
+      %h4 촉구 메시지에 응답한 분
+      .row.masonry-container
+        - speakers_group[true].each do |speaker|
+          .col-md-3.col-sm-4.col-xs-6
+            = render 'statementables/speaker', speaker: speaker, statementable: petition
+
+    - if speakers_group[false].try(:any?)
+      - if speakers_group[true].try(:any?)
+        %h4 촉구 메시지에 응답 없는 분
+      .row.masonry-container
+        - speakers_group[false].each do |speaker|
+          .col-md-3.col-sm-4.col-xs-6
+            = render 'statementables/speaker', speaker: speaker, statementable: petition
 
 - if @petition.statements.responed_body.any?
   %h3.sub-title= @petition.speaker_section_response_title.presence || I18n.t("views.petition.speaker_section_response_title.default")

@@ -24,7 +24,7 @@
                     %br
                     = speaker.organization
                   .media-right
-                    - if @statementable.speakers?(speaker)
+                    - if @statementable.speakable?(speaker)
                       .text-nowrap
                         %i.fa.fa-check
                         연결됨

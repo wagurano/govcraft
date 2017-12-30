@@ -6,7 +6,15 @@ module Statementable
     has_and_belongs_to_many :speakers, -> { uniq }
   end
 
-  def speakers? speaker
+  def speakable? speaker
     speakers.include? speaker
+  end
+
+  def speeched? speaker
+    speakable?(speaker) and statement_of(speaker).try(:is_responed?)
+  end
+
+  def statement_of speaker
+    statements.find_by(speaker: speaker)
   end
 end
