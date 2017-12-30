@@ -52,11 +52,11 @@ gem 'axlsx', github: 'randym/axlsx', ref: 'd41258e'
 gem 'axlsx_rails', '~> 0.5.0'
 gem 'htmlentities', '~> 4.3', '>= 4.3.4'
 gem "recaptcha", require: "recaptcha/rails"
-gem 'nokogiri', '~> 1.7', '>= 1.7.0.1'
 gem 'roo', '~> 2.7', '>= 2.7.1'
 gem 'google_drive'
 gem 'rest-client', '~> 2.0', '>= 2.0.2'
 gem 'streamio-ffmpeg'
+gem 'nokogiri', '~> 1.8.1'
 
 # file upload
 gem 'carrierwave', '~> 0.10.0'
