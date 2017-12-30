@@ -15,7 +15,7 @@ class PetitionsController < ApplicationController
   def show
     @project = @petition.project
     @petition.increment!(:views_count)
-    @signs = @petition.signs.recent
+    @signs = @petition.signs.where.any_of(*([Sign.where.not(body: nil).where.not(body: ''), (Sign.where(user: current_user) if current_user.present?)].compact)).recent
     @signs = params[:mode] == 'widget' ? @signs.limit(10) : @signs.page(params[:page])
 
     if params[:mode] == 'widget'

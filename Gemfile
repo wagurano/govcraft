@@ -7,7 +7,7 @@ gem 'unicorn'
 # database
 gem 'sqlite3'
 gem 'mysql2', '>= 0.3.13', '< 0.5'
-
+gem 'activerecord_any_of', github: 'oelmekki/activerecord_any_of', ref: '22b3bf'
 # model
 gem 'sequenced', '~> 3.1', '>= 3.1.1'
 gem 'kaminari', '~> 0.17.0'

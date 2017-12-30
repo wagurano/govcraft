@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/oelmekki/activerecord_any_of.git
+  revision: 22b3bfb4614c2223242dc496328356923a239bed
+  ref: 22b3bf
+  specs:
+    activerecord_any_of (1.4)
+      activerecord (>= 3.2.13, < 6)
+
+GIT
   remote: git://github.com/randym/axlsx.git
   revision: d41258edda220620226c20fb75ee25f36abe3636
   ref: d41258e
@@ -669,6 +677,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord_any_of!
   acts-as-taggable-on (~> 4.0)
   axlsx!
   axlsx_rails (~> 0.5.0)
@@ -768,4 +777,4 @@ DEPENDENCIES
   wkhtmltoimage-binary (~> 0.12.2)
 
 BUNDLED WITH
-   1.15.4
+   1.16.0.pre.3
