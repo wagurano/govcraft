@@ -145,14 +145,14 @@ ActiveRecord::Schema.define(version: 20171220141253) do
   end
 
   create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.text     "url",                   limit: 65535
+    t.text     "url",                   limit: 65535,             null: false
     t.text     "body",                  limit: 65535
     t.string   "title"
     t.text     "desc",                  limit: 65535
     t.text     "metadata",              limit: 65535
     t.string   "image"
     t.string   "page_type"
-    t.string   "crawling_status"
+    t.string   "crawling_status",                                 null: false
     t.datetime "crawled_at"
     t.string   "site_name"
     t.integer  "image_height",                        default: 0
@@ -218,7 +218,7 @@ ActiveRecord::Schema.define(version: 20171220141253) do
   end
 
   create_table "candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string   "name"
+    t.string   "name",                      null: false
     t.text     "body",        limit: 65535
     t.string   "image"
     t.integer  "election_id",               null: false
@@ -248,7 +248,7 @@ ActiveRecord::Schema.define(version: 20171220141253) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
-    t.string   "commentable_type"
+    t.string   "commentable_type",                                    null: false
     t.integer  "commentable_id",                                      null: false
     t.text     "body",                  limit: 65535
     t.datetime "created_at",                                          null: false
@@ -387,7 +387,7 @@ ActiveRecord::Schema.define(version: 20171220141253) do
   end
 
   create_table "issues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string   "title"
+    t.string   "title",                                                null: false
     t.integer  "following_issues_count",               default: 0
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
@@ -402,7 +402,7 @@ ActiveRecord::Schema.define(version: 20171220141253) do
 
   create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id",      null: false
-    t.string   "likable_type"
+    t.string   "likable_type", null: false
     t.integer  "likable_id",   null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -633,7 +633,7 @@ ActiveRecord::Schema.define(version: 20171220141253) do
     t.string   "poll_title"
     t.string   "petition_title"
     t.string   "wiki_title"
-    t.string   "slug",                                             null: false
+    t.string   "slug"
     t.boolean  "survey_enabled",                    default: true
     t.string   "survey_title"
     t.string   "subtitle"
@@ -665,7 +665,7 @@ ActiveRecord::Schema.define(version: 20171220141253) do
 
   create_table "redactor2_assets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
-    t.string   "data_file_name"
+    t.string   "data_file_name",               null: false
     t.string   "data_content_type"
     t.integer  "data_file_size"
     t.integer  "assetable_id"
@@ -680,7 +680,7 @@ ActiveRecord::Schema.define(version: 20171220141253) do
   end
 
   create_table "reports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string   "reportable_type"
+    t.string   "reportable_type", null: false
     t.integer  "reportable_id",   null: false
     t.integer  "user_id",         null: false
     t.datetime "created_at",      null: false
@@ -924,15 +924,15 @@ ActiveRecord::Schema.define(version: 20171220141253) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string   "email"
+    t.string   "email",                                               null: false
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",                        default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "provider"
-    t.string   "uid"
+    t.string   "provider",                                            null: false
+    t.string   "uid",                                                 null: false
     t.string   "nickname"
     t.string   "image"
     t.datetime "created_at",                                          null: false

@@ -6,7 +6,7 @@
         - if project.subtitle.present?
           %h3= project.subtitle
 
-        = smart_format project.body
+        = raw project.body
         %hr
         %h2{ style: 'font-weight: bold; margin-bottom: 12px;' } 네트워크
 
