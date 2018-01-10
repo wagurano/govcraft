@@ -74,6 +74,12 @@ ko:
       user:
         nickname: 아이디
         description: 자기소개
+        site_info: 사이트 주소
+        facebook_info: 페이스북 주소
+        twitter_info: 트위터 주소
+        skill: 스킬
+        interest: 관심사
+        description: 자기소개
         email: 이메일
         image: 프로필사진
         password: 비밀번호
@@ -335,4 +341,3 @@ ko:
       form_title:
         default: 의견을 남겨주세요
         sympathy: 추모의 글을 남겨주세요
-

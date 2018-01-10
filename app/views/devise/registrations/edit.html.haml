@@ -17,6 +17,15 @@
         = f.label :email
         = f.email_field :email, autofocus: true, class: 'form-control'
       .form-group
+        = f.label :site_info
+        = f.text_field :site_info, class: 'form-control', placeholder: 'ex) http://govcraft.org'
+      .form-group
+        = f.label :facebook_info
+        = f.text_field :facebook_info, class: 'form-control', placeholder: 'ex) https://www.facebook.com/PartiUnion'
+      .form-group
+        = f.label :twitter_info
+        = f.text_field :twitter_info, class: 'form-control', placeholder: 'ex) https://twitter.com/parti_xyz'
+      .form-group
         = f.label :image
         = f.file_field :image, autofocus: true, class: 'form-control'
         = f.hidden_field :image_cache

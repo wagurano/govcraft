@@ -2,8 +2,8 @@
   @extend .img-circle;
   background-size: cover;
   vertical-align: middle;
-  width: 20px;
-  height: 20px;
+  width: 50px;
+  height: 50px;
   display: inline-block;
 
   h2 & {
@@ -12,3 +12,23 @@
     vertical-align: top;
   }
 }
+
+.skill-button {
+  margin-left: 1rem;
+  color: white;
+  background-color: rgb(149,114,210);
+}
+
+.skill-button-temp {
+  margin-left: 1rem;
+  color: rgb(149,114,210);
+  background-color: white;
+}
+
+.profile-thumbnail {
+  text-align: center;
+}
+// .img-user {
+//   width: 50px;
+//   height: 50px;
+// }
