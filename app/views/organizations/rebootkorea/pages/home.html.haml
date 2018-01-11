@@ -1,0 +1,61 @@
+%section#about-section
+  .container
+    %h2
+      국민개헌네트워크
+
+
+%section#projects.page-block
+  .container
+    = link_to projects_url(subdomain: root_subdomain) do
+      %h3.sub-title= Project.model_name.human
+    .row
+      = render @current_organization.projects.recent.limit(3)
+    %hr{style:"color:rgba(230, 230, 230, 1);height:2px;margin-top:0px;"}
+
+- discussions = Discussion.recent.where(project: @current_organization.projects).limit(10)
+%section#discussions.page-block
+  .container
+    = link_to discussions_url(subdomain: root_subdomain) do
+      %h3.sub-title= Discussion.model_name.human
+    %table.table
+      = render discussions
+
+- stories = Story.recent.by_organization(@current_organization).limit(10)
+- if stories.any?
+  %section#stories.page-block
+    .container
+      = link_to stories_path do
+        %h3.sub-title= Story.model_name.human
+      .row
+        = render stories
+
+%section.rebootkorea.page-block
+  .container
+    %h3.sub-title
+      함께 하는 단체
+    = link_to 'https://urimanna.govcraft.org/', target: "blank" do
+      .organization-area
+        .desc
+          %h4
+            우리가만드는대한민국
+          전국적인 온라인 만민공동회 구축을 통해 깨어있는 시민들의 자발적 네트워크를 구축해 나가는 것을 지향합니다
+
+    = link_to 'https://change2020.org/', target: "blank" do
+      .organization-area
+        .desc
+          %h4
+            바꿈
+          세상을 바꾸는 우리 사회 공론장을 만드는 시민사회단체 바꿈 세상을 바꾸는 꿈입니다.
+
+    = link_to 'http://parti.xyz', target: "blank" do
+      .organization-area
+        .desc
+          %h4
+            빠띠
+          빠띠는 우리 사회 각 영역에 민주주의 문화를 확산시키기 위해 IT플랫폼, 컨텐츠, 커뮤니티를 만드는 민주주의 활동가 그룹입니다.
+
+    = link_to 'http://www.changecorea.co.kr/', target: "blank" do
+      .organization-area
+        .desc
+          %h4
+            씨알재단
