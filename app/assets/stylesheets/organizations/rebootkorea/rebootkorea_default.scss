@@ -1,0 +1,35 @@
+@import "variables";
+@import "organizations/rebootkorea/rebootkorea";
+
+.header-desc{
+  margin: 20px 0px;
+  font-size: 18px;
+  color: lightgray;
+  font-weight: 200;
+  max-width: 550px;
+}
+.organization-area{
+  width: 220px;
+  height: 220px;
+  display: inline-block;
+  margin-right: 10px;
+  float: left;
+  margin-top: -1px;
+  padding: 5px;
+  border: 3px solid #d8d8d8;
+  background-color: #f7f7f7;
+  h4{
+    height: 40px;
+  }
+  .desc{
+    background-color: #ffffff;
+    padding: 10px;
+    height: 100%;
+    color: dimgray;
+  }
+  @media (max-width: $screen-xs-max) {
+    width: 100%;
+    margin-bottom: 10px;
+    height: 170px;
+  }
+}
