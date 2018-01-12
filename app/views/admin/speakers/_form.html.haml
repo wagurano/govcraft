@@ -26,8 +26,17 @@
         = f.text_field :twitter, placeholder: '아이디만 적어주세요 (ex. @nick_name이라면 nick_name만 쓰기 )', class: 'form-control'
 
       .form-group
+        = f.label :public_site
+        = f.text_field :public_site, class: 'form-control'
+
+      .form-group
+        = f.label :election_region
+        = f.text_field :election_region, placeholder: 'ex) 은평갑', class: 'form-control'
+
+      .form-group
         = f.label :category
         = f.text_field :category, class: 'form-control'
+
 
       .form-group
         = f.label '테마에 쓰이는 분류'

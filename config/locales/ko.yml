@@ -220,6 +220,12 @@ ko:
         title: 제목
         body: 내용
         published_at: 발행일
+      speaker:
+        public_site: 공식 웹사이트
+        election_region: 선거구
+        organization: 소속 정당
+        name: 이름
+        image: 사진
       speech:
         title: 제목
         video_url: 동영상주소 URL(필수)
