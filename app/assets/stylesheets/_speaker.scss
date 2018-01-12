@@ -1,13 +1,20 @@
 .speaker-section{
   background-position: top center;
   background-size: cover;
-  background-color: $gray-darker;
+  background: #75a6d8; /* Old browsers */
+  background: -moz-linear-gradient(left, #75a6d8 0%, #7453ed 50%, #d3329b 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #75a6d8 0%,#7453ed 50%,#d3329b 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #75a6d8 0%,#7453ed 50%,#d3329b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#75a6d8', endColorstr='#d3329b',GradientType=1 ); /* IE6-9 */
   color: #fff;
   padding-top: 80px;
   padding-bottom: 40px;
 
   img.speaker-img{
-    border: 10px solid white;
+    border: 5px solid rgba(255,255,255,0.5);
+  }
+  .media-heading{
+    font-weight: bold;
   }
 
   .media-body{
@@ -17,6 +24,11 @@
     }
     p{
       font-weight: 200;
+      font-size: 18px;
+      line-height: 24px;
+      span{
+        font-weight: 500;
+      }
     }
   }
 }

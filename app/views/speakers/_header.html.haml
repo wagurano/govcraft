@@ -7,9 +7,23 @@
         %h3.media-heading
           = link_to speaker_path(speaker) do
             = speaker.name
+          %small
+            - speaker.positions.each do |position|
+              %span.label.label-default.speaker__positions= position
         %p
-          #{speaker.organization} 소속
+          %span
+            #{speaker.organization}
+          소속
+          - if speaker.election_region.present?
+            %span
+              #{speaker.election_region}
+            지역
           %br
+        %p.sns
+          - if speaker.public_site.present?
+            %a{ href: "#{speaker.public_site.to_s}" }
+              %i.fa.fa-home
+              웹사이트
           - if speaker.email.present?
             %a{ href: "mailto:#{speaker.email}"}
               %i.fa.fa-envelope
@@ -19,5 +33,4 @@
               %i.fa.fa-twitter
               트위터
         %p
-          - speaker.positions.each do |position|
-            %span.label.label-default.speaker__positions= position
+
