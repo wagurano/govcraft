@@ -15,13 +15,26 @@
       %span.visible-xs-block
       개헌안에 담길 수 있기를 요구합니다.
 
-%section#projects.page-block
+%section#highlight-section
   .container
-    = link_to projects_url(subdomain: root_subdomain) do
-      %h3.sub-title= Project.model_name.human
-    .row
-      = render @current_organization.projects.recent.limit(3)
-    %hr{style:"color:rgba(230, 230, 230, 1);height:2px;margin-top:0px;"}
+    %iframe{:allowscriptaccess => "always", :allowFullScreen => "true", :frameborder => "0", :height => "430", :src => "http://www.youtube.com/embed/90TywLI3fCc", :title => "YouTube video player", :width => "100%"}
+    = link_to 'http://rebootkorea.govcraft.org/p/rebootkorea#anchor-project-poll-and-survey' do
+      .main-banner
+        우리가 함께 하는 개헌안 투표
+        %i.fa.fa-hand-pointer-o
+        %span.hidden-xs
+          참여하기
+
+
+- stories = Story.recent.by_organization(@current_organization).limit(6)
+- if stories.any?
+  %section#stories.page-block
+    .container
+      = link_to stories_path do
+        %h3.sub-title= Story.model_name.human
+      .row.masonry-container
+        = render stories
+
 
 - discussions = Discussion.recent.where(project: @current_organization.projects).limit(10)
 %section#discussions.page-block
@@ -31,14 +44,6 @@
     %table.table
       = render discussions
 
-- stories = Story.recent.by_organization(@current_organization).limit(10)
-- if stories.any?
-  %section#stories.page-block
-    .container
-      = link_to stories_path do
-        %h3.sub-title= Story.model_name.human
-      .row
-        = render stories
 
 %section.page-block
   .container
