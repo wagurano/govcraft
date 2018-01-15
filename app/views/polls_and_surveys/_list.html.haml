@@ -8,7 +8,7 @@
   .section
     - models = [polls + surveys].flatten.sort_by(&:created_at).reverse
     - if models.any?
-      .row
+      .row.masonry-container
         - models .each do |model|
           = render model, hide_project_title: true
 
