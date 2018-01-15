@@ -16,16 +16,19 @@
             - attrs = { 'data-url': feedbacks_path(option_id: option.id), 'data-remote': true, 'data-method': :post}
           - else
             - attrs = { 'data-url': new_user_session_path, 'data-method': :get }
-        .item.gov-action-rails-link{ attrs.merge(style: 'margin-bottom: 12px') }
+        .row.item.gov-action-rails-link{ attrs.merge(style: 'margin-bottom: 12px') }
           - if survey.open?
             %i.check.square.outline.icon{ style: "font-size: 2em; line-height: 1.5em; color: #{option_selected?(option, current_user) ? '#4a5dd0' : '#bbb'};"}
-          .content{ style: 'width: 100%' }
+          .col-sm-1.item-checkbox
+            %i.fa.fa-check-square-o{ class: ('active' if option_selected?(option, current_user)) }
+          .col-sm-11.content
             .header
-              .option-body= option.body
+              .option-body{ class: ('active' if option_selected?(option, current_user)) }
+                = option.body
               - if option.desc.present?
                 .option-desc{ style: 'font-weight: normal;' }= option.desc
             .description{ style: 'margin-top: 3px;' }
-              .chart{ class: ('active' if option_selected?(option, current_user)) }
+              .chart
                 %span.chart__label #{option.feedbacks_count + option.anonymous_feedbacks_count}표
                 .chart__bar{ style: "width: #{survey.percentage(option)}%"}
   .footer

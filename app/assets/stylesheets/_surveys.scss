@@ -1,6 +1,9 @@
 .survey-card{
   margin: 15px 0px;
   border:1px solid $gray-light;
+  @media (max-width: $screen-xs-max) {
+    width: 100%;
+  }
 }
 .options-panel {
   border: 1px solid $gray-lighter;
@@ -162,6 +165,18 @@
         margin-top: 20px;
       }
     }
+  }
+}
+.option-body.active{
+  color: $brand-primary;
+}
+.item-checkbox{
+  font-size: 20px;
+  i{
+    color: #c0c0c2;
+  }
+  i.active{
+    color: $brand-primary;
   }
 }
 
