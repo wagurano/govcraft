@@ -1,0 +1,31 @@
+.townhall-card{
+  margin: 15px 0px;
+  border:1px solid $gray-light;
+  @media (max-width: $screen-xs-max) {
+    width: 100%;
+  }
+  .options-panel > .header{
+    color: #ffffff;
+    background-color: #713f95;
+  }
+  .title{
+    font-weight: 200;
+    line-height: 40px;
+    font-size: 16px;
+  }
+  .panel-body{
+    background-color: $gray-lightest;
+    font-weight: 200;
+  }
+  .option{
+    padding:5px 0px;
+    &__title{
+      font-weight: bold;
+    }
+    .chart{
+      &__bar{
+        background-color: rgba(242, 66, 117, 0.8);
+      }
+    }
+  }
+}
