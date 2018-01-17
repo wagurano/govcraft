@@ -16,7 +16,7 @@
         - if current_user.is_admin?
           - all_projects = Project.all
         - else
-          - all_projects = (@petition.project.try(:organization).try(:projects) || fetch_organization_from_request.try(:projects) || Project.where(organization: nil)).organize_by(current_user)
+          - all_projects = (@petition.project.try(:organization).try(:projects) || fetch_organization_from_request.try(:projects) || Project.where(organization: nil)).organize_by(current_user, 'Project')
 
         - if all_projects.any?
           .form-group

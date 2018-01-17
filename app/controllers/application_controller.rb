@@ -176,7 +176,7 @@ class ApplicationController < ActionController::Base
       else
         all_projects = Project.where(organization: nil)
       end
-      all_projects = all_projects.organize_by(current_user)
+      all_projects = all_projects.organize_by(current_user, 'Project')
     end
   end
 end
