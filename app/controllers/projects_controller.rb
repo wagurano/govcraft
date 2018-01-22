@@ -15,6 +15,11 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    if @project.townhall_enabled
+      json = RestClient.get "#{ENV["TOWNHALL_API_BASE"]}/meetings/#{@project.townhall_id}.json"
+      parsed_json = JSON.parse(json.body)
+      @battles = parsed_json.try(:[], "battles") || []
+    end
     @project.increment!(:views_count)
   end
 
@@ -78,7 +83,7 @@ class ProjectsController < ApplicationController
       :story_enabled, :discussion_enabled, :poll_enabled, :petition_enabled, :wiki_enabled,
       :story_title, :discussion_title, :poll_title, :petition_title, :wiki_title,
       :story_sequence, :discussion_sequence, :poll_sequence, :petition_sequence, :wiki_sequence, :event_sequence,
-      :townhall_enabled, :townhall_title, :townhall_sequence,
+      :townhall_enabled, :townhall_title, :townhall_sequence, :townhall_id,
       :event_title
     )
   end
