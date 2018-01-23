@@ -1,6 +1,6 @@
 %section#townhalls-in-project
   .container
-    - if user_signed_in? and (@project.blank? or can?(:manage, @project)) and battles.length < 1
+    - if user_signed_in? and (@project.blank? or can?(:manage, @project)) and (battles.nil? or battles.length < 1)
       .alert.alert-warning
         타운홀 정책 배틀 데이터가 없습니다. 미팅 번호를 정확하게 넣었는지 확인해주세요.(이 메세지는 프로젝트 관리자에게만 보입니다)
     -else
