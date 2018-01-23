@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    if @project.townhall_enabled
+    if @project.townhall_enabled and @project.townhall_id.presnet?
       json = RestClient.get "#{ENV["TOWNHALL_API_BASE"]}/meetings/#{@project.townhall_id}.json"
       parsed_json = JSON.parse(json.body)
       @battles = parsed_json.try(:[], "battles") || []
