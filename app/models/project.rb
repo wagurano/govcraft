@@ -45,7 +45,7 @@ class Project < ApplicationRecord
     [polls + surveys].flatten.sort_by(&:created_at).reverse
   end
 
-  DEFAULT_SORTED_COMPONENT_NAMES = %i(wiki event discussion poll petition story)
+  DEFAULT_SORTED_COMPONENT_NAMES = %i(wiki event discussion poll petition story townhall)
   def component_sequence(component_name)
     attr = :"#{component_name}_sequence"
     ((try(attr) || 0) * 10) + DEFAULT_SORTED_COMPONENT_NAMES.index(component_name.to_sym)
