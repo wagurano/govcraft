@@ -19,13 +19,10 @@
 
 %section#highlight-section
   .container
-    %iframe{:allowscriptaccess => "always", :allowFullScreen => "true", :frameborder => "0", :height => "430", :src => "http://www.youtube.com/embed/90TywLI3fCc", :title => "YouTube video player", :width => "100%"}
     = link_to 'http://rebootkorea.govcraft.org/p/rebootkorea#anchor-project-poll-and-survey' do
       .main-banner
-        우리가 함께 하는 개헌안 투표
+        정책배틀 바로가기
         %i.fa.fa-hand-pointer-o
-        %span.hidden-xs
-          참여하기
 
 
 - stories = Story.recent.by_organization(@current_organization).limit(6)
@@ -61,7 +58,7 @@
             우리가만드는대한민국
           전국적인 온라인 만민공동회 구축을 통해 깨어있는 시민들의 자발적 네트워크를 구축해 나가는 것을 지향합니다
 
-    = link_to 'https://change2020.org/', target: "blank" do
+    = link_to 'http://change2020.org/', target: "blank" do
       .organization-area
         .desc
           %h4
