@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180122034446) do
+ActiveRecord::Schema.define(version: 20180125141247) do
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "speaker_id",               null: false
@@ -653,6 +653,7 @@ ActiveRecord::Schema.define(version: 20180122034446) do
     t.string   "townhall_title"
     t.integer  "townhall_sequence"
     t.integer  "townhall_id"
+    t.boolean  "event_enabled",                     default: true
     t.index ["organization_id"], name: "index_projects_on_organization_id", using: :btree
     t.index ["project_category_id"], name: "index_projects_on_project_category_id", using: :btree
     t.index ["user_id"], name: "index_projects_on_user_id", using: :btree

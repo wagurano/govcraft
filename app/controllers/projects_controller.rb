@@ -82,7 +82,7 @@ class ProjectsController < ApplicationController
       :slug, :project_category_id,
       :story_enabled, :discussion_enabled, :poll_enabled, :petition_enabled, :wiki_enabled,
       :story_title, :discussion_title, :poll_title, :petition_title, :wiki_title,
-      :story_sequence, :discussion_sequence, :poll_sequence, :petition_sequence, :wiki_sequence, :event_sequence,
+      :story_sequence, :discussion_sequence, :poll_sequence, :petition_sequence, :wiki_sequence, :event_enabled, :event_sequence,
       :townhall_enabled, :townhall_title, :townhall_sequence, :townhall_id,
       :event_title
     )

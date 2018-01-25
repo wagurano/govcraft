@@ -100,6 +100,7 @@ ko:
         petition_title: 서명 기능 이름
         wiki_enabled: 위키 기능 사용
         wiki_title: 위키 기능 이름
+        event_enabled: 이벤트 기능 사용
         event_title: 이벤트 기능 이름
         townhall_enabled: 타운홀 위젯 사용
         townhall_title: 타운홀 위젯 이름

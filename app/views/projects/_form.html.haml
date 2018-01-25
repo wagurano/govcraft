@@ -142,7 +142,9 @@
 
       .row
         .col-sm-3
-          이벤트
+          %label
+            = f.check_box :event_enabled
+            = Project.human_attribute_name("event_enabled")
         .col-sm-6
           .form-group
             = f.text_field :event_title, placeholder: Project.human_attribute_name("event_title"), class: 'form-control'
