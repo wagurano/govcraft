@@ -15,7 +15,7 @@
           .row.masonry-container
             = render @project.stories.recent.limit(6)
   - when :townhall
-    - if @project.townhall_enabled?
+    - if @project.townhall_enabled? and @current_organization.try(:slug) == 'rebootkorea'
       %section.page-block
         %a{id: "anchor-project-townhall"}
         = render "townhalls/list", project: @project, battles: @battles
