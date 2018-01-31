@@ -34,17 +34,23 @@ class FeedbacksController < ApplicationController
           if survey.multi_selectable?
             if @previous_selected_options.include? @option
               @option.decrement(:anonymous_feedbacks_count)
-              mark_anonymous_unselected_option(@option.survey, @option)
+              mark_anonymous_unselected_option(@option)
             else
               @option.increment(:anonymous_feedbacks_count)
               mark_anonymous_selected_option(@option)
             end
           else
-            @option.survey.options.update_all(anonymous_feedbacks_count: 0)
-            mark_anonymous_unselected_option(@option.survey)
-            if @previous_selected_options.empty? or !@previous_selected_options.include? @option
+            if @previous_selected_options.include? @option
+              @option.decrement(:anonymous_feedbacks_count)
+              mark_anonymous_unselected_option(@option)
+            else
               @option.increment(:anonymous_feedbacks_count)
               mark_anonymous_selected_option(@option)
+              @previous_selected_options.each do |option|
+                option.decrement(:anonymous_feedbacks_count)
+                option.save
+                mark_anonymous_unselected_option(option)
+              end
             end
           end
           @option.save

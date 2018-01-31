@@ -1,10 +1,11 @@
 module FeedbackHelper
   def mark_anonymous_selected_option(option)
     updated = selected_surveys
-    if updated["#{option.survey.id}"].blank?
-      updated["#{option.survey.id}"] = [option.id]
+    survey = option.survey
+    if updated["#{survey.id}"].blank?
+      updated["#{survey.id}"] = [option.id]
     else
-      updated["#{option.survey.id}"] << option.id
+      updated["#{survey.id}"] << option.id
     end
 
     begin
@@ -15,8 +16,9 @@ module FeedbackHelper
     end
   end
 
-  def mark_anonymous_unselected_option(survey, option = nil)
+  def mark_anonymous_unselected_option(option)
     updated = selected_surveys
+    survey = option.survey
     if option.blank?
       updated["#{survey.id}"] = nil
     else
