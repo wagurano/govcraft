@@ -3,8 +3,17 @@
     %h2 인물
 
 %section#events.page-block
+  .container.text-center
+    .row
+      - Speaker.tag_counts_on(:positions).each do |position|
+        - btn_class = params[:position] == position.name ? 'btn-primary' : 'btn-default'
+        = link_to speakers_path(position: position.name), class: 'btn btn-lg ' + btn_class do
+          = position.name
+          (#{position.count})
+
+%section#events.page-block
   .container
     .row
-      - Speaker.order(:name).each do |speaker|
+      - @speakers.each do |speaker|
         .col-xs-6.col-sm-3
           = render speaker

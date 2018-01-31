@@ -2,6 +2,11 @@ class SpeakersController < ApplicationController
   load_and_authorize_resource
 
   def index
+    if params[:position]
+      @speakers = Speaker.tagged_with(params[:position], on: :positions, any: true).order(:name)
+    else
+      @speakers = Speaker.order(:name)
+    end
   end
 
   def show
