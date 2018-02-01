@@ -172,6 +172,7 @@ Rails.application.routes.draw do
     end
   end
   resources :speakers
+  resources :agencies
 
   namespace :admin do
     root 'base#home', as: :home
