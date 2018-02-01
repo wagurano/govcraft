@@ -1,4 +1,18 @@
-test
-= @agency.inspect
-= @speakers.inspect
-= @petitions.inspect
+%section.page-block
+  .container
+    %h2= @agency.title
+
+%section.page-block
+  %a{id: "anchor-project-petition"}
+  = render 'petitions/list', petitions: @petitions
+
+%section.page-block
+  .container
+    %h3.sub-title
+      관련 인물 - #{@speakers.count}명
+
+    .row
+      - @speakers.shuffle.first(8).each do |speaker|
+        .col-xs-6.col-sm-3
+          = render speaker
+

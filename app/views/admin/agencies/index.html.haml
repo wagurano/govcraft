@@ -16,7 +16,7 @@
           %tr
             %td
               %h5= agency.title
-            %td= agency.slug
+            %td= link_to agency.slug, agency_path(agency, id: agency.slug)
             %td= agency.position_list
             %td.text-right
               = link_to '수정', edit_admin_agency_path(agency), class: 'btn btn-xs btn-default'
