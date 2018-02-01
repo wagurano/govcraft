@@ -1,0 +1,17 @@
+.panel.panel-default
+  .panel-body
+    = form_for [:admin, @agency] do |f|
+      .form-group
+        = f.label :title
+        = f.text_field :title, class: 'form-control'
+
+      .form-group
+        = f.label :slug
+        = f.text_field :slug, class: 'form-control'
+
+      .form-group
+        = f.label '테마에 쓰이는 분류'
+        = f.text_field :position_list, value: @agency.position_list.try(:to_s), placeholder: 'ex)19대_대선후보, 20대_국회의원', class: 'form-control'
+
+      .form-group
+        = f.submit '저장', class: 'btn btn-primary'

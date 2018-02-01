@@ -179,6 +179,7 @@ Rails.application.routes.draw do
     get :refresh_assembly_members, to: 'base#refresh_assembly_members'
     resources :agendas
     resources :issues
+    resources :agencies
     resources :speakers
     resources :opinions do
       collection do

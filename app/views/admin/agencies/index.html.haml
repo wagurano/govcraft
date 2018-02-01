@@ -1,0 +1,23 @@
+%section.page-block
+  .page-header
+    %h2 에이전시
+
+  .panel.panel-default
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th 이름
+          %th slug
+          %th positions
+          %th.text-right
+            = link_to '추가', new_admin_agency_path, class: 'btn btn-sm btn-primary'
+      %tbody
+        - @agencies.each do |agency|
+          %tr
+            %td
+              %h5= agency.title
+            %td= agency.slug
+            %td= agency.position_list
+            %td.text-right
+              = link_to '수정', edit_admin_agency_path(agency), class: 'btn btn-xs btn-default'
+              = link_to '삭제', admin_agency_path(agency), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'
