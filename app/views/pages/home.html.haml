@@ -16,20 +16,21 @@
         = link_to 'https://docs.parti.xyz/', target: '_blank' do
           빠띠 소개
 
-
 %section#petitions.page-block
   .container
     = link_to petitions_url(subdomain: root_subdomain) do
       %h3.sub-title
-        = Petition.model_name.human
+        새로운 #{Petition.model_name.human}
         %small.pull-right 전체 보기
     .row
-      = render Petition.recent.limit(4)
+      = render Petition.recent.limit(6)
 
 %section#stories.page-block
   .container
     = link_to stories_url(subdomain: root_subdomain) do
-      %h3.sub-title= Story.model_name.human
+      %h3.sub-title
+        새로운 #{Story.model_name.human}
+        %small.pull-right 전체 보기
     .row.masonry-container
       = render Story.recent.limit(6)
 
@@ -38,9 +39,7 @@
     .clearfix
       = link_to projects_url(subdomain: root_subdomain) do
         %h3.sub-title
-          최근 #{Project.model_name.human}
-          %small #{Project.count}개 전체보기
+          새로운 #{Project.model_name.human}
+          %small.pull-right 전체 보기
     .row
       = render Project.recent.limit(6)
-    %hr{style:"color:rgba(230, 230, 230, 1);height:2px;margin-top:0px;"}
-
