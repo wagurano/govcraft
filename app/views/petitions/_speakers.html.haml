@@ -3,15 +3,14 @@
 - speakers_group = @petition.speakers.to_a.group_by { |speaker| petition.speeched?(speaker) }
 
 - if speakers_group[true].try(:any?)
-  %h4 메시지에 응답한 분
+  %h4.sub-title= @petition.speaker_section_response_title.presence || I18n.t("views.petition.speaker_section_response_title.default")
   .row.masonry-container
     - speakers_group[true].each do |speaker|
       .col-md-2.col-sm-3.col-xs-4
         = render 'statementables/speaker', speaker: speaker, statementable: petition
 
 - if @petition.statements.responed_body.any?
-  %h4.sub-title= @petition.speaker_section_response_title.presence || I18n.t("views.petition.speaker_section_response_title.default")
-  .panel.panel-opinion.panel-default
+  .panel.panel-opinion.panel-default{ style: 'background-color: #f5f5f5; border: none; font-size: 14px; line-height: 1.5;' }
     - @petition.statements.responed_body.recent.each do |statement|
       .panel-body[statement]
         .panel-post__statements
@@ -19,9 +18,9 @@
           .media[statement]
             .media-left
               = link_to speaker_path(speaker) do
-                .media-object.image{style: "background-image: url(#{speaker.image.xs.url}); background-size:cover; background-repeat: no-repeat; background-position: top; width: 50px; height: 50px;"}
+                .media-object.image{style: "background-image: url(#{speaker.image.xs.url}); background-size:cover; background-repeat: no-repeat; background-position: top; width: 48px; height: 64px;"}
 
-            .media-body
+            .media-body{ style: 'padding-top: 15px;' }
               - if statement.stance.present?
                 %h4.media-heading
                   = statement.stance.text
@@ -30,7 +29,7 @@
                   = speaker.name
                   %span.text-muted= speaker.organization
           - if statement.body.present?
-            .opinion__body
+            .opinion__body{ style: 'font-weight: normal;' }
               != statement.body
 
 - if speakers_group[false].try(:any?)

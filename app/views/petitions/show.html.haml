@@ -82,9 +82,9 @@
             %h4= speaker_section_title
             .row
               - @petition.speakers.to_a.sample(2).each do |speaker|
-                .col-sm-4.col-xs-6
-                = render 'statementables/speaker', speaker: speaker, statementable: @petition
-              .col-sm-4.col-xs-6
+                .col-md-2.col-sm-3.col-xs-4
+                  = render 'statementables/speaker', speaker: speaker, statementable: @petition
+              .col-md-2.col-sm-3.col-xs-4
                 .panel.panel-default
                   .panel-body
                     = link_to petition_path(@petition, anchor: "anchor-speakers"), class: "text-keep-all js-close-modal" do
