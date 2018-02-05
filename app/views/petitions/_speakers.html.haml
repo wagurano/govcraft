@@ -1,45 +1,42 @@
 %a{id: "anchor-speakers"}
 %h3.sub-title= @petition.speaker_section_title.presence || I18n.t("views.petition.speaker_section_title.default")
-.panel-body{style:"padding:0px"}
-  .panel-post__speakers
-    - speakers_group = @petition.speakers.to_a.group_by { |speaker| petition.speeched?(speaker) }
+- speakers_group = @petition.speakers.to_a.group_by { |speaker| petition.speeched?(speaker) }
 
-    - if speakers_group[true].try(:any?)
-      %h4 촉구 메시지에 응답한 분
-      .row.masonry-container
-        - speakers_group[true].each do |speaker|
-          .col-md-3.col-sm-4.col-xs-6
-            = render 'statementables/speaker', speaker: speaker, statementable: petition
-
-    - if speakers_group[false].try(:any?)
-      - if speakers_group[true].try(:any?)
-        %h4 촉구 메시지에 응답 없는 분
-      .row.masonry-container
-        - [speakers_group[nil], speakers_group[false]].flatten.each do |speaker|
-          .col-md-3.col-sm-4.col-xs-6
-            = render 'statementables/speaker', speaker: speaker, statementable: petition
+- if speakers_group[true].try(:any?)
+  %h4 메시지에 응답한 분
+  .row.masonry-container
+    - speakers_group[true].each do |speaker|
+      .col-md-2.col-sm-3.col-xs-4
+        = render 'statementables/speaker', speaker: speaker, statementable: petition
 
 - if @petition.statements.responed_body.any?
-  %h3.sub-title= @petition.speaker_section_response_title.presence || I18n.t("views.petition.speaker_section_response_title.default")
-  .panel-body{style:"padding:0px"}
-    .panel-post__statements
-      - @petition.statements.responed_body.recent.each do |statement|
-        - speaker = statement.speaker
-        .panel.panel-opinion.panel-default[statement]
-          .panel-body{ style: 'padding: 14px' }
-            .media[statement]
-              .media-left
-                = link_to speaker_path(speaker) do
-                  .media-object.image.user-image-sm{style: "background-image: url(#{speaker.image.xs.url}); background-size:cover; background-repeat: no-repeat; background-position: top;"}
+  %h4.sub-title= @petition.speaker_section_response_title.presence || I18n.t("views.petition.speaker_section_response_title.default")
+  .panel.panel-opinion.panel-default
+    - @petition.statements.responed_body.recent.each do |statement|
+      .panel-body[statement]
+        .panel-post__statements
+          - speaker = statement.speaker
+          .media[statement]
+            .media-left
+              = link_to speaker_path(speaker) do
+                .media-object.image{style: "background-image: url(#{speaker.image.xs.url}); background-size:cover; background-repeat: no-repeat; background-position: top; width: 50px; height: 50px;"}
 
-              .media-body
-                - if statement.stance.present?
-                  %h4.media-heading
-                    = statement.stance.text
-                %p
-                  = link_to speaker_path(speaker) do
-                    = speaker.name
-                    %span.text-muted= speaker.organization
-                - if statement.body.present?
-                  .opinion__body
-                    != statement.body
+            .media-body
+              - if statement.stance.present?
+                %h4.media-heading
+                  = statement.stance.text
+              %p
+                = link_to speaker_path(speaker) do
+                  = speaker.name
+                  %span.text-muted= speaker.organization
+          - if statement.body.present?
+            .opinion__body
+              != statement.body
+
+- if speakers_group[false].try(:any?)
+  - if speakers_group[true].try(:any?)
+    %h4 촉구 메시지에 응답 없는 분
+  .row.masonry-container
+    - [speakers_group[nil], speakers_group[false]].flatten.each do |speaker|
+      .col-md-2.col-sm-3.col-xs-4
+        = render 'statementables/speaker', speaker: speaker, statementable: petition

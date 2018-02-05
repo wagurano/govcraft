@@ -198,9 +198,8 @@ h2.main-title {
 
 h3.sub-title {
     color: $brand-primary-light;
-    font-weight: bold;
-    font-size: 24px;
-    margin: 40px 0px;
+    font-weight: 300;
+    margin: 40px 0px 10px;
 }
 
 //공통 카드 스타일
@@ -210,7 +209,6 @@ h3.sub-title {
   margin-bottom:30px;
   overflow:hidden;
   .card-content{
-    padding:20px 15px;
     .header{
       font-weight:bold;
       font-size:24px;
@@ -286,7 +284,7 @@ h3.sub-title {
 
 .component-box{
     border:1px solid $gray-light;
-    padding:40px;
+    padding:20px;
 }
 
 //공통 라벨 스타일

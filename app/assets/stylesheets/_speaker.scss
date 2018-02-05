@@ -39,31 +39,27 @@
   margin-top: -20px;
   margin-bottom: 20px;
 }
-.speaker-panel{
-  border-radius: 0px;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  .panel-body{
-    padding: 15px 10px 5px 10px;
-  }
-  .request-speaker-btn{
-    font-size: 14px;
-    color: $brand-primary;
-    font-weight: bold;
-  }
-  .speaker-name{
-    font-size: 16px;
-    font-weight: bold;
-    span{
-      display: block;
-      font-size: 14px;
-      font-weight: 200;
-      color: $gray;
-      line-height: 20px;
+
+.speaker-card {
+  .card-image {
+    position: relative;
+    .card-title {
+      color: #fff;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      background-color: rgba(0,0,0,0.6);
+      padding: 10px 0;
+      margin: 0;
+      .card-organization {
+        color: $gray;
+      }
     }
   }
-  .request-speaker{
-    border-top: 1px solid $gray-light;
-    padding: 8px 0px;
+  .card-content {
+    padding: 5px 10px;
+    font-size: $font-size-base;
   }
 }

@@ -8,23 +8,19 @@
     - ribbon_class = 'label-danger'
   - elsif statement.stance.blank?
     - ribbon_class = 'label-default'
-  %span.label.label-ribbon-right{ class: ribbon_class, style: 'position: absolute; right: 20px; top: 0;'}
+  %span.label.label-ribbon-right{ class: ribbon_class, style: 'position: absolute; right: 20px; top: 5px; z-index: 1;'}
     - if statement.stance.present?
       = statement.stance.text
     - else
       응답
-.panel.panel-default.speaker-panel
-  .panel-body
-    .media
-      .media-left
-        = link_to speaker, class: 'card-header' do
-          .user-thumb-md{ style: "background-image: url(#{speaker.image.md.url}); background-size:cover; background-repeat: no-repeat; background-position: top;" }
-      .media-body
-        %h5.media-heading.speaker-name
-          = speaker.name
-          %span.text-muted= speaker.organization
-        .request-speaker
-          = link_to polymorphic_url([:new_comment_speaker, statementable], speaker_id: speaker.id), class: "request-speaker-btn" do
-            - count = statementable.comments.with_target_speaker(speaker).count
-            촉구하기#{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}
-            %i.fa.fa-chevron-right
+.speaker-card.card
+  = link_to speaker do
+    .card-image{ style: "height: 180px; background-image: url(#{speaker.image.md.url}); background-size:cover; background-repeat: no-repeat; background-position: top;"}
+      %h5.card-title
+        = speaker.name
+        %span.card-organization= speaker.organization
+
+  .card-content
+    = link_to polymorphic_url([:new_comment_speaker, statementable], speaker_id: speaker.id), class: "request-speaker-btn" do
+      - count = statementable.comments.with_target_speaker(speaker).count
+      촉구하기#{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}

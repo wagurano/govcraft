@@ -72,8 +72,8 @@
     - if !local_assigns[:hide_users]
       .sign-panel__users
         - petition.signs.recent.limit(first_sign_users_count).each do |sign|
-          %i.fa.fa-user
-          = sign.user_name
+          #{sign.user_name},
+
         - if petition.signs.count > first_sign_users_count
           - if local_assigns[:widget]
             = link_to "... #{petition.signs.count - first_sign_users_count}명 더보기", petition_url(@petition), target: '_blank'
@@ -85,7 +85,6 @@
         %tr
           %td{style:"width:80px;"}
             %strong
-              %i.fa.fa-user
               = sign.user_name
           %td
             = raw(screened(sign, :body))
