@@ -270,7 +270,7 @@ h3.sub-title {
 //컴포넌트 디테일 공통 헤더 스타일
 .component-header{
   background-color: $brand-primary-dark;
-  height: 320px;
+  min-height: 300px;
   text-align: center;
   color: white;
   padding: 40px 0px 0px 0px;

@@ -1,9 +1,7 @@
 %section#petition-header.component-header
   .container
-    %span.gov-label
-      서명
-    %br
-    =@petition.title
+    %h1= @petition.title
+
     %div{ style: 'margin-top: 16px;font-size:16px;'}
       %span
       - if can? :edit, @petition
@@ -14,29 +12,32 @@
       - if can? :destroy, @petition
         &middot;
         = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
-%section#petition-block
-  .user-info
-    .user-image{style: "background-image:url(#{asset_url(@petition.user.image)});"}
-    = link_to @petition.user.nickname
-  .container{style: "margin-top:-30px;"}
-    - cover_image = @petition.cover_image_url(:lg)
+
+    .petition-meta{ style: 'font-size: 14px; '}
+      %span.date
+        = date_f @petition.created_at
+      &middot;
+      %span.views_count
+        조회
+        = @petition.views_count
+
     .petition-info-area
       = link_to petition_path(@petition, anchor: 'anchor-join'), class: 'petition-users-count-label' do
         = @petition.signs_count
-        명 참여 중
+        명 서명
       - if user_signed_in? and @petition.signed?(current_user)
         .petition-users-count-label
           서명 참여완료
       - else
         %a.petition-join-btn(href="#anchor-join")
-          서명 함께하기
-    %div{style:"font-weight:700;margin:40px 0px"}
-      %i.fa.fa-calendar
-      = date_f @petition.created_at
-      &nbsp;&nbsp;&nbsp;
-      %i.fa.fa-file-text-o
-      조회
-      = @petition.views_count
+          서명하기
+
+%section#petition-block
+  .user-info
+    = link_to @petition.user do
+      .user-image{style: "background-image:url(#{asset_url(@petition.user.image)});"}
+
+  .container
     .petition-body
       = raw @petition.body
 
@@ -49,7 +50,7 @@
 
       %h3.sub-title 이 이슈를 친구들에게 알려 주세요
       .panel-body.component-box
-        .share-box{ 'data-share-image': image_url(cover_image)}
+        .share-box{ 'data-share-image': image_url(@petition.cover_image_url(:lg))}
         %div
           %input{value: "<iframe width='100%' height='800' src='#{petition_url(@petition, mode: :widget)}' frameborder='0'></iframe>", class: 'form-control'}
 
