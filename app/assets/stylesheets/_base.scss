@@ -198,8 +198,7 @@ h2.main-title {
 
 h3.sub-title {
     color: $brand-primary-light;
-    font-weight: 300;
-    margin: 40px 0px 10px;
+    margin: $font-size-base*3 0px $font-size-base;
 }
 
 //공통 카드 스타일
