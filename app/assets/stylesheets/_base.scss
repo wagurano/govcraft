@@ -376,6 +376,19 @@ label.error {
     }
 }
 
+.user-image-xs{
+  height:20px;
+  width:20px;
+  background-color:black;
+  border-radius:20px;
+  display:inline-block;
+  background-size:cover;
+  background-position:center;
+  @media (max-width: $screen-sm-min) {
+      display:none;
+  }
+}
+
 //공통 테이블
 .table {
     border-top: 2px solid $gray-light;

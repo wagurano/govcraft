@@ -8,11 +8,11 @@
       = f.hidden_field :commentable_id, value: commentable.id
       - unless user_signed_in?
         .row
-          .col-xs-12.col-md-6
+          .col-xs-8.col-md-4
             .form-group
               = f.label :commenter_name
               = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
-          .col-xs-12.col-md-6
+          .col-xs-8.col-md-4
             .form-group
               = f.label :commenter_email
               = f.text_field :commenter_email, class: 'form-control'
