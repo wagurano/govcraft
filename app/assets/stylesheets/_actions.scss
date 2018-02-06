@@ -1,0 +1,47 @@
+.action-card {
+  margin-bottom: 30px;
+  .title .project-title {
+    font-size: $font-size-base;
+    line-height: 1.2;
+    margin-bottom: $font-size-base;
+  }
+  .card-image {
+    height: 200px;
+    color: white;
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+    }
+    .overlay {
+      position: relative;
+      height: 100%;
+      padding: 30px 25px;
+      background-color: rgba(0, 0, 0, 0.4);
+      font-size: 24px;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+      line-height: 36px;
+      font-weight: 500;
+      .title {
+        position: absolute;
+        bottom: 23px;
+        line-height: 1.2;
+        word-break: keep-all;
+        width: 90%;
+      }
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+  .card-extra {
+    height: 80px;
+    background-color: rgba(253, 254, 255, 1);
+    border: 1px solid rgba(157, 161, 153, 1);
+    padding: 30px 30px 45px 30px;
+    color: rgba(157, 161, 153, 1);
+    font-size: 14px;
+    .progress {
+      height: 3px;
+      margin-bottom: 10px;
+    }
+  }
+}

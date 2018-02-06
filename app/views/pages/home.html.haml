@@ -20,7 +20,7 @@
   .container
     = link_to petitions_url(subdomain: root_subdomain) do
       %h3.sub-title
-        새로운 #{Petition.model_name.human}
+        새로운 액션
         %small.pull-right 전체 보기
     .row
       = render Petition.recent.limit(6)

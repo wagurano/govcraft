@@ -1,7 +1,16 @@
 .col-md-4.col-sm-6.col-xs-12
-  .component-card{style:"height:350px;"}
-    .card-image{ style: "height: 160px; background-image: url(#{event.image_url(:md)}); background-size: cover; background-position: top center;"}
-    .card-content
-      = link_to event.title, event, class: 'header'
-      .card-description
-        = excerpt event.body, length:55
+  .action-card[event]
+    .card-image{ style: "background-image: url(#{event.image_url(:md)}); background-size: cover; background-position: top center;"}
+      .overlay
+        .title
+          - if event.project.present?
+            .project-title
+              = event.project.title
+          = event.title
+    .card-extra
+      .progress
+        .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "100", :role => "progressbar", :style => "width: 100%;"}
+
+      %span.count
+        %i.fa.fa-user
+        #{number_with_delimiter(event.comments.count)}명 참여
