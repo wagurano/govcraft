@@ -27,7 +27,7 @@
 //= require bootstrap-datetimepicker
 
 
-UnobtrusiveFlash.flashOptions['timeout'] = 300000;
+UnobtrusiveFlash.flashOptions['timeout'] = 3000;
 
 // blank
 $.is_blank = function (obj) {
