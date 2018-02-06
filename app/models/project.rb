@@ -69,7 +69,9 @@ class Project < ApplicationRecord
   end
 
   def views_count
-    petitions.sum(:views_count) + polls.sum(:views_count) + surveys.sum(:views_count) + wikis.sum(:views_count) + discussions.sum(:views_count)
+    petitions.sum(:views_count) + polls.sum(:views_count) + surveys.sum(:views_count) +
+    wikis.sum(:views_count) + discussions.sum(:views_count) +
+    stories.sum(:views_count)
   end
 
   private
