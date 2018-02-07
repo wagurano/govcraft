@@ -1,14 +1,18 @@
-
 .post-block {
+  .comments {
+    padding-top: $font-size-base*2;
+  }
   .comment {
-    border-top: 1px solid $gray-lighter;
-    padding-top: $font-size-base;
+    .comment__user {
+      padding-top: $font-size-small;
+    }
     .comment__meta {
+      color: $gray;
       display:table;
-      color: $gray-dark;
-      font-weight:bold;
       font-size: $font-size-base;
+      font-weight: normal;
       line-height:20px;
+      padding-left: $font-size-base;
       margin-bottom: $font-size-base*0.5;
       width:100%;
     }
@@ -24,10 +28,14 @@
       }
     }
     .comment__body {
-      color: $gray-dark;
-      font-size:14px;
+      background: $gray-lightest;
+      border-radius: $font-size-small;
+      color: $gray-darker;
+      font-size: $font-size-base;
+      font-weight: normal;
       line-height: $line-height-base;
       margin-bottom: $font-size-base*0.5;
+      padding: $font-size-base;
       h1, h2, h3, h4, h5 {
         font-size: $font-size-base !important;
         margin: 2px 0;
@@ -66,9 +74,8 @@
       margin-right: $font-size-base;
     }
     .comment__to-speaker{
-      margin: $font-size-base*0.5 0;
-      margin-right: $font-size-base;
-      color: $brand-primary-light;
+      margin-top: $font-size-base*0.5;
+      color: $brand-primary;
     }
   }
 }
