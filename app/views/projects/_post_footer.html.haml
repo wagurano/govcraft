@@ -2,8 +2,18 @@
   .container
     %h3.sub-title
       캠페인
-    .row
-      = render project
+    %div
+      = link_to project, html_options = {class:'project-link'} do
+        .project-card
+          .card-image{ style: "height: 150px; background-image: url(#{project.image.md.url});" }
+            .overlay
+              .project-card__title
+                = project.title
+              .project-card__meta
+                %i.fa.fa-thumbs-up
+                = project.action_count
+                %i.fa.fa-eye
+                = project.views_count
 
 - if project.story_enabled? and project.stories.any?
   %section.page-block
