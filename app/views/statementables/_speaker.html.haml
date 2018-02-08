@@ -20,7 +20,7 @@
         = speaker.name
         %span.card-organization= speaker.organization
 
-  .card-content
+  .card-content.text-center
     = link_to polymorphic_url([:new_comment_speaker, statementable], speaker_id: speaker.id), class: "request-speaker-btn" do
       - count = statementable.comments.with_target_speaker(speaker).count
       촉구하기#{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}
