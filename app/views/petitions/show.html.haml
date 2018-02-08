@@ -61,7 +61,7 @@
       - if @petition.comment_enabled
         %h3.sub-title
           의견을 남겨주세요
-        .panel-body.post-block.component-box
+        .panel-body.post-block.component-box.panel-comments
           .panel-post__comments
             = render 'comments/list', commentable: @petition
 

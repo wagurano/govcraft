@@ -1,6 +1,15 @@
 .post-block {
+  &.panel-comments {
+    padding: 0;
+    border: 0;
+  }
   .comments {
     padding-top: $font-size-base*2;
+  }
+  .comments-form {
+    background: $gray-lightest;
+    border-radius: 6px;
+    padding: 20px;
   }
   .comment {
     .comment__user {
