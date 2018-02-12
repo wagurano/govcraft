@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!, except: [:create, :index, :show]
   load_and_authorize_resource
+  invisible_captcha only: [:create]
 
   def index
     if params[:commentable_type].nil?
@@ -14,12 +15,6 @@ class CommentsController < ApplicationController
   end
 
   def create
-    if params[:i_am] != 'your_father'
-      if !verify_recaptcha(model: @comment) and !user_signed_in?
-        redirect_back_for_robot and return
-      end
-    end
-
     @comment.user = current_user if user_signed_in?
     if user_signed_in? and @comment.commentable.respond_to? :voted_by? and @comment.commentable.voted_by? current_user
       @comment.choice = @comment.commentable.fetch_vote_of(current_user).choice

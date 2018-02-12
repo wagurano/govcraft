@@ -18,6 +18,7 @@
           = f.hidden_field :commentable_type, value: commentable.class.name
           = f.hidden_field :commentable_id, value: commentable.id
           = f.hidden_field :target_speaker_id, value: @speaker.id
+          = invisible_captcha
           - unless user_signed_in?
             .row
               .col-xs-12.col-md-6
@@ -36,11 +37,6 @@
                 %label
                   = f.check_box :mailing, { checked: true }, 'ready', 'disable'
                   #{@speaker.name}님에게 메일로도 발송합니다.
-          - unless user_signed_in?
-            .form-group.recaptcha
-              .help-block 스팸 방지를 위해 사람인지 확인합니다. 아래 체크 박스를 클릭해 주세요.
-              = hidden_field_tag :hiddenRecaptcha, nil, class: 'validate'
-              .gov-action-recaptcha
           = f.submit '작성', class: 'btn btn-default btn-sm btn-inverted'
 
       - if !@statementable.respond_to?(:comment_enabled, true) or @statementable.comment_enabled

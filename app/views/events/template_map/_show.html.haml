@@ -17,6 +17,7 @@
             = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
               = f.hidden_field :commentable_type, value: 'Event'
               = f.hidden_field :commentable_id, value: event.id
+              = invisible_captcha
               - unless user_signed_in?
                 .form-group
                   = f.label :commenter_name
@@ -32,11 +33,6 @@
                 = f.file_field :image, class: 'form-control'
               .form-group
                 ~ f.text_area :body, placeholder: '지금 나는...', required: true, rows: 3, class: 'form-control', data: { 'rule-required': true }
-              - unless user_signed_in?
-                .form-group.recaptcha
-                  .help-block 스팸 방지를 위해 사람인지 확인합니다. 아래 체크 박스를 클릭해 주세요.
-                  = hidden_field_tag :hiddenRecaptcha, nil, class: 'validate'
-                  .gov-action-recaptcha
               = f.submit '작성', class: 'btn btn-primary btn-block'
       - event.comments.order('id DESC').each do |comment|
         .col-sm-4.col-xs-12
@@ -139,6 +135,7 @@
         = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
           = f.hidden_field :commentable_type, value: 'Event'
           = f.hidden_field :commentable_id, value: event.id
+          = invisible_captcha
           - unless user_signed_in?
             .form-group
               = f.label :commenter_name
@@ -151,9 +148,4 @@
             = f.file_field :image, required: true, class: 'form-control'
           .form-group
             ~ f.text_area :body, placeholder: '지금 나는...', required: true, rows: 3, class: 'form-control input-lg', data: { 'rule-required': true }
-          - unless user_signed_in?
-            .form-group.recaptcha
-              .help-block 스팸 방지를 위해 사람인지 확인합니다. 아래 체크 박스를 클릭해 주세요.
-              = hidden_field_tag :hiddenRecaptcha, nil, class: 'validate'
-              .gov-action-recaptcha
           = f.submit '작성', class: 'btn btn-primary btn-block'

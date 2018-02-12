@@ -75,6 +75,7 @@
             = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
               = f.hidden_field :commentable_type, value: 'Event'
               = f.hidden_field :commentable_id, value: event.id
+              = invisible_captcha
               - unless user_signed_in?
                 .row
                   .col-xs-12.col-md-6
@@ -90,11 +91,6 @@
               .form-group
                 = f.label :full_street_address, '주소(필수)'
                 = f.select :full_street_address, options_for_select(Event::LARGE_AREA), {}, class: 'form-control'
-              - unless user_signed_in?
-                .form-group.recaptcha
-                  .help-block 스팸 방지를 위해 사람인지 확인합니다. 아래 체크 박스를 클릭해 주세요.
-                  = hidden_field_tag :hiddenRecaptcha, nil, class: 'validate'
-                  .gov-action-recaptcha
               = f.submit '작성', class: 'btn btn-default btn-sm'
 
           %a{id: "anchor-comments-page"}

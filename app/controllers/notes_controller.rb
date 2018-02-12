@@ -1,12 +1,9 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!, except: :create
   load_and_authorize_resource
+  invisible_captcha only: [:create]
 
   def create
-    if !verify_recaptcha(model: @note) and !user_signed_in?
-      redirect_back_for_robot and return
-    end
-
     @note.user = current_user if user_signed_in?
     if user_signed_in? and @note.opinion.respond_to? :voted_by? and @note.opinion.voted_by? current_user
       @note.choice = @note.opinion.fetch_vote_of(current_user).choice
