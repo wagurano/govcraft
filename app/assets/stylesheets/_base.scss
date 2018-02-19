@@ -171,6 +171,16 @@ body {
     color: white;
     &:hover {
         background-color: $brand-sub-light;
+        color: white;
+    }
+}
+
+.btn-primary-neutral {
+    background-color: $gray-darker;
+    color: white;
+    &:hover {
+        background-color: rgba(113, 116, 110, 0.8);
+        color: white;
     }
 }
 

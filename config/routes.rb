@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     collection do
       post :agree
       post :disagree
+      post :neutral
       post :cancel
     end
   end

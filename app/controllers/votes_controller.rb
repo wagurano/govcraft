@@ -1,7 +1,7 @@
 class VotesController < ApplicationController
   include VoteHelper
 
-  before_action :authenticate_user!, except: [:agree, :disagree]
+  before_action :authenticate_user!, except: [:agree, :disagree, :neutral]
 
   def agree
     @widget = params[:widget]
@@ -18,6 +18,17 @@ class VotesController < ApplicationController
     @widget = params[:widget]
     fetch_votable
     choice(:disagree)
+
+    respond_to do |format|
+      format.js
+      format.html { redirect_back(fallback_location: @votable) }
+    end
+  end
+
+  def neutral
+    @widget = params[:widget]
+    fetch_votable
+    choice(:neutral)
 
     respond_to do |format|
       format.js

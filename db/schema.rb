@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180201025737) do
+ActiveRecord::Schema.define(version: 20180219075604) do
 
   create_table "agencies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title",      null: false
@@ -612,6 +612,7 @@ ActiveRecord::Schema.define(version: 20180201025737) do
     t.string   "social_card"
     t.string   "cover_image"
     t.integer  "anonymous_likes_count",               default: 0
+    t.integer  "neutrals_count",                      default: 0, null: false
     t.index ["project_id"], name: "index_polls_on_project_id", using: :btree
     t.index ["user_id"], name: "index_polls_on_user_id", using: :btree
   end

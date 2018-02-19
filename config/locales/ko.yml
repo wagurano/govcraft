@@ -315,6 +315,7 @@ ko:
       choice:
         agree: 찬성
         disagree: 반대
+        neutral: 중립
       stance:
         agree: 찬성
         disagree: 반대

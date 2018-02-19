@@ -12,6 +12,15 @@
           %span.choice__label 찬성
           %span.choice__count= votable.agrees_count
     .vote-button
+      - if vote.present? && vote.choice == 'neutral'
+        = link_to cancel_votes_path(vote_link_options), method: :post, remote: true, class: 'btn btn-primary-neutral btn-choice btn-lg' do
+          %span.choice__label 중립
+          %span.choice__count= votable.neutrals_count
+      - else
+        = link_to polymorphic_url(['neutral', :votes], vote_link_options), method: :post, remote: true, class: 'btn btn-default btn-choice btn-lg' do
+          %span.choice__label 중립
+          %span.choice__count= votable.neutrals_count
+    .vote-button
       - if vote.present? && vote.choice == 'disagree'
         = link_to cancel_votes_path(vote_link_options), method: :post, remote: true, class: 'btn btn-primary-sub btn-choice btn-lg' do
           %span.choice__label 반대
