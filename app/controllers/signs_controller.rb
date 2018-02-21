@@ -40,7 +40,7 @@ class SignsController < ApplicationController
 
   def sign_params
     params.require(:sign).permit(:body, :petition_id,
-      :signer_name, :signer_email, :signer_address, :signer_real_name,
+      :signer_name, :signer_email, :signer_address, :signer_real_name, :signer_phone,
       :extra_29_confirm_join)
   end
 end

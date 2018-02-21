@@ -91,8 +91,8 @@ class PetitionsController < ApplicationController
   def petition_params
     params.require(:petition).permit(:title, :body, :project_id, :signs_goal_count, :cover_image, :thanks_mention,
       :comment_enabled, :sign_title, :social_image, :confirm_privacy,
-      :use_signer_email, :use_signer_address, :use_signer_real_name,
-      :signer_email_title, :signer_address_title, :signer_real_name_title,
+      :use_signer_email, :use_signer_address, :use_signer_real_name, :use_signer_phone,
+      :signer_email_title, :signer_address_title, :signer_real_name_title, :signer_phone_title,
       :speaker_section_title, :speaker_section_response_title)
   end
 

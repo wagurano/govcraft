@@ -48,6 +48,11 @@
                 = f.label :signer_address, petition.signer_address_title.presence || t('activerecord.attributes.sign.signer_address')
                 = f.text_field :signer_address, placeholder: '주소', class: 'form-control', data: { 'rule-required': true }
 
+            - if petition.use_signer_phone?
+              .form-group
+                = f.label :signer_phone, petition.signer_phone_title.presence || t('activerecord.attributes.sign.signer_phone')
+                = f.text_field :signer_phone, placeholder: '연락처', class: 'form-control', data: { 'rule-required': true }
+
             - if petition.id == 29
               = f.hidden_field :extra_29_confirm_join, value: 1
 

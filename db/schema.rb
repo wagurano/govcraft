@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20180219075604) do
-
   create_table "agencies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title",      null: false
     t.string   "slug",       null: false
@@ -568,6 +567,8 @@ ActiveRecord::Schema.define(version: 20180219075604) do
     t.text     "confirm_privacy",                limit: 65535
     t.string   "speaker_section_title"
     t.string   "speaker_section_response_title"
+    t.boolean  "use_signer_phone",                             default: false
+    t.string   "signer_phone_title"
     t.index ["project_id"], name: "index_petitions_on_project_id", using: :btree
     t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
   end
@@ -737,6 +738,7 @@ ActiveRecord::Schema.define(version: 20180219075604) do
     t.boolean  "extra_29_confirm_join",               default: false
     t.string   "signer_real_name"
     t.string   "signer_address"
+    t.string   "signer_phone"
     t.index ["petition_id"], name: "index_signs_on_petition_id", using: :btree
     t.index ["user_id", "petition_id"], name: "index_signs_on_user_id_and_petition_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_signs_on_user_id", using: :btree

@@ -85,9 +85,21 @@
               %strong 주소를 받습니다.
         .form-group
           = f.label :signer_address_title
-          = f.text_field :signer_email_title, class: 'form-control'
+          = f.text_field :signer_address_title, class: 'form-control'
           %p.help-block
             주소 입력란에 대한 설명을 정합니다. 비워두면 "#{t('activerecord.attributes.sign.signer_address')}"로 표시됩니다.
+
+        .form-group
+          .checkbox
+            %label
+              = f.check_box :use_signer_phone
+              %strong 연락처를 받습니다.
+        .form-group
+          = f.label :signer_phone_title
+          = f.text_field :signer_phone_title, class: 'form-control'
+          %p.help-block
+            연락처 입력란에 대한 설명을 정합니다. 비워두면 "#{t('activerecord.attributes.sign.signer_phone')}"로 표시됩니다.
+
 
         .form-group
           = f.label :confirm_privacy
