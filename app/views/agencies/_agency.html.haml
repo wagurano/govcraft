@@ -1,0 +1,9 @@
+.col-md-4.col-sm-6.col-xs-12
+  .component-card[agency]
+    = link_to '#' do
+      .card-image{ style: "height: 200px; background-image: url(#{agency.image.md}); background-size: cover; background-position: top center;"}
+    .card-content
+      %h3= agency.title
+      .card-description
+
+    .card-content.card-extra{style:"border-top:1px solid #e6e6e6"}

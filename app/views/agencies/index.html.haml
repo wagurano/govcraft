@@ -1,0 +1,9 @@
+%section#parti-section
+  .container.text-center
+    %h2 기관
+
+%section#events.page-block
+  .container
+    .row
+      - @agencies.each do |agency|
+        = render agency

@@ -29,6 +29,6 @@ class Admin::AgenciesController < Admin::BaseController
   private
 
   def agency_params
-    params.require(:agency).permit(:title, :slug, :position_list)
+    params.require(:agency).permit(:title, :slug, :position_list, :image)
   end
 end

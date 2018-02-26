@@ -6,6 +6,7 @@
     %table.table.table-bordered
       %thead
         %tr
+          %th
           %th 이름
           %th slug
           %th positions
@@ -14,6 +15,8 @@
       %tbody
         - @agencies.each do |agency|
           %tr
+            %td
+              = image_tag agency.image.xs
             %td
               %h5= agency.title
             %td= link_to agency.slug, agency_path(agency, id: agency.slug)
