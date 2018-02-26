@@ -64,7 +64,11 @@ class Project < ApplicationRecord
   end
 
   def action_count
-    petitions.count + polls.count + surveys.count + wikis.count + discussions.count + events.count +
+    petitions.count + polls.count + surveys.count + wikis.count + discussions.count + events.count
+  end
+
+  def metoo_count
+    action_count +
     petitions.sum(:signs_count) + polls.sum(:votes_count) + surveys.sum(:feedbacks_count)
   end
 

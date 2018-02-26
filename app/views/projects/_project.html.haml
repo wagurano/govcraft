@@ -6,7 +6,7 @@
           .project-card__title
             = project.title
           .project-card__meta
-            %i.fa.fa-thumbs-up
+            %i.fa.fa-flash
             = project.action_count
-            %i.fa.fa-eye
-            = project.views_count
+            %i.fa.fa-users
+            = number_with_delimiter project.metoo_count
