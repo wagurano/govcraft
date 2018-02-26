@@ -64,7 +64,7 @@ class StoriesController < ApplicationController
 
   def reset_meta_tags
     prepare_meta_tags({
-      site_name: ("#{@story.project.title} - #{@story.project.user.nickname}" if @story.project.present?),
+      site_name: ("#{@story.project.title}" if @story.project.present?),
       title: "[최신소식] " + @story.title,
       description: @story.body.html_safe,
       image: (view_context.image_url(@story.fallback_social_image_url) if @story.fallback_social_image_url),
