@@ -3,7 +3,8 @@
     = link_to story do
       .card-image{ style: "height: 200px; background-image: url(#{story.cover.md}); background-size: cover; background-position: top center;"}
     .card-content
-      = link_to story.title, story, class: 'header'
+      = link_to story, class: 'header' do
+        %h4= story.title
       .card-description
         = excerpt story.body, length: 100 if story.body.present?
 

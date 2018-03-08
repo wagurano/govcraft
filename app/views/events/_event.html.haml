@@ -1,7 +1,7 @@
 .col-md-4.col-sm-6.col-xs-12
   .action-card[event]
     = link_to event do
-      .card-image{ style: "background-image: url(#{event.image_url(:md)}); background-size: cover; background-position: top center;"}
+      .card-image{ style: "background-image: url(#{event.image.md}); background-size: cover; background-position: top center;"}
         .overlay
           .title
             - if event.project.present?
