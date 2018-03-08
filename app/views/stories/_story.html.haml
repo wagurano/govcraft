@@ -1,7 +1,7 @@
 .col-md-4.col-sm-6.col-xs-12
   .component-card
     = link_to story do
-      .card-image{ style: "height: 200px; background-image: url(#{story.cover_url(:md)}); background-size: cover; background-position: top center;"}
+      .card-image{ style: "height: 200px; background-image: url(#{story.cover.md}); background-size: cover; background-position: top center;"}
     .card-content
       = link_to story.title, story, class: 'header'
       .card-description
