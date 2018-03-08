@@ -1,7 +1,7 @@
 %section.m-b
   .container
     .row
-      .col-sm-8.col-sm-offset-2
+      .col-sm-6.col-sm-offset-3
         .page-header
           %h3
             로그인
@@ -15,19 +15,18 @@
               %i.fa.fa-twitter.fa-fw
               트위터로 가입 혹은 로그인
 
+            %hr
 
-        .panel.panel-default
-          .panel-body
-            %p.email-login-box-title 또는 이메일로 로그인
+            %h4.email-login-box-title.text-center 이메일로 로그인
 
             = form_for User.new, url: session_path(:user, subdomain: root_subdomain) do |f|
               = f.hidden_field :provider, value: 'email'
               .form-group
-                = f.email_field :email, placeholder: '이메일을 입력하세요', class: 'form-control'
+                = f.email_field :email, placeholder: '이메일을 입력하세요', class: 'form-control input-lg'
               .form-group
-                = f.password_field :password, placeholder: '비밀번호를 입력하세요', autocomplete: "off", class: 'form-control'
+                = f.password_field :password, placeholder: '비밀번호를 입력하세요', autocomplete: "off", class: 'form-control input-lg'
               .form-group
-                = f.submit '로그인', class: 'btn btn-primary btn-block', data: { disable_with: "로그인 중..." }
+                = f.submit '로그인', class: 'btn btn-primary btn-lg btn-block', data: { disable_with: "로그인 중..." }
 
         .text-center
           .links
