@@ -147,4 +147,9 @@
             촉구하기에 대해 응답온 것을 표시하는 영역의 대한 설명을 정합니다. 비워두면 "#{t("views.petition.speaker_section_response_title.default")}"으로 표시됩니다.
 
         .form-group
+          %label
+            서명받은 목록을 숨깁니다.
+            = f.check_box :sign_hidden
+
+        .form-group
           = f.submit '저장', class: 'btn btn-primary btn-lg'

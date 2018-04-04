@@ -23,13 +23,13 @@
         = @petition.views_count
 
     .petition-info-area
-      = link_to petition_path(@petition, anchor: 'anchor-join'), class: 'petition-users-count-label' do
+      = link_to petition_path(@petition, anchor: 'anchor-sign'), class: 'petition-users-count-label' do
         = @petition.signs_count
         명 서명
       - if user_signed_in? and @petition.signed?(current_user)
         .petition-users-count-label
           서명 참여완료
-      - else
+      - elsif !@petition.sign_hidden
         %a.petition-join-btn(href="#anchor-join")
           서명하기
 
@@ -42,12 +42,22 @@
     .petition-body
       = raw @petition.body
 
-      %a{id: "anchor-join"}
-      %h3.sub-title#join-title
-        서명하기
-      .panel-body.component-box
-        .panel-post__signs
-          = render 'signs/list', petition: @petition
+      - if !@petition.sign_hidden
+        %a{id: "anchor-sign"}
+        %h3.sub-title#join-title
+          서명하기
+        .panel-body.component-box
+          .panel-post__signs
+            = render 'signs/list', petition: @petition
+      - else
+        %a{id: "anchor-sign"}
+        %h3.sub-title#join-title
+          서명
+        .panel-body.component-box
+          .help-text
+            #{@petition.signs_count}명이 서명했습니다.
+            %br
+            %span.text-muted 개설자가 서명 목록을 숨겼습니다.
 
       %h3.sub-title 이 이슈를 친구들에게 알려 주세요
       .panel-body.component-box

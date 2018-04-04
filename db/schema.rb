@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180219075604) do
+ActiveRecord::Schema.define(version: 20180403230013) do
+
   create_table "agencies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title",      null: false
     t.string   "slug",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "image"
   end
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -569,6 +571,7 @@ ActiveRecord::Schema.define(version: 20180219075604) do
     t.string   "speaker_section_response_title"
     t.boolean  "use_signer_phone",                             default: false
     t.string   "signer_phone_title"
+    t.boolean  "sign_hidden",                                  default: false, null: false
     t.index ["project_id"], name: "index_petitions_on_project_id", using: :btree
     t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
   end
