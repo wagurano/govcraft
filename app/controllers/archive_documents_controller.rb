@@ -16,6 +16,7 @@ class ArchiveDocumentsController < ApplicationController
 
   def new
     @archive ||= Archive.find(params[:archive_id])
+    @archive_document.archive = @archive
     @current_organization = @archive.organization
     render_new
   end
