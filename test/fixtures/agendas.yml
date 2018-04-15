@@ -2,14 +2,14 @@
 
 one:
   user: one
-  problem: MyText
-  solution: MyText
+#  problem: MyText
+#  solution: MyText
   memo: MyText
   image: MyString
 
 two:
   user: two
-  problem: MyText
-  solution: MyText
+#  problem: MyText
+#  solution: MyText
   memo: MyText
   image: MyString
