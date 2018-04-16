@@ -36,6 +36,6 @@
   - if speakers_group[true].try(:any?)
     %h4 촉구 메시지에 응답 없는 분
   .row.masonry-container
-    - [speakers_group[nil], speakers_group[false]].flatten.each do |speaker|
+    - speakers_group[false].each do |speaker|
       .col-md-2.col-sm-3.col-xs-4
         = render 'statementables/speaker', speaker: speaker, statementable: petition

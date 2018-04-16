@@ -11,7 +11,7 @@ module Statementable
   end
 
   def speeched? speaker
-    speakable?(speaker) and statement_of(speaker).try(:is_responed?)
+    speakable?(speaker) and (statement_of(speaker).try(:is_responed?) || false)
   end
 
   def statement_of speaker
