@@ -4,7 +4,7 @@
     .media[comment]
       .media-left
         .comment__user
-          .user-image-sm{style:"float:left;background-image:url(#{asset_url(commenter.nil? ? comment.image : commenter.image)});"}
+          .user-image-sm{style:"float:left;background-color: #eee; background-image:url(#{asset_url(commenter.nil? ? 'default-user.png' : commenter.image)}); #{"background-position: 0 4px; background-repeat: no-repeat;" if commenter.nil?}"}
       .media-body
         .comment__body
           %p= raw screened(comment, :body)

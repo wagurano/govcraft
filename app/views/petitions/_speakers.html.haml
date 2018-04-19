@@ -4,9 +4,9 @@
 
 - if speakers_group[true].try(:any?)
   %h4.sub-title= @petition.speaker_section_response_title.presence || I18n.t("views.petition.speaker_section_response_title.default")
-  .row.masonry-container
+  .row.masonry-container{ style: 'margin-left: -6px; margin-right: -6px;' }
     - speakers_group[true].each do |speaker|
-      .col-md-2.col-sm-3.col-xs-4
+      .col-md-2.col-sm-3.col-xs-4{ style: 'padding-left: 6px; padding-right: 6px;' }
         = render 'statementables/speaker', speaker: speaker, statementable: petition
 
 - if @petition.statements.responed_body.any?
@@ -35,7 +35,7 @@
 - if speakers_group[false].try(:any?)
   - if speakers_group[true].try(:any?)
     %h4 촉구 메시지에 응답 없는 분
-  .row.masonry-container
+  .row.masonry-container{ style: 'margin-left: -6px; margin-right: -6px;' }
     - speakers_group[false].each do |speaker|
-      .col-md-2.col-sm-3.col-xs-4
+      .col-md-2.col-sm-3.col-xs-4{ style: 'padding-left: 6px; padding-right: 6px;' }
         = render 'statementables/speaker', speaker: speaker, statementable: petition
