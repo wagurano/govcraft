@@ -1,6 +1,7 @@
 class SignsController < ApplicationController
   before_action :authenticate_user!, except: [:create, :index]
   load_and_authorize_resource
+  invisible_captcha only: [:create]
 
   def index
     @petition = Petition.find params[:petition_id]
