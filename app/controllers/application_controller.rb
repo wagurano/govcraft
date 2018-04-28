@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include OrganizationHelper
 
   protect_from_forgery with: :exception
+  before_action :support_ssl_multi_servers
   before_action :prepare_meta_tags, if: "request.get?"
   after_action :prepare_flash
   after_action :store_location
@@ -177,6 +178,15 @@ class ApplicationController < ActionController::Base
         all_projects = Project.where(organization: nil)
       end
       all_projects = all_projects.organize_by(current_user, 'Project')
+    end
+  end
+
+  def support_ssl_multi_servers
+    return if request.domain.nil?
+    if request.protocol == 'https://'
+      if !request.domain.end_with?('.govcraft.org') and request.domain != 'govcraft.org'
+        redirect_to "http://#{request.domain}"
+      end
     end
   end
 end
