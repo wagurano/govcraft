@@ -155,6 +155,9 @@
           = f.label :area_id, '특정 지역에 관련된 서명인가요? 지역과 연결해 보세요. (선택)'
           = f.select :area_id, Area.where(neighborhood: nil).map { |area| [area.description, area.id] }, { include_blank: true }, class: 'js-select2 form-control'
 
+        .form-group
+          = f.label :agenda_id, '특정 의제에 관련된 서명인가요? 의제를 연결해 보세요. (선택)'
+          = f.collection_select :agenda_id, Agenda.all, :id, :name, { include_blank: true }, class: 'js-select2 form-control'
 
         .form-group
           = f.submit '저장', class: 'btn btn-primary btn-lg'

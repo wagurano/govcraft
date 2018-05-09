@@ -7,6 +7,7 @@ class Agenda < ApplicationRecord
   has_many :speakers, -> { reorder('').distinct }, through: :opinions
   has_many :agenda_documents, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :petitions, dependent: :nullify
   has_and_belongs_to_many :agenda_themes, uniq: true
 
   acts_as_taggable

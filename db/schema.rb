@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180509012222) do
+ActiveRecord::Schema.define(version: 20180509013013) do
 
   create_table "agencies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title",      null: false
@@ -583,6 +583,8 @@ ActiveRecord::Schema.define(version: 20180509012222) do
     t.string   "signer_phone_title"
     t.boolean  "sign_hidden",                                  default: false, null: false
     t.integer  "area_id"
+    t.integer  "agenda_id"
+    t.index ["agenda_id"], name: "index_petitions_on_agenda_id", using: :btree
     t.index ["area_id"], name: "index_petitions_on_area_id", using: :btree
     t.index ["project_id"], name: "index_petitions_on_project_id", using: :btree
     t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
