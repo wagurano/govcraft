@@ -7,6 +7,7 @@ class Petition < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :signs, dependent: :destroy
   has_many :signed_users, through: :signs, source: :petition
+  belongs_to :area, optional: true
 
   mount_uploader :cover_image, ImageUploader
   mount_uploader :social_image, ImageUploader
