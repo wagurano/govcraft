@@ -94,6 +94,8 @@ GEM
     browser (2.3.0)
     buftok (0.2.0)
     builder (3.2.3)
+    bulk_insert (1.6.0)
+      activerecord (>= 4.1.0)
     by_star (2.2.1)
       activesupport
     byebug (9.0.6)
@@ -688,6 +690,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3, >= 3.3.5.1)
   bootstrap3-datetimepicker-rails
   browser (~> 2.0, >= 2.0.2)
+  bulk_insert
   bundler (~> 1.14, >= 1.14.5)
   by_star (~> 2.2, >= 2.2.1)
   byebug

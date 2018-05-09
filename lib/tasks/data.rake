@@ -77,6 +77,50 @@ namespace :data do
     end
   end
 
+  desc "seed areas"
+  task 'seed:areas' => :environment do
+    count = 0
+    ActiveRecord::Base.transaction do
+      Area.delete_all
+      now = DateTime.now
+      Area.bulk_insert(:code, :division, :subdivision, :neighborhood, :created_at, :updated_at) do |worker|
+        xlsx = Roo::Spreadsheet.open(Rails.root.join('lib', 'tasks', 'area_20180401.xlsx').to_s)
+
+        index_area_division_code = 1
+        index_area_subdivision_code = 3
+        index_area_code = 5
+
+        index_area_division = 2
+        index_area_subdivision = 4
+        index_area_neighborhood = 6
+
+        xlsx.sheet("Data").each_row_streaming(pad_cells: true) do |row|
+          division_code = row[index_area_division_code].try(:cell_value)
+          next if division_code.blank?
+
+          subdivision_code = row[index_area_subdivision_code].try(:cell_value)
+          code = row[index_area_code].try(:cell_value)
+          if code.blank?
+            if subdivision_code.blank?
+              code = division_code + "000" + "00"
+            else
+              code = subdivision_code + "00"
+            end
+          end
+
+          division = row[index_area_division].try(:cell_value)
+          subdivision = row[index_area_subdivision].try(:cell_value)
+          neighborhood = row[index_area_neighborhood].try(:cell_value)
+
+          worker.add [code, division, subdivision, neighborhood, now, now]
+          count += 1
+          print '.' if (count % 1000.0) == 0
+        end
+      end
+    end
+    puts '.' if count > 0
+  end
+
   def empty_row? row
     row[0].nil? or row[0].formatted_value.try(:strip).blank?
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403230013) do
+ActiveRecord::Schema.define(version: 20180509001430) do
 
   create_table "agencies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title",      null: false
@@ -150,6 +150,16 @@ ActiveRecord::Schema.define(version: 20180403230013) do
     t.integer  "organization_id"
     t.index ["organization_id"], name: "index_archives_on_organization_id", using: :btree
     t.index ["user_id"], name: "index_archives_on_user_id", using: :btree
+  end
+
+  create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "code",         null: false
+    t.string   "division",     null: false
+    t.string   "subdivision"
+    t.string   "neighborhood"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["code"], name: "index_areas_on_code", using: :btree
   end
 
   create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
