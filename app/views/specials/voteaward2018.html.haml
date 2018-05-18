@@ -1,0 +1,9 @@
+.row
+- @speakers.each do |speaker|
+  - election_candidate = speaker.election_candidates.find_by(election_slug: '20180613')
+  .col-sm-2
+    = render speaker
+    %ul
+      %li= election_candidate.party
+      %li= election_candidate.area_division
+      %li= election_candidate.district_name

@@ -121,6 +121,8 @@ Rails.application.routes.draw do
     post :create_by_slack, on: :collection
   end
 
+  get 'specials/voteaward2018'
+
   class AllTimelineConstraint
     def matches?(request)
       ["timeline", "list"].include? request.query_parameters["mode"]

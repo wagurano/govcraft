@@ -121,6 +121,85 @@ namespace :data do
     puts '.' if count > 0
   end
 
+  desc '2018년 제7회 지방선거 예비후보를 등록합니다'
+  task 'register_regional_election_7th_precandidate' => :environment do
+    count = 0
+
+    candidate_category = 'precandidate'
+
+    ActiveRecord::Base.transaction do
+      ElectionCandidate.bulk_insert(:candidate_category, :district_name,
+        :party, :image_url, :name, :election_slug,
+        :election_category, :election_code, :area_division,
+        :area_division_code, :district_slug, :district_code) do |worker|
+        xlsx = Roo::Spreadsheet.open(Rails.root.join('lib', 'tasks', 'regional_election_7th_precandidate.xlsx').to_s)
+
+        index_district_name = letter_to_number('b')
+        index_party = letter_to_number('c')
+        index_image_path = letter_to_number('d')
+        index_name = letter_to_number('e')
+        index_election_slug = letter_to_number('n')
+        index_election_category = letter_to_number('o')
+        index_election_code = letter_to_number('p')
+        index_area_division = letter_to_number('q')
+        index_area_division_code = letter_to_number('r')
+        index_district_slug = letter_to_number('u')
+        index_district_code = letter_to_number('v')
+
+        xlsx.sheet(0).each_row_streaming(offset: 1, pad_cells: true) do |row|
+          no = row[0].try(:cell_value)
+          next if no.blank?
+
+          name = row[index_name].try(:cell_value)
+          name = name.gsub /\(.*\)/, '' if name.present?
+          next if name.blank?
+
+          district_name = row[index_district_name].try(:cell_value)
+          party = row[index_party].try(:cell_value)
+          image_path = row[index_image_path].try(:cell_value)
+          election_slug = row[index_election_slug].try(:cell_value)
+          election_category = row[index_election_category].try(:cell_value)
+          election_code = row[index_election_code].try(:cell_value)
+          area_division = row[index_area_division].try(:cell_value)
+          area_division_code = row[index_area_division_code].try(:cell_value)
+          district_slug = row[index_district_slug].try(:cell_value)
+          district_code = row[index_district_code].try(:cell_value)
+
+          worker.add [candidate_category, district_name,
+            party, ("http://info.nec.go.kr#{image_path}" if image_path.present?), name, election_slug,
+            election_category, election_code, area_division,
+            area_division_code, district_slug, district_code]
+          count += 1
+          print '.' if (count % 100.0) == 0
+        end
+      end
+
+      print "speaker 저장 중...\n"
+      ElectionCandidate.where(election_slug: '20180613', candidate_category: candidate_category).each do |election_candidate|
+
+
+        s = Speaker.new(name: election_candidate.name, category: '')
+        s.remote_image_url = election_candidate.image_url
+        s.position_list = '제7대_지방선거_예비후보'
+
+        begin
+          s.save!
+        rescue ActiveRecord::RecordInvalid => e
+          s.image = nil
+        end
+        s.save!
+
+        election_candidate.speaker = s
+        election_candidate.save
+
+        sleep 0.1
+
+        count += 1
+        print '.' if (count % 100.0) == 0
+      end
+    end
+  end
+
   def empty_row? row
     row[0].nil? or row[0].formatted_value.try(:strip).blank?
   end
@@ -173,5 +252,9 @@ namespace :data do
 
   def fetch_data(row, attributes, name)
     row[attributes.index(name)].try(:formatted_value)
+  end
+
+  def letter_to_number(ch)
+    ch.ord - 'a'.ord
   end
 end

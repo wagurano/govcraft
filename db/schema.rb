@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180509013013) do
+ActiveRecord::Schema.define(version: 20180516225712) do
 
   create_table "agencies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title",      null: false
@@ -324,6 +324,23 @@ ActiveRecord::Schema.define(version: 20180509013013) do
     t.index ["discussion_category_id"], name: "index_discussions_on_discussion_category_id", using: :btree
     t.index ["project_id"], name: "index_discussions_on_project_id", using: :btree
     t.index ["user_id"], name: "index_discussions_on_user_id", using: :btree
+  end
+
+  create_table "election_candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer "speaker_id"
+    t.string  "candidate_category"
+    t.string  "district_name"
+    t.string  "party"
+    t.string  "image_url"
+    t.string  "name"
+    t.string  "election_slug"
+    t.string  "election_category"
+    t.string  "election_code"
+    t.string  "area_division"
+    t.string  "area_division_code"
+    t.string  "district_slug"
+    t.string  "district_code"
+    t.index ["speaker_id"], name: "index_election_candidates_on_speaker_id", using: :btree
   end
 
   create_table "elections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
