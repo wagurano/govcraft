@@ -23,7 +23,7 @@
         새로운 액션
         %small.pull-right 전체 보기
     .row
-      = render Petition.recent.limit(6)
+      = render Petition.recent.where("signs_count > 100").limit(6)
 
 %section#stories.page-block
   .container
