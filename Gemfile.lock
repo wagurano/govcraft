@@ -72,6 +72,7 @@ GEM
     after_commit_action (1.0.1)
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
+    ambry (1.0.0)
     ansi (1.5.0)
     arel (7.1.4)
     ast (2.3.0)
@@ -408,6 +409,8 @@ GEM
     memoist (0.15.0)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
+    merit (3.0.1)
+      ambry (~> 1.0.0)
     meta-tags (2.1.0)
       actionpack (>= 3.0.0)
     metaclass (0.0.4)
@@ -729,6 +732,7 @@ DEPENDENCIES
   letter_opener_web
   magnific-popup-rails (~> 1.1)
   mechanize (~> 2.7, >= 2.7.5)
+  merit
   meta-tags (~> 2.1.0)
   mini_magick
   minitest-focus (~> 1.1, >= 1.1.2)
@@ -783,4 +787,4 @@ DEPENDENCIES
   wkhtmltoimage-binary (~> 0.12.2)
 
 BUNDLED WITH
-   1.16.0.pre.3
+   1.16.1

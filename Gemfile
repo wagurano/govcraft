@@ -21,6 +21,7 @@ gem 'groupdate', '~> 3.1', '>= 3.1.1'
 gem 'chartkick', '~> 2.2', '>= 2.2.1'
 gem 'friendly_id', '~> 5.2.0'
 gem 'bulk_insert'
+gem 'merit'
 
 # geo
 gem 'geocoder'
