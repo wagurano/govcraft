@@ -166,12 +166,6 @@ ko:
         facebook_hashtags: 페이스북 해시태그
         facebook_href: 페이스북 링크
         tweet: 트위터 메시지
-      election:
-        title: 선거명
-      candidate:
-        name: 후보자
-        body: 추천사유 혹은 출마사유
-        image: 사진
       memorial:
         title: 제목
         body: 내용

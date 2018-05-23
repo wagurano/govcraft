@@ -20,7 +20,7 @@ class Ability
       can :create, [
           Project, Story, Discussion, DiscussionCategory, Poll, Feedback, Survey, Wiki, Sympathy,
           Memorial, Timeline, TimelineDocument,
-          Election, Candidate, Article, Person, Race, Player,
+          Article, Person, Race, Player,
           Thumb
         ]
 
@@ -45,7 +45,7 @@ class Ability
       can [:update, :destroy], [
           Project, Story, Discussion, DiscussionCategory, Petition, Poll, Survey, Wiki, Sympathy,
           Memorial, Timeline, TimelineDocument, Event,
-          Sign, Election, Candidate, Article, Person,
+          Sign, Article, Person,
           Race, Player
         ], :user_id => user.id
       can :update, Project do |project|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180516225712) do
+ActiveRecord::Schema.define(version: 20180523085443) do
 
   create_table "agencies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title",      null: false
@@ -235,18 +235,6 @@ ActiveRecord::Schema.define(version: 20180516225712) do
     t.index ["user_id"], name: "index_bulk_tasks_on_user_id", using: :btree
   end
 
-  create_table "candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string   "name"
-    t.text     "body",        limit: 65535
-    t.string   "image"
-    t.integer  "election_id",               null: false
-    t.integer  "user_id",                   null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.index ["election_id"], name: "index_candidates_on_election_id", using: :btree
-    t.index ["user_id"], name: "index_candidates_on_user_id", using: :btree
-  end
-
   create_table "citizen2017_speeches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "title"
     t.integer "citizen2017_id"
@@ -299,6 +287,34 @@ ActiveRecord::Schema.define(version: 20180516225712) do
     t.index ["speaker_id"], name: "index_comments_target_speakers_on_speaker_id", using: :btree
   end
 
+  create_table "deprecated_candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "name"
+    t.text     "body",        limit: 65535
+    t.string   "image"
+    t.integer  "election_id",               null: false
+    t.integer  "user_id",                   null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["election_id"], name: "index_deprecated_candidates_on_election_id", using: :btree
+    t.index ["user_id"], name: "index_deprecated_candidates_on_user_id", using: :btree
+  end
+
+  create_table "deprecated_elections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "title"
+    t.text     "body",            limit: 65535
+    t.string   "image"
+    t.integer  "user_id",                       null: false
+    t.integer  "project_id"
+    t.datetime "registered_from",               null: false
+    t.datetime "registered_to",                 null: false
+    t.datetime "voted_from",                    null: false
+    t.datetime "voted_to",                      null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["project_id"], name: "index_deprecated_elections_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_deprecated_elections_on_user_id", using: :btree
+  end
+
   create_table "discussion_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title"
     t.integer  "project_id",                    null: false
@@ -341,22 +357,6 @@ ActiveRecord::Schema.define(version: 20180516225712) do
     t.string  "district_slug"
     t.string  "district_code"
     t.index ["speaker_id"], name: "index_election_candidates_on_speaker_id", using: :btree
-  end
-
-  create_table "elections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string   "title"
-    t.text     "body",            limit: 65535
-    t.string   "image"
-    t.integer  "user_id",                       null: false
-    t.integer  "project_id"
-    t.datetime "registered_from",               null: false
-    t.datetime "registered_to",                 null: false
-    t.datetime "voted_from",                    null: false
-    t.datetime "voted_to",                      null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.index ["project_id"], name: "index_elections_on_project_id", using: :btree
-    t.index ["user_id"], name: "index_elections_on_user_id", using: :btree
   end
 
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
