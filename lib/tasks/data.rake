@@ -125,7 +125,7 @@ namespace :data do
   task 'register_regional_election_7th_precandidate' => :environment do
     count = 0
 
-    candidate_category = 'precandidate'
+    candidate_category = Election::CANDIDATE_CATEGORY_20180613_PRECANDIDATE
 
     ActiveRecord::Base.transaction do
       ElectionCandidate.bulk_insert(:candidate_category, :district_name,
@@ -175,7 +175,7 @@ namespace :data do
       end
 
       print "speaker 저장 중...\n"
-      ElectionCandidate.where(election_slug: '20180613', candidate_category: candidate_category).each do |election_candidate|
+      ElectionCandidate.where(election_slug: Election::SLUG_20180613, candidate_category: candidate_category).each do |election_candidate|
 
 
         s = Speaker.new(name: election_candidate.name, category: '')

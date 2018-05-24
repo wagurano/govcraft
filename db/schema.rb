@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180523085443) do
+ActiveRecord::Schema.define(version: 20180523213135) do
+
+  create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string  "action_assignable_slug", null: false
+    t.string  "action_assignable_type", null: false
+    t.string  "action_targetable_type"
+    t.integer "action_targetable_id"
+    t.index ["action_assignable_slug", "action_assignable_type", "action_targetable_type", "action_targetable_id"], name: "action_target_unique", unique: true, using: :btree
+  end
 
   create_table "agencies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title",      null: false
@@ -359,6 +367,12 @@ ActiveRecord::Schema.define(version: 20180523085443) do
     t.index ["speaker_id"], name: "index_election_candidates_on_speaker_id", using: :btree
   end
 
+  create_table "elections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string "slug",  null: false
+    t.string "title"
+    t.index ["slug"], name: "index_elections_on_slug", using: :btree
+  end
+
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "slug"
     t.string   "title"
@@ -601,6 +615,7 @@ ActiveRecord::Schema.define(version: 20180523085443) do
     t.boolean  "sign_hidden",                                  default: false, null: false
     t.integer  "area_id"
     t.integer  "agenda_id"
+    t.string   "special_slug"
     t.index ["agenda_id"], name: "index_petitions_on_agenda_id", using: :btree
     t.index ["area_id"], name: "index_petitions_on_area_id", using: :btree
     t.index ["project_id"], name: "index_petitions_on_project_id", using: :btree

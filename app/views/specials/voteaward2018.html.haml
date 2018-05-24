@@ -1,9 +1,77 @@
-.row
-- @speakers.each do |speaker|
-  - election_candidate = speaker.election_candidates.find_by(election_slug: '20180613')
-  .col-sm-2
-    = render speaker
-    %ul
-      %li= election_candidate.party
-      %li= election_candidate.area_division
-      %li= election_candidate.district_name
+%section.page-block
+  .container
+    %h3.sub-title
+      예비 후보자
+      (#{number_with_delimiter @election.speakers.count})
+    .row
+      - @speakers.each do |speaker|
+        - election_candidate = speaker.election_candidates.find_by(election_slug: Election::SLUG_20180613)
+        .col-sm-3
+          = render speaker
+          %ul
+            %li= election_candidate.party
+            %li= election_candidate.area_division
+            %li= election_candidate.district_name
+
+%section.page-block
+  .container
+    %h3.sub-title
+      = Petition.model_name.human
+      %small.pull-right
+        - if user_signed_in?
+          %button.btn.btn-primary.btn-lg.btn-block{"data-target" => "#petition-form-modal", "data-toggle" => "modal", :type => "button"}
+            %i.fa.fa-edit
+            한마디 추가
+        - else
+          = link_to new_user_session_path, class: 'button btn btn-primary btn-lg btn-block' do
+            %i.fa.fa-edit
+            한마디 추가
+
+    - if @petitions.any?
+      .row.masonry-container
+        = render @petitions
+    - else
+      .text-center
+        %i.fa.fa-info-circle
+        가장 먼저 한마디 해보세요.
+
+  #petition-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &#215;
+          %h4.modal-title 후보에게 한마디 하세요.
+        .modal-body
+          .panel.panel-default
+            .panel-body
+              = form_for @form_petition do |f|
+                - if @form_petition.errors.any?
+                  .alert.alert-danger
+                    %ul.list-unstyled
+                      - @form_petition.errors.full_messages.each do |msg|
+                        %li= msg
+
+                %fieldset
+                  %legend 기본정보
+
+                  = f.hidden_field :special_slug
+
+                  .form-group
+                    = f.label :title
+                    = f.text_field :title, class: 'form-control'
+
+                  .form-group
+                    = f.label :body
+                    ~ f.text_area :body, class: 'form-control redactor'
+
+                  .form-group
+                    = f.label :area_id, '특정 지역에 관련된 서명인가요? 지역과 연결해 보세요. (선택)'
+                    = f.select :area_id, Area.all_divisions.map { |area| [area.description, area.id] }, { include_blank: true }, class: 'js-select2 form-control'
+
+                  .form-group
+                    = f.label :agenda_id, '특정 의제에 관련된 서명인가요? 의제를 연결해 보세요. (선택)'
+                    = f.collection_select :agenda_id, Agenda.all, :id, :name, { include_blank: true }, class: 'js-select2 form-control'
+
+                  .form-group
+                    = f.submit '저장', class: 'btn btn-primary btn-lg'

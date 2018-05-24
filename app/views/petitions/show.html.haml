@@ -88,10 +88,10 @@
           != flash[:sign_notice]
           .share-box{ 'data-share-image': image_url(cover_image) }
           - if @petition.speakers.any?
-            - speaker_section_title = @petition.speaker_section_title.presence || I18n.t("views.petition.speaker_section_title.default")
+            - speaker_section_title = @petition.speaker_section_title.presence || I18n.t("views.action_assignable.speaker_section_title.default")
             %h4= speaker_section_title
             .row{ style: 'margin-left: -9px; margin-right: -9px;' }
-              - @petition.speakers.to_a.sample(2).each do |speaker|
+              - @petition.speakers_random(2).each do |speaker|
                 .col-sm-4.col-xs-4{ style: 'padding-left: 6px; padding-right: 6px;' }
                   = render 'statementables/speaker', speaker: speaker, statementable: @petition
               .col-sm-4.col-xs-4{ style: 'padding-left: 6px; padding-right: 6px;' }

@@ -6,7 +6,7 @@ class Speaker < ApplicationRecord
   has_many :sent_requests, dependent: :destroy
   has_many :agenda_documents, dependent: :destroy
   has_many :election_candidates, dependent: :nullify
-  has_and_belongs_to_many :petitions, -> { uniq }
+  has_and_belongs_to_many :petitions, -> { distinct }
 
   scope :of_position, ->(*positions) { tagged_with(positions, on: :positions) }
 

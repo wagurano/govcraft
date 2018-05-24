@@ -19,7 +19,8 @@
       %h5.card-title
         = speaker.name
         %br.xs-visible.block
-        %span.card-organization= speaker.organization
+        %span.card-organization
+          = simple_format Special.decorate_speaker_organization(statementable, speaker), {}, wrapper_tag: "span"
 
   .card-content.text-center
     = link_to polymorphic_url([:new_comment_speaker, statementable], speaker_id: speaker.id), class: "request-speaker-btn" do

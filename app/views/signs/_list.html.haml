@@ -77,8 +77,7 @@
   - if petition.signs_count > 0
     - if !local_assigns[:hide_users]
       .sign-panel__users
-        - petition.signs.recent.limit(first_sign_users_count).each do |sign|
-          #{sign.user_name},
+        = petition.signs.recent.limit(first_sign_users_count).map(&:user_name).join(', ')
 
         - if petition.signs.count > first_sign_users_count
           - if local_assigns[:widget]

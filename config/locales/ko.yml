@@ -340,7 +340,7 @@ ko:
       previous: "&lsaquo; 이전"
       next: "다음 &rsaquo;"
       truncate: "&hellip;"
-    petition:
+    action_assignable:
       speaker_section_title:
         default: 관련 인물에게 촉구하기
       speaker_section_response_title:

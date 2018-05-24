@@ -89,6 +89,13 @@ export GOOGLE_CLIENT_ID="xx"
 export GOOGLE_CLIENT_SECRET="xx"
 ```
 
+### 선거 정보
+
+```
+$ source .powenv
+$ bundle exec rails db:seed_fu
+```
+
 ### 국회의원 정보 data.go.kr
 data.go.kr의 키를 발급받아 .powenv에 저장한다
 

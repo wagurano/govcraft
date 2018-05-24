@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
       return
     end
 
-    if @comment.mailing.ready? and @comment.commentable.respond_to?(:speakers)
+    if @comment.commentable.respond_to?(:speakers)
       if @comment.target_speaker_id.blank?
         @comment.commentable.speakers.each do |speaker|
           @comment.target_speakers << speaker
@@ -40,18 +40,20 @@ class CommentsController < ApplicationController
     if @comment.save
       flash[:notice] = I18n.t('messages.commented')
 
-      if @comment.mailing.ready?
-        if @comment.target_speakers.empty? { |s| s.email.present? }
-          @comment.update_attributes(mailing: :fail)
-        else
-          if @comment.commentable.respond_to? :statements
-            @comment.target_speakers.each do |speaker|
-              statement = @comment.commentable.statements.find_or_create_by(speaker: speaker)
-              statement_key = statement.statement_keys.build(key: SecureRandom.hex(50))
-              statement_key.save!
-              CommentMailer.target_speaker(@comment.id, speaker.id, statement_key.id).deliver_later
-            end
+      if @comment.commentable.respond_to? :statements
+        @comment.target_speakers.each do |speaker|
+          statement = @comment.commentable.statements.find_or_create_by(speaker: speaker)
+          statement_key = statement.statement_keys.build(key: SecureRandom.hex(50))
+          statement_key.save!
+          if @comment.mailing.ready? and speaker.email.present?
+            CommentMailer.target_speaker(@comment.id, speaker.id, statement_key.id).deliver_later
           end
+        end
+      end
+
+      if @comment.mailing.ready?
+        if @comment.target_speakers.empty? { |speaker| speaker.email.present? }
+          @comment.update_attributes(mailing: :fail)
         end
       end
     else

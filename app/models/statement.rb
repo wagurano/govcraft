@@ -8,6 +8,9 @@ class Statement < ApplicationRecord
 
   scope :recent, -> { order('updated_at DESC').order('id DESC') }
   scope :responed_body, -> { where('body is not null') }
+  scope :responed_stance_only, -> { where.not(stance: nil).where.not(stance: "") }
+  scope :responed_body_only, -> { where.not(body: nil).where.not(body: "") }
+  scope :responed_only, -> { responed_stance_only.or(Statement.responed_body_only) }
 
   def is_responed?
     stance.present? or body.present?

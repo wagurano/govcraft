@@ -1,6 +1,10 @@
 class SpecialsController < ApplicationController
   def voteaward2018
     limit = 20
-    @speakers = Speaker.tagged_with("제7대_지방선거_예비후보", on: :positions).order("RAND()").first(5)
+    @election = Election.of_slug(Election::SLUG_20180613)
+    @speakers = @election.speakers_moderatly(4 * 2)
+
+    @petitions = Petition.where(special_slug: Special::SLUG_VOTEAWARD2018)
+    @form_petition = Petition.new(special_slug: Special::SLUG_VOTEAWARD2018)
   end
 end

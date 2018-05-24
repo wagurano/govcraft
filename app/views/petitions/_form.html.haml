@@ -138,13 +138,13 @@
           = f.label :speaker_section_title
           = f.text_field :speaker_section_title, class: 'form-control'
           %p.help-block
-            촉구하기 영역의 제목을 정합니다. 비워두면 "#{t("views.petition.speaker_section_title.default")}"으로 표시됩니다.
+            촉구하기 영역의 제목을 정합니다. 비워두면 "#{t("views.action_assignable.speaker_section_title.default")}"으로 표시됩니다.
 
         .form-group
           = f.label :speaker_section_response_title
           = f.text_field :speaker_section_response_title, class: 'form-control'
           %p.help-block
-            촉구하기에 대해 응답온 것을 표시하는 영역의 대한 설명을 정합니다. 비워두면 "#{t("views.petition.speaker_section_response_title.default")}"으로 표시됩니다.
+            촉구하기에 대해 응답온 것을 표시하는 영역의 대한 설명을 정합니다. 비워두면 "#{t("views.action_assignable.speaker_section_response_title.default")}"으로 표시됩니다.
 
         .form-group
           %label
@@ -153,7 +153,7 @@
 
         .form-group
           = f.label :area_id, '특정 지역에 관련된 서명인가요? 지역과 연결해 보세요. (선택)'
-          = f.select :area_id, Area.where(neighborhood: nil).map { |area| [area.description, area.id] }, { include_blank: true }, class: 'js-select2 form-control'
+          = f.select :area_id, Area.all_divisions.map { |area| [area.description, area.id] }, { include_blank: true }, class: 'js-select2 form-control'
 
         .form-group
           = f.label :agenda_id, '특정 의제에 관련된 서명인가요? 의제를 연결해 보세요. (선택)'
