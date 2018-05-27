@@ -17,7 +17,7 @@
           빠띠 소개
 
 %section#petitions.page-block
-  .container
+  .container-fluid
     = link_to petitions_url(subdomain: root_subdomain) do
       %h3.sub-title
         새로운 액션
@@ -26,20 +26,10 @@
       = render Petition.recent.where("signs_count > 100").limit(6)
 
 %section#stories.page-block
-  .container
+  .container-fluid
     = link_to stories_url(subdomain: root_subdomain) do
       %h3.sub-title
         새로운 #{Story.model_name.human}
         %small.pull-right 전체 보기
     .row.masonry-container
       = render Story.recent.limit(6)
-
-%section#projects.page-block
-  .container
-    .clearfix
-      = link_to projects_url(subdomain: root_subdomain) do
-        %h3.sub-title
-          새로운 #{Project.model_name.human}
-          %small.pull-right 전체 보기
-    .row
-      = render Project.recent.limit(6)

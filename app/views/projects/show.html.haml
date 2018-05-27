@@ -9,7 +9,7 @@
     - if @project.story_enabled? and @project.stories.any?
       %section.page-block
         %a{id: "anchor-project-story"}
-        .container
+        .container-fluid
           = link_to stories_path(project_id: @project), project: @project do
             %h3.sub-title= @project.component_title('story')
           .row.masonry-container

@@ -1,6 +1,6 @@
 - on_project_show = params[:controller] == 'projects' and params[:action] = 'show'
 %section
-  .container
+  .container-fluid
     - if @project.present?
       %h3.sub-title
         = local_assigns[:title_label] || @project.try(:component_title, 'discussion')
