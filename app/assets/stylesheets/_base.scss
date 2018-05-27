@@ -207,7 +207,7 @@ h2.main-title {
 }
 
 h3.sub-title {
-    color: $brand-primary-light;
+    color: $brand-primary;
     margin: $font-size-base*3 0px $font-size-base;
 }
 
@@ -224,7 +224,7 @@ h3.sub-title {
       font-size:24px;
       color:$gray-darker;
       &:hover{
-        color:$brand-primary-light;
+        color:$brand-primary;
       }
     }
   }
