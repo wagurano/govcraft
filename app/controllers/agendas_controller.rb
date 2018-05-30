@@ -58,6 +58,7 @@ class AgendasController < ApplicationController
 
   def theme_single_widget
     @agenda_theme = AgendaTheme.find_by(slug: params[:theme_slug])
+    render_404 and return if @agenda_theme.blank?
     render layout: 'strip_without_footer'
   end
 
