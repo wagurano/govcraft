@@ -2,19 +2,19 @@
   .container-fluid
     = link_to petitions_url(subdomain: root_subdomain) do
       %h3.sub-title
-        새로운 액션
+        진행 중인 시민 액션
         %small.pull-right 전체 보기
     .row
       = render Petition.recent.where("signs_count > 100").limit(6)
 
 %section#stories.page-block
   .container-fluid
-    = link_to stories_url(subdomain: root_subdomain) do
+    = link_to agendas_path do
       %h3.sub-title
-        새로운 #{Story.model_name.human}
+        = Agenda.model_name.human
         %small.pull-right 전체 보기
     .row.masonry-container
-      = render Story.recent.limit(6)
+      = render Agenda.limit(6)
 
 %section#about-section{style:"background-position:center; background-size:cover;background-image: url(#{asset_url('gov_bg3.png')});"}
   .container
