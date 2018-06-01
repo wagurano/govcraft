@@ -1,18 +1,22 @@
 %section#petitions.page-block
   .container-fluid
-    = link_to petitions_url(subdomain: root_subdomain) do
-      %h3.sub-title
-        진행 중인 시민 액션
-        %small.pull-right 전체 보기
+    %h3.sub-title
+      진행 중인 시민 액션
+      %small.pull-right
+        = link_to petitions_url(subdomain: root_subdomain), class: 'btn btn-default' do
+          전체 보기
+        = link_to new_petition_path, class: 'btn btn-info' do
+          액션 시작하기
     .row
       = render Petition.recent.where("signs_count > 100").limit(6)
 
 %section#stories.page-block
   .container-fluid
-    = link_to agendas_path do
-      %h3.sub-title
-        = Agenda.model_name.human
-        %small.pull-right 전체 보기
+    %h3.sub-title
+      = Agenda.model_name.human
+      %small.pull-right
+        = link_to agendas_path, class: 'btn btn-default' do
+          전체 보기
     .row.masonry-container
       = render Agenda.limit(6)
 

@@ -1,7 +1,6 @@
 %section
-  .container
-    .page-header
-      %h2 특집
+  .container-fluid
+    %h3.sub-title 특집
 
     %section{ style:"background-image: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)), url(#{image_url('events/2017-president.jpg')});background-size:cover; background-position: center center; border: 1px solid #ccc; padding: 3em 2em;" }
       = link_to theme_agendas_path(theme_slug: '2017-president'), style: 'color: white;' do
@@ -36,9 +35,12 @@
           = link_to '바로 보기', theme_agendas_path(theme_slug: 'votefuture'), class: 'btn btn-danger'
 
 %section.page-block
-  .container
-    .page-header
-      %h2 모든 #{Agenda.model_name.human}
+  .container-fluid
+    %h3.sub-title
+      모든 #{Agenda.model_name.human}
+      %small.pull-right
+        = link_to agendas_path, class: 'btn btn-default' do
+          전체 보기
 
     .row.masonry-container
       = render @agendas
