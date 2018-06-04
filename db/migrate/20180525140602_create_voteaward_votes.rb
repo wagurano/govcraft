@@ -3,7 +3,7 @@ class CreateVoteawardVotes < ActiveRecord::Migration[5.0]
     create_table :voteaward_votes do |t|
       t.string :title
       t.text :content
-      t.json :coordinates
+      t.text :coordinates
       t.string :image_filename
       t.integer :likes
       t.integer :seq

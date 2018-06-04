@@ -368,8 +368,10 @@ ActiveRecord::Schema.define(version: 20180525140902) do
   end
 
   create_table "elections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string "slug",  null: false
-    t.string "title"
+    t.string   "slug",       null: false
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_elections_on_slug", using: :btree
   end
 
@@ -1166,7 +1168,7 @@ ActiveRecord::Schema.define(version: 20180525140902) do
   create_table "voteaward_votes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title"
     t.text     "content",               limit: 65535
-    t.json     "coordinates"
+    t.text     "coordinates",           limit: 65535
     t.string   "image_filename"
     t.integer  "likes"
     t.integer  "seq"
