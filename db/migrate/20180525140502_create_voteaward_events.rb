@@ -4,7 +4,7 @@ class CreateVoteawardEvents < ActiveRecord::Migration[5.0]
       t.string :title
       t.text :content
       t.string :address
-      t.json :coordinates
+      t.text :coordinates
       t.string :image_filename
       t.integer :likes
       t.integer :limit

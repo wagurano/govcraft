@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180523213135) do
+ActiveRecord::Schema.define(version: 20180525140902) do
 
   create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "action_assignable_slug", null: false
@@ -1024,6 +1024,162 @@ ActiveRecord::Schema.define(version: 20180523213135) do
     t.integer "user_id"
     t.integer "role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+  end
+
+  create_table "voteaward_awards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "title"
+    t.text     "prize",                 limit: 65535
+    t.text     "content",               limit: 65535
+    t.string   "address"
+    t.string   "promise_ids"
+    t.string   "oid",                                 null: false
+    t.integer  "voteaward_election_id"
+    t.integer  "voteaward_user_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["oid"], name: "idx_voteaward_awards_oid", using: :btree
+    t.index ["voteaward_election_id"], name: "index_voteaward_awards_on_voteaward_election_id", using: :btree
+    t.index ["voteaward_user_id"], name: "index_voteaward_awards_on_voteaward_user_id", using: :btree
+  end
+
+  create_table "voteaward_campaigns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "image_filename"
+    t.string   "url"
+    t.string   "oid",                    null: false
+    t.integer  "voteaward_candidate_id"
+    t.integer  "voteaward_user_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["oid"], name: "idx_voteaward_campaigns_oid", using: :btree
+    t.index ["voteaward_candidate_id"], name: "index_voteaward_campaigns_on_voteaward_candidate_id", using: :btree
+    t.index ["voteaward_user_id"], name: "index_voteaward_campaigns_on_voteaward_user_id", using: :btree
+  end
+
+  create_table "voteaward_candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "name"
+    t.string   "number"
+    t.string   "party"
+    t.string   "oid",                   null: false
+    t.integer  "voteaward_election_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["oid"], name: "idx_voteaward_candidates_oid", using: :btree
+    t.index ["voteaward_election_id"], name: "index_voteaward_candidates_on_voteaward_election_id", using: :btree
+  end
+
+  create_table "voteaward_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "content"
+    t.string   "oid",               null: false
+    t.string   "commentable_type"
+    t.integer  "commentable_id"
+    t.integer  "voteaward_user_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["commentable_id"], name: "index_voteaward_comments_on_commentable_id", using: :btree
+    t.index ["oid"], name: "idx_voteaward_comments_oid", using: :btree
+    t.index ["voteaward_user_id"], name: "index_voteaward_comments_on_voteaward_user_id", using: :btree
+  end
+
+  create_table "voteaward_elections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "title"
+    t.string   "content"
+    t.string   "oid",        null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["oid"], name: "idx_voteaward_elections_oid", using: :btree
+  end
+
+  create_table "voteaward_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "title"
+    t.text     "content",               limit: 65535
+    t.string   "address"
+    t.text     "coordinates",           limit: 65535
+    t.string   "image_filename"
+    t.integer  "likes"
+    t.integer  "limit"
+    t.string   "oid",                                 null: false
+    t.integer  "voteaward_election_id"
+    t.integer  "voteaward_user_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["oid"], name: "idx_voteaward_events_oid", using: :btree
+    t.index ["voteaward_election_id"], name: "index_voteaward_events_on_voteaward_election_id", using: :btree
+    t.index ["voteaward_user_id"], name: "index_voteaward_events_on_voteaward_user_id", using: :btree
+  end
+
+  create_table "voteaward_giveups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "age"
+    t.string   "area"
+    t.string   "reason"
+    t.string   "sex"
+    t.string   "oid",               null: false
+    t.integer  "voteaward_user_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["oid"], name: "idx_voteaward_giveups_oid", using: :btree
+    t.index ["voteaward_user_id"], name: "index_voteaward_giveups_on_voteaward_user_id", using: :btree
+  end
+
+  create_table "voteaward_promises", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "age"
+    t.string   "area"
+    t.string   "award_ids"
+    t.integer  "likes"
+    t.string   "reason"
+    t.integer  "seq"
+    t.string   "sex"
+    t.boolean  "show_candidate"
+    t.string   "oid",                    null: false
+    t.integer  "voteaward_election_id"
+    t.integer  "voteaward_candidate_id"
+    t.integer  "voteaward_user_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["oid"], name: "idx_voteaward_promises_oid", using: :btree
+    t.index ["voteaward_candidate_id"], name: "index_voteaward_promises_on_voteaward_candidate_id", using: :btree
+    t.index ["voteaward_election_id"], name: "index_voteaward_promises_on_voteaward_election_id", using: :btree
+    t.index ["voteaward_user_id"], name: "index_voteaward_promises_on_voteaward_user_id", using: :btree
+  end
+
+  create_table "voteaward_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "name"
+    t.string   "password"
+    t.string   "email"
+    t.string   "oid",                 null: false
+    t.string   "omniauth"
+    t.string   "omniauth_token"
+    t.string   "omniauth_expires_at"
+    t.boolean  "omniauth_expires"
+    t.string   "omniauth_image"
+    t.string   "omniauth_provider",   null: false
+    t.string   "omniauth_uid",        null: false
+    t.string   "omniauth_url"
+    t.integer  "user_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["oid"], name: "idx_voteaward_users_oid", using: :btree
+    t.index ["omniauth_provider", "omniauth_uid"], name: "idx_voteaward_users_uid", using: :btree
+  end
+
+  create_table "voteaward_votes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "title"
+    t.text     "content",               limit: 65535
+    t.json     "coordinates"
+    t.string   "image_filename"
+    t.integer  "likes"
+    t.integer  "seq"
+    t.string   "oid",                                 null: false
+    t.integer  "voteaward_event_id"
+    t.integer  "voteaward_election_id"
+    t.integer  "voteaward_user_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["oid"], name: "idx_voteaward_votes_oid", using: :btree
+    t.index ["voteaward_election_id"], name: "index_voteaward_votes_on_voteaward_election_id", using: :btree
+    t.index ["voteaward_event_id"], name: "index_voteaward_votes_on_voteaward_event_id", using: :btree
+    t.index ["voteaward_user_id"], name: "index_voteaward_votes_on_voteaward_user_id", using: :btree
   end
 
   create_table "votes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
