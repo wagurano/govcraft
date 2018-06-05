@@ -16,7 +16,7 @@
             캠페인
           = @project.title
       - else
-        = organization.try(:slogan) || '참여형 캠페인을 위한 민주주의 플랫폼'
+        = organization.try(:slogan) || '세상을 바꾸는 시민들의 정치 플랫폼'
     .right-navi.js-top-menu.menu-btn{onclick:"javascript:toggleMenuList();"}
       - if @current_organization.try(:slug) == 'urimanna'
         %div#urimanna_menu

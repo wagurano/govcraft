@@ -1,22 +1,20 @@
 %section#petitions.page-block
   .container-fluid
-    %h3.sub-title
+    %h2
       진행 중인 시민 액션
-      %small.pull-right
-        = link_to petitions_url(subdomain: root_subdomain), class: 'btn btn-default' do
-          전체 보기
-        = link_to new_petition_path, class: 'btn btn-info' do
-          액션 시작하기
+      .pull-right
+        = link_to petitions_url(subdomain: root_subdomain) do
+          %i.fa.fa-ellipsis-h
     .row
       = render Petition.recent.where("signs_count > 100").limit(6)
 
 %section#stories.page-block
   .container-fluid
-    %h3.sub-title
+    %h2
       = Agenda.model_name.human
-      %small.pull-right
-        = link_to agendas_path, class: 'btn btn-default' do
-          전체 보기
+      .pull-right
+        = link_to agendas_path do
+          %i.fa.fa-ellipsis-h
     .row.masonry-container
       = render Agenda.limit(6)
 
@@ -26,7 +24,7 @@
       %p
         세상을 바꾸는
         %br
-        시민들의 정치 놀이터
+        시민들의 정치 플랫폼
         %br
         %strong{style:"font-size:61px;line-height:80px;"}
           가브크래프트

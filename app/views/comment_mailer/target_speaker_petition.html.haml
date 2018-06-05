@@ -8,9 +8,9 @@
     = stylesheet_link_tag 'emails/base', media: 'all'
   %body
     %p
-      #{@speaker.name}님! 안녕하세요. 참여형 캠페인을 위한 민주주의 플랫폼, 가브크래프트입니다.
+      #{@speaker.name}님! 안녕하세요. 세상을 바꾸는 시민들의 정치 플랫폼, 가브크래프트입니다.
     %p
-      참여형 캠페인을 위한 민주주의 플랫폼
+      세상을 바꾸는 시민들의 정치 플랫폼
       = link_to polymorphic_url(petition) do
         "#{petition.title}" #{polymorphic_url(petition)}
       에서 아래와 같은 서명이 진행 중입니다.
@@ -41,7 +41,7 @@
               %img(src="#{Rails.application.config.action_mailer.asset_host}/email_logo.png" width="40" height="40")
           %td(style="padding-left: 12px;")
             %a(href='http://govcraft.org/' target="_blank" style='color: #777; text-decoration: none;')
-              참여형 캠페인을 위한 민주주의 플랫폼
+              세상을 바꾸는 시민들의 정치 플랫폼
               %br
               %strong '가브크래프트'
               http://govcraft.org/

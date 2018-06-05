@@ -65,10 +65,10 @@ class ApplicationController < ActionController::Base
   def build_meta_options(options)
     current_organization = fetch_organization_from_request
     site_name = options[:site_name] || current_organization.try(:title) || "가브크래프트"
-    title = view_context.strip_tags(options[:title]) || current_organization.try(:title) || "참여형 캠페인을 위한 민주주의 플랫폼, 가브크래프트"
+    title = view_context.strip_tags(options[:title]) || current_organization.try(:title) || "세상을 바꾸는 시민들의 정치 플랫폼, 가브크래프트"
     image = options[:image] || (current_organization.try(:seo_image_path) and view_context.image_url(current_organization.try(:seo_image_path))) || view_context.image_url('seo.png')
     url = options[:url] || root_url
-    description = view_context.strip_tags(options[:description]) || "세상을 바꾸는 시민들의 정치 놀이터 '가브크래프트'입니다"
+    description = view_context.strip_tags(options[:description]) || "세상을 바꾸는 시민들의 정치 플랫폼 '가브크래프트'입니다"
     {
       title:       title,
       reverse:     true,
