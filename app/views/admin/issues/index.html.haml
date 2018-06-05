@@ -25,7 +25,7 @@
             %td
               %h5= link_to issue.title, issue
             %td.text-nowrap
-              = issue.agenda.try(:name)
+              = issue.agendas.map(&:name).join(', ')
             %td.text-nowrap
               = issue.agenda_theme.try(:title)
             %td.text-right.text-nowrap

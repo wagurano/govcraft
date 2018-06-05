@@ -3,13 +3,14 @@ class Admin::IssuesController < Admin::BaseController
 
   def index
     @issues = Issue.all
-    @issues = @issues.where(agenda_id: params[:agenda_id])if params[:agenda_id].present?
+    @issues = Agenda.find_by(id: params[:agenda_id]).issues if params[:agenda_id].present?
   end
 
   def create
     if @issue.save
       redirect_to admin_issues_path
     else
+      errors_to_flash(@issue)
       render 'new'
     end
   end
@@ -30,6 +31,6 @@ class Admin::IssuesController < Admin::BaseController
   private
 
   def issue_params
-    params.require(:issue).permit(:agenda_id, :agenda_theme_id, :title, :body, :tag_list, :has_stance)
+    params.require(:issue).permit(:agenda_theme_id, :title, :body, :tag_list, :has_stance, agenda_ids: [])
   end
 end

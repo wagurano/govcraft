@@ -98,7 +98,7 @@ class PetitionsController < ApplicationController
       :comment_enabled, :sign_title, :social_image, :confirm_privacy,
       :use_signer_email, :use_signer_address, :use_signer_real_name, :use_signer_phone,
       :signer_email_title, :signer_address_title, :signer_real_name_title, :signer_phone_title,
-      :speaker_section_title, :speaker_section_response_title, :sign_hidden, :area_id, :agenda_id,
+      :speaker_section_title, :speaker_section_response_title, :sign_hidden, :area_id, :issue_id,
       :special_slug)
   end
 

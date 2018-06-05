@@ -3,7 +3,12 @@
     = form_for [:admin, @issue], html: { class: 'ui form' } do |f|
       .form-group
         = f.label :agenda_id
-        = f.collection_select :agenda_id, Agenda.all, :id, :name, {}, { class: 'js-select2 form-control' }
+        .checkbox
+          = f.collection_check_boxes :agenda_ids, Agenda.all, :id, :name do |checkbox|
+            .check
+              = checkbox.label do
+                = checkbox.check_box
+                = checkbox.text
 
       .form-group
         = f.label :agenda_theme_id
@@ -21,7 +26,7 @@
         = f.label :has_stance
         .checkbox
           %label
-            = f.check_box :has_stance, class: 'form-control'
+            = f.check_box :has_stance
             찬반입장을 받습니다.
 
       .form-group

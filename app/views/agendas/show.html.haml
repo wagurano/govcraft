@@ -44,7 +44,8 @@
 
         - issues.each do |issue|
           %section{ style: 'margin-bottom: 3em;' }
-            %h3= issue.title
+            %h3
+              = link_to issue.title, issue
 
             - if issue.body.present?
               .issue-body

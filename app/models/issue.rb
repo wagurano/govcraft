@@ -1,11 +1,12 @@
 class Issue < ApplicationRecord
-  belongs_to :agenda
+  has_and_belongs_to_many :agendas
   belongs_to :agenda_theme, optional: true
   has_many :opinions, dependent: :destroy
   has_many :following_issues, dependent: :destroy
   has_many :followers, -> { order 'following_issues.created_at desc' }, through: :following_issues, source: :user
   has_many :comments, as: :commentable
   has_many :speakers, -> { reorder('').distinct }, through: :opinions
+  has_many :petitions, dependent: :nullify
 
   acts_as_taggable
 

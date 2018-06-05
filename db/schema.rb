@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180525140902) do
+ActiveRecord::Schema.define(version: 20180605122100) do
 
   create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "action_assignable_slug", null: false
@@ -75,6 +75,13 @@ ActiveRecord::Schema.define(version: 20180525140902) do
     t.text     "request_amendment_example", limit: 65535
     t.text     "request_opinion_example",   limit: 65535
     t.index ["user_id"], name: "index_agendas_on_user_id", using: :btree
+  end
+
+  create_table "agendas_issues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer "agenda_id"
+    t.integer "issue_id"
+    t.index ["agenda_id"], name: "index_agendas_issues_on_agenda_id", using: :btree
+    t.index ["issue_id"], name: "index_agendas_issues_on_issue_id", using: :btree
   end
 
   create_table "archive_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -442,12 +449,12 @@ ActiveRecord::Schema.define(version: 20180525140902) do
     t.integer  "following_issues_count",               default: 0
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
-    t.integer  "agenda_id"
+    t.integer  "deprecated_agenda_id"
     t.text     "body",                   limit: 65535
     t.boolean  "has_stance",                           default: false
     t.integer  "agenda_theme_id"
-    t.index ["agenda_id"], name: "index_issues_on_agenda_id", using: :btree
     t.index ["agenda_theme_id"], name: "index_issues_on_agenda_theme_id", using: :btree
+    t.index ["deprecated_agenda_id"], name: "index_issues_on_deprecated_agenda_id", using: :btree
     t.index ["title"], name: "index_issues_on_title", unique: true, using: :btree
   end
 
@@ -616,10 +623,10 @@ ActiveRecord::Schema.define(version: 20180525140902) do
     t.string   "signer_phone_title"
     t.boolean  "sign_hidden",                                  default: false, null: false
     t.integer  "area_id"
-    t.integer  "agenda_id"
     t.string   "special_slug"
-    t.index ["agenda_id"], name: "index_petitions_on_agenda_id", using: :btree
+    t.integer  "issue_id"
     t.index ["area_id"], name: "index_petitions_on_area_id", using: :btree
+    t.index ["issue_id"], name: "index_petitions_on_issue_id", using: :btree
     t.index ["project_id"], name: "index_petitions_on_project_id", using: :btree
     t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
   end

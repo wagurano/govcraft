@@ -1,5 +1,5 @@
 .agenda-container
-  = render 'agendas/header', agenda: @agenda
+  = render 'issues/header', issue: @issue
 
 %section.page-block.page-opinions
   .container
@@ -11,32 +11,75 @@
       .issue-body
         != simple_format(h(@issue.body.strip))
 
-- if @agenda.name == '선거제도'
-  - %w(19대_대선후보 20대_국회의원).each do |position|
-    %section.page-block.page-opinions
-      .container
-        %h4.ui.dividing.header
-          #{position} #{Opinion.model_name.human}
-          .sub.header #{position}으로부터 #{@agenda.speakers.of_position(position).count}개의 #{Opinion.model_name.human}을 받았습니다.
+%section.page-block.page-opinions
+  .container
+    - if @issue.has_any_stances?
+      = render 'opinions/stances', speakers: @issue.speakers, issue: @issue
+    .media-list
+      - if @issue.opinions.where(speaker: Speaker.of_position('19대_대선후보')).any?
+        - Speaker.of_position('19대_대선후보').shuffle.each do |speaker|
+          - @issue.opinions.of_speaker(speaker).each do |opinion|
+            - next unless opinion.has_content?
+            = render 'opinions/line_item', opinion: opinion
 
-        .opinion-speakers-list
-          .row
-            - ["찬성", "반대", nil].each do |quote|
-              - speakers = @issue.categorized_speakers(position, quote)
-              .col-sm-4{ class: ('hidden-xs' if speakers.empty?) }
-                .position
-                  = quote || "#{Opinion.model_name.human}없음"
-                  %span{ style: 'font-weight: normal' } #{speakers.count}명
 
-                = render 'issues/speakers', speakers: speakers, issue: @issue, quote: quote
-- else
-  %section.page-block.page-opinions
-    .container
-      - if @issue.has_any_stances?
-        = render 'opinions/stances', speakers: @issue.speakers, issue: @issue
-      .media-list
-        - if @issue.opinions.where(speaker: Speaker.of_position('19대_대선후보')).any?
-          - Speaker.of_position('19대_대선후보').shuffle.each do |speaker|
-            - @issue.opinions.of_speaker(speaker).each do |opinion|
-              - next unless opinion.has_content?
-              = render 'opinions/line_item', opinion: opinion
+%section.page-block
+  .container
+    %h3.sub-title
+      = Petition.model_name.human
+      %small.pull-right
+        - if user_signed_in?
+          %button.btn.btn-primary.btn-lg.btn-block{"data-target" => "#petition-form-modal", "data-toggle" => "modal", :type => "button"}
+            %i.fa.fa-edit
+            액션 시작하기
+        - else
+          = link_to new_user_session_path, class: 'button btn btn-primary btn-lg btn-block' do
+            %i.fa.fa-edit
+            액션 시작하기
+
+    - if @issue.petitions.any?
+      .row.masonry-container
+        = render @issue.petitions
+    - else
+      .text-center
+        %i.fa.fa-info-circle
+        가장 먼저 액션을 시작해 보세요.
+
+  #petition-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &#215;
+          %h4.modal-title 액션을 시작합니다.
+        .modal-body
+          .panel.panel-default
+            .panel-body
+              = form_for @form_petition do |f|
+                - if @form_petition.errors.any?
+                  .alert.alert-danger
+                    %ul.list-unstyled
+                      - @form_petition.errors.full_messages.each do |msg|
+                        %li= msg
+
+                %fieldset
+                  %legend 기본정보
+
+                  = f.hidden_field :special_slug
+
+                  .form-group
+                    = f.label :title
+                    = f.text_field :title, class: 'form-control'
+
+                  .form-group
+                    = f.label :body
+                    ~ f.text_area :body, class: 'form-control redactor'
+
+                  .form-group
+                    = f.label :area_id, '특정 지역에 관련된 서명인가요? 지역과 연결해 보세요. (선택)'
+                    = f.select :area_id, Area.all_divisions.map { |area| [area.description, area.id] }, { include_blank: true }, class: 'js-select2 form-control'
+
+                  = f.hidden_field :issue_id, value: @issue.id
+
+                  .form-group
+                    = f.submit '저장', class: 'btn btn-primary btn-lg'
