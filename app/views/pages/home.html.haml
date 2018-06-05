@@ -1,16 +1,29 @@
 %section#petitions.page-block
   .container-fluid
-    %h2
-      진행 중인 시민 액션
+    %h3
+      액션
       .pull-right
         = link_to petitions_url(subdomain: root_subdomain) do
           %i.fa.fa-ellipsis-h
     .row
       = render Petition.recent.where("signs_count > 100").limit(6)
 
+%section.page-block{ style: 'background:#fff' }
+  .container-fluid
+    .text-center
+      %h2
+        세상을 바꿀 멋진 아이디어가 있으세요?
+        %br
+        지금 바로 시작해 보세요.
+      %p.lead{ style: 'margin-top: 28px' }
+        = link_to '바로 액션 시작하기', new_petition_path, class: 'btn btn-lg btn-info'
+        = link_to 'mailto:https://m.me/PartiUnion', class: 'btn btn-lg' do
+          %i.fa.fa-comment-o
+          빠띠와 상의하기
+
 %section#stories.page-block
   .container-fluid
-    %h2
+    %h3
       = Agenda.model_name.human
       .pull-right
         = link_to agendas_path do
