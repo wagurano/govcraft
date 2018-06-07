@@ -1,12 +1,17 @@
 - commentable = @statementable
-%section#petition-block.page-block.component-header.component-header-auto-height
-  .container
-    %span.gov-label= @statementable.class.model_name.human
-    %br
-    = link_to @statementable, style: 'color: #fff' do
-      = @statementable.title
+
+- if commentable.class == Petition
+  = render 'petitions/header', petition: commentable, show_speakers: false
+- else
+  %section#petition-block.page-block.component-header.component-header-auto-height
+    .container
+      %span.gov-label= @statementable.class.model_name.human
+      %br
+      = link_to @statementable, style: 'color: #fff' do
+        = @statementable.title
+
 %section
-  .container
+  .container-fluid
     .page-header.page-header-narrow
       %h3.sub-title
         %span.image.speaker-image.speaker-image--mini{style: "background-image: url(#{@speaker.image.xs.url}); display: inline-block; width: 1.2em; height: 1.2em;"}
@@ -45,7 +50,7 @@
 
 - if @statementable.project
   %section.page-block
-    .container
+    .container-fluid
       %h3 프로젝트
       .row
         = render @statementable.project

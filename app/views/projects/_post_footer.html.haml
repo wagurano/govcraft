@@ -1,5 +1,5 @@
 %section.page-block
-  .container
+  .container-fluid
     %h3
       캠페인
     %div
@@ -18,7 +18,7 @@
 - if project.story_enabled? and project.stories.any?
   %section.page-block
     %a{id: "anchor-project-story"}
-    .container
+    .container-fluid
       %h3= project.component_title('story')
       .row
         = render project.stories.first(3)

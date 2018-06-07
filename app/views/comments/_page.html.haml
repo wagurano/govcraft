@@ -15,8 +15,9 @@
               %span.comment__to-speaker_default.hidden-xs
                 #{target_speaker.organization} #{target_speaker.name}님#{(" 이외 #{comment.target_speakers.count - 1}분" if comment.target_speakers.count > 1)}에게 보낸 의견입니다.
               %span.comment__to-speaker_mobile.visible-xs
+                = image_tag target_speaker.image.md.url, style: "height: 24px;"
                 #{target_speaker.organization} #{target_speaker.name}
-                님#{(" 이외 #{comment.target_speakers.count - 1}분" if comment.target_speakers.count > 1)}에게
+                님#{(" 이외 #{comment.target_speakers.count - 1}분" if comment.target_speakers.count > 1)}에게 촉구하였습니다.
 
         .comment__meta
           %span.comment__user-nm

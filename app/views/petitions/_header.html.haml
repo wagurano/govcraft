@@ -1,0 +1,54 @@
+%section#petition-header
+  .container-fluid
+    %h2.petition-title= petition.title
+
+    %div{ style: 'margin-top: 16px;font-size:16px;'}
+      %span
+      - if can? :edit, petition
+        = link_to '수정', edit_petition_path(petition)
+      - if can? :edit, petition
+        &middot;
+        = link_to '촉구인물관리', edit_speakers_petition_path(petition)
+      - if can? :destroy, petition
+        &middot;
+        = link_to '삭제', petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+
+    .petition-meta
+      .campaigner
+        .user-image-xs{style: "background-image:url(#{asset_url(petition.user.image)});"}
+        = petition.user.nickname
+      &middot;
+      %span
+        = date_f petition.created_at
+      &middot;
+      %span
+        조회
+        = petition.views_count
+
+    .m-t.m-b
+      %h5.text-muted 관련 이슈
+
+    - cover_image = petition.cover_image_url(:lg)
+    - if cover_image.present?
+      %section{ style: "margin: 15px -15px; height: 250px; background-image: url(#{cover_image}); background-size: cover; background-repeat: no-repeat;"}
+
+    .m-t.m-b
+      = link_to petition_path(petition, anchor: 'anchor-sign') do
+        - if petition.has_goal?
+          .progress
+            .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{petition.percentage}", :role => "progressbar", :style => "width: #{petition.percentage}%;"}
+          .pull-right #{petition.percentage}% 달성
+          %span.count
+            #{number_with_delimiter(petition.signs_count)}명 참여
+        - else
+          .progress
+            .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "100", :role => "progressbar", :style => "width: 100%;"}
+          %span.count
+            %i.fa.fa-user
+            #{number_with_delimiter(petition.signs_count)}명 참여
+
+- if petition.speakers.any? && show_speakers
+  %section.page-block
+    .container-fluid
+      .petition-speakers
+        = render 'petitions/speakers', petition: petition
