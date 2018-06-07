@@ -1,125 +1,138 @@
 #petition-block {
-    .petition-body {
-        font-size: 16px;
-        font-weight: 500;
-        color: $gray-dark;
-        text-align: left;
-        line-height: 28px;
-    }
+  .petition-body {
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+    line-height: 28px;
+  }
+}
+
+#petition-header {
+  background: #fff;
+
+  .petition-title {
+    font-weight: bold;
+  }
+  .petition-meta div {
+    display: inline-block;
+  }
+  .petition-meta .user-image-xs {
+    vertical-align: middle;
+    top: 4px;
+  }
 }
 
 .sign-panel {
-    .progress {
-        background-color: $gray-light;
+  .progress {
+    background-color: $gray-light;
+  }
+  .progress-bar {
+    background-color: $brand-sub;
+    color: white;
+    font-weight: bold;
+    max-width: 100%;
+  }
+  .sign-panel__users {
+    font-size: $font-size-small;
+  }
+  .sign-panel__status__count {
+    color: $gray-base;
+    font-size: $font-size-base;
+    span {
+      color: $brand-sub;
+      font-weight: bold;
     }
-    .progress-bar {
-        background-color: $brand-sub;
-        color: white;
-        font-weight: bold;
-        max-width: 100%;
+  }
+  .user-opinion-line {
+    font-size: $font-size-base;
+    line-height: 1.5;
+    width: 100%;
+    td:first-child {
+      vertical-align: top;
+      padding-bottom: $font-size-base*0.5;
     }
-    .sign-panel__users {
-        font-size: $font-size-base;
+    small {
+      a {
+        padding-right: 5px;
+      }
+      float: right;
     }
-    .sign-panel__status__count {
-        color: $gray-base;
-        font-size: $font-size-base;
-        span {
-            color: $brand-sub;
-            font-weight: bold;
-        }
-    }
-    .user-opinion-line {
-        font-size: $font-size-base;
-        width: 100%;
-        tr {
-            height: 32px;
-        }
-        td:first-child {
-            vertical-align: top;
-        }
-        small {
-            a {
-                padding-right: 5px;
-            }
-            float: right;
-        }
-    }
-    #js-petition-confirm-privacy {
-        font-weight: 600;
-        text-decoration: underline;
-        cursor: pointer;
-    }
+  }
+  #js-petition-confirm-privacy {
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 }
 
 .petition-info-area {
-    text-align: center;
-    .petition-users-count-label {
-        padding: 15px 26px;
-        color: $brand-primary-dark;
-        background-color: $gray-light;
-        display: inline-block;
-        font-size: 16px;
-        margin: 15px;
-        font-weight: 500;
-    }
-    .petition-join-btn {
-        display: inline-block;
-        background-color: $brand-sub;
-        color: white;
-        padding: 15px 26px;
-        font-size: 16px;
-        margin: 15px;
-        font-weight: 500;
-    }
+  text-align: center;
+  .petition-users-count-label {
+    padding: $font-size-base;
+    color: $brand-primary-dark;
+    background-color: $gray-light;
+    display: inline-block;
+    font-size: 16px;
+    margin: 15px;
+    font-weight: 500;
+  }
+  .petition-join-btn {
+    display: inline-block;
+    background-color: $brand-sub;
+    color: white;
+    padding: $font-size-base;
+    font-size: 16px;
+    margin: 15px;
+    font-weight: 500;
+  }
 }
 
 section#petitions-in-project {
-    h4 {
-        font-size: 18px;
-        font-weight: 600;
-        color: $gray-dark;
-        small {
-            a {
-                font-size: 12px;
-                color: $gray;
-            }
-        }
+  h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: $gray-dark;
+    small {
+      a {
+        font-size: 12px;
+        color: $gray;
+      }
     }
-    .petition-container {
-        background-position: top center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-color: #f5f5f5;
-        padding: 30px 0;
-        &.petition--cover-image {
-            @include texture-darken;
-        }
-        .content {
-            position: relative;
-        }
-        .petition-title {
-            margin-top: 0;
-            margin-bottom: 20px;
-            @media (max-width: $screen-xs-max) {
-                text-align: center;
-            }
-        }
-        .petition-body {
-            max-height: 4em;
-        }
-        >a {
-            color: $text-color;
-        }
-        &.petition--cover-image>a {
-            color: #fff;
-            .petition-body {
-                text-shadow: 1px 1px 0px #000;
-            }
-            .petition-title {
-                color: #fff;
-                text-shadow: 1px 1px 0px #000;
-            }
-        }
+  }
+  .petition-container {
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #f5f5f5;
+    padding: $font-size-base 0;
+    &.petition--cover-image {
+      @include texture-darken;
     }
+    .content {
+      position: relative;
+    }
+    .petition-title {
+      margin-top: 0;
+      margin-bottom: 20px;
+      @media (max-width: $screen-xs-max) {
+        text-align: center;
+      }
+    }
+    .petition-body {
+      max-height: 4em;
+    }
+    >a {
+      color: $text-color;
+    }
+    &.petition--cover-image>a {
+      color: #fff;
+      .petition-body {
+        text-shadow: 1px 1px 0px #000;
+      }
+      .petition-title {
+        color: #fff;
+        text-shadow: 1px 1px 0px #000;
+      }
+    }
+  }
 }

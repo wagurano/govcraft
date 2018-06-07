@@ -34,8 +34,7 @@
           - if comment.choice.present?
             %span.comment__choice{ class: comment.choice }= comment.choice.text
 
-      .media-right
-        = render 'likes/button', likable: comment
+          = render 'likes/button', likable: comment
 
 - if comments.first.try(:commentable).present?
   - commentable = comments.first.commentable

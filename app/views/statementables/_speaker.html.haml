@@ -1,28 +1,14 @@
 - statement = statementable.statement_of(speaker)
-- if statement.try(:is_responed?) and
-  - if statement.stance.try(:agree?) || true
-    - ribbon_class = 'label-success'
-  - elsif statement.stance.try(:hold?)
-    - ribbon_class = 'label-warning'
-  - elsif statement.stance.try(:disagree?)
-    - ribbon_class = 'label-danger'
-  - elsif statement.stance.blank?
-    - ribbon_class = 'label-default'
-  %span.label.label-ribbon-right{ class: ribbon_class, style: 'position: absolute; right: 20px; top: 5px; z-index: 1;'}
-    - if statement.stance.present?
-      = statement.stance.text
-    - else
-      응답
-.speaker-card.card
-  = link_to speaker do
-    .card-image{ style: "height: 180px; background-image: url(#{speaker.image.md.url}); background-size:cover; background-repeat: no-repeat; background-position: top;"}
-      %h5.card-title
-        = speaker.name
-        %br.xs-visible.block
-        %span.card-organization
-          = simple_format Special.decorate_speaker_organization(statementable, speaker), {}, wrapper_tag: "span"
+- responded = (statement.try(:is_responed?) && statement.stance.present?)
+- speaker_link = responded ? speaker : polymorphic_url([:new_comment_speaker, statementable], speaker_id: speaker.id)
+- btn_class = responded ? 'btn-success' : 'btn-default'
 
-  .card-content.text-center
-    = link_to polymorphic_url([:new_comment_speaker, statementable], speaker_id: speaker.id), class: "request-speaker-btn" do
+= link_to speaker_link, class: 'btn ' + btn_class, style: 'margin: 0 0 4px 0' do
+  = image_tag speaker.image.md.url, style: "height: 24px;"
+  %strong= speaker.name
+  - if statement.try(:is_responed?) and statement.stance.present?
+    %small= statement.stance.text
+  - else
+    %small.text-danger
       - count = statementable.comments.with_target_speaker(speaker).count
-      촉구하기#{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}
+      촉구하기 #{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}

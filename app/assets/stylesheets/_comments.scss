@@ -8,8 +8,8 @@
   }
   .comments-form {
     background: $gray-lightest;
-    border-radius: 6px;
-    padding: 20px;
+    font-size: $font-size-base;
+    padding: $font-size-base;
   }
   .comment {
     .comment__user {
@@ -91,9 +91,8 @@
 .btn-comment{
   background-color:$brand-primary-dark;
   color:white;
-  font-size: $font-size-large;
+  font-size: $font-size-base;
   width:100%;
-  padding:20px;
   &:hover{
     background-color:$brand-primary;
     color:white;

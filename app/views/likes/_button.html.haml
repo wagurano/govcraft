@@ -1,4 +1,4 @@
-- btn_class = 'btn btn-sm btn-like btn-inverted '
+- btn_class = 'btn btn-xs btn-like btn-inverted '
 - if likable?(likable)
   = link_to likes_path(like: { likable_id: likable.id, likable_type: likable.class.name}), method: :post, remote: true, class: btn_class + 'btn-default', id: like_btn_dom_id(likable) do
     %i.fa.fa-heart

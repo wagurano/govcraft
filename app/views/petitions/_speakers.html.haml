@@ -5,24 +5,18 @@
 
   - current_speakers = action_assignable.statementable_speakers_moderatly(@petition, 30)
 
-  %h3.sub-title= action_assignable.section_title_as_action_assignable
-
   - speakers_group = current_speakers.to_a.group_by { |speaker| petition.spoken?(speaker) }
   - speakers_spoken = @petition.action_assignable_speakers_spoken(action_assignable)
   - speakers_unspoken = @petition.action_assignable_speakers_unspoken(action_assignable)
 
-  - if @petition.special_slug == Special::SLUG_VOTEAWARD2018
-    = render 'petitions/speakers_special_voteaward2018'
-
   - if speakers_spoken.any?
-    %h4.sub-title= action_assignable.response_section_title_as_action_assignable
-    .row.masonry-container{ style: 'margin-left: -6px; margin-right: -6px;' }
+    %h5.text-muted 관련 인물 답변
+    %div
       - speakers_spoken.each do |speaker|
-        .col-md-2.col-sm-3.col-xs-4{ style: 'padding-left: 6px; padding-right: 6px;' }
-          = render 'statementables/speaker', speaker: speaker, statementable: petition
+        = render 'statementables/speaker', speaker: speaker, statementable: petition
 
   - if @petition.statements.responed_body.any?
-    .panel.panel-opinion.panel-default{ style: 'background-color: #f5f5f5; border: none; font-size: 14px; line-height: 1.5;' }
+    .panel.panel-opinion.panel-default{ style: 'background-color: #fff; border: none; line-height: 1.5;' }
       - @petition.statements.responed_body.recent.each do |statement|
         .panel-body[statement]
           .panel-post__statements
@@ -30,24 +24,23 @@
             .media[statement]
               .media-left
                 = link_to speaker_path(speaker) do
-                  .media-object.image{style: "background-image: url(#{speaker.image.xs.url}); background-size:cover; background-repeat: no-repeat; background-position: top; width: 48px; height: 64px;"}
+                  .media-object.image{style: "background-image: url(#{speaker.image.xs.url}); background-size:cover; background-repeat: no-repeat; background-position: top; width: 24px; height: 24px;"}
 
-              .media-body{ style: 'padding-top: 15px;' }
+              .media-body
                 - if statement.stance.present?
-                  %h4.media-heading
-                    = statement.stance.text
-                %p
-                  = link_to speaker_path(speaker) do
-                    = speaker.name
+                  %h4.media-heading{ style: 'line-height: 24px;' }
+                    = link_to speaker_path(speaker) do
+                      %strong= speaker.name
                     %span.text-muted= speaker.organization
+                    %span.text-success= statement.stance.text
+
             - if statement.body.present?
               .opinion__body{ style: 'font-weight: normal;' }
                 != statement.body
 
   - if speakers_unspoken.any?
     - if speakers_spoken.any?
-      %h4 촉구 메시지에 대한 응답 대기 중
-    .row.masonry-container{ style: 'margin-left: -6px; margin-right: -6px;' }
-      - speakers_unspoken.each do |speaker|
-        .col-md-2.col-sm-3.col-xs-4{ style: 'padding-left: 6px; padding-right: 6px;' }
+      %h5.text-muted 관련 인물에게 촉구하기
+      %div
+        - speakers_unspoken.each do |speaker|
           = render 'statementables/speaker', speaker: speaker, statementable: petition

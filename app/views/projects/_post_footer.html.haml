@@ -1,6 +1,6 @@
 %section.page-block
   .container
-    %h3.sub-title
+    %h3
       캠페인
     %div
       = link_to project, html_options = {class:'project-link'} do
@@ -19,6 +19,6 @@
   %section.page-block
     %a{id: "anchor-project-story"}
     .container
-      %h3.sub-title= project.component_title('story')
+      %h3= project.component_title('story')
       .row
         = render project.stories.first(3)

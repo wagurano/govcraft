@@ -118,54 +118,6 @@ body {
     }
 }
 
-.btn-default--active {
-    @extend .btn-default;
-    color: #fff;
-    background-color: $btn-default-color;
-    &:focus,
-    &.focus {
-        color: #fff;
-        background-color: $gray;
-    }
-    &:hover {
-        color: #fff;
-        background-color: $gray;
-    }
-    &:active,
-    &.active,
-    .open>&.dropdown-toggle {
-        color: #fff;
-        background-color: $gray;
-    }
-    &:active:hover,
-    &:active:focus,
-    &:active.focus,
-    &.active:hover,
-    &.active:focus,
-    &.active.focus,
-    .open>&.dropdown-toggle:hover,
-    .open>&.dropdown-toggle:focus,
-    .open>&.dropdown-toggle.focus {
-        color: #fff;
-        background-color: darken($gray, 10%);
-    }
-    &.disabled:hover,
-    &.disabled:focus,
-    &.disabled.focus,
-    &[disabled]:hover,
-    &[disabled]:focus,
-    &[disabled].focus,
-    fieldset[disabled] &:hover,
-    fieldset[disabled] &:focus,
-    fieldset[disabled] &.focus {
-        background-color: $btn-default-color;
-    }
-    & .badge {
-        color: $btn-default-color;
-        background-color: #fff;
-    }
-}
-
 .btn-primary-sub {
     background-color: $brand-sub;
     color: white;
@@ -381,9 +333,6 @@ label.error {
     display:inline-block;
     background-size:cover;
     background-position:center;
-    @media (max-width: $screen-sm-min) {
-        display:none;
-    }
 }
 
 .user-image-xs{
@@ -394,9 +343,6 @@ label.error {
   display:inline-block;
   background-size:cover;
   background-position:center;
-  @media (max-width: $screen-sm-min) {
-      display:none;
-  }
 }
 
 //공통 테이블

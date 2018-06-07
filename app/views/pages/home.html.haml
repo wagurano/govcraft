@@ -4,11 +4,11 @@
       액션
       .pull-right
         = link_to petitions_url(subdomain: root_subdomain) do
-          %i.fa.fa-ellipsis-h
+          %small 전체 보기
     .row
       = render Petition.recent.where("signs_count > 100").limit(6)
 
-%section.page-block{ style: 'background:#fff' }
+%section.page-block.page-block-white
   .container-fluid
     .text-center
       %h2
@@ -27,7 +27,7 @@
       = Agenda.model_name.human
       .pull-right
         = link_to agendas_path do
-          %i.fa.fa-ellipsis-h
+          %small 전체 보기
     .row.masonry-container
       = render Agenda.limit(6)
 
