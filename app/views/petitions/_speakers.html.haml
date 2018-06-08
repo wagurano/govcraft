@@ -13,30 +13,46 @@
     %h5.text-muted 관련 인물 답변
     %div
       - speakers_spoken.each do |speaker|
-        = render 'statementables/speaker', speaker: speaker, statementable: petition
+        - statement = petition.statement_of(speaker)
 
-  - if @petition.statements.responed_body.any?
-    .panel.panel-opinion.panel-default{ style: 'background-color: #fff; border: none; line-height: 1.5;' }
-      - @petition.statements.responed_body.recent.each do |statement|
-        .panel-body[statement]
-          .panel-post__statements
-            - speaker = statement.speaker
-            .media[statement]
-              .media-left
-                = link_to speaker_path(speaker) do
-                  .media-object.image{style: "background-image: url(#{speaker.image.xs.url}); background-size:cover; background-repeat: no-repeat; background-position: top; width: 24px; height: 24px;"}
+        %button.btn.btn-success{"data-target" => "#speaker-statement-modal-#{speaker.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0'}
+          = image_tag speaker.image.md.url, style: "height: 24px;"
+          %strong= speaker.name
+          %small= statement.stance.text
+          %i.fa.fa-commenting-o
 
-              .media-body
-                - if statement.stance.present?
-                  %h4.media-heading{ style: 'line-height: 24px;' }
-                    = link_to speaker_path(speaker) do
-                      %strong= speaker.name
+        - if @petition.statements.responed_body.any?
+          %div.modal.fade{id: "speaker-statement-modal-#{speaker.id}", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog{:role => "document"}
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} &#215;
+                  %h4.modal-title
+                    = image_tag speaker.image.md.url, style: "height: 36px;"
+                    %strong= speaker.name
                     %span.text-muted= speaker.organization
-                    %span.text-success= statement.stance.text
+                    님의 답변
 
-            - if statement.body.present?
-              .opinion__body{ style: 'font-weight: normal;' }
-                != statement.body
+                .modal-body
+                  .panel-body[statement]
+                    .panel-post__statements
+                      .media[statement]
+                        .media-body
+                          - if statement.stance.present?
+                            %h4.media-heading{ style: 'line-height: 24px;' }
+                              %span.text-success= statement.stance.text
+
+                          - if statement.body.present?
+                            .opinion__body{ style: 'font-weight: normal;' }
+                              != statement.body
+
+                          %div
+                            = link_to speaker, class: 'btn btn-success btn-block' do
+                              %strong= speaker.name
+                              = speaker.organization
+                              님의 다른 답변 보기
+
 
   - if speakers_unspoken.any?
     - if speakers_spoken.any?
