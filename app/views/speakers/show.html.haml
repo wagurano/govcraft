@@ -1,5 +1,15 @@
 = render 'speakers/header', speaker: @speaker
 
+- if @speaker.petitions.any?
+  %section.page-block#agends-list
+    .container
+      .page-header
+        %h2
+          = Petition.model_name.human
+          참여 현황
+      - @speaker.petitions.each do |petition|
+        = render petition, speaker: @speaker
+
 - if @speaker.opinions.any?
   %section.page-block
     .container
@@ -14,15 +24,3 @@
               %p!= simple_format(h(opinion.issue.body))
           = render opinion
 
-= render 'agendas/tabs', agendas: @agendas, speaker: @speaker
-
-
-- if @speaker.petitions.any?
-  %section.page-block#agends-list
-    .container
-      .page-header
-        %h2
-          = Petition.model_name.human
-          참여 현황
-      - @speaker.petitions.each do |petition|
-        = render petition, speaker: @speaker
