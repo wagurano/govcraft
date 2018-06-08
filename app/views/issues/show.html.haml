@@ -12,7 +12,7 @@
 %section.page-block
   .container-fluid
     %h3
-      액션
+      = Petition.model_name.human
 
     - if @issue.petitions.any?
       .row.masonry-container
@@ -20,7 +20,7 @@
     - else
       .text-center
         %i.fa.fa-info-circle
-        가장 먼저 액션을 시작해 보세요.
+        가장 먼저 캠페인을 시작해 보세요.
 
 %section.page-block.page-block-white
   .container-fluid
@@ -32,10 +32,10 @@
       %p.lead{ style: 'margin-top: 28px' }
         - if user_signed_in?
           %button.btn.btn-lg.btn-info{"data-target" => "#petition-form-modal", "data-toggle" => "modal", :type => "button"}
-            액션 시작하기
+            캠페인 시작하기
         - else
           = link_to new_user_session_path, class: 'btn btn-lg btn-info' do
-            액션 시작하기
+            캠페인 시작하기
         = link_to 'mailto:https://m.me/PartiUnion', class: 'btn btn-lg' do
           %i.fa.fa-comment-o
           빠띠와 상의하기
@@ -46,7 +46,7 @@
         .modal-header
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
             %span{"aria-hidden" => "true"} &#215;
-          %h4.modal-title 액션을 시작합니다.
+          %h4.modal-title 캠페인을 시작합니다.
         .modal-body
           .panel.panel-default
             .panel-body

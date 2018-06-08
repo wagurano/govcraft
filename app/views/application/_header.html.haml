@@ -28,20 +28,20 @@
       %i.fa.fa-times
     .menu-list.text-nowrap{style:"display:none;"}
       - if organization.blank?
-        = link_to '액션', petitions_url(subdomain: root_subdomain)
+        = link_to Petition.model_name.human, petitions_url(subdomain: root_subdomain)
         %br
-        = link_to Story.model_name.human, stories_url(subdomain: root_subdomain)
+        = link_to Issue.model_name.human, issues_path(subdomain: root_subdomain)
 
         %div{style:"font-size:22px; line-height:35px; margin-top: 30px;"}
           = link_to Project.model_name.human, projects_url(subdomain: root_subdomain)
+          %br
+          = link_to Story.model_name.human, stories_url(subdomain: root_subdomain)
           %br
           = link_to Event.model_name.human, events_url(subdomain: root_subdomain)
           %br
           = link_to Archive.model_name.human, archives_url(subdomain: root_subdomain)
           %br
           = link_to Sympathy.model_name.human, sympathies_path(subdomain: root_subdomain)
-          %br
-          = link_to Agenda.model_name.human, agendas_path(subdomain: root_subdomain)
           %br
           = link_to '커뮤니티', 'https://parti.xyz'
       - else

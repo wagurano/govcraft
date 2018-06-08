@@ -49,11 +49,11 @@ ko:
       agenda: 의제
       agenda_document: 관련 자료
       opinion: 의견
-      project: 캠페인
+      project: 프로젝트
       story: 소식
       discussion: 게시판
       discussion_category: 카테고리
-      petition: 서명
+      petition: 캠페인
       poll: 찬반투표
       survey: 설문
       wiki: 위키

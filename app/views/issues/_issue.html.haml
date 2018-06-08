@@ -8,7 +8,7 @@
         %h4= issue.title
 
       .card-description
-        액션 #{issue.petitions.count}개
+        #{Petition.model_name.human} #{issue.petitions.count}개
         &middot;
         의견 #{issue.opinions.count}개
 

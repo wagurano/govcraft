@@ -1,7 +1,7 @@
 %section#petitions.page-block
   .container-fluid
     %h3
-      액션
+      = Petition.model_name.human
       .pull-right
         = link_to petitions_url(subdomain: root_subdomain) do
           %small 더 보기
@@ -16,7 +16,7 @@
         %br
         지금 바로 시작해 보세요.
       %p.lead{ style: 'margin-top: 28px' }
-        = link_to '바로 액션 시작하기', new_petition_path, class: 'btn btn-lg btn-info'
+        = link_to '캠페인 시작하기', new_petition_path, class: 'btn btn-lg btn-info'
         = link_to 'mailto:https://m.me/PartiUnion', class: 'btn btn-lg' do
           %i.fa.fa-comment-o
           빠띠와 상의하기
