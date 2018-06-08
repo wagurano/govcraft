@@ -2,23 +2,21 @@
 
 - if @speaker.petitions.any?
   %section.page-block#agends-list
-    .container
-      .page-header
-        %h2
-          = Petition.model_name.human
-          참여 현황
-      - @speaker.petitions.each do |petition|
-        = render petition, speaker: @speaker
+    .container-fluid
+      %h3
+        관련
+        = Petition.model_name.human
+      .row
+        = render @speaker.petitions
 
 - if @speaker.opinions.any?
   %section.page-block
-    .container
-      .page-header
-        %h2
-          최근 의견
+    .container-fluid
+      %h3
+        의견
       - @speaker.opinions.recent.limit(2).each do |opinion|
         %section.m-b
-          %h3= opinion.issue.title
+          %h4= opinion.issue.title
           - if opinion.issue.body.present?
             .issue-body
               %p!= simple_format(h(opinion.issue.body))

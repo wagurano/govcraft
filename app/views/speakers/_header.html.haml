@@ -1,8 +1,8 @@
 %section.speaker-section
-  .container
+  .container-fluid
     .media
       .media-left
-        = image_tag speaker.image.xs.url, class: 'media-object speaker-img'
+        = image_tag speaker.image.xs.url, class: 'media-object'
       .media-body
         %h3.media-heading
           = link_to speaker_path(speaker) do
@@ -13,13 +13,12 @@
         %p
           %span
             #{speaker.organization}
-          소속
           - if speaker.election_region.present?
             %span
               #{speaker.election_region}
             지역
           %br
-        %p.sns
+        .sns
           - if speaker.public_site.present?
             %a{ href: "#{speaker.public_site.to_s}" }
               %i.fa.fa-home
@@ -32,5 +31,3 @@
             %a{ href: "http://twitter.com/#{speaker.twitter}", target: "_blank" }
               %i.fa.fa-twitter
               트위터
-        %p
-

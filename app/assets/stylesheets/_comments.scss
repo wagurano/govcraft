@@ -18,7 +18,7 @@
     .comment__meta {
       color: $gray;
       display:table;
-      font-size: $font-size-base;
+      font-size: $font-size-small;
       font-weight: normal;
       line-height:20px;
       padding-left: $font-size-base;
@@ -44,7 +44,12 @@
       font-weight: normal;
       line-height: $line-height-base;
       margin-bottom: $font-size-base*0.5;
-      padding: $font-size-base;
+      padding: $font-size-base*0.5 $font-size-base;
+
+      &.has_target {
+        background: $gray-light;
+      }
+
       h1, h2, h3, h4, h5 {
         font-size: $font-size-base !important;
         margin: 2px 0;
@@ -83,8 +88,9 @@
       margin-right: $font-size-base;
     }
     .comment__to-speaker{
-      margin-top: $font-size-base*0.5;
       color: $brand-primary;
+      font-size: $font-size-small;
+      font-weight: bold;
     }
   }
 }
