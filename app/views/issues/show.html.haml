@@ -1,41 +1,18 @@
-.agenda-container
-  = render 'issues/header', issue: @issue
-
-%section.page-block.page-opinions
-  .container
-    - if @issue.agenda_theme.present?
-      = render 'agenda_themes/line_item', agenda_theme: @issue.agenda_theme
-
-    %h2= @issue.title
+%section.cover-section{ style: 'background-color: #345; padding: 20px 10px;' }
+  .container-fluid
+    %h2
+      %small.label.label-info 이슈
+      %br
+      = @issue.title
     - if @issue.body.present?
-      .issue-body
-        != simple_format(h(@issue.body.strip))
-
-%section.page-block.page-opinions
-  .container
-    - if @issue.has_any_stances?
-      = render 'opinions/stances', speakers: @issue.speakers, issue: @issue
-    .media-list
-      - if @issue.opinions.where(speaker: Speaker.of_position('19대_대선후보')).any?
-        - Speaker.of_position('19대_대선후보').shuffle.each do |speaker|
-          - @issue.opinions.of_speaker(speaker).each do |opinion|
-            - next unless opinion.has_content?
-            = render 'opinions/line_item', opinion: opinion
-
+      %p
+        .issue-body
+          != simple_format(h(@issue.body.strip))
 
 %section.page-block
-  .container
-    %h3.sub-title
-      = Petition.model_name.human
-      %small.pull-right
-        - if user_signed_in?
-          %button.btn.btn-primary.btn-lg.btn-block{"data-target" => "#petition-form-modal", "data-toggle" => "modal", :type => "button"}
-            %i.fa.fa-edit
-            액션 시작하기
-        - else
-          = link_to new_user_session_path, class: 'button btn btn-primary btn-lg btn-block' do
-            %i.fa.fa-edit
-            액션 시작하기
+  .container-fluid
+    %h3
+      액션
 
     - if @issue.petitions.any?
       .row.masonry-container
@@ -44,6 +21,24 @@
       .text-center
         %i.fa.fa-info-circle
         가장 먼저 액션을 시작해 보세요.
+
+%section.page-block.page-block-white
+  .container-fluid
+    .text-center
+      %h2
+        %strong= @issue.title
+        %br
+        활동을 시작해 보세요.
+      %p.lead{ style: 'margin-top: 28px' }
+        - if user_signed_in?
+          %button.btn.btn-lg.btn-info{"data-target" => "#petition-form-modal", "data-toggle" => "modal", :type => "button"}
+            액션 시작하기
+        - else
+          = link_to new_user_session_path, class: 'btn btn-lg btn-info' do
+            액션 시작하기
+        = link_to 'mailto:https://m.me/PartiUnion', class: 'btn btn-lg' do
+          %i.fa.fa-comment-o
+          빠띠와 상의하기
 
   #petition-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
     .modal-dialog{:role => "document"}
@@ -83,3 +78,15 @@
 
                   .form-group
                     = f.submit '저장', class: 'btn btn-primary btn-lg'
+
+%section.page-block.page-opinions
+  .container-fluid
+    %h3 주요 인물 의견
+    - if @issue.has_any_stances?
+      = render 'opinions/stances', speakers: @issue.speakers, issue: @issue
+    .media-list
+      - if @issue.opinions.where(speaker: Speaker.of_position('19대_대선후보')).any?
+        - Speaker.of_position('19대_대선후보').shuffle.each do |speaker|
+          - @issue.opinions.of_speaker(speaker).each do |opinion|
+            - next unless opinion.has_content?
+            = render 'opinions/line_item', opinion: opinion

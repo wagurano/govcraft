@@ -25,8 +25,12 @@
         조회
         = petition.views_count
 
-    .m-t.m-b
-      %h5.text-muted 관련 이슈
+    - if petition.issue.present?
+      .m-t.m-b
+        %h4
+          %small.text-muted 관련 이슈
+          = link_to petition.issue do
+            = petition.issue.title
 
     - cover_image = petition.cover_image_url(:lg)
     - if cover_image.present?
