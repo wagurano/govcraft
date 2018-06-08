@@ -162,7 +162,7 @@ Rails.application.routes.draw do
       get '/themes/widget/:theme_slug', action: :theme_widget, as: :theme_widget
     end
   end
-  resources :issues, only: [:show]
+  resources :issues
   resources :opinions, only: [:show] do
     member do
       get :vote_widget

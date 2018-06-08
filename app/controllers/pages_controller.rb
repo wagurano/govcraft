@@ -15,6 +15,8 @@ class PagesController < ApplicationController
     @memorials = Memorial.recent
     @articles = Article.hot.limit(10)
     @project_categories = ProjectCategory.where(organization: @current_organization) if @current_organization.present?
+
+    @issues = Issue.limit(6)
   end
 
   def home_urimanna

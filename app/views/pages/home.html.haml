@@ -24,25 +24,25 @@
 %section#stories.page-block
   .container-fluid
     %h3
-      = Agenda.model_name.human
+      = Issue.model_name.human
       .pull-right
-        = link_to agendas_path do
+        = link_to issues_path do
           %small 더 보기
     .row.masonry-container
-      = render Agenda.limit(6)
+      = render @issues
 
 %section#about-section{style:"background-position:center; background-size:cover;background-image: url(#{asset_url('gov_bg3.png')});"}
   .container
-    %h2
-      %p
+    %h2{ style: 'line-height: 1.0;' }
+      %small{ style: 'color: #fff;' }
         세상을 바꾸는
         %br
         시민들의 정치 플랫폼
-        %br
-        %strong{style:"font-size:61px;line-height:80px;"}
-          가브크래프트
-      %small
-        = link_to 'https://docs.parti.xyz/platform-govcraft.html', class: 'btn btn-lg btn-danger', target: '_blank' do
-          가브크래프트 소개
-        = link_to 'https://docs.parti.xyz/', class: 'btn btn-lg btn-info', target: '_blank' do
-          빠띠 소개
+      %br
+      %strong{style:"font-size:61px;line-height:80px;"}
+        가브크래프트
+    %p
+      = link_to 'https://docs.parti.xyz/platform-govcraft.html', class: 'btn btn-lg btn-danger', target: '_blank' do
+        가브크래프트 소개
+      = link_to 'https://docs.parti.xyz/', class: 'btn btn-lg btn-info', target: '_blank' do
+        빠띠 소개
