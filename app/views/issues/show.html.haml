@@ -22,13 +22,11 @@
         %i.fa.fa-info-circle
         가장 먼저 캠페인을 시작해 보세요.
 
-%section.page-block.page-block-white
-  .container-fluid
-    .text-center
-      %h2
+    %div{ style: 'padding:14px; background: #fff; border-radius: 14px; text-align: center;'}
+      %h3
         %strong= @issue.title
         %br
-        활동을 시작해 보세요.
+        캠페인을 시작할까요?
       %p.lead{ style: 'margin-top: 28px' }
         - if user_signed_in?
           %button.btn.btn-lg.btn-info{"data-target" => "#petition-form-modal", "data-toggle" => "modal", :type => "button"}
@@ -38,7 +36,7 @@
             캠페인 시작하기
         = link_to 'mailto:https://m.me/PartiUnion', class: 'btn btn-lg' do
           %i.fa.fa-comment-o
-          빠띠와 상의하기
+          빠띠에 문의하기
 
   #petition-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
     .modal-dialog{:role => "document"}

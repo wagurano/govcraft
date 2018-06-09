@@ -1,3 +1,19 @@
+%section#about-section{style:"background-position:center; background-size:cover;background-image: url(#{asset_url('gov_bg3.png')});"}
+  .container
+    %h2{ style: 'line-height: 1.0;' }
+      %small{ style: 'color: #fff;' }
+        세상을 바꾸는
+        %br
+        시민들의 정치 플랫폼
+      %br
+      %strong{style:"font-size:61px;line-height:80px;"}
+        가브크래프트
+    %div
+      = link_to 'https://docs.parti.xyz/platform-govcraft.html', class: 'btn btn-lg btn-danger', target: '_blank' do
+        가브크래프트 소개
+      = link_to 'https://docs.parti.xyz/', class: 'btn btn-lg btn-info', target: '_blank' do
+        빠띠 소개
+
 %section#petitions.page-block
   .container-fluid
     %h3
@@ -8,18 +24,16 @@
     .row
       = render Petition.recent.where("signs_count > 100").limit(6)
 
-%section.page-block.page-block-white
-  .container-fluid
-    .text-center
-      %h2
-        세상을 바꿀 멋진 아이디어가 있으세요?
+    %div{ style: 'padding:14px; background: #fff; border-radius: 14px; text-align: center;'}
+      %h3{ style: 'letter-spacing: -1px; line-height: 1.5;' }
+        %strong 세상을 멋지게 할 아이디어!
         %br
-        지금 바로 시작해 보세요.
+        캠페인으로 실현해 보세요.
       %p.lead{ style: 'margin-top: 28px' }
         = link_to '캠페인 시작하기', new_petition_path, class: 'btn btn-lg btn-info'
         = link_to 'mailto:https://m.me/PartiUnion', class: 'btn btn-lg' do
           %i.fa.fa-comment-o
-          빠띠와 상의하기
+          빠띠에 문의하기
 
 %section#stories.page-block
   .container-fluid
@@ -31,18 +45,3 @@
     .row.masonry-container
       = render @issues
 
-%section#about-section{style:"background-position:center; background-size:cover;background-image: url(#{asset_url('gov_bg3.png')});"}
-  .container
-    %h2{ style: 'line-height: 1.0;' }
-      %small{ style: 'color: #fff;' }
-        세상을 바꾸는
-        %br
-        시민들의 정치 플랫폼
-      %br
-      %strong{style:"font-size:61px;line-height:80px;"}
-        가브크래프트
-    %p
-      = link_to 'https://docs.parti.xyz/platform-govcraft.html', class: 'btn btn-lg btn-danger', target: '_blank' do
-        가브크래프트 소개
-      = link_to 'https://docs.parti.xyz/', class: 'btn btn-lg btn-info', target: '_blank' do
-        빠띠 소개
