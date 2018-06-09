@@ -1,27 +1,25 @@
 %section.page-block
   .container
     .page-header
-      .container
-        .row
-          .col-sm-1.profile-thumbnail
-            = render 'thumbnail', user: @user
-          .col-sm-11
-            %h5
-              = @user.nickname
-              %br
-              = @user.description
-            - if @user.site_info.present?
-              %a(href='#{@user.site_info.to_s}')
-                %i.fa.fa-home
-                사이트
-            - if @user.facebook_info.present?
-              %a(href='#{@user.facebook_info.to_s}')
-                %i.fa.fa-facebook
-                페이스북
-            - if @user.twitter_info.present?
-              %a(href='#{@user.twitter_info.to_s}')
-                %i.fa.fa-twitter
-                트위터
+      .container-fluid
+        .profile-thumbnail
+          = render 'thumbnail', user: @user
+        %h3.text-center
+          = @user.nickname
+        %p
+          = @user.description
+        - if @user.site_info.present?
+          %a(href='#{@user.site_info.to_s}')
+            %i.fa.fa-home
+            사이트
+        - if @user.facebook_info.present?
+          %a(href='#{@user.facebook_info.to_s}')
+            %i.fa.fa-facebook
+            페이스북
+        - if @user.twitter_info.present?
+          %a(href='#{@user.twitter_info.to_s}')
+            %i.fa.fa-twitter
+            트위터
 
     %section
       %dl
@@ -30,23 +28,20 @@
 
     %section.page-block
       %h3.sub-title
-        참여 중인 #{Project.model_name.human}
+        #{Petition.model_name.human}
       .row
-        - own_project_ids = Project.where(user: @user).map &:id
-        - organizer_project_ids = Organizer.where(user: @user, organizable_type: "Project").map &:organizable_id
-        - projects = Project.where(id: own_project_ids + organizer_project_ids)
-        = render projects
+        = render @user.petitions
 
     %section.page-block
       %h3.sub-title
-        참여 중인 #{Petition.model_name.human}
+        참여한 #{Petition.model_name.human}
       .row
         - petitions = Petition.where(id: Sign.where(user: @user).map(&:petition_id))
         = render petitions
 
     %section.page-block
       %h3.sub-title
-        참여 중인 #{Event.model_name.human}
+        참여한 #{Event.model_name.human}
       .row
         - event_ids = Comment.where(user: @user, commentable_type: 'event').map(&:commentable_id).uniq
         - events = Event.where(id: event_ids)

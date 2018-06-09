@@ -61,3 +61,8 @@
       - else
         = link_to new_user_session_path do
           로그인·가입
+
+    - if user_signed_in?
+      .right-navi
+        = link_to current_user do
+          = image_tag current_user.image, height: 20, class: 'img-circle', style: 'background-color: #eee'
