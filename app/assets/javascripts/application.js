@@ -14,6 +14,7 @@
 //= require jssocials
 //= require chartkick
 //= require select2
+//= require select2_ko
 //= require jquery.slick
 //= require kakao
 //= require mobile-detect
@@ -223,6 +224,43 @@ $(function(){
   });
 
   $('.js-select2').select2();
+
+  $('.js-select2-issue').each(function(index, elm) {
+    var $elm = $(elm);
+    $elm.select2({
+      ajax: {
+        url: $elm.data('select2-url'),
+        dataType: 'json',
+        delay: 250,
+        language: "ko",
+        data: function (params) {
+          var query = {
+            q: params.term,
+            page: params.page || 1
+          }
+          return query;
+        }, processResults: function (data, params) {
+          // parse the results into the format expected by Select2
+          // since we are using custom formatting functions we do not need to
+          // alter the remote JSON data, except to indicate that infinite
+          // scrolling can be used
+          params.page = params.page || 1;
+
+          return {
+            results: data.items,
+            pagination: {
+              more: (params.page * 30) < data.total_count
+            }
+          };
+        },
+        cache: true
+      }
+    });
+  });
+
+
+
+
   $('.gov-action-people-select').select2({
     ajax: {
       url: "/people/search.json",

@@ -1,8 +1,12 @@
 class IssuesController < ApplicationController
   load_and_authorize_resource
 
-  def issues
+  def index
     @issues = Issue.all
+
+
+    @issues = @issues.where('title like ?', "%#{params[:q]}%") if params[:q]
+    @issues = @issues.page(params[:page]).per(30) if params[:page]
   end
 
   def show
