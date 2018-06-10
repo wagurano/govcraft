@@ -163,6 +163,7 @@ Rails.application.routes.draw do
     end
   end
   resources :issues
+  resources :following_issues
   resources :opinions, only: [:show] do
     member do
       get :vote_widget

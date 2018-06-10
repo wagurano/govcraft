@@ -12,5 +12,6 @@
         &middot;
         의견 #{issue.opinions.count}개
 
-      .card-sub
-        = link_to '관심이슈등록', '#', class: 'btn btn-default btn-inverted btn-block'
+      .card-sub.js-issue-following
+        = render 'issues/following', issue: issue
+

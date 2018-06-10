@@ -39,6 +39,14 @@ class Issue < ApplicationRecord
     agenda_theme.try(:title)
   end
 
+  def following?(someone)
+    followers.exists?(id: someone)
+  end
+
+  def following_of(someone)
+    following_issues.find_by(user_id: someone)
+  end
+
   def self.group_by_theme issues
     issues.to_a.group_by{ |i| i.agenda_theme }.sort_by { |k,v| k.try(:name) }
   end
