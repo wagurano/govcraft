@@ -11,7 +11,7 @@
             = link_to vote do
               .card-image{ style: "height: 170px; background-image: url(#{vote.image_filename.url}); background-size: cover; background-position: center; background-repeat:no-repeat;" }
             .card-content
-              = link_to "#{vote.seq}.#{vote.title}", vote, class: 'card-header'
+              = link_to "#{vote.seq}. #{vote.title}", vote, class: 'card-header'
               .card-meta= v_user.omniauth_provider
             .card-content.card-extra
               - if vote.voteaward_comments.count > 0

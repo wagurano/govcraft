@@ -8,8 +8,6 @@
           .col-sm-11
             %h5
               = @v_user.name
-              %br
-              = @v_user.email
             - if @v_user.omniauth_provider.present?
               %a(href='#{@v_user.omniauth_provider}')
                 %i.fa.fa-home

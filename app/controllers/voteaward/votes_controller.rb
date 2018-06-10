@@ -1,6 +1,6 @@
 class Voteaward::VotesController < Voteaward::BaseController
   def index
-    @votes = Voteaward::Vote.all.limit(20)
+    @votes = Voteaward::Vote.all.limit(100)
   end
 
 private

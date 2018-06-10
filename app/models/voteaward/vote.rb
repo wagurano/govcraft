@@ -5,4 +5,6 @@ class Voteaward::Vote < ActiveRecord::Base
   has_many :voteaward_comments, class_name: "Voteaward::Comment", as: :commentable
 
   mount_uploader :image_filename, VoteawardImageUploader
+
+  default_scope { order("id desc") }
 end
