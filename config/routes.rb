@@ -118,6 +118,8 @@ Rails.application.routes.draw do
   get 'specials/voteaward2018'
 
   namespace :voteaward do
+    resources :awards do
+    end
     resources :votes do
     end
 
