@@ -2,8 +2,8 @@
   .container-fluid
     %h2.petition-title= petition.title
 
-    %div{ style: 'margin-top: 16px;font-size:16px;'}
-      %span
+    %div{ style: 'background: #f5f5f5; margin-bottom: 14px; padding: 7px; '}
+      = link_to '수정', edit_petition_path(petition)
       - if can? :edit, petition
         = link_to '수정', edit_petition_path(petition)
       - if can? :edit, petition
@@ -14,9 +14,9 @@
         = link_to '삭제', petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
 
     .petition-meta
-      .campaigner
+      %span.campaigner
         .user-image-xs{style: "background-image:url(#{asset_url(petition.user.image)});"}
-        = petition.user.nickname
+        = link_to petition.user.nickname, petition.user
       &middot;
       %span
         = date_f petition.created_at

@@ -13,12 +13,11 @@
   .petition-title {
     font-weight: bold;
   }
-  .petition-meta div {
-    display: inline-block;
-  }
-  .petition-meta .user-image-xs {
-    vertical-align: middle;
-    top: 4px;
+  .petition-meta {
+    color: $text-muted;
+    .user-image-xs {
+      vertical-align: middle;
+    }
   }
 }
 
@@ -34,6 +33,7 @@
   }
   .sign-panel__users {
     font-size: $font-size-small;
+    line-height: 1.5;
   }
   .sign-panel__status__count {
     color: $gray-base;

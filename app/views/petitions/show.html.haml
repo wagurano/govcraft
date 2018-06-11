@@ -7,22 +7,20 @@
     .petition-body
       = raw @petition.body
 
-      - if !@petition.sign_hidden
+      %section.m-t
         %a{id: "anchor-sign"}
-        %h4#join-title
+        %h4
           서명하기
         .panel-body.component-box
-          .panel-post__signs
-            = render 'signs/list', petition: @petition
-      - else
-        %a{id: "anchor-sign"}
-        %h4#join-title
-          서명
-        .panel-body.component-box
-          .help-text
-            #{@petition.signs_count}명이 서명했습니다.
-            %br
-            %span.text-muted 개설자가 서명 목록을 숨겼습니다.
+          - if !@petition.sign_hidden
+            .panel-post__signs
+              = render 'signs/list', petition: @petition
+
+          - else
+            .help-text
+              #{@petition.signs_count}명이 서명했습니다.
+              %br
+              %span.text-muted 개설자가 서명 목록을 숨겼습니다.
 
       %section.m-t
         %h4 이 이슈를 친구들에게 알려 주세요
