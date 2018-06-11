@@ -1,3 +1,17 @@
 .component-card.issue-card {
   overflow: visible;
 }
+
+.badge-issue {
+  display: inline-block;
+  background-color: $btn-default-bg;
+  border-radius: $font-size-base;
+  border: solid 1px $btn-default-border;
+  padding: $font-size-base*.5 $font-size-base;
+  margin-right: $font-size-base*.5;
+  margin-bottom: $font-size-base*.5;
+  &.badge-issue-following {
+    background-color: $brand-primary;
+    color: #fff;
+  }
+}

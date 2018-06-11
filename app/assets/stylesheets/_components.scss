@@ -63,6 +63,13 @@
   &.page-block-white {
     background-color: white
   }
+  &.page-block-message {
+    background: #fff;
+    border-radius: 14px;
+    padding:14px;
+    text-align: center;
+    letter-spacing: -1px; line-height: 1.5;
+  }
 }
 
 .page-block-1 {

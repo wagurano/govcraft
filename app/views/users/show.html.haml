@@ -1,48 +1,31 @@
+%section.page-block.profile-header
+  .container-fluid
+    %div
+      = render 'thumbnail', user: @user
+    %h3
+      = @user.nickname
+
+    %dl
+      %dt 가입일
+      %dd= date_f @user.created_at
 %section.page-block
-  .container
-    .page-header
-      .container-fluid
-        .profile-thumbnail
-          = render 'thumbnail', user: @user
-        %h3.text-center
-          = @user.nickname
-        %p
-          = @user.description
-        - if @user.site_info.present?
-          %a(href='#{@user.site_info.to_s}')
-            %i.fa.fa-home
-            사이트
-        - if @user.facebook_info.present?
-          %a(href='#{@user.facebook_info.to_s}')
-            %i.fa.fa-facebook
-            페이스북
-        - if @user.twitter_info.present?
-          %a(href='#{@user.twitter_info.to_s}')
-            %i.fa.fa-twitter
-            트위터
+  .container-fluid
+    %h3 관심 이슈
+    .issues
+      - @user.following_issues.each do |following_issue|
+        = link_to following_issue.issue do
+          %span.badge-issue.badge-issue-following
+            = following_issue.issue.title
 
-    %section
-      %dl
-        %dt 가입일
-        %dd= date_f @user.created_at
+    - if user_signed_in? && current_user == @user
+      .page-block.page-block-message
+        .text-center
+          %h4 참여하고 싶은 이슈를 더 찾아 보세요
+          %p= link_to '이슈 더보기', issues_path
 
-    %section.page-block
-      %h3.sub-title
-        #{Petition.model_name.human}
-      .row
-        = render @user.petitions
-
-    %section.page-block
-      %h3.sub-title
-        참여한 #{Petition.model_name.human}
-      .row
-        - petitions = Petition.where(id: Sign.where(user: @user).map(&:petition_id))
-        = render petitions
-
-    %section.page-block
-      %h3.sub-title
-        참여한 #{Event.model_name.human}
-      .row
-        - event_ids = Comment.where(user: @user, commentable_type: 'event').map(&:commentable_id).uniq
-        - events = Event.where(id: event_ids)
-        = render events
+%section.page-block
+  .container-fluid
+    %h3
+      #{Petition.model_name.human}
+    .row
+      = render @user.petitions
