@@ -29,6 +29,10 @@ class Agent < ApplicationRecord
     opinions.where(issue: agenda.issues)
   end
 
+  def agencies
+    Agency.tagged_with(position_list, on: :positions, any: true).order(:title)
+  end
+
   def self.positions(agents)
     agents.tags_on(:positions)
   end

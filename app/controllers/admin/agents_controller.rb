@@ -2,7 +2,7 @@ class Admin::AgentsController < Admin::BaseController
   load_and_authorize_resource
 
   def index
-    @agents = Agent.all
+    @agents = Agent.page(params[:page])
   end
 
   def create

@@ -1,0 +1,35 @@
+%section.page-block
+  .container
+    %h2
+      = link_to @agency do
+        = @agency.title
+
+%section#events.page-block
+  .container.text-center
+    .row
+      - @agency.agents.tag_counts_on(:positions).each do |position_tag|
+        - next unless @agency.position_list.include?(position_tag.name)
+        - btn_class = params[:position] == position_tag.name ? 'btn-primary' : 'btn-default'
+        = link_to agents_agency_path(@agency, position: position_tag.name), class: 'btn btn-lg ' + btn_class do
+          = position_tag.name
+          (#{position_tag.count})
+
+%section.page-block
+  .container
+    %h3.sub-title
+      관련 인물
+      - if params[:position].blank?
+        (#{@agents.count})
+
+    - if params[:position].present?
+      %h4.sub-title
+        = params[:position]
+        (#{@agents.count})
+
+    .row
+      - @agents.each do |agent|
+        .col-xs-6.col-sm-3
+          = render agent
+    .text-center
+      = paginate @agents, theme: 'twitter-bootstrap-3'
+

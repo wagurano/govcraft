@@ -1,18 +1,30 @@
 %section.page-block
-  .container
+  .container-fluid
     %h2= @agency.title
 
 %section.page-block
   %a{id: "anchor-project-petition"}
   = render 'petitions/list', petitions: @petitions
 
-%section.page-block
-  .container
-    %h3.sub-title
-      관련 인물 - #{@agents.count}명
+-  base_agents = Agent.tagged_with(@agency.position_list, on: :positions, any: true)
 
-    .row
-      - @agents.shuffle.first(8).each do |agent|
-        .col-xs-6.col-sm-3
-          = render agent
+%section.page-block
+  .container-fluid
+    %h3.sub-title
+      관련 인물 - #{base_agents.count}명
+
+    - preview_count = 8
+    - @agency.position_list.each do |position|
+      - agents = Agent.tagged_with(position, on: :positions).order(:name)
+      %h4.sub-title
+        = position
+        (#{agents.count})
+      .row
+        - agents.shuffle.first(preview_count).each do |agent|
+          .col-xs-6.col-sm-3
+            = render agent
+      - if preview_count < agents.count
+        = link_to agents_agency_path(@agency, position: position), class: 'btn btn-default btn-block' do
+          더보기
+          %i.fa.fa-arrow-right
 

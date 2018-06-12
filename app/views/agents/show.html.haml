@@ -22,3 +22,10 @@
               %p!= simple_format(h(opinion.issue.body))
           = render opinion
 
+- if @agent.agencies.any?
+  %section.page-block
+    .container-fluid
+      %h3.sub-title
+        관련 기관
+      .row
+        = render @agent.agencies

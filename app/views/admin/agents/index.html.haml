@@ -23,3 +23,6 @@
             %td.text-right
               = link_to '수정', edit_admin_agent_path(agent), class: 'btn btn-xs btn-default'
               = link_to '삭제', admin_agent_path(agent), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'
+
+  .text-center
+    = paginate @agents, theme: 'twitter-bootstrap-3'

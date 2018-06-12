@@ -5,7 +5,15 @@ class AgenciesController < ApplicationController
   end
 
   def show
-    @agents = Agent.tagged_with(@agency.position_list, on: :positions, any: true).order(:name)
-    @petitions = Petition.where(id: PetitionsAgents.where(agent: @agents).select(:petition_id))
+    @petitions = Petition.where(id: AgentsPetitions.where(agent: @agents).select(:petition_id))
+  end
+
+  def agents
+    if params[:position]
+      @agents = Agent.tagged_with(params[:position], on: :positions, any: true).order(:name)
+    else
+      @agents = Agent.order(:name)
+    end
+    @agents = @agents.page(params[:page])
   end
 end

@@ -1,0 +1,20 @@
+%section.page-block
+  .page-header
+    %h2 포지션
+
+  .panel.panel-default
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th 이름
+          %th.text-right
+            = link_to '추가', new_admin_position_path, class: 'btn btn-sm btn-primary'
+      %tbody
+        - @positions.each do |position|
+          %tr
+            %td
+              %h5= position.title
+            %td.text-right
+              = link_to '수정', edit_admin_position_path(position), class: 'btn btn-xs btn-default'
+              = link_to '삭제', admin_position_path(position), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'
+

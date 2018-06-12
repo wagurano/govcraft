@@ -70,6 +70,9 @@ class Ability
       # 관심 이슈 등록
       can :manage, [FollowingIssue], user_id: user.id
 
+      # 기관
+      can :agents, Agency
+
       # 모든 당원은 위키를 수정하고 원복할 수 있다
       can [:update], Wiki
       can [:revert], WikiRevision

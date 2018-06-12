@@ -170,7 +170,11 @@ Rails.application.routes.draw do
     end
   end
   resources :agents
-  resources :agencies
+  resources :agencies do
+    member do
+      get :agents
+    end
+  end
 
   namespace :admin do
     root 'base#home', as: :home
@@ -179,6 +183,7 @@ Rails.application.routes.draw do
     resources :issues
     resources :agencies
     resources :agents
+    resources :positions
     resources :opinions do
       collection do
         get :new_or_edit
