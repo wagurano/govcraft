@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180612024036) do
+ActiveRecord::Schema.define(version: 20180612061331) do
 
   create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "action_assignable_slug", null: false
@@ -94,6 +94,16 @@ ActiveRecord::Schema.define(version: 20180612024036) do
     t.string  "twitter"
     t.string  "public_site"
     t.string  "election_region"
+  end
+
+  create_table "agents_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "event_id"
+    t.integer  "agent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_agents_events_on_agent_id", using: :btree
+    t.index ["event_id", "agent_id"], name: "index_agents_events_on_event_id_and_agent_id", unique: true, using: :btree
+    t.index ["event_id"], name: "index_agents_events_on_event_id", using: :btree
   end
 
   create_table "agents_petitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -421,16 +431,6 @@ ActiveRecord::Schema.define(version: 20180612024036) do
     t.text     "message_to_agent", limit: 65535
     t.index ["project_id"], name: "index_events_on_project_id", using: :btree
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
-  end
-
-  create_table "events_speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.integer  "event_id"
-    t.integer  "agent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["agent_id"], name: "index_events_speakers_on_agent_id", using: :btree
-    t.index ["event_id", "agent_id"], name: "index_events_speakers_on_event_id_and_agent_id", unique: true, using: :btree
-    t.index ["event_id"], name: "index_events_speakers_on_event_id", using: :btree
   end
 
   create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
