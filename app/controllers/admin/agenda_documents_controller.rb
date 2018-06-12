@@ -28,12 +28,12 @@ class Admin::AgendaDocumentsController < Admin::BaseController
 
   def new
     @agenda_document.agenda_id = params[:agenda_id] if params[:agenda_id].present?
-    @agenda_document.speaker_id = params[:speaker_id] if params[:speaker_id].present?
+    @agenda_document.agent_id = params[:agent_id] if params[:agent_id].present?
   end
 
   private
 
   def agenda_document_params
-    params.require(:agenda_document).permit(:agenda_id, :speaker_id, :attachment, :attachment_cache, :desc)
+    params.require(:agenda_document).permit(:agenda_id, :agent_id, :attachment, :attachment_cache, :desc)
   end
 end

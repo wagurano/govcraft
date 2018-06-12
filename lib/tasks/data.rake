@@ -7,10 +7,10 @@ namespace :data do
   end
 
   desc '국회의원을 스피커로 등록합니다'
-  task 'register_assembly_members_to_speaker' => :environment do
+  task 'register_assembly_members_to_agent' => :environment do
     ActiveRecord::Base.transaction do
       AssemblyMember.all.select(:empNm, :assemEmail, :polyNm).each do |assembly_member|
-        s = Speaker.new(name: assembly_member[:empNm], organization: assembly_member[:polyNm],
+        s = Agent.new(name: assembly_member[:empNm], organization: assembly_member[:polyNm],
          email: assembly_member[:assemEmail], category: '')
         s.position_list = '20대_국회의원'
         s.save!
@@ -24,14 +24,14 @@ namespace :data do
   end
 
   desc '국회의원의 이미지를 추가하고, 국회의원이 스피커가 되는 경우 스피커id를 넣어줍니다'
-  task 'link_assembly_members_to_speaker_and_add_image' => :environment do
+  task 'link_assembly_members_to_agent_and_add_image' => :environment do
     ActiveRecord::Base.transaction do
-      Speaker.tagged_with("20대_국회의원").each do |speaker|
-        member = AssemblyMember.find_by(empNm: speaker.name, polyNm: speaker.organization)
-        member.speaker_id = speaker.id
+      Agent.tagged_with("20대_국회의원").each do |agent|
+        member = AssemblyMember.find_by(empNm: agent.name, polyNm: agent.organization)
+        member.agent_id = agent.id
         member.save!
-        speaker.remote_image_url = member.jpgLink
-        speaker.save!
+        agent.remote_image_url = member.jpgLink
+        agent.save!
       end
     end
   end
@@ -174,11 +174,11 @@ namespace :data do
         end
       end
 
-      print "speaker 저장 중...\n"
+      print "agent 저장 중...\n"
       ElectionCandidate.where(election_slug: Election::SLUG_20180613, candidate_category: candidate_category).each do |election_candidate|
 
 
-        s = Speaker.new(name: election_candidate.name, category: '')
+        s = Agent.new(name: election_candidate.name, category: '')
         s.remote_image_url = election_candidate.image_url
         s.position_list = '제7대_지방선거_예비후보'
 
@@ -189,7 +189,7 @@ namespace :data do
         end
         s.save!
 
-        election_candidate.speaker = s
+        election_candidate.agent = s
         election_candidate.save
 
         sleep 0.1

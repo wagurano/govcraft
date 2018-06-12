@@ -4,60 +4,60 @@ module StatementableControlling
   private
 
   def init_statementable(statementable)
-    statementable.title_to_speaker = statementable.title
-    statementable.message_to_speaker = statementable.body
+    statementable.title_to_agent = statementable.title
+    statementable.message_to_agent = statementable.body
   end
 
-  def statementable_update_message_to_speaker(statementable)
+  def statementable_update_message_to_agent(statementable)
     @statementable = statementable
-    if @statementable.update_attributes(title_to_speaker: params[:title_to_speaker], message_to_speaker: params[:message_to_speaker])
+    if @statementable.update_attributes(title_to_agent: params[:title_to_agent], message_to_agent: params[:message_to_agent])
       redirect_to @statementable
     else
       error_to_flash(@statementable)
-      render 'statementables/edit_message_to_speaker'
+      render 'statementables/edit_message_to_agent'
     end
   end
 
-  def statementable_edit_message_to_speaker(statementable)
+  def statementable_edit_message_to_agent(statementable)
     @statementable = statementable
-    render 'statementables/edit_message_to_speaker'
+    render 'statementables/edit_message_to_agent'
   end
 
-  def statementable_edit_speakers(statementable)
+  def statementable_edit_agents(statementable)
     if params[:q].present?
-      @searched_speakers = Speaker.where('name like ?', "%#{params[:q]}%")
+      @searched_agents = Agent.where('name like ?', "%#{params[:q]}%")
     end
 
     @statementable = statementable
-    render 'statementables/edit_speakers'
+    render 'statementables/edit_agents'
   end
 
-  def statementable_add_speaker(statementable)
-    @speaker = Speaker.find_by(id: params[:speaker_id])
-    render_404 and return if @speaker.blank?
-    statementable.speakers << @speaker unless statementable.speakers.include?(@speaker)
+  def statementable_add_agent(statementable)
+    @agent = Agent.find_by(id: params[:agent_id])
+    render_404 and return if @agent.blank?
+    statementable.agents << @agent unless statementable.agents.include?(@agent)
     statementable.save
-    redirect_to polymorphic_path([:edit_speakers, statementable], q: params[:q])
+    redirect_to polymorphic_path([:edit_agents, statementable], q: params[:q])
   end
 
-  def statementable_new_comment_speaker(statementable)
+  def statementable_new_comment_agent(statementable)
     @statementable = statementable
     @comment = Comment.new
-    if @statementable.respond_to? :message_to_speaker
-      @comment.body = @statementable.message_to_speaker + "<p></p>"
+    if @statementable.respond_to? :message_to_agent
+      @comment.body = @statementable.message_to_agent + "<p></p>"
     end
 
-    if params[:speaker_id].present?
-      @speaker = Speaker.find_by(id: params[:speaker_id])
-      render_404 and return if @speaker.blank?
+    if params[:agent_id].present?
+      @agent = Agent.find_by(id: params[:agent_id])
+      render_404 and return if @agent.blank?
 
-      render 'statementables/new_comment_speaker'
+      render 'statementables/new_comment_agent'
     else
-      render 'statementables/new_comment_speaker_for_all'
+      render 'statementables/new_comment_agent_for_all'
     end
   end
 
-  def statementable_update_statement_speaker(statementable)
+  def statementable_update_statement_agent(statementable)
     @statement_key = StatementKey.find_by(statement_id: params[:statement_id], key: params[:key])
     render_404 and return if @statement_key.blank?
     return if @statement_key.expired?
@@ -69,15 +69,15 @@ module StatementableControlling
       @statement.save
     end
 
-    @speaker = @statement.speaker
+    @agent = @statement.agent
     @statementable = statementable
-    render 'statementables/update_statement_speaker'
+    render 'statementables/update_statement_agent'
   end
 
-  def statementable_remove_speaker(statementable)
-    @speaker = Speaker.find_by(id: params[:speaker_id])
-    render_404 and return if @speaker.blank?
-    statementable.speakers.delete(@speaker) << @speaker if statementable.speakers.include?(@speaker)
-    redirect_to polymorphic_path([:edit_speakers, statementable], q: params[:q])
+  def statementable_remove_agent(statementable)
+    @agent = Agent.find_by(id: params[:agent_id])
+    render_404 and return if @agent.blank?
+    statementable.agents.delete(@agent) << @agent if statementable.agents.include?(@agent)
+    redirect_to polymorphic_path([:edit_agents, statementable], q: params[:q])
   end
 end

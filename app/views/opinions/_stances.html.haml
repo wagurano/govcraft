@@ -1,7 +1,7 @@
 %section
   - if local_assigns[:position].present?
     %h4= position
-  .opinion-speakers-list
+  .opinion-agents-list
     .row
       - Opinion.available_stance_values_by_theme(issue.agenda_theme).each do |stance|
         - if stance == 'unsure'
@@ -11,13 +11,13 @@
             - opinions = issue.opinions.any_of(Opinion.where(stance: nil), Opinion.where(stance: 'unsure'))
         - else
           - opinions = issue.opinions.where(stance: stance)
-        - stance_speakers = Speaker.where(id: opinions.pluck(:speaker_id)).distinct
+        - stance_agents = Agent.where(id: opinions.pluck(:agent_id)).distinct
         - available_stances = Opinion.available_stance_values_by_theme(issue.agenda_theme)
-        %div{ class: "#{('hidden-xs' if stance_speakers.empty?)} #{(issue.agenda_theme.try(:slug) == 'votefuture' ? "col-sm-4" : "col-sm-3")}" }
+        %div{ class: "#{('hidden-xs' if stance_agents.empty?)} #{(issue.agenda_theme.try(:slug) == 'votefuture' ? "col-sm-4" : "col-sm-3")}" }
           .position
             = Opinion.stance_text_by_theme(issue.agenda_theme, stance)
-            %span{ style: 'font-weight: normal' } #{stance_speakers.count}명
+            %span{ style: 'font-weight: normal' } #{stance_agents.count}명
 
-          .answer-speakers
+          .answer-agents
             .ui.list.grid
-          = render 'issues/speakers', speakers: stance_speakers, issue: issue, quote: stance, max_count: 15, link_to_opinon: true
+          = render 'issues/agents', agents: stance_agents, issue: issue, quote: stance, max_count: 15, link_to_opinon: true

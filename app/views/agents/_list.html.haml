@@ -1,0 +1,8 @@
+%section#issues.page-block
+  .container
+    %h3= Agent.model_name.human
+    - if agenda.agents.any?
+      .agents.ui.six.doubling.cards
+        = render agenda.agents, local_assigns
+    - else
+      %p 아직 #{Agent.model_name.human}가 없습니다.

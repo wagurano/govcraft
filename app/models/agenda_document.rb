@@ -1,5 +1,5 @@
 class AgendaDocument < ApplicationRecord
-  belongs_to :speaker
+  belongs_to :agent
   belongs_to :agenda
   belongs_to :user, optional: true
   before_save :update_meta

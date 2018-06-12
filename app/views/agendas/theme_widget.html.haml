@@ -1,5 +1,5 @@
-- speaker_positions = @agenda_theme.speaker_positions
-- speakers = Speaker.of_position(speaker_positions)
+- agent_positions = @agenda_theme.agent_positions
+- agents = Agent.of_position(agent_positions)
 - @agendas.each_with_index do |agenda, i|
   %base(target="_blank")
   %section.page-block.page-opinions[agenda]{ class: "page-block-#{i%2}"}
@@ -7,7 +7,7 @@
       %h2{ style: 'border-bottom: 1px solid #c0c0c2;' }
         = link_to agenda.name, agenda, style: 'color: #333333'
       - agenda.issues.with_theme(@agenda_theme).each do |issue|
-        = render 'agendas/theme_issue', issue: issue, speakers: speakers
+        = render 'agendas/theme_issue', issue: issue, agents: agents
 
 = content_for :script do
   %script(src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.11/iframeResizer.contentWindow.min.js" defer)

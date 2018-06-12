@@ -1,10 +1,10 @@
-- speaker_positions = @agenda_theme.speaker_positions
-- speakers = Speaker.of_position(speaker_positions)
+- agent_positions = @agenda_theme.agent_positions
+- agents = Agent.of_position(agent_positions)
 %base(target="_blank")
 %section.page-opinions[@agenda]
   .container{ style: 'width: initial; padding: 0 24px 24px;'}
     - @agenda.issues.with_theme(@agenda_theme).each do |issue|
-      = render 'agendas/theme_issue', issue: issue, speakers: speakers
+      = render 'agendas/theme_issue', issue: issue, agents: agents
 
 = content_for :script do
   %script(src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.11/iframeResizer.contentWindow.min.js" defer)

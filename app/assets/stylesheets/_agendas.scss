@@ -3,7 +3,7 @@
   border: none;
 }
 
-.opinion-speakers-list {
+.opinion-agents-list {
   display: table;
   table-layout: fixed;
   width: 100%;
@@ -31,7 +31,7 @@
     }
   }
 }
-.speaker-tab-content {
+.agent-tab-content {
   .tab-pane {
     margin-top: 20px;
   }
@@ -51,7 +51,7 @@
     font-weight: 300;
   }
 }
-.speaker-image {
+.agent-image {
   width: 70px;
   height: 101px;
   @media (max-width: $screen-xs-max) {
@@ -82,9 +82,9 @@
   background-position: center;
 }
 
-// speakers
-.answer-speakers{
-  .speaker {
+// agents
+.answer-agents{
+  .agent {
     margin: 3px 0;
     @media (max-width: $screen-xs-max) {
       padding: 0 15px;

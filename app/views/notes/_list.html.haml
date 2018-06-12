@@ -32,10 +32,10 @@
             = f.label :body
           ~ f.text_area :body, rows: 6, placeholder: '제 생각에는...', class: 'form-control validate', data: { 'rule-required': true }
         .form-group
-          - if opinion.speaker.email.present?
+          - if opinion.agent.email.present?
             %label
               %i.fa.fa-envelope-o
-              #{opinion.speaker.name}님에게
+              #{opinion.agent.name}님에게
               이메일도 보냅니다
               = f.check_box :sent_email
         = f.submit '작성', class: 'btn btn-default btn-sm'

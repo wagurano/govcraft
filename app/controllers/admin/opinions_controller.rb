@@ -29,8 +29,8 @@ class Admin::OpinionsController < Admin::BaseController
 
   def new_or_edit
     issue = Issue.find params[:issue_id]
-    speaker = Speaker.find params[:speaker_id]
-    @opinion = speaker.opinions.of_issue(issue).first || issue.opinions.build(speaker: speaker)
+    agent = Agent.find params[:agent_id]
+    @opinion = agent.opinions.of_issue(issue).first || issue.opinions.build(agent: agent)
     if @opinion.new_record?
       render 'new'
     else
@@ -41,6 +41,6 @@ class Admin::OpinionsController < Admin::BaseController
   private
 
   def opinion_params
-    params.require(:opinion).permit(:issue_id, :speaker_id, :quote, :body, :stance)
+    params.require(:opinion).permit(:issue_id, :agent_id, :quote, :body, :stance)
   end
 end

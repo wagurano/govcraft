@@ -56,13 +56,13 @@ Rails.application.routes.draw do
   resources :statements
   concern :statementable do
     member do
-      get 'edit_message_to_speaker'
-      put 'update_message_to_speaker'
-      get 'edit_speakers'
-      put 'add_speaker'
-      delete 'remove_speaker'
-      get 'new_comment_speaker'
-      get 'update_statement_speaker'
+      get 'edit_message_to_agent'
+      put 'update_message_to_agent'
+      get 'edit_agents'
+      put 'add_agent'
+      delete 'remove_agent'
+      get 'new_comment_agent'
+      get 'update_statement_agent'
     end
   end
 
@@ -169,7 +169,7 @@ Rails.application.routes.draw do
       get :vote_widget
     end
   end
-  resources :speakers
+  resources :agents
   resources :agencies
 
   namespace :admin do
@@ -178,7 +178,7 @@ Rails.application.routes.draw do
     resources :agendas
     resources :issues
     resources :agencies
-    resources :speakers
+    resources :agents
     resources :opinions do
       collection do
         get :new_or_edit

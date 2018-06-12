@@ -1,10 +1,10 @@
-- speaker = opinion.speaker
+- agent = opinion.agent
 .list-group-item.panel-opinion{ style: 'padding: 15px;' }
   .media[opinion]
     .hidden-xs
       .media-left
-        = link_to speaker_path(speaker) do
-          %img.media-object.speaker-image{style: "background-image: url(#{speaker.image.xs.url});"}
+        = link_to agent_path(agent) do
+          %img.media-object.agent-image{style: "background-image: url(#{agent.image.xs.url});"}
       .media-body
         %h5.media-heading
           - lead = capture do
@@ -16,9 +16,9 @@
             = link_to lead, opinion_path(opinion)
 
         %p
-          = link_to speaker_path(speaker) do
-            = speaker.name
-            %span.text-muted= speaker.organization
+          = link_to agent_path(agent) do
+            = agent.name
+            %span.text-muted= agent.organization
 
         - if opinion.body.present?
           - if local_assigns[:show_full]
@@ -32,13 +32,13 @@
 
     .visible-xs
       .media-left
-        = link_to speaker_path(speaker) do
-          %img.media-object.speaker-image{style: "background-image: url(#{speaker.image.xs.url});"}
+        = link_to agent_path(agent) do
+          %img.media-object.agent-image{style: "background-image: url(#{agent.image.xs.url});"}
       .media-body
         %h5.media-heading
-          = link_to speaker_path(speaker) do
-            = speaker.name
-            %small= speaker.organization
+          = link_to agent_path(agent) do
+            = agent.name
+            %small= agent.organization
         - if opinion.quote.present?
           = link_to opinion_path(opinion) do
             != simple_format h(opinion.quote), style: 'font-size: 1.5em; font-weight: 100; margin: .5em 0 .4em;'

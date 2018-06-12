@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180605122100) do
+ActiveRecord::Schema.define(version: 20180611223832) do
 
   create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "action_assignable_slug", null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20180605122100) do
   end
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.integer  "speaker_id",               null: false
+    t.integer  "agent_id",                 null: false
     t.integer  "agenda_id",                null: false
     t.integer  "user_id"
     t.string   "attachment",               null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20180605122100) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["agenda_id"], name: "index_agenda_documents_on_agenda_id", using: :btree
-    t.index ["speaker_id"], name: "index_agenda_documents_on_speaker_id", using: :btree
+    t.index ["agent_id"], name: "index_agenda_documents_on_agent_id", using: :btree
     t.index ["user_id"], name: "index_agenda_documents_on_user_id", using: :btree
   end
 
@@ -82,6 +82,28 @@ ActiveRecord::Schema.define(version: 20180605122100) do
     t.integer "issue_id"
     t.index ["agenda_id"], name: "index_agendas_issues_on_agenda_id", using: :btree
     t.index ["issue_id"], name: "index_agendas_issues_on_issue_id", using: :btree
+  end
+
+  create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string  "name",                            null: false
+    t.string  "organization"
+    t.string  "category",                        null: false
+    t.string  "image"
+    t.string  "email"
+    t.integer "sent_requests_count", default: 0
+    t.string  "twitter"
+    t.string  "public_site"
+    t.string  "election_region"
+  end
+
+  create_table "agents_petitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "petition_id"
+    t.integer  "agent_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["agent_id"], name: "index_agents_petitions_on_agent_id", using: :btree
+    t.index ["petition_id", "agent_id"], name: "index_agents_petitions_on_petition_id_and_agent_id", unique: true, using: :btree
+    t.index ["petition_id"], name: "index_agents_petitions_on_petition_id", using: :btree
   end
 
   create_table "archive_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -223,8 +245,8 @@ ActiveRecord::Schema.define(version: 20180605122100) do
     t.string  "shrtNm"
     t.string  "staff"
     t.string  "jpgLink"
-    t.integer "speaker_id"
-    t.index ["speaker_id"], name: "index_assembly_members_on_speaker_id", using: :btree
+    t.integer "agent_id"
+    t.index ["agent_id"], name: "index_assembly_members_on_agent_id", using: :btree
   end
 
   create_table "bulk_tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -285,21 +307,21 @@ ActiveRecord::Schema.define(version: 20180605122100) do
     t.string   "full_street_address"
     t.integer  "anonymous_likes_count",               default: 0
     t.boolean  "toxic",                               default: false
-    t.integer  "target_speaker_id"
+    t.integer  "target_agent_id"
     t.string   "mailing",                                             null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
-    t.index ["target_speaker_id"], name: "index_comments_on_target_speaker_id", using: :btree
+    t.index ["target_agent_id"], name: "index_comments_on_target_agent_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
-  create_table "comments_target_speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+  create_table "comments_target_agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "comment_id"
-    t.integer  "speaker_id"
+    t.integer  "agent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["comment_id", "speaker_id"], name: "comments_target_speakers_uk", unique: true, using: :btree
-    t.index ["comment_id"], name: "index_comments_target_speakers_on_comment_id", using: :btree
-    t.index ["speaker_id"], name: "index_comments_target_speakers_on_speaker_id", using: :btree
+    t.index ["agent_id"], name: "index_comments_target_agents_on_agent_id", using: :btree
+    t.index ["comment_id", "agent_id"], name: "comments_target_speakers_uk", unique: true, using: :btree
+    t.index ["comment_id"], name: "index_comments_target_agents_on_comment_id", using: :btree
   end
 
   create_table "deprecated_candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -358,7 +380,7 @@ ActiveRecord::Schema.define(version: 20180605122100) do
   end
 
   create_table "election_candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.integer "speaker_id"
+    t.integer "agent_id"
     t.string  "candidate_category"
     t.string  "district_name"
     t.string  "party"
@@ -371,7 +393,7 @@ ActiveRecord::Schema.define(version: 20180605122100) do
     t.string  "area_division_code"
     t.string  "district_slug"
     t.string  "district_code"
-    t.index ["speaker_id"], name: "index_election_candidates_on_speaker_id", using: :btree
+    t.index ["agent_id"], name: "index_election_candidates_on_agent_id", using: :btree
   end
 
   create_table "elections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -385,30 +407,30 @@ ActiveRecord::Schema.define(version: 20180605122100) do
   create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "slug"
     t.string   "title"
-    t.text     "body",               limit: 65535
+    t.text     "body",             limit: 65535
     t.string   "image"
     t.integer  "user_id"
-    t.integer  "comments_count",                   default: 0
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.integer  "comments_count",                 default: 0
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.integer  "project_id"
     t.string   "template"
-    t.text     "css",                limit: 65535
+    t.text     "css",              limit: 65535
     t.string   "social_image"
-    t.string   "title_to_speaker"
-    t.text     "message_to_speaker", limit: 65535
+    t.string   "title_to_agent"
+    t.text     "message_to_agent", limit: 65535
     t.index ["project_id"], name: "index_events_on_project_id", using: :btree
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
 
   create_table "events_speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "event_id"
-    t.integer  "speaker_id"
+    t.integer  "agent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id", "speaker_id"], name: "index_events_speakers_on_event_id_and_speaker_id", unique: true, using: :btree
+    t.index ["agent_id"], name: "index_events_speakers_on_agent_id", using: :btree
+    t.index ["event_id", "agent_id"], name: "index_events_speakers_on_event_id_and_agent_id", unique: true, using: :btree
     t.index ["event_id"], name: "index_events_speakers_on_event_id", using: :btree
-    t.index ["speaker_id"], name: "index_events_speakers_on_speaker_id", using: :btree
   end
 
   create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -524,7 +546,7 @@ ActiveRecord::Schema.define(version: 20180605122100) do
   create_table "opinions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "quote"
     t.text     "body",                  limit: 65535
-    t.integer  "speaker_id"
+    t.integer  "agent_id"
     t.integer  "issue_id"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
@@ -534,8 +556,8 @@ ActiveRecord::Schema.define(version: 20180605122100) do
     t.integer  "agrees_count",                        default: 0
     t.integer  "disagrees_count",                     default: 0
     t.string   "stance"
+    t.index ["agent_id"], name: "index_opinions_on_agent_id", using: :btree
     t.index ["issue_id"], name: "index_opinions_on_issue_id", using: :btree
-    t.index ["speaker_id"], name: "index_opinions_on_speaker_id", using: :btree
   end
 
   create_table "options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -595,33 +617,33 @@ ActiveRecord::Schema.define(version: 20180605122100) do
 
   create_table "petitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title"
-    t.text     "body",                           limit: 65535
+    t.text     "body",                         limit: 65535
     t.integer  "project_id"
     t.integer  "user_id"
-    t.datetime "created_at",                                                   null: false
-    t.datetime "updated_at",                                                   null: false
-    t.integer  "likes_count",                                  default: 0
-    t.integer  "signs_goal_count",                             default: 1000
-    t.integer  "signs_count",                                  default: 0
-    t.integer  "views_count",                                  default: 0
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+    t.integer  "likes_count",                                default: 0
+    t.integer  "signs_goal_count",                           default: 1000
+    t.integer  "signs_count",                                default: 0
+    t.integer  "views_count",                                default: 0
     t.string   "cover_image"
-    t.integer  "anonymous_likes_count",                        default: 0
-    t.text     "thanks_mention",                 limit: 65535
-    t.boolean  "comment_enabled",                              default: true
+    t.integer  "anonymous_likes_count",                      default: 0
+    t.text     "thanks_mention",               limit: 65535
+    t.boolean  "comment_enabled",                            default: true
     t.string   "sign_title"
     t.string   "social_image"
-    t.boolean  "use_signer_real_name",                         default: false
-    t.boolean  "use_signer_email",                             default: false
-    t.boolean  "use_signer_address",                           default: false
+    t.boolean  "use_signer_real_name",                       default: false
+    t.boolean  "use_signer_email",                           default: false
+    t.boolean  "use_signer_address",                         default: false
     t.string   "signer_real_name_title"
     t.string   "signer_email_title"
     t.string   "signer_address_title"
-    t.text     "confirm_privacy",                limit: 65535
-    t.string   "speaker_section_title"
-    t.string   "speaker_section_response_title"
-    t.boolean  "use_signer_phone",                             default: false
+    t.text     "confirm_privacy",              limit: 65535
+    t.string   "agent_section_title"
+    t.string   "agent_section_response_title"
+    t.boolean  "use_signer_phone",                           default: false
     t.string   "signer_phone_title"
-    t.boolean  "sign_hidden",                                  default: false, null: false
+    t.boolean  "sign_hidden",                                default: false, null: false
     t.integer  "area_id"
     t.string   "special_slug"
     t.integer  "issue_id"
@@ -629,16 +651,6 @@ ActiveRecord::Schema.define(version: 20180605122100) do
     t.index ["issue_id"], name: "index_petitions_on_issue_id", using: :btree
     t.index ["project_id"], name: "index_petitions_on_project_id", using: :btree
     t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
-  end
-
-  create_table "petitions_speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.integer  "petition_id"
-    t.integer  "speaker_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["petition_id", "speaker_id"], name: "index_petitions_speakers_on_petition_id_and_speaker_id", unique: true, using: :btree
-    t.index ["petition_id"], name: "index_petitions_speakers_on_petition_id", using: :btree
-    t.index ["speaker_id"], name: "index_petitions_speakers_on_speaker_id", using: :btree
   end
 
   create_table "players", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -774,13 +786,13 @@ ActiveRecord::Schema.define(version: 20180605122100) do
   end
 
   create_table "sent_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.integer  "speaker_id"
+    t.integer  "agent_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "agenda_id"
     t.index ["agenda_id"], name: "index_sent_requests_on_agenda_id", using: :btree
-    t.index ["speaker_id"], name: "index_sent_requests_on_speaker_id", using: :btree
+    t.index ["agent_id"], name: "index_sent_requests_on_agent_id", using: :btree
     t.index ["user_id"], name: "index_sent_requests_on_user_id", using: :btree
   end
 
@@ -812,18 +824,6 @@ ActiveRecord::Schema.define(version: 20180605122100) do
     t.index ["event_id"], name: "index_sns_events_on_event_id", using: :btree
   end
 
-  create_table "speakers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string  "name",                            null: false
-    t.string  "organization"
-    t.string  "category",                        null: false
-    t.string  "image"
-    t.string  "email"
-    t.integer "sent_requests_count", default: 0
-    t.string  "twitter"
-    t.string  "public_site"
-    t.string  "election_region"
-  end
-
   create_table "speeches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title",                                 null: false
     t.string   "video_url",                             null: false
@@ -851,14 +851,14 @@ ActiveRecord::Schema.define(version: 20180605122100) do
   end
 
   create_table "statements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.integer  "speaker_id",                       null: false
+    t.integer  "agent_id",                         null: false
     t.text     "body",               limit: 65535
     t.string   "stance"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "statementable_type"
     t.integer  "statementable_id"
-    t.index ["speaker_id"], name: "index_statements_on_speaker_id", using: :btree
+    t.index ["agent_id"], name: "index_statements_on_agent_id", using: :btree
     t.index ["statementable_type", "statementable_id"], name: "index_statements_on_statementable_type_and_statementable_id", using: :btree
   end
 
@@ -1230,6 +1230,6 @@ ActiveRecord::Schema.define(version: 20180605122100) do
   end
 
   add_foreign_key "events", "users"
-  add_foreign_key "sent_requests", "speakers"
+  add_foreign_key "sent_requests", "agents"
   add_foreign_key "sent_requests", "users"
 end

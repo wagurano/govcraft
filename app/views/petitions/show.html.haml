@@ -1,6 +1,6 @@
 - cover_image = @petition.cover_image_url(:lg)
 
-= render 'petitions/header', petition: @petition, show_speakers: true
+= render 'petitions/header', petition: @petition, show_agents: true
 
 %section#petition-block.page-block.page-block-white
   .container-fluid
@@ -49,18 +49,18 @@
         .modal-body
           != flash[:sign_notice]
           .share-box{ 'data-share-image': image_url(cover_image) }
-          - if @petition.speakers.any?
-            - speaker_section_title = @petition.speaker_section_title.presence || I18n.t("views.action_assignable.speaker_section_title.default")
-            %h4= speaker_section_title
+          - if @petition.agents.any?
+            - agent_section_title = @petition.agent_section_title.presence || I18n.t("views.action_assignable.agent_section_title.default")
+            %h4= agent_section_title
             .row{ style: 'margin-left: -9px; margin-right: -9px;' }
-              - @petition.speakers_random(2).each do |speaker|
+              - @petition.agents_random(2).each do |agent|
                 .col-sm-4.col-xs-4{ style: 'padding-left: 6px; padding-right: 6px;' }
-                  = render 'statementables/speaker', speaker: speaker, statementable: @petition
+                  = render 'statementables/agent', agent: agent, statementable: @petition
               .col-sm-4.col-xs-4{ style: 'padding-left: 6px; padding-right: 6px;' }
                 .panel.panel-default
                   .panel-body
-                    = link_to petition_path(@petition, anchor: "anchor-speakers"), class: "text-keep-all js-close-modal" do
-                      다른 #{speaker_section_title}
+                    = link_to petition_path(@petition, anchor: "anchor-agents"), class: "text-keep-all js-close-modal" do
+                      다른 #{agent_section_title}
                       %i.fa.fa-arrow-right
 
   = content_for :script do

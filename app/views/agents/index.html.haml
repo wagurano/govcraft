@@ -5,15 +5,15 @@
 %section#events.page-block
   .container.text-center
     .row
-      - Speaker.tag_counts_on(:positions).each do |position|
+      - Agent.tag_counts_on(:positions).each do |position|
         - btn_class = params[:position] == position.name ? 'btn-primary' : 'btn-default'
-        = link_to speakers_path(position: position.name), class: 'btn btn-lg ' + btn_class do
+        = link_to agents_path(position: position.name), class: 'btn btn-lg ' + btn_class do
           = position.name
           (#{position.count})
 
 %section#events.page-block
   .container
     .row
-      - @speakers.each do |speaker|
+      - @agents.each do |agent|
         .col-xs-6.col-sm-3
-          = render speaker
+          = render agent

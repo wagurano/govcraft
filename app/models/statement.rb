@@ -1,5 +1,5 @@
 class Statement < ApplicationRecord
-  belongs_to :speaker
+  belongs_to :agent
   belongs_to :statementable, polymorphic: true, optional: true
   has_many :statement_keys
 

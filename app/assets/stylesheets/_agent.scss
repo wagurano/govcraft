@@ -1,4 +1,4 @@
-.speaker-section{
+.agent-section{
   background-position: top center;
   background-size: cover;
   background: #75a6d8; /* Old browsers */
@@ -10,7 +10,7 @@
   padding-top: 80px;
   padding-bottom: 40px;
 
-  img.speaker-img{
+  img.agent-img{
     border: 5px solid rgba(255,255,255,0.5);
   }
   .media-heading{
@@ -32,7 +32,7 @@
     }
   }
 }
-.speaker-opinion{
+.agent-opinion{
   background-color: $gray-light;
   padding: 10px;
   border-radius: 10px;
@@ -40,7 +40,7 @@
   margin-bottom: 20px;
 }
 
-.speaker-card {
+.agent-card {
   .card-image {
     position: relative;
     .card-title {

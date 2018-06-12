@@ -99,6 +99,7 @@ gem 'imgkit', '~> 1.6', '>= 1.6.1'
 group :development, :test do
   gem 'wkhtmltoimage-binary', '~> 0.12.2'
 end
+gem 'aws-sdk-s3'
 
 # notification
 gem 'postmark-rails', '~> 0.12.0'

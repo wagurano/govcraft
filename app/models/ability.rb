@@ -10,10 +10,10 @@ class Ability
     can :download, Timeline
     can [:widget, :new_email, :send_email, :theme, :theme_widget, :theme_single_widget], Agenda
     can :vote_widget, Opinion
-    can :agenda, Speaker
-    can [:new_comment_speaker], :all
+    can :agenda, Agent
+    can [:new_comment_agent], :all
     can [:download], ArchiveDocument
-    can [:update_statement_speaker], :all
+    can [:update_statement_agent], :all
 
     if user
       can [:new_email, :send_email], Agenda
@@ -56,7 +56,7 @@ class Ability
         user == discussion.user or discussion.try(:project).try(:organizer?, user)
       end
 
-      can [:edit_speakers, :add_speaker, :remove_speaker, :edit_message_to_speaker, :update_message_to_speaker], [Petition, Event] do |event|
+      can [:edit_agents, :add_agent, :remove_agent, :edit_message_to_agent, :update_message_to_agent], [Petition, Event] do |event|
         user == event.user or event.try(:project).try(:organizer?, user)
       end
 

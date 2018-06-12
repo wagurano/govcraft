@@ -6,8 +6,8 @@
         = f.collection_select :agenda_id, Agenda.all, :id, :name, {}, { class: 'form-control' }
 
       .form-group
-        = f.label :speaker_id
-        = f.collection_select :speaker_id, Speaker.all, :id, :details, {}, { class: 'js-select2 form-control' }
+        = f.label :agent_id
+        = f.collection_select :agent_id, Agent.all, :id, :details, {}, { class: 'js-select2 form-control' }
 
       .form-group
         = f.label :attachment

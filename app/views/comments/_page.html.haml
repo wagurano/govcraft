@@ -6,17 +6,17 @@
         .comment__user
           .user-image-sm{style:"float:left;background-color: #eee; background-image:url(#{asset_url(commenter.nil? ? 'default-user.png' : commenter.image)}); #{"background-position: 0 4px; background-repeat: no-repeat;" if commenter.nil?}"}
       .media-body
-        - has_target_class = comment.target_speakers.any? ? "has_target" : ""
+        - has_target_class = comment.target_agents.any? ? "has_target" : ""
         .comment__body{ class: has_target_class }
-          - if comment.target_speakers.any?
-            .comment__to-speaker
-              - target_speaker = comment.target_speakers.first
-              %span.comment__to-speaker_default.hidden-xs
-                #{target_speaker.organization} #{target_speaker.name}님#{(" 이외 #{comment.target_speakers.count - 1}분" if comment.target_speakers.count > 1)}에게
-              %span.comment__to-speaker_mobile.visible-xs
-                = image_tag target_speaker.image.md.url, style: "height: 24px;"
-                #{target_speaker.organization} #{target_speaker.name}
-                님#{(" 이외 #{comment.target_speakers.count - 1}분" if comment.target_speakers.count > 1)}에게
+          - if comment.target_agents.any?
+            .comment__to-agent
+              - target_agent = comment.target_agents.first
+              %span.comment__to-agent_default.hidden-xs
+                #{target_agent.organization} #{target_agent.name}님#{(" 이외 #{comment.target_agents.count - 1}분" if comment.target_agents.count > 1)}에게
+              %span.comment__to-agent_mobile.visible-xs
+                = image_tag target_agent.image.md.url, style: "height: 24px;"
+                #{target_agent.organization} #{target_agent.name}
+                님#{(" 이외 #{comment.target_agents.count - 1}분" if comment.target_agents.count > 1)}에게
 
           %p= raw screened(comment, :body)
 

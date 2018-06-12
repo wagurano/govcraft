@@ -1,8 +1,0 @@
-%section#issues.page-block
-  .container
-    %h3= Speaker.model_name.human
-    - if agenda.speakers.any?
-      .speakers.ui.six.doubling.cards
-        = render agenda.speakers, local_assigns
-    - else
-      %p 아직 #{Speaker.model_name.human}가 없습니다.

@@ -15,11 +15,11 @@ class AgendaMailer < ApplicationMailer
     return if @note.blank?
 
     @opinion = @note.opinion
-    @speaker = @opinion.speaker
-    return if @speaker.email.blank?
+    @agent = @opinion.agent
+    return if @agent.email.blank?
 
 
-    mail(to: @speaker.email,
+    mail(to: @agent.email,
       subject: "[가브크래프트] 귀하의 '#{@opinion.issue.try(:title)}'에 대한 입장에 대해 #{@note.user_nickname}님이 의견을 보냅니다.")
   end
 end

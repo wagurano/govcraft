@@ -1,0 +1,62 @@
+%a{id: "anchor-agents"}
+
+- @petition.total_action_assignables.each do |action_assignable|
+  - next if action_assignable.statementable_agents(@petition).empty?
+
+  - current_agents = action_assignable.statementable_agents_moderatly(@petition, 30)
+
+  - agents_group = current_agents.to_a.group_by { |agent| petition.spoken?(agent) }
+  - agents_spoken = @petition.action_assignable_agents_spoken(action_assignable)
+  - agents_unspoken = @petition.action_assignable_agents_unspoken(action_assignable)
+
+  - if agents_spoken.any?
+    %h5.text-muted 관련 인물 답변
+    %div
+      - agents_spoken.each do |agent|
+        - statement = petition.statement_of(agent)
+
+        %button.btn.btn-success{"data-target" => "#agent-statement-modal-#{agent.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0'}
+          = image_tag agent.image.md.url, style: "height: 24px;"
+          %strong= agent.name
+          %small= statement.stance.text
+          %i.fa.fa-commenting-o
+
+        - if @petition.statements.responed_body.any?
+          %div.modal.fade{id: "agent-statement-modal-#{agent.id}", :role => "dialog", :tabindex => "-1"}
+            .modal-dialog{:role => "document"}
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} &#215;
+                  %h4.modal-title
+                    = image_tag agent.image.md.url, style: "height: 36px;"
+                    %strong= agent.name
+                    %span.text-muted= agent.organization
+                    님의 답변
+
+                .modal-body
+                  .panel-body[statement]
+                    .panel-post__statements
+                      .media[statement]
+                        .media-body
+                          - if statement.stance.present?
+                            %h4.media-heading{ style: 'line-height: 24px;' }
+                              %span.text-success= statement.stance.text
+
+                          - if statement.body.present?
+                            .opinion__body{ style: 'font-weight: normal;' }
+                              != statement.body
+
+                          %div
+                            = link_to agent, class: 'btn btn-success btn-block' do
+                              %strong= agent.name
+                              = agent.organization
+                              님의 다른 답변 보기
+
+
+  - if agents_unspoken.any?
+    - if agents_spoken.any?
+      %h5.text-muted 관련 인물에게 촉구하기
+      %div
+        - agents_unspoken.each do |agent|
+          = render 'statementables/agent', agent: agent, statementable: petition

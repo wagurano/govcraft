@@ -1,7 +1,7 @@
 - issue = @opinion.issue
-- speaker = @opinion.speaker
+- agent = @opinion.agent
 
-= render 'speakers/header', speaker: speaker
+= render 'agents/header', agent: agent
 
 %section.page-block
   .container
@@ -15,7 +15,7 @@
     %h3
       = link_to issue.title, issue
       %small
-        = link_to new_or_edit_admin_opinions_path(issue_id: issue.id, speaker_id: speaker.id), class: 'text-danger' do
+        = link_to new_or_edit_admin_opinions_path(issue_id: issue.id, agent_id: agent.id), class: 'text-danger' do
           #{Opinion.model_name.human} 수정
 
     - if issue.body.present?
@@ -23,7 +23,7 @@
         != simple_format(h(issue.body.strip))
 
     %section.opinion-show[@opinion]{ style: 'margin-bottom: 2em' }
-      - opinions = issue.opinions.recent.of_speaker(speaker)
+      - opinions = issue.opinions.recent.of_agent(agent)
       = render @opinion, show_full: true
 
     .post-block__share

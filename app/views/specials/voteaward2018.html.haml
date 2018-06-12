@@ -2,12 +2,12 @@
   .container
     %h3.sub-title
       예비 후보자
-      (#{number_with_delimiter @election.speakers.count})
+      (#{number_with_delimiter @election.agents.count})
     .row
-      - @speakers.each do |speaker|
-        - election_candidate = speaker.election_candidates.find_by(election_slug: Election::SLUG_20180613)
+      - @agents.each do |agent|
+        - election_candidate = agent.election_candidates.find_by(election_slug: Election::SLUG_20180613)
         .col-sm-3
-          = render speaker
+          = render agent
           %ul
             %li= election_candidate.party
             %li= election_candidate.area_division

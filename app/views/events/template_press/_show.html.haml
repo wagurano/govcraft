@@ -15,10 +15,10 @@
           = link_to '수정', edit_event_path(event)
         - if can? :edit, event
           &middot;
-          = link_to '촉구메시지관리', edit_message_to_speaker_event_path(event)
+          = link_to '촉구메시지관리', edit_message_to_agent_event_path(event)
         - if can? :edit, event
           &middot;
-          = link_to '촉구인물관리', edit_speakers_event_path(event)
+          = link_to '촉구인물관리', edit_agents_event_path(event)
         - if can? :destroy, event
           &middot;
           = link_to '삭제', event, method: :delete, data: { confirm: '삭제하시겠습니까?' }
@@ -35,23 +35,23 @@
 
 %section
   .container-fluid
-    = render 'events/template_press/speakers', event: @event
+    = render 'events/template_press/agents', event: @event
 
 %section
   .container-fluid
-    %a{id: "anchor-speakers"}
+    %a{id: "anchor-agents"}
     %h3.sub-title 촉구메시지 #{@comments.total_count}개
     .row.masonry-container
       - @comments.recent.each do |comment|
         .col-sm-6.col-md-4.col-lg-3
           .panel.panel-default.panel-floating[comment]{ class: (comment.toxic? ? 'comment-toxic': '') }
             .panel-body
-              - if comment.target_speakers.any?
-                - target_speaker = comment.target_speakers.first
-                .comment__to-speaker_any{ style: 'font-weight: bold'}<>
+              - if comment.target_agents.any?
+                - target_agent = comment.target_agents.first
+                .comment__to-agent_any{ style: 'font-weight: bold'}<>
                   %span<>
-                    #{target_speaker.organization} #{target_speaker.name}
-                  님#{(" 이외 #{comment.target_speakers.count - 1}분" if comment.target_speakers.count > 1)}에게
+                    #{target_agent.organization} #{target_agent.name}
+                  님#{(" 이외 #{comment.target_agents.count - 1}분" if comment.target_agents.count > 1)}에게
               .comment__body
                 %h4{ style: 'font-size: 16px; letter-spacing: -0.02em; line-height: 1.4;'}
                   != comment.body

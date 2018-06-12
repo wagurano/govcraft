@@ -9,10 +9,10 @@
 %section.page-block
   .container
     %h3.sub-title
-      관련 인물 - #{@speakers.count}명
+      관련 인물 - #{@agents.count}명
 
     .row
-      - @speakers.shuffle.first(8).each do |speaker|
+      - @agents.shuffle.first(8).each do |agent|
         .col-xs-6.col-sm-3
-          = render speaker
+          = render agent
 

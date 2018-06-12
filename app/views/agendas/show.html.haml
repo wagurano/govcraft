@@ -17,7 +17,7 @@
         .page-header
           %h2
             #{position} #{Opinion.model_name.human}
-            %small #{position} #{@agenda.speakers.of_position(position).count}명에게 #{Opinion.model_name.human}을 받았습니다.
+            %small #{position} #{@agenda.agents.of_position(position).count}명에게 #{Opinion.model_name.human}을 받았습니다.
         - @agenda.issues.each do |issue|
           %h3= issue.title
 
@@ -25,16 +25,16 @@
             .issue-body
               %p!= simple_format(h(issue.body))
 
-          .opinion-speakers-list
+          .opinion-agents-list
             .row
               - ["찬성", "반대", nil].each do |quote|
-                - speakers = issue.categorized_speakers(position, quote)
-                .col-sm-4{ class: ('hidden-xs' if speakers.empty?) }
+                - agents = issue.categorized_agents(position, quote)
+                .col-sm-4{ class: ('hidden-xs' if agents.empty?) }
                   .position
                     = quote || "#{Opinion.model_name.human}없음"
-                    %span{ style: 'font-weight: normal' } #{speakers.count}명
+                    %span{ style: 'font-weight: normal' } #{agents.count}명
 
-                  = render 'issues/speakers', speakers: speakers, issue: issue, quote: quote, max_count: 15
+                  = render 'issues/agents', agents: agents, issue: issue, quote: quote, max_count: 15
 - else
   - Issue.group_by_theme(@agenda.issues).each_with_index do |(agenda_theme, issues), i|
     %section.page-block.page-opinions{ class: "page-block-#{i%2}"}
@@ -52,9 +52,9 @@
                 %p!= simple_format(h(issue.body))
 
             - if issue.has_any_stances?
-              = render 'opinions/stances', speakers: issue.speakers, issue: issue
+              = render 'opinions/stances', agents: issue.agents, issue: issue
             .media-list
-              - Speaker.of_position('19대_대선후보').shuffle.each do |speaker|
-                - issue.opinions.of_speaker(speaker).each do |opinion|
+              - Agent.of_position('19대_대선후보').shuffle.each do |agent|
+                - issue.opinions.of_agent(agent).each do |opinion|
                   - next unless opinion.has_content?
                   = render 'opinions/line_item', opinion: opinion

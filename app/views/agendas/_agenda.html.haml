@@ -1,4 +1,4 @@
-- url = agenda_path(agenda, speaker_id: local_assigns[:speaker].try(:id))
+- url = agenda_path(agenda, agent_id: local_assigns[:agent].try(:id))
 .col-lg-2.col-md-3.col-sm-4.col-xs-6
   .agenda-card.panel-floating.component-card[agenda]
     = link_to url do

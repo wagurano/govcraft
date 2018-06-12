@@ -4,18 +4,18 @@ class Election < ApplicationRecord
 
   has_many :action_targets, as: :action_assignable
   has_many :election_candidates, dependent: :restrict_with_error, primary_key: :slug, foreign_key: :election_slug
-  has_many :speakers, through: :election_candidates
+  has_many :agents, through: :election_candidates
 
-  def statementable_speakers(statementable)
+  def statementable_agents(statementable)
     if statementable.respond_to?(:area) and convert_area_code(statementable.area).present?
-      speakers.where(id: election_candidates.where(area_division_code: convert_area_code(statementable.area)).select(:speaker_id))
+      agents.where(id: election_candidates.where(area_division_code: convert_area_code(statementable.area)).select(:agent_id))
     else
-      speakers
+      agents
     end
   end
 
-  def statementable_speakers_moderatly(statementable, limit)
-    result = statementable_speakers(statementable)
+  def statementable_agents_moderatly(statementable, limit)
+    result = statementable_agents(statementable)
     if result.count > limit
       result.order("RAND()").first(limit)
     else
@@ -23,11 +23,11 @@ class Election < ApplicationRecord
     end
   end
 
-  def speakers_moderatly(limit)
-    if speakers.count > limit
-      speakers.order("RAND()").first(limit)
+  def agents_moderatly(limit)
+    if agents.count > limit
+      agents.order("RAND()").first(limit)
     else
-      speakers
+      agents
     end
   end
 
@@ -51,7 +51,7 @@ class Election < ApplicationRecord
     end
   end
 
-  def speakers_unspoken_limit
+  def agents_unspoken_limit
     30
   end
 

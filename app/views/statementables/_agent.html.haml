@@ -1,39 +1,39 @@
-- statement = statementable.statement_of(speaker)
+- statement = statementable.statement_of(agent)
 - responded = (statement.try(:is_responed?) && statement.stance.present?)
 
 - if responded
-  = link_to speaker, class: 'btn btn-success btn-inverted', style: 'margin: 0 0 4px 0' do
-    = image_tag speaker.image.md.url, style: "height: 24px;"
-    %strong= speaker.name
+  = link_to agent, class: 'btn btn-success btn-inverted', style: 'margin: 0 0 4px 0' do
+    = image_tag agent.image.md.url, style: "height: 24px;"
+    %strong= agent.name
     %small= statement.stance.text
 
 - else
-  %button.btn.btn-default.btn-inverted{"data-target" => "#comment-to-speaker-modal-#{speaker.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0'}
-    = image_tag speaker.image.md.url, style: "height: 24px;"
-    %strong= speaker.name
+  %button.btn.btn-default.btn-inverted{"data-target" => "#comment-to-agent-modal-#{agent.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0'}
+    = image_tag agent.image.md.url, style: "height: 24px;"
+    %strong= agent.name
     %small.text-danger
-      - count = statementable.comments.with_target_speaker(speaker).count
+      - count = statementable.comments.with_target_agent(agent).count
       촉구하기 #{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}
 
   - if @petition
-    %div.modal.fade{id: "comment-to-speaker-modal-#{speaker.id}", :role => "dialog", :tabindex => "-1"}
+    %div.modal.fade{id: "comment-to-agent-modal-#{agent.id}", :role => "dialog", :tabindex => "-1"}
       .modal-dialog{:role => "document"}
         .modal-content
           .modal-header
             %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
               %span{"aria-hidden" => "true"} &#215;
             %h4.modal-title
-              = image_tag speaker.image.md.url, style: "height: 36px;"
-              %strong= speaker.name
+              = image_tag agent.image.md.url, style: "height: 36px;"
+              %strong= agent.name
               에게 촉구하기
-              %small= speaker.organization
+              %small= agent.organization
           .modal-body
             .comments-form
               = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
                 = hidden_field_tag :back_commentable, '1'
                 = f.hidden_field :commentable_type, value: @petition.class.name
                 = f.hidden_field :commentable_id, value: @petition.id
-                = f.hidden_field :target_speaker_id, value: speaker.id
+                = f.hidden_field :target_agent_id, value: agent.id
                 = invisible_captcha
                 - unless user_signed_in?
                   .row
@@ -43,14 +43,14 @@
                         = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
                     .col-xs-12.col-md-6
                       .form-group
-                        = f.label :commenter_email, speaker.email.present? ? "이메일(#{speaker.name}님에게 메일을 발송하려면 반드시 넣어주세요)" : nil
+                        = f.label :commenter_email, agent.email.present? ? "이메일(#{agent.name}님에게 메일을 발송하려면 반드시 넣어주세요)" : nil
                         = f.text_field :commenter_email, class: 'form-control'
                 .form-group
                   ~ f.text_area :body, placeholder: '제 생각에는...', class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
-                - if speaker.email.present?
+                - if agent.email.present?
                   .form-group
                     .checkbox
                       %label{ style: 'font-weight: bold' }
                         = f.check_box :mailing, { checked: true }, 'ready', 'disable'
-                        #{speaker.name}님에게 메일로도 발송합니다.
+                        #{agent.name}님에게 메일로도 발송합니다.
                 = f.submit "#{count+1}번째로 촉구하기", class: 'btn btn-danger btn-block'

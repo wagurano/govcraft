@@ -54,32 +54,32 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
-  def update_message_to_speaker
-    statementable_update_message_to_speaker(@event)
+  def update_message_to_agent
+    statementable_update_message_to_agent(@event)
   end
 
-  def edit_message_to_speaker
-    statementable_edit_message_to_speaker(@event)
+  def edit_message_to_agent
+    statementable_edit_message_to_agent(@event)
   end
 
-  def edit_speakers
-    statementable_edit_speakers(@event)
+  def edit_agents
+    statementable_edit_agents(@event)
   end
 
-  def add_speaker
-    statementable_add_speaker(@event)
+  def add_agent
+    statementable_add_agent(@event)
   end
 
-  def new_comment_speaker
-    statementable_new_comment_speaker(@event)
+  def new_comment_agent
+    statementable_new_comment_agent(@event)
   end
 
-  def update_statement_speaker
-    statementable_update_statement_speaker(@event)
+  def update_statement_agent
+    statementable_update_statement_agent(@event)
   end
 
-  def remove_speaker
-    statementable_remove_speaker(@event)
+  def remove_agent
+    statementable_remove_agent(@event)
   end
 
   private

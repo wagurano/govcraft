@@ -3,11 +3,11 @@
 one:
   quote: MyString
   body: MyText
-  speaker: one
+  agent: one
   issue: one
 
 two:
   quote: MyString
   body: MyText
-  speaker: two
+  agent: two
   issue: two

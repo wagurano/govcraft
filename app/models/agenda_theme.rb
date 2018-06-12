@@ -5,7 +5,7 @@ class AgendaTheme < ApplicationRecord
   has_many :options, through: :issues
   mount_uploader :cover, ImageUploader
 
-  def speaker_positions
+  def agent_positions
     {
       '2017-president' => ['19대_대선후보'],
       'votefuture' => ['19대_대선후보'],

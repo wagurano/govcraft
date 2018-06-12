@@ -1,5 +1,5 @@
 - is_one_theme_view = local_assigns[:agenda_theme].present?
-- is_one_speaker_view = local_assigns[:speaker].present?
+- is_one_agent_view = local_assigns[:agent].present?
 
 .tab-pane.active{ id: "agenda_tab_#{agenda.id}" }
   .collapse.js-loading
@@ -13,12 +13,12 @@
     - issues = is_one_theme_view ? agenda.issues.with_theme(agenda_theme) : agenda.issues
 
     - Issue.group_by_theme(issues).each_with_index do |(agenda_theme, issues), i|
-      - next if is_one_speaker_view and !Opinion.where(issue_id: issues).exists?(speaker: local_assigns[:speaker])
+      - next if is_one_agent_view and !Opinion.where(issue_id: issues).exists?(agent: local_assigns[:agent])
       %section
         - if !is_one_theme_view and agenda_theme.present?
           = render 'agenda_themes/line_item', agenda_theme: agenda_theme
         - issues.each do |issue|
-          - next if is_one_speaker_view and !issue.opinions.exists?(speaker: local_assigns[:speaker])
+          - next if is_one_agent_view and !issue.opinions.exists?(agent: local_assigns[:agent])
           %section{ style: 'margin-bottom: 3em;' }
             %h3[issue]
               = issue.title
@@ -28,29 +28,29 @@
                   = form_tag new_or_edit_admin_opinions_path, method: :get, class: 'form-inline', target: '_blank' do
                     .inline.field
                       = hidden_field_tag :issue_id, issue.id
-                      %select{name: :speaker_id, class: 'form-control'}
-                        - all_speakers = local_assigns[:speakers] || [local_assigns[:speaker]]
-                        - all_speakers.each do |speaker|
-                          %option{ value: speaker.id }
-                            = speaker.name
+                      %select{name: :agent_id, class: 'form-control'}
+                        - all_agents = local_assigns[:agents] || [local_assigns[:agent]]
+                        - all_agents.each do |agent|
+                          %option{ value: agent.id }
+                            = agent.name
                       %button.btn.btn-default{ type: "submit" } 입력
 
             - if issue.body.present?
               .issue-body
                 %p!= simple_format(h(issue.body))
 
-            - if local_assigns[:speaker].present?
+            - if local_assigns[:agent].present?
               .panel.panel-default
                 .list-group
-                  - issue.opinions.of_speaker(speaker).each do |opinion|
+                  - issue.opinions.of_agent(agent).each do |opinion|
                     = render 'opinions/line_item', opinion: opinion
             - else
-              = render 'opinions/stances_list', issue: issue, speakers: speakers
+              = render 'opinions/stances_list', issue: issue, agents: agents
 
-              - if issue.opinions.where(speaker: speakers).any?(&:has_content?)
+              - if issue.opinions.where(agent: agents).any?(&:has_content?)
                 .panel.panel-default
                   .list-group
-                    - speakers.shuffle.each do |speaker|
-                      - issue.opinions.of_speaker(speaker).each do |opinion|
+                    - agents.shuffle.each do |agent|
+                      - issue.opinions.of_agent(agent).each do |opinion|
                         - next unless opinion.has_content?
                         = render 'opinions/line_item', opinion: opinion

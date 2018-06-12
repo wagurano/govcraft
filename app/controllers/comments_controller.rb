@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
       @commentable_model = params[:commentable_type].classify.safe_constantize
       @commentable = @commentable_model.find(params[:commentable_id])
       @comments = @commentable.comments.page(params[:page])
-      @comments = @comments.with_target_speaker(Speaker.find_by(id: params[:speaker_id])) if params[:speaker_id].present?
+      @comments = @comments.with_target_agent(Agent.find_by(id: params[:agent_id])) if params[:agent_id].present?
     end
   end
 
@@ -27,13 +27,13 @@ class CommentsController < ApplicationController
       return
     end
 
-    if @comment.commentable.respond_to?(:speakers)
-      if @comment.target_speaker_id.blank?
-        @comment.commentable.speakers.each do |speaker|
-          @comment.target_speakers << speaker
+    if @comment.commentable.respond_to?(:agents)
+      if @comment.target_agent_id.blank?
+        @comment.commentable.agents.each do |agent|
+          @comment.target_agents << agent
         end
       else
-        @comment.target_speakers << Speaker.find_by(id: @comment.target_speaker_id)
+        @comment.target_agents << Agent.find_by(id: @comment.target_agent_id)
       end
     end
 
@@ -41,18 +41,18 @@ class CommentsController < ApplicationController
       flash[:notice] = I18n.t('messages.commented')
 
       if @comment.commentable.respond_to? :statements
-        @comment.target_speakers.each do |speaker|
-          statement = @comment.commentable.statements.find_or_create_by(speaker: speaker)
+        @comment.target_agents.each do |agent|
+          statement = @comment.commentable.statements.find_or_create_by(agent: agent)
           statement_key = statement.statement_keys.build(key: SecureRandom.hex(50))
           statement_key.save!
-          if @comment.mailing.ready? and speaker.email.present?
-            CommentMailer.target_speaker(@comment.id, speaker.id, statement_key.id).deliver_later
+          if @comment.mailing.ready? and agent.email.present?
+            CommentMailer.target_agent(@comment.id, agent.id, statement_key.id).deliver_later
           end
         end
       end
 
       if @comment.mailing.ready?
-        if @comment.target_speakers.empty? { |speaker| speaker.email.present? }
+        if @comment.target_agents.empty? { |agent| agent.email.present? }
           @comment.update_attributes(mailing: :fail)
         end
       end
@@ -84,7 +84,7 @@ class CommentsController < ApplicationController
       :commenter_name, :commenter_email,
       :full_street_address,
       :tag_list, :image,
-      :target_speaker_id, :mailing,
+      :target_agent_id, :mailing,
       :toxic
     )
   end

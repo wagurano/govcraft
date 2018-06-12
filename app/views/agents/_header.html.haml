@@ -1,0 +1,33 @@
+%section.agent-section
+  .container-fluid
+    .media
+      .media-left
+        = image_tag agent.image.xs.url, class: 'media-object'
+      .media-body
+        %h3.media-heading
+          = link_to agent_path(agent) do
+            = agent.name
+          %small
+            - agent.positions.each do |position|
+              %span.label.label-default.agent__positions= position
+        %p
+          %span
+            #{agent.organization}
+          - if agent.election_region.present?
+            %span
+              #{agent.election_region}
+            지역
+          %br
+        .sns
+          - if agent.public_site.present?
+            %a{ href: "#{agent.public_site.to_s}" }
+              %i.fa.fa-home
+              웹사이트
+          - if agent.email.present?
+            %a{ href: "mailto:#{agent.email}"}
+              %i.fa.fa-envelope
+              이메일
+          - if agent.twitter.present?
+            %a{ href: "http://twitter.com/#{agent.twitter}", target: "_blank" }
+              %i.fa.fa-twitter
+              트위터

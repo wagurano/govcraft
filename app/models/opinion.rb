@@ -5,14 +5,14 @@ class Opinion < ApplicationRecord
   extend Enumerize
   enumerize :stance, in: %w[agree partially disagree unsuer]
 
-  belongs_to :speaker
+  belongs_to :agent
   belongs_to :issue
   has_many :notes, dependent: :destroy
 
   scope :recent, -> { order('id DESC') }
   scope :of_issue, ->(issue) { where(issue: issue) }
   scope :of_quote, ->(quote) { where(quote: quote) }
-  scope :of_speaker, ->(speaker) { where(speaker: speaker) }
+  scope :of_agent, ->(agent) { where(agent: agent) }
   scope :of_theme, ->(theme) { where(issue_id: Issue.where(agenda_theme_id: theme.id)) }
 
   def has_content?

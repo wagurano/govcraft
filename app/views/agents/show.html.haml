@@ -1,20 +1,20 @@
-= render 'speakers/header', speaker: @speaker
+= render 'agents/header', agent: @agent
 
-- if @speaker.petitions.any?
+- if @agent.petitions.any?
   %section.page-block#agends-list
     .container-fluid
       %h3
         관련
         = Petition.model_name.human
       .row
-        = render @speaker.petitions
+        = render @agent.petitions
 
-- if @speaker.opinions.any?
+- if @agent.opinions.any?
   %section.page-block
     .container-fluid
       %h3
         의견
-      - @speaker.opinions.recent.limit(2).each do |opinion|
+      - @agent.opinions.recent.limit(2).each do |opinion|
         %section.m-b
           %h4= opinion.issue.title
           - if opinion.issue.body.present?

@@ -6,8 +6,8 @@
         = f.collection_select :issue_id, Issue.all, :id, :title, {}, { class: 'form-control' }
 
       .form-group
-        = f.label :speaker_id
-        = f.collection_select :speaker_id, Speaker.all, :id, :details, {}, { class: 'form-control js-select2' }
+        = f.label :agent_id
+        = f.collection_select :agent_id, Agent.all, :id, :details, {}, { class: 'form-control js-select2' }
 
       .form-group
         = f.label :quote

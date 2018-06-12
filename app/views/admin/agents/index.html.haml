@@ -1,0 +1,25 @@
+%section.page-block
+  .page-header
+    %h2 발언자
+
+  .panel.panel-default
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th 이름
+          %th 조직
+          %th 분류
+          %th 포지션
+          %th.text-right
+            = link_to '추가', new_admin_agent_path, class: 'btn btn-sm btn-primary'
+      %tbody
+        - @agents.each do |agent|
+          %tr
+            %td
+              %h5= agent.name
+            %td= agent.organization
+            %td= agent.category
+            %td= agent.positions.pluck(:name).join(',')
+            %td.text-right
+              = link_to '수정', edit_admin_agent_path(agent), class: 'btn btn-xs btn-default'
+              = link_to '삭제', admin_agent_path(agent), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'

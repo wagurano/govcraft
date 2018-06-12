@@ -1,10 +1,10 @@
-- speaker = opinion.speaker
+- agent = opinion.agent
 .panel.panel-opinion.panel-default[opinion]
   .panel-body
     .media[opinion]
       .media-left
-        = link_to speaker_path(speaker) do
-          .media-object.image.speaker-image.speaker-image--mini{style: "background-image: url(#{speaker.image.xs.url});"}
+        = link_to agent_path(agent) do
+          .media-object.image.agent-image.agent-image--mini{style: "background-image: url(#{agent.image.xs.url});"}
       .media-body
         .row
           .col-sm-9.col-xs-12

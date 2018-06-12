@@ -26,33 +26,33 @@ class PetitionsController < ApplicationController
   def data
   end
 
-  def edit_speakers
+  def edit_agents
     if params[:q].present?
-      @searched_speakers = Speaker.where('name like ?', "%#{params[:q]}%")
+      @searched_agents = Agent.where('name like ?', "%#{params[:q]}%")
     end
 
     @statementable = @petition
-    render 'statementables/edit_speakers'
+    render 'statementables/edit_agents'
   end
 
-  def edit_speakers
-    statementable_edit_speakers(@petition)
+  def edit_agents
+    statementable_edit_agents(@petition)
   end
 
-  def add_speaker
-    statementable_add_speaker(@petition)
+  def add_agent
+    statementable_add_agent(@petition)
   end
 
-  def new_comment_speaker
-    statementable_new_comment_speaker(@petition)
+  def new_comment_agent
+    statementable_new_comment_agent(@petition)
   end
 
-  def update_statement_speaker
-    statementable_update_statement_speaker(@petition)
+  def update_statement_agent
+    statementable_update_statement_agent(@petition)
   end
 
-  def remove_speaker
-    statementable_remove_speaker(@petition)
+  def remove_agent
+    statementable_remove_agent(@petition)
   end
 
   def new
@@ -98,7 +98,7 @@ class PetitionsController < ApplicationController
       :comment_enabled, :sign_title, :social_image, :confirm_privacy,
       :use_signer_email, :use_signer_address, :use_signer_real_name, :use_signer_phone,
       :signer_email_title, :signer_address_title, :signer_real_name_title, :signer_phone_title,
-      :speaker_section_title, :speaker_section_response_title, :sign_hidden, :area_id, :issue_id,
+      :agent_section_title, :agent_section_response_title, :sign_hidden, :area_id, :issue_id,
       :special_slug)
   end
 

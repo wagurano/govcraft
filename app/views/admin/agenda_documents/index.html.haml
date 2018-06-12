@@ -6,7 +6,7 @@
     %table.table.table-bordered
       %thead
         %tr
-          %th #{Speaker.model_name.human}
+          %th #{Agent.model_name.human}
           %th #{Agenda.model_name.human}
           %th 파일
           %th 요약
@@ -16,7 +16,7 @@
         - @agenda_documents.each do |agenda_document|
           %tr
             %td
-              = agenda_document.speaker.name
+              = agenda_document.agent.name
             %td
               = agenda_document.agenda.name
             %td

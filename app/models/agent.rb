@@ -1,4 +1,4 @@
-class Speaker < ApplicationRecord
+class Agent < ApplicationRecord
   has_many :opinions, dependent: :destroy
   validates :name, presence: true
   mount_uploader :image, ImageUploader
@@ -29,8 +29,8 @@ class Speaker < ApplicationRecord
     opinions.where(issue: agenda.issues)
   end
 
-  def self.positions(speakers)
-    speakers.tags_on(:positions)
+  def self.positions(agents)
+    agents.tags_on(:positions)
   end
 end
 

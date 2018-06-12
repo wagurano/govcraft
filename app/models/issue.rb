@@ -5,7 +5,7 @@ class Issue < ApplicationRecord
   has_many :following_issues, dependent: :destroy
   has_many :followers, -> { order 'following_issues.created_at desc' }, through: :following_issues, source: :user
   has_many :comments, as: :commentable
-  has_many :speakers, -> { reorder('').distinct }, through: :opinions
+  has_many :agents, -> { reorder('').distinct }, through: :opinions
   has_many :petitions, dependent: :nullify
 
   acts_as_taggable
@@ -17,20 +17,20 @@ class Issue < ApplicationRecord
   default_scope { order('title ASC') }
   scope :with_theme, ->(theme) { where('agenda_theme_id': theme.id) }
 
-  def categorized_speakers(position, quote)
+  def categorized_agents(position, quote)
     if quote.present?
-      opinions = self.opinions.recent.of_quote(quote).of_speaker(speakers.of_position(position))
-      opinions.map &:speaker
+      opinions = self.opinions.recent.of_quote(quote).of_agent(agents.of_position(position))
+      opinions.map &:agent
     else
-      Speaker.of_position(position).where.not(id: self.speakers)
+      Agent.of_position(position).where.not(id: self.agents)
     end
   end
 
-  def has_any_stances?(speakers = nil)
+  def has_any_stances?(agents = nil)
     return false unless has_stance?
 
     result = self.opinions.where.not(stance: nil)
-    result = result.where(speaker_id: speakers) unless speakers.nil?
+    result = result.where(agent_id: agents) unless agents.nil?
 
     result.exists?
   end

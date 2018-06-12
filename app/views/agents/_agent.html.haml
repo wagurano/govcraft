@@ -1,0 +1,11 @@
+.card
+  = link_to agent do
+    .card-image{ style: "height: 170px; background-image: url(#{agent.image.md.url}); background-size: cover; background-position: center; background-repeat:no-repeat;" }
+  .card-content
+    = link_to agent.name, agent, class: 'card-header'
+    .card-meta= agent.organization
+  .card-content.card-extra
+    - if agent.opinions.count > 0
+      의견 #{agent.opinions.count}개
+    - else
+      의견 없음

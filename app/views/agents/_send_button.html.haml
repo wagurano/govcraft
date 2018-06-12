@@ -1,0 +1,26 @@
+- is_question ||= false
+
+- if agent.email.present?
+  - if is_question
+    .ui.violet.segment.clearing
+      = link_to '작성', new_email_agenda_path(agenda, agent_id: agent.id, is_question: is_question),  class: 'ui right floated button'
+      %p
+        #{agent.name}님에게 질의하기
+        %br
+        %small
+          현재까지 총
+          %strong #{agent.sent_requests_count}회
+          질의하였습니다.
+
+  - else
+    .ui.violet.segment.clearing
+      = link_to '작성', new_email_agenda_path(agenda, agent_id: agent.id),  class: 'ui right floated button'
+      %p
+        #{agent.name}님에게 #{Opinion.model_name.human} 요청하기
+        %br
+        %small
+          - if agent.requested_by? current_user
+            %strong 이미 #{current_user.nickname}님은 #{Opinion.model_name.human}을 요청하셨습니다.
+          현재까지 총
+          %strong #{agent.sent_requests_count}회
+          요청되었습니다.

@@ -4,7 +4,7 @@ class Agenda < ApplicationRecord
   belongs_to :user
   has_and_belongs_to_many :issues
   has_many :opinions, through: :issues
-  has_many :speakers, -> { reorder('').distinct }, through: :opinions
+  has_many :agents, -> { reorder('').distinct }, through: :opinions
   has_many :agenda_documents, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_and_belongs_to_many :agenda_themes, uniq: true
@@ -15,8 +15,8 @@ class Agenda < ApplicationRecord
 
   scope :sort_by_name, -> { order("if(ascii(substring(name, 1)) < 128, 1, 0)").order(:name) }
 
-  def opinions_by speaker
-    opinions.where(speaker: speaker)
+  def opinions_by agent
+    opinions.where(agent: agent)
   end
 
   def hot?(theme = nil)

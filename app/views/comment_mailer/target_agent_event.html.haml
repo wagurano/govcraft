@@ -1,0 +1,42 @@
+- event = @comment.commentable
+- message.subject = event.formatted_title_to_agent(@comment.user_nickname)
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    = stylesheet_link_tag 'emails/base', media: 'all'
+  %body
+    %p
+      #{@agent.name}님! 안녕하세요. 세상을 바꾸는 시민들의 정치 플랫폼, 가브크래프트입니다.
+    %p
+      = link_to polymorphic_url(event) do
+        '#{event.title_to_agent}' #{polymorphic_url(event)}
+      에서 #{@comment.user_nickname}님이 #{@agent.name}님에게 행동을 촉구합니다.
+    .container
+      != @comment.body
+    %p
+      = link_to polymorphic_url(event), target: "_blank" do
+        "#{event.title_to_agent}" 촉구 메시지를 자세히 보려면 여기를 클릭해 주세요.
+
+    %p{ style: 'text-align: center' }
+      아래 찬성이나 반대 버튼을 눌러 이 메시지에 #{@agent.name}님의 의견을 등록하세요.
+
+    %p{ style: 'text-align: center' }
+      %a{:href => update_statement_agent_event_url(event, statement_id: @statement_key.statement.id, key: @statement_key.key, stance: :agree), :style => "font-size: 14px; display: inline-block; color: #22be34; background: none; border-radius: 3px; padding: 16px 20px; text-decoration: none; outline: 0px; font-family: AppleSDGothic, \"apple sd gothic neo\", \"noto sans korean\", \"noto sans korean regular\", \"noto sans cjk kr\", \"noto sans cjk\", \"nanum gothic\", \"malgun gothic\", dotum, sans-serif; border-width: 2px; border-style: solid; border-color: #22be34;_display:inline", :target => "_blank"} 찬성
+      %a{:href => update_statement_agent_event_url(event, statement_id: @statement_key.statement.id, key: @statement_key.key, stance: :hold), :style => "font-size: 14px; display: inline-block; color: #ff851b; background: none; border-radius: 3px; padding: 16px 20px; text-decoration: none; outline: 0px; font-family: AppleSDGothic, \"apple sd gothic neo\", \"noto sans korean\", \"noto sans korean regular\", \"noto sans cjk kr\", \"noto sans cjk\", \"nanum gothic\", \"malgun gothic\", dotum, sans-serif; border-width: 2px; border-style: solid; border-color: #ff851b;_display:inline", :target => "_blank"} 유보
+      %a{:href => update_statement_agent_event_url(event, statement_id: @statement_key.statement.id, key: @statement_key.key, stance: :disagree), :style => "font-size: 14px; display: inline-block; color: #d01919; background: none; border-radius: 3px; padding: 16px 20px; text-decoration: none; outline: 0px; font-family: AppleSDGothic, \"apple sd gothic neo\", \"noto sans korean\", \"noto sans korean regular\", \"noto sans cjk kr\", \"noto sans cjk\", \"nanum gothic\", \"malgun gothic\", dotum, sans-serif; border-width: 2px; border-style: solid; border-color: #d01919;_display:inline", :target => "_blank"} 반대
+
+
+    %div(style="margin-top: 60px;")
+      %table
+        %tr
+          %td
+            %a(href='http://govcraft.org/')
+              %img(src="#{Rails.application.config.action_mailer.asset_host}/email_logo.png" width="40" height="40")
+          %td(style="padding-left: 12px;")
+            %a(href='http://govcraft.org/' target="_blank" style='color: #777; text-decoration: none;')
+              세상을 바꾸는 시민들의 정치 플랫폼
+              %br
+              %strong '가브크래프트'
+              http://govcraft.org/

@@ -135,16 +135,16 @@
             {{number}}라고 쓰시면 그자리에 서명 순번이 표시됩니다.
 
         .form-group
-          = f.label :speaker_section_title
-          = f.text_field :speaker_section_title, class: 'form-control'
+          = f.label :agent_section_title
+          = f.text_field :agent_section_title, class: 'form-control'
           %p.help-block
-            촉구하기 영역의 제목을 정합니다. 비워두면 "#{t("views.action_assignable.speaker_section_title.default")}"으로 표시됩니다.
+            촉구하기 영역의 제목을 정합니다. 비워두면 "#{t("views.action_assignable.agent_section_title.default")}"으로 표시됩니다.
 
         .form-group
-          = f.label :speaker_section_response_title
-          = f.text_field :speaker_section_response_title, class: 'form-control'
+          = f.label :agent_section_response_title
+          = f.text_field :agent_section_response_title, class: 'form-control'
           %p.help-block
-            촉구하기에 대해 응답온 것을 표시하는 영역의 대한 설명을 정합니다. 비워두면 "#{t("views.action_assignable.speaker_section_response_title.default")}"으로 표시됩니다.
+            촉구하기에 대해 응답온 것을 표시하는 영역의 대한 설명을 정합니다. 비워두면 "#{t("views.action_assignable.agent_section_response_title.default")}"으로 표시됩니다.
 
         .form-group
           %label

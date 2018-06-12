@@ -9,6 +9,7 @@ class Petition < ApplicationRecord
   has_many :signed_users, through: :signs, source: :petition
   belongs_to :area, optional: true
   belongs_to :issue, optional: true
+  has_and_belongs_to_many :agents, -> { distinct }
 
   mount_uploader :cover_image, ImageUploader
   mount_uploader :social_image, ImageUploader
@@ -42,7 +43,7 @@ class Petition < ApplicationRecord
     end
   end
 
-  def formatted_title_to_speaker(user_nickname = nil)
+  def formatted_title_to_agent(user_nickname = nil)
     "서명 \"#{title}\"에 대해 #{"#{user_nickname}님이 " if user_nickname.present?}행동을 촉구합니다"
   end
 end

@@ -5,19 +5,19 @@
       %h2.ui.dividing.header
         #{position} #{Opinion.model_name.human}
         %br
-        %small #{position} #{@agenda.speakers.of_position(position).count}명에게 #{Opinion.model_name.human}을 받았습니다.
+        %small #{position} #{@agenda.agents.of_position(position).count}명에게 #{Opinion.model_name.human}을 받았습니다.
       - @agenda.issues.each do |issue|
         %section{ style: 'margin-top: 48px' }
           %h4= issue.title
-          .opinion-speakers-list
+          .opinion-agents-list
             .row
               - ["찬성", "반대", nil].each do |quote|
-                - speakers = issue.categorized_speakers(position, quote)
-                .col-sm-4{ class: ('hidden-xs' if speakers.empty?) }
+                - agents = issue.categorized_agents(position, quote)
+                .col-sm-4{ class: ('hidden-xs' if agents.empty?) }
                   .position
                     = quote || "#{Opinion.model_name.human}없음"
-                    %span{ style: 'font-weight: normal' } #{speakers.count}명
+                    %span{ style: 'font-weight: normal' } #{agents.count}명
 
-                  = render 'issues/speakers', speakers: speakers, issue: issue, quote: quote, max_count: 4, widget: true
+                  = render 'issues/agents', agents: agents, issue: issue, quote: quote, max_count: 4, widget: true
 = content_for :script do
   %script(src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.11/iframeResizer.contentWindow.min.js" defer)

@@ -5,11 +5,11 @@
     %meta{:charset => "utf-8"}/
     = stylesheet_link_tag 'emails/base', media: 'all'
   %body
-    %p #{@speaker.name}님! 안녕하세요.
+    %p #{@agent.name}님! 안녕하세요.
     %p
       가브크래프트
       %a(href="#{opinion_url(@opinion)}" target="_blank") 의제 '#{@opinion.issue.title}'
-      에서 #{@speaker.name}님의 입장을 읽고
+      에서 #{@agent.name}님의 입장을 읽고
       #{@note.user_nickname}님이 발신한 메일입니다.
     .container
       != simple_format h(@note.body)

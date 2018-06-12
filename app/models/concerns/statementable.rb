@@ -3,48 +3,48 @@ module Statementable
 
   included do
     has_many :statements, as: :statementable
-    has_and_belongs_to_many :dedicated_speakers, -> { distinct }, class_name: 'Speaker'
+    has_and_belongs_to_many :dedicated_agents, -> { distinct }, class_name: 'Agent'
     has_many :action_targets, dependent: :destroy, as: :action_targetable
   end
 
-  def speakers
+  def agents
     if action_targets.blank?
-      dedicated_speakers
+      dedicated_agents
     else
       conditions = action_targets.map { |action_target|
-        action_target.action_assignable.statementable_speakers(self) }
-      conditions << Speaker.where(id: dedicated_speakers)
-      Speaker.where.any_of(*conditions)
+        action_target.action_assignable.statementable_agents(self) }
+      conditions << Agent.where(id: dedicated_agents)
+      Agent.where.any_of(*conditions)
     end
   end
 
-  def speakers_random(limit)
-    speakers.order("RAND()").first(limit)
+  def agents_random(limit)
+    agents.order("RAND()").first(limit)
   end
 
-  def speakable? speaker
-    speakers.include? speaker
+  def speakable? agent
+    agents.include? agent
   end
 
-  def spoken? speaker
-    speakable?(speaker) and statement_of(speaker).try(:is_responed?)
+  def spoken? agent
+    speakable?(agent) and statement_of(agent).try(:is_responed?)
   end
 
-  def action_assignable_speakers_spoken(action_assignable)
-    action_assignable.statementable_speakers(self).where(id: statements.responed_only.select(:speaker_id))
+  def action_assignable_agents_spoken(action_assignable)
+    action_assignable.statementable_agents(self).where(id: statements.responed_only.select(:agent_id))
   end
 
-  def action_assignable_speakers_unspoken(action_assignable)
-    speakers_unspoken = action_assignable.statementable_speakers(self).where.not(id: statements.responed_only.select(:speaker_id))
-    if action_assignable.speakers_unspoken_limit.present? and speakers_unspoken.count > action_assignable.speakers_unspoken_limit
-      speakers_unspoken = speakers_unspoken.order("RAND()").first(action_assignable.speakers_unspoken_limit)
+  def action_assignable_agents_unspoken(action_assignable)
+    agents_unspoken = action_assignable.statementable_agents(self).where.not(id: statements.responed_only.select(:agent_id))
+    if action_assignable.agents_unspoken_limit.present? and agents_unspoken.count > action_assignable.agents_unspoken_limit
+      agents_unspoken = agents_unspoken.order("RAND()").first(action_assignable.agents_unspoken_limit)
     else
-      speakers_unspoken
+      agents_unspoken
     end
   end
 
-  def statement_of speaker
-    statements.find_by(speaker: speaker)
+  def statement_of agent
+    statements.find_by(agent: agent)
   end
 
   def total_action_assignables

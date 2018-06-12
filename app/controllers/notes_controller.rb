@@ -9,7 +9,7 @@ class NotesController < ApplicationController
       @note.choice = @note.opinion.fetch_vote_of(current_user).choice
     end
     if @note.save
-      if @note.sent_email? and @note.opinion.speaker.email.present?
+      if @note.sent_email? and @note.opinion.agent.email.present?
         AgendaMailer.note(@note.id).deliver_later
       end
 
