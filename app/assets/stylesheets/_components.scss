@@ -38,6 +38,20 @@
   }
 }
 
+.hero-block {
+  background-image: image_url('wouldyou_main.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: #fff;
+  border-radius: 0;
+  padding: $font-size-base*3 0;
+  letter-spacing: -1px;
+  h2 {
+    font-size: $font-size-base*4;
+  }
+}
+
 .panel-floating {
   overflow: hidden;
   border-radius: $border-radius-large;

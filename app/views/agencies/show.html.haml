@@ -1,6 +1,15 @@
-%section.page-block
-  .container-fluid
+%section.agency-header-block.hero-block{style:"background-position:center; background-size:cover; background-image: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .8)), url(#{asset_url(@agency.image_url(:lg))});"}
+  .container
     %h2= @agency.title
+    %p.agency-header__meta.lead
+      = @agency.agents.count
+      명이 활동 중입니다.
+    .agency-header__buttons
+      = link_to '#', class: 'btn btn-info btn-lg' do
+        #{@petitions.count}개의 캠페인 진행 중
+      = link_to new_petition_path, class: 'btn btn-danger btn-lg' do
+        #{@agency.title} 대상으로 캠페인을 시작하기
+        %i.fa.fa-arrow-circle-right
 
 %section.page-block
   %a{id: "anchor-project-petition"}
@@ -10,21 +19,23 @@
 
 %section.page-block
   .container-fluid
-    %h3.sub-title
+    %h3
       관련 인물 - #{base_agents.count}명
 
     - preview_count = 8
     - @agency.position_list.each do |position|
       - agents = Agent.tagged_with(position, on: :positions).order(:name)
-      %h4.sub-title
+      %h4
         = position
         (#{agents.count})
+
+        - if preview_count < agents.count
+          .pull-right
+            = link_to agents_agency_path(@agency, position: position) do
+              %span.text-muted 더 보기
+
       .row
         - agents.shuffle.first(preview_count).each do |agent|
-          .col-xs-6.col-sm-3
+          .col-xs-6.col-sm-3.col-lg-2
             = render agent
-      - if preview_count < agents.count
-        = link_to agents_agency_path(@agency, position: position), class: 'btn btn-default btn-block' do
-          더보기
-          %i.fa.fa-arrow-right
 
