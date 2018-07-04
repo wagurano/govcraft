@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180612061331) do
+ActiveRecord::Schema.define(version: 20180623015314) do
 
   create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "action_assignable_slug", null: false
@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 20180612061331) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "image"
+  end
+
+  create_table "agencies_positions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer "agency_id",   null: false
+    t.integer "position_id", null: false
+    t.index ["agency_id", "position_id"], name: "index_agencies_positions_on_agency_id_and_position_id", unique: true, using: :btree
+    t.index ["agency_id"], name: "index_agencies_positions_on_agency_id", using: :btree
+    t.index ["position_id"], name: "index_agencies_positions_on_position_id", using: :btree
   end
 
   create_table "agenda_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -114,6 +122,17 @@ ActiveRecord::Schema.define(version: 20180612061331) do
     t.index ["agent_id"], name: "index_agents_petitions_on_agent_id", using: :btree
     t.index ["petition_id", "agent_id"], name: "index_agents_petitions_on_petition_id_and_agent_id", unique: true, using: :btree
     t.index ["petition_id"], name: "index_agents_petitions_on_petition_id", using: :btree
+  end
+
+  create_table "appointments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "position_id", null: false
+    t.integer  "agent_id",    null: false
+    t.date     "started_at"
+    t.date     "ended_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["agent_id"], name: "index_appointments_on_agent_id", using: :btree
+    t.index ["position_id"], name: "index_appointments_on_position_id", using: :btree
   end
 
   create_table "archive_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

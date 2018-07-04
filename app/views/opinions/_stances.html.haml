@@ -1,6 +1,6 @@
 %section
   - if local_assigns[:position].present?
-    %h4= position
+    %h4= position.name
   .opinion-agents-list
     .row
       - Opinion.available_stance_values_by_theme(issue.agenda_theme).each do |stance|

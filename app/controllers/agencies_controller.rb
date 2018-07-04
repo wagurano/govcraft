@@ -9,10 +9,11 @@ class AgenciesController < ApplicationController
   end
 
   def agents
-    if params[:position]
-      @agents = Agent.tagged_with(params[:position], on: :positions, any: true).order(:name)
+    @all_agents = @agency.agents
+    if params[:position_name]
+      @agents = @agency.agents.of_position_names(params[:position_name]).order(:name)
     else
-      @agents = Agent.order(:name)
+      @agents = @agency.agents.order(:name)
     end
     @agents = @agents.page(params[:page])
   end

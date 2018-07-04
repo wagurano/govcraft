@@ -44,7 +44,7 @@ class AgendasController < ApplicationController
     end
     @agendas = @agenda_theme.agendas
     @agent_positions = @agenda_theme.agent_positions
-    @agents = Agent.of_position(@agent_positions)
+    @agents = Agent.of_positions(@agent_positions)
     if params[:agenda_id].present?
       @agenda = Agenda.find params[:agenda_id]
       render 'theme_agenda'

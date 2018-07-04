@@ -12,7 +12,7 @@ namespace :data do
       AssemblyMember.all.select(:empNm, :assemEmail, :polyNm).each do |assembly_member|
         s = Agent.new(name: assembly_member[:empNm], organization: assembly_member[:polyNm],
          email: assembly_member[:assemEmail], category: '')
-        s.position_list = '20대_국회의원'
+        s.position_name_list = '20대_국회의원'
         s.save!
       end
     end
@@ -26,7 +26,7 @@ namespace :data do
   desc '국회의원의 이미지를 추가하고, 국회의원이 스피커가 되는 경우 스피커id를 넣어줍니다'
   task 'link_assembly_members_to_agent_and_add_image' => :environment do
     ActiveRecord::Base.transaction do
-      Agent.tagged_with("20대_국회의원").each do |agent|
+      Agent.of_position_names("20대_국회의원").each do |agent|
         member = AssemblyMember.find_by(empNm: agent.name, polyNm: agent.organization)
         member.agent_id = agent.id
         member.save!
@@ -180,7 +180,7 @@ namespace :data do
 
         s = Agent.new(name: election_candidate.name, category: '')
         s.remote_image_url = election_candidate.image_url
-        s.position_list = '제7대_지방선거_예비후보'
+        s.position_name_list = '제7대_지방선거_예비후보'
 
         begin
           s.save!

@@ -21,7 +21,7 @@
               %h5
                 = link_to agency.title, agency_path(agency)
             %td= link_to agency.slug, agency_path(agency)
-            %td= agency.position_list
+            %td= agency.position_name_list
             %td.text-right
               = link_to '수정', edit_admin_agency_path(agency), class: 'btn btn-xs btn-default'
               = link_to '삭제', admin_agency_path(agency), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'

@@ -1,5 +1,5 @@
 - agent_positions = @agenda_theme.agent_positions
-- agents = Agent.of_position(agent_positions)
+- agents = Agent.of_positions(agent_positions)
 - @agendas.each_with_index do |agenda, i|
   %base(target="_blank")
   %section.page-block.page-opinions[agenda]{ class: "page-block-#{i%2}"}

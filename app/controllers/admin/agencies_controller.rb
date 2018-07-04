@@ -13,6 +13,9 @@ class Admin::AgenciesController < Admin::BaseController
     end
   end
 
+  def edit
+  end
+
   def update
     if @agency.update(agency_params)
       redirect_to admin_agencies_path
@@ -29,6 +32,6 @@ class Admin::AgenciesController < Admin::BaseController
   private
 
   def agency_params
-    params.require(:agency).permit(:title, :slug, :position_list, :image)
+    params.require(:agency).permit(:title, :slug, :position_name_list, :image)
   end
 end

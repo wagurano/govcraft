@@ -7,23 +7,22 @@
 %section#events.page-block
   .container.text-center
     .row
-      - @agency.agents.tag_counts_on(:positions).each do |position_tag|
-        - next unless @agency.position_list.include?(position_tag.name)
-        - btn_class = params[:position] == position_tag.name ? 'btn-primary' : 'btn-default'
-        = link_to agents_agency_path(@agency, position: position_tag.name), class: 'btn btn-lg ' + btn_class do
-          = position_tag.name
-          (#{position_tag.count})
+      - @agency.positions.each do |position|
+        - btn_class = params[:position_name] == position.name ? 'btn-primary' : 'btn-default'
+        = link_to agents_agency_path(@agency, position_name: position.name), class: 'btn btn-lg ' + btn_class do
+          = position.name
+          (#{position.agents.count})
 
 %section.page-block
   .container
     %h3.sub-title
       관련 인물
-      - if params[:position].blank?
-        (#{@agents.count})
+      - if params[:position_name].blank?
+        (#{@all_agents.count})
 
-    - if params[:position].present?
+    - if params[:position_name].present?
       %h4.sub-title
-        = params[:position]
+        = params[:position_name]
         (#{@agents.count})
 
     .row

@@ -29,6 +29,6 @@ class Admin::AgentsController < Admin::BaseController
   private
 
   def agent_params
-    params.require(:agent).permit(:image, :name, :organization, :category, :position_list, :email, :twitter, :public_site, :election_region)
+    params.require(:agent).permit(:image, :name, :organization, :category, :position_name_list, :email, :twitter, :public_site, :election_region)
   end
 end

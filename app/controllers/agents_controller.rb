@@ -2,8 +2,8 @@ class AgentsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    if params[:position]
-      @agents = Agent.tagged_with(params[:position], on: :positions, any: true).order(:name)
+    if params[:position_name]
+      @agents = Agent.of_position_names(params[:position_name]).order(:name)
     else
       @agents = Agent.order(:name)
     end

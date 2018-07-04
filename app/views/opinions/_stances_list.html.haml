@@ -4,6 +4,6 @@
     = render 'opinions/stances', agents: agents, issue: issue
   - else
     - agent_positions_of_theme.each do |position|
-      - agents_of_position = agents.of_position(position)
+      - agents_of_position = agents.of_positions(position)
       - if issue.has_any_stances?(agents_of_position)
         = render 'opinions/stances', position: (position if agent_positions_of_theme.count > 1), agents: agents_of_position, issue: issue

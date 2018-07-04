@@ -83,8 +83,8 @@
     - if @issue.has_any_stances?
       = render 'opinions/stances', agents: @issue.agents, issue: @issue
     .media-list
-      - if @issue.opinions.where(agent: Agent.of_position('19대_대선후보')).any?
-        - Agent.of_position('19대_대선후보').shuffle.each do |agent|
+      - if @issue.opinions.where(agent: Agent.of_position_names('19대_대선후보')).any?
+        - Agent.of_position_names('19대_대선후보').shuffle.each do |agent|
           - @issue.opinions.of_agent(agent).each do |opinion|
             - next unless opinion.has_content?
             = render 'opinions/line_item', opinion: opinion

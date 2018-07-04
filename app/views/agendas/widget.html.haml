@@ -1,18 +1,18 @@
 .agenda-container
-- %w(19대_대선후보 20대_국회의원).each do |position|
+- %w(19대_대선후보 20대_국회의원).each do |position_name|
   %section.page-block.page-opinions
     .container
       %h2.ui.dividing.header
-        #{position} #{Opinion.model_name.human}
+        #{position_name} #{Opinion.model_name.human}
         %br
-        %small #{position} #{@agenda.agents.of_position(position).count}명에게 #{Opinion.model_name.human}을 받았습니다.
+        %small #{position_name} #{@agenda.agents.of_position_names(position_name).count}명에게 #{Opinion.model_name.human}을 받았습니다.
       - @agenda.issues.each do |issue|
         %section{ style: 'margin-top: 48px' }
           %h4= issue.title
           .opinion-agents-list
             .row
               - ["찬성", "반대", nil].each do |quote|
-                - agents = issue.categorized_agents(position, quote)
+                - agents = issue.categorized_agents(position_name, quote)
                 .col-sm-4{ class: ('hidden-xs' if agents.empty?) }
                   .position
                     = quote || "#{Opinion.model_name.human}없음"

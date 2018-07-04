@@ -5,11 +5,11 @@
 %section#events.page-block
   .container.text-center
     .row
-      - Agent.tag_counts_on(:positions).each do |position|
-        - btn_class = params[:position] == position.name ? 'btn-primary' : 'btn-default'
-        = link_to agents_path(position: position.name), class: 'btn btn-lg ' + btn_class do
+      - Position.all.each do |position|
+        - btn_class = params[:position_name] == position.name ? 'btn-primary' : 'btn-default'
+        = link_to agents_path(position_name: position.name), class: 'btn btn-lg ' + btn_class do
           = position.name
-          (#{position.count})
+          (#{position.agents.count})
 
 %section#events.page-block
   .container

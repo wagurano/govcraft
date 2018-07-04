@@ -17,12 +17,12 @@ class Issue < ApplicationRecord
   default_scope { order('title ASC') }
   scope :with_theme, ->(theme) { where('agenda_theme_id': theme.id) }
 
-  def categorized_agents(position, quote)
+  def categorized_agents(position_name, quote)
     if quote.present?
-      opinions = self.opinions.recent.of_quote(quote).of_agent(agents.of_position(position))
+      opinions = self.opinions.recent.of_quote(quote).of_agent(agents.of_position_names(position_name))
       opinions.map &:agent
     else
-      Agent.of_position(position).where.not(id: self.agents)
+      Agent.of_position_names(position_name).where.not(id: self.agents)
     end
   end
 

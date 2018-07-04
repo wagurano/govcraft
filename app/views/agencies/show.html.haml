@@ -15,7 +15,7 @@
   %a{id: "anchor-project-petition"}
   = render 'petitions/list', petitions: @petitions
 
--  base_agents = Agent.tagged_with(@agency.position_list, on: :positions, any: true)
+-  base_agents = @agency.agents
 
 %section.page-block
   .container-fluid
@@ -23,19 +23,20 @@
       관련 인물 - #{base_agents.count}명
 
     - preview_count = 8
-    - @agency.position_list.each do |position|
-      - agents = Agent.tagged_with(position, on: :positions).order(:name)
+    - @agency.positions.each do |position|
+      - agents = @agency.agents.of_positions(position)
       %h4
-        = position
+        = position.name
         (#{agents.count})
 
         - if preview_count < agents.count
           .pull-right
-            = link_to agents_agency_path(@agency, position: position) do
+            = link_to agents_agency_path(@agency, position_name: position.name) do
               %span.text-muted 더 보기
 
       .row
         - agents.shuffle.first(preview_count).each do |agent|
           .col-xs-6.col-sm-3.col-lg-2
             = render agent
+
 

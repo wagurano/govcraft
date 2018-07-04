@@ -9,7 +9,7 @@
             = agent.name
           %small
             - agent.positions.each do |position|
-              %span.label.label-default.agent__positions= position
+              %span.label.label-default.agent__positions= position.name
         %p
           %span
             #{agent.organization}

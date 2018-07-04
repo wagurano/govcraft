@@ -7,8 +7,8 @@ class AgendaTheme < ApplicationRecord
 
   def agent_positions
     {
-      '2017-president' => ['19대_대선후보'],
-      'votefuture' => ['19대_대선후보'],
+      '2017-president' => Position.named('19대_대선후보'),
+      'votefuture' => Position.named('19대_대선후보'),
     }.fetch(slug, nil)
   end
 end

@@ -3,14 +3,23 @@ class Agent < ApplicationRecord
   validates :name, presence: true
   mount_uploader :image, ImageUploader
 
+  include Positionable
+
   has_many :sent_requests, dependent: :destroy
   has_many :agenda_documents, dependent: :destroy
   has_many :election_candidates, dependent: :nullify
   has_and_belongs_to_many :petitions, -> { distinct }
+  has_many :appointments, dependent: :destroy
+  has_many :positions, through: :appointments
+  has_many :agencies, -> { distinct }, through: :positions
 
-  scope :of_position, ->(*positions) { tagged_with(positions, on: :positions) }
+  # X_POSITION
+  # scope :of_position, ->(*positions) { tagged_with(positions, on: :positions) }
+  # acts_as_taggable_on :positions
 
-  acts_as_taggable_on :positions
+  scope :of_position_names, ->(*position_names) { where(id: Appointment.of_positions_named(position_names).select(:agent_id)) }
+  scope :of_positions, ->(*positions) { where(id: Appointment.of_positions(positions).select(:agent_id)) }
+
 
   def details
     "#{name} - #{organization}"
@@ -27,14 +36,6 @@ class Agent < ApplicationRecord
 
   def opinions_of_agenda agenda
     opinions.where(issue: agenda.issues)
-  end
-
-  def agencies
-    Agency.tagged_with(position_list, on: :positions, any: true).order(:title)
-  end
-
-  def self.positions(agents)
-    agents.tags_on(:positions)
   end
 end
 

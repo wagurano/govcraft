@@ -15,7 +15,7 @@
 
       .form-group
         = f.label '포지션'
-        = f.text_field :position_list, value: @agency.position_list.try(:to_s), placeholder: 'ex)19대_대선후보, 20대_국회의원', class: 'form-control'
+        = f.text_field :position_name_list, value: @agency.position_name_list, placeholder: 'ex)19대_대선후보, 20대_국회의원', class: 'form-control'
         .help-text
           %p
             아래 포지션 중에 선택해서 입력해 주세요.
