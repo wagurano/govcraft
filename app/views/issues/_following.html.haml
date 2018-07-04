@@ -2,12 +2,20 @@
   .dropdown
     %a.dropdown-toggle.btn.btn-primary.btn-block{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button", style: 'color: white;' }
       관심이슈
+      - if issue.following_issues_count > 0
+        #{issue.following_issues_count}명
     %ul.dropdown-menu
       %li
         = link_to issue.following_of(current_user), method: :delete, remote: true, data: { 'disable-with': '처리 중...' } do
           관심끊기
 - else
+  - button_label = capture do
+    관심이슈등록
+    - if issue.following_issues_count > 0
+      #{issue.following_issues_count}명
   - if user_signed_in?
-    = link_to '관심이슈등록', following_issues_path('following_issue[issue_id]': issue.id), method: :post, remote: true, class: 'btn btn-default btn-inverted btn-block', data: { 'disable-with': '처리 중...' }
+    = link_to following_issues_path('following_issue[issue_id]': issue.id), method: :post, remote: true, class: 'btn btn-default btn-inverted btn-block', data: { 'disable-with': '처리 중...' } do
+      = button_label
   - else
-    = link_to '관심이슈등록', new_user_session_url, class: 'btn btn-default btn-inverted btn-block'
+    = link_to new_user_session_url, class: 'btn btn-default btn-inverted btn-block' do
+      = button_label
