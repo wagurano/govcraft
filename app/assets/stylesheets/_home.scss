@@ -43,13 +43,14 @@
     }
   }
   .drop-main-menu{
-    background-color:$brand-primary;
-    width:100%;
-    height:750px;
-    display:block !important;
-    top:0;
-    z-index:10; /* 리본보다 더 높게 */
-    position:absolute;
+    background-color: $brand-primary;
+    width: 100%;
+    height: 100%;
+    display: block !important;
+    top: 0;
+    z-index: 10; /* 리본보다 더 높게 */
+    position: fixed;
+    overflow: scroll;
     .menu-btn, .slogan-or-navi, #urimanna_menu {
       display:none;
     }
