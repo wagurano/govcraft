@@ -23,6 +23,10 @@ ko:
     need_to_email: '보내시는 분의 메일을 입력해주세요'
     reported: '신고되었습니다!'
     reverted: '복원되었습니다!'
+    petitions:
+      open: 다시 열렸습니다
+      close: 종료되었습니다
+      closed: 종료된 캠페인입니다.
     xlsx_help:
       archive_document:
         id: "비워두면 신규생성, 숫자를 적으면 해당 숫자를 ID로 가지는 자료를 업데이트합니다."

@@ -82,6 +82,8 @@ Rails.application.routes.draw do
     resources :signs
     member do
       get 'data'
+      put 'close'
+      put 'open'
     end
   end
   resources :polls do

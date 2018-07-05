@@ -99,6 +99,18 @@ class PetitionsController < ApplicationController
     redirect_to @petition.project ? project_path(@petition.project) : petitions_path
   end
 
+  def open
+    @petition.update_attributes(closed_at: nil)
+    flash[:success] = t('messages.petitions.open')
+    redirect_to @petition
+  end
+
+  def close
+    @petition.touch(:closed_at)
+    flash[:success] = t('messages.petitions.close')
+    redirect_to @petition
+  end
+
   private
 
   def petition_params

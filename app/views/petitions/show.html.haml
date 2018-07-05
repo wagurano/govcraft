@@ -10,7 +10,7 @@
       %section.m-t
         %a{id: "anchor-sign"}
         %h4
-          서명하기
+          참여 상황
         .panel-body.component-box
           - if !@petition.sign_hidden
             .panel-post__signs
@@ -18,9 +18,9 @@
 
           - else
             .help-text
-              #{@petition.signs_count}명이 서명했습니다.
+              #{@petition.signs_count}명이 참여했습니다.
               %br
-              %span.text-muted 개설자가 서명 목록을 숨겼습니다.
+              %span.text-muted 개설자가 참여 목록을 숨겼습니다.
 
       %section.m-t
         %h4 이 이슈를 친구들에게 알려 주세요
@@ -46,7 +46,11 @@
                     = link_to action_assignable do
                       = action_assignable.section_title_as_action_assignable
             - desc_doms.compact!
-            != t('views.comment.form_title.petition', desc: desc_doms.join(', '))
+            - desc = desc_doms.join(', ')
+            - if desc.present?
+              != t('views.comment.form_title.petition', desc: desc)
+            - else
+              = t('views.comment.form_title.default')
           .panel-body.post-block.component-box.panel-comments
             .panel-post__comments
               = render 'comments/list', commentable: @petition

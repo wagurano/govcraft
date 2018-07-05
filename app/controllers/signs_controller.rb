@@ -14,6 +14,11 @@ class SignsController < ApplicationController
       redirect_to(@sign.petition) and return
     end
 
+    if @sign.petition.closed?
+      flash[:notice] = t('messages.petitions.closed')
+      redirect_to(@sign.petition) and return
+    end
+
     @sign.user = current_user if user_signed_in?
     if @sign.save
       flash[:sign_notice] = view_context.fill_in(@sign.petition.thanks_mention, number: @sign.petition.signs_count) || I18n.t('messages.signed')
