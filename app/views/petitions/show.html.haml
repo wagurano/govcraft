@@ -40,8 +40,11 @@
             - @petition.total_action_assignables.each do |action_assignable|
               - desc_doms << capture do
                 - if action_assignable.section_title_as_action_assignable.present?
-                  = link_to action_assignable do
+                  - if action_assignable.instance_of? DedicatedActionAssignee
                     = action_assignable.section_title_as_action_assignable
+                  - else
+                    = link_to action_assignable do
+                      = action_assignable.section_title_as_action_assignable
             - desc_doms.compact!
             != t('views.comment.form_title.petition', desc: desc_doms.join(', '))
           .panel-body.post-block.component-box.panel-comments
