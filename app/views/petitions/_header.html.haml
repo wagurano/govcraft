@@ -2,16 +2,18 @@
   .container-fluid
     %h2.petition-title= petition.title
 
-    %div{ style: 'background: #f5f5f5; margin-bottom: 14px; padding: 7px; '}
-      = link_to '수정', edit_petition_path(petition)
+    - buttons = capture do
       - if can? :edit, petition
         = link_to '수정', edit_petition_path(petition)
       - if can? :edit, petition
         &middot;
-        = link_to '촉구인물관리', edit_agents_petition_path(petition)
+        = link_to '촉구대상 관리', edit_agents_petition_path(petition)
       - if can? :destroy, petition
         &middot;
         = link_to '삭제', petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+    - if buttons.present?
+      %div{ style: 'background: #f5f5f5; margin-bottom: 14px; padding: 7px; '}
+        = buttons
 
     .petition-meta
       %span.campaigner

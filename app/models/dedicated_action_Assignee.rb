@@ -12,7 +12,9 @@ class DedicatedActionAssignee
   end
 
   def section_title_as_action_assignable
-    @statementable.agent_section_title.presence || I18n.t("views.action_assignable.agent_section_title.default")
+    return if @statementable.dedicated_agents.empty?
+    first_agent = @statementable.dedicated_agents.first
+    return "#{first_agent.organization} #{first_agent.name}님#{(" 이외 #{@statementable.dedicated_agents.count - 1}분" if @statementable.dedicated_agents.count > 1)}"
   end
 
   def response_section_title_as_action_assignable

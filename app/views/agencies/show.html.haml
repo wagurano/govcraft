@@ -7,9 +7,49 @@
     .agency-header__buttons
       = link_to '#', class: 'btn btn-info btn-lg' do
         #{@petitions.count}개의 캠페인 진행 중
-      = link_to new_petition_path, class: 'btn btn-danger btn-lg' do
-        #{@agency.title} 대상으로 캠페인을 시작하기
-        %i.fa.fa-arrow-circle-right
+      - if user_signed_in?
+        %button.btn.btn-lg.btn-danger{"data-target" => "#petition-form-modal", "data-toggle" => "modal", :type => "button"}
+          #{@agency.title} 대상으로 캠페인 시작하기
+          %i.fa.fa-arrow-circle-right
+      - else
+        = link_to new_user_session_path, class: 'btn btn-lg btn-danger' do
+          #{@agency.title} 대상으로 캠페인 시작하기
+          %i.fa.fa-arrow-circle-right
+      = link_to 'https://m.me/PartiUnion', class: 'btn btn-lg' do
+        %i.fa.fa-comment-o
+        빠띠에 문의하기
+
+#petition-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &#215;
+        %h4.modal-title 캠페인을 시작합니다.
+      .modal-body
+        .panel.panel-default
+          .panel-body
+            = form_for @form_petition do |f|
+              - if @form_petition.errors.any?
+                .alert.alert-danger
+                  %ul.list-unstyled
+                    - @form_petition.errors.full_messages.each do |msg|
+                      %li= msg
+
+              %fieldset
+                .form-group
+                  = f.label :title
+                  = f.text_field :title, class: 'form-control'
+
+                .form-group
+                  = f.label :body
+                  ~ f.text_area :body, class: 'form-control redactor'
+
+                = hidden_field_tag :action_assignable_id, @agency.id
+                = hidden_field_tag :action_assignable_type, Agency.to_s
+
+                .form-group
+                  = f.submit '저장', class: 'btn btn-primary btn-lg'
 
 %section.page-block
   %a{id: "anchor-project-petition"}

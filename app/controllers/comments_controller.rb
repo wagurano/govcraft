@@ -40,7 +40,7 @@ class CommentsController < ApplicationController
     if @comment.save
       flash[:notice] = I18n.t('messages.commented')
 
-      if @comment.commentable.respond_to? :statements
+      if @comment.commentable.try(:statementable?)
         @comment.target_agents.each do |agent|
           statement = @comment.commentable.statements.find_or_create_by(agent: agent)
           statement_key = statement.statement_keys.build(key: SecureRandom.hex(50))

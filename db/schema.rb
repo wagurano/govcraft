@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180623015314) do
+ActiveRecord::Schema.define(version: 20180705002206) do
 
   create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string  "action_assignable_slug", null: false
+    t.string  "action_assignable_id",   null: false
     t.string  "action_assignable_type", null: false
     t.string  "action_targetable_type"
     t.integer "action_targetable_id"
-    t.index ["action_assignable_slug", "action_assignable_type", "action_targetable_type", "action_targetable_id"], name: "action_target_unique", unique: true, using: :btree
+    t.index ["action_assignable_id", "action_assignable_type", "action_targetable_type", "action_targetable_id"], name: "action_target_unique", unique: true, using: :btree
   end
 
   create_table "agencies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

@@ -37,9 +37,9 @@ class Election < ApplicationRecord
 
   def section_title_as_action_assignable
     if slug == Election::SLUG_20180613
-      '제7대 지방선거 예비후보에게 촉구하기'
+      '제7대 지방선거 예비후보'
     else
-      "#{title} 관련 인물에게 촉구하기"
+      title
     end
   end
 

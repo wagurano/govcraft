@@ -70,6 +70,10 @@ class EventsController < ApplicationController
     statementable_add_agent(@event)
   end
 
+  def add_action_target
+    statementable_add_action_target(@event)
+  end
+
   def new_comment_agent
     statementable_new_comment_agent(@event)
   end
@@ -80,6 +84,10 @@ class EventsController < ApplicationController
 
   def remove_agent
     statementable_remove_agent(@event)
+  end
+
+  def remove_action_target
+    statementable_remove_action_target(@event)
   end
 
   private

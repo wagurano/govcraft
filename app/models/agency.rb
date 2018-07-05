@@ -2,6 +2,7 @@ class Agency < ApplicationRecord
   extend FriendlyId
   friendly_id :slug, use: [:slugged, :finders]
   mount_uploader :image, ImageUploader
+  has_many :action_targets, as: :action_assignable
 
   include Positionable
 
@@ -14,4 +15,31 @@ class Agency < ApplicationRecord
   # def agents
   #   Agent.tagged_with(position_list, on: :positions, any: true)
   # end
+
+
+  # action_assignable interface
+  def statementable_agents(statementable)
+    agents
+  end
+
+  def statementable_agents_moderatly(statementable, limit)
+    result = agents
+    if result.count > limit
+      result.order("RAND()").first(limit)
+    else
+      result
+    end
+  end
+
+  def section_title_as_action_assignable
+    "#{title} #{agents.count}분"
+  end
+
+  def response_section_title_as_action_assignable
+    I18n.t("views.action_assignable.agent_section_response_title.custom", title: title)
+  end
+
+  def agents_unspoken_limit
+    30
+  end
 end

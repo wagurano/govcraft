@@ -3,7 +3,7 @@
     .page-header
       %h2
         = link_to (@statementable.try(:title) || "현재 글의"), @statementable
-        촉구인물
+        촉구대상
 
     .panel.panel-default
       .panel-body
@@ -12,8 +12,57 @@
           = submit_tag '검색', class: 'btn btn-default'
         - if @searched_agents.try(:any?)
           %hr
+          %h3 인물
+          - if @searched_agents.count > 50
+            .help 검색 결과가 너무 많습니다. 좀더 정확한 이름을 넣어 주세요.
+          - else
+            .row
+              - @searched_agents.each do |agent|
+                .col-xs-12.col-sm-4
+                  .media
+                    .media-left
+                      = link_to agent_path(agent) do
+                        .image.agent-image.agent-image--mini{style: "background-image: url(#{agent.image.xs.url});"}
+                    .media-body
+                      %strong= agent.name
+                      %br
+                      = agent.organization
+                    .media-right
+                      - if @statementable.speakable?(agent)
+                        .text-nowrap
+                          %i.fa.fa-check
+                          연결됨
+                      - else
+                        = link_to '연결하기', polymorphic_path([:add_agent, @statementable], agent_id: agent.id, q: params[:q]), method: :put, class: 'btn btn-default text-nowrap'
+
+        - if @searched_agencies.try(:any?)
+          %hr
+          %h3 조직&middot;기관
           .row
-            - @searched_agents.each do |agent|
+            - @searched_agencies.each do |agency|
+              .col-xs-12.col-sm-4
+                .media
+                  .media-left
+                    = link_to agency_path(agency) do
+                      .image.agent-image.agent-image--mini{style: "background-image: url(#{agency.image.xs.url});"}
+                  .media-body
+                    %strong= agency.title
+                  .media-right
+                    - if @statementable.action_targeting?(agency)
+                      .text-nowrap
+                        %i.fa.fa-check
+                        연결됨
+                    - else
+                      = link_to '연결하기', polymorphic_path([:add_action_target, @statementable], action_assignable_id: agency.id, action_assignable_type: Agency, q: params[:q]), method: :put, class: 'btn btn-default text-nowrap'
+    .panel.panel-default
+      .panel-body
+        - if @statementable.agents.empty?
+          아직 촉구 중인 대상이 없습니다.
+
+        - if @statementable.dedicated_agents.any?
+          %h3 인물
+          .row
+            - @statementable.dedicated_agents.each do |agent|
               .col-xs-12.col-sm-4
                 .media
                   .media-left
@@ -24,25 +73,17 @@
                     %br
                     = agent.organization
                   .media-right
-                    - if @statementable.speakable?(agent)
-                      .text-nowrap
-                        %i.fa.fa-check
-                        연결됨
-                    - else
-                      = link_to '연결하기', polymorphic_path([:add_agent, @statementable], agent_id: agent.id, q: params[:q]), method: :put, class: 'btn btn-default text-nowrap'
-    .panel.panel-default
-      .panel-body
-        - if @statementable.agents.empty?
-          아직 촉구할 인물이 없습니다.
-        - @statementable.agents.each do |agent|
-          .col-xs-12.col-sm-4
-            .media
-              .media-left
-                = link_to agent_path(agent) do
-                  .image.agent-image.agent-image--mini{style: "background-image: url(#{agent.image.xs.url});"}
-              .media-body
-                %strong= agent.name
-                %br
-                = agent.organization
-              .media-right
-                = link_to '연결끊기', polymorphic_path([:remove_agent, @statementable], agent_id: agent.id, q: params[:q]), method: :delete, class: 'btn btn-danger text-nowrap'
+                    = link_to '연결끊기', polymorphic_path([:remove_agent, @statementable], agent_id: agent.id, q: params[:q]), method: :delete, class: 'btn btn-danger text-nowrap'
+        - if @statementable.action_targets.any?
+          - @statementable.action_targets.to_a.group_by(&:action_assignable_type).each do |action_assignable_type, action_targets|
+            %h3= action_assignable_type.classify.safe_constantize.model_name.human
+            .row
+              - action_targets.each do |action_target|
+                - action_assignable = action_target.action_assignable
+                .col-xs-12.col-sm-4
+                  .media
+                    .media-body
+                      = link_to action_assignable do
+                        %strong= action_assignable.title
+                    .media-right
+                      = link_to '연결끊기', polymorphic_path([:remove_action_target, @statementable], action_assignable_id: action_assignable.id, action_assignable_type: action_assignable.class.to_s, q: params[:q]), method: :delete, class: 'btn btn-danger text-nowrap'

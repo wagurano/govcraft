@@ -26,6 +26,7 @@ module StatementableControlling
   def statementable_edit_agents(statementable)
     if params[:q].present?
       @searched_agents = Agent.where('name like ?', "%#{params[:q]}%")
+      @searched_agencies = Agency.where('title like ?', "%#{params[:q]}%")
     end
 
     @statementable = statementable
@@ -37,6 +38,14 @@ module StatementableControlling
     render_404 and return if @agent.blank?
     statementable.agents << @agent unless statementable.agents.include?(@agent)
     statementable.save
+    redirect_to polymorphic_path([:edit_agents, statementable], q: params[:q])
+  end
+
+  def statementable_add_action_target(statementable)
+    action_assignable_model = params[:action_assignable_type].classify.safe_constantize
+    @action_assignable = action_assignable_model.find_by(id: params[:action_assignable_id])
+    render_404 and return if @action_assignable.blank?
+    statementable.action_targets.create(action_assignable: @action_assignable) unless statementable.action_targets.exists?(action_assignable: @action_assignable)
     redirect_to polymorphic_path([:edit_agents, statementable], q: params[:q])
   end
 
@@ -77,7 +86,15 @@ module StatementableControlling
   def statementable_remove_agent(statementable)
     @agent = Agent.find_by(id: params[:agent_id])
     render_404 and return if @agent.blank?
-    statementable.agents.delete(@agent) << @agent if statementable.agents.include?(@agent)
+    statementable.agents.delete(@agent) if statementable.agents.include?(@agent)
+    redirect_to polymorphic_path([:edit_agents, statementable], q: params[:q])
+  end
+
+  def statementable_remove_action_target(statementable)
+    action_assignable_model = params[:action_assignable_type].classify.safe_constantize
+    @action_assignable = action_assignable_model.find_by(id: params[:action_assignable_id])
+    render_404 and return if @action_assignable.blank?
+    statementable.action_targets.where(action_assignable: @action_assignable).destroy_all
     redirect_to polymorphic_path([:edit_agents, statementable], q: params[:q])
   end
 end

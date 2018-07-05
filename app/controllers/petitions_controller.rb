@@ -27,20 +27,15 @@ class PetitionsController < ApplicationController
   end
 
   def edit_agents
-    if params[:q].present?
-      @searched_agents = Agent.where('name like ?', "%#{params[:q]}%")
-    end
-
-    @statementable = @petition
-    render 'statementables/edit_agents'
-  end
-
-  def edit_agents
     statementable_edit_agents(@petition)
   end
 
   def add_agent
     statementable_add_agent(@petition)
+  end
+
+  def add_action_target
+    statementable_add_action_target(@petition)
   end
 
   def new_comment_agent
@@ -55,6 +50,10 @@ class PetitionsController < ApplicationController
     statementable_remove_agent(@petition)
   end
 
+  def remove_action_target
+    statementable_remove_action_target(@petition)
+  end
+
   def new
     @project = Project.find(params[:project_id]) if params[:project_id].present?
     @current_organization = @project.organization if @project.present?
@@ -65,6 +64,15 @@ class PetitionsController < ApplicationController
 
     if @petition.special_slug.present?
       Special.build_petition @petition
+    end
+
+    if params[:action_assignable_id].present? and params[:action_assignable_type].present?
+      action_assignable_model = params[:action_assignable_type].classify.safe_constantize
+      render_404 and return if action_assignable_model.blank?
+      action_assignable = action_assignable_model.find_by(id: params[:action_assignable_id])
+      render_404 and return if action_assignable.blank?
+
+      @petition.action_targets.build(action_assignable: action_assignable)
     end
 
     if @petition.save
