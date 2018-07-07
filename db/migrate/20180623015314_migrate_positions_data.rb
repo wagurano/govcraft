@@ -1,5 +1,5 @@
 class MigratePositionsData < ActiveRecord::Migration[5.0]
-  def change
+  def up
     ActiveRecord::Base.transaction do
       ActsAsTaggableOn::Tagging.where('taggable_type': "Agent").where('context': 'positions').each do |tagging|
         tag_name = tagging.tag.name

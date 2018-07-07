@@ -3,6 +3,7 @@ class Admin::AgentsController < Admin::BaseController
 
   def index
     @agents = Agent.page(params[:page])
+    @agents = @agents.search_for(params[:q]) if params[:q].present?
   end
 
   def create

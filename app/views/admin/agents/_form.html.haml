@@ -35,8 +35,7 @@
 
       .form-group
         = f.label :category
-        = f.text_field :category, class: 'form-control'
-
+        = f.select :category, Agent.category.options, {}, class: 'form-control'
 
       .form-group
         = f.label '포지션'

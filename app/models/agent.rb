@@ -12,6 +12,10 @@ class Agent < ApplicationRecord
   has_many :appointments, dependent: :destroy
   has_many :positions, through: :appointments
   has_many :agencies, -> { distinct }, through: :positions
+  extend Enumerize
+  enumerize :category, in: %i(개인 법인)
+
+  validates :category, presence: true
 
   # X_POSITION
   # scope :of_position, ->(*positions) { tagged_with(positions, on: :positions) }
@@ -19,7 +23,7 @@ class Agent < ApplicationRecord
 
   scope :of_position_names, ->(*position_names) { where(id: Appointment.of_positions_named(position_names).select(:agent_id)) }
   scope :of_positions, ->(*positions) { where(id: Appointment.of_positions(positions).select(:agent_id)) }
-
+  scoped_search on: [:name]
 
   def details
     "#{name} - #{organization}"
