@@ -27,7 +27,7 @@
                   = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
               .col-xs-12.col-md-6
                 .form-group
-                  = f.label "이메일(반드시 넣어주세요)"
+                  = f.label :commenter_email, "이메일(반드시 넣어주세요)"
                   = f.text_field :commenter_email, class: 'form-control'
           .form-group
             ~ f.text_area :body, placeholder: '의견...', class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }

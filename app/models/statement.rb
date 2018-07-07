@@ -11,6 +11,7 @@ class Statement < ApplicationRecord
   scope :responed_stance_only, -> { where.not(stance: nil).where.not(stance: "") }
   scope :responed_body_only, -> { where.not(body: nil).where.not(body: "") }
   scope :responed_only, -> { responed_stance_only.or(Statement.responed_body_only) }
+  scope :agreed, -> { where(stance: :agree) }
 
   def is_responed?
     stance.present? or body.present?

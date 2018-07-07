@@ -27,6 +27,8 @@
           %span.comment__date
             = date_f comment.created_at
 
+          = render 'likes/button', likable: comment
+
           %span.comment__action
             - if can? :destroy, comment
               = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
@@ -35,8 +37,6 @@
 
           - if comment.choice.present?
             %span.comment__choice{ class: comment.choice }= comment.choice.text
-
-          = render 'likes/button', likable: comment
 
 - if comments.first.try(:commentable).present?
   - commentable = comments.first.commentable

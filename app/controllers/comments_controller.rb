@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
 
     if @comment.commentable.respond_to?(:agents)
       if @comment.target_agent_id.blank?
-        @comment.commentable.agents.each do |agent|
+        @comment.commentable.not_agree_agents.each do |agent|
           @comment.target_agents << agent
         end
       else

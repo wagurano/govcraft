@@ -26,7 +26,10 @@
       width:100%;
     }
     .comment__action{
-      float:right;
+      float: right;
+      @media (max-width: $screen-xs-max) {
+        float: left;
+      }
       a{
         margin-right:5px;
         font-size:12px;

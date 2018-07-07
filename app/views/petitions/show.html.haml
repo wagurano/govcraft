@@ -39,33 +39,39 @@
                   .btn.btn-default 위젯 복사
                 %input.form-control{ value: "<iframe width='100%' height='800' src='#{petition_url(@petition, mode: :widget)}' frameborder='0'></iframe>" }
 
+      - comment_section_title = capture do
+        - if @petition.agents.any?
+          - if @petition.agent_section_title.present?
+            = @petition.agent_section_title
+          - else
+            - desc_doms = []
+            - @petition.total_action_assignables.each do |action_assignable|
+              - desc_doms << capture do
+                - if action_assignable.section_title_as_action_assignable.present?
+                  - if action_assignable.instance_of? DedicatedActionAssignee
+                    = action_assignable.section_title_as_action_assignable
+                  - else
+                    = link_to action_assignable do
+                      = action_assignable.section_title_as_action_assignable
+            - desc_doms.compact!
+            - desc = desc_doms.join(', ')
+            - if desc.present?
+              != t('views.action_assignable.agent_section_title.custom', desc: desc)
+            - else
+              = t('views.action_assignable.agent_section_title.default')
+        - else
+          = t('views.comment.form_title.default')
       - if @petition.comment_enabled
         %section.m-t
           %h4
-            - if @petition.agent_section_title.present?
-              = @petition.agent_section_title
-            - else
-              - desc_doms = []
-              - @petition.total_action_assignables.each do |action_assignable|
-                - desc_doms << capture do
-                  - if action_assignable.section_title_as_action_assignable.present?
-                    - if action_assignable.instance_of? DedicatedActionAssignee
-                      = action_assignable.section_title_as_action_assignable
-                    - else
-                      = link_to action_assignable do
-                        = action_assignable.section_title_as_action_assignable
-              - desc_doms.compact!
-              - desc = desc_doms.join(', ')
-              - if desc.present?
-                != t('views.action_assignable.agent_section_title.custom', desc: desc)
-              - else
-                = t('views.action_assignable.agent_section_title.default')
-            %button.btn.btn-xs.btn-default{"data-target" => "#assigned-agents-modal", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0'}
-              촉구대상 상세보기
-              %i.fa.fa-arrow-right
+            = comment_section_title
+            - if @petition.agents.any?
+              %button.btn.btn-xs.btn-default{"data-target" => "#assigned-agents-modal", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0'}
+                촉구대상 상세보기
+                %i.fa.fa-arrow-right
           .panel-body.post-block.component-box.panel-comments
             .panel-post__comments
-              = render 'comments/list', commentable: @petition
+              = render 'comments/list', commentable: @petition, request_statement: true
 
 #assigned-agents-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
@@ -86,23 +92,21 @@
           %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
             %span{"aria-hidden" => "true"} &#215;
           %h4.modal-title
-            서명에 참여해주셔서 감사합니다.
+            참여해주셔서 감사합니다.
         .modal-body
-          != flash[:sign_notice]
-          .share-box{ 'data-share-image': image_url(cover_image) }
-          - if @petition.agents.any?
-            - agent_section_title = @petition.agent_section_title.presence || I18n.t("views.action_assignable.agent_section_title.default")
-            %h4= agent_section_title
-            .row{ style: 'margin-left: -9px; margin-right: -9px;' }
-              - @petition.agents_random(2).each do |agent|
-                .col-sm-4.col-xs-4{ style: 'padding-left: 6px; padding-right: 6px;' }
-                  = render 'statementables/agent', agent: agent, statementable: @petition
-              .col-sm-4.col-xs-4{ style: 'padding-left: 6px; padding-right: 6px;' }
-                .panel.panel-default
-                  .panel-body
-                    = link_to petition_path(@petition, anchor: "anchor-agents"), class: "text-keep-all js-close-modal" do
-                      다른 #{agent_section_title}
-                      %i.fa.fa-arrow-right
+          %p
+            != flash[:sign_notice]
+
+          %p.text-basic-wrap
+            이 캠페인을 친구들에게 알려 주세요
+            .share-box{ 'data-share-image': image_url(cover_image) }
+          - if @petition.comment_enabled
+            %p.text-basic-wrap
+              = comment_section_title
+              %div
+                = link_to petition_path(@petition, anchor: "anchor-comments-list"), class: " js-close-modal btn btn-xs btn-primary" do
+                  의견 남기기
+                  %i.fa.fa-arrow-right
 
   = content_for :script do
     :javascript

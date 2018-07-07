@@ -17,7 +17,7 @@ ko:
       need_nickname_format: ' 영문이나 숫자 혹은 _,-만 기입할 수 있습니다. 반드시 기입해야 합니다.'
   messages:
     saved: '저장되었습니다'
-    signed: '이 이슈를 친구들에게 알려 주세요'
+    signed: '<strong>이제 다음 행동을 함께해 주세요.</strong>'
     already_signed: '이미 서명하셨습니다.'
     commented: '댓글을 게시했습니다!'
     need_to_email: '보내시는 분의 메일을 입력해주세요'

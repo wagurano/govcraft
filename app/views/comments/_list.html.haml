@@ -6,6 +6,8 @@
     = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
       = f.hidden_field :commentable_type, value: commentable.class.name
       = f.hidden_field :commentable_id, value: commentable.id
+      - if local_assigns[:request_statement]
+        = f.hidden_field :mailing, value: :ready
       = invisible_captcha
       - unless user_signed_in?
         .row
@@ -15,7 +17,10 @@
               = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
           .col-xs-8.col-md-4
             .form-group
-              = f.label :commenter_email
+              - if local_assigns[:request_statement]
+                = f.label :commenter_email, "이메일(반드시 넣어주세요)"
+              - else
+                = f.label :commenter_email
               = f.text_field :commenter_email, class: 'form-control'
       .form-group
         ~ f.text_area :body, placeholder: '제 생각에는...', class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
