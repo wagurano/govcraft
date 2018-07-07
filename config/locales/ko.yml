@@ -47,9 +47,9 @@ ko:
     models:
       organization: 조직
       poll_and_survey: 투표
-      user: 당원
+      user: 회원
       issue: 이슈
-      agent: 발언자
+      agent: 조직/기관 인물
       agenda: 의제
       agency: 조직/기관
       agenda_document: 관련 자료
@@ -228,8 +228,8 @@ ko:
         published_at: 발행일
       agent:
         public_site: 공식 웹사이트
-        election_region: 선거구
-        organization: 소속 정당
+        election_region: 활동 지역
+        organization: 연관 조직
         name: 이름
         image: 사진
       speech:
@@ -348,6 +348,7 @@ ko:
     action_assignable:
       agent_section_title:
         default: 관련 인물에게 촉구하기
+        custom: "%{desc}에게 행동을 촉구하세요"
       agent_section_response_title:
         default: 관련 인물 응답
         custom: "%{title}의 응답"
@@ -355,4 +356,3 @@ ko:
       form_title:
         default: 의견을 남겨주세요
         sympathy: 추모의 글을 남겨주세요
-        petition: "%{desc}에게 행동을 촉구하세요"

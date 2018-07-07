@@ -52,3 +52,21 @@
 body {
   background: #f8f8fa;
 }
+
+// Bootstrap Container Fluid for xs, sm
+@media (min-width: $screen-sm-min) {
+  .container-fluid:not(.container-fluid-always) {
+    width: $container-sm;
+  }
+}
+@media (min-width: $screen-md-min) {
+  .container-fluid:not(.container-fluid-always) {
+    width: $container-md;
+  }
+}
+@media (min-width: $screen-lg-min) {
+  .container-fluid:not(.container-fluid-always) {
+    width: $container-lg;
+  }
+}
+

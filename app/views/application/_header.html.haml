@@ -1,6 +1,6 @@
 - organization = fetch_organization_from_request || @current_organization
 %section#site-header
-  #header-container.container-fluid
+  #header-container.container-fluid.container-fluid-always
     - unless @current_organization.nil?
       = link_to 'http://' + @current_organization.slug + '.govcraft.org' do
         .title

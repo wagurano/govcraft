@@ -112,7 +112,7 @@
           %td
             %strong
               = sign.user_name
-            = raw(screened(sign, :body))
+            %span.text-basic-wrap= raw(screened(sign, :body))
             - if !local_assigns[:widget]
               %small
                 - if current_user != sign.user

@@ -1,7 +1,7 @@
 - commentable = @statementable
 
 - if commentable.class == Petition
-  = render 'petitions/header', petition: commentable, show_agents: false
+  = render 'petitions/header', petition: commentable
 - else
   %section#petition-block.page-block.component-header.component-header-auto-height
     .container

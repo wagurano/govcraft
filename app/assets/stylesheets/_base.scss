@@ -14,6 +14,11 @@ body {
     word-break: keep-all;
 }
 
+.text-basic-wrap {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
 // 백그라운드 위에 반투명 검은 바탕색을 깝니다.
 @mixin texture-darken {
     position: relative;

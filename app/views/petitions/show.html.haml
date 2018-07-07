@@ -1,6 +1,12 @@
 - cover_image = @petition.cover_image_url(:lg)
 
-= render 'petitions/header', petition: @petition, show_agents: true
+= render 'petitions/header', petition: @petition
+
+- if @petition.statements.responed_only.any?
+  %section.page-block
+    .container-fluid
+      .petition-agents
+        = render 'petitions/statements_responed_only', petition: @petition
 
 %section#petition-block.page-block.page-block-white
   .container-fluid
@@ -36,24 +42,41 @@
       - if @petition.comment_enabled
         %section.m-t
           %h4
-            - desc_doms = []
-            - @petition.total_action_assignables.each do |action_assignable|
-              - desc_doms << capture do
-                - if action_assignable.section_title_as_action_assignable.present?
-                  - if action_assignable.instance_of? DedicatedActionAssignee
-                    = action_assignable.section_title_as_action_assignable
-                  - else
-                    = link_to action_assignable do
-                      = action_assignable.section_title_as_action_assignable
-            - desc_doms.compact!
-            - desc = desc_doms.join(', ')
-            - if desc.present?
-              != t('views.comment.form_title.petition', desc: desc)
+            - if @petition.agent_section_title.present?
+              = @petition.agent_section_title
             - else
-              = t('views.comment.form_title.default')
+              - desc_doms = []
+              - @petition.total_action_assignables.each do |action_assignable|
+                - desc_doms << capture do
+                  - if action_assignable.section_title_as_action_assignable.present?
+                    - if action_assignable.instance_of? DedicatedActionAssignee
+                      = action_assignable.section_title_as_action_assignable
+                    - else
+                      = link_to action_assignable do
+                        = action_assignable.section_title_as_action_assignable
+              - desc_doms.compact!
+              - desc = desc_doms.join(', ')
+              - if desc.present?
+                != t('views.action_assignable.agent_section_title.custom', desc: desc)
+              - else
+                = t('views.action_assignable.agent_section_title.default')
+            %button.btn.btn-xs.btn-default{"data-target" => "#assigned-agents-modal", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0'}
+              촉구대상 상세보기
+              %i.fa.fa-arrow-right
           .panel-body.post-block.component-box.panel-comments
             .panel-post__comments
               = render 'comments/list', commentable: @petition
+
+#assigned-agents-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} &#215;
+        %h4.modal-title 촉구대상
+      .modal-body
+        = render 'petitions/agents', petition: @petition
+
 
 - if flash[:sign_notice].present?
   #sign-success-modal.modal.fade{:role => "dialog", :tabindex => "0"}

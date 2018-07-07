@@ -1,0 +1,53 @@
+- if @petition.statements.responed_only.any?
+  %a{id: "anchor-statements-responed-only"}
+
+  %h5.text-muted= @petition.agent_section_response_title.presence || t('views.action_assignable.agent_section_response_title.default')
+
+  %div
+    - @petition.statements.responed_only.each do |statement|
+      - agent = statement.agent
+
+      - agent_card = capture do
+        = image_tag agent.image.md.url, style: "height: 24px;"
+        %strong= agent.name
+        %small= statement.stance.text
+
+      - if statement.body.present?
+        %button.btn.btn-success{"data-target" => "#agent-statement-modal-#{agent.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0'}
+          = agent_card
+          %i.fa.fa-commenting-o
+      - else
+        %button.btn.btn-success{ style: 'margin: 0 0 4px 0; cursor: default;' }
+          = agent_card
+
+      - if @petition.statements.responed_body.any?
+        %div.modal.fade{id: "agent-statement-modal-#{agent.id}", :role => "dialog", :tabindex => "-1"}
+          .modal-dialog{:role => "document"}
+            .modal-content
+              .modal-header
+                %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                  %span{"aria-hidden" => "true"} &#215;
+                %h4.modal-title
+                  = image_tag agent.image.md.url, style: "height: 36px;"
+                  %strong= agent.name
+                  %span.text-muted= agent.organization
+                  님의 답변
+
+              .modal-body
+                .panel-body[statement]
+                  .panel-post__statements
+                    .media[statement]
+                      .media-body
+                        - if statement.stance.present?
+                          %h4.media-heading{ style: 'line-height: 24px;' }
+                            %span.text-success= statement.stance.text
+
+                        - if statement.body.present?
+                          .opinion__body{ style: 'font-weight: normal;' }
+                            != statement.body
+
+                        %div
+                          = link_to agent, class: 'btn btn-success btn-block' do
+                            %strong= agent.name
+                            = agent.organization
+                            님의 다른 답변 보기

@@ -1,6 +1,6 @@
 %section#petition-header
   .container-fluid
-    %h2.petition-title= petition.title
+    %h2.petition-title.text-basic-wrap= petition.title
 
     - buttons = capture do
       - if can? :edit, petition
@@ -53,8 +53,3 @@
             %i.fa.fa-user
             #{number_with_delimiter(petition.signs_count)}명 참여
 
-- if petition.agents.any? && show_agents
-  %section.page-block
-    .container-fluid
-      .petition-agents
-        = render 'petitions/agents', petition: petition
