@@ -47,7 +47,7 @@
             = link_to admin_positions_path do
               포지션관리하기
               %i.fa.fa-arrow-right
-          %p= Position.all.map(&:title).join(' / ')
+          %p= Position.all.map(&:name).join(' / ')
 
       .form-group
         = f.submit '저장', class: 'btn btn-primary'
