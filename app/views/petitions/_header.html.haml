@@ -36,7 +36,7 @@
 
     - cover_image = petition.cover_image_url(:lg)
     - if cover_image.present?
-      %section.no-container-margin-xs{ style: "height: 250px; background-image: url(#{cover_image}); background-size: cover; background-repeat: no-repeat;" }
+      %section.no-container-margin-xs{ style: "margin-top: 15px; margin-top: 15px; height: 250px; background-image: url(#{cover_image}); background-size: cover; background-repeat: no-repeat;" }
 
     .m-t.m-b
       = link_to petition_path(petition, anchor: 'anchor-sign') do
