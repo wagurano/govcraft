@@ -9,6 +9,11 @@
         .issue-body
           != simple_format(h(@issue.body.strip))
 
+    %h4
+      %small.text-muted
+        관련 아젠다
+        != @issue.agendas.map{ |agenda| link_to agenda.name, agenda }.join(', ')
+
 %section.page-block
   .container-fluid
     %h3
