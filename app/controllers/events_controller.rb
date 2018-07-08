@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   include OrganizationHelper
-  include StatementableControlling
+  include Statementing
 
   load_and_authorize_resource
   before_action :reset_meta_tags, only: :show
@@ -30,7 +30,7 @@ class EventsController < ApplicationController
 
   def create
     @event.user = current_user
-    init_statementable(@event)
+    init_statementable
     if @event.save
       redirect_to @event
     else
@@ -54,42 +54,6 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
-  def update_message_to_agent
-    statementable_update_message_to_agent(@event)
-  end
-
-  def edit_message_to_agent
-    statementable_edit_message_to_agent(@event)
-  end
-
-  def edit_agents
-    statementable_edit_agents(@event)
-  end
-
-  def add_agent
-    statementable_add_agent(@event)
-  end
-
-  def add_action_target
-    statementable_add_action_target(@event)
-  end
-
-  def new_comment_agent
-    statementable_new_comment_agent(@event)
-  end
-
-  def update_statement_agent
-    statementable_update_statement_agent(@event)
-  end
-
-  def remove_agent
-    statementable_remove_agent(@event)
-  end
-
-  def remove_action_target
-    statementable_remove_action_target(@event)
-  end
-
   private
 
   def event_params
@@ -111,5 +75,10 @@ class EventsController < ApplicationController
     else
       fetch_organization_from_request
     end
+  end
+
+  # for Statementing
+  def fetch_statementable
+    @event
   end
 end

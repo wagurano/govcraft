@@ -8,18 +8,17 @@
     = stylesheet_link_tag 'emails/base', media: 'all'
   %body
     %p
-      #{@agent.name}님! 안녕하세요. 세상을 바꾸는 시민들의 정치 플랫폼, 가브크래프트입니다.
+      #{@agent.name}님 안녕하세요? 세상을 바꾸는 시민들의 정치 플랫폼, 가브크래프트입니다.
     %p
-      세상을 바꾸는 시민들의 정치 플랫폼
+      서명
       = link_to polymorphic_url(petition) do
         "#{petition.title}" #{polymorphic_url(petition)}
-      에서 아래와 같은 서명이 진행 중입니다.
+      이 진행 중입니다.
     .container
       %h4= link_to petition.title, polymorphic_url(petition), target: "_blank"
-      %p= raw petition.body
-    %p
+      %p= excerpt(petition.body, length: 1000)
       = link_to polymorphic_url(petition), target: "_blank" do
-        "#{petition.title}" 서명으로 이동하려면 여기를 클릭해 주세요.
+        자세히 보기
     %p
       이 서명에 대해 #{@comment.user_nickname}님이 #{@agent.name}님에게 행동을 촉구합니다.
     .container

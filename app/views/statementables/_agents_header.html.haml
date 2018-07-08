@@ -1,0 +1,8 @@
+.page-header.page-header-nav-tabs
+  %h2
+    = link_to (@statementable.try(:title) || "현재 글의"), @statementable
+    촉구대상 관리
+
+  %ul.nav.nav-tabs.nav-tabs-light
+    %li{ class: ('active' if local_assigns[:active] == :edit_agents) }= link_to '촉구대상', [:edit_agents, @statementable]
+    %li{ class: ('active' if local_assigns[:active] == :edit_statements) }= link_to '답변', [:edit_statements, @statementable]

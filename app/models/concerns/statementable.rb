@@ -35,7 +35,7 @@ module Statementable
     agents.order("RAND()").first(limit)
   end
 
-  def speakable? agent
+  def assigned? agent
     agents.include? agent
   end
 
@@ -44,7 +44,7 @@ module Statementable
   end
 
   def spoken? agent
-    speakable?(agent) and statement_of(agent).try(:is_responed?)
+    assigned?(agent) and statement_of(agent).try(:is_responed?)
   end
 
   def action_assignable_agents_spoken(action_assignable)

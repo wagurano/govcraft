@@ -396,6 +396,10 @@ figure img {
   cursor: pointer;
 }
 
+.page-header.page-header-nav-tabs {
+  border: none;
+}
+
 .page-header.page-header-narrow {
   border: none;
   margin: 0;
@@ -408,5 +412,20 @@ figure img {
   @media (max-width: $screen-xs-max) {
     margin-left: -15px;
     margin-right: -15px;
+  }
+}
+
+.nav.nav-tabs.nav-tabs-light {
+  > li.active > a,
+  > li.active > a:hover,
+  > li.active > a:focus {
+    border: none;
+    border-bottom: 2px solid;
+    background-color: transparent;
+    font-weight: bold;
+    color: $brand-primary;
+  }
+  > li:not(.active) > a {
+    color: $gray;
   }
 }

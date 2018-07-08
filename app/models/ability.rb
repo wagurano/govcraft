@@ -56,8 +56,13 @@ class Ability
         user == discussion.user or discussion.try(:project).try(:organizer?, user)
       end
 
-      can [:edit_agents, :add_agent, :remove_agent, :add_action_target, :remove_action_target, :edit_message_to_agent, :update_message_to_agent, :open, :close], [Petition, Event] do |action|
+      can [:edit_agents, :add_agent, :edit_statements, :remove_agent, :add_action_target, :remove_action_target, :edit_message_to_agent, :update_message_to_agent, :open, :close], [Petition, Event] do |action|
         user == action.user or action.try(:project).try(:organizer?, user)
+      end
+
+      can [:create, :update], [Statement] do |statement|
+        statementable = statement.statementable
+        statementable.present? and can?(:update, statementable)
       end
 
       can :destroy, Comment do |comment|

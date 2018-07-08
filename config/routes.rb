@@ -65,6 +65,7 @@ Rails.application.routes.draw do
       delete 'remove_action_target'
       get 'new_comment_agent'
       get 'update_statement_agent'
+      get 'edit_statements'
     end
   end
 

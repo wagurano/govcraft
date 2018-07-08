@@ -1,6 +1,6 @@
 class PetitionsController < ApplicationController
   include OrganizationHelper
-  include StatementableControlling
+  include Statementing
 
   load_and_authorize_resource
   before_action :reset_meta_tags_for_show, only: :show
@@ -26,34 +26,6 @@ class PetitionsController < ApplicationController
   def data
   end
 
-  def edit_agents
-    statementable_edit_agents(@petition)
-  end
-
-  def add_agent
-    statementable_add_agent(@petition)
-  end
-
-  def add_action_target
-    statementable_add_action_target(@petition)
-  end
-
-  def new_comment_agent
-    statementable_new_comment_agent(@petition)
-  end
-
-  def update_statement_agent
-    statementable_update_statement_agent(@petition)
-  end
-
-  def remove_agent
-    statementable_remove_agent(@petition)
-  end
-
-  def remove_action_target
-    statementable_remove_action_target(@petition)
-  end
-
   def new
     @project = Project.find(params[:project_id]) if params[:project_id].present?
     @current_organization = @project.organization if @project.present?
@@ -61,7 +33,6 @@ class PetitionsController < ApplicationController
 
   def create
     @petition.user = current_user
-
     if @petition.special_slug.present?
       Special.build_petition @petition
     end
@@ -138,5 +109,10 @@ class PetitionsController < ApplicationController
     else
       fetch_organization_from_request
     end
+  end
+
+  # for Statementing
+  def fetch_statementable
+    @petition
   end
 end

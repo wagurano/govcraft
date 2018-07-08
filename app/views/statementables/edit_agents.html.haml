@@ -1,12 +1,12 @@
 %section.page-block
   .container
-    .page-header
-      %h2
-        = link_to (@statementable.try(:title) || "현재 글의"), @statementable
-        촉구대상
+    = render 'statementables/agents_header', active: :edit_agents
 
     .panel.panel-default
+      .panel-heading
+        촉구대상 추가
       .panel-body
+        %p 촉구할 대상을 찾아 보세요.
         = form_tag nil, method: :get do
           = text_field_tag :q, params[:q], class: 'form-control', style: 'display: inline; width: auto'
           = submit_tag '검색', class: 'btn btn-default'
@@ -28,7 +28,7 @@
                       %br
                       = agent.organization
                     .media-right
-                      - if @statementable.speakable?(agent)
+                      - if @statementable.assigned?(agent)
                         .text-nowrap
                           %i.fa.fa-check
                           연결됨
@@ -55,12 +55,13 @@
                     - else
                       = link_to '연결하기', polymorphic_path([:add_action_target, @statementable], action_assignable_id: agency.id, action_assignable_type: Agency, q: params[:q]), method: :put, class: 'btn btn-default text-nowrap'
     .panel.panel-default
+      .panel-heading
+        현재 촉구대상
       .panel-body
         - if @statementable.agents.empty?
           아직 촉구 중인 대상이 없습니다.
-
         - if @statementable.dedicated_agents.any?
-          %h3 인물
+          %h4 직접 연결된 인물
           .row
             - @statementable.dedicated_agents.each do |agent|
               .col-xs-12.col-sm-4
@@ -76,12 +77,15 @@
                     = link_to '연결끊기', polymorphic_path([:remove_agent, @statementable], agent_id: agent.id, q: params[:q]), method: :delete, class: 'btn btn-danger text-nowrap'
         - if @statementable.action_targets.any?
           - @statementable.action_targets.to_a.group_by(&:action_assignable_type).each do |action_assignable_type, action_targets|
-            %h3= action_assignable_type.classify.safe_constantize.model_name.human
+            %h4 연결된 #{action_assignable_type.classify.safe_constantize.model_name.human}
             .row
               - action_targets.each do |action_target|
                 - action_assignable = action_target.action_assignable
                 .col-xs-12.col-sm-4
                   .media
+                    .media-left
+                      = link_to action_assignable do
+                        .image.agent-image.agent-image--mini{style: "background-image: url(#{action_assignable.image.xs.url});"}
                     .media-body
                       = link_to action_assignable do
                         %strong= action_assignable.title

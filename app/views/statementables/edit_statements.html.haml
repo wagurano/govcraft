@@ -1,0 +1,79 @@
+%section.page-block
+  .container
+    = render 'statementables/agents_header', active: :edit_statements
+
+    .panel.panel-default
+      .panel-heading
+        찾기
+      .panel-body
+        %p 답변 관리할 촉구대상을 찾아 보세요.
+        = form_tag nil, method: :get do
+          = text_field_tag :statement_q, params[:statement_q], class: 'form-control', style: 'display: inline; width: auto'
+          = submit_tag '검색', class: 'btn btn-default'
+        - if @searched_agents.try(:any?)
+          %hr
+          - if @searched_agents.count > 50
+            .help 검색 결과가 너무 많습니다. 좀더 정확한 이름을 넣어 주세요.
+          - else
+            .row
+              - @searched_agents.each do |agent|
+                .col-xs-12.col-sm-4
+                  .media
+                    .media-left
+                      = link_to agent_path(agent) do
+                        .image.agent-image.agent-image--mini{style: "background-image: url(#{agent.image.xs.url});"}
+                    .media-body
+                      %strong= agent.name
+                      %br
+                      = agent.organization
+                    .media-right
+                      - if @statementable.assigned?(agent)
+                        - statement = @statementable.statement_of(agent)
+                        - if statement.try(:stance).nil?
+                          - btn_stance_class = 'btn-default'
+                        - elsif statement.stance.agree?
+                          - btn_stance_class = 'btn-success'
+                        - elsif statement.stance.disagree?
+                          - btn_stance_class = 'btn-danger'
+                        - else
+                          - btn_stance_class = 'btn-default'
+                        %button.btn{ style: 'margin: 0 0 4px 0; cursor: default;', class: btn_stance_class }
+                          = statement.try(:stance).try(:text) || '무응답'
+                          - if statement.try(:body).try(:present?)
+                            %i.fa.fa-commenting-o
+                    .media-right
+                      - if @statementable.assigned?(agent)
+                        = link_to polymorphic_path([:edit_statements, @statementable], agent_id: agent.id), class: 'btn btn-default text-nowrap' do
+                          관리하기
+                          %i.fa.fa-arrow-right
+                      - else
+                        = link_to '연결하기', polymorphic_path([:add_agent, @statementable], agent_id: agent.id, q: params[:q]), method: :put, class: 'btn btn-default text-nowrap'
+
+    - if @target_agent.present?
+      .panel.panel-default
+        .panel-heading
+          .media
+            .media-left
+              .image.agent-image.agent-image--mini{style: "background-image: url(#{@target_agent.image.xs.url});"}
+            .media-body{ style: 'vertical-align: middle;' } #{@target_agent.name} 답변 관리
+        .panel-body
+          .comments-form
+            - statement = @statementable.statement_of(@target_agent)
+            - statement = @statementable.statements.build(agent: @target_agent) if statement.blank?
+            = form_for statement, html: { class: 'gov-action-form-validation' } do |f|
+              .form-group
+                = f.label :stance, '찬반여부'
+                = f.select :stance, Statement.stance.options, { include_blank: true }, class: 'form-control'
+              .form-group
+                = f.label :stance, '의견'
+                ~ f.text_area :body, class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
+              = hidden_field_tag :after_save_url, polymorphic_path([:edit_statements, @statementable], agent_id: @target_agent.id)
+              = f.submit '작성', class: 'btn btn-default btn-sm'
+            - if statement.last_updated_user.present?
+              %hr
+              %p.help-text
+                마지막 작성자
+                .media
+                  .media-left
+                    .media-object.user-image-sm{style:"float:left;background-color: #eee; background-image:url(#{asset_url(statement.last_updated_user.nil? ? 'default-user.png' : statement.last_updated_user.image)}); #{"background-position: 0 4px; background-repeat: no-repeat;" if statement.last_updated_user.nil?}"}
+                  .media-body{ style: 'vertical-align: middle' }= statement.last_updated_user.nickname

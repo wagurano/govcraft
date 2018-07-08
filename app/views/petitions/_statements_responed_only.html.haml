@@ -12,12 +12,18 @@
         %strong= agent.name
         %small= statement.stance.text
 
+      - if statement.stance.agree?
+        - btn_stance_class = 'btn-success'
+      - elsif statement.stance.disagree?
+        - btn_stance_class = 'btn-danger'
+      - else
+        - btn_stance_class = 'btn-default'
       - if statement.body.present?
-        %button.btn.btn-success{"data-target" => "#agent-statement-modal-#{agent.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0'}
+        %button.btn{"data-target" => "#agent-statement-modal-#{agent.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0', class: btn_stance_class}
           = agent_card
           %i.fa.fa-commenting-o
       - else
-        %button.btn.btn-success{ style: 'margin: 0 0 4px 0; cursor: default;' }
+        %button.btn{ style: 'margin: 0 0 4px 0; cursor: default;', class: btn_stance_class }
           = agent_card
 
       - if @petition.statements.responed_body.any?
