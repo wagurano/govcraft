@@ -26,6 +26,7 @@
 //= require trianglify
 //= require moment
 //= require bootstrap-datetimepicker
+//= require perfect-scrollbar
 
 
 UnobtrusiveFlash.flashOptions['timeout'] = 3000;
@@ -348,6 +349,60 @@ $(function(){
       }
     });
   });
+
+
+  (function() {
+    $('.js-horizontal-scroll-container').each(function(i, elm) {
+      var ps = new PerfectScrollbar(elm);
+      var $elm = $(elm);
+      var $left_indicator = $($elm.data('scroll-indicator-left'));
+      var $right_indicator = $($elm.data('scroll-indicator-right'));
+
+      var update_indicators = function() {
+        if(ps.scrollbarXActive) {
+          if(ps.reach.x == 'start') {
+            $left_indicator.hide();
+            $right_indicator.show();
+          }
+          else if(ps.reach.x == 'end') {
+            $left_indicator.show();
+            $right_indicator.hide();
+          } else {
+            $left_indicator.show();
+            $right_indicator.show();
+          }
+        } else {
+          $left_indicator.hide();
+          $right_indicator.hide();
+        }
+
+      }
+
+      $elm.on('ps-scroll-x', function() {
+        update_indicators();
+      });
+      update_indicators();
+
+      $left_indicator.on('click', function(e) {
+        e.preventDefault();
+        $elm.stop().animate({
+            scrollLeft: ps.lastScrollLeft - 500
+        }, 500);
+      });
+
+      $right_indicator.on('click', function(e) {
+        e.preventDefault();
+        $elm.stop().animate({
+            scrollLeft: ps.lastScrollLeft + 500
+        }, 500);
+      });
+      $( window).resize(function() {
+        $('.js-horizontal-scroll-container').each(function(i, elm) {
+          ps.update();
+        });
+      });
+    });
+  })();
 
   if (location.hash !== '' && location.hash.startsWith('#agenda_tab_')) {
     $('.tab-pane.active .js-tab-content').hide();

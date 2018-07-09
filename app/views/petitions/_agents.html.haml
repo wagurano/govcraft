@@ -4,22 +4,41 @@
   %h5.text-muted= petition.agent_section_title.presence || t('views.action_assignable.agent_section_title.default')
 
   - if petition.sure_agents.any?
-    %div
-      - petition.sure_agents.each do |agent|
-        = render 'petitions/agent', agent: agent, petition: petition
+    %div{ style: 'position: relative' }
+      - scroll_container_indicator_left_id = "js-scroll-indicator-left-#{SecureRandom.uuid}"
+      - scroll_container_indicator_right_id = "js-scroll-indicator-right-#{SecureRandom.uuid}"
+      %div.js-horizontal-scroll-container.no-container-margin-xs{ data: { 'scroll-indicator-left': "##{scroll_container_indicator_left_id}", 'scroll-indicator-right': "##{scroll_container_indicator_right_id}" }, style: 'white-space: nowrap; overflow-y: scroll;' }
+        - petition.sure_agents.shuffle.each do |agent|
+          = render 'petitions/agent', agent: agent, petition: petition
+      .arrows.hidden-xs
+        .arrow-left.collapse{ id: scroll_container_indicator_left_id, style: 'position: absolute; top: 25%; left: -2rem;' }
+          %i.fa.fa-chevron-left
+        .arrow-right.collapse{ id: scroll_container_indicator_right_id, style: 'position: absolute; top: 25%; right: -2rem;' }
+          %i.fa.fa-chevron-right
 
   - if petition.unsure_agents.any?
     - if petition.sure_agents.any?
       %div{ style: 'margin-top: 2em' }
-    %div
-      - petition.unsure_agents.each do |agent|
-        = render 'petitions/agent', agent: agent, petition: petition
+    %div{ style: 'position: relative' }
+      - scroll_container_indicator_left_id = "js-scroll-indicator-left-#{SecureRandom.uuid}"
+      - scroll_container_indicator_right_id = "js-scroll-indicator-right-#{SecureRandom.uuid}"
+      %div.js-horizontal-scroll-container.no-container-margin-xs{ data: { 'scroll-indicator-left': "##{scroll_container_indicator_left_id}", 'scroll-indicator-right': "##{scroll_container_indicator_right_id}" }, style: 'white-space: nowrap; overflow-y: scroll;' }
+        - petition.unsure_agents.shuffle.each do |agent|
+          = render 'petitions/agent', agent: agent, petition: petition
+        - if petition.agents.count > 1 and petition.not_agree_agents.any?
+          %button.btn.btn-danger{ "data-target" => "#agent-request-all-modal-#{petition.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0; height: 59px;' }
+            찬성하지 않는  #{petition.not_agree_agents.count}명 모두에게
+            %br
+            %small
+              %i.fa.fa-paper-plane-o
+              촉구하기
+      .arrows.hidden-xs
+        .arrow-left.collapse{ id: scroll_container_indicator_left_id, style: 'position: absolute; top: 25%; left: -2rem;' }
+          %i.fa.fa-chevron-left
+        .arrow-right.collapse{ id: scroll_container_indicator_right_id, style: 'position: absolute; top: 25%; right: -2rem;' }
+          %i.fa.fa-chevron-right
 
-  - if petition.agents.count > 1 and petition.not_agree_agents.any?
-    %a{"href": "#", "data-target" => "#agent-request-all-modal-#{petition.id}", "data-toggle" => "modal", :type => "button", style: ''}
-      %i.fa.fa-paper-plane-o
-      찬성하지 않는  #{petition.not_agree_agents.count}명 모두에게 촉구하기
-      %i.fa.fa-arrow-right
+
 
     %div.modal.fade{id: "agent-request-all-modal-#{petition.id}", :role => "dialog", :tabindex => "-1"}
       .modal-dialog{:role => "document"}
