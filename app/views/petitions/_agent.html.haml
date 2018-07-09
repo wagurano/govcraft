@@ -1,7 +1,8 @@
 - statement = petition.statement_of(agent)
 
 - agent_card = capture do
-  = image_tag agent.image.md.url, style: "height: 24px;"
+  = image_tag agent.image.md.url, style: "height: 28px;"
+  %br
   %strong= agent.name
   %small= statement.try(:stance).try(:text)
 
