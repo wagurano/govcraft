@@ -6,7 +6,7 @@
   %section.page-block
     .container-fluid
       .petition-agents
-        = render 'petitions/statements_responed_only', petition: @petition
+        = render 'petitions/agents', petition: @petition
 
 %section#petition-block.page-block.page-block-white
   .container-fluid
@@ -39,50 +39,13 @@
                   .btn.btn-default 위젯 복사
                 %input.form-control{ value: "<iframe width='100%' height='800' src='#{petition_url(@petition, mode: :widget)}' frameborder='0'></iframe>" }
 
-      - comment_section_title = capture do
-        - if @petition.agents.any?
-          - if @petition.agent_section_title.present?
-            = @petition.agent_section_title
-          - else
-            - desc_doms = []
-            - @petition.total_action_assignables.each do |action_assignable|
-              - desc_doms << capture do
-                - if action_assignable.section_title_as_action_assignable.present?
-                  - if action_assignable.instance_of? DedicatedActionAssignee
-                    = action_assignable.section_title_as_action_assignable
-                  - else
-                    = link_to action_assignable do
-                      = action_assignable.section_title_as_action_assignable
-            - desc_doms.compact!
-            - desc = desc_doms.join(', ')
-            - if desc.present?
-              != t('views.action_assignable.agent_section_title.custom', desc: desc)
-            - else
-              = t('views.action_assignable.agent_section_title.default')
-        - else
-          = t('views.comment.form_title.default')
       - if @petition.comment_enabled
         %section.m-t
           %h4
-            = comment_section_title
-            - if @petition.agents.any?
-              %button.btn.btn-xs.btn-default{"data-target" => "#assigned-agents-modal", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0'}
-                촉구대상 상세보기
-                %i.fa.fa-arrow-right
+            = t('views.comment.form_title.default')
           .panel-body.post-block.component-box.panel-comments
             .panel-post__comments
-              = render 'comments/list', commentable: @petition, request_statement: true
-
-#assigned-agents-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
-  .modal-dialog{:role => "document"}
-    .modal-content
-      .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} &#215;
-        %h4.modal-title 촉구대상
-      .modal-body
-        = render 'petitions/agents', petition: @petition
-
+              = render 'comments/list', commentable: @petition
 
 - if flash[:sign_notice].present?
   #sign-success-modal.modal.fade{:role => "dialog", :tabindex => "0"}
@@ -104,7 +67,7 @@
             %p.text-basic-wrap
               = comment_section_title
               %div
-                = link_to petition_path(@petition, anchor: "anchor-comments-list"), class: " js-close-modal btn btn-xs btn-primary" do
+                = link_to petition_path(@petition, anchor: "anchor-agents"), class: " js-close-modal btn btn-xs btn-primary" do
                   의견 남기기
                   %i.fa.fa-arrow-right
 

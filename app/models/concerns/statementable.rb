@@ -31,6 +31,14 @@ module Statementable
     agents.where.not(id: statements.agreed.select(:agent_id))
   end
 
+  def unsure_agents
+    agents.where.not(id: statements.sure.select(:agent_id))
+  end
+
+  def sure_agents
+    agents.where(id: statements.sure.select(:agent_id))
+  end
+
   def agents_random(limit)
     agents.order("RAND()").first(limit)
   end

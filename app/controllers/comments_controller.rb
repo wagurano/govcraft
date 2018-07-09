@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
       return
     end
 
-    if @comment.commentable.respond_to?(:agents)
+    if @comment.mailing.ready? and @comment.commentable.respond_to?(:agents)
       if @comment.target_agent_id.blank?
         @comment.commentable.not_agree_agents.each do |agent|
           @comment.target_agents << agent

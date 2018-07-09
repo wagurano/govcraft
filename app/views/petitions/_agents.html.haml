@@ -1,29 +1,52 @@
-.panel.panel-default
-  .panel-body
-    - if petition.agents.empty?
-      아직 촉구 중인 대상이 없습니다.
+- if petition.agents.any?
+  %a{id: "anchor-agents"}
 
-    - if petition.dedicated_agents.any?
-      %h3 인물
-      .row
-        - petition.dedicated_agents.each do |agent|
-          .col-xs-12.col-sm-4
-            .media
-              .media-left
-                = link_to agent_path(agent) do
-                  .image.agent-image.agent-image--mini{style: "background-image: url(#{agent.image.xs.url});"}
-              .media-body
-                %strong= agent.name
-                %br
-                = agent.organization
-    - if petition.action_targets.any?
-      - petition.action_targets.to_a.group_by(&:action_assignable_type).each do |action_assignable_type, action_targets|
-        %h3= action_assignable_type.classify.safe_constantize.model_name.human
-        .row
-          - action_targets.each do |action_target|
-            - action_assignable = action_target.action_assignable
-            .col-xs-12.col-sm-4
-              .media
-                .media-body
-                  = link_to action_assignable do
-                    %strong= action_assignable.title
+  %h5.text-muted= petition.agent_section_title.presence || t('views.action_assignable.agent_section_title.default')
+
+  - if petition.sure_agents.any?
+    %div
+      - petition.sure_agents.each do |agent|
+        = render 'petitions/agent', agent: agent, petition: petition
+
+  - if petition.unsure_agents.any?
+    - if petition.sure_agents.any?
+      %div{ style: 'margin-top: 2em' }
+    %div
+      - petition.unsure_agents.each do |agent|
+        = render 'petitions/agent', agent: agent, petition: petition
+
+  - if petition.agents.count > 1 and petition.not_agree_agents.any?
+    %a{"href": "#", "data-target" => "#agent-request-all-modal-#{petition.id}", "data-toggle" => "modal", :type => "button", style: ''}
+      %i.fa.fa-paper-plane-o
+      찬성하지 않는  #{petition.not_agree_agents.count}명 모두에게 촉구하기
+      %i.fa.fa-arrow-right
+
+    %div.modal.fade{id: "agent-request-all-modal-#{petition.id}", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog{:role => "document"}
+        .modal-content
+          .modal-header
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+              %span{"aria-hidden" => "true"} &#215;
+            %h4.modal-title
+              찬성하지 않는 #{petition.not_agree_agents.count}명 모두에게 촉구하기
+
+          .modal-body
+            .comments-form
+              = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
+                = f.hidden_field :commentable_type, value: 'Petition'
+                = f.hidden_field :commentable_id, value: petition.id
+                = f.hidden_field :mailing, value: :ready
+                = invisible_captcha
+                - unless user_signed_in?
+                  .row
+                    .col-xs-12.col-md-6
+                      .form-group
+                        = f.label :commenter_name
+                        = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
+                    .col-xs-12.col-md-6
+                      .form-group
+                        = f.label :commenter_email, "이메일(반드시 넣어주세요)"
+                        = f.text_field :commenter_email, class: 'form-control'
+                .form-group
+                  ~ f.text_area :body, placeholder: '촉구합니다...', class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
+                = f.submit '작성', class: 'btn btn-primary btn-block'
