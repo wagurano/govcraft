@@ -2,7 +2,7 @@
 
 = render 'petitions/header', petition: @petition
 
-- if @petition.statements.responed_only.any?
+- if @petition.agents.any?
   %section.page-block
     .container-fluid
       .petition-agents
