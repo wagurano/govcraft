@@ -65,7 +65,7 @@
             .share-box{ 'data-share-image': image_url(cover_image) }
           - if @petition.comment_enabled
             %p.text-basic-wrap
-              = comment_section_title
+              관련된 인물에게 촉구해 주세요.
               %div
                 = link_to petition_path(@petition, anchor: "anchor-agents"), class: " js-close-modal btn btn-xs btn-primary" do
                   의견 남기기
