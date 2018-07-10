@@ -447,7 +447,7 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
-    mysql2 (0.4.5)
+    mysql2 (0.4.10)
     naught (1.1.0)
     nenv (0.3.0)
     net-http-digest_auth (1.4.1)
@@ -804,4 +804,4 @@ DEPENDENCIES
   wkhtmltoimage-binary (~> 0.12.2)
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
