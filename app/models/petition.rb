@@ -9,7 +9,6 @@ class Petition < ApplicationRecord
   has_many :signed_users, through: :signs, source: :petition
   belongs_to :area, optional: true
   belongs_to :issue, optional: true
-  has_and_belongs_to_many :agents, -> { distinct }
 
   mount_uploader :cover_image, ImageUploader
   mount_uploader :social_image, ImageUploader

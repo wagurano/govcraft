@@ -21,7 +21,7 @@ module Statementable
       dedicated_agents
     else
       conditions = action_targets.map { |action_target|
-        action_target.action_assignable.statementable_agents(self) }
+        Agent.where(id: action_target.action_assignable.statementable_agents(self)) }
       conditions << Agent.where(id: dedicated_agents)
       Agent.where.any_of(*conditions)
     end

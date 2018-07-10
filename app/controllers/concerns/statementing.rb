@@ -16,7 +16,7 @@ module Statementing
     render_404 and return if @agent.blank?
 
     @statementable = fetch_statementable
-    @statementable.agents << @agent unless @statementable.agents.include?(@agent)
+    @statementable.dedicated_agents << @agent unless @statementable.dedicated_agents.include?(@agent)
     @statementable.save
     redirect_to polymorphic_path([:edit_agents, @statementable], q: params[:q])
   end
@@ -80,7 +80,7 @@ module Statementing
     render_404 and return if @agent.blank?
 
     @statementable = fetch_statementable
-    @statementable.agents.delete(@agent) if @statementable.agents.include?(@agent)
+    @statementable.dedicated_agents.delete(@agent) if @statementable.dedicated_agents.include?(@agent)
     redirect_to polymorphic_path([:edit_agents, @statementable], q: params[:q])
   end
 
