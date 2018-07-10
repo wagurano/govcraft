@@ -229,7 +229,7 @@ ko:
       agent:
         public_site: 공식 웹사이트
         election_region: 활동 지역
-        organization: 주요 조직
+        organization: 주요 설명
         name: 이름
         image: 사진
         category: 개인/법인 구분

@@ -3,12 +3,16 @@ class DedicatedActionAssignee
     @statementable = statementable
   end
 
-  def statementable_agents(statementable)
-    statementable.dedicated_agents
+  def id
+    @statementable.id
   end
 
-  def statementable_agents_moderatly(statementable, limit)
-    statementable_agents(statementable)
+  def statementable_agents()
+    @statementable.dedicated_agents
+  end
+
+  def statementable_agents_moderatly(limit)
+    statementable_agents()
   end
 
   def section_title_as_action_assignable
@@ -23,5 +27,12 @@ class DedicatedActionAssignee
 
   def agents_unspoken_limit
     Float::INFINITY
+  end
+
+  def self.find_by_id(id)
+    petition = Petition.find_by(id: id)
+    return if petition.blank?
+
+    DedicatedActionAssignee.new(petition)
   end
 end

@@ -21,22 +21,28 @@ module Statementable
       dedicated_agents
     else
       conditions = action_targets.map { |action_target|
-        Agent.where(id: action_target.action_assignable.statementable_agents(self)) }
+        Agent.where(id: action_target.action_assignable.statementable_agents) }
       conditions << Agent.where(id: dedicated_agents)
       Agent.where.any_of(*conditions)
     end
   end
 
-  def not_agree_agents
-    agents.where.not(id: statements.agreed.select(:agent_id))
+  def not_agree_agents(action_assignable = nil)
+    result = agents.where.not(id: statements.agreed.select(:agent_id))
+    result = result.where(id: action_assignable.statementable_agents) if action_assignable.present?
+    result
   end
 
-  def unsure_agents
-    agents.where.not(id: statements.sure.select(:agent_id))
+  def unsure_agents(action_assignable = nil)
+    result = agents.where.not(id: statements.sure.select(:agent_id))
+    result = result.where(id: action_assignable.statementable_agents) if action_assignable.present?
+    result
   end
 
-  def sure_agents
-    agents.where(id: statements.sure.select(:agent_id))
+  def sure_agents(action_assignable = nil)
+    result = agents.where(id: statements.sure.select(:agent_id))
+    result = result.where(id: action_assignable.statementable_agents) if action_assignable.present?
+    result
   end
 
   def agents_random(limit)
@@ -56,11 +62,11 @@ module Statementable
   end
 
   def action_assignable_agents_spoken(action_assignable)
-    action_assignable.statementable_agents(self).where(id: statements.responed_only.select(:agent_id))
+    action_assignable.statementable_agents.where(id: statements.responed_only.select(:agent_id))
   end
 
   def action_assignable_agents_unspoken(action_assignable)
-    agents_unspoken = action_assignable.statementable_agents(self).where.not(id: statements.responed_only.select(:agent_id))
+    agents_unspoken = action_assignable.statementable_agents.where.not(id: statements.responed_only.select(:agent_id))
     if action_assignable.agents_unspoken_limit.present? and agents_unspoken.count > action_assignable.agents_unspoken_limit
       agents_unspoken = agents_unspoken.order("RAND()").first(action_assignable.agents_unspoken_limit)
     else

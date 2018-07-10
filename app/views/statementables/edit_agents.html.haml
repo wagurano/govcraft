@@ -33,7 +33,7 @@
                           %i.fa.fa-check
                           연결됨
                       - else
-                        = link_to '연결하기', polymorphic_path([:add_agent, @statementable], agent_id: agent.id, q: params[:q]), method: :put, class: 'btn btn-default text-nowrap'
+                        = link_to '연결하기', polymorphic_path([:add_agent, @statementable], agent_id: agent.id, q: params[:q]), method: :put, class: 'btn btn-default btn-xs text-nowrap'
 
         - if @searched_agencies.try(:any?)
           %hr
@@ -53,7 +53,7 @@
                         %i.fa.fa-check
                         연결됨
                     - else
-                      = link_to '연결하기', polymorphic_path([:add_action_target, @statementable], action_assignable_id: agency.id, action_assignable_type: Agency, q: params[:q]), method: :put, class: 'btn btn-default text-nowrap'
+                      = link_to '연결하기', polymorphic_path([:add_action_target, @statementable], action_assignable_id: agency.id, action_assignable_type: Agency, q: params[:q]), method: :put, class: 'btn btn-default btn-xs text-nowrap'
     .panel.panel-default
       .panel-heading
         현재 촉구대상
@@ -74,7 +74,7 @@
                     %br
                     = agent.organization
                   .media-right
-                    = link_to '연결끊기', polymorphic_path([:remove_agent, @statementable], agent_id: agent.id, q: params[:q]), method: :delete, class: 'btn btn-danger text-nowrap'
+                    = link_to '연결끊기', polymorphic_path([:remove_agent, @statementable], agent_id: agent.id, q: params[:q]), method: :delete, class: 'btn btn-danger btn-xs text-nowrap'
         - if @statementable.action_targets.any?
           - @statementable.action_targets.to_a.group_by(&:action_assignable_type).each do |action_assignable_type, action_targets|
             %h4 연결된 #{action_assignable_type.classify.safe_constantize.model_name.human}
@@ -90,4 +90,4 @@
                       = link_to action_assignable do
                         %strong= action_assignable.title
                     .media-right
-                      = link_to '연결끊기', polymorphic_path([:remove_action_target, @statementable], action_assignable_id: action_assignable.id, action_assignable_type: action_assignable.class.to_s, q: params[:q]), method: :delete, class: 'btn btn-danger text-nowrap'
+                      = link_to '연결끊기', polymorphic_path([:remove_action_target, @statementable], action_assignable_id: action_assignable.id, action_assignable_type: action_assignable.class.to_s, q: params[:q]), method: :delete, class: 'btn btn-danger btn-xs text-nowrap'

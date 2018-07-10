@@ -18,11 +18,11 @@ class Agency < ApplicationRecord
 
 
   # action_assignable interface
-  def statementable_agents(statementable)
+  def statementable_agents()
     agents
   end
 
-  def statementable_agents_moderatly(statementable, limit)
+  def statementable_agents_moderatly(limit)
     result = agents
     if result.count > limit
       result.order("RAND()").first(limit)
@@ -32,7 +32,7 @@ class Agency < ApplicationRecord
   end
 
   def section_title_as_action_assignable
-    "#{title} #{agents.count}분"
+    title
   end
 
   def response_section_title_as_action_assignable

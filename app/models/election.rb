@@ -6,16 +6,16 @@ class Election < ApplicationRecord
   has_many :election_candidates, dependent: :restrict_with_error, primary_key: :slug, foreign_key: :election_slug
   has_many :agents, through: :election_candidates
 
-  def statementable_agents(statementable)
-    if statementable.respond_to?(:area) and convert_area_code(statementable.area).present?
-      agents.where(id: election_candidates.where(area_division_code: convert_area_code(statementable.area)).select(:agent_id))
-    else
+  def statementable_agents()
+    # if statementable.respond_to?(:area) and convert_area_code(statementable.area).present?
+    #   agents.where(id: election_candidates.where(area_division_code: convert_area_code(statementable.area)).select(:agent_id))
+    # else
       agents
-    end
+    # end
   end
 
-  def statementable_agents_moderatly(statementable, limit)
-    result = statementable_agents(statementable)
+  def statementable_agents_moderatly(limit)
+    result = statementable_agents()
     if result.count > limit
       result.order("RAND()").first(limit)
     else

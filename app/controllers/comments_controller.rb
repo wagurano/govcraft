@@ -29,7 +29,16 @@ class CommentsController < ApplicationController
 
     if @comment.mailing.ready? and @comment.commentable.respond_to?(:agents)
       if @comment.target_agent_id.blank?
-        @comment.commentable.not_agree_agents.each do |agent|
+        target_agents = @comment.commentable.not_agree_agents
+        if params[:action_assignable_type].present? and params[:action_assignable_id].present?
+          action_assignable_model = params[:action_assignable_type].classify.safe_constantize
+          if action_assignable_model.present?
+            action_assignable = action_assignable_model.find_by_id(params[:action_assignable_id])
+            target_agents = @comment.commentable.not_agree_agents(action_assignable)
+          end
+        end
+
+        target_agents.each do |agent|
           @comment.target_agents << agent
         end
       else
