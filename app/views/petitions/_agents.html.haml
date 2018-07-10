@@ -1,18 +1,18 @@
 - if petition.agents.any?
   %a{id: "anchor-agents"}
 
-  %h5.text-muted= petition.agent_section_title.presence || t('views.action_assignable.agent_section_title.default')
+  %h4= petition.agent_section_title.presence || t('views.action_assignable.agent_section_title.default')
 
   - petition.total_action_assignables.each do |action_assignable|
-    %h6.text-muted= action_assignable.section_title_as_action_assignable
+    %h5= action_assignable.section_title_as_action_assignable
 
     - if petition.sure_agents(action_assignable).any?
       %div{ style: 'position: relative' }
         - scroll_container_indicator_left_id = "js-scroll-indicator-left-#{SecureRandom.uuid}"
         - scroll_container_indicator_right_id = "js-scroll-indicator-right-#{SecureRandom.uuid}"
-        %div.js-horizontal-scroll-container.no-container-margin-xs{ data: { 'scroll-indicator-left': "##{scroll_container_indicator_left_id}", 'scroll-indicator-right': "##{scroll_container_indicator_right_id}" }, style: 'white-space: nowrap; overflow-y: scroll;' }
+        %div
           - petition.sure_agents(action_assignable).shuffle.each do |agent|
-            = render 'petitions/agent', agent: agent, petition: petition
+            = render 'petitions/agent', agent: agent, petition: petition, template: 'line'
         .arrows.hidden-xs
           .arrow-left.collapse{ id: scroll_container_indicator_left_id, style: 'position: absolute; top: 25%; left: -2rem;' }
             %i.fa.fa-chevron-left
@@ -21,16 +21,16 @@
 
     - if petition.unsure_agents(action_assignable).any?
       %div{ style: 'position: relative' }
+        %h6.text-muted 응답하지 않은 분들에게 촉구합니다
         - scroll_container_indicator_left_id = "js-scroll-indicator-left-#{SecureRandom.uuid}"
         - scroll_container_indicator_right_id = "js-scroll-indicator-right-#{SecureRandom.uuid}"
         %div.js-horizontal-scroll-container.no-container-margin-xs{ data: { 'scroll-indicator-left': "##{scroll_container_indicator_left_id}", 'scroll-indicator-right': "##{scroll_container_indicator_right_id}" }, style: 'white-space: nowrap; overflow-y: scroll;' }
           - petition.unsure_agents(action_assignable).shuffle.each do |agent|
             = render 'petitions/agent', agent: agent, petition: petition
           - if petition.not_agree_agents(action_assignable).count > 1
-            %button.btn.btn-default{ "data-target" => "#agent-request-all-modal-#{petition.id}-#{action_assignable.class.to_s}-#{action_assignable.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0; height: 59px;' }
+            %button.btn.btn-default.btn-inverted{ "data-target" => "#agent-request-all-modal-#{petition.id}-#{action_assignable.class.to_s}-#{action_assignable.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0;' }
               %small{ style: 'color: gray' }
                 찬성하지 않는  #{petition.not_agree_agents(action_assignable).count}명 모두에게
-                %br
                 %i.fa.fa-paper-plane-o
                 촉구하기
         .arrows.hidden-xs
@@ -38,7 +38,6 @@
             %i.fa.fa-chevron-left
           .arrow-right.collapse{ id: scroll_container_indicator_right_id, style: 'position: absolute; top: 25%; right: -2rem;' }
             %i.fa.fa-chevron-right
-
 
 
       %div.modal.fade{id: "agent-request-all-modal-#{petition.id}-#{action_assignable.class.to_s}-#{action_assignable.id}", :role => "dialog", :tabindex => "-1"}

@@ -6,29 +6,38 @@
   %small= statement.try(:stance).try(:text)
 
 - if statement.blank?
-  - btn_stance_class = 'btn-default'
+  - stance_class = 'default'
   - action_style = 'color: gray'
 - if statement.try(:stance).try(:agree?)
-  - btn_stance_class = 'btn-success'
+  - stance_class = 'success'
   - action_style = 'color: white'
 - elsif statement.try(:stance).try(:disagree?)
-  - btn_stance_class = 'btn-danger'
+  - stance_class = 'danger'
   - action_style = 'color: white'
 - else
-  - btn_stance_class = 'btn-default'
-  - action_style = 'color: gray'
+  - stance_class = 'default btn-inverted'
+  - action_style = 'color: black'
 
-%button.btn{ style: 'margin: 0 0 4px 0; cursor: default;', class: btn_stance_class }
-  = agent_card
-  %br
-  %small
+- if local_assigns[:template] == 'line'
+  %div{ class: "text-#{stance_class}", style: 'margin: 7px 0' }
+    %span.text-muted &middot;
+    = image_tag agent.image.md.url, style: "height: 24px;"
+    %span.text-muted= agent.organization
+    %strong #{agent.name}
+    은(는)
+    %strong= statement.try(:stance).try(:text)
+    %span.text-muted 의견을 보내왔습니다.
     - if statement.try(:body).present?
-      %a{"href": "#", "data-target" => "#agent-statement-modal-#{agent.id}", "data-toggle" => "modal", :type => "button", style: action_style}
+      %a{"href": "#", "data-target" => "#agent-statement-modal-#{agent.id}", "data-toggle" => "modal", :type => "button" }
         %i.fa.fa-commenting-o
         답변보기
-    %a{"href": "#", "data-target" => "#agent-request-modal-#{agent.id}", "data-toggle" => "modal", :type => "button", style: action_style}
-      %i.fa.fa-paper-plane-o
-      촉구하기
+
+- else
+  %button.btn{ style: 'margin: 0 0 4px 0; cursor: default;', class: "btn-#{stance_class}", "data-target" => "#agent-request-modal-#{agent.id}", "data-toggle" => "modal", :type => "button" }
+    = agent_card
+    %small<>
+      %span{ style: action_style }
+        에 촉구하기
 
 - if statement.try(:body).present?
   %div.modal.fade{id: "agent-statement-modal-#{agent.id}", :role => "dialog", :tabindex => "-1"}
