@@ -4,7 +4,7 @@
   %h4= petition.agent_section_title.presence || t('views.action_assignable.agent_section_title.default')
 
   - petition.total_action_assignables.each do |action_assignable|
-    %h5= action_assignable.section_title_as_action_assignable
+    %h5{ style: 'margin-top: 1.5em' }= action_assignable.section_title_as_action_assignable
 
     - if petition.sure_agents(action_assignable).any?
       %div{ style: 'position: relative' }
@@ -12,32 +12,34 @@
         - scroll_container_indicator_right_id = "js-scroll-indicator-right-#{SecureRandom.uuid}"
         %div
           - petition.sure_agents(action_assignable).shuffle.each do |agent|
-            = render 'petitions/agent', agent: agent, petition: petition, template: 'line'
+            = render 'petitions/agent', agent: agent, petition: petition, template: 'line', agency: action_assignable
         .arrows.hidden-xs
-          .arrow-left.collapse{ id: scroll_container_indicator_left_id, style: 'position: absolute; top: 25%; left: -2rem;' }
+          .arrow-left.collapse{ id: scroll_container_indicator_left_id, style: 'position: absolute; top: 0.5em; left: -2rem;' }
             %i.fa.fa-chevron-left
-          .arrow-right.collapse{ id: scroll_container_indicator_right_id, style: 'position: absolute; top: 25%; right: -2rem;' }
+          .arrow-right.collapse{ id: scroll_container_indicator_right_id, style: 'position: absolute; top: 0.5em; right: -2rem;' }
             %i.fa.fa-chevron-right
 
     - if petition.unsure_agents(action_assignable).any?
-      %div{ style: 'position: relative' }
-        %h6.text-muted 응답하지 않은 분들에게 촉구합니다
+      %div
+        - if petition.sure_agents(action_assignable).any?
+          %h6.text-muted 응답하지 않은 분들에게 촉구합니다
         - scroll_container_indicator_left_id = "js-scroll-indicator-left-#{SecureRandom.uuid}"
         - scroll_container_indicator_right_id = "js-scroll-indicator-right-#{SecureRandom.uuid}"
-        %div.js-horizontal-scroll-container.no-container-margin-xs{ data: { 'scroll-indicator-left': "##{scroll_container_indicator_left_id}", 'scroll-indicator-right': "##{scroll_container_indicator_right_id}" }, style: 'white-space: nowrap; overflow-y: scroll;' }
-          - petition.unsure_agents(action_assignable).shuffle.each do |agent|
-            = render 'petitions/agent', agent: agent, petition: petition
-          - if petition.not_agree_agents(action_assignable).count > 1
-            %button.btn.btn-default.btn-inverted{ "data-target" => "#agent-request-all-modal-#{petition.id}-#{action_assignable.class.to_s}-#{action_assignable.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0;' }
-              %small{ style: 'color: gray' }
-                찬성하지 않는  #{petition.not_agree_agents(action_assignable).count}명 모두에게
-                %i.fa.fa-paper-plane-o
-                촉구하기
-        .arrows.hidden-xs
-          .arrow-left.collapse{ id: scroll_container_indicator_left_id, style: 'position: absolute; top: 25%; left: -2rem;' }
-            %i.fa.fa-chevron-left
-          .arrow-right.collapse{ id: scroll_container_indicator_right_id, style: 'position: absolute; top: 25%; right: -2rem;' }
-            %i.fa.fa-chevron-right
+        %div{ style: 'position: relative' }
+          %div.js-horizontal-scroll-container.no-container-margin-xs{ data: { 'scroll-indicator-left': "##{scroll_container_indicator_left_id}", 'scroll-indicator-right': "##{scroll_container_indicator_right_id}" }, style: 'white-space: nowrap; overflow-y: scroll; padding: 0 0 0.5em;' }
+            - petition.unsure_agents(action_assignable).shuffle.each do |agent|
+              = render 'petitions/agent', agent: agent, petition: petition, agency: action_assignable
+            - if petition.not_agree_agents(action_assignable).count > 1
+              %button.btn.btn-default.btn-inverted{ "data-target" => "#agent-request-all-modal-#{petition.id}-#{action_assignable.class.to_s}-#{action_assignable.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0; line-height: 23px;' }
+                %small
+                  찬성하지 않는  #{petition.not_agree_agents(action_assignable).count}명 모두에게
+                  %i.fa.fa-paper-plane-o
+                  촉구하기
+          .arrows.hidden-xs
+            .arrow-left.collapse{ id: scroll_container_indicator_left_id, style: 'position: absolute; top: 0.5em; left: -2rem;' }
+              %i.fa.fa-chevron-left
+            .arrow-right.collapse{ id: scroll_container_indicator_right_id, style: 'position: absolute; top: 0.5em; right: -2rem;' }
+              %i.fa.fa-chevron-right
 
 
       %div.modal.fade{id: "agent-request-all-modal-#{petition.id}-#{action_assignable.class.to_s}-#{action_assignable.id}", :role => "dialog", :tabindex => "-1"}

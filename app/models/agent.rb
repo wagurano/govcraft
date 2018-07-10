@@ -41,5 +41,10 @@ class Agent < ApplicationRecord
   def opinions_of_agenda agenda
     opinions.where(issue: agenda.issues)
   end
+
+  def positions_of_agency agency
+    return Position.none unless agency.respond_to?(:positions)
+    positions.where(id: agency.positions)
+  end
 end
 

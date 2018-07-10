@@ -67,3 +67,13 @@
   }
   padding-bottom: 120%;
 }
+
+.btn-agent {
+  margin: 0 0 4px 0;
+  cursor: default;
+  @media (max-width: $screen-xs-max) {
+    &:first-child {
+      margin-left: 15px;
+    }
+  }
+}
