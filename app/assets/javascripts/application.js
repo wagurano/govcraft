@@ -62,27 +62,21 @@ $(document).imagesLoaded( { }, function() {
   });
 
 
-  if ( $(window).width() > 739 ) {
-    //masonry
-    var options = {}
-      $('.masonry-container').masonry();
-    }
-
-    // Initialize Redactor
-    $('.redactor').redactor({
-      buttons: ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'file', 'link', 'horizontalrule'],
-      callbacks: {
-        imageUploadError: function(json, xhr) {
-          UnobtrusiveFlash.showFlashMessage(json.error.data[0], {type: 'notice'})
-        }
-      },
-      toolbarFixed: true,
-      plugins: ['fontcolor', 'alignment']
-    });
-    $('.redactor .redactor-editor').prop('contenteditable', true);
-    $('select.dropdown').dropdown();
-  }
-);
+  $('.masonry-container').masonry();
+  // Initialize Redactor
+  $('.redactor').redactor({
+    buttons: ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'file', 'link', 'horizontalrule'],
+    callbacks: {
+      imageUploadError: function(json, xhr) {
+        UnobtrusiveFlash.showFlashMessage(json.error.data[0], {type: 'notice'})
+      }
+    },
+    toolbarFixed: true,
+    plugins: ['fontcolor', 'alignment']
+  });
+  $('.redactor .redactor-editor').prop('contenteditable', true);
+  $('select.dropdown').dropdown();
+});
 
 // Kakao Key
 Kakao.init('6a30dead1bff1ef43b7e537f49d2f655');
