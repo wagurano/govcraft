@@ -1,16 +1,16 @@
 - if petition.agents.any?
   %a{id: "anchor-agents"}
 
-  %h4= petition.agent_section_title.presence || t('views.action_assignable.agent_section_title.default')
+  %h5= petition.agent_section_title.presence || t('views.action_assignable.agent_section_title.default')
 
   - petition.total_action_assignables.each do |action_assignable|
-    %h5{ style: 'margin-top: 1.5em' }= action_assignable.section_title_as_action_assignable
+    %h4{ style: 'margin-top: 28px' }= action_assignable.section_title_as_action_assignable
 
     - if petition.sure_agents(action_assignable).any?
       %div{ style: 'position: relative' }
         - scroll_container_indicator_left_id = "js-scroll-indicator-left-#{SecureRandom.uuid}"
         - scroll_container_indicator_right_id = "js-scroll-indicator-right-#{SecureRandom.uuid}"
-        %div
+        %div{ style: 'margin: 14px 0' }
           - petition.sure_agents(action_assignable).shuffle.each do |agent|
             = render 'petitions/agent', agent: agent, petition: petition, template: 'line', agency: action_assignable
         .arrows.hidden-xs
@@ -22,7 +22,7 @@
     - if petition.unsure_agents(action_assignable).any?
       %div
         - if petition.sure_agents(action_assignable).any?
-          %h6.text-muted 응답하지 않은 분들에게 촉구합니다
+          %h5.text-muted 응답하지 않은 분들에게 답변을 요청합니다
         - scroll_container_indicator_left_id = "js-scroll-indicator-left-#{SecureRandom.uuid}"
         - scroll_container_indicator_right_id = "js-scroll-indicator-right-#{SecureRandom.uuid}"
         %div{ style: 'position: relative' }
@@ -32,7 +32,7 @@
             - if petition.not_agree_agents(action_assignable).count > 1
               %button.btn.btn-default.btn-inverted{ "data-target" => "#agent-request-all-modal-#{petition.id}-#{action_assignable.class.to_s}-#{action_assignable.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0; line-height: 23px;' }
                 %small
-                  찬성하지 않는  #{petition.not_agree_agents(action_assignable).count}명 모두에게
+                  응답하지 않은 #{petition.not_agree_agents(action_assignable).count}명 모두에게
                   %i.fa.fa-paper-plane-o
                   촉구하기
           .arrows.hidden-xs
