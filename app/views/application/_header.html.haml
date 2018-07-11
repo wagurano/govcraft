@@ -30,7 +30,7 @@
     - if user_signed_in?
       .right-navi
         = link_to current_user do
-          = image_tag current_user.image, height: 20, class: 'img-circle', style: 'background-color: #eee'
+          = render 'users/thumbnail'
 
     .menu-list.text-nowrap.collapse
       - if organization.blank?
