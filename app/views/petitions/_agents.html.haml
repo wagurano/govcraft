@@ -11,7 +11,7 @@
         - scroll_container_indicator_left_id = "js-scroll-indicator-left-#{SecureRandom.uuid}"
         - scroll_container_indicator_right_id = "js-scroll-indicator-right-#{SecureRandom.uuid}"
         %div{ style: 'margin: 14px 0' }
-          - petition.sure_agents(action_assignable).shuffle.each do |agent|
+          - petition.sure_agents(action_assignable).each do |agent|
             = render 'petitions/agent', agent: agent, petition: petition, template: 'line', agency: action_assignable
         .arrows.hidden-xs
           .arrow-left.collapse{ id: scroll_container_indicator_left_id, style: 'position: absolute; top: 0.5em; left: -2rem;' }
@@ -32,7 +32,7 @@
             - if petition.not_agree_agents(action_assignable).count > 1
               %button.btn.btn-default.btn-inverted{ "data-target" => "#agent-request-all-modal-#{petition.id}-#{action_assignable.class.to_s}-#{action_assignable.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0; line-height: 23px;' }
                 %small
-                  응답하지 않은 #{petition.not_agree_agents(action_assignable).count}명 모두에게
+                  찬성하지 않은 #{petition.not_agree_agents(action_assignable).count}명 모두에게
                   %i.fa.fa-paper-plane-o
                   촉구하기
           .arrows.hidden-xs

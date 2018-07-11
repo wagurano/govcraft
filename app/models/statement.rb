@@ -14,14 +14,14 @@ class Statement < ApplicationRecord
   scope :responed_only, -> { responed_stance_only.or(Statement.responed_body_only) }
   scope :agreed, -> { where(stance: :agree) }
   scope :disagreed, -> { where(stance: :disagree) }
-  scope :sure, -> { where.any_of(Statement.agreed, Statement.disagreed) }
+  scope :sure, -> { where.not(stance: nil) }
 
   def is_responed?
     stance.present? or body.present?
   end
 
   def sure?
-    stance.try(:agree?) or stance.try(:disagree?)
+    stance.present?
   end
 
   def unsure?

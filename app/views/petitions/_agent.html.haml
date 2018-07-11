@@ -7,37 +7,47 @@
     %small= agent.organization
   %small= statement.try(:stance).try(:text)
 
-- if statement.blank?
-  - stance_class = 'default'
-  - action_style = 'color: gray'
 - if statement.try(:stance).try(:agree?)
   - stance_class = 'success'
   - action_style = 'color: white'
+  - stance_icon = capture do
+    %i.fa.fa-check
 - elsif statement.try(:stance).try(:disagree?)
   - stance_class = 'danger'
   - action_style = 'color: white'
+  - stance_icon = capture do
+    %i.fa.fa-ban
+- elsif statement.try(:stance).try(:hold?)
+  - stance_class = 'hold'
+  - action_style = 'color: white'
+  - stance_icon = capture do
+    %i.fa.fa-minus
 - else
   - stance_class = 'default btn-inverted'
   - action_style = 'color: black'
+  - stance_icon = capture do
+    %i.fa.fa-question
 
 - if local_assigns[:template] == 'line'
-  %ul.text-basic-wrap{ class: "text-#{stance_class}", style: 'margin: 0; padding-left: 0; list-style-type: none;' }
-    %li
-      - if stance_class == 'success'
-        %i.fa.fa-check
-      - if stance_class == 'danger'
-        %i.fa.fa-ban
-
+  .media.text-basic-wrap{ class: "text-#{stance_class}", style: 'margin: 6px 0; padding-left: 0; list-style-type: none;' }
+    .media-left= stance_icon
+    .media-body
       = image_tag agent.image.md.url, style: "height: 24px;"
       - if agent.category == '개인'
         %small.text-muted= agent.organization
       %strong= Catan::SmartPostposition.new(agent.name).with!('는')
       %strong= statement.try(:stance).try(:text)
       %span.text-muted 입장을 밝혔습니다.
-      - if statement.try(:body).present?
-        %a.text-nowrap{"href": "#", "data-target" => "#agent-statement-modal-#{agent.id}", "data-toggle" => "modal", :type => "button" }
-          %i.fa.fa-commenting-o
-          답변보기
+      %br.visible-xs-block
+      %small
+        - if statement.try(:body).present?
+          %a.text-nowrap{"href": "#", "data-target" => "#agent-statement-modal-#{agent.id}", "data-toggle" => "modal", :type => "button" }
+            %i.fa.fa-commenting-o
+            답변보기
+        - unless statement.try(:stance).try(:agree?)
+          %a.text-nowrap{"href": "#", "data-target" => "#agent-request-modal-#{agent.id}", "data-toggle" => "modal", :type => "button" }
+            %i.fa.fa-send-o
+            촉구하기
 
 - else
   %button.btn.btn-agent{ class: "btn-#{stance_class}", "data-target" => "#agent-request-modal-#{agent.id}", "data-toggle" => "modal", :type => "button" }
@@ -60,10 +70,10 @@
             님의 답변
 
         .modal-body
-          .media[statement]
-            .media-body
+          %div[statement]
+            %div
               - if statement.stance.present?
-                %h4.media-heading{ style: 'line-height: 24px;' }
+                %h4{ style: 'line-height: 24px;' }
                   %span.text-success= statement.stance.text
 
               - if statement.body.present?
