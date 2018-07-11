@@ -13,6 +13,11 @@
       %small.text-muted
         관련 아젠다
         != @issue.agendas.map{ |agenda| link_to agenda.name, agenda }.join(', ')
+        - if user_signed_in? and current_user.is_admin?
+          &middot;
+          = link_to [:edit, :admin, @issue] do
+            %i.fa.fa-edit
+            아젠다 관리
 
 %section.page-block
   .container-fluid
