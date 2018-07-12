@@ -11,12 +11,12 @@
         #{event.agents.count}명 모두에게 촉구하기
         %i.fa.fa-arrow-right
 
-- if event.statements.responed_body.any?
+- if event.statements.responded_body.any?
   %h3.sub-title 응답메시지
   .panel-body{style:"padding:0px"}
     .panel-post__statements
       .row.masonry-container
-        - event.statements.responed_body.recent.each do |statement|
+        - event.statements.responded_body.recent.each do |statement|
           - agent = statement.agent
           .col-md-6.col-sm-12
             .panel.panel-opinion.panel-default[statement]

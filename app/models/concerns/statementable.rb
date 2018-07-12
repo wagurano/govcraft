@@ -45,6 +45,12 @@ module Statementable
     result
   end
 
+  def responded_agents(action_assignable = nil)
+    result = agents.where(id: statements.responded_only.select(:agent_id))
+    result = result.where(id: action_assignable.statementable_agents) if action_assignable.present?
+    result
+  end
+
   def agents_random(limit)
     agents.order("RAND()").first(limit)
   end
@@ -58,15 +64,15 @@ module Statementable
   end
 
   def spoken? agent
-    assigned?(agent) and statement_of(agent).try(:is_responed?)
+    assigned?(agent) and statement_of(agent).try(:is_responded?)
   end
 
   def action_assignable_agents_spoken(action_assignable)
-    action_assignable.statementable_agents.where(id: statements.responed_only.select(:agent_id))
+    action_assignable.statementable_agents.where(id: statements.responded_only.select(:agent_id))
   end
 
   def action_assignable_agents_unspoken(action_assignable)
-    agents_unspoken = action_assignable.statementable_agents.where.not(id: statements.responed_only.select(:agent_id))
+    agents_unspoken = action_assignable.statementable_agents.where.not(id: statements.responded_only.select(:agent_id))
     if action_assignable.agents_unspoken_limit.present? and agents_unspoken.count > action_assignable.agents_unspoken_limit
       agents_unspoken = agents_unspoken.order("RAND()").first(action_assignable.agents_unspoken_limit)
     else

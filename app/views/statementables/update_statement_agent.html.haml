@@ -4,7 +4,7 @@
 - commentable = @statementable
 %section.page-block
   - unless @statement_key.expired?
-    - if params[:stance].present?
+    - if params[:stance].present? and !@statement.stance.unsure?
       .container
         .alert.alert-success
           %h3 #{@statement.stance_text} 의견이 등록되었습니다!
@@ -28,9 +28,9 @@
           = hidden_field_tag :key, @statement_key.key
           .form-group
             = f.label :stance, '찬반여부'
-            = f.select :stance, Statement.stance.options, { include_blank: true }, class: 'form-control'
+            = f.select :stance, Statement.stance.options, { }, class: 'form-control'
           .form-group
-            = f.label :stance, '추가의견'
+            = f.label :body, '추가의견'
             ~ f.text_area :body, placeholder: '제 생각에는...', class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
           = f.submit '작성', class: 'btn btn-default btn-sm'
   - else

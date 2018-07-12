@@ -66,9 +66,9 @@
             = form_for statement, html: { class: 'gov-action-form-validation' } do |f|
               .form-group
                 = f.label :stance, '찬반여부'
-                = f.select :stance, Statement.stance.options, { include_blank: true }, class: 'form-control'
+                = f.select :stance, Statement.stance.options, { }, class: 'form-control'
               .form-group
-                = f.label :stance, '의견'
+                = f.label :body, '의견'
                 ~ f.text_area :body, class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
               = hidden_field_tag :after_save_url, polymorphic_path([:edit_statements, @statementable], agent_id: @target_agent.id)
               = f.submit '작성', class: 'btn btn-default btn-sm'

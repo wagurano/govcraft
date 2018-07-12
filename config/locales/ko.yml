@@ -322,22 +322,22 @@ ko:
       stance:
         agree: 찬성
         disagree: 반대
-        unsuer: 의견없음
+        unsure: 검토 중
         hold: 유보
         partially: 일부찬성
         long:
           agree: 찬성합니다
           disagree: 반대합니다
-          unsuer: 의견을 확인 중입니다
+          unsure: 의견을 확인 중입니다
           partially: 일부 찬성합니다
     votefuture:
       stance:
         agree: 반영
-        unsuer: 검토 중
+        unsure: 검토 중
         partially: 일부반영
         long:
           agree: 반영하겠습니다
-          unsuer: 검토 중입니다
+          unsure: 검토 중입니다
           partially: 일부 반영하겠습니다
   views:
     pagination:

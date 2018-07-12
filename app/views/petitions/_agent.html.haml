@@ -1,12 +1,5 @@
 - statement = petition.statement_of(agent)
 
-- agent_card = capture do
-  = image_tag agent.image.md.url, style: "height: 24px;"
-  %strong= agent.name
-  - if agent.category == '개인'
-    %small= agent.organization
-  %small= statement.try(:stance).try(:text)
-
 - if statement.try(:stance).try(:agree?)
   - stance_class = 'success'
   - action_style = 'color: white'
@@ -21,12 +14,12 @@
   - stance_class = 'hold'
   - action_style = 'color: white'
   - stance_icon = capture do
-    %i.fa.fa-minus
+    %i.fa.fa-minus{ style: 'color: lightgray'}
 - else
   - stance_class = 'default btn-inverted'
   - action_style = 'color: black'
   - stance_icon = capture do
-    %i.fa.fa-question
+    %i.fa.fa-minus{ style: 'color: lightgray'}
 
 - if local_assigns[:template] == 'line'
   .media.text-basic-wrap{ class: "text-#{stance_class}", style: 'margin: 6px 0; padding-left: 0; list-style-type: none;' }
@@ -35,9 +28,15 @@
       = image_tag agent.image.md.url, style: "height: 24px;"
       - if agent.category == '개인'
         %small.text-muted= agent.organization
-      %strong= Catan::SmartPostposition.new(agent.name).with!('는')
-      %strong= statement.try(:stance).try(:text)
-      %span.text-muted 입장을 밝혔습니다.
+
+      - if statement.try(:sure?)
+        %strong= Catan::SmartPostposition.new(agent.name).with!('는')
+        %strong= statement.try(:stance).try(:text)
+        %span.text-muted 입장을 밝혔습니다.
+      - else
+        %strong= Catan::SmartPostposition.new(agent.name).with!('가')
+        %span.text-muted 답변했습니다.
+
       %br.visible-xs-block
       %small
         - if statement.try(:body).present?
@@ -51,7 +50,10 @@
 
 - else
   %button.btn.btn-agent{ class: "btn-#{stance_class}", "data-target" => "#agent-request-modal-#{agent.id}", "data-toggle" => "modal", :type => "button" }
-    = agent_card
+    = image_tag agent.image.md.url, style: "height: 24px;"
+    %strong= agent.name
+    - if agent.category == '개인'
+      %small= agent.organization
     %small<>
       %span{ style: action_style }
         에 촉구하기

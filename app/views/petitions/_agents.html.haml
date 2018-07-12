@@ -6,12 +6,12 @@
   - petition.total_action_assignables.each do |action_assignable|
     %h4{ style: 'margin-top: 28px' }= action_assignable.section_title_as_action_assignable
 
-    - if petition.sure_agents(action_assignable).any?
+    - if petition.responded_agents(action_assignable).any?
       %div{ style: 'position: relative' }
         - scroll_container_indicator_left_id = "js-scroll-indicator-left-#{SecureRandom.uuid}"
         - scroll_container_indicator_right_id = "js-scroll-indicator-right-#{SecureRandom.uuid}"
         %div{ style: 'margin: 14px 0' }
-          - petition.sure_agents(action_assignable).each do |agent|
+          - petition.responded_agents(action_assignable).each do |agent|
             = render 'petitions/agent', agent: agent, petition: petition, template: 'line', agency: action_assignable
         .arrows.hidden-xs
           .arrow-left.collapse{ id: scroll_container_indicator_left_id, style: 'position: absolute; top: 0.5em; left: -2rem;' }

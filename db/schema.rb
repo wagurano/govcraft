@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180708020510) do
+ActiveRecord::Schema.define(version: 20180712152345) do
 
   create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "action_assignable_id",   null: false
@@ -877,11 +877,11 @@ ActiveRecord::Schema.define(version: 20180708020510) do
   end
 
   create_table "statements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.integer  "agent_id",                           null: false
+    t.integer  "agent_id",                                              null: false
     t.text     "body",                 limit: 65535
-    t.string   "stance"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.string   "stance",                             default: "unsure"
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
     t.string   "statementable_type"
     t.integer  "statementable_id"
     t.integer  "last_updated_user_id"

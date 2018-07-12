@@ -3,7 +3,7 @@ class Opinion < ApplicationRecord
   include Votable
 
   extend Enumerize
-  enumerize :stance, in: %w[agree partially disagree unsuer]
+  enumerize :stance, in: %w[agree partially disagree unsure]
 
   belongs_to :agent
   belongs_to :issue
