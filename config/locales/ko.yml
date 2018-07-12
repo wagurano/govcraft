@@ -137,6 +137,7 @@ ko:
         agent_section_title: 촉구하기 영역 제목
         agent_section_response_title: 촉구하기 응답 영역 제목
         sign_hidden: 서명 목록 숨기기
+        sign_form_intro: 서명폼 상단 안내문구
       sign:
         signer_name: 이름
         signer_email: 이메일

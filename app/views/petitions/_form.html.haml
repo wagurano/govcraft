@@ -51,6 +51,17 @@
         %legend.m-t 서명 폼
 
         .form-group
+          .checkbox
+            %label
+              = f.check_box :sign_form_intro
+              %strong 서명 폼 상단에 안내 문구를 적습니다.
+        .form-group
+          = f.label :sign_form_intro
+          = f.text_field :sign_form_intro, class: 'form-control'
+          %p.help-block
+            서명 폼에 대한 설명을 정합니다. 비워두면 표시되지 않습니다
+
+        .form-group
           = f.label :sign_title
           = f.text_field :sign_title, class: 'form-control'
           %p.help-block
