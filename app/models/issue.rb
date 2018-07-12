@@ -16,6 +16,7 @@ class Issue < ApplicationRecord
 
   default_scope { order('title ASC') }
   scope :with_theme, ->(theme) { where('agenda_theme_id': theme.id) }
+  scoped_search on: [:title]
 
   def categorized_agents(position_name, quote)
     if quote.present?

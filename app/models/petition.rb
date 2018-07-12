@@ -17,6 +17,7 @@ class Petition < ApplicationRecord
 
   scope :recent, -> { order('id DESC') }
   scope :by_organization, ->(organization) { where(project: organization.projects) }
+  scoped_search on: [:title]
 
   def signed? someone
     signs.exists?(user: someone)

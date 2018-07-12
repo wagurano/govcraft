@@ -4,11 +4,18 @@
 
   .panel.panel-default
     .panel-body
-      = form_tag nil, class: 'form-inline', method: :get do
+      = form_tag nil, class: 'form-inline', style: 'display: inline-block', method: :get do
         .form-group
           = label_tag :agenda_id
           = select_tag :agenda_id, options_from_collection_for_select(Agenda.all, :id, :name), class: 'form-control js-select2'
         = submit_tag '보기', class: 'btn btn-default btn-sm'
+      &nbsp;
+      = form_tag nil, class: 'form-inline', style: 'display: inline-block', method: :get do
+        .form-group
+          = text_field_tag :q, params[:q]
+        = submit_tag '찾기', class: 'btn btn-default btn-sm'
+        - if params[:q].present?
+          = link_to '취소', url_for(q: nil), class: 'btn btn-default btn-sm'
 
   .panel.panel-default
     %table.table.table-bordered
@@ -31,3 +38,4 @@
             %td.text-right.text-nowrap
               = link_to '수정', edit_admin_issue_path(issue), class: 'btn btn-xs btn-default'
               = link_to '삭제', admin_issue_path(issue), method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }, class: 'btn btn-xs btn-danger'
+              = link_to '캠페인', edit_petitions_admin_issue_path(issue), class: 'btn btn-xs btn-default'

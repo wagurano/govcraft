@@ -185,7 +185,14 @@ Rails.application.routes.draw do
     root 'base#home', as: :home
     get :refresh_assembly_members, to: 'base#refresh_assembly_members'
     resources :agendas
-    resources :issues
+    resources :issues do
+      member do
+        get :edit_petitions
+        get :search_petitions
+        put :add_petition
+        delete :remove_petition
+      end
+    end
     resources :agencies
     resources :agents
     resources :positions

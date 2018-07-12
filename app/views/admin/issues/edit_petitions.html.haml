@@ -1,0 +1,29 @@
+%section.page-block
+  .page-header
+    %h2= link_to "#{@issue.title} 이슈", admin_issues_path
+    %h3 캠페인
+
+  .panel.panel-default
+    .panel-body
+      = form_tag add_petition_admin_issue_path(@issue), class: 'form-inline', style: 'display: inline-block', method: :put do
+        .form-group
+          %label 캠페인 연결
+          = select_tag :petition_id, nil, prompt: '캠페인 제목 검색', include_blank: true, class: 'js-select2-ajax form-control', style: 'width: 200px', data: { 'select2-url': search_petitions_admin_issue_path(@issue) }
+        = submit_tag '연결짓기', class: 'btn btn-default btn-sm'
+
+  .panel.panel-default
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th 캠페인명
+          %th 내용
+          %th #
+      %tbody
+        - @issue.petitions.each do |petition|
+          %tr
+            %td
+              = link_to petition.title, petition, target: '_blank'
+            %td
+              = excerpt(petition.body, length: 200)
+            %td.text-right.text-nowrap
+              = link_to '연결끊기', remove_petition_admin_issue_path(@issue, petition_id: petition.id), method: :delete, data: { confirm: '정말 연결을 끊으시겠습니까?' }, class: 'btn btn-xs btn-danger'

@@ -220,7 +220,7 @@ $(function(){
 
   $('.js-select2').select2();
 
-  $('.js-select2-issue').each(function(index, elm) {
+  $('.js-select2-ajax').each(function(index, elm) {
     var $elm = $(elm);
     $elm.select2({
       ajax: {
