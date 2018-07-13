@@ -48,7 +48,7 @@
               %p= petition.sign_form_intro
             .sign-panel__form
               .alert.alert-danger
-                - if petition.signed?(current_user)
+                - if user_signed_in? and petition.signed?(current_user)
                 - else
                   = form_for Sign.new(petition: petition), html: { class: 'gov-action-form-validation' } do |f|
                     = f.hidden_field :petition_id
