@@ -50,8 +50,12 @@ module Statementing
 
   def edit_statements
     @statementable = fetch_statementable
-    @searched_agents = @statementable.all if params[:statement_q].nil? and params[:agent_id].nil?
-    @searched_agents = @statementable.agents.search_for(params[:statement_q]) if params[:statement_q].present?
+    if params[:statement_q].present?
+      @searched_agents = @statementable.agents.search_for(params[:statement_q])
+    else
+      @searched_agents = @statementable.agents
+    end
+
     if params[:agent_id].present?
       @target_agent = Agent.find_by(id: params[:agent_id])
       @target_agent = nil unless @statementable.assigned?(@target_agent)

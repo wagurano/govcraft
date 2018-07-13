@@ -12,11 +12,15 @@
           = submit_tag '검색', class: 'btn btn-default'
         - if @searched_agents.try(:any?)
           %hr
-          - if @searched_agents.count > 50 and params[:statement_q].try(:any?)
-            .help 검색 결과가 너무 많습니다. 좀더 정확한 이름을 넣어 주세요.
+          - if @searched_agents.count > 50
+            - if params[:statement_q].try(:any?)
+              .help 검색 결과가 너무 많습니다. 좀더 정확한 이름을 넣어 주세요.
           - else
-            %h4= '전체 촉구대상의 목록입니다.' if params[:statement_q].nil?
-            %h4= "#{params[:statement_q]} 으로 검색하신 결과입니다." if params[:statement_q].present?
+            - if params[:statement_q].present?
+              %h4 #{params[:statement_q]}으로 검색하신 결과입니다.
+            - else
+              %h4 전체 촉구대상의 목록입니다.
+
             %br
             .row
               - @searched_agents.each do |agent|
@@ -40,15 +44,10 @@
                           - btn_stance_class = 'btn-danger'
                         - else
                           - btn_stance_class = 'btn-default'
-                        %button.btn{ style: 'margin: 0 0 4px 0; cursor: default;', class: btn_stance_class }
+                        = link_to polymorphic_path([:edit_statements, @statementable], agent_id: agent.id), class: "btn btn-xs text-nowrap #{btn_stance_class}" do
                           = statement.try(:stance).try(:text) || '무응답'
                           - if statement.try(:body).try(:present?)
                             %i.fa.fa-commenting-o
-                    .media-right
-                      - if @statementable.assigned?(agent)
-                        = link_to polymorphic_path([:edit_statements, @statementable], agent_id: agent.id), class: 'btn btn-default text-nowrap' do
-                          관리하기
-                          %i.fa.fa-arrow-right
                       - else
                         = link_to '연결하기', polymorphic_path([:add_agent, @statementable], agent_id: agent.id, q: params[:q]), method: :put, class: 'btn btn-default text-nowrap'
 
