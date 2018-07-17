@@ -1,7 +1,6 @@
 %section.page-block
   .container
-    - if can?(:update, @statementable)
-      = render 'statementables/agents_header', active: :edit_statements
+    = render 'statementables/agents_header', active: :edit_statements
 
     .panel.panel-default
       .panel-heading
@@ -32,7 +31,6 @@
                         .image.agent-image.agent-image--mini{style: "background-image: url(#{agent.image.xs.url});"}
                     .media-body
                       %strong= agent.name
-                      %br
                       = agent.organization
                     .media-right
                       - if @statementable.assigned?(agent)
@@ -46,7 +44,7 @@
                         - else
                           - btn_stance_class = 'btn-default'
                         = link_to polymorphic_path([:edit_statements, @statementable], agent_id: agent.id), class: "btn btn-xs text-nowrap #{btn_stance_class}" do
-                          = statement.try(:stance).try(:text) || '무응답'
+                          = statement.try(:stance).try(:text) || '검토 중'
                           - if statement.try(:body).try(:present?)
                             %i.fa.fa-commenting-o
                       - else
@@ -63,6 +61,7 @@
           .comments-form
             - statement = @statementable.statement_of(@target_agent)
             - statement = @statementable.statements.build(agent: @target_agent) if statement.blank?
+            - statement.stance = params[:stance] if params[:stance].present?
             = form_for statement, html: { class: 'gov-action-form-validation' } do |f|
               .form-group
                 = f.label :stance, '찬반여부'
@@ -73,10 +72,10 @@
               = hidden_field_tag :after_save_url, polymorphic_path([:edit_statements, @statementable], agent_id: @target_agent.id)
               - unless can?(:update, @statementable)
                 .form-group
-                  = label_tag :access_token, "#{@target_agent.name} 비밀번호"
+                  = label_tag :access_token, "#{@target_agent.name}님 비밀번호"
                   = password_field_tag :access_token, nil, class: 'form-control'
                   %p.help-text
-                    #{@target_agent.name} 비밀번호를 모르시나요?
+                    #{@target_agent.name}님 비밀번호를 모르시나요?
                     = link_to new_access_token_agent_path(@target_agent), target: '_blank' do
                       %i.fa.fa-envelope
                       비밀번호 재설정하기

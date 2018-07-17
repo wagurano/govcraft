@@ -64,19 +64,21 @@ module Statementing
   end
 
   def update_statement_agent
-    @statement_key = StatementKey.find_by(statement_id: params[:statement_id], key: params[:key])
-    render_404 and return if @statement_key.blank?
-    return if @statement_key.expired?
+    @statementable = fetch_statementable
 
-    @statement = @statement_key.statement
+    @statement = Statement.find_by(id: params[:statement_id])
+    render_404 and return if @statement.blank?
+    @statement_key = StatementKey.find_by(statement: @statement, key: params[:key])
+    render_404 and return if @statement_key.blank?
+
+    @agent = @statement.agent
+    redirect_to polymorphic_path([:edit_statements, @statementable], agent_id: @agent.id, stance: params[:stance]) and return if @statement_key.expired?
 
     if params[:stance].present?
       @statement.stance = params[:stance]
       @statement.save
     end
 
-    @agent = @statement.agent
-    @statementable = fetch_statementable
     render 'statementables/update_statement_agent'
   end
 
