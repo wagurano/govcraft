@@ -3,3 +3,10 @@
 %section.page-block
   .container-fluid
     %p.alert.alert-success 비밀번호 재설정 메일을 보냈습니다. #{@agent.email}
+
+    .help-block
+      %p
+        #{@agent.name}님의 메일 주소가 #{@agent.email}가 아니세요?
+      %p
+        %a(href="help@parti.xyz") help@parti.xyz
+        에 문의해 주세요.
