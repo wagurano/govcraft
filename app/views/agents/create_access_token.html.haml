@@ -1,0 +1,11 @@
+= render 'agents/header', agent: @agent
+
+%section.page-block
+  .container-fluid
+    %h3 비밀번호가 재설정되었습니다.
+    .alert.alert-success
+
+      %p 새로운 비밀번호는
+      %div{ style: 'margin: 1em 1em'}
+        %strong= @agent.access_token
+      %p 입니다. 외부에 유출되지 않게 해주세요.

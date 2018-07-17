@@ -1,0 +1,5 @@
+= render 'agents/header', agent: @agent
+
+%section.page-block
+  .container-fluid
+    %p.alert.alert-success 비밀번호 재설정 메일을 보냈습니다. #{@agent.email}

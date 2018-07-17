@@ -73,3 +73,9 @@
                   .form-group
                     ~ f.text_area :body, placeholder: '촉구합니다...', class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
                   = f.submit '작성', class: 'btn btn-primary btn-block'
+
+  %h5
+    촉구대상 중에 한 분이세요?
+    = link_to [:edit_statements, petition] do
+      %i.fa.fa-commenting-o
+      답변하기

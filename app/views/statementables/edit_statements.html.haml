@@ -1,6 +1,7 @@
 %section.page-block
   .container
-    = render 'statementables/agents_header', active: :edit_statements
+    - if can?(:update, @statementable)
+      = render 'statementables/agents_header', active: :edit_statements
 
     .panel.panel-default
       .panel-heading
@@ -10,7 +11,7 @@
         = form_tag nil, method: :get do
           = text_field_tag :statement_q, params[:statement_q], class: 'form-control', style: 'display: inline; width: auto'
           = submit_tag '검색', class: 'btn btn-default'
-        - if @searched_agents.try(:any?)
+        - if @searched_agents.try(:any?) and @target_agent.blank?
           %hr
           - if @searched_agents.count > 50
             - if params[:statement_q].try(:any?)
@@ -70,6 +71,17 @@
                 = f.label :body, '의견'
                 ~ f.text_area :body, class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
               = hidden_field_tag :after_save_url, polymorphic_path([:edit_statements, @statementable], agent_id: @target_agent.id)
+              - unless can?(:update, @statementable)
+                .form-group
+                  = label_tag :access_token, "#{@target_agent.name} 비밀번호"
+                  = password_field_tag :access_token, nil, class: 'form-control'
+                  %p.help-text
+                    #{@target_agent.name} 비밀번호를 모르시나요?
+                    = link_to new_access_token_agent_path(@target_agent), target: '_blank' do
+                      %i.fa.fa-envelope
+                      비밀번호 재설정하기
+
+
               = f.submit '작성', class: 'btn btn-default btn-sm'
             - if statement.last_updated_user.present?
               %hr

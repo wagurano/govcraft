@@ -19,4 +19,23 @@ class AgentsController < ApplicationController
       end
     end
   end
+
+  def create_access_token
+    if @agent.refresh_access_token != params[:refresh_access_token]
+      flash[:error] = '재설정 요청한지 오래되었거나 잘못된 요청입니다'
+      redirect_to root_url and return
+    end
+    @agent.clear_refresh_access_token
+    @agent.generate_access_token
+    unless @agent.save
+      error_to_flash(@agent)
+      redirect_to root_url and return
+    end
+  end
+
+  def new_access_token
+    @agent.generate_refresh_access_token
+    @agent.save
+    AgentMailer.refresh_access_token(@agent.id).deliver_later
+  end
 end

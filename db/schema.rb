@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180712234715) do
+ActiveRecord::Schema.define(version: 20180717032625) do
 
   create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "action_assignable_id",   null: false
@@ -93,15 +93,19 @@ ActiveRecord::Schema.define(version: 20180712234715) do
   end
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string  "name",                            null: false
-    t.string  "organization"
-    t.string  "category",                        null: false
-    t.string  "image"
-    t.string  "email"
-    t.integer "sent_requests_count", default: 0
-    t.string  "twitter"
-    t.string  "public_site"
-    t.string  "election_region"
+    t.string   "name",                                null: false
+    t.string   "organization"
+    t.string   "category",                            null: false
+    t.string   "image"
+    t.string   "email"
+    t.integer  "sent_requests_count",     default: 0
+    t.string   "twitter"
+    t.string   "public_site"
+    t.string   "election_region"
+    t.string   "access_token"
+    t.integer  "access_fail_count",       default: 0
+    t.string   "refresh_access_token"
+    t.datetime "refresh_access_token_at"
   end
 
   create_table "agents_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

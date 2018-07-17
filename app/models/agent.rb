@@ -46,5 +46,27 @@ class Agent < ApplicationRecord
     return Position.none unless agency.respond_to?(:positions)
     positions.where(id: agency.positions)
   end
+
+  def generate_access_token
+    self.access_token = SecureRandom.hex(10)
+    self.access_fail_count = 0
+  end
+
+  def clear_access_token
+    self.access_token = nil
+    self.access_fail_count = 0
+  end
+
+  def generate_refresh_access_token
+    return if self.refresh_access_token_at.try(:'>', 2.days.ago)
+
+    self.refresh_access_token = SecureRandom.hex(30)
+    self.refresh_access_token_at = DateTime.now
+  end
+
+  def clear_refresh_access_token
+    self.refresh_access_token = nil
+    self.refresh_access_token_at = nil
+  end
 end
 

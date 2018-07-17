@@ -14,7 +14,7 @@ class StatementsController < ApplicationController
   def update
     @statement = Statement.find_by(id: params[:id])
     render_404 and return if @statement.blank?
-    render_404 and return if !@statement.valid_key?(params[:key]) and !can?(:edit, @statement)
+    render_404 and return if !@statement.valid_key?(params[:key]) and @statement.agent.access_token != params[:access_token] and !can?(:edit, @statement)
 
     @statement.assign_attributes(statement_params)
     @statement.last_updated_user = current_user

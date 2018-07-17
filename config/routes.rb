@@ -174,7 +174,12 @@ Rails.application.routes.draw do
       get :vote_widget
     end
   end
-  resources :agents
+  resources :agents do
+    member do
+      get :new_access_token
+      get :create_access_token
+    end
+  end
   resources :agencies do
     member do
       get :agents
