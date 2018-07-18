@@ -14,7 +14,17 @@ class StatementsController < ApplicationController
   def update
     @statement = Statement.find_by(id: params[:id])
     render_404 and return if @statement.blank?
-    render_404 and return if !@statement.valid_key?(params[:key]) and @statement.agent.access_token != params[:access_token] and !can?(:edit, @statement)
+    if cannot?(:update, @statement)
+      edit_path = polymorphic_path([:edit_statements, @statement.statementable], agent_id: @statement.agent.id)
+      if params[:key].present? and !@statement.valid_key?(params[:key])
+        flash[:error] = '입력을 시작한 지 너무 오래 되었습니다. 다시 시도해 주세요.'
+        redirect_to edit_path and return
+      end
+      if @statement.agent.access_token != params[:access_token]
+        flash[:error] = '비밀번호가 맞지 않습니다. 다시 시도해 주세요.'
+        redirect_to edit_path and return
+      end
+    end
 
     @statement.assign_attributes(statement_params)
     @statement.last_updated_user = current_user
