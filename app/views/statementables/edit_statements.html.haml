@@ -71,8 +71,9 @@
                 ~ f.text_area :body, class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
               = hidden_field_tag :after_save_url, polymorphic_path([:edit_statements, @statementable], agent_id: @target_agent.id)
               - unless can?(:update, @statementable)
+                %hr
                 .form-group
-                  = label_tag :access_token, "#{@target_agent.name}님 비밀번호"
+                  = label_tag :access_token, "저장하려면 #{@target_agent.name}님 비밀번호를 입력해 주세요", class: 'text-primary'
                   = password_field_tag :access_token, nil, class: 'form-control'
                   %p.help-text
                     #{@target_agent.name}님 비밀번호를 모르시나요?
