@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180717032625) do
+ActiveRecord::Schema.define(version: 20180728025212) do
 
   create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "action_assignable_id",   null: false
@@ -452,6 +452,7 @@ ActiveRecord::Schema.define(version: 20180717032625) do
     t.string   "social_image"
     t.string   "title_to_agent"
     t.text     "message_to_agent", limit: 65535
+    t.datetime "closed_at"
     t.index ["project_id"], name: "index_events_on_project_id", using: :btree
     t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end

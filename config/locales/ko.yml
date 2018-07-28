@@ -27,6 +27,10 @@ ko:
       open: 다시 열렸습니다
       close: 종료되었습니다
       closed: 종료된 캠페인입니다.
+    events:
+      open: 다시 열렸습니다
+      close: 종료되었습니다
+      closed: 종료된 캠페인입니다.
     xlsx_help:
       archive_document:
         id: "비워두면 신규생성, 숫자를 적으면 해당 숫자를 ID로 가지는 자료를 업데이트합니다."
@@ -155,10 +159,14 @@ ko:
         body: 내용
         revision_note: 메모
       event:
+        project: 프로젝트
+        project_id: 프로젝트
         title: 제목
         body: 설명
         template: 이벤트형식
         image: 커버이미지(선택)
+        slug: 주소(선택)
+        css: 스타일(선택)
         social_image: 소셜공유이미지(선택)
         template_names:
           default: "목소리 모으기"

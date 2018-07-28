@@ -15,6 +15,11 @@ class CommentsController < ApplicationController
   end
 
   def create
+    if @comment.commentable.try(:comment_closed?)
+      flash[:notice] = t("messages.#{@comment.commentable_type.pluralize.underscore}.closed")
+      redirect_back(fallback_location: root_path, i_am: params[:i_am]) and return
+    end
+
     @comment.user = current_user if user_signed_in?
     if user_signed_in? and @comment.commentable.respond_to? :voted_by? and @comment.commentable.voted_by? current_user
       @comment.choice = @comment.commentable.fetch_vote_of(current_user).choice

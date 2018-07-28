@@ -4,7 +4,6 @@
 
 %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image})" }
   .container
-    = render 'application/current_user_state_badge'
     - if @project
       .cover-section__project
         = link_to @project.title, @project
@@ -42,11 +41,12 @@
 
 %section.page-block
   .container
-    .row
-      .col-sm-12.hidden-xs
-        .panel.panel-default.panel-floating
-          .panel-body
-            = render 'form_with_assembly', event: event
+    - if event.opened?
+      .row
+        .col-sm-12.hidden-xs
+          .panel.panel-default.panel-floating
+            .panel-body
+              = render 'form_with_assembly', event: event
     .row.masonry-container
       - comments.order('id DESC').each do |comment|
         .col-sm-4
@@ -154,19 +154,20 @@
     showRandomInfowindow();
     infowindowInterval = setInterval(showRandomInfowindow, 10000);
 
-%section.visible-xs
-  .container
-    %nav.navbar.navbar-default.navbar-fixed-bottom{ style: 'min-height: auto;'}
-      %button.btn.btn-primary.btn-lg.btn-block{"data-target" => "#comment-form-modal", "data-toggle" => "modal", :type => "button"}
-        %i.fa.fa-file-image-o
-        사진 올리기
+- if event.opened?
+  %section.visible-xs
+    .container
+      %nav.navbar.navbar-default.navbar-fixed-bottom{ style: 'min-height: auto;'}
+        %button.btn.btn-primary.btn-lg.btn-block{"data-target" => "#comment-form-modal", "data-toggle" => "modal", :type => "button"}
+          %i.fa.fa-file-image-o
+          사진 올리기
 
-#comment-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
-  .modal-dialog{:role => "document"}
-    .modal-content
-      .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} &#215;
-        %h4.modal-title 사진과 설명을 남겨주세요
-      .modal-body
-        = render 'form_with_assembly', event: event
+  #comment-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &#215;
+          %h4.modal-title 사진과 설명을 남겨주세요
+        .modal-body
+          = render 'form_with_assembly', event: event

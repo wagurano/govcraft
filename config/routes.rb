@@ -111,6 +111,8 @@ Rails.application.routes.draw do
   resources :events, concerns: :statementable do
     member do
       get 'data'
+      put 'close'
+      put 'open'
     end
   end
   resources :sns_events do

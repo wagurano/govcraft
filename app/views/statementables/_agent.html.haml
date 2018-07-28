@@ -5,14 +5,14 @@
     = image_tag agent.image.md.url, style: "height: 24px;"
     %strong= agent.name
     %small= statement.stance.text
-
 - else
-  %button.btn.btn-default.btn-inverted{"data-target" => "#comment-to-agent-modal-#{agent.id}", "data-toggle" => "modal", :type => "button", style: 'margin: 0 0 4px 0'}
+  %button.btn.btn-default.btn-inverted.cursor-default{"data-target" => "#comment-to-agent-modal-#{agent.id}", "data-toggle" => ("modal" if !statementable.try(:closed?)), :type => "button", style: 'margin: 0 0 4px 0'}
     = image_tag agent.image.md.url, style: "height: 24px;"
     %strong= agent.name
     %small.text-danger
       - count = statementable.comments.with_target_agent(agent).count
-      촉구하기 #{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}
+      - if !statementable.try(:closed?)
+        촉구하기 #{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}
 
   %div.modal.fade{id: "comment-to-agent-modal-#{agent.id}", :role => "dialog", :tabindex => "-1"}
     .modal-dialog{:role => "document"}

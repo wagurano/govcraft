@@ -1,7 +1,6 @@
 - cover_image = event.image_url(:lg)
 %section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image})" }
   .container.container-fluid
-    = render 'application/current_user_state_badge'
     - if @project
       .cover-section__project
         = link_to @project.title, @project
@@ -49,25 +48,26 @@
 %section{ style: 'margin: 28px 0;' }
   .container-fluid
     .row.masonry-container
-      .col-sm-6.col-md-4.col-lg-3
-        .panel.panel-default.panel-floating
-          .panel-body
-            = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
-              = f.hidden_field :commentable_type, value: 'Event'
-              = f.hidden_field :commentable_id, value: event.id
-              = invisible_captcha
-              - unless user_signed_in?
+      - if event.opened?
+        .col-sm-6.col-md-4.col-lg-3
+          .panel.panel-default.panel-floating
+            .panel-body
+              = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
+                = f.hidden_field :commentable_type, value: 'Event'
+                = f.hidden_field :commentable_id, value: event.id
+                = invisible_captcha
+                - unless user_signed_in?
+                  .form-group
+                    = f.label :commenter_name, '한 줄 소개'
+                    = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
+                  .form-group
+                    = f.label :commenter_email
+                    = f.text_field :commenter_email, class: 'form-control'
                 .form-group
-                  = f.label :commenter_name, '한 줄 소개'
-                  = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
+                  ~ f.text_area :body, placeholder: '나의 의견은 ...', rows: 8, class: 'form-control input-lg', data: { 'rule-required': true }
                 .form-group
-                  = f.label :commenter_email
-                  = f.text_field :commenter_email, class: 'form-control'
-              .form-group
-                ~ f.text_area :body, placeholder: '나의 의견은 ...', rows: 8, class: 'form-control input-lg', data: { 'rule-required': true }
-              .form-group
-                = f.text_field :tag_list, placeholder: '태그1, 태그2', class: 'form-control'
-              = f.submit '작성', class: 'btn btn-primary btn-sm btn-block'
+                  = f.text_field :tag_list, placeholder: '태그1, 태그2', class: 'form-control'
+                = f.submit '작성', class: 'btn btn-primary btn-sm btn-block'
 
       - @comments.recent.each do |comment|
         .col-sm-6.col-md-4.col-lg-3

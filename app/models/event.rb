@@ -1,7 +1,8 @@
 class Event < ApplicationRecord
   include Statementable
 
-  TEMPLATES = %w( default default_with_photo map map_with_assembly speech sns press any_speech )
+  TEMPLATES = %w( default default_with_photo sns press )
+  TEMPLATES_SPECIAL = %w( map_with_assembly any_speech map speech any_speech )
 
   belongs_to :user
   belongs_to :project
@@ -162,5 +163,21 @@ class Event < ApplicationRecord
 
   def formatted_title_to_agent(user_nickname = nil)
     "\"#{self.title_to_agent}\"에 대해 #{"#{user_nickname}님이 " if user_nickname.present?}행동을 촉구합니다"
+  end
+
+  def closed?
+    self.closed_at.present?
+  end
+
+  def opened?
+    !closed?
+  end
+
+  def comment_closed?
+    closed?
+  end
+
+  def comment_opened?
+    opened?
   end
 end

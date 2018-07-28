@@ -11,29 +11,30 @@
       .share-box{ 'data-share-image': image_url('seo.png') }
 
     .row.masonry-container
-      .col-sm-4.hidden-xs
-        .panel.panel-default.panel-floating
-          .panel-body
-            = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
-              = f.hidden_field :commentable_type, value: 'Event'
-              = f.hidden_field :commentable_id, value: event.id
-              = invisible_captcha
-              - unless user_signed_in?
+      - if event.opened?
+        .col-sm-4.hidden-xs
+          .panel.panel-default.panel-floating
+            .panel-body
+              = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
+                = f.hidden_field :commentable_type, value: 'Event'
+                = f.hidden_field :commentable_id, value: event.id
+                = invisible_captcha
+                - unless user_signed_in?
+                  .form-group
+                    = f.label :commenter_name
+                    = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
+                  .form-group
+                    = f.label :commenter_email
+                    = f.text_field :commenter_email, class: 'form-control'
                 .form-group
-                  = f.label :commenter_name
-                  = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
+                  = f.label :full_street_address, '주소(선택사항)'
+                  = f.text_field :full_street_address, class: 'form-control'
                 .form-group
-                  = f.label :commenter_email
-                  = f.text_field :commenter_email, class: 'form-control'
-              .form-group
-                = f.label :full_street_address, '주소(선택사항)'
-                = f.text_field :full_street_address, class: 'form-control'
-              .form-group
-                = f.label :image
-                = f.file_field :image, class: 'form-control'
-              .form-group
-                ~ f.text_area :body, placeholder: '지금 나는...', required: true, rows: 3, class: 'form-control', data: { 'rule-required': true }
-              = f.submit '작성', class: 'btn btn-primary btn-block'
+                  = f.label :image
+                  = f.file_field :image, class: 'form-control'
+                .form-group
+                  ~ f.text_area :body, placeholder: '지금 나는...', required: true, rows: 3, class: 'form-control', data: { 'rule-required': true }
+                = f.submit '작성', class: 'btn btn-primary btn-block'
       - event.comments.order('id DESC').each do |comment|
         .col-sm-4.col-xs-12
           .panel.panel-default.panel-floating[comment]{ style: 'padding:0' }
@@ -118,34 +119,35 @@
 
     map.fitBounds(bounds);
 
-%section.visible-xs
-  %nav.navbar.navbar-default.navbar-fixed-bottom{ style: 'min-height: auto;'}
-    %button.btn.btn-primary.btn-lg.btn-block{"data-target" => "#comment-form-modal", "data-toggle" => "modal", :type => "button"}
-      %i.fa.fa-file-image-o
-      사진 올리기
+- if event.opened?
+  %section.visible-xs
+    %nav.navbar.navbar-default.navbar-fixed-bottom{ style: 'min-height: auto;'}
+      %button.btn.btn-primary.btn-lg.btn-block{"data-target" => "#comment-form-modal", "data-toggle" => "modal", :type => "button"}
+        %i.fa.fa-file-image-o
+        사진 올리기
 
-#comment-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
-  .modal-dialog{:role => "document"}
-    .modal-content
-      .modal-header
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} &#215;
-        %h4.modal-title 사진과 설명을 남겨주세요
-      .modal-body
-        = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
-          = f.hidden_field :commentable_type, value: 'Event'
-          = f.hidden_field :commentable_id, value: event.id
-          = invisible_captcha
-          - unless user_signed_in?
+  #comment-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} &#215;
+          %h4.modal-title 사진과 설명을 남겨주세요
+        .modal-body
+          = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
+            = f.hidden_field :commentable_type, value: 'Event'
+            = f.hidden_field :commentable_id, value: event.id
+            = invisible_captcha
+            - unless user_signed_in?
+              .form-group
+                = f.label :commenter_name
+                = f.text_field :commenter_name, class: 'form-control', class: 'form-control', data: { 'rule-required': true }
+              .form-group
+                = f.label :commenter_email
+                = f.text_field :commenter_email, class: 'form-control'
             .form-group
-              = f.label :commenter_name
-              = f.text_field :commenter_name, class: 'form-control', class: 'form-control', data: { 'rule-required': true }
+              = f.label :image
+              = f.file_field :image, required: true, class: 'form-control'
             .form-group
-              = f.label :commenter_email
-              = f.text_field :commenter_email, class: 'form-control'
-          .form-group
-            = f.label :image
-            = f.file_field :image, required: true, class: 'form-control'
-          .form-group
-            ~ f.text_area :body, placeholder: '지금 나는...', required: true, rows: 3, class: 'form-control input-lg', data: { 'rule-required': true }
-          = f.submit '작성', class: 'btn btn-primary btn-block'
+              ~ f.text_area :body, placeholder: '지금 나는...', required: true, rows: 3, class: 'form-control input-lg', data: { 'rule-required': true }
+            = f.submit '작성', class: 'btn btn-primary btn-block'

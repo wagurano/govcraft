@@ -72,27 +72,28 @@
     .container
       .row
         .col-sm-12.col-md-8.col-md-offset-2
-          .comments-form
-            = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
-              = f.hidden_field :commentable_type, value: 'Event'
-              = f.hidden_field :commentable_id, value: event.id
-              = invisible_captcha
-              - unless user_signed_in?
-                .row
-                  .col-xs-12.col-md-6
-                    .form-group
-                      = f.label :commenter_name
-                      = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
-                  .col-xs-12.col-md-6
-                    .form-group
-                      = f.label :commenter_email
-                      = f.text_field :commenter_email, class: 'form-control'
-              .form-group
-                ~ f.text_area :body, placeholder: '제 생각에는...', class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
-              .form-group
-                = f.label :full_street_address, '주소(필수)'
-                = f.select :full_street_address, options_for_select(Event::LARGE_AREA), {}, class: 'form-control'
-              = f.submit '작성', class: 'btn btn-default btn-sm'
+          - if event.opened?
+            .comments-form
+              = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
+                = f.hidden_field :commentable_type, value: 'Event'
+                = f.hidden_field :commentable_id, value: event.id
+                = invisible_captcha
+                - unless user_signed_in?
+                  .row
+                    .col-xs-12.col-md-6
+                      .form-group
+                        = f.label :commenter_name
+                        = f.text_field :commenter_name, class: 'form-control', data: { 'rule-required': true }
+                    .col-xs-12.col-md-6
+                      .form-group
+                        = f.label :commenter_email
+                        = f.text_field :commenter_email, class: 'form-control'
+                .form-group
+                  ~ f.text_area :body, placeholder: '제 생각에는...', class: 'form-control validate ' + ( is_redactorable? ? 'redactor' : ''), data: { 'rule-required': true }
+                .form-group
+                  = f.label :full_street_address, '주소(필수)'
+                  = f.select :full_street_address, options_for_select(Event::LARGE_AREA), {}, class: 'form-control'
+                = f.submit '작성', class: 'btn btn-default btn-sm'
 
           %a{id: "anchor-comments-page"}
           - comments = params[:tag].present? ? event.comments.tagged_with(params[:tag]) : event.comments

@@ -34,21 +34,23 @@
     = f.label :image
     = f.file_field :image, class: 'form-control'
 
-  .form-group
-    - @event.template = :default if @event.template.blank?
-    = f.label :template
-    - template_selections = Hash[Event::TEMPLATES.map { |n| [t("activerecord.attributes.event.template_names.#{n}"), n] }]
-    = f.select :template, template_selections.sort{|a, b| a[0] <=> b[0]}, {}, class: 'form-control'
-    .help-block
-      템플릿 예시 :
-      %ul
-        - Event::TEMPLATES.each do |template|
-          %li
-            = t("activerecord.attributes.event.template_names.#{template}")
-            \:
-            - sample_event = Event.where.not(id: @event.try(:id)).where(template: template).first
-            - if sample_event.present?
-              = link_to sample_event.title, sample_event, target: '_blank'
+  - unless @event.persisted?
+    .form-group
+      - @event.template = :default if @event.template.blank?
+      = f.label :template
+      - template_selections = Hash[Event::TEMPLATES.map { |n| [t("activerecord.attributes.event.template_names.#{n}"), n] }]
+      = f.select :template, template_selections.sort{|a, b| a[0] <=> b[0]}, {}, class: 'form-control'
+      .help-block
+        템플릿 예시 :
+        %ul
+          - Event::TEMPLATES.each do |template|
+            %li
+              = t("activerecord.attributes.event.template_names.#{template}")
+              \:
+              - sample_event = Event.where.not(id: @event.try(:id)).where(template: template).first
+              - if sample_event.present?
+                = link_to sample_event.title, sample_event, target: '_blank'
+
   .form-group
     = f.label :title
     = f.text_field :title, class: 'form-control'
@@ -61,11 +63,12 @@
     = f.label :slug
     = f.text_field :slug, class: 'form-control'
     .help-block
-      입력하지 않아도 됩니다.
-  .form-group
-    = f.label :css
-    ~ f.text_area :css, rows: 10, class: 'form-control'
-    .help-block
-      입력하지 않아도 됩니다.
+      선택사항입니다.
+  - if current_user.is_admin?
+    .form-group
+      = f.label :css
+      ~ f.text_area :css, rows: 10, class: 'form-control'
+      .help-block
+        선택사항입니다.
   .form-group
     = f.submit '저장', class: 'btn btn-primary'

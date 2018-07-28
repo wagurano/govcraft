@@ -1,12 +1,10 @@
 %a{id: "anchor-agents"}
-%h3.sub-title 촉구하기
+%h3.sub-title 촉구합니다
 .panel-body{style:"padding:0px"}
   .panel-post__agents
-    .row.masonry-container
-      - event.agents.each do |agent|
-        .col-md-3.col-sm-4.col-xs-12
-          = render 'statementables/agent', agent: agent, statementable: event
-    - if event.agents.count > 1
+    - event.agents.each do |agent|
+      = render 'statementables/agent', agent: agent, statementable: event
+    - if event.agents.count > 1 and event.opened?
       = link_to [:new_comment_agent, event], class: 'btn btn-primary btn-lg' do
         #{event.agents.count}명 모두에게 촉구하기
         %i.fa.fa-arrow-right

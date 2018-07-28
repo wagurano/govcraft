@@ -54,6 +54,18 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
+  def open
+    @event.update_attributes(closed_at: nil)
+    flash[:success] = t('messages.events.open')
+    redirect_to @event
+  end
+
+  def close
+    @event.touch(:closed_at)
+    flash[:success] = t('messages.events.close')
+    redirect_to @event
+  end
+
   private
 
   def event_params
