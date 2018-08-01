@@ -1,7 +1,6 @@
 row_definition = [
   [:created_at, '일시'],
   [:user_name, '성명'],
-  [:user_email, '이메일'],
   [:signer_address, '주소'],
   [:signer_phone, '연락처'],
   [:body, '한마디']

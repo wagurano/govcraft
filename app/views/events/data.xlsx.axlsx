@@ -1,7 +1,6 @@
 row_definition = [
   [:created_at, '일시'],
   [:user_nickname, '이름'],
-  [:user_email, '이메일'],
   [:body, '내용'],
   [:tag_list, '태그']
 ]
