@@ -5,6 +5,8 @@ row_definition = [
   [:body, '내용'],
   [:tag_list, '태그']
 ]
+row_definition << [:target_agents_to_s, '촉구 대상'] if @event.template == 'press'
+
 row_titles = row_definition.map { |c| c[1] }
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "댓글 #{@event.comments_count}건") do |sheet|

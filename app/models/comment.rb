@@ -39,6 +39,10 @@ class Comment < ApplicationRecord
     user.present? ? user.email : commenter_email
   end
 
+  def target_agents_to_s
+    self.target_agents.map{ |agent| "#{agent.organization} #{agent.name}" }.join(", ")
+  end
+
   private
 
   def save_gps
@@ -59,8 +63,6 @@ class Comment < ApplicationRecord
       errors.add(:commenter_name, I18n.t('activerecord.errors.models.comment.commenter.blank'))
     end
   end
-
-  private
 
   def fetch_geocode
     self.latitude = nil
