@@ -31,6 +31,12 @@ ko:
       open: 다시 열렸습니다
       close: 종료되었습니다
       closed: 종료된 캠페인입니다.
+    signs:
+      mail:
+        empty_signer: '참여자가 아무도 없습니다.'
+        completed: '모든 참여자에게 메일을 보냈습니다.'
+        blank_preview_email: '내 메일을 입력해 주세요.'
+        preview_completed: '내 메일로 미리보기 메일을 보냈습니다.'
     xlsx_help:
       archive_document:
         id: "비워두면 신규생성, 숫자를 적으면 해당 숫자를 ID로 가지는 자료를 업데이트합니다."

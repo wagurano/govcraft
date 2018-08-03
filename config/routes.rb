@@ -80,7 +80,12 @@ Rails.application.routes.draw do
   resources :discussion_categories
   resources :sympathies
   resources :petitions, concerns: :statementable do
-    resources :signs
+    resources :signs do
+      collection do
+        get 'mail_form'
+        post 'mail'
+      end
+    end
     member do
       get 'data'
       put 'close'

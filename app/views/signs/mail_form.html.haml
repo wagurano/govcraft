@@ -1,0 +1,19 @@
+
+.container{style:"margin-bottom: 30px;"}
+  %h3 참여자에게 메일 보내기
+  = form_tag mail_petition_signs_path(@petition) do
+    .form-group
+      = label_tag :title, "메일 제목"
+      = text_field_tag :title, nil, class: "form-control"
+    .form-group
+      = label_tag :body, "메일 내용"
+      = text_area_tag :body, nil, class: "form-control"
+
+    = submit_tag "보내기", data: {confirm: "정말 보내시겠습니까?" }, class: 'btn btn-primary'
+
+    %hr
+
+    .form-group
+      = label_tag :preview_email, '미리 받아볼 내 메일 주소'
+      = text_field_tag :preview_email, current_user.email, class: 'form-control'
+    %button.btn.btn-default{ name: 'preview', value: 'true' } 내 메일로 받아보기

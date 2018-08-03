@@ -8,6 +8,9 @@
       - if can? :edit, petition
         &middot;
         = link_to '촉구대상 관리', edit_agents_petition_path(petition)
+      - if can? :mail_signs, petition
+        &middot;
+        = link_to '참여자에게 메일 보내기', mail_form_petition_signs_path(petition)
       - if can? :destroy, petition
         &middot;
         = link_to '삭제', petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }

@@ -60,6 +60,9 @@ class Ability
       can [:edit_agents, :add_agent, :remove_agent, :add_action_target, :remove_action_target, :edit_message_to_agent, :update_message_to_agent, :open, :close], [Petition, Event] do |action|
         user == action.user or action.try(:project).try(:organizer?, user)
       end
+      can [:mail_signs], Petition do |petition|
+        user == petition.user or petition.project.try(:organizer?, user)
+      end
 
       can [:create, :update], [Statement] do |statement|
         statementable = statement.statementable
