@@ -58,6 +58,12 @@ class SignsController < ApplicationController
     render_404 and return if @petition.blank?
     authorize! :mail_signs, @petition
 
+    if params[:title].blank?
+      flash[:error] = t('messages.signs.mail.blank_title')
+      redirect_back(fallback_location: @petition)
+      return
+    end
+
     if params[:preview_email].blank? and params[:preview] == "true"
       flash[:error] = t('messages.signs.mail.blank_preview_email')
       redirect_back(fallback_location: @petition)
