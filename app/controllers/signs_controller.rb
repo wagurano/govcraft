@@ -73,6 +73,8 @@ class SignsController < ApplicationController
     SignsMailingJob.perform_async(@petition.id, params[:title], params[:body], (params[:preview_email] if params[:preview] == 'true'), current_user.id)
     if params[:preview] == 'true'
       flash[:success] = t('messages.signs.mail.preview_completed')
+      render "signs/mail_form"
+      return
     else
       flash[:success] = t('messages.signs.mail.completed')
     end

@@ -5,11 +5,9 @@
 %p
   .container
     != @body
-%p
-  =link_to "서명 진행자 #{@sign.petition.user.nickname}에게 연락하기", "#"
-  =link_to "서명 진행상황 확인하기", petition_url(@sign.petition), target: "_blank"
-%p
-  (수신거부를 위해 본 메일을 회신해 주십시오.)
+%p{ style: 'text-align: center' }
+  =link_to "서명 진행상황 확인하기", petition_url(@sign.petition), style: "font-size: 14px; display: inline-block; color: #1779f3; background: none; border-radius: 3px; padding: 16px 20px; text-decoration: none; outline: 0px; font-family: AppleSDGothic, \"apple sd gothic neo\", \"noto sans korean\", \"noto sans korean regular\", \"noto sans cjk kr\", \"noto sans cjk\", \"nanum gothic\", \"malgun gothic\", dotum, sans-serif; border-width: 2px; border-style: solid; border-color: #1779f3;_display:inline", target: "_blank"
+
 %div(style="margin-top: 60px;")
   %table
     %tr
@@ -22,3 +20,5 @@
           %br
           %strong '가브크래프트'
           http://govcraft.org/
+  %p{ style: 'text-align: center; color: #777; font-size: 12px' }
+    수신거부를 원하시면 본 메일을 회신해 주십시오
