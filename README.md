@@ -132,6 +132,27 @@ export PARTI_API_BASE="xx"
 export FILENAME_ENCODING="ISO-8859-1"
 ```
 
+### 사이드킥을 로컬에서 테스트하려면
+.powenv에 아래를 추가합니다.
+
+```
+export SIDEKIQ=true
+```
+
+redis를 구동합니다
+
+```
+$ redis-server
+```
+
+사이드킥을 구동합니다
+
+```
+$ source .powenv && bundle exec sidekiq
+```
+
+puma를 재기동합니다
+
 ### 조직 기본 데이터 등록
 
 ```
