@@ -1,4 +1,30 @@
+include ActionView::Helpers::SanitizeHelper
+
 namespace :data do
+  desc '성남시의원 데이터를 읽어서 에이전트로 등록합니다'
+  task 'register_councilor_to_agent' => :environment do
+    path = Rails.root.join('data', '2018_07_seongnam_city_councilor.xlsx')
+    xlsx = Roo::Spreadsheet.open path.to_s
+    ActiveRecord::Base.transaction do
+      position = Position.find_or_create_by!(name: '제8대 성남시의원')
+      xlsx.sheet(0).each_row_streaming(offset: 1, pad_cells: true) do |row|
+        puts row.inspect
+
+        agent = Agent.new(
+          name: row[0].cell_value,
+          email: strip_tags(row[1].cell_value),
+          organization: row[2].cell_value,
+          category: '개인',
+          remote_image_url: strip_tags(row[5].cell_value),
+          election_region: "성남시 #{row[3].cell_value}"
+        )
+
+        agent.appointments.build(position: position)
+        agent.save!
+      end
+    end
+  end
+
   desc '국회의원 데이터가 비어있으면 로드합니다'
   task 'load_once_assembly_members' => :environment do
     if AssemblyMember.all.empty?

@@ -158,3 +158,10 @@ puma를 재기동합니다
 ```
 $ bin/rails organizations:seed
 ```
+
+## 데이터 정보
+
+### 시의원 데이터 목록
+
+* data/2018_07_seongnam_city_council.xlsx : 2018년 7월 성남시의원 데이터
+
