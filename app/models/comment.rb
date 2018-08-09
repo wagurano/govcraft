@@ -12,8 +12,9 @@ class Comment < ApplicationRecord
 
   belongs_to :commentable, polymorphic: true
   belongs_to :user
-  #belongs_to :target_agent, optional: true, class_name: Agent
-  has_and_belongs_to_many :target_agents, class_name: 'Agent', join_table: 'comments_target_agents'
+  belongs_to :target_agent, optional: true, class_name: Agent
+  has_many :target_agents, through: :comments_target_agents, source: :agent
+  has_many :comments_target_agents
   has_many :comments, class_name: Comment, as: :commentable, dependent: :destroy
 
   mount_uploader :image, ImageUploader

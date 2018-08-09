@@ -310,7 +310,7 @@ $(function(){
     $('#site-sidebar').sidebar('toggle');
   });
 
-  $('.gov-action-popover').each(function(i, elm) {
+  $('.js-popover').each(function(i, elm) {
     var $elm = $(elm);
 
     var options = {}
