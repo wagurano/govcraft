@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180728025212) do
+ActiveRecord::Schema.define(version: 20180809075658) do
 
   create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "action_assignable_id",   null: false
@@ -347,16 +347,6 @@ ActiveRecord::Schema.define(version: 20180728025212) do
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
-  create_table "comments_target_agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.integer  "comment_id"
-    t.integer  "agent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["agent_id"], name: "index_comments_target_agents_on_agent_id", using: :btree
-    t.index ["comment_id", "agent_id"], name: "comments_target_speakers_uk", unique: true, using: :btree
-    t.index ["comment_id"], name: "index_comments_target_agents_on_comment_id", using: :btree
-  end
-
   create_table "deprecated_candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "name"
     t.text     "body",        limit: 65535
@@ -593,6 +583,16 @@ ActiveRecord::Schema.define(version: 20180728025212) do
     t.string   "desc"
     t.integer  "anonymous_feedbacks_count",               default: 0
     t.index ["survey_id"], name: "index_options_on_survey_id", using: :btree
+  end
+
+  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "comment_id"
+    t.integer  "agent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_orders_on_agent_id", using: :btree
+    t.index ["comment_id", "agent_id"], name: "comments_target_speakers_uk", unique: true, using: :btree
+    t.index ["comment_id"], name: "index_orders_on_comment_id", using: :btree
   end
 
   create_table "organizations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|

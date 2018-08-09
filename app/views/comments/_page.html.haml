@@ -17,7 +17,7 @@
                 = image_tag target_agent.image.md.url, style: "height: 24px;"
                 #{target_agent.organization} #{target_agent.name}
                 님#{(" 이외 #{comment.target_agents.count - 1}분" if comment.target_agents.count > 1)}에게
-              - read = [true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false].sample
+              - read = [true, false, false, false, false, false, false, false].sample
               - if read
                 %span.js-popover{ "data-url": "#xxxx", "data-placement": "bottom", "data-trigger": "hover", style: 'color: red;' }
                   %i.fa.fa-check
@@ -25,7 +25,10 @@
                   = rand(10)
                 .hidden
                   #xxxx
-                    던킨도너츠 스타벅스 커피빈 희상
+                    - comment.target_agents.each do |target_agent|
+                      %span=target_agent.name
+                      %span=
+                      %br
 
 
 
