@@ -1,5 +1,7 @@
 class CommentMailer < ApplicationMailer
   def target_agent(comment_id, agent_id, statement_key_id)
+    metadata['comment_id'] = comment_id
+    metadata['agent_id'] = agent_id
     @comment = Comment.find_by(id: comment_id)
     return if @comment.blank?
     @statement_key = StatementKey.find_by(id: statement_key_id)
@@ -13,6 +15,7 @@ class CommentMailer < ApplicationMailer
     end
     @comment.update_attributes(mailing: :sent)
     mail(to: @agent.email,
-      template_name: "target_agent_#{@comment.commentable.class.name.underscore}")
+      template_name: "target_agent_#{@comment.commentable.class.name.underscore}",
+      tag: "order")
   end
 end

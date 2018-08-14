@@ -10,7 +10,8 @@
     = image_tag agent.image.md.url, style: "height: 24px;"
     %strong= agent.name
     %small.text-danger
-      - count = statementable.comments.with_target_agent(agent).count
+      - comments = statementable.comments
+      - count = Order.where(agent_id: agent).where(comment_id: comments).count
       - if !statementable.try(:closed?)
         촉구하기 #{count > 999 ? "(999+)" : (count > 0 ? "(#{count})" : nil)}
 

@@ -17,21 +17,27 @@
                 = image_tag target_agent.image.md.url, style: "height: 24px;"
                 #{target_agent.organization} #{target_agent.name}
                 님#{(" 이외 #{comment.target_agents.count - 1}분" if comment.target_agents.count > 1)}에게
-              - read = [true, false, false, false, false, false, false, false].sample
-              - if read
-                %span.js-popover{ "data-url": "#xxxx", "data-placement": "bottom", "data-trigger": "hover", style: 'color: red;' }
+
+              - if comment.orders.all_read.any?
+                - read_status_dom_id = "js-read-status-#{SecureRandom.uuid}"
+                %span.js-popover{ "data-url": "##{read_status_dom_id}", "data-placement": "bottom", "data-trigger": "hover", style: 'color: red;' }
                   %i.fa.fa-check
                   읽음
-                  = rand(10)
+                  = comment.orders.all_read.count
                 .hidden
-                  #xxxx
-                    - comment.target_agents.each do |target_agent|
-                      %span=target_agent.name
-                      %span=
-                      %br
-
-
-
+                  %div{ id: read_status_dom_id }
+                    - comment.orders.in_groups_of(2, false).each do |group_orders|
+                      %div.row
+                        - group_orders.each do |order|
+                          %div.col-sm-6
+                            = image_tag order.agent.image.md.url, style: "height: 24px; margin-right: 5px;"
+                            - if order.agent.category == '개인'
+                              %small.text-muted= order.agent.organization
+                            %span= order.agent.name
+                            - if order.read?
+                              %span= date_f order.read_at
+                            - else
+                              %span 안읽음
 
           %p= raw screened(comment, :body)
 

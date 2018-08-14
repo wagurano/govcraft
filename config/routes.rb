@@ -192,6 +192,11 @@ Rails.application.routes.draw do
       get :agents
     end
   end
+  resources :orders do
+    collection do
+      post :read
+    end
+  end
 
   namespace :admin do
     root 'base#home', as: :home
