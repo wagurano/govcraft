@@ -26,11 +26,11 @@
 
           = link_to project.user do
             = image_tag project.user.image_url(:sm), class: 'user-image-sm'
-          - if project.organizers.any?
+          - organizers = project.organizers.where.not(user: project.user)
+          - if organizers.any?
             %i.fa.fa-times
-            - project.organizers.each do |organizer|
-              - if project.user != organizer.user
-                = link_to organizer.user do
-                  = image_tag organizer.user.image_url(:sm), class: 'user-image-sm'
+            - organizers.each do |organizer|
+              = link_to organizer.user do
+                = image_tag organizer.user.image_url(:sm), class: 'user-image-sm'
 
       = render 'projects/header_admin_menu', project: project
