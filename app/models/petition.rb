@@ -2,6 +2,8 @@ class Petition < ApplicationRecord
   include Statementable
   include Likable
 
+  TEMPLATES = %w( default petition )
+
   belongs_to :user
   belongs_to :project
   has_many :comments, as: :commentable, dependent: :destroy
@@ -38,8 +40,10 @@ class Petition < ApplicationRecord
   def fallback_social_image_url
     if self.read_attribute(:social_image).present?
       self.social_image_url
+    elsif self.project.try(:read_attribute, :social_image).present?
+      self.project.social_image_url
     else
-      self.project.try(:social_image_url)
+      self.cover_image_url
     end
   end
 
@@ -53,5 +57,27 @@ class Petition < ApplicationRecord
 
   def opened?
     !closed?
+  end
+
+  def comment_closed?
+    return false if self.template == 'petition'
+
+    closed?
+  end
+
+  def comment_opened?
+    !comment_closed?
+  end
+
+  def signable?
+    self.template == 'petition'
+  end
+
+  def agents_orderable?
+    self.template == 'petition'
+  end
+
+  def comment_disablable?
+    self.template == 'petition'
   end
 end

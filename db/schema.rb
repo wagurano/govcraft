@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180809094654) do
+ActiveRecord::Schema.define(version: 20180822105845) do
 
   create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "action_assignable_id",   null: false
@@ -645,8 +645,8 @@ ActiveRecord::Schema.define(version: 20180809094654) do
     t.text     "body",                         limit: 65535
     t.integer  "project_id"
     t.integer  "user_id"
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
     t.integer  "likes_count",                                default: 0
     t.integer  "signs_goal_count",                           default: 1000
     t.integer  "signs_count",                                default: 0
@@ -668,12 +668,19 @@ ActiveRecord::Schema.define(version: 20180809094654) do
     t.string   "agent_section_response_title"
     t.boolean  "use_signer_phone",                           default: false
     t.string   "signer_phone_title"
-    t.boolean  "sign_hidden",                                default: false, null: false
+    t.boolean  "sign_hidden",                                default: false,      null: false
     t.integer  "area_id"
     t.string   "special_slug"
     t.integer  "issue_id"
     t.datetime "closed_at"
     t.string   "sign_form_intro"
+    t.string   "slug"
+    t.integer  "comments_count",                             default: 0
+    t.string   "template",                                   default: "petition"
+    t.string   "title_to_agent"
+    t.text     "message_to_agent",             limit: 65535
+    t.integer  "previous_event_id"
+    t.text     "css",                          limit: 65535
     t.index ["area_id"], name: "index_petitions_on_area_id", using: :btree
     t.index ["issue_id"], name: "index_petitions_on_issue_id", using: :btree
     t.index ["project_id"], name: "index_petitions_on_project_id", using: :btree

@@ -18,6 +18,13 @@ class PetitionsController < ApplicationController
     @signs = @petition.signs.where.any_of(*([Sign.where.not(body: nil).where.not(body: ''), (Sign.where(user: current_user) if current_user.present?)].compact)).recent
     @signs = params[:mode] == 'widget' ? @signs.limit(10) : @signs.page(params[:page])
 
+    if @petition.template != 'petition'
+      @comments = params[:tag].present? ? @petition.comments.tagged_with(params[:tag]) : @petition.comments
+      @comments = params[:toxic].present? ? @comments.where(toxic: true) : @comments.where(toxic: false)
+      @comments = @comments.order('id DESC')
+      @comments = @comments.page(params[:page]).per 50
+    end
+
     if params[:mode] == 'widget'
       render '_widget', layout: 'strip'
     end
@@ -27,8 +34,11 @@ class PetitionsController < ApplicationController
   end
 
   def new
+    render 'new_no_template' and return if params[:template].blank?
+
     @project = Project.find(params[:project_id]) if params[:project_id].present?
     @current_organization = @project.organization if @project.present?
+    @petition.template = params[:template]
   end
 
   def create
@@ -90,7 +100,7 @@ class PetitionsController < ApplicationController
       :use_signer_email, :use_signer_address, :use_signer_real_name, :use_signer_phone,
       :signer_email_title, :signer_address_title, :signer_real_name_title, :signer_phone_title,
       :agent_section_title, :agent_section_response_title, :sign_hidden, :area_id, :issue_id,
-      :special_slug, :sign_form_intro)
+      :special_slug, :sign_form_intro, (:template if params[:action] == 'create'))
   end
 
   def reset_meta_tags_for_show
