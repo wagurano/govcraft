@@ -13,7 +13,7 @@
       - if @project.present?
         = link_to @project do
           %span.header-label
-            캠페인
+            프로젝트
           = @project.title
       - else
         = organization.try(:slogan) || '세상을 바꾸는 시민들의 일상 정치 플랫폼'
