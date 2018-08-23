@@ -2,7 +2,7 @@ class Petition < ApplicationRecord
   include Statementable
   include Likable
 
-  TEMPLATES = %w( default petition )
+  TEMPLATES = %w( basic petition photo )
 
   belongs_to :user
   belongs_to :project
