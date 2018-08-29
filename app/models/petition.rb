@@ -17,7 +17,7 @@ class Petition < ApplicationRecord
 
   validates :signs_goal_count, :numericality => { :greater_than_or_equal_to => 0 }
 
-  scope :recent, -> { order('id DESC') }
+  scope :recent, -> { order('created_at DESC') }
   scope :by_organization, ->(organization) { where(project: organization.projects) }
   scoped_search on: [:title]
 
