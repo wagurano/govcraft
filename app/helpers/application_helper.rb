@@ -84,4 +84,10 @@ module ApplicationHelper
     max_length = options[:length] || 3
     HTML_Truncator.truncate(text, max_length, options)
   end
+
+  def render_if_exist(path, options = {})
+    return unless lookup_context.exists?(path)
+
+    render path, options
+  end
 end

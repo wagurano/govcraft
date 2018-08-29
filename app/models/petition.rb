@@ -2,7 +2,7 @@ class Petition < ApplicationRecord
   include Statementable
   include Likable
 
-  TEMPLATES = %w( basic petition photo )
+  TEMPLATES = %w( basic petition photo order )
 
   belongs_to :user
   belongs_to :project
@@ -48,8 +48,9 @@ class Petition < ApplicationRecord
   end
 
   def formatted_title_to_agent(user_nickname = nil)
-    "서명 \"#{title}\"에 대해 #{"#{user_nickname}님이 " if user_nickname.present?}행동을 촉구합니다"
+    "캠페인 \"#{self.title_to_agent.presence || self.title}\"에 대해 #{"#{user_nickname}님이 " if user_nickname.present?}행동을 촉구합니다"
   end
+
 
   def closed?
     self.closed_at.present?
@@ -67,14 +68,6 @@ class Petition < ApplicationRecord
 
   def comment_opened?
     !comment_closed?
-  end
-
-  def signable?
-    self.template == 'petition'
-  end
-
-  def agents_orderable?
-    self.template == 'petition'
   end
 
   def comment_disablable?

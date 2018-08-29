@@ -26,7 +26,7 @@
               = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
                 - if params[:i_am] == 'your_father'
                   = hidden_field_tag :i_am, 'your_father'
-                = f.hidden_field :commentable_type, value: 'Event'
+                = f.hidden_field :commentable_type, value: 'Petition'
                 = f.hidden_field :commentable_id, value: @petition.id
                 = invisible_captcha
                 - unless user_signed_in?
@@ -68,7 +68,7 @@
         %h4.modal-title 인증샷과 함께 한마디 남겨주세요
       .modal-body
         = form_for Comment.new, html: { class: 'gov-action-form-validation' } do |f|
-          = f.hidden_field :commentable_type, value: 'Event'
+          = f.hidden_field :commentable_type, value: 'Petition'
           = f.hidden_field :commentable_id, value: @petition.id
           = invisible_captcha
           - unless user_signed_in?

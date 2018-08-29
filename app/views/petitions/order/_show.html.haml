@@ -1,0 +1,72 @@
+- cover_image = @petition.cover_image_url(:lg)
+%section.cover-section{ style: "background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image})" }
+  .container.container-fluid
+    - if @project
+      .cover-section__project
+        = link_to @project.title, @project
+
+    %h2.cover-section__title
+      = @petition.title
+
+    - if can?(:edit, @petition) || can?(:destroy, @petition)
+      .cover-section__buttons
+        - if can? :edit, @petition
+          = link_to '수정', edit_petition_path(@petition)
+        - if can? :edit, @petition
+          &middot;
+          = link_to '촉구메시지관리', edit_message_to_agent_petition_path(@petition)
+        - if can? :edit, @petition
+          &middot;
+          = link_to '촉구대상관리', edit_agents_petition_path(@petition)
+        - if can? :destroy, @petition
+          &middot;
+          = link_to '삭제', @petition, method: :delete, data: { confirm: '삭제하시겠습니까?' }
+
+    .cover-section__body= raw @petition.body
+
+    %h4.cover-section__users-count
+      %span
+        %i.fa.fa-comment-o
+        = @petition.comments.count
+
+    .share-box{ 'data-share-image': image_url('seo.png') }
+
+
+%section
+  .container-fluid
+    = render 'petitions/order/agents', petition: @petition
+
+%section
+  .container-fluid
+    %a{id: "anchor-agents"}
+    %h3.sub-title 촉구메시지 #{@comments.total_count}개
+    .row.masonry-container
+      - @comments.recent.each do |comment|
+        .col-sm-6.col-md-4.col-lg-3
+          .panel.panel-default.panel-floating[comment]{ class: (comment.toxic? ? 'comment-toxic': '') }
+            .panel-body
+              - if comment.target_agents.any?
+                - target_agent = comment.target_agents.first
+                .comment__to-agent_any{ style: 'font-weight: bold'}<>
+                  %span<>
+                    #{target_agent.organization} #{target_agent.name}
+                  님#{(" 이외 #{comment.target_agents.count - 1}분" if comment.target_agents.count > 1)}에게
+              .comment__body
+                %h4{ style: 'font-size: 16px; letter-spacing: -0.02em; line-height: 1.4;'}
+                  != comment.body
+              .comment__tags
+                - comment.tag_list.each do |tag|
+                  = link_to "##{tag}", petition_path(@petition, {tag: tag})
+              .comment__meta{ style: 'color: #5f5f5f;font-size: 12px' }
+                = comment.user_nickname
+                = date_f comment.created_at
+                - if can? :destroy, comment
+                  = link_to '삭제', comment, method: :delete, data: { confirm: '정말 삭제하시겠습니까?' }
+                - if current_user != comment.user
+                  = render 'reports/button', reportable: comment
+
+              .comment__like{ style: 'margin-top: 14px;' }
+                = render 'likes/button', likable: comment
+    .text-center
+      = paginate @comments, theme: 'twitter-bootstrap-3'
+

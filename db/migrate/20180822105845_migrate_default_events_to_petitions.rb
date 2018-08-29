@@ -25,10 +25,25 @@ class MigrateDefaultEventsToPetitions < ActiveRecord::Migration[5.0]
 
       dir.down do
         transaction do
+          Petition.where('event')
+
+          execute <<-SQL
+            UPDATE comments
+               SET commentable_id = previous_event_id,
+                   commentable_type = 'Event'
+             WHERE commentable_type = 'Petition'
+               AND commentable_id in (
+                SELECT id
+                  FROM petitions
+                 WHERE template = 'basic'
+               )
+          SQL
+
           execute <<-SQL
             DELETE FROM petitions
              WHERE template = 'basic'
           SQL
+
         end
       end
     end
