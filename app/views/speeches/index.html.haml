@@ -6,7 +6,7 @@
     .container.fill-bloc-top-edge
       %nav
         .text-center
-          = link_to @event do
+          = link_to @petition do
             = image_tag 'events/speeches/logo.png', alt: "logo", class: 'candle-logo'
 
     .container.cover-body
@@ -14,7 +14,7 @@
         .col-sm-12.col-md-10.col-md-offset-1
           .speech
             %h3.mg-lg.text-center.tc-outer-space.cover-text
-              != strip_tags(@event.body)
+              != strip_tags(@petition.body)
 
   / bloc-0 END
   / bloc-1
@@ -44,10 +44,4 @@
                       = number_with_delimiter speech.view_count_cacheable
       .text-center
         = paginate @speeches, theme: 'twitter-bootstrap-3'
-  / bloc-1 END
-  / bloc-2
-  #bloc-2.bloc.bgc-outer-space.d-bloc
-    .container.bloc-sm
-      .row.row-no-gutters
-        .col-sm-12.text-center
-          = link_to '촛불발언 동영상 올리기', new_speech_path(event_id: @event.id), class: 'btn btn-sq btn-dark-jungle-green btn-lg'
+

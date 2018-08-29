@@ -2,10 +2,6 @@ score_job:
   cron: "1 * * * * Asia/Seoul"
   class: "ScoreJob"
   queue: default
-speeches_view_count_job:
-  cron: "15 * * * * Asia/Seoul"
-  class: "SpeechesViewCountJob"
-  queue: default
 summary_mailing_job:
   class: SummaryMailingJob
   cron: "15 5 * * 1 Asia/Seoul"

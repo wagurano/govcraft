@@ -25,6 +25,11 @@ class PetitionsController < ApplicationController
       @comments = @comments.page(params[:page]).per 50
     end
 
+    if @petition.template == 'special_speech'
+      @speeches = @petition.speeches.recent.limit(browser.device.mobile? ? 4 : 8)
+      @hero_speech = @petition.speeches.sample
+    end
+
     if params[:mode] == 'widget'
       render '_widget', layout: 'strip'
     end
