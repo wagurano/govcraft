@@ -85,8 +85,14 @@ module ApplicationHelper
     HTML_Truncator.truncate(text, max_length, options)
   end
 
+  def partial_lookup_path(path)
+    items = path.split('/')
+    items[-1] = "_#{items[-1]}"
+    items.join('/')
+  end
+
   def render_if_exist(path, options = {})
-    return unless lookup_context.exists?(path)
+    return unless lookup_context.exists?(partial_lookup_path(path))
 
     render path, options
   end
