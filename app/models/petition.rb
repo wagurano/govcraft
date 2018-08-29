@@ -207,4 +207,8 @@ class Petition < ApplicationRecord
   def comment_disablable?
     self.template == 'petition'
   end
+
+  def signable?
+    self.template == 'petition'
+  end
 end

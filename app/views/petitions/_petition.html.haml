@@ -9,17 +9,25 @@
                 = petition.project.title
             = petition.title
       .card-extra
-        - if petition.has_goal?
-          .progress
-            .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{petition.percentage}", :role => "progressbar", :style => "width: #{petition.percentage}%;"}
-          .pull-right #{petition.percentage}% 달성
+        - if petition.signable?
+          - if petition.has_goal?
+            .progress
+              .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{petition.percentage}", :role => "progressbar", :style => "width: #{petition.percentage}%;"}
+            .pull-right #{petition.percentage}% 달성
 
-          %span.count
-            #{number_with_delimiter(petition.signs_count)}명 참여
+            %span.count
+              #{number_with_delimiter(petition.signs_count)}명 참여
+          - else
+            .progress
+              .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "100", :role => "progressbar", :style => "width: 100%;"}
+
+            %span.count
+              %i.fa.fa-user
+              #{number_with_delimiter(petition.signs_count)}명 참여
         - else
           .progress
             .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "100", :role => "progressbar", :style => "width: 100%;"}
 
           %span.count
-            %i.fa.fa-user
-            #{number_with_delimiter(petition.signs_count)}명 참여
+            %i.fa.fa-rocket
+            #{number_with_delimiter(petition.comments.count)}건 참여
