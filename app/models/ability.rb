@@ -25,6 +25,9 @@ class Ability
         ]
 
       # 서명 만들기
+      can :create_peition, [Organization] do |organization|
+        organization.blank? or organization.projects.any?{ |project| project.organizer?(user) }
+      end
       can :create_peition, [Project] do |project|
         project.blank? or project.organizer?(user)
       end

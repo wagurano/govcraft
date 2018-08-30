@@ -41,10 +41,10 @@
 - if petitions.any?
   .container
     %h3.sub-title
-      = local_assigns[:title_label] || @project.try(:component_title, 'petition') || Petition.model_name.human
-      - if user_signed_in? and (@project.blank? or can?(:create_petition, @project))
+      = local_assigns[:title_label] || Petition.model_name.human
+      - if user_signed_in? and can?(:create_petition, @current_organization)
         %small.pull-right
-          = link_to "캠페인 시작하기", new_petition_path(project_id: @project), class: 'text-muted'
+          = link_to "캠페인 시작하기", new_petition_path, class: 'text-muted'
 
     .row.masonry-container
       = render petitions

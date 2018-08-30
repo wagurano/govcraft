@@ -70,14 +70,17 @@
         - if @project.present? and @petition.project.blank?
           - @petition.project = @project
         - if current_user.is_admin?
-          - all_projects = Project.all
+          - if fetch_organization_from_request.present?
+            - all_projects = fetch_organization_from_request.try(:projects)
+          - else
+            - all_projects = Project.all
         - else
           - all_projects = (@petition.project.try(:organization).try(:projects) || fetch_organization_from_request.try(:projects) || Project.where(organization: nil)).organize_by(current_user, 'Project')
 
         - if all_projects.any?
           .form-group
-            = f.label :project_id, '특정 프로젝트에 관련된 캠페인인가요? 프로젝트와 연결하세요. (선택)'
-            = f.collection_select :project_id, all_projects, :id, :title, {include_blank: '프로젝트 없음'}, { class: 'js-select2 form-control' }
+            = f.label :project_id, "특정 프로젝트에 관련된 캠페인인가요? 프로젝트와 연결하세요. (#{fetch_organization_from_request.present? ? '필수' : '선택'})"
+            = f.collection_select :project_id, all_projects, :id, :title, {include_blank: (fetch_organization_from_request.present? ? nil : '프로젝트 없음')}, { class: 'js-select2 form-control' }
 
         .form-group
           = f.label :area_id, '특정 지역에 관련된 캠페인인가요? 지역과 연결해 보세요. (선택)'

@@ -2,7 +2,7 @@
 %section#site-header
   #header-container.container-fluid.container-fluid-always
     - unless @current_organization.nil?
-      = link_to 'http://' + @current_organization.slug + '.govcraft.org' do
+      = link_to root_url(subdomain: @current_organization.slug) do
         .title
           = @current_organization.title
     - else
