@@ -35,7 +35,7 @@
         %a{id: "anchor-project-poll-and-survey"}
         = render 'polls_and_surveys/list', polls: @project.polls.recent, surveys: @project.surveys.recent
   - when :petition
-    - if @project.petition_enabled?
+    - if @project.petition_enabled? and @project.petitions.any?
       %section.page-block
         %a{id: "anchor-project-petition"}
-        = render 'petitions/list', petitions: @project.petitions.recent
+        = render 'petitions/list', petitions: @project.petitions.recent.limit(8), project: @project

@@ -10,7 +10,7 @@
 
 %section#projects.page-block
   .container
-    = link_to projects_url(subdomain: root_subdomain) do
+    = link_to projects_path do
       %h3.sub-title= Project.model_name.human
     .row
       = render @current_organization.projects.recent.limit(3)
@@ -19,7 +19,7 @@
 
 %section#petitions.page-block
   .container
-    = link_to petitions_url(subdomain: root_subdomain) do
+    = link_to petitions_path do
       %h3.sub-title= Petition.model_name.human
     .row
       = render Petition.recent.where(project: @current_organization.projects).limit(3)
@@ -28,7 +28,7 @@
 - discussions = Discussion.recent.where(project: @current_organization.projects).limit(10)
 %section#discussions.page-block
   .container
-    = link_to discussions_url(subdomain: root_subdomain) do
+    = link_to discussions_path do
       %h3.sub-title= Discussion.model_name.human
     %table.table
       = render discussions

@@ -4,9 +4,11 @@
       = local_assigns[:title_label] || @project.try(:component_title, 'petition')
     - else
       = Petition.model_name.human
-      .pull-right
-        = link_to new_petition_url(subdomain: root_subdomain) do
-          %small 개설하기
+      - petition_container = local_assigns[:project] || fetch_organization_from_request
+      - if petition_container.blank? || can?(:create_petition, petition_container)
+        .pull-right
+          = link_to new_petition_path(project_id: local_assigns[:project].try(:id)) do
+            %small 새 캠페인 만들기
 
   - if petitions.any?
     .row.masonry-container
