@@ -3,7 +3,7 @@ class MigrateMapEventsToPetitions < ActiveRecord::Migration[5.0]
     reversible do |dir|
       dir.up do
         transaction do
-          Event.where(template: 'map').each do |event|
+          DeprecatedEvent.where(template: 'map').each do |event|
             petition = Petition.new(previous_event_id: event.id,
               slug: event.slug, title: event.title, body: event.body,
               user_id: event.user_id, comments_count: event.comments_count,

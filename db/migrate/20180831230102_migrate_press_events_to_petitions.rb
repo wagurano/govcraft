@@ -3,7 +3,7 @@ class MigratePressEventsToPetitions < ActiveRecord::Migration[5.0]
     reversible do |dir|
       dir.up do
         transaction do
-          Event.where(template: 'press').each do |event|
+          DeprecatedEvent.where(template: 'press').each do |event|
             petition = Petition.new(previous_event_id: event.id,
               slug: event.slug, title: event.title, body: event.body,
               user_id: event.user_id, comments_count: event.comments_count,
@@ -19,9 +19,9 @@ class MigratePressEventsToPetitions < ActiveRecord::Migration[5.0]
             event.statements.update_all(statementable_type: 'Petition', statementable_id: petition.id)
             execute <<-SQL
               INSERT INTO agents_petitions(petition_id, agent_id, created_at, updated_at)
-                   SELECT #{petition.id}, agents_events.agent_id, created_at, updated_at
-                     FROM agents_events
-                    WHERE agents_events.event_id = #{event.id}
+                   SELECT #{petition.id}, deprecated_agents_events.agent_id, created_at, updated_at
+                     FROM deprecated_agents_events
+                    WHERE deprecated_agents_events.deprecated_event_id = #{event.id}
             SQL
             event.action_targets.update_all(action_targetable_type: 'Petition', action_targetable_id: petition.id)
           end
