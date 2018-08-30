@@ -43,10 +43,10 @@
 
 %section#events.page-block
   .container
-    = link_to events_path do
-      %h3.sub-title= Event.model_name.human
+    = link_to petitions_path do
+      %h3.sub-title= Petition.model_name.human
     .row
-      = render Event.recent.where(project: @current_organization.projects).limit(3)
+      = render Petition.recent.where(project: @current_organization.projects).limit(3)
 
 
 %section#communities

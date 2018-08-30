@@ -76,7 +76,7 @@ ko:
       memorial: 추모관
       agenda: 의제
       timeline: 타임라인
-      event: 이벤트
+      deprecated_event: 이벤트
       article: 뉴스
       person: 인물
       race: 인물투표
@@ -116,8 +116,6 @@ ko:
         petition_title: 서명 기능 이름
         wiki_enabled: 위키 기능 사용
         wiki_title: 위키 기능 이름
-        event_enabled: 이벤트 기능 사용
-        event_title: 이벤트 기능 이름
         townhall_enabled: 타운홀 위젯 사용
         townhall_title: 타운홀 위젯 이름
         townhall_id: 정책배틀 아이디
@@ -167,7 +165,7 @@ ko:
         title: 제목
         body: 내용
         revision_note: 메모
-      event:
+      deprecated_event:
         project: 프로젝트
         project_id: 프로젝트
         title: 제목
@@ -185,7 +183,7 @@ ko:
           press: "촉구하기"
           speech: "[특별판] 촛불발언 발언"
           map_with_assembly: "[특별판] 박근혜 탄핵"
-      sns_event:
+      deprecated_sns_event:
         facebook_hashtags: 페이스북 해시태그
         facebook_href: 페이스북 링크
         tweet: 트위터 메시지

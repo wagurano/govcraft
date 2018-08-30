@@ -24,11 +24,6 @@
       %section.page-block
         %a{id: "anchor-project-wiki"}
         = render 'wikis/list', wikis: @project.wikis.recent
-  - when :event
-    - if @project.event_enabled?
-      %section.page-block
-        %a{id: "anchor-project-event"}
-        = render 'events/list', project: @project, events: @project.events.recent
   - when :discussion
     - if @project.discussion_enabled?
       %section.page-block

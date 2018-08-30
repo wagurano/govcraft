@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   include OrganizationHelper
 
   load_and_authorize_resource find_by: :slug
-  before_action :reset_meta_tags, only: [:show, :events]
+  before_action :reset_meta_tags, only: [:show]
   before_action :verify_organization
 
   def index

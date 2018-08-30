@@ -1,4 +1,4 @@
-class Event < ApplicationRecord
+class DeprecatedEvent < ApplicationRecord
   include Statementable
 
   TEMPLATES = %w( default default_with_photo press )
@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   belongs_to :project
   has_many :comments, as: :commentable
   has_many :speeches, dependent: :destroy
-  has_one :sns_event
+  has_one :deprecated_sns_event
 
   mount_uploader :image, ImageUploader
   mount_uploader :social_image, ImageUploader

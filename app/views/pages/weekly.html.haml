@@ -14,7 +14,6 @@
               = render project
 
 
-= render 'events/list', events: @new_events, title_label: "새 #{Event.model_name.human}" if @new_events.any?
 = render 'polls/list', polls: @new_polls, title_label: "새 #{Poll.model_name.human}" if @new_polls.any?
 = render 'surveys/list', surveys: @new_surveys, title_label: "새 #{Survey.model_name.human}" if @new_polls.any?
 = render 'petitions/list', petitions: @new_petitions, title_label: "새 #{Petition.model_name.human}" if @new_petitions.any?

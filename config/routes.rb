@@ -39,9 +39,7 @@ Rails.application.routes.draw do
   get 'c/:id', to: redirect { |params, req| "/p/#{Project.find_by(id: params[:id]).slug}"}, constraints: lambda { |request, params|
     Project.exists?(id: params[:id])
   }
-  resources :projects, path: :p do
-    get 'events', on: :member
-  end
+  resources :projects, path: :p
   resources :episodes do
     collection do
       get 'change2020'
@@ -113,16 +111,6 @@ Rails.application.routes.draw do
   resources :players
   resources :thumbs
 
-  resources :events, concerns: :statementable do
-    member do
-      get 'data'
-      put 'close'
-      put 'open'
-    end
-  end
-  resources :sns_events do
-    get 'new_or_edit', on: :collection
-  end
   resources :articles do
     post :create_by_slack, on: :collection
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180829165609) do
+ActiveRecord::Schema.define(version: 20180830003442) do
 
   create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "action_assignable_id",   null: false
@@ -106,16 +106,6 @@ ActiveRecord::Schema.define(version: 20180829165609) do
     t.integer  "access_fail_count",       default: 0
     t.string   "refresh_access_token"
     t.datetime "refresh_access_token_at"
-  end
-
-  create_table "agents_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.integer  "event_id"
-    t.integer  "agent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["agent_id"], name: "index_agents_events_on_agent_id", using: :btree
-    t.index ["event_id", "agent_id"], name: "index_agents_events_on_event_id_and_agent_id", unique: true, using: :btree
-    t.index ["event_id"], name: "index_agents_events_on_event_id", using: :btree
   end
 
   create_table "agents_petitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -347,6 +337,16 @@ ActiveRecord::Schema.define(version: 20180829165609) do
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
+  create_table "deprecate_agents_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "event_id"
+    t.integer  "agent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_deprecate_agents_events_on_agent_id", using: :btree
+    t.index ["event_id", "agent_id"], name: "index_deprecate_agents_events_on_event_id_and_agent_id", unique: true, using: :btree
+    t.index ["event_id"], name: "index_deprecate_agents_events_on_event_id", using: :btree
+  end
+
   create_table "deprecated_candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "name"
     t.text     "body",        limit: 65535
@@ -373,6 +373,36 @@ ActiveRecord::Schema.define(version: 20180829165609) do
     t.datetime "updated_at",                    null: false
     t.index ["project_id"], name: "index_deprecated_elections_on_project_id", using: :btree
     t.index ["user_id"], name: "index_deprecated_elections_on_user_id", using: :btree
+  end
+
+  create_table "deprecated_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "slug"
+    t.string   "title"
+    t.text     "body",             limit: 65535
+    t.string   "image"
+    t.integer  "user_id"
+    t.integer  "comments_count",                 default: 0
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "project_id"
+    t.string   "template"
+    t.text     "css",              limit: 65535
+    t.string   "social_image"
+    t.string   "title_to_agent"
+    t.text     "message_to_agent", limit: 65535
+    t.datetime "closed_at"
+    t.index ["project_id"], name: "index_deprecated_events_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_deprecated_events_on_user_id", using: :btree
+  end
+
+  create_table "deprecated_sns_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "facebook_hashtags"
+    t.string   "facebook_href"
+    t.text     "tweet",             limit: 65535
+    t.integer  "event_id",                        null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["event_id"], name: "index_deprecated_sns_events_on_event_id", using: :btree
   end
 
   create_table "discussion_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -425,26 +455,6 @@ ActiveRecord::Schema.define(version: 20180829165609) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_elections_on_slug", using: :btree
-  end
-
-  create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string   "slug"
-    t.string   "title"
-    t.text     "body",             limit: 65535
-    t.string   "image"
-    t.integer  "user_id"
-    t.integer  "comments_count",                 default: 0
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
-    t.integer  "project_id"
-    t.string   "template"
-    t.text     "css",              limit: 65535
-    t.string   "social_image"
-    t.string   "title_to_agent"
-    t.text     "message_to_agent", limit: 65535
-    t.datetime "closed_at"
-    t.index ["project_id"], name: "index_events_on_project_id", using: :btree
-    t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
 
   create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -738,41 +748,41 @@ ActiveRecord::Schema.define(version: 20180829165609) do
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title"
-    t.text     "body",                limit: 65535
+    t.text     "body",                     limit: 65535
     t.integer  "user_id"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
-    t.integer  "views_count",                       default: 0
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+    t.integer  "views_count",                            default: 0
     t.string   "image"
-    t.boolean  "discussion_enabled",                default: true
-    t.boolean  "petition_enabled",                  default: true
-    t.boolean  "poll_enabled",                      default: true
-    t.boolean  "wiki_enabled",                      default: true
+    t.boolean  "discussion_enabled",                     default: true
+    t.boolean  "petition_enabled",                       default: true
+    t.boolean  "poll_enabled",                           default: true
+    t.boolean  "wiki_enabled",                           default: true
     t.string   "discussion_title"
     t.string   "poll_title"
     t.string   "petition_title"
     t.string   "wiki_title"
-    t.string   "slug",                                             null: false
-    t.boolean  "survey_enabled",                    default: true
+    t.string   "slug",                                                  null: false
+    t.boolean  "survey_enabled",                         default: true
     t.string   "survey_title"
     t.string   "subtitle"
-    t.integer  "discussion_sequence",               default: 0
-    t.integer  "petition_sequence",                 default: 0
-    t.integer  "poll_sequence",                     default: 0
-    t.integer  "wiki_sequence",                     default: 0
-    t.integer  "event_sequence",                    default: 0
+    t.integer  "discussion_sequence",                    default: 0
+    t.integer  "petition_sequence",                      default: 0
+    t.integer  "poll_sequence",                          default: 0
+    t.integer  "wiki_sequence",                          default: 0
+    t.integer  "event_sequence",                         default: 0
     t.string   "social_image"
     t.integer  "organization_id"
-    t.boolean  "story_enabled",                     default: true
+    t.boolean  "story_enabled",                          default: true
     t.string   "story_title"
-    t.integer  "story_sequence",                    default: 0
+    t.integer  "story_sequence",                         default: 0
     t.integer  "project_category_id"
     t.string   "event_title"
-    t.boolean  "townhall_enabled",                  default: true
+    t.boolean  "townhall_enabled",                       default: true
     t.string   "townhall_title"
     t.integer  "townhall_sequence"
     t.integer  "townhall_id"
-    t.boolean  "event_enabled",                     default: true
+    t.boolean  "deprecated_event_enabled",               default: true
     t.index ["organization_id"], name: "index_projects_on_organization_id", using: :btree
     t.index ["project_category_id"], name: "index_projects_on_project_category_id", using: :btree
     t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
@@ -852,16 +862,6 @@ ActiveRecord::Schema.define(version: 20180829165609) do
     t.index ["petition_id"], name: "index_signs_on_petition_id", using: :btree
     t.index ["user_id", "petition_id"], name: "index_signs_on_user_id_and_petition_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_signs_on_user_id", using: :btree
-  end
-
-  create_table "sns_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string   "facebook_hashtags"
-    t.string   "facebook_href"
-    t.text     "tweet",             limit: 65535
-    t.integer  "event_id",                        null: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.index ["event_id"], name: "index_sns_events_on_event_id", using: :btree
   end
 
   create_table "speeches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -1272,7 +1272,7 @@ ActiveRecord::Schema.define(version: 20180829165609) do
     t.index ["user_id"], name: "index_wikis_on_user_id", using: :btree
   end
 
-  add_foreign_key "events", "users"
+  add_foreign_key "deprecated_events", "users"
   add_foreign_key "sent_requests", "agents"
   add_foreign_key "sent_requests", "users"
 end

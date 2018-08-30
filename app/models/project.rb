@@ -10,10 +10,11 @@ class Project < ApplicationRecord
   has_many :petitions, dependent: :destroy
   has_many :polls, dependent: :destroy
   has_many :wikis, dependent: :destroy
-  has_many :events, dependent: :destroy
   has_many :surveys, dependent: :destroy
   has_many :participations, dependent: :destroy
   has_many :discussion_categories, dependent: :destroy
+
+  has_many :deprecated_events, dependent: :destroy
 
   mount_uploader :image, ImageUploader
   mount_uploader :social_image, ImageUploader
@@ -45,7 +46,7 @@ class Project < ApplicationRecord
     [polls + surveys].flatten.sort_by(&:created_at).reverse
   end
 
-  DEFAULT_SORTED_COMPONENT_NAMES = %i(wiki event discussion poll petition story townhall)
+  DEFAULT_SORTED_COMPONENT_NAMES = %i(wiki discussion poll petition story townhall)
   def component_sequence(component_name)
     attr = :"#{component_name}_sequence"
     ((try(attr) || 0) * 10) + DEFAULT_SORTED_COMPONENT_NAMES.index(component_name.to_sym)
@@ -64,7 +65,7 @@ class Project < ApplicationRecord
   end
 
   def action_count
-    petitions.count + polls.count + surveys.count + wikis.count + discussions.count + events.count
+    petitions.count + polls.count + surveys.count + wikis.count + discussions.count
   end
 
   def metoo_count

@@ -39,17 +39,6 @@
               - if poll.project.present?
                 .campaign-title= poll.project.title
               = poll.title
-  - if @new_events.any?
-    .content
-      .content-title
-        이벤트
-      .sub-content
-        - @new_events.each do |event|
-          = link_to polymorphic_url(event) do
-            .sub-title
-              - if event.project.present?
-                .campaign-title= event.project.title
-              = event.title
   - if @new_articles.any?
     .content
       .content-title

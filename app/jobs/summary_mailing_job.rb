@@ -7,14 +7,13 @@ class SummaryMailingJob
 
     new_petitions = Petition.past_week
     new_polls = Poll.past_week
-    new_events = Event.past_week
     new_articles = Article.past_week
 
     return if [new_projects,
-      new_petitions, new_polls, new_events, new_articles].select { |news| news.any? }.blank?
+      new_petitions, new_polls, new_articles].select { |news| news.any? }.blank?
 
     User.where(enable_mailing: true).each do |user|
-      # ApplicationMailer.summary(user, new_projects, new_petitions, new_polls, new_events, new_articles).deliver_now
+      # ApplicationMailer.summary(user, new_projects, new_petitions, new_polls, new_articles).deliver_now
     end
   end
 end
