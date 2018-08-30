@@ -140,20 +140,6 @@
             순서:
             = f.text_field :wiki_sequence, class: 'form-control'
 
-      .row
-        .col-sm-3
-          %label
-            = f.check_box :event_enabled
-            = Project.human_attribute_name("event_enabled")
-        .col-sm-6
-          .form-group
-            = f.text_field :event_title, placeholder: Project.human_attribute_name("event_title"), class: 'form-control'
-
-        .col-sm-3
-          .form-group.form-inline
-            순서:
-            = f.text_field :event_sequence, class: 'form-control'
-
       - if @current_organization.try(:slug) == 'rebootkorea'
         .row
           .col-sm-3
