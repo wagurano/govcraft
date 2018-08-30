@@ -122,6 +122,7 @@ ko:
         social_image: 소셜공유 이미지(선택)
         organization_id: 프로젝트 조직
         slug: 프로젝트 웹페이지 주소
+        user_nickname: 캠페이너 회원의 닉네임
       discussion:
         title: 제목
         body: 내용
