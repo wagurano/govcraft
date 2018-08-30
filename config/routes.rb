@@ -39,6 +39,9 @@ Rails.application.routes.draw do
   get 'c/:id', to: redirect { |params, req| "/p/#{Project.find_by(id: params[:id]).slug}"}, constraints: lambda { |request, params|
     Project.exists?(id: params[:id])
   }
+  get 'events/:id', to: redirect { |params, req| "/petitions/#{Petition.find_by(previous_event_id: params[:id]).id}"}, constraints: lambda { |request, params|
+    Petition.exists?(previous_event_id: params[:id])
+  }
   resources :projects, path: :p
   resources :episodes do
     collection do
