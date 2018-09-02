@@ -16,7 +16,7 @@
   - stance_icon = capture do
     %i.fa.fa-minus{ style: 'color: lightgray'}
 - else
-  - stance_class = 'default btn-inverted'
+  - stance_class = 'default'
   - action_style = 'color: black'
   - stance_icon = capture do
     %i.fa.fa-minus{ style: 'color: lightgray'}
@@ -49,7 +49,7 @@
             촉구하기
 
 - else
-  %button.btn.btn-agent{ class: "btn-#{stance_class}", "data-target" => "#agent-request-modal-#{agent.id}", "data-toggle" => "modal", :type => "button" }
+  %button.btn.btn-agent.btn-inverted{ class: "btn-#{stance_class}", "data-target" => "#agent-request-modal-#{agent.id}", "data-toggle" => "modal", :type => "button" }
     = image_tag agent.image.md.url, style: "height: 24px;"
     %strong= agent.name
     - if agent.category == '개인'
