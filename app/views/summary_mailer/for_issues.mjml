@@ -1,0 +1,37 @@
+%mj-section
+  %mj-column{:width => "50%"}
+    %mj-text{:align => "center", :padding => "0px"}
+      .main-title
+        %span.text-nowrap #{DateTime.now.strftime("%Y년 %-m월 %-d일")}
+        %span.text-nowrap 가브크래프트 새소식
+%mj-section
+  %mj-column{:width => "100%"}
+    %mj-text{:align => "center"}
+      #{@user.nickname}님이 관심있는 이슈에서 캠페인이 진행 중입니다.
+
+%mj-spacer{:height => "10px"}
+
+= render 'application_mailer/line'
+
+%mj-spacer{:height => "10px"}
+
+
+- if @petitions.try(:any?)
+  - @petitions.each do |petition|
+    - has_image = petition.read_attribute(:cover_image).present?
+    %mj-section
+      %mj-column{:width => (has_image ? "75%" : "100%")}
+        %mj-text{"padding-bottom" => "0"}
+          %h3.campaign-title
+            %a{:href => polymorphic_url(petition)}
+              - if petition.project.present?
+                %small.project-title= petition.project.title
+              %div= petition.title
+          %p.campaign-body
+            = excerpt(petition.body, length: 100)
+      - if has_image
+        %mj-column{"padding-bottom" => "0", :width => "25%"}
+          %mj-image{:href => polymorphic_url(petition), :src => petition.cover_image_url(:md)}
+    %mj-spacer{:height => "10px"}
+
+

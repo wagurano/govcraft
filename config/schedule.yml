@@ -3,8 +3,8 @@ score_job:
   class: "ScoreJob"
   queue: default
 summary_mailing_job:
-  class: SummaryMailingJob
-  cron: "15 5 * * 1 Asia/Seoul"
+  class: IssuesSummaryMailingJob
+  cron: "*/25 * * * 1 Asia/Seoul"
   queue: default
 clypit_job:
   class: ClypitJob

@@ -1,0 +1,33 @@
+%mjml
+  %mj-head
+    %mj-title 가브크래프트 소식
+    %mj-attributes
+      %mj-all{"font-family" => "AppleSDGothic,'apple sd gothic neo','malgun gothic',dotum,sans-serif"}
+      %mj-text{:color => "#616161", "font-size" => "16px", "font-weight" => "300", "line-height" => "24px"}
+      %mj-section{:padding => "0px"}
+
+  %mj-body
+    %mj-raw
+      = stylesheet_link_tag 'emails/mjml', media: 'all'
+    %mj-spacer{:height => "40px"}
+
+    = yield
+
+    %mj-spacer{:height => "10px"}
+
+    = render 'application_mailer/line'
+
+    %mj-section
+      %mj-column
+        %mj-text{:href => root_url }
+          %a{:href => root_url, :style => "color: #616161; text-decoration: none"}
+            가브크래프트
+            %small{ style: 'font-size: 10px'} 세상을 바꾸는 시민들의 일상 정치 플랫폼
+    %mj-section{"padding-bottom" => "0px", "padding-top" => "0px"}
+      %mj-column
+        %mj-text{"font-size" => "10px", "line-height" => "12px", "padding-bottom" => "0px", "padding-top" => "0px"}
+          %a{:href => edit_user_registration_url, :style => "color: #616161; text-decoration: none"} 수신거부
+          &middot;
+          %a{:href => privacy_url, :style => "color: #616161; text-decoration: none"} 개인정보 취급방침
+
+    %mj-spacer{:height => "10px"}

@@ -57,6 +57,15 @@ class User < ApplicationRecord
   default_scope { order('id DESC') }
   scope :not_someone, ->(someone) { where.not(id: someone.id) }
 
+  INTERVAL_ISSUE_MAILING = 7.days.ago
+
+  scope :need_to_delivery_issues_summary_mailing, -> {
+    where("issues_summary_email_sent_at <= ?", User::INTERVAL_ISSUE_MAILING)
+    .or(self.where(issues_summary_email_sent_at: nil))
+    .where(enable_mailing: true)
+    .order(:issues_summary_email_sent_at)
+  }
+
   # methods for devises/auth
   def self.parse_omniauth(data)
     {provider: data['provider'], uid: data['uid'], email: data['info']['email'], image: data['info']['image']}
@@ -110,6 +119,14 @@ class User < ApplicationRecord
 
   def is_admin?
     has_role?(:admin)
+  end
+
+  def issues_summary_mailing_delivered!
+    self.touch(:issues_summary_email_sent_at)
+  end
+
+  def datetime_of_need_to_issues_summary_mailing
+    [User::INTERVAL_ISSUE_MAILING.to_date.yesterday, self.issues_summary_email_sent_at].compact.max.at_beginning_of_day
   end
 
   private

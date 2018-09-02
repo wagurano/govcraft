@@ -1,0 +1,27 @@
+.main-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.campaign-title {
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0;
+  a {
+    color: #3498DB;
+    text-decoration: none
+  }
+  .project-title {
+    color: #bbb;
+    font-weight: 200;
+  }
+}
+
+p.campaign-body {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}

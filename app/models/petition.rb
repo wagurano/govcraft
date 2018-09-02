@@ -145,6 +145,7 @@ class Petition < ApplicationRecord
   belongs_to :area, optional: true
   belongs_to :issue, optional: true
   has_many :speeches, dependent: :destroy
+  has_many :issue_mailings, dependent: :destroy, as: :source
 
   mount_uploader :cover_image, ImageUploader
   mount_uploader :social_image, ImageUploader
@@ -154,6 +155,8 @@ class Petition < ApplicationRecord
   scope :recent, -> { order('created_at DESC') }
   scope :by_organization, ->(organization) { where(project: organization.projects) }
   scoped_search on: [:title]
+
+  after_save :mailing_issue,  if: :issue_id_changed?
 
   def signed? someone
     signs.exists?(user: someone)
@@ -210,5 +213,10 @@ class Petition < ApplicationRecord
 
   def signable?
     self.template == 'petition'
+  end
+
+  def mailing_issue
+    self.issue_mailings.where(action: 'add').where(deleted_at: nil).update_all(deleted_at: DateTime.now)
+    self.issue_mailings.find_or_create_by(issue: self.issue, action: 'add')
   end
 end

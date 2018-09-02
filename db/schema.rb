@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180831230103) do
+ActiveRecord::Schema.define(version: 20180901154408) do
 
   create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "action_assignable_id",   null: false
@@ -488,6 +488,18 @@ ActiveRecord::Schema.define(version: 20180831230103) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
 
+  create_table "issue_mailings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "issue_id"
+    t.string   "source_type"
+    t.integer  "source_id"
+    t.string   "action",      null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["issue_id"], name: "index_issue_mailings_on_issue_id", using: :btree
+    t.index ["source_type", "source_id"], name: "index_issue_mailings_on_source_type_and_source_id", using: :btree
+  end
+
   create_table "issues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "title"
     t.integer  "following_issues_count",               default: 0
@@ -689,6 +701,7 @@ ActiveRecord::Schema.define(version: 20180831230103) do
     t.text     "message_to_agent",             limit: 65535
     t.integer  "previous_event_id"
     t.text     "css",                          limit: 65535
+    t.boolean  "mailed_issue",                               default: false
     t.index ["area_id"], name: "index_petitions_on_area_id", using: :btree
     t.index ["issue_id"], name: "index_petitions_on_issue_id", using: :btree
     t.index ["project_id"], name: "index_petitions_on_project_id", using: :btree
@@ -1042,7 +1055,7 @@ ActiveRecord::Schema.define(version: 20180831230103) do
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string   "email"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                        default: 0,    null: false
+    t.integer  "sign_in_count",                              default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -1051,8 +1064,8 @@ ActiveRecord::Schema.define(version: 20180831230103) do
     t.string   "uid"
     t.string   "nickname"
     t.string   "image"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
     t.string   "encrypted_password"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -1060,13 +1073,14 @@ ActiveRecord::Schema.define(version: 20180831230103) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.text     "description",            limit: 65535
-    t.boolean  "enable_mailing",                       default: true
+    t.text     "description",                  limit: 65535
+    t.boolean  "enable_mailing",                             default: true
     t.string   "google_access_token"
     t.string   "google_refresh_token"
     t.string   "site_info"
     t.string   "facebook_info"
     t.string   "twitter_info"
+    t.datetime "issues_summary_email_sent_at"
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
   end
 

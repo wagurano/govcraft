@@ -1,72 +1,75 @@
 *{
-    font-family:AppleSDGothic,"apple sd gothic neo","noto sans korean","noto sans korean regular","noto sans cjk kr","noto sans cjk","nanum gothic","malgun gothic",dotum,sans-serif;
+  font-family:AppleSDGothic,"apple sd gothic neo","noto sans korean","noto sans korean regular","noto sans cjk kr","noto sans cjk","nanum gothic","malgun gothic",dotum,sans-serif;
 }
 body{
-    background-color:#fff;
+  background-color:#fff;
 }
 .container{
-    margin:0 auto;
-    padding:24px;
-    background-color:#eee;
+  margin:0 auto;
+  padding:24px;
+  background-color:#eee;
 }
 .header{
-    text-align:left;
+  text-align:left;
 }
 .header > p{
-    font-size:14px;
+  font-size:14px;
 }
 .content h3{
-    color:#445AB3;
+  color:#445AB3;
 }
 .sub-content a {
-    text-decoration: none;
+  text-decoration: none;
 }
 .sub-title{
-    line-height: 24px;
-    background-color:#eee;
-    color: #777;
-    padding:12px;
-    margin:12px 0px;
-    box-shadow:1px 1px 0px 2px #ddd;
-    .campaign-title {
-        color: #bbb;
-    }
+  line-height: 24px;
+  background-color:#eee;
+  color: #777;
+  padding:12px;
+  margin:12px 0px;
+  box-shadow:1px 1px 0px 2px #ddd;
+  .campaign-title {
+    color: #bbb;
+  }
 }
 .content-title{
-    margin-top:36px;
-    border-top: 2px solid #eee;
-    padding:10px;
-    color:#989898;
-    font-size:14px;
-    font-weight:500;
+  margin-top:36px;
+  border-top: 2px solid #eee;
+  padding:10px;
+  color:#989898;
+  font-size:14px;
+  font-weight:500;
+}
+.card-image {
+  height: 200px;
 }
 .link-btn{
-    font-size:12px;
-    padding:3px 7px;
-    border-radius:3px;
-    color:#fff;
-    margin:3px;
-    text-decoration:none;
+  font-size:12px;
+  padding:3px 7px;
+  border-radius:3px;
+  color:#fff;
+  margin:3px;
+  text-decoration:none;
 }
 .footer{
-    text-align:center;
-    font-size:12px;
-    margin-top:50px;
-    margin-bottom:20px;
-    line-height:20px;
+  text-align:center;
+  font-size:12px;
+  margin-top:50px;
+  margin-bottom:20px;
+  line-height:20px;
 }
 .footer > h3 {
-    margin-bottom:3px;
+  margin-bottom:3px;
 }
 .footer > h3 a {
-    color:#4A5DD0;
-    text-decoration:none;
+  color:#4A5DD0;
+  text-decoration:none;
 }
 .header > p {
-    margin-bottom:18px;
+  margin-bottom:18px;
  }
 
 // redactor에서 입력되는 그림의 폭을 제한
 figure img {
-    max-width: 100%;
+  max-width: 100%;
 }
