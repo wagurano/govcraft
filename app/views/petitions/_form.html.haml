@@ -42,6 +42,8 @@
               %label
                 = f.check_box :comment_enabled
                 = Petition.human_attribute_name("comment_enabled")
+            %p.help-block
+              체크해 두면 캠페인에서 댓글이 사용됩니다.
 
         .form-group
           = f.label :social_image
