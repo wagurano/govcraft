@@ -39,7 +39,7 @@
 
     - cover_image = campaign.cover_image_url(:lg)
     - if cover_image.present?
-      %section.no-container-margin-xs{ style: "margin-top: 15px; margin-top: 15px; height: 250px; background-image: url(#{cover_image}); background-size: cover; background-repeat: no-repeat;" }
+      %section.no-container-margin-xs{ style: "margin-top: 15px; margin-top: 15px; height: 250px; background-image: url(#{cover_image}); background-size: cover; background-repeat: no-repeat; background-position: center" }
 
     .m-t.m-b
       = link_to campaign_path(campaign, anchor: 'anchor-sign') do
