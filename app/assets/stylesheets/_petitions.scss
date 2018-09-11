@@ -136,3 +136,11 @@ section#petitions-in-project {
     }
   }
 }
+
+button.js-sticky-sign-button.stuck {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+}

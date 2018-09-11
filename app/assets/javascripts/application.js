@@ -27,7 +27,8 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require perfect-scrollbar
-
+//= require jquery.waypoints
+//= require sticky
 
 UnobtrusiveFlash.flashOptions['timeout'] = 3000;
 
@@ -406,7 +407,17 @@ $(function(){
 
   $('.js-close-modal').click(function(){
     $($(this).closest('.modal')).modal('hide');
-  })
+  });
+
+  // 내 홈 탭
+  if($('.js-sticky-sign-button').length > 0){
+    var sticky = new Waypoint.Sticky({
+      element: $('.js-sticky-sign-button')[0],
+      direction: 'up',
+      offset: 'bottom-in-view'
+    })
+  }
+
 });
 
 $(document).ajaxError(function (e, xhr, settings) {
