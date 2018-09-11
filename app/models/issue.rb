@@ -6,7 +6,7 @@ class Issue < ApplicationRecord
   has_many :followers, -> { order 'following_issues.created_at desc' }, through: :following_issues, source: :user
   has_many :comments, as: :commentable
   has_many :agents, -> { reorder('').distinct }, through: :opinions
-  has_many :petitions, dependent: :nullify
+  has_many :campaigns, dependent: :nullify
 
   acts_as_taggable
 

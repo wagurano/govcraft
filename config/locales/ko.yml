@@ -23,7 +23,7 @@ ko:
     need_to_email: '보내시는 분의 메일을 입력해주세요'
     reported: '신고되었습니다!'
     reverted: '복원되었습니다!'
-    petitions:
+    campaigns:
       open: 다시 열렸습니다
       close: 종료되었습니다
       closed: 종료된 캠페인입니다.
@@ -69,7 +69,7 @@ ko:
       story: 소식
       discussion: 게시판
       discussion_category: 카테고리
-      petition: 캠페인
+      campaign: 캠페인
       poll: 찬반투표
       survey: 설문
       wiki: 위키
@@ -112,8 +112,8 @@ ko:
         discussion_title: 토론 기능 이름
         poll_enabled: 투표 기능 사용
         poll_title: 투표 기능 이름
-        petition_enabled: 서명 기능 사용
-        petition_title: 서명 기능 이름
+        campaign_enabled: 서명 기능 사용
+        campaign_title: 서명 기능 이름
         wiki_enabled: 위키 기능 사용
         wiki_title: 위키 기능 이름
         townhall_enabled: 타운홀 위젯 사용
@@ -129,8 +129,8 @@ ko:
         discussion_category: 카테고리
       discussion_category:
         title: 제목
-      petition:
-        project_id: 캠페인
+      campaign:
+        project_id: 프로젝트
         title: 제목
         body: 내용
         signs_goal_count: 서명 목표인수

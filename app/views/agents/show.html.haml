@@ -1,13 +1,13 @@
 = render 'agents/header', agent: @agent
 
-- if @agent.petitions.any?
+- if @agent.campaigns.any?
   %section.page-block#agends-list
     .container-fluid
       %h3
         관련
-        = Petition.model_name.human
+        = Campaign.model_name.human
       .row
-        = render @agent.petitions
+        = render @agent.campaigns
 
 - if @agent.opinions.any?
   %section.page-block

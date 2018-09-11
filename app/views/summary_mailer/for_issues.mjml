@@ -16,22 +16,22 @@
 %mj-spacer{:height => "10px"}
 
 
-- if @petitions.try(:any?)
-  - @petitions.each do |petition|
-    - has_image = petition.read_attribute(:cover_image).present?
+- if @campaigns.try(:any?)
+  - @campaigns.each do |campaign|
+    - has_image = campaign.read_attribute(:cover_image).present?
     %mj-section
       %mj-column{:width => (has_image ? "75%" : "100%")}
         %mj-text{"padding-bottom" => "0"}
           %h3.campaign-title
-            %a{:href => polymorphic_url(petition)}
-              - if petition.project.present?
-                %small.project-title= petition.project.title
-              %div= petition.title
+            %a{:href => polymorphic_url(campaign)}
+              - if campaign.project.present?
+                %small.project-title= campaign.project.title
+              %div= campaign.title
           %p.campaign-body
-            = excerpt(petition.body, length: 100)
+            = excerpt(campaign.body, length: 100)
       - if has_image
         %mj-column{"padding-bottom" => "0", :width => "25%"}
-          %mj-image{:href => polymorphic_url(petition), :src => petition.cover_image_url(:md)}
+          %mj-image{:href => polymorphic_url(campaign), :src => campaign.cover_image_url(:md)}
     %mj-spacer{:height => "10px"}
 
 

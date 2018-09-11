@@ -33,14 +33,11 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'campaigns/:id', to: redirect { |params, req| "/p/#{Project.find_by(id: params[:id]).slug}"}, constraints: lambda { |request, params|
-    Project.exists?(id: params[:id])
-  }
   get 'c/:id', to: redirect { |params, req| "/p/#{Project.find_by(id: params[:id]).slug}"}, constraints: lambda { |request, params|
     Project.exists?(id: params[:id])
   }
-  get 'events/:id', to: redirect { |params, req| "/petitions/#{Petition.find_by(previous_event_id: params[:id]).id}"}, constraints: lambda { |request, params|
-    Petition.exists?(previous_event_id: params[:id])
+  get 'events/:id', to: redirect { |params, req| "/campaigns/#{Campaign.find_by(previous_event_id: params[:id]).id}"}, constraints: lambda { |request, params|
+    Campaign.exists?(previous_event_id: params[:id])
   }
   resources :projects, path: :p
   resources :episodes do
@@ -80,7 +77,7 @@ Rails.application.routes.draw do
   end
   resources :discussion_categories
   resources :sympathies
-  resources :petitions, concerns: :statementable do
+  resources :campaigns, concerns: :statementable do
     resources :signs do
       collection do
         get 'mail_form'
@@ -195,10 +192,10 @@ Rails.application.routes.draw do
     resources :agendas
     resources :issues do
       member do
-        get :edit_petitions
-        get :search_petitions
-        put :add_petition
-        delete :remove_petition
+        get :edit_campaigns
+        get :search_campaigns
+        put :add_campaigns
+        delete :remove_campaigns
       end
     end
     resources :agencies

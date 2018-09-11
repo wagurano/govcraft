@@ -8,7 +8,7 @@ class Agent < ApplicationRecord
   has_many :sent_requests, dependent: :destroy
   has_many :agenda_documents, dependent: :destroy
   has_many :election_candidates, dependent: :nullify
-  has_and_belongs_to_many :petitions, -> { distinct }
+  has_and_belongs_to_many :campaigns, -> { distinct }
   has_many :appointments, dependent: :destroy
   has_many :positions, through: :appointments
   has_many :agencies, -> { distinct }, through: :positions

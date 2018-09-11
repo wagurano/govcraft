@@ -1,0 +1,18 @@
+%section.page-block
+  .container
+    .page-header
+      %h2 #{Campaign.model_name.human} 수정
+    = render 'form'
+
+    - if @campaign.closed?
+      .page-header
+        %h2 #{Campaign.model_name.human} 다시 열기
+        %small 캠페인을 다시 열고 참여를 받습니다.
+      = link_to open_campaign_path(@campaign), method: :put, class: 'btn btn-block btn-danger', data: { disable: '정말 다시 여시겠습니까?' } do
+        다시 열기
+    - else
+      .page-header
+        %h2 #{Campaign.model_name.human} 종료
+        %small 캠페인을 종료하고 더이상 참여를 받지 않습니다.
+      = link_to close_campaign_path(@campaign), method: :put, class: 'btn btn-block btn-danger', data: { disable: '정말 종료하시겠습니까?' } do
+        종료하기

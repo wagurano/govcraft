@@ -1,15 +1,15 @@
-%section#petition-block.page-block.post-block
+%section#campaign-block.page-block.post-block
   .container
     .post-block__signs
       .sign-panel
         .sign-panel__users
           %h4
             참여자
-            %small= link_to '돌아가기', @petition
+            %small= link_to '돌아가기', @campaign
           - @signs.each do |sign|
             %div
               = image_tag 'icon-candle.png', width: 20, height: 20, class: 'img-circle'
               = sign.user_name
     .text-center
-      = paginate @signs, params: { petition_id: @petition.id }, theme: 'twitter-bootstrap-3'
+      = paginate @signs, params: { campaign_id: @campaign.id }, theme: 'twitter-bootstrap-3'
 

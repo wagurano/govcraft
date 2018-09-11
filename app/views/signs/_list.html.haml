@@ -3,32 +3,32 @@
   - local_assigns[:hide_users] = params[:hide_users].present? ? (params[:hide_users] == 'true') : true
 
 .sign-panel
-  - if petition.signs_goal_count > 0
+  - if campaign.signs_goal_count > 0
     .sign-panel__status.text-right
       .sign-panel__status__count
         현재
         %span
-          = petition.signs_count
+          = campaign.signs_count
         \/
         목표
-        = petition.signs_goal_count
+        = campaign.signs_goal_count
 
       .progress
-        .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{petition.percentage}", :role => "progressbar", :style => "width: #{petition.percentage}%;"}
-          #{petition.percentage}%
+        .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{campaign.percentage}", :role => "progressbar", :style => "width: #{campaign.percentage}%;"}
+          #{campaign.percentage}%
 
-  - if user_signed_in? and petition.signed?(current_user)
+  - if user_signed_in? and campaign.signed?(current_user)
     .sign-panel__form
       .alert.alert-warning
         .text-center
           참여하였습니다
   - else
-    - if petition.opened?
+    - if campaign.opened?
       %section
         %nav.navbar.navbar-default.navbar-fixed-bottom{ style: 'min-height: auto; background: transparent; border: 0;'}
           %div{ style: 'margin: 10px; box-shadow: 0 0 24px rgba(0,0,0,.5)' }
             %button.btn.btn-danger.btn-lg.btn-block{"data-target" => "#sign-form-modal", "data-toggle" => "modal", :type => "button"}
-              #{petition.signs_count+1}번째로 캠페인에 참여하기
+              #{campaign.signs_count+1}번째로 캠페인에 참여하기
     - else
       %section
         %nav.navbar.navbar-default.navbar-fixed-bottom{ style: 'min-height: auto; background: transparent; border: 0;'}
@@ -44,69 +44,69 @@
               %span{"aria-hidden" => "true"} &#215;
             %h4.modal-title 참여하기
           .modal-body
-            - if petition.sign_form_intro.present?
-              %p= petition.sign_form_intro
+            - if campaign.sign_form_intro.present?
+              %p= campaign.sign_form_intro
             .sign-panel__form
               .alert.alert-danger
-                - if user_signed_in? and petition.signed?(current_user)
+                - if user_signed_in? and campaign.signed?(current_user)
                 - else
-                  = form_for Sign.new(petition: petition), html: { class: 'gov-action-form-validation' } do |f|
-                    = f.hidden_field :petition_id
+                  = form_for Sign.new(campaign: campaign), html: { class: 'gov-action-form-validation' } do |f|
+                    = f.hidden_field :campaign_id
                     = invisible_captcha
-                    - if petition.use_signer_real_name?
+                    - if campaign.use_signer_real_name?
                       .form-group
-                        = f.label :signer_real_name, petition.signer_real_name_title.presence || t('activerecord.attributes.sign.signer_real_name')
+                        = f.label :signer_real_name, campaign.signer_real_name_title.presence || t('activerecord.attributes.sign.signer_real_name')
                         = f.text_field :signer_real_name, placeholder: '실명..', class: 'form-control', data: { 'rule-required': true }
                     - else
                       - unless user_signed_in?
                         .form-group
                           = f.label :signer_name
                           = f.text_field :signer_name, placeholder: '이름 혹은 별명..', class: 'form-control', data: { 'rule-required': true }
-                    - if petition.use_signer_email?
+                    - if campaign.use_signer_email?
                       - f.object.signer_email = current_user.try(:email)
                       .form-group
-                        = f.label :signer_email, petition.signer_email_title.presence || t('activerecord.attributes.sign.signer_email')
+                        = f.label :signer_email, campaign.signer_email_title.presence || t('activerecord.attributes.sign.signer_email')
                         = f.text_field :signer_email, placeholder: '이메일', class: 'form-control', data: { 'rule-required': true }
-                    - if petition.use_signer_address?
+                    - if campaign.use_signer_address?
                       .form-group
-                        = f.label :signer_address, petition.signer_address_title.presence || t('activerecord.attributes.sign.signer_address')
+                        = f.label :signer_address, campaign.signer_address_title.presence || t('activerecord.attributes.sign.signer_address')
                         = f.text_field :signer_address, placeholder: '주소', class: 'form-control', data: { 'rule-required': true }
 
-                    - if petition.use_signer_phone?
+                    - if campaign.use_signer_phone?
                       .form-group
-                        = f.label :signer_phone, petition.signer_phone_title.presence || t('activerecord.attributes.sign.signer_phone')
+                        = f.label :signer_phone, campaign.signer_phone_title.presence || t('activerecord.attributes.sign.signer_phone')
                         = f.text_field :signer_phone, placeholder: '연락처', class: 'form-control', data: { 'rule-required': true }
 
-                    - if petition.id == 29
+                    - if campaign.id == 29
                       = f.hidden_field :extra_29_confirm_join, value: 1
 
                     .form-group
-                      = f.label :body, petition.sign_title || Sign.human_attribute_name(:body)
+                      = f.label :body, campaign.sign_title || Sign.human_attribute_name(:body)
                       = f.text_field :body, placeholder: '나는...', class: 'form-control'
 
-                    - if petition.confirm_privacy.present?
+                    - if campaign.confirm_privacy.present?
                       %p{ style: "color: gray"}
                         참여하시면 본 서명의
-                        %span#js-petition-confirm-privacy
+                        %span#js-campaign-confirm-privacy
                           개인정보취급방침
                         에 동의하게 됩니다.
-                      .form-group#js-petition-confirm-privacy-body{style: "display: none;"}
+                      .form-group#js-campaign-confirm-privacy-body{style: "display: none;"}
                         .panel
                           .panel-body.text-muted
-                            != petition.confirm_privacy
+                            != campaign.confirm_privacy
                     .form-group
-                      = f.submit "#{petition.signs_count+1}번째로 참여하기", class: 'btn btn-danger btn-lg btn-block', data: { disable_with: "진행 중..." }
+                      = f.submit "#{campaign.signs_count+1}번째로 참여하기", class: 'btn btn-danger btn-lg btn-block', data: { disable_with: "진행 중..." }
 
-  - if petition.signs_count > 0
+  - if campaign.signs_count > 0
     - if !local_assigns[:hide_users]
       .sign-panel__users
-        = petition.signs.recent.limit(first_sign_users_count).map(&:user_name).join(', ')
+        = campaign.signs.recent.limit(first_sign_users_count).map(&:user_name).join(', ')
 
-        - if petition.signs.count > first_sign_users_count
+        - if campaign.signs.count > first_sign_users_count
           - if local_assigns[:widget]
-            = link_to "... #{petition.signs.count - first_sign_users_count}명 더보기", petition_url(@petition), target: '_blank'
+            = link_to "... #{campaign.signs.count - first_sign_users_count}명 더보기", campaign_url(@campaign), target: '_blank'
           - else
-            = link_to "... #{petition.signs.count - first_sign_users_count}명 더보기", petition_signs_path(petition)
+            = link_to "... #{campaign.signs.count - first_sign_users_count}명 더보기", campaign_signs_path(campaign)
     %hr
     %table.user-opinion-line
       - @signs.each do |sign|
@@ -126,8 +126,8 @@
 
     - if !local_assigns[:widget]
       .sign-panel__pagination.text-center
-        = paginate @signs, params: { controller: :petitions, activeon: :show }, theme: 'twitter-bootstrap-3'
+        = paginate @signs, params: { controller: :campaigns, activeon: :show }, theme: 'twitter-bootstrap-3'
     - else
       .text-center{ style: 'margin-top: 12px' }
-        = link_to '더보기 >', petition_url(@petition), target: '_blank'
+        = link_to '더보기 >', campaign_url(@campaign), target: '_blank'
 

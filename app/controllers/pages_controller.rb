@@ -37,8 +37,8 @@ class PagesController < ApplicationController
     @polls = Poll.recent
   end
 
-  def petitions
-    @petitions = Petition.recent
+  def campaigns
+    @campaigns = Campaign.recent
   end
 
   def discussions

@@ -1,11 +1,11 @@
 class Special
   SLUG_VOTEAWARD2018 = 'voteaward2018'
 
-  def self.build_petition(petition)
-    if petition.special_slug == Special::SLUG_VOTEAWARD2018
-      petition.signs_goal_count = 0
+  def self.build_campaign(campaign)
+    if campaign.special_slug == Special::SLUG_VOTEAWARD2018
+      campaign.signs_goal_count = 0
     end
-    petition.action_targets.build(action_assignable: Election.of_slug(Election::SLUG_20180613))
+    campaign.action_targets.build(action_assignable: Election.of_slug(Election::SLUG_20180613))
   end
 
   def self.decorate_agent_organization(specialable, agent)

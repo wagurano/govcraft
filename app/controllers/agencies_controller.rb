@@ -5,8 +5,8 @@ class AgenciesController < ApplicationController
   end
 
   def show
-    @petitions = Petition.to_action_assignable(@agency)
-    @form_petition = Petition.new(special_slug: Special::SLUG_VOTEAWARD2018)
+    @campaigns = Campaign.to_action_assignable(@agency)
+    @form_campaign = Campaign.new(special_slug: Special::SLUG_VOTEAWARD2018)
   end
 
   def agents

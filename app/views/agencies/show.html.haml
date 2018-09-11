@@ -6,9 +6,9 @@
       명이 활동 중입니다.
     .agency-header__buttons
       = link_to '#', class: 'btn btn-info btn-lg' do
-        #{@petitions.count}개의 캠페인 진행 중
+        #{@campaigns.count}개의 캠페인 진행 중
       - if user_signed_in?
-        %button.btn.btn-lg.btn-danger{"data-target" => "#petition-form-modal", "data-toggle" => "modal", :type => "button"}
+        %button.btn.btn-lg.btn-danger{"data-target" => "#campaign-form-modal", "data-toggle" => "modal", :type => "button"}
           #{@agency.title} 대상으로 캠페인 시작하기
           %i.fa.fa-arrow-circle-right
       - else
@@ -19,7 +19,7 @@
         %i.fa.fa-comment-o
         빠띠에 문의하기
 
-#petition-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
+#campaign-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
     .modal-content
       .modal-header
@@ -29,11 +29,11 @@
       .modal-body
         .panel.panel-default
           .panel-body
-            = form_for @form_petition do |f|
-              - if @form_petition.errors.any?
+            = form_for @form_campaign do |f|
+              - if @form_campaign.errors.any?
                 .alert.alert-danger
                   %ul.list-unstyled
-                    - @form_petition.errors.full_messages.each do |msg|
+                    - @form_campaign.errors.full_messages.each do |msg|
                       %li= msg
 
               %fieldset
@@ -52,8 +52,8 @@
                   = f.submit '저장', class: 'btn btn-primary btn-lg'
 
 %section.page-block
-  %a{id: "anchor-project-petition"}
-  = render 'petitions/list', petitions: @petitions
+  %a{id: "anchor-project-campaign"}
+  = render 'campaigns/list', campaigns: @campaigns
 
 -  base_agents = @agency.agents
 

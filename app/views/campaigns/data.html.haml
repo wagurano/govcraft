@@ -1,0 +1,19 @@
+%section.page-block
+  .container
+    %h2.page-header= @campaign.title
+
+    %h4 서명 #{@campaign.signs_count}건
+    %table.table
+      %thead
+        %tr
+          %th 일시
+          %th 성명
+          %th 이메일
+          %th 한마디
+      %tbody
+        - @campaign.signs.recent.each do |sign|
+          %tr
+            %td= l sign.created_at
+            %td= sign.user_name
+            %td= sign.user_email
+            %td= sign.body

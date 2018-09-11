@@ -2,7 +2,7 @@ class Speech < ApplicationRecord
   include Likable
 
   belongs_to :user
-  belongs_to :petition
+  belongs_to :campaign
 
   paginates_per 4 * 8
 

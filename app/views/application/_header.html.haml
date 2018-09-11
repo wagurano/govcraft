@@ -34,7 +34,7 @@
 
     .menu-list.text-nowrap.collapse
       - if organization.blank?
-        = link_to Petition.model_name.human, petitions_url(subdomain: root_subdomain)
+        = link_to Campaign.model_name.human, campaigns_url(subdomain: root_subdomain)
         %br
         = link_to Issue.model_name.human, issues_path(subdomain: root_subdomain)
 

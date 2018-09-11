@@ -84,8 +84,8 @@ Kakao.init('6a30dead1bff1ef43b7e537f49d2f655');
 $(function(){
   $(".slick").slick();
 
-  $("#js-petition-confirm-privacy").click(function(){
-    $("#js-petition-confirm-privacy-body").toggle();
+  $("#js-campaign-confirm-privacy").click(function(){
+    $("#js-campaign-confirm-privacy-body").toggle();
   })
 
   $(".js-published_at").datetimepicker({

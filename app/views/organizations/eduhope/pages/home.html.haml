@@ -19,10 +19,10 @@
 
 %section#petitions.page-block
   .container
-    = link_to petitions_path do
-      %h3.sub-title= Petition.model_name.human
+    = link_to campaigns_path do
+      %h3.sub-title= Campaign.model_name.human
     .row
-      = render Petition.recent.where(project: @current_organization.projects).limit(3)
+      = render Campaign.recent.where(project: @current_organization.projects).limit(3)
 
 
 - discussions = Discussion.recent.where(project: @current_organization.projects).limit(10)

@@ -1,7 +1,7 @@
 %section{ style: 'margin-top: 30px' }
   .container
     = form_for @sign do |f|
-      - if @sign.petition.use_signer_real_name?
+      - if @sign.campaign.use_signer_real_name?
         .form-group
           = f.label :signer_real_name
           = f.text_field :signer_real_name, class: 'form-control'
@@ -9,11 +9,11 @@
         .form-group
           = f.label :signer_name
           = f.text_field :signer_name, class: 'form-control'
-      - if @sign.petition.use_signer_email?
+      - if @sign.campaign.use_signer_email?
         .form-group
           = f.label :signer_email
           = f.text_field :signer_email, class: 'form-control'
-      - if @sign.petition.use_signer_address?
+      - if @sign.campaign.use_signer_address?
         .form-group
           = f.label :signer_address
           = f.text_field :signer_address, class: 'form-control'
@@ -22,7 +22,7 @@
         = f.label :body
         ~ f.text_area :body, class: 'form-control'
 
-      - if @sign.petition.id == 29
+      - if @sign.campaign.id == 29
         .form-group
           = f.label :extra_29_confirm_join
           = f.check_box :extra_29_confirm_join, class: 'form-control'

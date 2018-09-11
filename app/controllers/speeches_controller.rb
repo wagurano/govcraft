@@ -2,18 +2,18 @@ class SpeechesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @petition = Petition.find(params[:petition_id]) if params[:petition_id]
+    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
     @speeches = Speech.all.recent.page params[:page]
   end
 
   def new
-    @petition = Petition.find(params[:petition_id]) if params[:petition_id]
+    @campaign = Campaign.find(params[:campaign_id]) if params[:campaign_id]
   end
 
   def create
     @speech.user = current_user
     if @speech.save
-      redirect_to @speech.petition
+      redirect_to @speech.campaign
     else
       render 'new'
     end
@@ -21,6 +21,6 @@ class SpeechesController < ApplicationController
 
   private
   def speech_params
-    params.require(:speech).permit(:title, :video_url, :petition_id)
+    params.require(:speech).permit(:title, :video_url, :campaign_id)
   end
 end

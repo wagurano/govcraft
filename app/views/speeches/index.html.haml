@@ -6,7 +6,7 @@
     .container.fill-bloc-top-edge
       %nav
         .text-center
-          = link_to @petition do
+          = link_to @campaign do
             = image_tag 'events/speeches/logo.png', alt: "logo", class: 'candle-logo'
 
     .container.cover-body
@@ -14,7 +14,7 @@
         .col-sm-12.col-md-10.col-md-offset-1
           .speech
             %h3.mg-lg.text-center.tc-outer-space.cover-text
-              != strip_tags(@petition.body)
+              != strip_tags(@campaign.body)
 
   / bloc-0 END
   / bloc-1

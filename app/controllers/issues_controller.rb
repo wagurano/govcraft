@@ -13,6 +13,6 @@ class IssuesController < ApplicationController
     if params[:theme_slug].present?
       redirect_to theme_agendas_path(theme_slug: params[:theme_slug], anchor: view_context.dom_id(@issue))
     end
-    @form_petition = Petition.new
+    @form_campaign = Campaign.new
   end
 end

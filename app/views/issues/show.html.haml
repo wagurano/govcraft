@@ -22,11 +22,11 @@
 %section.page-block
   .container-fluid
     %h3
-      = Petition.model_name.human
+      = Campaign.model_name.human
 
-    - if @issue.petitions.any?
+    - if @issue.campaigns.any?
       .row.masonry-container
-        = render @issue.petitions
+        = render @issue.campaigns
     - else
       .text-center
         %i.fa.fa-info-circle
@@ -39,7 +39,7 @@
         캠페인을 시작할까요?
       %p.lead{ style: 'margin-top: 28px' }
         - if user_signed_in?
-          %button.btn.btn-lg.btn-info{"data-target" => "#petition-form-modal", "data-toggle" => "modal", :type => "button"}
+          %button.btn.btn-lg.btn-info{"data-target" => "#campaign-form-modal", "data-toggle" => "modal", :type => "button"}
             캠페인 시작하기
         - else
           = link_to new_user_session_path, class: 'btn btn-lg btn-info' do
@@ -48,7 +48,7 @@
           %i.fa.fa-comment-o
           빠띠에 문의하기
 
-  #petition-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
+  #campaign-form-modal.modal.fade{:role => "dialog", :tabindex => "-1"}
     .modal-dialog{:role => "document"}
       .modal-content
         .modal-header
@@ -58,11 +58,11 @@
         .modal-body
           .panel.panel-default
             .panel-body
-              = form_for @form_petition do |f|
-                - if @form_petition.errors.any?
+              = form_for @form_campaign do |f|
+                - if @form_campaign.errors.any?
                   .alert.alert-danger
                     %ul.list-unstyled
-                      - @form_petition.errors.full_messages.each do |msg|
+                      - @form_campaign.errors.full_messages.each do |msg|
                         %li= msg
 
                 %fieldset

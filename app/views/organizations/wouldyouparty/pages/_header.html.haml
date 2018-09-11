@@ -1,7 +1,7 @@
 %br
 = link_to Project.model_name.human, projects_path
 %br
-= link_to Petition.model_name.human, petitions_path
+= link_to Campaign.model_name.human, campaigns_path
 - if organization.community_url.present?
   %br
   = link_to '커뮤니티', organization.community_url, target: '_blank'

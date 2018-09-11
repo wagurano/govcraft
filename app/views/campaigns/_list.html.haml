@@ -1,0 +1,15 @@
+.container-fluid
+  %h3
+    - if @project.present?
+      = local_assigns[:title_label] || @project.try(:component_title, 'campaign')
+    - else
+      = Campaign.model_name.human
+      - campaign_container = local_assigns[:project] || fetch_organization_from_request
+      - if campaign_container.blank? || can?(:create_campaign, campaign_container)
+        .pull-right
+          = link_to new_campaign_path(project_id: local_assigns[:project].try(:id)) do
+            %small 새 캠페인 만들기
+
+  - if campaigns.any?
+    .row.masonry-container
+      = render campaigns

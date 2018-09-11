@@ -1,5 +1,5 @@
 class Area < ApplicationRecord
-  has_many :petitions, dependent: :nullify
+  has_many :campaigns, dependent: :nullify
 
   scope :all_divisions, -> { where(subdivision: nil) }
   def description

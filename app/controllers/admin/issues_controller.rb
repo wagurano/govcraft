@@ -29,28 +29,28 @@ class Admin::IssuesController < Admin::BaseController
     redirect_to admin_issues_path
   end
 
-  def edit_petitions
+  def edit_campaigns
   end
 
-  def search_petitions
-    @petitions = Petition.search_for(params[:q])
-    @petitions = @petitions.page(params[:page]).per(30) if params[:page]
+  def search_campaigns
+    @campaigns = Campaign.search_for(params[:q])
+    @campaigns = @campaigns.page(params[:page]).per(30) if params[:page]
   end
 
-  def add_petition
-    @petition = Petition.find_by(id: params[:petition_id])
-    render_404 and return if @petition.blank?
-    @petition.update_attributes(issue: @issue)
+  def add_campaign
+    @campaign = Campaign.find_by(id: params[:campaign_id])
+    render_404 and return if @campaign.blank?
+    @campaign.update_attributes(issue: @issue)
 
-    redirect_to [:edit_petitions, :admin, @issue]
+    redirect_to [:edit_campaigns, :admin, @issue]
   end
 
-  def remove_petition
-    @petition = Petition.find_by(id: params[:petition_id])
-    render_404 and return if @petition.blank?
-    @petition.update_attributes(issue: nil)
+  def remove_campaign
+    @campaign = Campaign.find_by(id: params[:campaign_id])
+    render_404 and return if @campaign.blank?
+    @campaign.update_attributes(issue: nil)
 
-    redirect_to [:edit_petitions, :admin, @issue]
+    redirect_to [:edit_campaigns, :admin, @issue]
   end
 
   private

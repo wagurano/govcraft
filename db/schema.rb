@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180901154408) do
+ActiveRecord::Schema.define(version: 20180911065412) do
 
   create_table "action_targets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.string  "action_assignable_id",   null: false
@@ -108,14 +108,14 @@ ActiveRecord::Schema.define(version: 20180901154408) do
     t.datetime "refresh_access_token_at"
   end
 
-  create_table "agents_petitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.integer  "petition_id"
+  create_table "agents_campaigns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.integer  "campaign_id"
     t.integer  "agent_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["agent_id"], name: "index_agents_petitions_on_agent_id", using: :btree
-    t.index ["petition_id", "agent_id"], name: "index_agents_petitions_on_petition_id_and_agent_id", unique: true, using: :btree
-    t.index ["petition_id"], name: "index_agents_petitions_on_petition_id", using: :btree
+    t.index ["agent_id"], name: "index_agents_campaigns_on_agent_id", using: :btree
+    t.index ["campaign_id", "agent_id"], name: "index_agents_campaigns_on_campaign_id_and_agent_id", unique: true, using: :btree
+    t.index ["campaign_id"], name: "index_agents_campaigns_on_campaign_id", using: :btree
   end
 
   create_table "appointments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -293,6 +293,54 @@ ActiveRecord::Schema.define(version: 20180901154408) do
     t.index ["archive_id"], name: "index_bulk_tasks_on_archive_id", using: :btree
     t.index ["job_id"], name: "index_bulk_tasks_on_job_id", using: :btree
     t.index ["user_id"], name: "index_bulk_tasks_on_user_id", using: :btree
+  end
+
+  create_table "campaigns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
+    t.string   "title"
+    t.text     "body",                         limit: 65535
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
+    t.integer  "likes_count",                                default: 0
+    t.integer  "signs_goal_count",                           default: 1000
+    t.integer  "signs_count",                                default: 0
+    t.integer  "views_count",                                default: 0
+    t.string   "cover_image"
+    t.integer  "anonymous_likes_count",                      default: 0
+    t.text     "thanks_mention",               limit: 65535
+    t.boolean  "comment_enabled",                            default: true
+    t.string   "sign_title"
+    t.string   "social_image"
+    t.boolean  "use_signer_real_name",                       default: false
+    t.boolean  "use_signer_email",                           default: false
+    t.boolean  "use_signer_address",                         default: false
+    t.string   "signer_real_name_title"
+    t.string   "signer_email_title"
+    t.string   "signer_address_title"
+    t.text     "confirm_privacy",              limit: 65535
+    t.string   "agent_section_title"
+    t.string   "agent_section_response_title"
+    t.boolean  "use_signer_phone",                           default: false
+    t.string   "signer_phone_title"
+    t.boolean  "sign_hidden",                                default: false,      null: false
+    t.integer  "area_id"
+    t.string   "special_slug"
+    t.integer  "issue_id"
+    t.datetime "closed_at"
+    t.string   "sign_form_intro"
+    t.string   "slug"
+    t.integer  "comments_count",                             default: 0
+    t.string   "template",                                   default: "petition"
+    t.string   "title_to_agent"
+    t.text     "message_to_agent",             limit: 65535
+    t.integer  "previous_event_id"
+    t.text     "css",                          limit: 65535
+    t.boolean  "mailed_issue",                               default: false
+    t.index ["area_id"], name: "index_campaigns_on_area_id", using: :btree
+    t.index ["issue_id"], name: "index_campaigns_on_issue_id", using: :btree
+    t.index ["project_id"], name: "index_campaigns_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_campaigns_on_user_id", using: :btree
   end
 
   create_table "citizen2017_speeches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
@@ -660,54 +708,6 @@ ActiveRecord::Schema.define(version: 20180901154408) do
     t.index ["user_id"], name: "index_people_on_user_id", using: :btree
   end
 
-  create_table "petitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
-    t.string   "title"
-    t.text     "body",                         limit: 65535
-    t.integer  "project_id"
-    t.integer  "user_id"
-    t.datetime "created_at",                                                      null: false
-    t.datetime "updated_at",                                                      null: false
-    t.integer  "likes_count",                                default: 0
-    t.integer  "signs_goal_count",                           default: 1000
-    t.integer  "signs_count",                                default: 0
-    t.integer  "views_count",                                default: 0
-    t.string   "cover_image"
-    t.integer  "anonymous_likes_count",                      default: 0
-    t.text     "thanks_mention",               limit: 65535
-    t.boolean  "comment_enabled",                            default: true
-    t.string   "sign_title"
-    t.string   "social_image"
-    t.boolean  "use_signer_real_name",                       default: false
-    t.boolean  "use_signer_email",                           default: false
-    t.boolean  "use_signer_address",                         default: false
-    t.string   "signer_real_name_title"
-    t.string   "signer_email_title"
-    t.string   "signer_address_title"
-    t.text     "confirm_privacy",              limit: 65535
-    t.string   "agent_section_title"
-    t.string   "agent_section_response_title"
-    t.boolean  "use_signer_phone",                           default: false
-    t.string   "signer_phone_title"
-    t.boolean  "sign_hidden",                                default: false,      null: false
-    t.integer  "area_id"
-    t.string   "special_slug"
-    t.integer  "issue_id"
-    t.datetime "closed_at"
-    t.string   "sign_form_intro"
-    t.string   "slug"
-    t.integer  "comments_count",                             default: 0
-    t.string   "template",                                   default: "petition"
-    t.string   "title_to_agent"
-    t.text     "message_to_agent",             limit: 65535
-    t.integer  "previous_event_id"
-    t.text     "css",                          limit: 65535
-    t.boolean  "mailed_issue",                               default: false
-    t.index ["area_id"], name: "index_petitions_on_area_id", using: :btree
-    t.index ["issue_id"], name: "index_petitions_on_issue_id", using: :btree
-    t.index ["project_id"], name: "index_petitions_on_project_id", using: :btree
-    t.index ["user_id"], name: "index_petitions_on_user_id", using: :btree
-  end
-
   create_table "players", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "person_id",                       null: false
     t.integer  "user_id",                         null: false
@@ -766,19 +766,19 @@ ActiveRecord::Schema.define(version: 20180901154408) do
     t.integer  "views_count",                             default: 0
     t.string   "image"
     t.boolean  "discussion_enabled",                      default: true
-    t.boolean  "petition_enabled",                        default: true
+    t.boolean  "campaign_enabled",                        default: true
     t.boolean  "poll_enabled",                            default: true
     t.boolean  "wiki_enabled",                            default: true
     t.string   "discussion_title"
     t.string   "poll_title"
-    t.string   "petition_title"
+    t.string   "campaign_title"
     t.string   "wiki_title"
     t.string   "slug",                                                   null: false
     t.boolean  "survey_enabled",                          default: true
     t.string   "survey_title"
     t.string   "subtitle"
     t.integer  "discussion_sequence",                     default: 0
-    t.integer  "petition_sequence",                       default: 0
+    t.integer  "campaign_sequence",                       default: 0
     t.integer  "poll_sequence",                           default: 0
     t.integer  "wiki_sequence",                           default: 0
     t.integer  "deprecated_event_sequence",               default: 0
@@ -859,7 +859,7 @@ ActiveRecord::Schema.define(version: 20180901154408) do
 
   create_table "signs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "user_id"
-    t.integer  "petition_id",                                         null: false
+    t.integer  "campaign_id",                                         null: false
     t.text     "body",                  limit: 65535
     t.datetime "created_at",                                          null: false
     t.datetime "updated_at",                                          null: false
@@ -870,8 +870,8 @@ ActiveRecord::Schema.define(version: 20180901154408) do
     t.string   "signer_real_name"
     t.string   "signer_address"
     t.string   "signer_phone"
-    t.index ["petition_id"], name: "index_signs_on_petition_id", using: :btree
-    t.index ["user_id", "petition_id"], name: "index_signs_on_user_id_and_petition_id", unique: true, using: :btree
+    t.index ["campaign_id"], name: "index_signs_on_campaign_id", using: :btree
+    t.index ["user_id", "campaign_id"], name: "index_signs_on_user_id_and_campaign_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_signs_on_user_id", using: :btree
   end
 
@@ -887,9 +887,9 @@ ActiveRecord::Schema.define(version: 20180901154408) do
     t.integer  "cached_view_count",     default: 0
     t.datetime "view_count_cached_at"
     t.boolean  "is_expired_view_count", default: false
-    t.integer  "petition_id",                           null: false
+    t.integer  "campaign_id",                           null: false
+    t.index ["campaign_id"], name: "index_speeches_on_campaign_id", using: :btree
     t.index ["deprecated_event_id"], name: "index_speeches_on_deprecated_event_id", using: :btree
-    t.index ["petition_id"], name: "index_speeches_on_petition_id", using: :btree
     t.index ["user_id"], name: "index_speeches_on_user_id", using: :btree
   end
 

@@ -21,9 +21,9 @@
 
 %section#petitions.page-block
   .container
-    %h3.sub-title= Petition.model_name.human
+    %h3.sub-title= Campaign.model_name.human
     .row
-      = render Petition.recent.by_organization(@current_organization).limit(3)
+      = render Campaign.recent.by_organization(@current_organization).limit(3)
 
 - discussions = Discussion.recent.where(project: @current_organization.projects).limit(10)
 %section#discussions.page-block

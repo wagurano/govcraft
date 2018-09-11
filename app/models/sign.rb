@@ -2,11 +2,11 @@ class Sign < ApplicationRecord
   include Reportable
 
   belongs_to :user, optional: true
-  belongs_to :petition, counter_cache: true
+  belongs_to :campaign, counter_cache: true
 
-  validates :user, uniqueness: { scope: :petition }, if: 'user.present?'
+  validates :user, uniqueness: { scope: :campaign }, if: 'user.present?'
   validate :valid_signer
-  validates :signer_email, format: { with: Devise.email_regexp }, uniqueness: { scope: :petition }, if: 'signer_email.present?'
+  validates :signer_email, format: { with: Devise.email_regexp }, uniqueness: { scope: :campaign }, if: 'signer_email.present?'
 
   scope :recent, -> { order(created_at: :desc) }
   scope :earlier, -> { order(created_at: :asc) }
@@ -26,7 +26,7 @@ class Sign < ApplicationRecord
   private
 
   def valid_signer
-    if petition.use_signer_real_name?
+    if campaign.use_signer_real_name?
       if signer_real_name.blank?
         errors.add(:signer_name, I18n.t('errors.messages.blank'))
       end
@@ -36,11 +36,11 @@ class Sign < ApplicationRecord
       end
     end
 
-    if petition.use_signer_email? and signer_email.blank?
+    if campaign.use_signer_email? and signer_email.blank?
       errors.add(:signer_name, I18n.t('errors.messages.blank'))
     end
 
-    if petition.use_signer_address? and signer_address.blank?
+    if campaign.use_signer_address? and signer_address.blank?
       errors.add(:signer_name, I18n.t('errors.messages.blank'))
     end
   end

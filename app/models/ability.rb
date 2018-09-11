@@ -13,7 +13,7 @@ class Ability
     can [:new_comment_agent], :all
     can [:download], ArchiveDocument
     can [:update_statement_agent], :all
-    can [:edit_statements], [Petition]
+    can [:edit_statements], [Campaign]
 
     if user
       can [:new_email, :send_email], Agenda
@@ -25,19 +25,19 @@ class Ability
         ]
 
       # 서명 만들기
-      can :create_petition, [Organization] do |organization|
+      can :create_campaign, [Organization] do |organization|
         organization.blank? or organization.projects.any?{ |project| project.organizer?(user) }
       end
-      can :create_petition, [Project] do |project|
+      can :create_campaign, [Project] do |project|
         project.blank? or project.organizer?(user)
       end
-      can :create, [Petition] do |petition|
-        project = petition.try(:project) || (Project.find_by(slug: params[:project_id]) if params[:project_id].present?)
+      can :create, [Campaign] do |campaign|
+        project = campaign.try(:project) || (Project.find_by(slug: params[:project_id]) if params[:project_id].present?)
         project.blank? or project.organizer?(user)
       end
 
       can [:update, :destroy], [
-          Project, Story, Discussion, DiscussionCategory, Petition, Poll, Survey, Wiki, Sympathy,
+          Project, Story, Discussion, DiscussionCategory, Campaign, Poll, Survey, Wiki, Sympathy,
           Memorial, Timeline, TimelineDocument,
           Sign, Article, Person,
           Race, Player
@@ -50,11 +50,11 @@ class Ability
         user == discussion.user or discussion.try(:project).try(:organizer?, user)
       end
 
-      can [:edit_agents, :add_agent, :remove_agent, :add_action_target, :remove_action_target, :edit_message_to_agent, :update_message_to_agent, :open, :close], [Petition] do |action|
+      can [:edit_agents, :add_agent, :remove_agent, :add_action_target, :remove_action_target, :edit_message_to_agent, :update_message_to_agent, :open, :close], [Campaign] do |action|
         user == action.user or action.try(:project).try(:organizer?, user)
       end
-      can [:mail_signs], Petition do |petition|
-        user == petition.user or petition.project.try(:organizer?, user)
+      can [:mail_signs], Campaign do |campaign|
+        user == campaign.user or campaign.project.try(:organizer?, user)
       end
 
       can [:create, :update], [Statement] do |statement|
@@ -66,7 +66,7 @@ class Ability
         comment.toxic == false && user == comment.user
       end
 
-      can :data, [Petition], user_id: user.id
+      can :data, [Campaign], user_id: user.id
 
       # 관심 이슈 등록
       can :manage, [FollowingIssue], user_id: user.id
@@ -79,7 +79,7 @@ class Ability
       can [:revert], WikiRevision
 
       # 프로젝트 개설자 및 운영자는 프로젝트에 속한 글과 댓글을 삭제할 수 있다
-      can [:destroy, :update], [Story, Discussion, DiscussionCategory, Petition, Poll, Survey, Wiki] do |model|
+      can [:destroy, :update], [Story, Discussion, DiscussionCategory, Campaign, Poll, Survey, Wiki] do |model|
         model.project && ( user == model.project.user or model.project.organizer?(user) )
       end
       can :destroy, Comment do |comment|

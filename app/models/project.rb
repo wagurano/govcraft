@@ -7,7 +7,7 @@ class Project < ApplicationRecord
   belongs_to :project_category, optional: true
   has_many :stories, dependent: :destroy
   has_many :discussions, dependent: :destroy
-  has_many :petitions, dependent: :destroy
+  has_many :campaigns, dependent: :destroy
   has_many :polls, dependent: :destroy
   has_many :wikis, dependent: :destroy
   has_many :surveys, dependent: :destroy
@@ -46,7 +46,7 @@ class Project < ApplicationRecord
     [polls + surveys].flatten.sort_by(&:created_at).reverse
   end
 
-  DEFAULT_SORTED_COMPONENT_NAMES = %i(wiki discussion poll petition story townhall)
+  DEFAULT_SORTED_COMPONENT_NAMES = %i(wiki discussion poll campaign story townhall)
   def component_sequence(component_name)
     attr = :"#{component_name}_sequence"
     ((try(attr) || 0) * 10) + DEFAULT_SORTED_COMPONENT_NAMES.index(component_name.to_sym)
@@ -65,16 +65,16 @@ class Project < ApplicationRecord
   end
 
   def action_count
-    petitions.count + polls.count + surveys.count + wikis.count + discussions.count
+    campaigns.count + polls.count + surveys.count + wikis.count + discussions.count
   end
 
   def metoo_count
     action_count +
-    petitions.sum(:signs_count) + polls.sum(:votes_count) + surveys.sum(:feedbacks_count)
+    campaigns.sum(:signs_count) + polls.sum(:votes_count) + surveys.sum(:feedbacks_count)
   end
 
   def views_count
-    petitions.sum(:views_count) + polls.sum(:views_count) + surveys.sum(:views_count) +
+    campaigns.sum(:views_count) + polls.sum(:views_count) + surveys.sum(:views_count) +
     wikis.sum(:views_count) + discussions.sum(:views_count) +
     stories.sum(:views_count)
   end

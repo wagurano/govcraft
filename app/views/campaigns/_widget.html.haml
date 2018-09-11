@@ -1,0 +1,30 @@
+- cover_image = @campaign.cover_image_url(:lg)
+%section.campaign-widget.cover-section{ style: "padding-top: 0;" }
+  %section{ style: "padding-top: 20px; padding-bottom: 56px; background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(#{cover_image}); background-size: cover; background-position: center top; background-repeat: no-repeat;" }
+    .container
+      - if @campaign.project
+        .cover-section__project
+          = link_to @campaign.project.title, @campaign.project, target: '_blank'
+
+      = link_to campaign_url(@campaign), target: '_blank', style: 'color: #fff;' do
+        %h1.cover-section__title= @campaign.title
+
+        %h4.cover-section__users-count
+          %span
+            %i.fa.fa-user-o
+            = @campaign.signs_count
+            명 참여
+  %section{ style: 'background: #fff;' }
+    .container{ style: 'position: relative; top: -56px;' }
+      .cover-section__signs{ style: "color: #777; text-align: left;" }
+        = render 'signs/list', campaign: @campaign, widget: true
+
+
+- if flash[:sign_notice].present?
+  = content_for :script do
+    :javascript
+      var message = "#{flash[:sign_notice]}";
+      $(function(){
+        alert(message);
+      });
+  - flash.delete(:sign_notice)

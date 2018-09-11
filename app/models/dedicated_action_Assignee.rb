@@ -30,9 +30,9 @@ class DedicatedActionAssignee
   end
 
   def self.find_by_id(id)
-    petition = Petition.find_by(id: id)
-    return if petition.blank?
+    campaign = Campaign.find_by(id: id)
+    return if campaign.blank?
 
-    DedicatedActionAssignee.new(petition)
+    DedicatedActionAssignee.new(campaign)
   end
 end

@@ -29,7 +29,7 @@
         .checkbox
           %label
             = f.check_box :comment_enabled
-            = Petition.human_attribute_name("comment_enabled")
+            = Campaign.human_attribute_name("comment_enabled")
 
       .form-group
         = f.submit '저장', class: 'btn btn-primary'
