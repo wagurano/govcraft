@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   get 'events/:id', to: redirect { |params, req| "/campaigns/#{Campaign.find_by(previous_event_id: params[:id]).id}"}, constraints: lambda { |request, params|
     Campaign.exists?(previous_event_id: params[:id])
   }
+  get 'petitions/:id', to: redirect { |params, req| "/campaigns/#{params[:id]}"}
   resources :projects, path: :p
   resources :episodes do
     collection do
