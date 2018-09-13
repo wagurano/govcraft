@@ -41,7 +41,7 @@
 
 - form_block = capture do
   = form_for Comment.new, html: { class: 'gov-action-form-validation', onsubmit: "$(this).find('#comment_tag_list').val( $(this).find('#comment_full_street_address option:selected').text() );" } do |f|
-    = f.hidden_field :commentable_type, value: 'Petition'
+    = f.hidden_field :commentable_type, value: 'Campaign'
     = f.hidden_field :commentable_id, value: @campaign.id
     = f.hidden_field :tag_list
     = invisible_captcha
@@ -54,7 +54,7 @@
         = f.text_field :commenter_email, class: 'form-control'
     .form-group
       = f.label :full_street_address, '주소(필수)'
-      = f.select :full_street_address, options_for_select( Petition::CONGRESSMEN.collect{|c| [ "#{c[0]} (#{c[1]} #{c[2]})", c[3]]} ), {}, class: 'form-control'
+      = f.select :full_street_address, options_for_select( Campaign::CONGRESSMEN.collect{|c| [ "#{c[0]} (#{c[1]} #{c[2]})", c[3]]} ), {}, class: 'form-control'
     .form-group
       = f.label :image
       = f.file_field :image, class: 'form-control'
