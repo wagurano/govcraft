@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
       redirect_to root_url
     else
       @commentable_model = params[:commentable_type].classify.safe_constantize
+      render_404 and return if @commentable_model.blank?
       @commentable = @commentable_model.find(params[:commentable_id])
       @comments = @commentable.comments.page(params[:page])
       @comments = @comments.with_target_agent(Agent.find_by(id: params[:agent_id])) if params[:agent_id].present?
