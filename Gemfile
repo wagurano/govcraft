@@ -129,7 +129,7 @@ group :development do
   gem 'puma'
 end
 
-group :development, :staging do
+group :development, :staging, :test do
   gem 'letter_opener_web'
 end
 
@@ -142,4 +142,5 @@ group :development, :test do
   gem 'spring'
   gem 'mocha', '~> 1.1'
   gem 'rails-controller-testing'
+  gem 'minitest', '5.10.1'
 end
