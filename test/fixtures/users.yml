@@ -4,3 +4,8 @@ one:
   provider: facebook
   nickname: nick1
 
+james:
+  email: james@gmail.com
+  uid: james
+  provider: facebook
+  nickname: jack
