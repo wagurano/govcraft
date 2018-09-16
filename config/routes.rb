@@ -33,13 +33,13 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'c/:id', to: redirect { |params, req| "/p/#{Project.find_by(id: params[:id]).slug}"}, constraints: lambda { |request, params|
+  get 'c/:id', to: redirect { |params, req| "/p/#{URI.escape(Project.find_by(id: params[:id]).slug)}"}, constraints: lambda { |request, params|
     Project.exists?(id: params[:id])
   }
   get 'events/:id', to: redirect { |params, req| "/campaigns/#{Campaign.find_by(previous_event_id: params[:id]).id}"}, constraints: lambda { |request, params|
     Campaign.exists?(previous_event_id: params[:id])
   }
-  get 'petitions/:id', to: redirect { |params, req| "/campaigns/#{params[:id]}"}
+  get 'petitions/:id', to: redirect { |params, req| "/campaigns/#{URI.escape(params[:id])}"}
   resources :projects, path: :p
   resources :episodes do
     collection do
