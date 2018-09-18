@@ -116,6 +116,13 @@ GEM
       activesupport
     byebug (9.0.6)
     cancancan (1.16.0)
+    capybara (2.18.0)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (>= 2.0, < 4.0)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -162,6 +169,8 @@ GEM
     execjs (2.7.0)
     exifr (1.2.5)
     ey_config (0.0.7)
+    faker (1.9.1)
+      i18n (>= 0.7)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     fastimage (1.9.0)
@@ -442,8 +451,22 @@ GEM
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
     minitest (5.10.1)
+    minitest-capybara (0.8.2)
+      capybara (~> 2.2)
+      minitest (~> 5.0)
+      rake
     minitest-focus (1.1.2)
       minitest (>= 4, < 6)
+    minitest-metadata (0.6.0)
+      minitest (>= 4.7, < 6.0)
+    minitest-rails (3.0.0)
+      minitest (~> 5.8)
+      railties (~> 5.0)
+    minitest-rails-capybara (3.0.1)
+      capybara (~> 2.7)
+      minitest-capybara (~> 0.8)
+      minitest-metadata (~> 0.6)
+      minitest-rails (~> 3.0)
     mjml-rails (4.2.2)
     mocha (1.2.1)
       metaclass (~> 0.0.1)
@@ -700,6 +723,8 @@ GEM
     websocket-extensions (0.1.2)
     wkhtmltoimage-binary (0.12.4)
     xml-simple (1.1.5)
+    xpath (3.1.0)
+      nokogiri (~> 1.8)
 
 PLATFORMS
   ruby
@@ -731,6 +756,7 @@ DEPENDENCIES
   exception_notification (~> 4.1, >= 4.1.4)
   exifr
   ey_config
+  faker
   fastimage (~> 1.9)
   file_validators (~> 2.0, >= 2.0.2)
   fog
@@ -759,6 +785,7 @@ DEPENDENCIES
   mini_magick
   minitest (= 5.10.1)
   minitest-focus (~> 1.1, >= 1.1.2)
+  minitest-rails-capybara
   mjml-rails
   mocha (~> 1.1)
   momentjs-rails

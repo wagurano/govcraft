@@ -2,6 +2,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'mocha/mini_test'
+require "minitest/rails/capybara"
 
 OmniAuth.config.test_mode = true
 
@@ -40,4 +41,8 @@ end
 
 class ActionController::TestCase
   include Devise::Test::ControllerHelpers
+end
+
+class ActionDispatch::IntegrationTest
+  include Capybara::DSL
 end

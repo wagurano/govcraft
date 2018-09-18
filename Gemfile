@@ -144,3 +144,8 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'minitest', '5.10.1'
 end
+
+group :test do
+  gem 'minitest-rails-capybara'
+  gem 'faker'
+end
