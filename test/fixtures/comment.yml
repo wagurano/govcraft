@@ -1,0 +1,18 @@
+sympathy_comment:
+  user: james
+  commentable_type: nil,
+  commentable_id: nil,
+  body: "삼가 고인의 명복을 빕니다."
+  choice: nil,
+  commenter_name: james.name
+  commenter_email: james.email
+  reports_count: 0
+  likes_count: 0
+  image: nil
+  latitude: nil
+  longitude: nil
+  full_street_address: "세종로 1"
+  anonymous_likes_count: 0
+  toxic: false
+  target_agent_id: nil
+  mailing: nil
