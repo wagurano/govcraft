@@ -83,7 +83,7 @@ gem 'rolify'
 gem 'rack-cors'
 gem 'rails-i18n'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'envyable', '~> 0.2.0'
+gem 'dotenv'
 gem 'seed-fu', '~> 2.3', '>= 2.3.5'
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 gem 'browser', '~> 2.0', '>= 2.0.2'
